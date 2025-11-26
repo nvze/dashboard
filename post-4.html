@@ -3,175 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sisi Kocak Generasi Terbaik: Kumpulan Kisah Nyeleneh Sahabat Nabi</title>
+    <title>Sisi Lain Sahabat: Tawa di Balik Dakwah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Merriweather', serif;
+            background-color: #fdfbf7;
+            color: #2d3748;
+        }
+        h1, h2, h3, h4, .sans-font {
+            font-family: 'Poppins', sans-serif;
+        }
+        .prose-custom p {
+            margin-bottom: 1.5rem;
             line-height: 1.8;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
+            font-size: 1.125rem;
         }
-       .blog-container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        h1 {
-            font-family: 'Helvetica Neue', sans-serif;
-            font-size: 2.5em;
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-       .subtitle {
-            text-align: center;
-            color: #7f8c8d;
+        .quote-box {
+            border-left: 4px solid #d97706;
+            background-color: #fffbeb;
+            padding: 1rem;
             font-style: italic;
-            margin-bottom: 40px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
         }
-        h2 {
-            font-family: 'Helvetica Neue', sans-serif;
-            color: #e67e22;
-            margin-top: 40px;
-            border-left: 5px solid #e67e22;
-            padding-left: 15px;
+        .highlight-card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
         }
-        h3 {
-            color: #34495e;
-            margin-top: 25px;
+        .highlight-card:hover {
+            transform: translateY(-5px);
         }
-        p {
-            margin-bottom: 20px;
-            font-size: 1.1em;
+        .story-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 3rem 0;
+            color: #d97706;
         }
-       .highlight {
-            background-color: #fff3cd;
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-        blockquote {
-            background: #f1f8ff;
-            border-left: 10px solid #3498db;
-            margin: 1.5em 10px;
-            padding: 0.5em 10px;
-            font-style: italic;
-            color: #555;
-        }
-       .citation {
-            font-size: 0.8em;
-            color: #999;
-            vertical-align: super;
-            text-decoration: none;
-        }
-       .footer {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 0.9em;
-            color: #aaa;
+        .story-divider::before, .story-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 2px solid #e5e7eb;
+            margin: 0 1rem;
         }
     </style>
 </head>
 <body>
 
-<div class="blog-container">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-amber-600 sans-font">SirahHumor.</div>
+            <div class="text-sm text-gray-500 sans-font">Edisi Spesial</div>
+        </div>
+    </nav>
 
-    <h1>Sisi Kocak Generasi Terbaik</h1>
-    <div class="subtitle">Menggali Humor dan Kelakuan "Nyeleneh" Para Sahabat Nabi Muhammad SAW</div>
+    <!-- Hero Section -->
+    <header class="bg-white border-b border-gray-100 pb-12 pt-16 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-amber-600 uppercase bg-amber-100 rounded-full sans-font">Begini Kisahnya</span>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                Ketika Para Sahabat Tertawa: <br>Kisah Nyeleneh di Zaman Nabi
+            </h1>
+            <p class="text-lg text-gray-600 mb-8 sans-font max-w-2xl mx-auto">
+                Lupakan bayangan bahwa para Sahabat Nabi adalah sosok kaku yang selalu mengerutkan dahi. Mereka adalah manusia paling bahagia yang juga punya selera humor kelas tinggi.
+            </p>
+            <div class="flex items-center justify-center space-x-4 text-sm text-gray-500 sans-font">
+                <div class="flex items-center">
+                    <span>☕ Waktu baca: 10 menit</span>
+                </div>
+                <span>&bull;</span>
+                <div>Kompilasi Kisah Shahih & Hasan</div>
+            </div>
+        </div>
+    </header>
 
-    <p>Seringkali, saat membayangkan para Sahabat Nabi (<i>Radhiyallahu 'anhum</i>), yang terlintas di benak kita adalah sosok-sosok yang sangat serius, selalu menangis karena takut akhirat, dan menghabiskan malam hanya untuk shalat. Itu memang benar. Tapi, apakah mereka manusia tanpa selera humor? Tentu tidak.</p>
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 py-12 prose-custom">
+        
+        <p>
+            Seringkali, ketika kita membaca sejarah Islam, kita terjebak pada narasi peperangan yang menegangkan atau ibadah yang khusyuk. Padahal, kehidupan di Madinah tidak selalu hitam putih dan serius. Di sela-sela wahyu yang turun, ada canda tawa, ada kejahilan (prank), dan ada momen-momen sangat manusiawi yang membuat Rasulullah SAW tertawa hingga terlihat gigi gerahamnya.
+        </p>
+        <p>
+            Mari kita masuk ke lorong waktu, menengok sisi lain para manusia terbaik ini. Siapkan teh hangat, karena beberapa kisah ini mungkin akan membuat Anda tersedak karena tertawa.
+        </p>
 
-    <p>Mereka adalah manusia paling bahagia. Mereka tertawa, saling melempar candaan (bahkan <i>prank</i>!), dan memiliki momen-momen konyol yang terekam dalam sejarah. Laporan ini akan mengajak Anda "duduk santai" di Madinah, menyaksikan sisi lain para sahabat yang jenaka, manusiawi, dan sangat menghibur.</p>
+        <!-- Story 1: Nuaiman -->
+        <div class="story-divider"><span class="text-2xl">🐪</span></div>
 
-    <h2>1. Nuaiman bin Amr: Sang Legenda "Prankster" Madinah</h2>
-    <p>Jika ada penghargaan untuk orang terlucu di Madinah, pialanya pasti milik <b>Nuaiman bin Amr al-Ansari</b>. Dia adalah veteran Perang Badar, dijamin masuk surga, tapi kelakuannya sering membuat orang geleng-geleng kepala. Nabi SAW bahkan pernah tertawa hingga gigi gerahamnya terlihat karena ulah Nuaiman.</p>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 mt-8">Nu'aiman: Bapak "Prankster" Madinah</h2>
+        
+        <p>
+            Jika ada penghargaan untuk orang paling jahil di zaman Nabi, pialanya mutlak milik <strong>Nu'aiman bin Amr</strong>. Beliau adalah veteran Perang Badar, ahli surga, tapi kelakuannya sering bikin orang geleng-geleng kepala.
+        </p>
 
-    <h3>Kisah 1: Menjual Teman Sendiri di Pasar Budak</h3>
-    <p>Ini adalah <i>masterpiece</i> keisengan Nuaiman. Suatu hari, ia pergi berdagang ke Busra bersama Abu Bakar dan <b>Suwaibith bin Harmalah</b>. Suwaibith ini orangnya kaku dan sangat amanah.</p>
-    <p>Saat Nuaiman lapar, ia minta makanan pada Suwaibith. Suwaibith menolak: <i>"Tunggu Abu Bakar datang!"</i>. Kesal karena lapar, Nuaiman mengancam: <i>"Oke, kalau begitu aku akan bikin ulah."</i></p>
-    <p>Nuaiman pergi ke pasar, mencari pedagang budak, dan berkata: <i>"Aku punya budak, orangnya cekatan dan pintar. Tapi dia punya satu cacat: kalau kalian tangkap, dia bakal teriak 'Aku orang merdeka!'. Jangan dengarkan dia, itu cuma akal-akalannya."</i></p>
-    <p>Budak (yang sebenarnya Suwaibith) itu terjual seharga 10 unta (atau riwayat lain menyebut nilai dirham). Ketika pembeli datang menyergap Suwaibith, Suwaibith berteriak panik: <i>"Aku bukan budak! Aku orang merdeka!"</i>. Para pembeli cuma tertawa, <i>"Iya, iya, kami sudah tahu kau bakal bilang begitu,"</i> lalu mengikat lehernya. Abu Bakar harus turun tangan menebus Suwaibith. Nabi SAW tertawa terpingkal-pingkal mendengar cerita ini sepanjang tahun. [[9]],</p>
+        <div class="highlight-card p-6 mb-8 border-l-4 border-amber-500">
+            <h3 class="text-xl font-bold text-gray-800 mb-3">Kisah 1: Menjual Teman Sendiri</h3>
+            <p class="text-sm text-gray-600 mb-4 sans-font">Level Kejahilan: 100/10</p>
+            <p class="mb-0">
+                Suatu hari, Nu'aiman pergi berdagang ke Syam bersama Abu Bakar Ash-Shiddiq dan Suhayb bin Sinan. Suhayb bertugas menjaga logistik makanan. Saat Nu'aiman lapar, ia minta makan pada Suhayb. Suhayb yang amanah menolak: "Tunggu Abu Bakar datang."
+            </p>
+            <p class="mt-4">
+                Nu'aiman kesal tapi tersenyum licik. "Oke, tunggu pembalasanku," batinnya.
+            </p>
+            <p class="mt-4">
+                Nu'aiman pergi ke pasar, mencari rombongan kabilah yang mencari budak. Ia berteriak, "Saya punya budak murah! Orangnya kuat, tapi punya satu cacat: <strong>Dia suka berhalusinasi mengaku sebagai orang merdeka.</strong> Kalau kalian beli, abaikan saja omongannya."
+            </p>
+            <p class="mt-4">
+                Terjadilah transaksi. Nu'aiman mendapat uang, dan rombongan itu segera menyergap Suhayb. Suhayb panik, "Lepaskan! Saya orang merdeka! Saya Suhayb!"
+            </p>
+            <p class="mt-4">
+                Para pembeli itu tertawa, "Iya, iya, majikanmu sudah bilang kau memang suka begitu." Suhayb pun diseret. Untungnya, Abu Bakar segera datang dan menyelamatkan situasi (sambil mungkin menahan tawa).
+            </p>
+            <p class="mt-4 font-semibold">
+                Respon Nabi?
+            </p>
+            <p class="mb-0">
+                Ketika kisah ini sampai ke telinga Rasulullah, beliau tertawa terpingkal-pingkal hingga gigi gerahamnya terlihat. Bahkan setahun kemudian, jika ada tamu datang, Nabi sering menceritakan ulang kisah "Nu'aiman Menjual Suhayb" ini.
+            </p>
+        </div>
 
-    <h3>Kisah 2: Hadiah Madu "Bayar Sendiri"</h3>
-    <p>Nuaiman melihat madu enak dijual seorang Badui. Ia mengambilnya, membawanya ke rumah Nabi, dan memberikannya sebagai hadiah. Nabi senang sekali.</p>
-    <p>Plot twist-nya? Saat penjual madu menagih uang, Nuaiman membawanya ke hadapan Nabi dan berkata: <i>"Wahai Rasulullah, tolong bayar harganya."</i></p>
-    <p>Nabi kaget, <i>"Lho, bukannya itu hadiah?"</i><br>
-    Nuaiman menjawab polos: <i>"Aku ingin Engkau memakannya, Ya Rasulullah, tapi aku tidak punya uang."</i> Nabi pun tersenyum dan membayarnya. Ini adalah level "sedekah" tertinggi: pakai uang orang yang disedekahi! [1, 2]</p>
+        <div class="highlight-card p-6 mb-8 border-l-4 border-green-500">
+            <h3 class="text-xl font-bold text-gray-800 mb-3">Kisah 2: Hadiah (Tidak) Gratis untuk Nabi</h3>
+            <p class="mb-0">
+                Nu'aiman melihat penjual madu (atau dalam riwayat lain, makanan lezat) di pasar. Ia mengambil madu itu dan membawanya ke rumah Nabi SAW.
+            </p>
+            <p class="mt-4">
+                "Ya Rasulullah, ini hadiah untukmu," kata Nu'aiman. Nabi tentu saja senang menerima hadiah.
+            </p>
+            <p class="mt-4">
+                Tapi plot twist-nya, ketika si penjual menagih uang, Nu'aiman mengajaknya ke hadapan Nabi. "Ya Rasulullah, tolong bayarkan harganya ya," ucap Nu'aiman tanpa dosa.
+            </p>
+            <p class="mt-4">
+                Nabi kaget, "Lho, katanya hadiah?"
+            </p>
+            <p class="mt-4">
+                Nu'aiman menjawab dengan jujur dan jenaka, "Saya ingin sekali Baginda memakan madu itu, tapi saya lagi bokek, Ya Rasulullah."
+            </p>
+            <p class="mt-4">
+                Rasulullah pun tertawa dan membayarkan harganya.
+            </p>
+        </div>
 
-    <h3>Kisah 3: Prank Menyembelih Unta Tamu</h3>
-    <p>Suatu hari, ada tamu datang membawa unta gemuk. Para sahabat yang sedang lapar "mengompori" Nuaiman: <i>"Wah, daging unta enak nih. Sembelih dong, Nuaiman. Nanti Rasulullah yang ganti rugi."</i></p>
-    <p>Nuaiman yang mudah terpengaruh pun menyembelih unta itu. Saat tamu keluar dan histeris, Nuaiman sudah kabur sembunyi di parit ditutupi pelepah kurma. Saat ketahuan, wajahnya penuh debu, dan ia masih sempat menyalahkan orang lain: <i>"Mereka yang menunjukkan tempatku ini yang menyuruhku!"</i> Nabi tertawa, membersihkan wajah Nuaiman, dan mengganti rugi unta tersebut.,</p>
+        <div class="highlight-card p-6 mb-8 border-l-4 border-red-500">
+            <h3 class="text-xl font-bold text-gray-800 mb-3">Kisah 3: Tamu Bedui dan Unta yang Disembelih</h3>
+            <p class="mb-0">
+                Suatu hari seorang tamu Bedui datang menemui Nabi dan menambatkan untanya di halaman masjid. Para sahabat saat itu sedang merasa lapar (atau sekadar iseng). Mereka berbisik pada Nu'aiman, "Eh, unta itu dagingnya kayaknya enak ya. Sembelih gih, nanti Rasulullah yang ganti rugi."
+            </p>
+            <p class="mt-4">
+                Tanpa pikir panjang, Nu'aiman—yang mudah diprovokasi—benar-benar menyembelih unta itu!
+            </p>
+            <p class="mt-4">
+                Ketika si Bedui keluar dan melihat untanya sudah jadi bahan barbeque, ia berteriak histeris. Nabi keluar, bertanya siapa pelakunya. Semua menunjuk Nu'aiman.
+            </p>
+            <p class="mt-4">
+                Nabi mencari Nu'aiman yang ternyata bersembunyi di lubang parit yang ditutupi pelepah kurma. Seseorang menunjuk lokasi persembunyiannya.
+            </p>
+            <p class="mt-4">
+                Saat diangkat keluar, wajah Nu'aiman penuh debu. Nabi bertanya, "Kenapa kau lakukan itu?" Nu'aiman menjawab sambil menunjuk teman-temannya, "Tanya orang-orang yang menunjuk tempat persembunyianku itu, Ya Rasulullah. Mereka yang menyuruhku!"
+            </p>
+            <p class="mt-4">
+                Lagi-lagi, Nabi tidak marah. Beliau membersihkan debu di wajah Nu'aiman sambil tersenyum, lalu mengganti rugi unta si Bedui dengan harga dua kali lipat.
+            </p>
+        </div>
 
-    <h3>Kisah 4: Orang Buta, Masjid, dan Khalifah</h3>
-    <p><b>Makhramah bin Naufal</b>, sahabat sepuh yang buta (usia 115 tahun), minta dituntun untuk buang air kecil di masjid. Nuaiman menuntunnya, tapi bukan ke toilet, melainkan ke tengah masjid! Orang-orang berteriak, "Itu masjid!". Makhramah marah besar dan bersumpah akan memukul Nuaiman dengan tongkat.</p>
-    <p>Beberapa waktu kemudian, Nuaiman mendatangi Makhramah lagi (menyamarkan suara), bertanya: <i>"Kau masih mau memukul Nuaiman?"</i>. "Ya!" jawab Makhramah. Nuaiman lalu menuntun tangan Makhramah ke arah orang yang sedang shalat. <i>"Itu Nuaiman,"</i> bisiknya.</p>
-    <p><i>Plakk!</i> Makhramah memukul orang itu. Ternyata yang dipukul adalah <b>Utsman bin Affan</b> (Khalifah). Situasi jadi kacau tapi jenaka, karena lagi-lagi... itu ulah Nuaiman.,</p>
+        <!-- Story 2: Ali & Nabi -->
+        <div class="story-divider"><span class="text-2xl">🌴</span></div>
 
-    <h2>2. Abdullah bin Hudzafah: Humor "Gelap" Sang Diplomat</h2>
-    <p>Abdullah bin Hudzafah as-Sahmi adalah tipe orang yang berani mati, tapi juga punya selera humor yang ekstrem.</p>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Candaan Cerdas Ali bin Abi Thalib</h2>
+        <p>
+            Humor tidak selalu harus slapstick seperti Nu'aiman. Ada juga humor intelek ala Ali bin Abi Thalib dan Rasulullah SAW.
+        </p>
 
-    <h3>Prank "Masuk Api"</h3>
-    <p>Dalam sebuah ekspedisi perang, Nabi menunjuk Abdullah jadi komandan. Di tengah jalan, ia menyuruh pasukannya mengumpulkan kayu bakar dan menyalakan api besar.
-    <i>"Bukankah kalian wajib taat padaku?"</i> tanyanya.<br>
-    <i>"Ya,"</i> jawab pasukan.<br>
-    <i>"Masuklah kalian ke api ini!"</i></p>
-    <p>Pasukan bingung. Sebagian mau lompat, sebagian menahan: <i>"Kita masuk Islam biar selamat dari api (neraka), kok malah disuruh masuk api?"</i>. Untungnya api padam dan perintah dibatalkan. Saat lapor ke Nabi, beliau bersabda: <i>"Ketaatan hanya dalam kebaikan. Kalau mereka masuk, takkan bisa keluar selamanya."</i> [3, 4]</p>
+        <div class="bg-amber-50 rounded-xl p-8 mb-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Misteri Biji Kurma</h3>
+            <p>
+                Suatu hari, Rasulullah SAW dan Ali bin Abi Thalib sedang duduk santai memakan kurma basah. Suasana akrab. Namun, Ali punya ide jahil.
+            </p>
+            <p>
+                Setiap kali Ali memakan kurma, ia diam-diam menggeser biji kurmanya ke tumpukan biji di depan Rasulullah. Lama kelamaan, tumpukan biji di depan Nabi menjadi menggunung, sementara di depan Ali bersih.
+            </p>
+            <p>
+                Ali kemudian berkata dengan nada menggoda, "Wahai Rasulullah, tampaknya Engkau lapar sekali, lihatlah tumpukan biji kurma di depanmu itu."
+            </p>
+            <p>
+                Apakah Nabi kalah 'debat'? Tentu tidak. Beliau membalas dengan senyuman cerdas, "Wahai Ali, justru kamulah yang tampaknya sangat lapar. Lihatlah, kamu memakan kurma sampai menelan biji-bijinya (karena tidak ada tumpukan biji di depan Ali)."
+            </p>
+            <p class="text-sm text-gray-500 mt-4 text-right sans-font">— Skak mat yang indah.</p>
+        </div>
 
-    <h3>Ciuman Pembebas 80 Nyawa</h3>
-    <p>Saat ditawan Romawi, Abdullah dibujuk masuk Kristen dengan iming-iming harta dan putri raja. Ia menolak. Ia diancam direbus dalam kuali minyak panas. Ia menangis.</p>
-    <p>Raja Romawi kira ia takut. Ternyata Abdullah berkata: <i>"Aku menangis karena nyawaku cuma satu. Coba aku punya 100 nyawa untuk direbus demi Allah."</i> Raja Romawi yang <i>mind-blown</i> akhirnya menawarkan: <i>"Cium kepalaku, kau kubebaskan."</i></p>
-    <p>Abdullah menawar: <i>"Bebaskan juga semua tawanan muslim?"</i> Raja setuju. Abdullah mencium kepala raja kafir itu demi menyelamatkan teman-temannya. Sebuah kemenangan diplomasi yang diawali dengan keberanian gila.,</p>
+        <!-- Story 3: Suhayb -->
+        <div class="story-divider"><span class="text-2xl">👁️</span></div>
 
-    <h2>3. Arab Badui: Polos Tapi Menohok</h2>
-    <p>Orang-orang pedalaman (Badui) sering datang ke Madinah dengan kepolosan yang membuat Nabi tersenyum.</p>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Logika Unik Suhayb Ar-Rumi</h2>
+        
+        <p>
+            Suhayb Ar-Rumi, sahabat yang pernah "dijual" Nu'aiman tadi, ternyata juga punya selera humor yang unik.
+        </p>
+        <p>
+            Suatu ketika mata Suhayb sedang sakit (bengkak/infeksi). Namun, ia terlihat sedang asyik memakan kurma.
+        </p>
+        <p>
+            Nabi SAW melihat hal itu dan menegur dengan nada bercanda, "Hei Suhayb, matamu sedang sakit bengkak begitu kok malah makan kurma?" (Dalam pengobatan masa itu, mungkin kurma dianggap bisa memicu sakit mata bertambah parah).
+        </p>
+        <p>
+            Jawaban Suhayb sungguh di luar dugaan:
+        </p>
+        <div class="quote-box">
+            "Tenang, Ya Rasulullah. Saya mengunyahnya pakai sisi mulut yang sebelah sana kok, bukan sisi mata yang sakit."
+        </div>
+        <p>
+            Mendengar logika "ilmiah" tapi nyeleneh itu, Rasulullah pun tertawa.
+        </p>
 
-    <h3>Doa "Eksklusif"</h3>
-    <p>Seorang Badui berdoa lantang di masjid: <i>"Ya Allah, ampunilah aku dan Muhammad, dan JANGAN ampuni orang lain selain kami berdua!"</i><br>
-    Nabi tertawa mendengar "egoisme spiritual" yang lugu ini dan berkata: <i>"Engkau telah mempersempit sesuatu yang luas (rahmat Allah)."</i> [[5]],</p>
+        <!-- Story 4: Umar -->
+        <div class="story-divider"><span class="text-2xl">🦁</span></div>
 
-    <h3>Insiden Kencing dan Tarik Selendang</h3>
-    <p>Badui yang sama (atau yang lain) pernah kencing di pojok masjid karena mengira itu tanah lapang biasa. Sahabat mau memukulnya, tapi Nabi melarang (biar kencingnya tuntas dulu, supaya tidak sakit). Lalu Nabi menasihatinya dengan lembut.</p>
-    <p>Ada juga Badui yang menarik selendang Nabi begitu keras sampai leher beliau berbekas merah, lalu minta harta: <i>"Hai Muhammad, ini bukan harta bapakmu!"</i> Nabi hanya tersenyum dan memberinya sedekah. [5, 6]</p>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Sisi Lembut Umar bin Khattab</h2>
+        
+        <p>
+            Kita mengenal Umar sebagai sosok yang garang, tegas, dan ditakuti setan. Tapi di rumah, Umar adalah suami yang sangat sabar, bahkan jenaka dalam kesabarannya.
+        </p>
+        <p>
+            Ada sebuah kisah masyhur tentang seorang pria yang datang jauh-jauh ke rumah Umar hendak mengadukan istrinya yang sering memarahinya.
+        </p>
+        <p>
+            Saat sampai di depan pintu rumah Umar, pria itu tertegun. Ia mendengar suara istri Umar sedang memarahi Umar dengan keras. Dan Umar? Sang Amirul Mukminin yang menguasai Persia dan Romawi itu hanya diam mendengarkan, tidak membantah sepatah katapun.
+        </p>
+        <p>
+            Pria itu balik kanan, hendak pulang. "Kalau Umar saja begitu, apalagi saya," batinnya.
+        </p>
+        <p>
+            Umar melihat pria itu beranjak dan memanggilnya. "Ada apa?"
+        </p>
+        <p>
+            Pria itu curhat. Lalu Umar memberikan nasihat yang sangat menyentuh hati sekaligus realistis:
+        </p>
+        <div class="bg-gray-100 p-6 rounded-lg italic text-gray-700 mb-6">
+            "Wahai saudaraku, aku bersabar atas omelannya karena dia punya hak atas diriku. Dia yang memasak makananku, mencucikan bajuku, menyusui anak-anakku, padahal itu bukan kewajibannya. Hatinya tenang bersamaku dan menjagaku dari yang haram. Karena itu, aku bersabar atas omelannya."
+        </div>
+        <p>
+            Ini adalah humor kehidupan nyata: Bahkan lelaki terkuat di dunia pun, kadang "kalah" di hadapan istri tercinta.
+        </p>
 
-    <h3>Bubur Dajjal</h3>
-    <p>Seorang Badui bertanya soal Dajjal, tapi fokusnya ke perut. <i>"Ya Rasul, Dajjal kan bawa bubur (makanan). Apakah aku harus nolak buburnya dan mati lapar, atau boleh makan buburnya tapi hati tetap iman?"</i><br>
-    Pertanyaan "cerdas-cerdas bodoh" ini membuat Nabi tertawa sampai gerahamnya terlihat. [7]</p>
+        <!-- Conclusion -->
+        <div class="bg-amber-600 text-white rounded-2xl p-8 mt-12 text-center shadow-lg">
+            <h2 class="text-2xl font-bold mb-4 font-sans">Hikmah di Balik Tawa</h2>
+            <p class="mb-0">
+                Kisah-kisah ini mengajarkan kita bahwa Islam adalah agama fitrah. Menjadi sholeh tidak berarti kehilangan selera humor. Rasulullah SAW bersabda:
+                <br><br>
+                <em>"Aku juga bercanda, namun aku tidak mengatakan kecuali kebenaran."</em> (HR. Thabrani)
+                <br><br>
+                Tertawalah, bahagialah, dan tetaplah taat. Seperti para Sahabat yang kakinya menapak bumi dengan segala candanya, namun hatinya terpaut ke langit.
+            </p>
+        </div>
 
-    <h2>4. Candaan Ringan: Adu Cerdas dan Kasih Sayang</h2>
+    </main>
+ <p><a href="blog.html">Kembali ke daftar blog</a></p>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 mt-12">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <div class="text-2xl font-bold text-white mb-4 sans-font">SirahHumor.</div>
+            <p class="text-sm mb-6">
+                Dibuat dengan cinta untuk mengenang generasi terbaik. <br>
+                Semoga Allah meridhoi mereka semua.
+            </p>
+            <div class="w-16 h-1 bg-amber-600 mx-auto rounded mb-6"></div>
+            <p class="text-xs text-gray-600">
+                &copy; 2025 - All Stories Compiled from Authentic Sources
+            </p>
+        </div>
+    </footer>
 
-    <h3>Ali bin Abi Thalib & Biji Kurma</h3>
-    <p>Suatu ketika Nabi SAW dan Ali bin Abi Thalib sedang makan kurma. Ali yang iseng diam-diam memindahkan biji kurma bekas makannya ke piring Nabi.</p>
-    <p>Setelah selesai, Ali berkata: <i>"Wahai Rasulullah, Engkau lapar sekali ya? Lihat tumpukan biji di depanmu."</i><br>
-    Nabi membalas dengan cerdas: <i>"Wahai Ali, justru kamulah yang sangat lapar. Kamu makan kurma sampai menelan biji-bijinya (karena piring Ali kosong melompong)!"</i>,,</p>
-
-    <h3>Ummu Aiman dan "Anak Unta"</h3>
-    <p>Ummu Aiman (pengasuh Nabi) datang minta unta untuk tunggangan. Nabi bercanda: <i>"Aku akan memberimu anak unta."</i><br>
-    Ummu Aiman protes: <i>"Ya Rasulullah, anak unta mana kuat mengangkutku?"</i><br>
-    Nabi tersenyum: <i>"Bukankah setiap unta dewasa pasti adalah anak dari unta lain?"</i>,,</p>
-
-    <h3>Nenek Tua di Surga</h3>
-    <p>Seorang nenek minta didoakan masuk surga. Nabi berkata: <i>"Tidak ada nenek-nenek di surga."</i> Si nenek menangis sedih. Nabi lalu menjelaskan (sambil menghibur): <i>"Maksudnya, engkau akan masuk surga dalam keadaan muda kembali, bukan sebagai nenek-nenek."</i></p>
-
-    <h3>Zahir bin Haram: "Budak Murah"</h3>
-    <p>Zahir adalah sahabat dari desa yang fisiknya kurang menarik dan sering merasa rendah diri. Saat dia di pasar, Nabi memeluknya erat dari belakang (sebuah <i>surprise hug</i>). Zahir berteriak: <i>"Lepaskan! Siapa ini?"</i></p>
-    <p>Saat tahu itu Nabi, Zahir malah menyandarkan punggungnya manja. Nabi lalu berteriak layaknya juru lelang: <i>"Siapa mau beli budak ini?"</i><br>
-    Zahir berkata sedih: <i>"Demi Allah, aku ini barang dagangan yang tidak laku (murah), wahai Rasul."</i><br>
-    Nabi menjawab: <i>"Tapi di mata Allah, engkau sangat mahal."</i> [7, 8]</p>
-
-    <h2>Kesimpulan: Kemanusiaan yang Agung</h2>
-    <p>Kisah-kisah ini bukan sekadar lelucon. Ini adalah bukti bahwa Islam hadir tidak untuk mematikan fitrah manusia untuk berbahagia. Nabi Muhammad SAW dan para sahabatnya mengajarkan kita bahwa kesalehan bisa berjalan beriringan dengan tawa, kehangatan, dan kelapangan dada. </p>
-    
-    <div class="footer">
-        <p>&copy; 2025 Laporan Sirah Nabawiyah. Disusun berdasarkan riwayat-riwayat shahih dan hasan.</p>
-    </div>
-
-</div>
-  <p><a href="blog.html">Kembali ke daftar blog</a></p>
 </body>
-
 </html>
