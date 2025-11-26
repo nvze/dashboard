@@ -3,35 +3,181 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Saya</title>
+  <title>Arsip Tulisan</title>
   <style>
-    body {font-family:Arial,sans-serif;background:#1e1e2e;color:#cdd6f4;padding:40px;line-height:1.6;}
-    h1 {text-align:center;}
-    ul {list-style:none; padding:0;}
-    li {margin:15px 0; font-size:1.5rem;}
-    a {color:#f5c2e7; text-decoration:none;}
-    a:hover {text-decoration:underline;}
-    .back {text-align:center; margin-top:50px; font-size:1.2rem;}
+    /* Reset & Base Style */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      /* Background Gradient sama dengan Index agar konsisten */
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Container Utama */
+    .blog-card {
+      background: #ffffff;
+      width: 90%;
+      max-width: 600px;
+      height: 85vh; /* Tinggi fix agar bisa discroll dalamnya */
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column; /* Susunan vertikal: Header - List - Footer */
+      overflow: hidden; /* Agar sudut bulat tidak tertutup content */
+    }
+
+    /* Bagian Header */
+    .card-header {
+      padding: 25px 30px;
+      background: #ffffff;
+      border-bottom: 1px solid #eee;
+      z-index: 10;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+
+    .card-header h1 {
+      font-size: 1.5rem;
+      color: #000080; /*biru dongker*/
+      font-weight: 800;
+    }
+
+    .card-header p {
+      font-size: 0.9rem;
+      color: #001f3f;
+      margin-top: 5px;
+    }
+
+    /* Area List yang Bisa di-Scroll */
+    .post-list-container {
+      flex: 1; /* Mengisi sisa ruang kosong */
+      overflow-y: auto; /* Scroll aktif jika konten panjang */
+      padding: 10px 0;
+      counter-reset: post-counter; /* Untuk penomoran otomatis */
+    }
+
+    /* Scrollbar Kustom (biar makin keren) */
+    .post-list-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .post-list-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    .post-list-container::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 3px;
+    }
+    .post-list-container::-webkit-scrollbar-thumb:hover {
+      background: #999;
+    }
+
+    /* Item Postingan */
+    .post-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 30px; /* Rapat tapi tetap nyaman diklik */
+      text-decoration: none;
+      color: #2d3436;
+      border-bottom: 1px solid #f9f9f9; /* Garis pemisah sangat tipis */
+      transition: background 0.2s ease, padding-left 0.2s ease;
+    }
+
+    .post-item:hover {
+      background-color: #f8faff;
+      padding-left: 35px; /* Efek geser sedikit saat hover */
+      color: #1a73e8; /* Warna biru Google saat hover */
+    }
+
+    /* Penomoran Otomatis yang Keren */
+    .post-item::before {
+      counter-increment: post-counter;
+      content: counter(post-counter);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #b2bec3;
+      margin-right: 15px;
+      min-width: 25px; /* Lebar tetap agar teks lurus */
+    }
+
+    .post-title {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* Bagian Footer (Tombol Kembali) */
+    .card-footer {
+      padding: 20px;
+      border-top: 1px solid #eee;
+      text-align: center;
+      background: #fff;
+    }
+
+    .btn-back {
+      display: inline-block;
+      text-decoration: none;
+      color: #636e72;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 30px;
+      background: #f1f2f6;
+      transition: all 0.2s;
+    }
+
+    .btn-back:hover {
+      background: #dfe6e9;
+      color: #2d3436;
+    }
+
   </style>
 </head>
 <body>
-  <h1>Blog Saya</h1>
-  <p>Berikut daftar tulisan saya:</p>
 
-  <ul>
-    <li><a href="post-1.html">1. Belajar HTML itu Mudah Banget</a></li>
-    <li><a href="post-2.html">2. Cara Deploy Website Gratis di GitHub Pages</a></li>
-    <li><a href="post-3.html">3. Tips Membuat Dashboard Pribadi Keren</a></li>
-     <li><a href="post-4.html">4. Sisi Kocak Generasi Terbaik</a></li>
-    <li><a href="post-5.html">5. ANALISIS DAMPAK YEN CARRY TRADE TERHADAP PASAR KEUANGAN INDONESIA</a></li>
-    <li><a href="post-6.html">6. Teater Modal </a></li>
-    <!-- Tambah postingan baru tinggal copy baris di atas -->
-  </ul>
+  <div class="blog-card">
+    
+    <div class="card-header">
+      <h1>Arsip Tulisan</h1>
+      <p>Kumpulan pemikiran dan catatan</p>
+    </div>
 
-  <div class="back">
-    <a href="index.html">Kembali ke Dashboard</a>
+    <div class="post-list-container">
+      <a href="post-1.html" class="post-item">
+        <span class="post-title">Belajar HTML itu Mudah Banget</span>
+      </a>
+
+      <a href="post-2.html" class="post-item">
+        <span class="post-title">Cara Deploy Website Gratis di GitHub Pages</span>
+      </a>
+
+      <a href="post-3.html" class="post-item">
+        <span class="post-title">Tips Membuat Dashboard Pribadi Keren</span>
+      </a>
+
+      <a href="post-4.html" class="post-item">
+        <span class="post-title">Sisi Kocak Generasi Terbaik</span>
+      </a>
+
+      <a href="post-5.html" class="post-item">
+        <span class="post-title">Analisis Dampak Yen Carry Trade Terhadap Pasar Keuangan</span>
+      </a>
+
+      <a href="post-6.html" class="post-item">
+        <span class="post-title">Teater Modal</span>
+      </a>
+      
+      </div>
+
+    <div class="card-footer">
+      <a href="index.html" class="btn-back">← Kembali ke Dashboard</a>
+    </div>
+
   </div>
+
 </body>
 </html>
-
-
