@@ -3,96 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Blog Writer</title>
+    <title>GitHub Blog Manager (Edit & Create)</title>
     <style>
-        body { font-family: sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
-        .config-box { background: #f4f4f4; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid #ddd; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
-        input, textarea { width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        textarea { height: 300px; font-family: monospace; }
-        button { background: #2ea44f; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 1rem; }
-        button:hover { background: #2c974b; }
-        #status { margin-top: 1rem; padding: 1rem; border-radius: 4px; display: none; }
-        .success { background: #d0f0c0; color: #1e561e; }
-        .error { background: #f8d7da; color: #721c24; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; color: #333; }
+        h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .config-box { background: #f6f8fa; padding: 1.5rem; border-radius: 6px; margin-bottom: 2rem; border: 1px solid #d0d7de; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
+        input, textarea { width: 100%; padding: 8px 12px; margin-bottom: 1rem; border: 1px solid #d0d7de; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        textarea { height: 400px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; line-height: 1.4; }
+        
+        .action-bar { display: flex; gap: 10px; align-items: flex-end; margin-bottom: 1rem; }
+        .action-bar input { margin-bottom: 0; }
+        
+        button { border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600; transition: 0.2s; }
+        .btn-check { background: #0969da; color: white; white-space: nowrap; }
+        .btn-check:hover { background: #0756b3; }
+        .btn-publish { background: #2da44e; color: white; width: 100%; font-size: 16px; padding: 12px; }
+        .btn-publish:hover { background: #2c974b; }
+        
+        #file-status { font-size: 0.9rem; margin-top: 5px; font-weight: bold; }
+        .status-new { color: #2da44e; } /* Green */
+        .status-edit { color: #bf8700; } /* Orange */
+        
+        #notification { margin-top: 1rem; padding: 1rem; border-radius: 6px; display: none; }
+        .success { background: #dafbe1; color: #1a7f37; border: 1px solid #2da44e; }
+        .error { background: #ffeff0; color: #cf222e; border: 1px solid #ff8182; }
+        
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
-    <h1>📝 Tulis Blog ke GitHub</h1>
+    <h1>📝 GitHub Blog Manager</h1>
 
     <div class="config-box">
-        <h3>🔑 Pengaturan GitHub</h3>
-        <label for="token">GitHub Personal Access Token (PAT):</label>
+        <h3>🔐 Akses Repository</h3>
+        <label for="token">Personal Access Token (PAT):</label>
         <input type="password" id="token" placeholder="ghp_xxxxxxxxxxxx...">
         
-        <div style="display: flex; gap: 10px;">
+        <div style="display: flex; gap: 15px;">
             <div style="flex: 1;">
                 <label for="username">Username:</label>
-                <input type="text" id="username" placeholder="Contoh: imamsantos">
+                <input type="text" id="username" placeholder="imamsantos">
             </div>
             <div style="flex: 1;">
-                <label for="repo">Nama Repository:</label>
-                <input type="text" id="repo" placeholder="Contoh: blog-saya">
+                <label for="repo">Repository:</label>
+                <input type="text" id="repo" placeholder="blog-saya">
             </div>
         </div>
-        <label for="folder">Path/Folder (Opsional):</label>
-        <input type="text" id="folder" placeholder="posts/ (kosongkan jika di root)">
+        <label for="folder">Folder (Opsional):</label>
+        <input type="text" id="folder" placeholder="posts/">
     </div>
 
-    <label for="filename">Nama File (akhiri dengan .html):</label>
-    <input type="text" id="filename" placeholder="artikel-baru.html">
+    <label>Nama File (termasuk .html):</label>
+    <div class="action-bar">
+        <input type="text" id="filename" placeholder="about.html" oninput="resetStatus()">
+        <button onclick="checkFile()" class="btn-check">🔍 Cek / Muat File</button>
+    </div>
+    <div id="file-status" class="hidden"></div>
 
-    <label for="content">Isi Konten HTML:</label>
-    <textarea id="content" placeholder="<h1>Judul Blog</h1><p>Tulisan kamu disini...</p>"></textarea>
+    <div id="editor-area" style="opacity: 0.5; pointer-events: none;">
+        <label for="content">Isi Konten HTML:</label>
+        <textarea id="content" placeholder="Tekan tombol 'Cek / Muat File' dulu sebelum menulis..."></textarea>
+        
+        <label for="commit-msg">Pesan Commit:</label>
+        <input type="text" id="commit-msg" placeholder="Update artikel..." value="Update content via Web">
 
-    <button onclick="publishPost()">🚀 Publish ke GitHub</button>
+        <button onclick="publishPost()" class="btn-publish" id="btn-save">💾 Simpan ke GitHub</button>
+    </div>
 
-    <div id="status"></div>
+    <div id="notification"></div>
 
     <script>
-        async function publishPost() {
-            const token = document.getElementById('token').value;
-            const username = document.getElementById('username').value;
-            const repo = document.getElementById('repo').value;
-            let folder = document.getElementById('folder').value;
-            const filename = document.getElementById('filename').value;
-            const content = document.getElementById('content').value;
-            const statusDiv = document.getElementById('status');
+        let currentSha = null; // Menyimpan sidik jari file jika file sudah ada
 
-            // Validasi Input
-            if (!token || !username || !repo || !filename || !content) {
-                showStatus("Mohon lengkapi semua kolom!", "error");
+        // Fungsi untuk mengambil data file dari GitHub (GET)
+        async function checkFile() {
+            const { token, username, repo, path } = getDetails();
+            const statusLabel = document.getElementById('file-status');
+            const editorArea = document.getElementById('editor-area');
+            const contentArea = document.getElementById('content');
+            
+            if (!token || !username || !repo || !path) {
+                showNotif("Lengkapi data Token, Repo, dan Nama File dulu!", "error");
                 return;
             }
 
-            // Rapikan path folder
-            if (folder && !folder.endsWith('/')) folder += '/';
-            
-            // API Endpoint
-            const path = `${folder}${filename}`;
+            statusLabel.className = '';
+            statusLabel.textContent = "Sedang memeriksa...";
+            statusLabel.style.display = 'block';
+
             const url = `https://api.github.com/repos/${username}/${repo}/contents/${path}`;
 
-            // Encoding konten ke Base64 (support UTF-8/Emoji)
+            try {
+                const response = await fetch(url, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.status === 200) {
+                    // File Ditemukan (Mode Edit)
+                    const data = await response.json();
+                    currentSha = data.sha; // Simpan SHA penting ini!
+                    
+                    // Decode konten dari Base64 ke UTF-8
+                    const decodedContent = decodeURIComponent(escape(window.atob(data.content.replace(/\n/g, ""))));
+                    contentArea.value = decodedContent;
+
+                    statusLabel.textContent = "✅ File ditemukan: Mode EDIT";
+                    statusLabel.className = "status-edit";
+                    document.getElementById('commit-msg').value = `Update ${path}`;
+                } else if (response.status === 404) {
+                    // File Tidak Ada (Mode Baru)
+                    currentSha = null;
+                    contentArea.value = ""; // Kosongkan editor
+                    
+                    statusLabel.textContent = "✨ File belum ada: Mode BARU";
+                    statusLabel.className = "status-new";
+                    document.getElementById('commit-msg').value = `Create ${path}`;
+                } else {
+                    throw new Error("Gagal mengambil info file.");
+                }
+
+                // Aktifkan area editor
+                editorArea.style.opacity = "1";
+                editorArea.style.pointerEvents = "auto";
+                showNotif("", "hidden"); // Sembunyikan notif error jika ada sebelumnya
+
+            } catch (error) {
+                showNotif(`Error: ${error.message}`, "error");
+                statusLabel.textContent = "❌ Gagal koneksi";
+            }
+        }
+
+        // Fungsi untuk Upload/Update file (PUT)
+        async function publishPost() {
+            const { token, username, repo, path } = getDetails();
+            const content = document.getElementById('content').value;
+            const message = document.getElementById('commit-msg').value;
+
+            if (!content) { showNotif("Konten tidak boleh kosong!", "error"); return; }
+
+            showNotif("Sedang mengirim ke GitHub...", "success");
+
+            // Encode konten ke Base64 (UTF-8 safe)
             const contentEncoded = btoa(unescape(encodeURIComponent(content)));
 
+            const url = `https://api.github.com/repos/${username}/${repo}/contents/${path}`;
+
             const data = {
-                message: `✨ Blog baru: ${filename} via Web Interface`,
+                message: message,
                 content: contentEncoded,
-                branch: "main" // Ganti 'master' jika repo lama
+                branch: "main" // Ubah jadi 'master' jika perlu
             };
 
-            statusDiv.style.display = 'block';
-            statusDiv.textContent = "Sedang mengirim...";
-            statusDiv.className = "";
+            // PENTING: Jika kita mengedit, sertakan SHA
+            if (currentSha) {
+                data.sha = currentSha;
+            }
 
             try {
                 const response = await fetch(url, {
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/vnd.github.v3+json'
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(data)
                 });
@@ -100,24 +174,47 @@
                 const result = await response.json();
 
                 if (response.ok) {
-                    showStatus(`✅ Berhasil! File tersimpan di: ${path}`, "success");
-                    // Opsional: Bersihkan form content
-                    // document.getElementById('content').value = ''; 
+                    showNotif(`✅ Sukses! File ${path} berhasil disimpan.`, "success");
+                    // Update SHA baru agar user bisa save lagi tanpa reload
+                    currentSha = result.content.sha;
+                    document.getElementById('file-status').textContent = "✅ File tersimpan (Mode EDIT)";
+                    document.getElementById('file-status').className = "status-edit";
                 } else {
-                    showStatus(`❌ Gagal: ${result.message}`, "error");
+                    showNotif(`❌ Gagal: ${result.message}`, "error");
                 }
             } catch (error) {
-                showStatus(`❌ Error Koneksi: ${error.message}`, "error");
+                showNotif(`❌ Error Koneksi: ${error.message}`, "error");
             }
         }
 
-        function showStatus(msg, type) {
-            const el = document.getElementById('status');
+        // Helper: Ambil value dari input
+        function getDetails() {
+            let folder = document.getElementById('folder').value.trim();
+            if (folder && !folder.endsWith('/')) folder += '/';
+            
+            return {
+                token: document.getElementById('token').value.trim(),
+                username: document.getElementById('username').value.trim(),
+                repo: document.getElementById('repo').value.trim(),
+                path: folder + document.getElementById('filename').value.trim()
+            };
+        }
+
+        // Helper: Reset status jika nama file diubah manual
+        function resetStatus() {
+            document.getElementById('file-status').style.display = 'none';
+            document.getElementById('editor-area').style.opacity = "0.5";
+            document.getElementById('editor-area').style.pointerEvents = "none";
+            currentSha = null;
+        }
+
+        function showNotif(msg, type) {
+            const el = document.getElementById('notification');
+            if (type === 'hidden') { el.style.display = 'none'; return; }
             el.style.display = 'block';
             el.textContent = msg;
             el.className = type;
         }
     </script>
-<a href="index.html" class="btn-back">← Kembali ke Dashboard</a>
 </body>
 </html>
