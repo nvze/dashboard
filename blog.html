@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal Pemikiran | NVZE</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. LUXURY VARIABLES --- */
+        :root {
+            --bg-color: #FDFBF7;      /* Warm Paper White (Kesan buku mahal) */
+            --text-main: #1C1C1C;     /* Obsidian Black */
+            --text-muted: #6E6E6E;    /* Slate Grey */
+            --accent: #BFA15F;        /* Muted Gold */
+            --border: #E8E6E1;
+            
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-weight: 300;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- 2. TOP NAVIGATION (BACK BUTTON) --- */
+        .top-bar {
+            padding: 30px 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-back:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+        }
+
+        /* --- 3. HEADER AREA --- */
+        header {
+            padding: 60px 20px 40px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 4.5rem; /* Ukuran besar untuk kesan mewah */
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* --- 4. STICKY CATEGORY NAV --- */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            border-top: 1px solid var(--border);
+            padding: 15px 0;
+            margin-bottom: 60px;
+        }
+
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding-bottom: 2px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            color: var(--text-main);
+        }
+
+        .filter-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--accent);
+        }
+
+        /* --- 5. ARTICLE LIST LAYOUT --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex: 1; /* Agar footer terdorong ke bawah */
+        }
+
+        .article-card {
+            display: block;
+            text-decoration: none;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+
+        .article-card:hover {
+            opacity: 0.75;
+        }
+
+        .meta-group {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .post-title {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: var(--text-main);
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .post-excerpt {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 90%;
+        }
+
+        /* --- 6. FOOTER & UTILS --- */
+        .load-more-container {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .btn-load {
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 12px 40px;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-load:hover {
+            background: var(--text-main);
+            color: #fff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+            font-family: var(--font-serif);
+            font-style: italic;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .nav-list { gap: 20px; padding: 0 10px; }
+            .post-title { font-size: 1.8rem; }
+            .top-bar { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="https://nvze.github.io/dashboard/index.html" class="btn-back">
+            &larr; Kembali ke Dashboard
+        </a>
+    </div>
+
+    <header>
+        <h1>NVZE JURNAL</h1>
+        <p class="subtitle">Arsip Ekonomi, Teknologi, Humaniora & Artikel Bebas</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <ul class="nav-list">
+            <li><button class="filter-btn active" onclick="setCategory('all', this)">Indeks</button></li>
+            <li><button class="filter-btn" onclick="setCategory('ekonomi', this)">Ekonomi</button></li>
+            <li><button class="filter-btn" onclick="setCategory('teknologi', this)">Teknologi</button></li>
+            <li><button class="filter-btn" onclick="setCategory('humaniora', this)">Humaniora</button></li>
+            <li><button class="filter-btn" onclick="setCategory('bebas', this)">Bebas</button></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div id="posts-container">
+            </div>
+
+        <div class="load-more-container">
+            <button id="loadMoreBtn" class="btn-load" onclick="loadMore()">Muat Lebih Banyak</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy;2025 nvze dashboard
+    </footer>
+
+    <script>
+        /* =========================================================
+           DATABASE ARTIKEL
+           Silakan edit bagian 'title' dan 'desc' sesuai isi file post-X.html Anda.
+           Sistem ini siap menampung hingga 1000+ item.
+           =========================================================
+        */
+        const allPosts = [
+            // --- KELOMPOK EKONOMI ---
+            { title: "rekayasa finansial global ", cat: "ekonomi", date: "01 Nov 2025", desc: "Kajian Analisis Strategis:
+Validasi dan Dekonstruksi Arsitektur Penguasaan Negara Melalui Finansialisasi Global", link: "post-2.html" },
+            { title: "ANALISIS DAMPAK YEN CARRY TRADE TERHADAP PASAR KEUANGAN INDONESIA", cat: "ekonomi", date: "05 Jan 2025", desc: "Yen Carry Trade adalah strategi arbitrase finansial di mana investor global meminjam dana dalam mata uang Yen Jepang (JPY) karena tingkat suku bunga yang sangat rendah", link: "post-5.html" },
+            { title: "teater modal ", cat: "ekonomi", date: "10 Jan 2025", desc: "Sebuah Drama tentang Geopolitik & Keuangan Global", link: "post-6.html" },
+            { title: "Catatan Bagi Pemula Bisnis Forex", cat: "ekonomi", date: "12 Jan 2025", desc: "pasar valas adalah pasar keuangan nomor 1 terbesar di dunia. Kalau bisnis ini lebih banyak ruginya tentu tidak mungkin pasar valas menjadi terbesar di dunia", link: "post-7.html" },
+               { title: "analisis cadangan devisa dan rupiah  ", cat: "ekonomi", date: "10 Jan 2025", desc: "Paradoks Rupiah: Menganalisis Dominasi Faktor Permintaan Valas di Tengah Melimpahnya Cadangan Devisa", link: "post-10.html" },
+
+            // --- KELOMPOK TEKNOLOGI ---
+            { title: "Studi Teknik dan Manajemen Industri", cat: "teknologi", date: "26 Nov 2025", desc: "Evolusi Disiplin, Fondasi Teoretis, dan Lanskap Akademik Global", link: "post-1.html" },
+            { title: "teknik industri dan SCM", cat: "teknologi", date: "18 Jan 2025", desc: "Arsitektur Aliran: Sebuah Kajian Mendalam Keterkaitan Teknik Industri dan Supply Chain Management", link: "post-11.html" },
+        
+
+            // --- KELOMPOK HUMANIORA ---
+            { title: "Amerika Itu Memang Perkasa", cat: "humaniora", date: "25 Jan 2025", desc: "Di Amerika di beberapa kota akan sering terlihat homeless alias gembel. Padahal AS dikenal sebagai negara kaya nomor 1 di dunia.", link: "post-8.html" },
+            { title: "Belajar Melawan Gelombang", cat: "humaniora", date: "28 Jan 2025", desc: "Saya engga mau kerja di perusahaan anda. Saya mohon dilibatkan sebagai team dalam proses private equity. Itu aja” kata Karen suatu waktu.", link: "post-9.html" },
+            { title: "pengendali arus uang ", cat: "humaniora", date: "01 Feb 2025", desc: "Total aset perusahaan kamu tumbuh agresif tiga tahun berturut-turut. Tapi hanya 10% yang berasal dari paid-up capital. Artinya, kamu hebat dalam leverage. Tapi leverage kamu bukan dari profitabilitas. Tapi dari… cerita.", link: "post-12.html" },
+             { title: "dunia persepsi  ", cat: "humaniora", date: "01 Feb 2025", desc: "Apa pandangan Anda tentang sektor IT di China?", link: "post-13.html" },
+                { title: "dilema dua raksasa ", cat: "humaniora", date: "27 Nov 2025", desc: "Selama puluhan tahun, "Bebas Aktif" menjadi mantra suci diplomasi Indonesia. Namun, di tengah persaingan memanas antara Amerika Serikat dan Tiongkok, apakah posisi netral masih menjadi tameng yang aman, atau justru jebakan yang berbahaya?", link: "post-14.html" },
+            
+
+            // --- KELOMPOK BEBAS ---
+            { title: "Catatan Perjalanan: Bandung", cat: "bebas", date: "28 Nov 2025", desc: "Refleksi pagi hari di kota kembang.", link: "posts/post-14.html" },
+          
+        ];
+
+        // --- SYSTEM CORE LOGIC ---
+        let currentCategory = 'all';
+        let displayLimit = 15; // Jumlah awal artikel yang ditampilkan
+        let filteredList = [];
+
+        const container = document.getElementById('posts-container');
+        const loadBtn = document.getElementById('loadMoreBtn');
+
+        function init() {
+            setCategory('all', document.querySelector('.filter-btn.active'));
+        }
+
+        function setCategory(cat, element) {
+            // 1. Update Tampilan Tab
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            if(element) element.classList.add('active');
+
+            // 2. Filter Data
+            currentCategory = cat;
+            if (cat === 'all') {
+                filteredList = allPosts;
+            } else {
+                filteredList = allPosts.filter(post => post.cat === cat);
+            }
+
+            // 3. Reset dan Render
+            renderList();
+        }
+
+        function renderList() {
+            container.innerHTML = ''; // Bersihkan container
+
+            // Ambil data sesuai limit (Pagination Logic)
+            const listToShow = filteredList.slice(0, displayLimit);
+
+            if(listToShow.length === 0) {
+                container.innerHTML = `<p style="text-align:center; color:#999; padding:40px;">Belum ada artikel di kategori ini.</p>`;
+                loadBtn.style.display = 'none';
+                return;
+            }
+
+            listToShow.forEach(post => {
+                const article = document.createElement('a');
+                article.href = post.link;
+                article.className = 'article-card';
+                article.innerHTML = `
+                    <div class="meta-group">
+                        <span>${post.cat}</span>
+                        <span>${post.date}</span>
+                    </div>
+                    <h2 class="post-title">${post.title}</h2>
+                    <p class="post-excerpt">${post.desc}</p>
+                `;
+                container.appendChild(article);
+            });
+
+            // Cek apakah tombol Load More perlu muncul
+            if (displayLimit >= filteredList.length) {
+                loadBtn.style.display = 'none';
+            } else {
+                loadBtn.style.display = 'inline-block';
+            }
+        }
+
+        function loadMore() {
+            displayLimit += 10; // Menambah 10 artikel setiap klik
+            renderList();
+        }
+
+        // Jalankan saat halaman siap
+        window.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+</html>
