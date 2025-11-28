@@ -3,148 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riset Operasi: Ilmu Pengambilan Keputusan dan Perannya dalam Teknik Industri</title>
+    <title>Riset Operasi: Ilmu Pengambilan Keputusan</title>
     
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        /* Reset & Dasar */
-        body {
-            font-family: "Merriweather", "Georgia", serif; /* Font Serif untuk keterbacaan akademik */
-            line-height: 1.8;
-            color: #333;
-            background-color: #fdfdfd;
-            margin: 0;
-            padding: 0;
+        /* CSS Reset & Academic Style */
+        :root {
+            --primary-color: #003366; /* Navy Blue Akademik */
+            --text-color: #212529;
+            --bg-color: #fdfdfd;
+            --accent-color: #8b0000; /* Merah Marun untuk highlight */
         }
 
-        /* Container Utama */
+        body {
+            font-family: "Charter", "Bitstream Charter", "Sitka Text", Cambria, serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            font-size: 18px; /* Ukuran font nyaman untuk membaca panjang */
+        }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 40px 24px;
             background-color: #ffffff;
-            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
         }
 
-        /* Tipografi Judul */
+        /* Typography */
         h1, h2, h3, h4 {
-            font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-            color: #2c3e50;
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
+            font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+            color: var(--primary-color);
+            margin-top: 1.8em;
+            margin-bottom: 0.8em;
             font-weight: 700;
+            line-height: 1.3;
         }
 
         h1 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             text-align: center;
-            border-bottom: 2px solid #2c3e50;
-            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 30px;
             margin-top: 0;
         }
 
         h2 {
-            font-size: 1.6rem;
-            border-bottom: 1px solid #eee;
+            font-size: 1.8rem;
+            border-bottom: 1px solid #ddd;
             padding-bottom: 10px;
-            color: #2980b9; /* Biru Akademik */
+            color: #444;
         }
 
         h3 {
-            font-size: 1.3rem;
-            color: #34495e;
+            font-size: 1.4rem;
+            color: var(--primary-color);
         }
 
-        /* Paragraf & Teks */
         p {
-            margin-bottom: 1.2em;
+            margin-bottom: 1.5em;
             text-align: justify;
         }
 
-        /* Rumus Matematika */
-        .math-display {
-            overflow-x: auto;
-            margin: 20px 0;
-            text-align: center;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-radius: 4px;
+        ul, ol {
+            margin-bottom: 1.5em;
+            padding-left: 2em;
         }
 
-        /* Tabel */
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* Math Styling */
+        .math-display {
+            background-color: #f4f6f9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            margin: 25px 0;
+            overflow-x: auto;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        /* Table Styling */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
+            margin: 30px 0;
             font-family: "Segoe UI", sans-serif;
             font-size: 0.95rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
-        table, th, td {
-            border: 1px solid #ddd;
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            text-align: left;
         }
 
         th {
-            background-color: #f2f2f2;
-            color: #333;
-            padding: 12px;
-            text-align: left;
+            background-color: var(--primary-color);
+            color: white;
             font-weight: 600;
         }
 
-        td {
-            padding: 10px;
-        }
-
         tr:nth-child(even) {
-            background-color: #fafafa;
+            background-color: #f8f9fa;
         }
 
-        /* Daftar Pustaka */
-        .references {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 3px double #ccc;
-            font-size: 0.9rem;
+        /* Blockquote */
+        blockquote {
+            border-left: 4px solid var(--accent-color);
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #fff5f5;
+            font-style: italic;
             color: #555;
         }
+
+        /* References */
+        .references {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #ccc;
+            font-size: 0.85rem;
+            color: #666;
+        }
         
+        .references h3 {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
         .references ol {
             padding-left: 20px;
         }
-        
+
         .references li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             word-wrap: break-word;
         }
 
-        /* Tombol Navigasi Bawah */
+        /* Navigation Button */
         .footer-nav {
-            margin-top: 60px;
+            margin-top: 80px;
             text-align: center;
-            padding: 20px 0;
+            padding: 40px 0;
         }
 
         .btn-back {
             display: inline-block;
-            padding: 12px 24px;
-            background-color: #2c3e50;
-            color: #ffffff;
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: white;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 50px;
             font-family: "Segoe UI", sans-serif;
             font-weight: 600;
-            transition: background-color 0.3s ease;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .btn-back:hover {
-            background-color: #34495e;
+            background-color: #002244;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        /* Emphasis */
+        /* Highlight helper */
         strong {
+            font-weight: 700;
             color: #000;
         }
     </style>
@@ -161,7 +207,7 @@
         <h2>BAGIAN I: FONDASI DAN OPTIMASI DETERMINISTIK – MEMBANGUN DUNIA YANG IDEAL</h2>
 
         <h3>Bab 1: Kelahiran Sebuah Disiplin: Sejarah dan Jiwa Riset Operasi</h3>
-        <p>Riset Operasi (Operations Research - OR) bukanlah disiplin yang lahir dari kontemplasi akademis yang tenang di menara gading universitas. Sebaliknya, ia ditempa dalam kancah kebutuhan mendesak Perang Dunia II. Pada akhir 1930-an dan awal 1940-an, ketika Inggris menghadapi tantangan strategis dan taktis yang belum pernah terjadi sebelumnya, para pemimpin militer mengambil langkah radikal: mereka mengumpulkan tim-tim ilmuwan dari berbagai disiplin—fisikawan, matematikawan, ahli biologi, dan insinyur—untuk "meriset" operasi militer.</p>
+        <p>Riset Operasi (<em>Operations Research</em> - OR) bukanlah disiplin yang lahir dari kontemplasi akademis yang tenang di menara gading universitas. Sebaliknya, ia ditempa dalam kancah kebutuhan mendesak Perang Dunia II. Pada akhir 1930-an dan awal 1940-an, ketika Inggris menghadapi tantangan strategis dan taktis yang belum pernah terjadi sebelumnya, para pemimpin militer mengambil langkah radikal: mereka mengumpulkan tim-tim ilmuwan dari berbagai disiplin—fisikawan, matematikawan, ahli biologi, dan insinyur—untuk "meriset" operasi militer.</p>
         
         <p>Tim-tim perintis ini ditugaskan untuk memecahkan masalah-masalah kompleks menggunakan pendekatan ilmiah. Masalah-masalah ini berkisar dari menentukan cara terbaik menyebarkan sistem radar yang baru ditemukan, mengoptimalkan kedalaman peledakan bom anti-kapal selam, hingga merancang ukuran dan pola konvoi yang paling aman untuk melintasi Atlantik. Pendekatan mereka adalah inti dari apa yang sekarang kita sebut OR: penggunaan analisis kuantitatif dan pemodelan matematis untuk meningkatkan efisiensi sistem yang ada. Ini adalah prototipe dari tim Teknik Industri (TI) modern: sekelompok pakar lintas disiplin yang berfokus pada efisiensi sistem.</p>
         
@@ -185,49 +231,52 @@
             <li><strong>Implementasi:</strong> Langkah terakhir adalah mengintegrasikan model ke dalam proses operasional organisasi.</li>
         </ol>
         
-        <p>Dalam praktik industri modern, nilai sebenarnya dari seorang Insinyur Industri seringkali tidak terletak pada Langkah 3; perangkat lunak komersial telah mengotomatiskan sebagian besar perhitungan yang kompleks. Sebaliknya, keahlian yang tak tergantikan terletak pada Langkah 1, 2, dan 4. Tantangan terbesar adalah menerjemahkan "masalah bisnis" klien yang seringkali kualitatif dan membingungkan ke dalam formulasi matematis yang tepat dan, yang sama pentingnya, secara skeptis menguji apakah solusi model tersebut benar-benar masuk akal dan valid di dunia nyata. Model yang brilian secara matematis namun tidak mencerminkan realitas operasional adalah latihan akademis yang sia-sia. Peran Insinyur Industri adalah menjadi jembatan antara realitas operasional yang berantakan dan abstraksi matematis yang elegan.</p>
+        <p>Dalam praktik industri modern, nilai sebenarnya dari seorang Insinyur Industri seringkali tidak terletak pada Langkah 3; perangkat lunak komersial telah mengotomatiskan sebagian besar perhitungan yang kompleks. Sebaliknya, keahlian yang tak tergantikan terletak pada Langkah 1, 2, dan 4. Tantangan terbesar adalah menerjemahkan "masalah bisnis" klien yang seringkali kualitatif dan membingungkan ke dalam formulasi matematis yang tepat dan, yang sama pentingnya, secara skeptis menguji apakah solusi model tersebut benar-benar masuk akal dan valid di dunia nyata. Peran Insinyur Industri adalah menjadi jembatan antara realitas operasional yang berantakan dan abstraksi matematis yang elegan.</p>
 
         <h3>Bab 3: Pemrograman Linier dan Mesin Pemecahnya: Algoritma Simpleks</h3>
-        <p>Fondasi dari optimasi deterministik adalah Pemrograman Linier (Linear Programming - LP). LP adalah sebuah metode matematis yang kuat untuk memecahkan masalah alokasi sumber daya. Ini digunakan ketika kita perlu mengalokasikan sumber daya yang terbatas (seperti bahan baku, jam kerja, ruang gudang, atau anggaran) di antara berbagai aktivitas yang bersaing, dengan tujuan untuk mengoptimalkan hasil (yaitu, memaksimalkan laba atau meminimalkan biaya). Kekuatan LP terletak pada asumsinya: ia mengasumsikan bahwa fungsi tujuan dan semua kendala adalah linier.</p>
+        <p>Fondasi dari optimasi deterministik adalah Pemrograman Linier (<em>Linear Programming</em> - LP). LP adalah sebuah metode matematis yang kuat untuk memecahkan masalah alokasi sumber daya. Ini digunakan ketika kita perlu mengalokasikan sumber daya yang terbatas (seperti bahan baku, jam kerja, ruang gudang, atau anggaran) di antara berbagai aktivitas yang bersaing, dengan tujuan untuk mengoptimalkan hasil (yaitu, memaksimalkan laba atau meminimalkan biaya). Kekuatan LP terletak pada asumsinya: ia mengasumsikan bahwa fungsi tujuan dan semua kendala adalah linier.</p>
         
         <p>Bentuk umum dari model LP dapat dituliskan secara matematis sebagai berikut:</p>
         
         <div class="math-display">
-            <strong>Fungsi Tujuan (Maksimalkan atau Minimalkan):</strong><br>
+            <strong>Fungsi Tujuan (Maksimalkan atau Minimalkan):</strong><br><br>
             $$Z = c_1x_1 + c_2x_2 + \dots + c_nx_n$$
         </div>
         
         <div class="math-display">
-            <strong>Tunduk pada Kendala:</strong><br>
-            $$a_{i1}x_1 + a_{i2}x_2 + \dots + a_{in}x_n \leq (\text{atau} \geq, =) b_i \quad \text{untuk setiap } i=1, \dots, m$$
+            <strong>Tunduk pada Kendala (Subject to Constraints):</strong><br><br>
+            $$a_{i1}x_1 + a_{i2}x_2 + \dots + a_{in}x_n \leq b_i \quad (\text{atau } \geq, =)$$
+            <br><small>untuk setiap $i=1, \dots, m$</small>
         </div>
         
         <div class="math-display">
-            <strong>Kendala Non-negativitas:</strong><br>
+            <strong>Kendala Non-negativitas:</strong><br><br>
             $$x_j \geq 0 \quad \text{untuk setiap } j=1, \dots, n$$
         </div>
         
         <p>Di mana:</p>
         <ul>
-            <li>$x_j$ adalah variabel keputusan (misalnya, jumlah produk A yang akan diproduksi).</li>
+            <li>$x_j$ adalah <strong>variabel keputusan</strong> (misalnya, jumlah produk A yang akan diproduksi).</li>
             <li>$c_j$ adalah koefisien fungsi tujuan (misalnya, laba per unit produk A).</li>
             <li>$b_i$ adalah jumlah sumber daya $i$ yang tersedia (misalnya, 150 kg kayu jati).</li>
             <li>$a_{ij}$ adalah koefisien teknis (misalnya, jumlah kg kayu jati yang dibutuhkan untuk membuat satu unit produk A).</li>
         </ul>
         
-        <p>Pada tahun 1947, George Dantzig, yang saat itu bekerja pada Angkatan Udara AS, mengembangkan algoritma simpleks. Ini adalah terobosan yang mengubah LP dari keingintahuan teoretis menjadi alat praktis yang revolusioner. Dantzig menyadari bahwa secara geometris, solusi optimal untuk masalah LP harus terletak di titik sudut (vertex) dari wilayah layak (feasible region)—area yang didefinisikan oleh kendala. Algoritma simpleks adalah prosedur aljabar yang sangat efisien yang secara cerdas "berjalan" dari satu titik sudut ke titik sudut tetangga yang lebih baik. Ia berhenti ketika tidak ada lagi titik sudut tetangga yang dapat memperbaiki nilai fungsi tujuan.</p>
+        <p>Pada tahun 1947, George Dantzig, yang saat itu bekerja pada Angkatan Udara AS, mengembangkan <strong>algoritma simpleks</strong>. Ini adalah terobosan yang mengubah LP dari keingintahuan teoretis menjadi alat praktis yang revolusioner. Dantzig menyadari bahwa secara geometris, solusi optimal untuk masalah LP harus terletak di <strong>titik sudut</strong> (vertex) dari <strong>wilayah layak</strong> (feasible region)—area yang didefinisikan oleh kendala. Algoritma simpleks adalah prosedur aljabar yang sangat efisien yang secara cerdas "berjalan" dari satu titik sudut ke titik sudut tetangga yang lebih baik. Ia berhenti ketika tidak ada lagi titik sudut tetangga yang dapat memperbaiki nilai fungsi tujuan.</p>
 
         <h4>Tutorial Mekanika: Menjalankan Algoritma Simpleks</h4>
-        <p>Mari kita bedah mekanisme algoritma simpleks untuk masalah maksimisasi, seperti yang dijelaskan dalam berbagai materi penyelesaian:</p>
+        <p>Mari kita bedah mekanisme algoritma simpleks untuk masalah maksimisasi:</p>
         
         <p><strong>Langkah 1: Mengubah ke Bentuk Standar (Kanonik)</strong><br>
-        Semua kendala harus diubah menjadi persamaan. Untuk kendala $\leq$, kita menambahkan sebuah variabel slack ($S_i$) untuk "menyerap" sisa sumber daya. Misalnya, $2x_1 + 3x_2 \leq 5$ menjadi $2x_1 + 3x_2 + S_1 = 5$. Fungsi tujuan (misal, $Z = 3x_1 + 5x_2$) dipindahkan ke satu sisi: $Z - 3x_1 - 5x_2 = 0$.</p>
+        Semua kendala harus diubah menjadi persamaan. Untuk kendala $\leq$, kita menambahkan sebuah <strong>variabel slack</strong> ($S_i$) untuk "menyerap" sisa sumber daya.
+        <br>Misalnya, $2x_1 + 3x_2 \leq 5$ menjadi $2x_1 + 3x_2 + S_1 = 5$.
+        <br>Fungsi tujuan (misal, $Z = 3x_1 + 5x_2$) dipindahkan ke satu sisi: $Z - 3x_1 - 5x_2 = 0$.</p>
         
         <p><strong>Langkah 2: Membuat Tabel Simpleks Awal</strong><br>
         Semua koefisien dari bentuk standar dimasukkan ke dalam tabel (matriks). Variabel slack biasanya menjadi variabel basis (VB) awal, yang mewakili solusi "tidak melakukan apa-apa" ($x_1=0, x_2=0$).</p>
         
         <p><strong>Langkah 3: Memilih Kolom Kunci (Entering Variable)</strong><br>
-        Lihat baris fungsi tujuan (baris Z atau $\text{Cj-Zj}$). Pilih kolom dengan nilai paling negatif (untuk maksimisasi). Ini adalah variabel keputusan yang, jika ditingkatkan, akan memberikan peningkatan terbesar pada $Z$.</p>
+        Lihat baris fungsi tujuan (baris Z atau $C_j-Z_j$). Pilih kolom dengan nilai paling negatif (untuk maksimisasi). Ini adalah variabel keputusan yang, jika ditingkatkan, akan memberikan peningkatan terbesar pada $Z$.</p>
         
         <p><strong>Langkah 4: Memilih Baris Kunci (Leaving Variable)</strong><br>
         Hitung indeks atau rasio untuk setiap baris kendala:</p>
@@ -243,8 +292,9 @@
         Ini adalah inti dari perhitungan, di mana kita secara aljabar "menukar" variabel yang masuk dengan variabel yang keluar.</p>
         <div class="math-display">
             $$\text{Baris Kunci Baru} = \frac{\text{Baris Kunci Lama}}{\text{Angka Kunci}}$$
-            <br><br>
-            $$\text{Baris Lain Baru} = \text{Baris Lain Lama} - (\text{Koefisien Kolom Kunci di Baris tsb}) \times (\text{Baris Kunci Baru})$$
+        </div>
+        <div class="math-display">
+            $$\text{Baris Lain Baru} = \text{Baris Lain Lama} - (\text{Koefisien Kolom Kunci} \times \text{Baris Kunci Baru})$$
         </div>
         <p>Tujuan dari langkah ini adalah untuk membuat semua entri lain di kolom kunci menjadi nol, secara efektif menyelesaikan sistem persamaan untuk basis yang baru.</p>
         
@@ -252,61 +302,39 @@
         Kembali ke Langkah 3. Apakah masih ada nilai negatif di baris Z?
         <br><strong>Jika Ya:</strong> Solusi belum optimal. Ulangi Langkah 3-6.
         <br><strong>Jika Tidak:</strong> Solusi sudah optimal. Semua nilai di baris Z adalah non-negatif ($\geq 0$). Nilai $Z$ dan variabel keputusan dapat dibaca langsung dari tabel.</p>
-        
-        <p>Algoritma simpleks lebih dari sekadar kalkulator. Setiap iterasi adalah simulasi dari pertukaran strategis. Ia menukar variabel "non-produktif" (Non-Basis) dengan variabel "produktif" (Basis) untuk meningkatkan solusi. Tabel final tidak hanya berisi jawaban (misalnya, $Z=132$), tetapi juga menyimpan informasi tersembunyi yang sangat berharga, yang kita buka di bab berikutnya.</p>
 
         <h3>Bab 4: Di Balik Solusi Optimal: Dualitas dan Analisis Sensitivitas</h3>
-        <p>Seorang Insinyur Industri yang baik tidak berhenti saat solusi optimal ditemukan. Solusi optimal ("Buat 12 unit $X_1$ dan 6 unit $X_2$") hanyalah permulaan. Pertanyaan manajerial yang sesungguhnya adalah: "Seberapa sensitif solusi ini?" dan "Di mana letak <em>bottleneck</em> kita yang sebenarnya?" Di sinilah kita memasuki ranah Dualitas dan Analisis Sensitivitas.</p>
+        <p>Seorang Insinyur Industri yang baik tidak berhenti saat solusi optimal ditemukan. Solusi optimal ("Buat 12 unit $x_1$ dan 6 unit $x_2$") hanyalah permulaan. Pertanyaan manajerial yang sesungguhnya adalah: "Seberapa sensitif solusi ini?" dan "Di mana letak <em>bottleneck</em> kita yang sebenarnya?"</p>
         
         <h4>Konsep Dualitas: Dunia Bayangan</h4>
-        <p>Setiap persoalan LP, yang kita sebut Primal, memiliki "saudara kembar" yang terkait erat yang disebut Dual. Jika masalah Primal adalah masalah maksimisasi (misalnya, memaksimalkan laba dari produksi), masalah Dual-nya adalah masalah minimisasi (misalnya, meminimalkan nilai imbangan atau biaya dari sumber daya yang dikonsumsi).</p>
+        <p>Setiap persoalan LP, yang kita sebut <strong>Primal</strong>, memiliki "saudara kembar" yang terkait erat yang disebut <strong>Dual</strong>. Jika masalah Primal adalah masalah maksimisasi, masalah Dual-nya adalah masalah minimisasi.</p>
         <p>Hubungan mereka sangat elegan:</p>
         <ul>
             <li>Koefisien fungsi tujuan Primal menjadi nilai kanan (RHS) dari kendala Dual.</li>
             <li>Nilai kanan (RHS) Primal menjadi koefisien fungsi tujuan Dual.</li>
             <li>Matriks kendala $A$ dari Primal menjadi $A^T$ (transpos) untuk Dual.</li>
-            <li>Yang terpenting, solusi optimal dari Primal dan Dual adalah sama. Solusi dari Primal juga memberikan solusi untuk Dual.</li>
+            <li>Yang terpenting, solusi optimal dari Primal dan Dual adalah sama.</li>
         </ul>
         
         <h4>Wawasan Kritis TI: Shadow Price (Harga Bayangan)</h4>
-        <p>Variabel Dual ini memiliki interpretasi ekonomi yang sangat kuat: <em>Shadow Price</em> atau Harga Bayangan. <em>Shadow price</em> dari sebuah kendala adalah kenaikan (atau penurunan) pada nilai fungsi tujuan $Z$ jika nilai kanan (RHS) dari kendala tersebut bertambah satu unit.</p>
-        <p>Mari kita interpretasikan ini. Misalkan kita memiliki tiga kendala: jam mesin A, jam mesin B, dan bahan baku C. Tabel simpleks akhir memberi tahu kita <em>shadow price</em> untuk masing-masing:</p>
+        <p>Variabel Dual ini memiliki interpretasi ekonomi yang sangat kuat: <em>Shadow Price</em>.
+        <br><em>Shadow price</em> dari sebuah kendala adalah kenaikan (atau penurunan) pada nilai fungsi tujuan $Z$ jika nilai kanan (RHS) dari kendala tersebut bertambah satu unit.</p>
         <ul>
-            <li><strong>Jam Mesin A (Kendala Mengikat):</strong> <em>Shadow Price</em> = Rp 50.000.
-                <br><em>Interpretasi:</em> Setiap jam tambahan yang dapat kita peroleh di Mesin A akan meningkatkan total laba kita sebesar Rp 50.000. Ini memberi tahu kita nilai persis dari sumber daya <em>bottleneck</em> kita.</li>
-            <li><strong>Jam Mesin B (Kendala Mengikat):</strong> <em>Shadow Price</em> = Rp 30.000.
-                <br><em>Interpretasi:</em> Setiap jam tambahan di Mesin B akan meningkatkan laba sebesar Rp 30.000.</li>
-            <li><strong>Bahan Baku C (Kendala Tidak Mengikat):</strong> <em>Shadow Price</em> = 0.
-                <br><em>Interpretasi:</em> Ini berarti kita memiliki sisa (slack) bahan baku C. Menambah lebih banyak bahan baku C tidak akan menambah laba sama sekali, karena kita sudah memiliki lebih dari yang kita butuhkan.</li>
+            <li><strong>Jam Mesin A (Kendala Mengikat):</strong> <em>Shadow Price</em> = Rp 50.000. Artinya, menambah 1 jam Mesin A akan menambah laba Rp 50.000.</li>
+            <li><strong>Bahan Baku C (Kendala Tidak Mengikat):</strong> <em>Shadow Price</em> = 0. Artinya, kita memiliki sisa (slack), sehingga menambah bahan baku ini tidak menambah laba.</li>
         </ul>
         
-        <h4>Analisis Sensitivitas: Seberapa Kuat Solusi Kita?</h4>
-        <p><em>Shadow price</em> tidak berlaku selamanya. Jika kita terus menambah jam di Mesin A, pada titik tertentu, Mesin B (atau kendala lain) akan menjadi <em>bottleneck</em> yang baru. Analisis Sensitivitas adalah studi formal untuk menjawab: "Sampai seberapa jauh data input (misalnya, ketersediaan sumber daya $b_i$, atau laba per unit $c_j$) dapat berubah tanpa mengubah basis solusi optimal?".</p>
-        <p>Perangkat lunak OR akan memberi kita "Rentang Optimalitas" (untuk $c_j$) dan "Rentang Kelayakan" (untuk $b_i$). Contoh: <em>Shadow price</em> Rp 50.000 untuk Mesin A mungkin valid untuk rentang 80 hingga 110 jam. Ini berarti kita dapat menambah (atau mengurangi) jam dalam rentang ini, dan <em>shadow price</em> tersebut akan berlaku. Jika kita menambah jam menjadi 111, solusi basisnya akan berubah, dan seluruh model perlu dihitung ulang dari awal.</p>
-        <p>Ini adalah topik yang memisahkan seorang insinyur dari seorang ahli strategi. Jawaban LP adalah taktis. Analisis sensitivitas adalah strategis. Seorang Insinyur Industri kini dapat memberikan rekomendasi manajerial yang sesungguhnya: "Solusi optimal kita saat ini dibatasi oleh Mesin A dan B. Nilai satu jam tambahan di Mesin A (Rp 50.000) hampir dua kali lipat nilai Mesin B (Rp 30.000). Sementara itu, kita membuang-buang uang untuk menyimpan kelebihan Bahan Baku C. Rekomendasi saya adalah: prioritaskan semua investasi modal dan upaya perbaikan proses untuk meningkatkan kapasitas Mesin A, karena itu memberikan ROI tertinggi. Hentikan pengeluaran untuk Bahan Baku C di atas kebutuhan minimum kita."</p>
+        <h4>Analisis Sensitivitas</h4>
+        <p>Analisis Sensitivitas menjawab: "Sampai seberapa jauh data input (misalnya $b_i$ atau $c_j$) dapat berubah tanpa mengubah basis solusi optimal?". Ini memberikan "Rentang Optimalitas" dan "Rentang Kelayakan". Jika parameter berubah dalam rentang ini, keputusan strategis kita tidak perlu berubah total.</p>
 
         <h3>Bab 5: Masalah Khusus LP: Transportasi dan Penugasan</h3>
-        <p>Di dalam keluarga besar Pemrograman Linier, ada sub-kelas masalah dengan struktur khusus yang memungkinkan solusi yang jauh lebih cepat daripada algoritma simpleks penuh. Dua yang paling umum adalah Model Transportasi dan Model Penugasan.</p>
+        <p>Dua sub-kelas masalah LP dengan struktur khusus yang memungkinkan solusi lebih cepat.</p>
         
         <h4>Model Transportasi</h4>
-        <p>Model ini, seperti namanya, berkaitan dengan masalah alokasi. Tujuannya adalah untuk menemukan cara pengiriman dengan biaya minimum untuk memindahkan barang dari serangkaian Sumber (misalnya, pabrik dengan kapasitas produksi) ke serangkaian Tujuan (misalnya, gudang dengan kebutuhan permintaan). Karena strukturnya yang khusus (setiap variabel hanya muncul dalam dua kendala), ia dapat diselesaikan dengan algoritma yang sangat efisien.</p>
-        <p>Namun, sebelum kita dapat mengoptimalkan, kita harus menemukan solusi layak awal (Initial Feasible Solution). Ada beberapa metode untuk ini (misalnya, Vogel's Approximation Method, Minimum Cost), tetapi yang paling sederhana secara konseptual adalah Metode North West Corner (NWC).</p>
+        <p>Tujuannya adalah menemukan biaya pengiriman minimum dari Sumber ke Tujuan. Salah satu metode untuk mencari solusi awal adalah <strong>Metode North West Corner (NWC)</strong>.</p>
         
-        <h4>Tutorial Mekanika: Metode North West Corner (NWC)</h4>
-        <p>Penting untuk dipahami: NWC adalah heuristik (aturan praktis). Tujuannya adalah untuk mendapatkan solusi layak dengan cepat, dan ia sama sekali mengabaikan biaya. Aturannya sederhana:</p>
-        <ol>
-            <li>Mulai dari sel di pojok kiri atas (Barat Laut / North West) dari tabel transportasi.</li>
-            <li>Alokasikan unit sebanyak mungkin ke sel tersebut. Jumlah ini adalah $\min(\text{Kapasitas baris}, \text{Kebutuhan kolom})$.</li>
-            <li>Kurangi jumlah yang dialokasikan dari Kapasitas baris dan Kebutuhan kolom.</li>
-            <li>Jika Kebutuhan kolom terpenuhi, pindah satu sel ke kanan.</li>
-            <li>Jika Kapasitas baris habis, pindah satu sel ke bawah. (Jika keduanya habis, pindah secara diagonal).</li>
-            <li>Ulangi sampai semua kapasitas dan kebutuhan terpenuhi.</li>
-        </ol>
+        <p><strong>Contoh Tabel Transportasi NWC:</strong></p>
         
-        <p><strong>Contoh Tabel Transportasi NWC:</strong><br>
-        Mari kita lihat alokasi langkah demi langkah dari sumber (misalnya Purwakerto, Magelang) ke tujuan (misalnya Semarang, Madiun) menggunakan NWC.</p>
-        
-        <strong>Tabel 1: Langkah Awal NWC</strong>
         <table>
             <thead>
                 <tr>
@@ -328,50 +356,6 @@
                 <tr>
                     <td>Magelang (Kap: 5000)</td>
                     <td><strong>1000</strong> ($X_{21}$)</td>
-                    <td>...</td>
-                    <td></td>
-                    <td>5000</td>
-                </tr>
-                <tr>
-                    <td>Surakarta (Kap: 6000)</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>6000</td>
-                </tr>
-                <tr>
-                    <td><strong>Kebutuhan</strong></td>
-                    <td><s>5000</s> 1000</td>
-                    <td>4500</td>
-                    <td>5500</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-        <p><em>Interpretasi Langkah 1:</em> Mulai di sel $X_{11}$ (Purwakerto-Semarang). Alokasikan $\min(4000, 5000) = 4000$. Kapasitas Purwakerto habis, jadi kita pindah ke bawah ke sel $X_{21}$ (Magelang-Semarang).</p>
-
-        <strong>Tabel 2: Langkah Berikutnya NWC</strong>
-        <table>
-            <thead>
-                <tr>
-                    <th>Sumber</th>
-                    <th>Semarang (Keb: 1000)</th>
-                    <th>Madiun (Keb: 4500)</th>
-                    <th>Yogyakarta (Keb: 5500)</th>
-                    <th>Kapasitas</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Purwakerto (Kap: 0)</td>
-                    <td>4000</td>
-                    <td></td>
-                    <td></td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>Magelang (Kap: 5000)</td>
-                    <td><strong>1000</strong> ($X_{21}$)</td>
                     <td><strong>4000</strong> ($X_{22}$)</td>
                     <td></td>
                     <td><s>5000</s> 0</td>
@@ -385,410 +369,154 @@
                 </tr>
                 <tr>
                     <td><strong>Kebutuhan</strong></td>
-                    <td><s>1000</s> 0</td>
+                    <td><s>5000</s> 0</td>
                     <td><s>4500</s> 500</td>
                     <td>5500</td>
                     <td></td>
                 </tr>
             </tbody>
         </table>
-        <p><em>Interpretasi Langkah 2 & 3:</em> Di sel $X_{21}$, alokasikan $\min(5000, 1000) = 1000$. Kebutuhan Semarang habis, pindah ke kanan ke $X_{22}$. Di $X_{22}$, alokasikan $\min(4000, 4500) = 4000$. Kapasitas Magelang habis, pindah ke bawah ke $X_{32}$. Proses ini berlanjut sampai semua 15.000 unit teralokasi. Sekali lagi, NWC tidak menjamin solusi berbiaya rendah, tetapi ini adalah titik awal yang cepat untuk algoritma yang lebih canggih (seperti Metode MODI) yang akan "memperbaiki" alokasi ini menuju optimal.</p>
-
-        <h4>Model Penugasan</h4>
-        <p>Model Penugasan adalah kasus yang lebih spesifik lagi dari model transportasi. Model ini berhubungan dengan penugasan optimal dari sumber daya (misalnya, karyawan, mesin) ke tugas-tugas, di mana setiap sumber daya hanya dapat ditugaskan ke satu tugas. Tujuannya adalah untuk memaksimalkan efisiensi total atau meminimalkan biaya total. Ini dapat diselesaikan dengan sangat efisien menggunakan Algoritma Hungaria.</p>
+        
+        <p>Interpretasi tabel di atas menunjukkan alokasi dimulai dari pojok kiri atas ($X_{11}$) dan bergerak ke kanan atau ke bawah saat kapasitas/kebutuhan terpenuhi.</p>
 
         <h3>Bab 6: Sistem sebagai Jaringan: Model Optimasi Jaringan</h3>
-        <p>Banyak sistem Teknik Industri—rantai pasokan, jaringan telekomunikasi, sistem logistik, dan bahkan proyek—secara alami paling baik direpresentasikan sebagai jaringan. Jaringan terdiri dari <em>nodes</em> (titik) yang dihubungkan oleh <em>arcs</em> (garis atau panah). Model optimasi jaringan adalah alat yang ampuh yang mencakup beberapa masalah klasik:</p>
+        <p>Banyak sistem TI (rantai pasok, telekomunikasi) adalah jaringan. Tiga masalah klasik:</p>
         <ul>
-            <li><strong>Masalah Jalur Terpendek (Shortest-Path Problem):</strong> Menemukan jalur dengan total "biaya" (bisa berupa jarak, waktu, atau biaya) terendah antara dua node.</li>
-            <li><strong>Masalah Arus Maksimum (Maximum Flow Problem):</strong> Menemukan jumlah maksimum "aliran" (misalnya, mobil, data, cairan) yang dapat dikirim melalui jaringan dari <em>source node</em> ke <em>sink node</em> tanpa melebihi kapasitas arc mana pun.</li>
-            <li><strong>Masalah Pohon Rentang Minimum (Minimum Spanning Tree Problem):</strong> Menghubungkan semua node dalam jaringan dengan total panjang arc minimum (berguna untuk meletakkan kabel atau pipa).</li>
+            <li><strong>Shortest-Path Problem:</strong> Jalur terpendek (misal: Algoritma Dijkstra).</li>
+            <li><strong>Maximum Flow Problem:</strong> Arus maksimum dari <em>source</em> ke <em>sink</em> (misal: Algoritma Ford-Fulkerson).</li>
+            <li><strong>Minimum Spanning Tree Problem:</strong> Menghubungkan semua node dengan biaya minimum.</li>
         </ul>
-        
-        <h4>Studi Kasus Mendalam: Analisis Lalu Lintas (Teknik Industri/Sipil)</h4>
-        <p>Sebuah studi kasus di Kota Kinabalu, Malaysia, memberikan contoh sempurna tentang bagaimana model jaringan ini diterapkan untuk memecahkan masalah rekayasa transportasi. Tujuannya adalah untuk menganalisis kemacetan lalu lintas antara source (Masjid Bandaraya) dan sink (Kampung Air). Tim insinyur menggunakan tiga teknik OR inti secara bersamaan:</p>
-        
-        <p><strong>1. Aplikasi Jalur Terpendek (Optimalitas Pengguna)</strong><br>
-        Masalah: Pengemudi individu ingin tahu rute terpendek (jarak terendah) dari sumber ke tujuan.<br>
-        Metode: Data jarak dikumpulkan dari perangkat lunak pemetaan. Algoritma Dijkstra diterapkan untuk menemukan jalur terpendek.<br>
-        Hasil: Algoritma mengidentifikasi rute spesifik (misalnya, melalui Jln. Tun Fuad 1, Jln. KK Bypass, dll.) sebagai yang terpendek secara matematis. Ini adalah optimasi <em>user-centric</em>.</p>
-        
-        <p><strong>2. Aplikasi Arus Maksimum (Kapasitas Sistem)</strong><br>
-        Masalah: Perencana kota perlu tahu: Berapa kapasitas total jaringan jalan ini? Berapa banyak kendaraan per jam yang dapat ditangani sistem ini secara keseluruhan?<br>
-        Metode: Data volume lalu lintas (kapasitas jalan) digunakan sebagai kapasitas arc. Algoritma Ford-Fulkerson diterapkan.<br>
-        Hasil: Ditemukan bahwa arus maksimum yang dapat ditangani jaringan adalah 2598 kendaraan per jam. Ini adalah optimasi <em>system-centric</em>.</p>
-        
-        <p><strong>3. Identifikasi Kemacetan (Alat Diagnostik)</strong><br>
-        Masalah: Arus maksimum adalah 2598. Mengapa tidak 3000? Di mana letak <em>bottleneck</em> yang menahan seluruh sistem?<br>
-        Metode: Para insinyur menerapkan Teorema Max-Flow Min-Cut. Teorema fundamental ini menyatakan bahwa arus maksimum yang dapat melalui jaringan tepat sama dengan kapasitas potongan minimum (total kapasitas dari <em>bottleneck</em> tersempit).<br>
-        Hasil: Analisis ini secara presisi mengidentifikasi <em>bottleneck</em> sistem: Jalan Laiman Diki dan Jalan Coastal.</p>
-        
-        <p>Kombinasi ketiga analisis ini adalah alat diagnostik yang luar biasa bagi seorang Insinyur Industri (atau Sipil). Algoritma Dijkstra memberi tahu Anda rute yang diinginkan pengemudi. Algoritma Ford-Fulkerson memberi tahu Anda apa yang sebenarnya dapat ditangani oleh sistem. Dan Teorema Min-Cut memberi tahu Anda secara pasti di mana harus mengalokasikan anggaran perbaikan jalan yang terbatas untuk mendapatkan dampak maksimum pada peningkatan throughput sistem.</p>
+        <p>Studi kasus lalu lintas menunjukkan aplikasi gabungan: Dijkstra untuk rute user, Ford-Fulkerson untuk kapasitas sistem, dan Teorema <em>Max-Flow Min-Cut</em> untuk mencari bottleneck (kemacetan).</p>
 
-        <h3>Bab 7: Keputusan "Ya atau Tidak": Pemrograman Integer (Integer Programming)</h3>
-        <p>Pemrograman Linier memiliki keterbatasan besar: ia mengasumsikan bahwa variabel keputusan dapat mengambil nilai pecahan. Solusi seperti "produksi 10.53 unit mobil" atau "alokasikan 2.7 pekerja" mungkin optimal secara matematis, tetapi tidak mungkin secara fisik. Dunia nyata seringkali menuntut keputusan bilangan bulat (integer).</p>
-        <p>Di sinilah Pemrograman Integer (Integer Programming - IP) masuk. Kasus yang paling umum adalah Binary Integer Programming (0-1 IP), di mana variabel keputusan hanya bisa mengambil nilai 0 ("Tidak") atau 1 ("Ya"). Ini sangat berguna untuk keputusan "go/no-go", seperti "Bangun pabrik?" (Ya=1, Tidak=0) atau "Pilih proyek ini?"</p>
+        <h3>Bab 7: Keputusan "Ya atau Tidak": Pemrograman Integer</h3>
+        <p>Pemrograman Integer (IP) digunakan saat variabel keputusan harus bilangan bulat. Kasus khususnya adalah <strong>Binary Integer Programming (0-1 IP)</strong> untuk keputusan "Ya/Tidak".</p>
         
-        <h4>Mengapa IP Jauh Lebih Sulit daripada LP?</h4>
-        <p>Menambahkan kendala "harus integer" secara drastis meningkatkan kompleksitas komputasi. Masalah LP dapat diselesaikan secara efisien (dalam waktu polinomial), tetapi IP termasuk dalam kelas masalah NP-hard, yang berarti masalah skala besar bisa jadi hampir tidak mungkin untuk dipecahkan secara eksak. Secara intuitif, alasannya adalah ini: dalam LP, feasible region adalah bentuk konveks yang bagus. Algoritma Simpleks bekerja karena ia tahu ia hanya perlu memeriksa titik sudut. Segera setelah Anda menambahkan kendala integer, feasible region bukan lagi bentuk yang terhubung; itu adalah sekumpulan titik-titik diskrit yang tersebar. Algoritma "berjalan di tepi" tidak lagi berfungsi.</p>
-        
-        <h4>Metode Solusi: Branch and Bound (B&B)</h4>
-        <p>Metode yang paling umum digunakan untuk memecahkan IP adalah Branch and Bound (B&B). Ini adalah strategi "pecah belah" (divide and conquer) yang cerdas:</p>
-        <ul>
-            <li><strong>Relaxation (Relaksasi):</strong> Pertama, selesaikan masalah sebagai LP biasa (abaikan kendala integer). Ini disebut LP relaxation. Solusinya (misalnya, $Z=150.5, x_1=2.5$) memberikan batas atas (untuk maksimisasi)—kita tahu tidak ada solusi integer yang bisa lebih baik dari 150.5.</li>
-            <li><strong>Branching (Percabangan):</strong> Ambil variabel non-integer ($x_1=2.5$). Buat dua sub-problem baru:
-                <ul>
-                    <li>Sub-problem A: Tambahkan kendala $x_1 \leq 2$.</li>
-                    <li>Sub-problem B: Tambahkan kendala $x_1 \geq 3$.</li>
-                </ul>
-            </li>
-            <li><strong>Bounding (Pembatasan):</strong> Selesaikan LP relaxation untuk Sub-problem A dan B. Simpan solusi integer terbaik yang ditemukan sejauh ini (ini disebut batas bawah).</li>
-            <li><strong>Pruning (Pemangkasan):</strong> Hentikan penelusuran sebuah "cabang" pohon pencarian jika salah satu dari tiga hal ini terjadi:
-                <ol type="a">
-                    <li>Cabang menghasilkan solusi integer (simpan jika lebih baik dari batas bawah saat ini).</li>
-                    <li>Cabang tersebut tidak layak (infeasible).</li>
-                    <li>Solusi LP relaxation cabang tersebut (batas atasnya) lebih buruk daripada batas bawah yang kita miliki saat ini. (Tidak ada gunanya mencari di sini, karena solusi integer di bawahnya pasti akan lebih buruk).</li>
-                </ol>
-            </li>
-        </ul>
+        <h4>Studi Kasus: Capital Budgeting</h4>
+        <p>Memilih proyek dengan anggaran terbatas.
+        <br><strong>Variabel:</strong> $X_j = 1$ jika Proyek $j$ dipilih, 0 jika tidak.
+        <br><strong>Tujuan:</strong> Maksimalkan $\sum P_j X_j$ (Total NPV).
+        <br><strong>Kendala Anggaran:</strong> $\sum C_j X_j \leq \text{Anggaran}$.</p>
+        <p>Kita juga bisa memodelkan logika bisnis:
+        <br><em>Mutually Exclusive:</em> $X_1 + X_2 \leq 1$ (Pilih maksimal satu).
+        <br><em>Contingent:</em> $X_3 \leq X_4$ (Proyek 3 hanya jika Proyek 4 dipilih).</p>
 
-        <h4>Studi Kasus Mendalam: Capital Budgeting (Penganggaran Modal)</h4>
-        <p>Ini adalah aplikasi 0-1 IP klasik untuk Insinyur Industri. Sebuah perusahaan memiliki Rp 41,4 Juta dalam anggaran modal dan daftar 5 proyek potensial (misalnya, mengganti lini produksi lama), masing-masing dengan biaya, $C_j$, dan pengembalian yang diharapkan (Net Present Value - NPV), $P_j$. Tujuannya adalah untuk memilih portofolio proyek yang memaksimalkan total NPV tanpa melebihi anggaran.</p>
+        <h3>Bab 8: Keputusan Berurutan: Pemrograman Dinamis</h3>
+        <p>Pemrograman Dinamis (DP) memecahkan masalah kompleks dengan memecahnya menjadi sub-problem. Prinsip utamanya adalah <strong>Prinsip Optimalitas Bellman</strong>.</p>
         
-        <p><strong>Formulasi 0-1 IP:</strong></p>
-        <ul>
-            <li><strong>Variabel Keputusan:</strong> $X_j = 1$ jika Proyek $j$ dipilih, $X_j = 0$ jika tidak.</li>
-            <li><strong>Fungsi Tujuan:</strong> Maksimalkan $\text{Total NPV} = \sum_{j=1}^{5} P_j X_j$</li>
-            <li><strong>Kendala Anggaran:</strong> $\sum_{j=1}^{5} C_j X_j \leq 41,440,000$.</li>
-            <li><strong>Kendala Logis:</strong> Di sinilah kekuatan IP bersinar. Kita dapat memodelkan aturan bisnis:
-                <ul>
-                    <li><em>Mutually Exclusive</em> (Proyek 1 dan 2 tidak dapat dipilih bersamaan): $X_1 + X_2 \leq 1$.</li>
-                    <li><em>Contingent</em> (Proyek 3 hanya dapat dipilih jika Proyek 4 juga dipilih): $X_3 \leq X_4$.</li>
-                    <li><em>Replacement</em> (Harus memilih tepat satu antara lini lama $X_1$ dan lini baru $X_6$): $X_1 + X_6 = 1$.</li>
-                </ul>
-            </li>
-        </ul>
-        <p><strong>Solusi:</strong> Dengan menggunakan metode B&B, sebuah studi kasus nyata pada perusahaan manufaktur di Manila mampu memberikan rekomendasi yang tepat. Solusi 0-1 menunjukkan: Ganti lini 2 dan 5 ($X_7=1, X_{10}=1$), pertahankan lini 3 dan 4 ($X_3=1, X_4=1$), dan hapus lini 1 seluruhnya ($X_1=0, X_6=0$). Ini menunjukkan bagaimana IP mengangkat Insinyur Industri dari sekadar mengoptimalkan sumber daya fisik (seperti dalam LP) menjadi merancang strategi investasi perusahaan, dengan menerjemahkan aturan bisnis yang kompleks ke dalam model matematis yang dapat dipecahkan.</p>
-
-        <h3>Bab 8: Keputusan Berurutan: Pemrograman Dinamis (Dynamic Programming)</h3>
-        <p>Bagaimana jika masalah kita bukanlah satu keputusan besar, melainkan serangkaian keputusan yang saling terkait dari waktu ke waktu? Di sinilah Pemrograman Dinamis (Dynamic Programming - DP) berperan. DP adalah pendekatan yang sangat kuat untuk memecahkan masalah optimasi yang kompleks dengan memecahnya menjadi sub-problem yang lebih sederhana, lebih kecil, dan lebih mudah dikelola. Kunci dari DP adalah menyimpan solusi untuk sub-problem ini (sebuah proses yang disebut <em>memoization</em> atau <em>caching</em>) sehingga solusi tersebut dapat digunakan kembali untuk memecahkan masalah yang lebih besar, menghemat waktu komputasi secara drastis.</p>
+        <h4>Persamaan Rekursif Bellman</h4>
+        <p>Contoh pada <em>Cargo Loading Problem</em> (mirip Knapsack Problem).
+        <br>Misalkan $f_n(x)$ adalah nilai maksimal dari tahap $n$ dengan sisa kapasitas $x$.</p>
         
-        <h4>Prinsip Optimalitas Bellman</h4>
-        <p>Metodologi ini dibangun di atas fondasi tunggal yang elegan: Prinsip Optimalitas Bellman, yang dikembangkan oleh Richard Bellman. Prinsip ini menyatakan:</p>
-        <blockquote>"Sebuah kebijakan optimal memiliki sifat bahwa apa pun keadaan awal dan keputusan awalnya, keputusan yang tersisa harus merupakan kebijakan optimal untuk keadaan yang dihasilkan dari keputusan pertama."</blockquote>
-        <p>Dalam bahasa yang lebih sederhana: Jika rute terpendek dari Jakarta ke Surabaya melewati Semarang, maka bagian rute dari Semarang ke Surabaya harus menjadi rute terpendek dari Semarang ke Surabaya. Prinsip ini memungkinkan kita untuk memecahkan masalah secara rekursif. Alih-alih mencoba menyelesaikan seluruh masalah multi-tahap sekaligus, kita mundur dari akhir (sebuah proses yang disebut <em>backward induction</em>). Kita memecahkan masalah trivial di tahap terakhir, lalu menggunakan solusi itu untuk memecahkan tahap kedua dari belakang, dan seterusnya, sampai kita kembali ke keputusan pertama.</p>
-        
-        <p>Formulasi DP biasanya melibatkan:</p>
-        <ul>
-            <li><strong>Stages (Tahapan):</strong> Titik-titik waktu atau urutan di mana keputusan dibuat.</li>
-            <li><strong>States (Keadaan):</strong> Informasi penting yang Anda perlukan di setiap tahap untuk membuat keputusan optimal (misalnya, sisa kapasitas, lokasi saat ini).</li>
-            <li><strong>Recursive Relationship:</strong> Rumus matematis (seperti Persamaan Bellman) yang menghubungkan nilai optimal di satu tahap dengan nilai optimal di tahap berikutnya.</li>
-        </ul>
-        
-        <h4>Contoh Soal Klasik: Cargo Loading Problem</h4>
-        <p>Ini adalah variasi dari Knapsack Problem dan merupakan aplikasi klasik DP. Seorang manajer logistik memiliki kapal kargo dengan kapasitas berat total $W$. Ada $N$ jenis item yang dapat dimuat. Setiap item $i$ memiliki berat $w_i$ dan memberikan nilai (atau keuntungan) $v_i$. Tujuannya adalah untuk memutuskan berapa banyak ($d_i$) setiap item yang akan dimuat untuk memaksimalkan total nilai kargo tanpa melebihi kapasitas $W$.</p>
-        
-        <p><strong>Formulasi DP:</strong></p>
-        <ul>
-            <li><strong>Stages ($n$):</strong> Tahap $n$ adalah keputusan untuk item $n$ (mempertimbangkan item $n, n+1, \dots, N$).</li>
-            <li><strong>States ($x$):</strong> Keadaan $x$ adalah sisa kapasitas berat yang tersedia.</li>
-            <li><strong>Decision ($d_n$):</strong> Jumlah unit item $n$ yang akan dimuat.</li>
-            <li><strong>Recursive Function:</strong> Biarkan $f_n(x)$ menjadi nilai optimal maksimum yang bisa didapat dari Tahap $n$ (item $n$ dan seterusnya) dengan sisa kapasitas $x$.</li>
-        </ul>
         <div class="math-display">
             $$f_n(x) = \max_{d_n} \{ v_n \cdot d_n + f_{n+1}(x - w_n \cdot d_n) \}$$
         </div>
-        <p>(di mana $d_n$ dipilih sedemikian rupa sehingga $d_n \cdot w_n \leq x$)</p>
         
-        <p><strong>Solusi (Secara Konseptual):</strong> Kita mulai dari akhir. Selesaikan Tahap N (item terakhir): $f_N(x) = \max_{d_N} \{ v_N \cdot d_N \}$ (untuk $d_N \cdot w_N \leq x$). Ini adalah perhitungan sederhana. Pindah ke Tahap N-1. Untuk setiap kemungkinan sisa kapasitas $x$, kita hitung: $f_{N-1}(x) = \max_{d_{N-1}} \{ v_{N-1} \cdot d_{N-1} + f_N(x - w_{N-1} \cdot d_{N-1}) \}$. Perhatikan kita menggunakan kembali solusi dari $f_N$ yang sudah kita hitung. Kita terus bekerja mundur seperti ini sampai kita mencapai Tahap 1. Jawaban akhir untuk keseluruhan masalah adalah $f_1(W)$.</p>
-        
-        <p>DP adalah salah satu alat paling kuat dalam arsenal OR, tetapi tidak seperti LP, tidak ada "model standar" atau algoritma umum seperti Simpleks. Kekuatan dan kelemahan terbesar DP adalah bahwa ia adalah sebuah seni. Kreativitas Insinyur Industri diuji dalam mendefinisikan "Tahapan" dan "Keadaan". Jika keadaan didefinisikan secara tidak efisien, masalah tersebut bisa meledak secara komputasi (disebut "kutukan dimensionalitas"). Tetapi jika didefinisikan dengan cerdas, masalah yang tampaknya mustahil dapat dipecahkan secara efisien.</p>
+        <p>Di mana:
+        <br>$d_n$: keputusan jumlah item $n$.
+        <br>$v_n$: nilai item.
+        <br>$w_n$: berat item.</p>
 
         <section>
             <h2>BAGIAN II: MENJINAKKAN KETIDAKPASTIAN – MODEL STOKASTIK</h2>
-            <p>Sejauh ini, kita telah hidup di dunia deterministik—dunia di mana biaya, permintaan, dan kapasitas diketahui dengan pasti. Namun, Insinyur Industri tahu bahwa dunia nyata penuh dengan variabilitas dan ketidakpastian. Bagian kedua dari pengajaran kita berfokus pada model stokastik—alat untuk mengambil keputusan yang optimal ketika kita tidak tahu persis apa yang akan terjadi selanjutnya.</p>
 
-            <h3>Bab 9: Sains Menunggu: Teori Antrian (Queuing Theory)</h3>
-            <p>Salah satu masalah paling universal yang dihadapi Insinyur Industri adalah antrian (waiting lines). Baik itu suku cadang yang menunggu di mesin di lantai pabrik, pelanggan yang menunggu di call center, truk yang menunggu di dok pemuatan, atau paket data yang menunggu di router—antrian ada di mana-mana. Teori Antrian adalah studi matematis tentang menunggu dalam antrean. Ini bukan hanya tentang mengukur antrian, tetapi tentang mengoptimalkan sistem antrian. Selalu ada pertukaran (trade-off) yang mendasar:</p>
-            <ul>
-                <li><strong>Biaya Pelayanan:</strong> Membuka lebih banyak loket kasir atau membeli lebih banyak mesin itu mahal.</li>
-                <li><strong>Biaya Menunggu:</strong> Membuat pelanggan (atau suku cadang) menunggu terlalu lama juga mahal (kehilangan bisnis, biaya <em>bottleneck</em> produksi).</li>
-            </ul>
-            <p>Tujuan TI adalah menggunakan Teori Antrian untuk menemukan keseimbangan optimal antara kedua biaya ini.</p>
+            <h3>Bab 9: Sains Menunggu: Teori Antrian</h3>
+            <p>Teori Antrian menyeimbangkan biaya pelayanan vs biaya menunggu. Notasi standar adalah <strong>Kendall Notation ($A/B/s$)</strong>. Model paling dasar adalah <strong>M/M/1</strong> (Kedatangan Poisson, Pelayanan Eksponensial, 1 Server).</p>
             
-            <h4>Bahasa Antrian: Notasi Kendall (A/B/s)</h4>
-            <p>Untuk menganalisis antrian, kita memerlukan bahasa yang tepat. Notasi Kendall adalah standar untuk mendeskripsikan komponen sistem antrian:</p>
-            <div class="math-display">$$A / B / s$$</div>
-            <ul>
-                <li><strong>A:</strong> Distribusi probabilitas waktu antar kedatangan (misalnya, berapa lama antara pelanggan 1 dan pelanggan 2).</li>
-                <li><strong>B:</strong> Distribusi probabilitas waktu pelayanan (misalnya, berapa lama untuk melayani satu pelanggan).</li>
-                <li><strong>s:</strong> Jumlah pelayan (server) yang paralel.</li>
-            </ul>
-            <p>Simbol yang paling umum untuk A dan B adalah <strong>M</strong> (Markovian atau Eksponensial, menyiratkan kedatangan acak), <strong>D</strong> (Deterministik/waktu konstan), dan <strong>G</strong> (General).</p>
-
-            <h4>Model "Kuda Pacu": M/M/1</h4>
-            <p>Model antrian paling dasar dan banyak digunakan adalah M/M/1. Ini mewakili Kedatangan berdistribusi Poisson (pola acak), Waktu pelayanan berdistribusi Eksponensial (pola acak), dan 1 pelayan. Meskipun sederhana, model M/M/1 memberikan wawasan yang sangat kuat tentang perilaku antrian.</p>
+            <h4>Rumus Kunci M/M/1</h4>
+            <p>Parameter: $\lambda$ (Laju kedatangan), $\mu$ (Laju pelayanan). Syarat stabil: $\lambda < \mu$.</p>
             
-            <p><strong>Rumus Kunci M/M/1 (Wajib Dihafal)</strong><br>
-            Untuk model M/M/1, kita mendefinisikan dua parameter dasar:
-            <br>$\lambda$ (lambda) = Laju kedatangan rata-rata (misalnya, 10 pelanggan per jam).
-            <br>$\mu$ (mu) = Laju pelayanan rata-rata (misalnya, 12 pelanggan per jam).
-            <br>Agar sistem stabil (antrian tidak tumbuh selamanya), kita harus memiliki $\lambda < \mu$.</p>
-            
-            <p>Dari sini, kita dapat menurunkan semua ukuran kinerja utama:</p>
-            <ul>
-                <li><strong>Intensitas Lalu Lintas (Utilisasi):</strong> $\rho = \lambda / \mu$. Seberapa sibuk pelayan tersebut? Jika $\lambda=10, \mu=12$, maka $\rho = 10/12 \approx 0.83$ (pelayan sibuk 83% dari waktu).</li>
-                <li><strong>Probabilitas Sistem Kosong:</strong> $P_0 = 1 - \rho$. Probabilitas tidak ada pelanggan di sistem.</li>
-                <li><strong>Jumlah Rata-rata Pelanggan dalam Sistem ($L$):</strong> (menunggu dan dilayani)
-                    <div class="math-display">$$L = \frac{\lambda}{\mu - \lambda} \quad \text{atau} \quad L = \frac{\rho}{1 - \rho}$$</div>
-                </li>
-                <li><strong>Jumlah Rata-rata Pelanggan dalam Antrian ($L_q$):</strong> (hanya menunggu)
-                    <div class="math-display">$$L_q = \frac{\lambda^2}{\mu(\mu - \lambda)} \quad \text{atau} \quad L_q = \frac{\rho^2}{1 - \rho}$$</div>
-                </li>
-                <li><strong>Waktu Rata-rata dalam Sistem ($W$):</strong> (menunggu dan dilayani)
-                    <div class="math-display">$$W = \frac{1}{\mu - \lambda} \quad \text{atau} \quad W = \frac{L}{\lambda}$$</div>
-                </li>
-                <li><strong>Waktu Rata-rata dalam Antrian ($W_q$):</strong> (hanya menunggu)
-                    <div class="math-display">$$W_q = \frac{\lambda}{\mu(\mu - \lambda)} \quad \text{atau} \quad W_q = \frac{L_q}{\lambda}$$</div>
-                </li>
-            </ul>
-            <p>Hukum Little adalah identitas fundamental $L = \lambda W$ dan $L_q = \lambda W_q$ yang berlaku untuk hampir semua sistem antrian, tidak hanya M/M/1.</p>
-
-            <h4>Wawasan Non-Linear yang Kritis</h4>
-            <p>Wawasan paling penting dan <em>counter-intuitive</em> dari Teori Antrian berasal dari rumus $L = \rho / (1 - \rho)$. Perilaku antrian adalah sangat non-linear. Seorang manajer (yang berpikir secara linier) mungkin berkata: "Utilisasi kita 80% ($\rho=0.8$). Mari kita tingkatkan menjadi 90% ($\rho=0.9$) untuk efisiensi. Antrian seharusnya hanya bertambah sekitar 10-12%."</p>
-            <p>Seorang Insinyur Industri, yang dipersenjatai dengan rumus M/M/1, tahu yang sebenarnya:</p>
-            <ul>
-                <li>Pada $\rho = 0.8$, jumlah rata-rata di sistem $L = 0.8 / (1 - 0.8) = 4$ pelanggan.</li>
-                <li>Pada $\rho = 0.9$, jumlah rata-rata di sistem $L = 0.9 / (1 - 0.9) = 9$ pelanggan.</li>
-                <li>Pada $\rho = 0.95$, jumlah rata-rata di sistem $L = 0.95 / (1 - 0.95) = 19$ pelanggan.</li>
-            </ul>
-            <p>Peningkatan "efisiensi" 10% (dari 80% ke 90%) lebih dari menggandakan panjang antrian. Peningkatan 5% berikutnya (dari 90% ke 95%) menggandakan antrian lagi! Ini secara matematis menjelaskan mengapa sistem yang tampak "sangat efisien" di atas kertas (misalnya, utilisasi 95%) terasa "rusak" dan "kacau" dalam praktiknya (antrian yang sangat panjang dan waktu tunggu yang tidak dapat diprediksi). Peran Insinyur Industri adalah menggunakan data ini untuk secara kuantitatif berdebat melawan "efisiensi 100%" dan mengadvokasi kapasitas penyangga (buffer) yang tepat untuk menyerap variabilitas yang tak terhindarkan.</p>
-
-            <h3>Bab 10: Strategi dan Konflik: Teori Permainan (Game Theory)</h3>
-            <p>Model-model yang telah kita diskusikan sejauh ini mengasumsikan bahwa kita bermain melawan "alam" (ketidakpastian acak). Tetapi bagaimana jika kita bermain melawan pesaing yang cerdas dan rasional, yang keputusannya juga memengaruhi hasil kita? Di sinilah Teori Permainan (Game Theory) berperan, sebuah cabang dari OR yang menganalisis pengambilan keputusan strategis. Teori Permainan adalah studi tentang bagaimana individu atau kelompok yang rasional membuat pilihan ketika hasil mereka saling bergantung.</p>
-            
-            <h4>Konsep Kunci: Keseimbangan Nash (Nash Equilibrium)</h4>
-            <p>Konsep inti dalam Teori Permainan adalah Keseimbangan Nash (Nash Equilibrium). Ini adalah situasi dalam permainan di mana setiap pemain telah memilih strategi, dan: "Tidak ada pemain yang memiliki insentif untuk secara sepihak mengubah strateginya, mengingat strategi yang dipilih oleh pemain lain."</p>
-            <p>Dengan kata lain: "Saya melakukan yang terbaik yang saya bisa, mengingat apa yang Anda lakukan. Dan Anda melakukan yang terbaik yang Anda bisa, mengingat apa yang saya lakukan." Banyak permainan (seperti Prisoner's Dilemma) memiliki Keseimbangan Nash yang sub-optimal—artinya, ada hasil lain di mana kedua pemain bisa lebih baik, tetapi mereka gagal mencapainya karena mereka tidak dapat mempercayai satu sama lain.</p>
-            
-            <h4>Aplikasi untuk Teknik Industri</h4>
-            <p>Bagi seorang Insinyur Industri, terutama yang bekerja di manajemen rantai pasokan, Teori Permainan adalah alat yang sangat penting. Negosiasi antara perusahaan Anda dan pemasok utamanya adalah sebuah permainan. Jika permainan ini dirancang sebagai <em>zero-sum game</em> (di mana setiap rupiah yang dihemat perusahaan Anda adalah kerugian bagi pemasok), Keseimbangan Nash-nya mungkin adalah "saling menekan" (tawar-menawar harga yang agresif). Hasil jangka panjangnya adalah margin yang tipis, kualitas yang rendah, dan ketidakstabilan rantai pasok.</p>
-            <p>Peran Insinyur Industri adalah menjadi perancang permainan. Dengan mengubah struktur dan imbalan (payoff) dari permainan—misalnya, dengan menciptakan kontrak jangka panjang, skema berbagi keuntungan untuk inovasi desain, atau transparansi data—TI dapat mengubah Keseimbangan Nash. Tujuannya adalah untuk merancang permainan baru di mana Keseimbangan Nash bukan lagi "saling mengkhianati" tetapi "saling bekerja sama", yang mengarah pada rantai pasokan yang lebih kuat, lebih inovatif, dan lebih menguntungkan bagi kedua belah pihak.</p>
-
-            <h3>Bab 11: Memprediksi Masa Depan (dengan Asumsi): Rantai Markov (Markov Chains)</h3>
-            <p>Rantai Markov (Markov Chains) adalah alat stokastik yang kuat untuk memodelkan sistem yang bergerak melalui serangkaian keadaan (states) dari waktu ke waktu. Karakteristik yang mendefinisikan dari Rantai Markov adalah Markov Property: probabilitas untuk pindah ke keadaan berikutnya hanya bergantung pada keadaan saat ini, dan bukan pada bagaimana sistem sampai di keadaan tersebut. Ia memiliki "memori satu langkah" — masa lalu (sebelum keadaan saat ini) tidak relevan.</p>
-            
-            <h4>Mesin Penggerak: Matriks Transisi (P)</h4>
-            <p>Inti dari setiap model Rantai Markov adalah Matriks Transisi. Ini adalah matriks persegi di mana:</p>
-            <div class="math-display">$$P = [P_{ij}]$$</div>
-            <p>$P_{ij}$ adalah probabilitas untuk pindah dari Keadaan i ke Keadaan j dalam satu langkah waktu. Setiap baris dari matriks $P$ harus berjumlah 1 (karena dari Keadaan $i$, Anda harus pindah ke suatu tempat).</p>
-            
-            <h4>Rumus Kunci dan Analisis</h4>
-            <ul>
-                <li><strong>Distribusi n-Langkah:</strong> Jika Anda memiliki vektor (baris) $v(0)$ yang mewakili probabilitas awal Anda berada di setiap keadaan, maka distribusi probabilitas setelah $k$ langkah adalah: $$v(k) = v(0) \times P^k$$ (di mana $P^k$ adalah matriks $P$ yang dipangkatkan $k$ kali).</li>
-                <li><strong>Distribusi Steady-State ($\pi$):</strong> Untuk banyak Rantai Markov, seiring berjalannya waktu ($k \to \infty$), distribusi probabilitas akan stabil ke vektor $\pi$ yang disebut distribusi steady-state. Ini adalah probabilitas jangka panjang untuk berada di setiap keadaan, terlepas dari keadaan awal. Vektor $\pi$ ini dapat ditemukan dengan memecahkan sistem persamaan linier: $$\pi = \pi P$$ (ditambah dengan kendala bahwa $\sum \pi_i = 1$). $\pi$ secara efektif adalah eigenvector kiri dari matriks $P$.</li>
-            </ul>
-
-            <h4>Aplikasi untuk Teknik Industri (Keandalan)</h4>
-            <p>Bagi seorang Insinyur Industri, Rantai Markov adalah alat utama untuk analisis keandalan (reliability) dan perencanaan pemeliharaan. Contoh: Bayangkan sebuah mesin kritis di lini produksi. Kita dapat memodelkannya dengan 3 keadaan: (1) "Berfungsi Sempurna", (2) "Perlu Penyetelan", (3) "Rusak".</p>
-            <ol>
-                <li><strong>Langkah 1 (Model):</strong> Berdasarkan data pemeliharaan historis, Insinyur Industri membangun Matriks Transisi $P$ (misalnya, $P_{12} = 0.10$ adalah probabilitas 10% mesin "Sempurna" menjadi "Perlu Penyetelan" dalam satu hari).</li>
-                <li><strong>Langkah 2 (Analisis):</strong> Selesaikan $\pi = \pi P$ untuk menemukan steady-state. Mungkin hasilnya adalah $\pi = [0.70, 0.20, 0.10]$.</li>
-                <li><strong>Langkah 3 (Rekomendasi TI):</strong> "Manajemen, analisis Rantai Markov kami menunjukkan bahwa dalam jangka panjang, mesin <em>bottleneck</em> ini akan berada dalam keadaan 'Rusak' 10% dari waktu. Ini setara dengan kehilangan produksi 2.5 jam per hari, yang tidak dapat diterima."</li>
-                <li><strong>Langkah 4 (Preskriptif):</strong> "Kami telah memodelkan skenario kedua: berinvestasi dalam program <em>preventive maintenance</em> baru. Ini akan mengubah probabilitas transisi (misalnya, mengurangi $P_{23}$ dan meningkatkan $P_{21}$). Model baru kami memprediksi steady-state 'Rusak' hanya 3%. Biaya program ini adalah $X$, dan penghematan dari pengurangan downtime 7% adalah $Y$."</li>
-            </ol>
-            <p>Ini adalah analisis ROI (Return on Investment) yang canggih, didukung oleh model stokastik, yang mengubah TI dari "mandor" menjadi "ahli strategi keandalan".</p>
-
-            <h3>Bab 12: Memilih dalam Ketidakpastian: Analisis Keputusan (Decision Analysis)</h3>
-            <p>Analisis Keputusan adalah kerangka kerja formal untuk membuat pilihan di bawah kondisi ketidakpastian. Ketika seorang Insinyur Industri dihadapkan pada keputusan strategis yang besar (misalnya, "Haruskah kita membangun pabrik besar, pabrik kecil, atau tidak sama sekali?") di mana hasilnya bergantung pada keadaan alamiah yang tidak pasti (misalnya, "permintaan pasar akan tinggi atau rendah"), Analisis Keputusan memberikan alat untuk memetakan masalah secara logis.</p>
-            
-            <h4>Alat Visual: Pohon Keputusan (Decision Trees)</h4>
-            <p>Alat utama dalam Analisis Keputusan adalah Pohon Keputusan. Pohon ini memetakan pilihan dan ketidakpastian secara kronologis, menggunakan simbol-simbol standar:</p>
-            <ul>
-                <li><strong>Kotak (Decision Nodes):</strong> Mewakili titik-titik di mana Anda membuat pilihan. Anda mengontrol apa yang terjadi di sini.</li>
-                <li><strong>Lingkaran (Chance Nodes):</strong> Mewakili keadaan alamiah atau peristiwa yang tidak pasti. Anda tidak mengontrol ini; Anda hanya dapat menetapkan probabilitas untuk setiap hasil.</li>
-            </ul>
-
-            <h4>Mekanisme: Rollback dan Expected Monetary Value (EMV)</h4>
-            <p>Pohon Keputusan dianalisis dengan bekerja mundur dari kanan ke kiri, sebuah proses yang disebut <em>rollback</em>.</p>
-            <ol>
-                <li>Mulai dari hasil akhir (payoff) di ujung kanan pohon.</li>
-                <li>Setiap kali Anda tiba di Lingkaran (Chance Node), hitung Expected Monetary Value (EMV)-nya. Tulis nilai ini di atas lingkaran.
-                    <div class="math-display">$$\text{EMV} = \sum (\text{Payoff dari hasil } i) \times (\text{Probabilitas dari hasil } i)$$</div>
-                </li>
-                <li>Setiap kali Anda tiba di Kotak (Decision Node), Anda memilih. Bandingkan EMV dari setiap cabang yang keluar darinya. Pilih cabang yang mengarah ke EMV tertinggi (untuk maksimisasi).</li>
-                <li>Coret cabang-cabang lainnya. Tulis EMV yang menang di atas kotak.</li>
-                <li>Lanjutkan proses rollback ini sampai Anda mencapai simpul pertama di sebelah kiri. EMV dari simpul ini adalah nilai dari keputusan optimal Anda.</li>
-            </ol>
-
-            <h4>Konsep Kunci: Expected Value of Perfect Information (EVPI)</h4>
-            <p>EMV memberi tahu kita keputusan terbaik berdasarkan ketidakpastian. Tetapi ini menimbulkan pertanyaan: Berapa nilai dari menghilangkan ketidakpastian itu? Di sinilah Expected Value of Perfect Information (EVPI) masuk. EVPI adalah jumlah maksimum yang seharusnya Anda bayarkan untuk mendapatkan ramalan yang sempurna. Ini mewakili biaya dari ketidakpastian itu sendiri.</p>
-            
-            <p><strong>Perhitungan EVPI:</strong></p>
             <div class="math-display">
-                $$\text{EVPI} = (\text{Nilai yang Diharapkan *dengan* Informasi Sempurna}) - (\text{Nilai yang Diharapkan *tanpa* Informasi Sempurna})$$
-                <br><br>
+                <strong>Intensitas Lalu Lintas (Utilisasi):</strong><br>
+                $$\rho = \frac{\lambda}{\mu}$$
+            </div>
+            
+            <div class="math-display">
+                <strong>Jumlah Pelanggan Rata-rata dalam Sistem ($L$):</strong><br>
+                $$L = \frac{\lambda}{\mu - \lambda} = \frac{\rho}{1 - \rho}$$
+            </div>
+            
+            <div class="math-display">
+                <strong>Jumlah Pelanggan Rata-rata dalam Antrian ($L_q$):</strong><br>
+                $$L_q = \frac{\lambda^2}{\mu(\mu - \lambda)} = \frac{\rho^2}{1 - \rho}$$
+            </div>
+            
+            <p>Hubungan waktu menunggu diatur oleh <strong>Hukum Little</strong>: $L = \lambda W$ dan $L_q = \lambda W_q$.
+            <br>Wawasan penting: Perilaku antrian adalah <strong>non-linear</strong>. Peningkatan utilisasi dari 90% ke 95% bisa menggandakan panjang antrian.</p>
+
+            <h3>Bab 10: Teori Permainan</h3>
+            <p>Menganalisis keputusan strategis saat menghadapi pesaing rasional. Konsep kuncinya adalah <strong>Nash Equilibrium</strong>: situasi di mana tidak ada pemain yang untung jika mengubah strategi sendirian.</p>
+
+            <h3>Bab 11: Memprediksi Masa Depan: Rantai Markov</h3>
+            <p>Memodelkan sistem yang berpindah antar keadaan (state) dengan probabilitas tertentu. Kuncinya adalah <strong>Matriks Transisi $P$</strong>.</p>
+            
+            <div class="math-display">
+                <strong>Distribusi Probabilitas n-Langkah:</strong><br>
+                $$v(k) = v(0) \times P^k$$
+            </div>
+            
+            <div class="math-display">
+                <strong>Kondisi Steady-State ($\pi$):</strong><br>
+                $$\pi = \pi P \quad \text{dan} \quad \sum \pi_i = 1$$
+            </div>
+            
+            <p>Aplikasi TI: Analisis keandalan mesin (menghitung probabilitas mesin rusak dalam jangka panjang).</p>
+
+            <h3>Bab 12: Analisis Keputusan</h3>
+            <p>Menggunakan <strong>Pohon Keputusan</strong> untuk memetakan pilihan dan ketidakpastian.</p>
+            
+            <p><strong>1. Expected Monetary Value (EMV)</strong></p>
+            <div class="math-display">
+                $$\text{EMV} = \sum (\text{Payoff}_i \times \text{Probabilitas}_i)$$
+            </div>
+            
+            <p><strong>2. Expected Value of Perfect Information (EVPI)</strong></p>
+            <p>Nilai maksimum yang layak dibayar untuk menghilangkan ketidakpastian.</p>
+            <div class="math-display">
                 $$\text{EVPI} = \text{EV}_{w}\text{PI} - \text{Max EMV}$$
             </div>
-            <ul>
-                <li><strong>Max EMV:</strong> Ini adalah EMV terbaik yang Anda dapatkan dari analisis pohon keputusan standar Anda (misalnya, $\text{Max EMV} = 32$).</li>
-                <li><strong>EV w PI:</strong> Hitung nilai yang diharapkan jika seorang peramal sempurna memberi tahu Anda keadaan alamiah sebelum Anda membuat keputusan. "Jika saya tahu permintaan akan Tinggi, apa keputusan terbaik saya?" (Misalnya, 'Pabrik Besar', payoff = 70). Kalikan payoff terbaik ini dengan probabilitasnya: $\text{EV}_{w}\text{PI} = (70 \times 0.2) + (45 \times 0.5) + (5 \times 0.3) = 14 + 22.5 + 1.5 = 38$.</li>
-                <li><strong>EVPI:</strong> $\text{EVPI} = 38 - 32 = 6$.</li>
-            </ul>
-            <p>Interpretasi: Nilai dari "mengetahui masa depan" adalah 6 (misalnya, Rp 6 Juta). Jika sebuah perusahaan konsultan menawarkan untuk melakukan "studi pasar mendalam" seharga Rp 7 Juta, Insinyur Industri dapat secara matematis membuktikan bahwa studi tersebut tidak sepadan dengan biayanya. EVPI adalah alat rasional yang ampuh untuk melawan "kelumpuhan analisis" (<em>analysis paralysis</em>) dan memutuskan kapan harus berhenti meneliti dan mulai bertindak.</p>
+            <p>Di mana $\text{EV}_{w}\text{PI}$ adalah Nilai Harapan <em>dengan</em> Informasi Sempurna.</p>
 
-            <h3>Bab 13: Laboratorium Digital: Simulasi</h3>
-            <p>Apa yang terjadi ketika sistem menjadi terlalu rumit untuk model analitis? Bagaimana jika kita memiliki 50 mesin yang saling berinteraksi (bukan hanya satu server M/M/1), dengan waktu kedatangan dan pelayanan non-Poisson, dan aturan logika yang kompleks? Ketika matematika analitis gagal, kita beralih ke Simulasi. Simulasi adalah proses merancang model komputer dari sistem nyata dan melakukan eksperimen dengan model tersebut untuk memahami perilakunya. Bagi seorang Insinyur Industri, simulasi adalah "laboratorium digital" mereka.</p>
-            <p>Ada dua jenis utama simulasi yang digunakan dalam OR:</p>
-            
-            <h4>Metode 1: Simulasi Monte Carlo (Simulasi Statis)</h4>
-            <p>Dinamakan seperti kasino terkenal di Monako, metode Monte Carlo dikembangkan oleh John von Neumann dan Stanislaw Ulam selama Proyek Manhattan. Ini adalah teknik untuk memodelkan risiko dan ketidakpastian dalam model statis. Mekanisme dasarnya adalah:</p>
-            <ol>
-                <li><strong>Siapkan Model:</strong> Buat model prediktif (misalnya, dalam spreadsheet). Contoh: $\text{Laba} = (\text{Harga} - \text{Biaya Variabel}) \times \text{Volume} - \text{Biaya Tetap}$.</li>
-                <li><strong>Tentukan Distribusi Probabilitas:</strong> Alih-alih menggunakan satu angka tebakan, tentukan distribusi probabilitas untuk variabel independen yang tidak pasti. (misalnya, Volume adalah Distribusi Normal dengan $\mu=1000, \sigma=150$).</li>
-                <li><strong>Iterasi:</strong> Gunakan komputer untuk menjalankan ribuan iterasi. Di setiap iterasi, komputer mengambil sampel acak dari setiap distribusi input dan menghitung output (Laba).</li>
-                <li><strong>Analisis Hasil:</strong> Hasilnya bukanlah satu angka, melainkan distribusi probabilitas untuk Laba.</li>
-            </ol>
-            
-            <h4>Metode 2: Simulasi Kejadian Diskrit (Discrete-Event Simulation - DES)</h4>
-            <p>Ini adalah alat simulasi utama untuk Insinyur Industri yang berfokus pada manufaktur, logistik, dan layanan. Berbeda dengan Monte Carlo yang statis, DES adalah dinamis—ia memodelkan aliran entitas (misalnya, suku cadang, pelanggan, dokumen) melalui proses dari waktu ke waktu. DES bekerja dengan melompat dari satu "kejadian" ke kejadian berikutnya (misalnya, "Kedatangan Pelanggan", "Selesai Pelayanan Mesin A"), dan melacak status sistem dan statistik (utilisasi, panjang antrian, waktu tunggu).</p>
-            
-            <h4>Perbedaan Kunci: Monte Carlo vs. DES</h4>
-            <p>Perbedaan antara keduanya sangat penting untuk dipahami oleh seorang Insinyur Industri:</p>
+            <h3>Bab 13: Simulasi</h3>
+            <p>Ketika analitik terlalu rumit, kita menggunakan simulasi.</p>
             <ul>
-                <li><strong>Monte Carlo</strong> sangat baik untuk menganalisis risiko dalam desain statis. Ia menjawab, "Mengingat ketidakpastian dalam bahan dan suhu, berapa probabilitas cacat produk kita?"</li>
-                <li><strong>DES</strong> sangat baik untuk menganalisis aliran dan <em>bottleneck</em> dalam operasi dinamis. Ia menjawab, "Mengapa antrian menumpuk di depan Mesin C?"</li>
+                <li><strong>Simulasi Monte Carlo:</strong> Untuk model statis dan analisis risiko (menggunakan distribusi probabilitas acak).</li>
+                <li><strong>Discrete-Event Simulation (DES):</strong> Untuk model dinamis (antrian, aliran proses). Menjawab pertanyaan "What-if" tanpa mengganggu sistem nyata.</li>
             </ul>
-            <p>Bagi seorang TI, DES adalah alat "Bagaimana jika..." (<em>What-if</em>) yang paling murni. Tanpa mengganggu lantai pabrik yang sebenarnya, mereka dapat menguji pertanyaan seperti: "Bagaimana jika kita membeli satu forklift lagi?" atau "Bagaimana jika kita mengubah tata letak lini ini?". DES memungkinkan mereka untuk melihat dampak perubahan tersebut pada keseluruhan sistem, mengidentifikasi <em>bottleneck</em> baru, dan merancang sistem yang resilien (tangguh) terhadap variabilitas.</p>
         </section>
 
         <section>
-            <h2>BAGIAN III: PERBATASAN BARU – MASA DEPAN RISET OPERASI</h2>
-
-            <h3>Bab 14: Aplikasi Lintas Industri: OR dalam Praktik</h3>
-            <p>Kekuatan Riset Operasi terletak pada penerapannya yang universal. Metodologi yang sama yang mengoptimalkan lini produksi dapat mengoptimalkan portofolio investasi dan jadwal ruang operasi. OR adalah "ilmu tentang yang lebih baik" (<em>science of better</em>), dan ia diterapkan di hampir setiap industri.</p>
-            <ul>
-                <li><strong>Logistik dan Rantai Pasokan:</strong> Manajemen Inventaris (EOQ, ROP), Perencanaan Rute (VRP), Lokasi Gudang, dan Perencanaan Rute Dinamis menggunakan AI.</li>
-                <li><strong>Industri Keuangan:</strong> Manajemen Portofolio (Model Markowitz), Analisis Risiko (Monte Carlo), dan Manajemen Pendapatan (Revenue Management) untuk maskapai penerbangan dan hotel.</li>
-                <li><strong>Industri Kesehatan:</strong> Penjadwalan pasien dan ruang operasi, Analisis Kebijakan Kesehatan (efektivitas biaya obat), dan Pemerataan Layanan (lokasi klinik).</li>
-                <li><strong>Telekomunikasi dan Energi:</strong> Desain Jaringan (5G) dan Unit Commitment (pembangkit listrik).</li>
-            </ul>
-
-            <h3>Bab 15: Evolusi OR: Otak di Balik Analitik Preskriptif</h3>
-            <p>Dalam beberapa dekade terakhir, dunia telah dibanjiri oleh "data science" dan "analitik". Penting bagi seorang Insinyur Industri untuk memahami di mana Riset Operasi berada dalam ekosistem ini. Secara umum, analitik data dibagi menjadi empat jenis:</p>
-            <ol>
-                <li><strong>Analitik Deskriptif:</strong> "Apa yang terjadi?"</li>
-                <li><strong>Analitik Diagnostik:</strong> "Mengapa itu terjadi?"</li>
-                <li><strong>Analitik Prediktif:</strong> "Apa yang akan terjadi?" (Machine Learning).</li>
-                <li><strong>Analitik Preskriptif:</strong> "Apa yang harus kita lakukan?" (Riset Operasi).</li>
-            </ol>
-            <p>Riset Operasi adalah mesin di balik Analitik Preskriptif. Ini telah disebut sebagai "masa depan analitik data" karena ini adalah satu-satunya jenis analitik yang melampaui penyajian informasi dan secara proaktif merekomendasikan tindakan terbaik. Analitik Preskriptif (OR) mengambil output dari Analitik Prediktif (seringkali Machine Learning) sebagai input-nya. Ini menciptakan sinergi yang luar biasa.</p>
-            <p>Machine Learning (Prediktif): "Berdasarkan miliaran titik data, model kami memprediksi permintaan untuk Produk A di Jakarta minggu depan adalah 750 unit."
-            <br>Riset Operasi (Preskriptif): "Input diterima. Model Pemrograman Integer Stokastik kami telah menghitung bahwa, mengingat ramalan tersebut, tindakan optimal adalah mengirim 3 truk dari gudang Bekasi dan 2 truk dari Tangerang."</p>
-
-            <h3>Bab 16: Sinergi Abad 21: Integrasi OR dengan AI dan Machine Learning</h3>
-            <p>Jauh dari menjadi "usang" oleh AI dan ML, Riset Operasi justru mengalami kebangkitan yang didorong oleh data. Persimpangan antara disiplin-disiplin ini adalah di mana inovasi paling menarik terjadi saat ini. Lembaga profesional terkemuka untuk OR, INFORMS, kini secara eksplisit mendefinisikan dirinya sebagai payung untuk profesional di bidang AI, analitik, machine learning, data science, dan OR.</p>
-            <p>Sinergi ini meliputi:</p>
-            <ul>
-                <li><strong>ML untuk OR (Memperbaiki Input):</strong> Menggunakan ML untuk meningkatkan akurasi peramalan yang kemudian dimasukkan ke dalam model optimasi (OR).</li>
-                <li><strong>OR untuk ML (Memperbaiki Model):</strong> Menggunakan teknik Pemrograman Integer (OR) untuk mengoptimalkan arsitektur neural network (AI).</li>
-                <li><strong>Pendekatan Hibrida:</strong> Menggabungkan ML dan optimasi untuk memecahkan masalah kompleks seperti logistik e-commerce.</li>
-            </ul>
-            <p>AI dan ML sangat baik dalam menangani tantangan data yang secara historis menjadi penghalang bagi model OR. Dengan memecahkan masalah input ini, AI/ML telah "melepaskan" kekuatan penuh dari mesin optimasi dan pengambilan keputusan OR.</p>
-
-            <h3>Bab 17: Penutup: Peran Abadi Insinyur Industri</h3>
-            <p>Kita telah menempuh perjalanan panjang dari medan perang Perang Dunia II, di mana para ilmuwan pertama kali menerapkan metode kuantitatif untuk operasi militer. Kita telah membedah dunia optimasi yang rapi dan deterministik dari Pemrograman Linier, di mana Algoritma Simpleks secara metodis mencari solusi terbaik. Kita telah melihat bagaimana Dualitas dan Analisis Sensitivitas mengubah seorang analis menjadi ahli strategi, dengan mengidentifikasi nilai sebenarnya dari sumber daya yang langka.</p>
-            <p>Kemudian, kita merangkul kompleksitas dunia nyata, menyelami model stokastik untuk menjinakkan ketidakpastian. Kita menganalisis antrian dengan Teori Antrian, memetakan keputusan berisiko dengan Pohon Keputusan, dan memprediksi keandalan sistem dengan Rantai Markov. Kita memodelkan strategi pesaing dengan Teori Permainan dan keputusan berurutan dengan Pemrograman Dinamis. Ketika matematika menjadi terlalu sulit, kita membangun laboratorium digital dengan Simulasi.</p>
-            <p>Akhirnya, kita tiba di masa kini, di mana Riset Operasi telah berevolusi menjadi otak di balik Analitik Preskriptif, membentuk aliansi yang kuat dengan Artificial Intelligence dan Machine Learning untuk menciptakan sistem pengambilan keputusan yang benar-benar cerdas.</p>
-            <p>Sepanjang evolusi ini, peran inti dari Insinyur Industri tetap tidak berubah sejak tahun 1940-an: untuk merancang, menganalisis, dan mengoptimalkan sistem yang kompleks. Yang telah berubah adalah perangkatnya. Seorang Insinyur Industri modern harus fasih dalam dua bahasa: bahasa fisik dari lantai pabrik, rantai pasokan, dan alur kerja manusia; dan bahasa kuantitatif dari Riset Operasi. OR adalah, dan akan tetap menjadi, tata bahasa matematis yang digunakan oleh Insinyur Industri untuk berdebat, membuktikan, merancang, dan pada akhirnya, mengimplementasikan keputusan yang lebih baik dan lebih cerdas.</p>
+            <h2>BAGIAN III: MASA DEPAN RISET OPERASI</h2>
+            <h3>Bab 14 - 17: Integrasi dengan Data Science</h3>
+            <p>Riset Operasi kini menjadi otak dari <strong>Analitik Preskriptif</strong> ("Apa yang harus kita lakukan?"). Ia bekerja sinergis dengan <em>Machine Learning</em> (ML):
+            <br><strong>ML (Prediktif):</strong> Meramalkan permintaan masa depan.
+            <br><strong>OR (Preskriptif):</strong> Menentukan keputusan optimal berdasarkan ramalan tersebut.
+            <br>Insinyur Industri modern harus menguasai dua bahasa: fisik (sistem nyata) dan kuantitatif (model matematika).</p>
         </section>
 
         <section class="references">
-            <h3>Karya yang Dikutip</h3>
+            <h3>Daftar Pustaka</h3>
             <ol>
-                <li>BAB II LANDASAN TEORI 2.1 Sejarah Operation Research Menurut teori evolusi manajemen, Operation Research sebagai suatu bagian d, diakses November 12, 2025, https://digilib.uinsgd.ac.id/38981/5/5_BAB%20II.pdf</li>
-                <li>Prinsip-Prinsip dan Aplikasi Riset Operasi - diklatkerja.com, diakses November 12, 2025, https://www.diklatkerja.com/blog/prinsip-prinsip-dan-aplikasi-riset-operasi</li>
-                <li>Peran Riset Operasi dalam Mengoptimalkan Efisiensi Bisnis - diklatkerja.com, diakses November 12, 2025, https://www.diklatkerja.com/blog/peran-riset-operasi-dalam-mengoptimalkan-efisiensi-bisnis</li>
-                <li>Penelitian Operasional Teknik Industri - Program Studi Teknik Industri Terbaik di Medan Sumatera Utara yang Merupakan Jurusan dari Fakultas Favorit di Sumut Yaitu Fakultas Teknik UMA, diakses November 12, 2025, https://industri.uma.ac.id/2023/09/16/penelitian-operasional-teknik-industri/</li>
-                <li>Riset Operasi.pdf - Repository UIN Suska, diakses November 12, 2025, https://repository.uin-suska.ac.id/10403/1/Riset%20Operasi.pdf</li>
-                <li>Operations Research - Middlebury College, diakses November 12, 2025, https://s23.middlebury.edu/MATH0318A/Hillier10th.pdf</li>
-                <li>INTRODUCTION TO OPERATIONS RESEARCH - DigitalOcean, diakses November 12, 2025, https://webweb.ams3.cdn.digitaloceanspaces.com/data/simmcdev.webweb.ai.in/MCAdigitalbook/OPTIMIZATION-TECHNIQUES-20240629T072451Z-001/introduction%20to%20operations%20research%20(%20PDFDrive%20).pdf</li>
-                <li>Pengenalan Riset Operasi - MODUL 1, diakses November 12, 2025, https://repository.ut.ac.id/3876/1/ADBI4530-M1.pdf</li>
-                <li>Buku ajar riset operasi pardi affandi cv irdh - Repo Dosen ULM, diakses November 12, 2025, https://repo-dosen.ulm.ac.id/bitstream/handle/123456789/16542/Buku%20edited%20%281%29.pdf?isAllowed=y&sequence=1</li>
-                <li>8 BAB II LANDASAN TEORI A. Pemrograman Linear Pemrograman linear (PL) ialah salah satu teknik dari riset operasi untuk memecahka, diakses November 12, 2025, http://eprints.uny.ac.id/28253/2/BAB%20II.pdf</li>
-                <li>George Dantzig: Operations research phenom - Berkeley Engineering, diakses November 12, 2025, https://engineering.berkeley.edu/george-dantzig-operations-research-phenom/</li>
-                <li>Linear Programming and the birth of the Simplex Algorithm – Ben Lowery @ STOR-i, diakses November 12, 2025, https://www.lancaster.ac.uk/stor-i-student-sites/ben-lowery/2022/03/linear-programming-and-the-birth-of-the-simplex-algorithm/</li>
-                <li>THE (DANTZIG) SIMPLEX METHOD FOR LINEAR PROGRAMMING - Hua Zhou, diakses November 12, 2025, https://hua-zhou.github.io/teaching/st758-2014fall/top10/simplex.pdf</li>
-                <li>2 Solving LPs: The Simplex Algorithm of George Dantzig, diakses November 12, 2025, https://sites.math.washington.edu/~burke/crs/407/notes/section2.pdf</li>
-                <li>LINEAR PROGRAMMING DENGAN METODE SIMPLEKS, diakses November 12, 2025, https://lmsspada.kemdiktisaintek.go.id/pluginfile.php/79172/mod_resource/content/1/M-3-linear-programming-metode-simplex%20lengkap.pdf</li>
-                <li>METODE SIMPLEKS DALAM PROGRAM LINIER, diakses November 12, 2025, https://ira.lecturer.pens.ac.id/fileLawas/SPK/72F12-OK-Jurnal4-DW-Program%2520Linier.pdf</li>
-                <li>Dualitas Dan Analisis Sensitivitas | PDF | Teknologi & Rekayasa - Scribd, diakses November 12, 2025, https://id.scribd.com/document/499121467/Dualitas-dan-Analisis-Sensitivitas-2</li>
-                <li>DUALITAS DAN SENSITIVITAS LP - LMS-SPADA INDONESIA, diakses November 12, 2025, https://lmsspada.kemdiktisaintek.go.id/pluginfile.php/79165/mod_resource/content/1/M4-DUALITAS%20DAN%20SENSITIVITAS%20LP.pdf</li>
-                <li>HARGA BAYANGAN (Shadow Price) | PDF - Scribd, diakses November 12, 2025, https://id.scribd.com/document/458257047/HARGA-BAYANGAN-Shadow-Price</li>
-                <li>Contoh Sensitivitas 1a Soal Riset Operasi | PDF | Metode & Bahan ..., diakses November 12, 2025, https://id.scribd.com/doc/259651241/Contoh-Sensitivitas-1a-Soal-riset-operasi</li>
-                <li>Contoh Soal tentang Analisis Sensitivitas: Perubahan Rentang Matriks b (Ruas Sisi Kanan), diakses November 12, 2025, https://www.youtube.com/watch?v=A9d9Fbixso0</li>
-                <li>INTRODUCTION TO OPERATIONS RESEARCH - McGraw Hill, diakses November 12, 2025, https://info.mheducation.com/rs/128-SJW-347/images/Preface_Hillier_Intro_Operations_Research_11e.pdf</li>
-                <li>The Application of the Shortest Path and Maximum Flow with ..., diakses November 12, 2025, https://www.jcscm.net/fp/106.pdf</li>
-                <li>What Is The Difference Between Linear And Integer Programming? - The Friendly Statistician - YouTube, diakses November 12, 2025, https://www.youtube.com/watch?v=Rywi1hnZX2Y</li>
-                <li>Binary Integer LP – Capital Budgeting – Formulation + Solution - YouTube, diakses November 12, 2025, https://www.youtube.com/watch?v=q3gy3bKc1aA</li>
-                <li>What is the difference between linear and integer programming?, diakses November 12, 2025, https://math.stackexchange.com/questions/1636899/what-is-the-difference-between-linear-and-integer-programming</li>
-                <li>Integer Programming: The Branch and Bound Method, diakses November 12, 2025, http://web.tecnico.ulisboa.pt/mcasquilho/compute/_linpro/TaylorB_module_c.pdf</li>
-                <li>AN INTEGER PROGRAMMING APPLICATION TO THE CAPITAL ..., diakses November 12, 2025, https://www.dlsu.edu.ph/wp-content/uploads/pdf/research/publishing-house/journals/BER/vol-1-no2-1988/an-integer-programming-application-to-the-capital-budgeting-problem-in-a-large-multinational-firm-in-metro-manila.pdf</li>
-                <li>PMS6.1-Capital Budgeting - YouTube, diakses November 12, 2025, https://www.youtube.com/watch?v=MsvzCM9LEik</li>
-                <li>Optimizing Capital Budgeting with Linear Programming: 01 Introduction - YouTube, diakses November 12, 2025, https://www.youtube.com/watch?v=DzEQ0K6dpUs</li>
-                <li>Integer programming formulation examples, diakses November 12, 2025, https://people.brunel.ac.uk/~mastjjb/jeb/or/moreip.html</li>
-                <li>diakses November 12, 2025, https://www.awork.com/glossary/dynamic-programming#:~:text=Dynamic%20programming%20is%20an%20approach,to%20save%20time%20and%20resources.</li>
-                <li>Applications of dynamic programming | Combinatorial Optimization Class Notes - Fiveable, diakses November 12, 2025, https://fiveable.me/combinatorial-optimization/unit-7/applications-dynamic-programming/study-guide/Y86YgjRduClbeN0X</li>
-                <li>Dynamic Programming Explained: Efficient Optimization - awork, diakses November 12, 2025, https://www.awork.com/glossary/dynamic-programming</li>
-                <li>Dynamic Programming and Applications - MIT Mathematics, diakses November 12, 2025, https://math.mit.edu/research/highschool/primes/circle/documents/2020/GonzalezGauss_Zhao_2020.pdf</li>
-                <li>THE THEORY OF DYNAMIC PROGRAMMING - Richard Bellman - RAND, diakses November 12, 2025, https://www.rand.org/content/dam/rand/pubs/papers/2008/P550.pdf</li>
-                <li>Bellman equation - Wikipedia, diakses November 12, 2025, https://en.wikipedia.org/wiki/Bellman_equation</li>
-                <li>Bellman Optimality Equation in Reinforcement Learning - Analytics Vidhya, diakses November 12, 2025, https://www.analyticsvidhya.com/blog/2021/02/understanding-the-bellman-optimality-equation-in-reinforcement-learning/</li>
-                <li>30th 2016, Poland, EU OPTIMIZATION OF THE LOADING OF GOODS INTO THE CARGO COMPARTMENT OF A VEHICLE AS A DYNAMIC PROGR, diakses November 12, 2025, https://www.confer.cz/clc/2016/download/2677-optimization-of-loading-the-goods-into-the-loading-compartment-vehicle-designed-as-a-dynamic-programming-problem.pdf</li>
-                <li>Bellman Principle of Optimality - Reinforcement Learning - Machine Learning - YouTube, diakses November 12, 2025, https://www.youtube.com/watch?v=asWQWl59Krg</li>
-                <li>Practice Problems in DP | PDF | Dynamic Programming | Logarithm - Scribd, diakses November 12, 2025, https://id.scribd.com/document/241229077/Practice-Problems-in-DP</li>
-                <li>Applications of Dynamic Programming | by Himanshu Kurzekar - Medium, diakses November 12, 2025, https://himanshu-kurzekar19.medium.com/applications-of-dynamic-programming-97ec71141cc4</li>
-                <li>UNIT 6 DYNAMIC PROGRAMMING - eGyanKosh, diakses November 12, 2025, https://egyankosh.ac.in/bitstream/123456789/13879/1/Unit-6.pdf</li>
-                <li>Dynamic Programming - BITS Pilani, diakses November 12, 2025, https://universe.bits-pilani.ac.in/uploads/DP.pdf</li>
-                <li>Dynamic Programming Cargo Loading Problem - YouTube, diakses November 12, 2025, https://www.youtube.com/watch?v=C2vYcnOqJUQ</li>
-                <li>Riset Operasi: Mengoptimalkan Pengambilan Keputusan untuk Kesuksesan, diakses November 12, 2025, https://www.diklatkerja.com/blog/riset-operasi-mengoptimalkan-pengambilan-keputusan-untuk-kesuksesan</li>
-                <li>MODEL ANTRIAN KENDALL-LEE M/M/1 Kepada PROGRAM STUDI MATEMATIKA FAKULTAS SAINS DAN TEKNOLOGI UIN SUNAN KALIJAGA YOGYAKARTA 2010, diakses November 12, 2025, https://digilib.uin-suka.ac.id/5480/1/BAB%20I%2C%20IV%2C%20DAFTAR%20PUSTAKA.pdf</li>
-                <li>Riset Operasi Teori Antrian (Queueing Theory) - SPADA UNS, diakses November 12, 2025, https://spada.uns.ac.id/mod/resource/view.php?id=239179</li>
-                <li>BAB IV HASIL DAN PEMBAHASAN 4.1 Distribusi probabilitas banyaknya pelanggan dalam sistem antrian M/M/1/K Pada model antrian, ked - Repository - UNAIR, diakses November 12, 2025, https://repository.unair.ac.id/25578/13/13.%20Bab%204.pdf</li>
-                <li>Makalah Teori Antrian M - M - 1 | PDF - Scribd, diakses November 12, 2025, https://id.scribd.com/document/509702674/Makalah-Teori-Antrian-M-m-1</li>
-                <li>4 Notasi Kendalls | PDF - Scribd, diakses November 12, 2025, https://id.scribd.com/doc/57290742/4-notasi-kendalls</li>
-                <li>Strategi Dominan dan Nash Equilibrium | PDF - Scribd, diakses November 12, 2025, https://id.scribd.com/presentation/653356117/Tugas-Ekonomi-Manajerial-Game-teori</li>
-                <li>RPS-Operation-Research-2SKS-Ary-Yudianto.docx - STIA Amuntai, diakses November 12, 2025, https://www.stiaamuntai.ac.id/wp-content/uploads/2024/11/RPS-Operation-Research-2SKS-Ary-Yudianto.docx</li>
-                <li>Markov chain - Wikipedia, diakses November 12, 2025, https://en.wikipedia.org/wiki/Markov_chain</li>
-                <li>Chapter 8: Markov Chains, diakses November 12, 2025, https://www.stat.auckland.ac.nz/~fewster/325/notes/ch8.pdf</li>
-                <li>Markov Chains & Transition Matrices - YouTube, diakses November 12, 2025, https://www.youtube.com/watch?v=1GKtfgwf3ig</li>
-                <li>10.1: Introduction to Markov Chains - Mathematics LibreTexts, diakses November 12, 2025, https://math.libretexts.org/Bookshelves/Applied_Mathematics/Applied_Finite_Mathematics_(Sekhon_and_Bloom)/10%3A_Markov_Chains/10.01%3A_Introduction_to_Markov_Chains</li>
-                <li>What is decision tree analysis? 5 steps to make better decisions - Asana, diakses November 12, 2025, https://asana.com/resources/decision-tree-analysis</li>
-                <li>20.9 Expected value of perfect information (EVPI), diakses November 12, 2025, https://www.treeage.com/help-bus/Content/0-TP-Bus/17-Analyzing-Decision-Trees-Bus/9-Expected-value-perfect-information-EVPI.htm</li>
-                <li>Decision Tree Analysis with Example and Expected Value - Easy & Fun Calculation, diakses November 12, 2025, https://www.youtube.com/watch?v=GDz_MuquByE</li>
-                <li>diakses November 12, 2025, https://taylorandfrancis.com/knowledge/Engineering_and_technology/Engineering_support_and_special_topics/Expected_value_of_perfect_information/#:~:text=Expected%20Value%20of%20Perfect%20Information%20(EVPI)%20which%20estimates%20the%20maximum,to%20the%20presence%20of%20uncertainty.</li>
-                <li>Expected value of perfect information - Wikipedia, diakses November 12, 2025, https://en.wikipedia.org/wiki/Expected_value_of_perfect_information</li>
-                <li>Decision Analysis 2: EMV & EVPI - Expected Value & Perfect Information - YouTube, diakses November 12, 2025, https://www.youtube.com/watch?v=tbv9E9D2BRQ</li>
-                <li>Interpretation of the Expected Value of Perfect Information and Research Recommendations: A Systematic Review and Empirical Investigation - PubMed, diakses November 12, 2025, https://pubmed.ncbi.nlm.nih.gov/25986471/</li>
-                <li>bab 3 pembangunan model simulasi monte carlo - UPI Repository, diakses November 12, 2025, https://repository.upi.edu/109926/5/ta_mtk_0706566_chapter3.pdf</li>
-                <li>Apa itu Simulasi Monte Carlo? - Amazon AWS, diakses November 12, 2025, https://aws.amazon.com/id/what-is/monte-carlo-simulation/</li>
-                <li>Monte Carlo vs. Discrete Event Simulation: Understanding the Key Differences, diakses November 12, 2025, https://blog.minitab.com/en/blog/monte-carlo-vs.-discrete-event-simulation-understanding-the-key-differences</li>
-                <li>Apa itu Simulasi Monte Carlo? - IBM, diakses November 12, 2025, https://www.ibm.com/id-id/think/topics/monte-carlo-simulation</li>
-                <li>Algoritma Heuristik dan Metaheuristik Riset Operasi - diklatkerja.com, diakses November 12, 2025, https://www.diklatkerja.com/blog/algoritma-heuristik-dan-metaheuristik-riset-operasi</li>
-                <li>Mendalami Riset Operasi - Pentingnya dan Aplikasinya - diklatkerja.com, diakses November 12, 2025, https://www.diklatkerja.com/blog/mendalami-riset-operasi-pentingnya-dan-aplikasinya</li>
-                <li>22 Aplikasi Logistik untuk Efisiensi Rantai Pasok dan Transportasi - Mekari Jurnal, diakses November 12, 2025, https://www.jurnal.id/id/aplikasi-logistik/</li>
-                <li>Penelitian tentang sistem Komunikasi Millimeter wave hingga THz - Organisasi Riset Elektronika dan Informatika, diakses November 12, 2025, https://brin.go.id/orei/pusat-riset-telekomunikasi/page/penelitian-tentang-sistem-komunikasi-millimeter-wave-hingga-thz</li>
-                <li>What Is Prescriptive Analytics? 6 Examples - HBS Online, diakses November 12, 2025, https://online.hbs.edu/blog/post/prescriptive-analytics</li>
-                <li>The 4 Types of Data Analysis [Ultimate Guide] - CareerFoundry, diakses November 12, 2025, https://careerfoundry.com/en/blog/data-analytics/different-types-of-data-analysis/</li>
-                <li>What is Prescriptive Analytics in Data Science? - GeeksforGeeks, diakses November 12, 2025, https://www.geeksforgeeks.org/data-science/what-is-prescriptive-analytics-in-data-science/</li>
-                <li>Descriptive, predictive and prescriptive: three types of business analytics - Online MSc courses - University of Bath, diakses November 12, 2025, https://online.bath.ac.uk/content/descriptive-predictive-and-prescriptive-three-types-business-analytics</li>
-                <li>Data Science and Analytics: An Overview from Data-Driven Smart Computing, Decision-Making and Applications Perspective - PMC, diakses November 12, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC8274472/</li>
-                <li>Riset Operasi dan AI Potensial Jadi Strategi Efisiensi Sistem Bagi Industri Hadapi Persaingan Global - Universitas Gadjah Mada, diakses November 12, 2025, https://ugm.ac.id/id/berita/riset-operasi-dan-ai-potensial-jadi-strategi-efisiensi-sistem-bagi-industri-hadapi-persaingan-global/</li>
-                <li>INFORMS: IOL Home, diakses November 12, 2025, https://www.informs.org/</li>
-                <li>INFORMS Journals, diakses November 12, 2025, https://www.informs.org/Publications/INFORMS-Journals</li>
-                <li>AI4OPT Showcases Advances in Machine Learning and Optimization at INFORMS 2025, diakses November 12, 2025, https://www.ai4opt.org/news-events/ai4opt-showcases-advances-machine-learning-and-optimization-informs-2025</li>
-                <li>Webinar PR KAKS Seri#2 Tahun 2025 “Implementasi Mutakhir AI pada Bidang Kesehatan”, diakses November 12, 2025, https://www.youtube.com/watch?v=1WVKarVIExA</li>
-                <li>Machine Learning - INFORMS, diakses November 12, 2025, https://www.informs.org/Machine-Learning</li>
+                <li>BAB II LANDASAN TEORI 2.1 Sejarah Operation Research, https://digilib.uinsgd.ac.id/38981/5/5_BAB%20II.pdf</li>
+                <li>Prinsip-Prinsip dan Aplikasi Riset Operasi, https://www.diklatkerja.com/blog/prinsip-prinsip-dan-aplikasi-riset-operasi</li>
+                <li>Peran Riset Operasi dalam Mengoptimalkan Efisiensi Bisnis, https://www.diklatkerja.com/blog/peran-riset-operasi-dalam-mengoptimalkan-efisiensi-bisnis</li>
+                <li>Penelitian Operasional Teknik Industri - Universitas Medan Area, https://industri.uma.ac.id/2023/09/16/penelitian-operasional-teknik-industri/</li>
+                <li>Riset Operasi.pdf - Repository UIN Suska, https://repository.uin-suska.ac.id/10403/1/Riset%20Operasi.pdf</li>
+                <li>Operations Research - Hillier & Lieberman, https://s23.middlebury.edu/MATH0318A/Hillier10th.pdf</li>
+                <li>Introduction to Operations Research, DigitalOcean PDF Drive.</li>
+                <li>Pengenalan Riset Operasi - Modul UT, https://repository.ut.ac.id/3876/1/ADBI4530-M1.pdf</li>
+                <li>Buku Ajar Riset Operasi - Repo Dosen ULM, https://repo-dosen.ulm.ac.id/bitstream/handle/123456789/16542/Buku%20edited%20%281%29.pdf</li>
+                <li>Landasan Teori Pemrograman Linear - UNY, http://eprints.uny.ac.id/28253/2/BAB%20II.pdf</li>
+                <li>George Dantzig: Operations Research Phenom - Berkeley Engineering.</li>
+                <li>The Dantzig Simplex Method - Hua Zhou.</li>
+                <li>Dualitas dan Analisis Sensitivitas - LMS SPADA.</li>
+                <li>Harga Bayangan (Shadow Price) - Scribd.</li>
+                <li>Teori Antrian M/M/1 - Repository UNAIR.</li>
+                <li>Game Theory & Nash Equilibrium - Materi Ekonomi Manajerial.</li>
+                <li>Markov Chains - University of Auckland Statistics.</li>
+                <li>Decision Tree Analysis - Asana & TreeAge.</li>
+                <li>Simulasi Monte Carlo vs DES - Minitab Blog & IBM.</li>
+                <li>Prescriptive Analytics - HBS Online & GeeksforGeeks.</li>
+                <li>INFORMS - Institute for Operations Research and the Management Sciences.</li>
             </ol>
         </section>
 
