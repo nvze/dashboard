@@ -8,12 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 1. LUXURY VARIABLES --- */
+        /* --- CONFIGURATION --- */
         :root {
-            --bg-color: #FDFBF7;      /* Warm Paper White (Kesan buku mahal) */
-            --text-main: #1C1C1C;     /* Obsidian Black */
-            --text-muted: #6E6E6E;    /* Slate Grey */
-            --accent: #BFA15F;        /* Muted Gold */
+            --bg-color: #FDFBF7;
+            --text-main: #1C1C1C;
+            --text-muted: #6E6E6E;
+            --accent: #BFA15F;
             --border: #E8E6E1;
             
             --font-serif: 'Cormorant Garamond', serif;
@@ -34,11 +34,9 @@
             min-height: 100vh;
         }
 
-        /* --- 2. TOP NAVIGATION (BACK BUTTON) --- */
+        /* --- BACK BUTTON --- */
         .top-bar {
             padding: 30px 40px;
-            display: flex;
-            align-items: center;
         }
 
         .btn-back {
@@ -59,7 +57,7 @@
             transform: translateX(-5px);
         }
 
-        /* --- 3. HEADER AREA --- */
+        /* --- HEADER --- */
         header {
             padding: 60px 20px 40px;
             text-align: center;
@@ -69,7 +67,7 @@
 
         h1 {
             font-family: var(--font-serif);
-            font-size: 4.5rem; /* Ukuran besar untuk kesan mewah */
+            font-size: 4.5rem;
             font-weight: 400;
             line-height: 1;
             letter-spacing: -0.03em;
@@ -84,7 +82,7 @@
             color: var(--text-muted);
         }
 
-        /* --- 4. STICKY CATEGORY NAV --- */
+        /* --- STICKY NAV --- */
         .sticky-nav {
             position: sticky;
             top: 0;
@@ -133,12 +131,12 @@
             background-color: var(--accent);
         }
 
-        /* --- 5. ARTICLE LIST LAYOUT --- */
+        /* --- POST LIST --- */
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 0 20px;
-            flex: 1; /* Agar footer terdorong ke bawah */
+            flex: 1;
         }
 
         .article-card {
@@ -147,7 +145,6 @@
             padding: 40px 0;
             border-bottom: 1px solid var(--border);
             transition: opacity 0.3s ease;
-            position: relative;
         }
 
         .article-card:hover {
@@ -181,7 +178,7 @@
             max-width: 90%;
         }
 
-        /* --- 6. FOOTER & UTILS --- */
+        /* --- FOOTER & UTILS --- */
         .load-more-container {
             text-align: center;
             padding: 60px 0;
@@ -216,7 +213,6 @@
             font-style: italic;
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 768px) {
             h1 { font-size: 3rem; }
             .nav-list { gap: 20px; padding: 0 10px; }
@@ -262,42 +258,111 @@
     </footer>
 
     <script>
-        /* =========================================================
-           DATABASE ARTIKEL
-           Silakan edit bagian 'title' dan 'desc' sesuai isi file post-X.html Anda.
-           Sistem ini siap menampung hingga 1000+ item.
-           =========================================================
-        */
+        /* DATABASE POST */
         const allPosts = [
             // --- KELOMPOK EKONOMI ---
-            { title: "rekayasa finansial global ", cat: "ekonomi", date: "01 Nov 2025", desc: "Kajian Analisis Strategis:
-Validasi dan Dekonstruksi Arsitektur Penguasaan Negara Melalui Finansialisasi Global", link: "post-2.html" },
-            { title: "ANALISIS DAMPAK YEN CARRY TRADE TERHADAP PASAR KEUANGAN INDONESIA", cat: "ekonomi", date: "05 Jan 2025", desc: "Yen Carry Trade adalah strategi arbitrase finansial di mana investor global meminjam dana dalam mata uang Yen Jepang (JPY) karena tingkat suku bunga yang sangat rendah", link: "post-5.html" },
-            { title: "teater modal ", cat: "ekonomi", date: "10 Jan 2025", desc: "Sebuah Drama tentang Geopolitik & Keuangan Global", link: "post-6.html" },
-            { title: "Catatan Bagi Pemula Bisnis Forex", cat: "ekonomi", date: "12 Jan 2025", desc: "pasar valas adalah pasar keuangan nomor 1 terbesar di dunia. Kalau bisnis ini lebih banyak ruginya tentu tidak mungkin pasar valas menjadi terbesar di dunia", link: "post-7.html" },
-               { title: "analisis cadangan devisa dan rupiah  ", cat: "ekonomi", date: "10 Jan 2025", desc: "Paradoks Rupiah: Menganalisis Dominasi Faktor Permintaan Valas di Tengah Melimpahnya Cadangan Devisa", link: "post-10.html" },
+            { 
+                title: "rekayasa finansial global", 
+                cat: "ekonomi", 
+                date: "01 Nov 2025", 
+                desc: "Kajian Analisis Strategis: Validasi dan Dekonstruksi Arsitektur Penguasaan Negara Melalui Finansialisasi Global", 
+                link: "post-2.html" 
+            },
+            { 
+                title: "ANALISIS DAMPAK YEN CARRY TRADE TERHADAP PASAR KEUANGAN INDONESIA", 
+                cat: "ekonomi", 
+                date: "05 Jan 2025", 
+                desc: "Yen Carry Trade adalah strategi arbitrase finansial di mana investor global meminjam dana dalam mata uang Yen Jepang (JPY) karena tingkat suku bunga yang sangat rendah", 
+                link: "post-5.html" 
+            },
+            { 
+                title: "teater modal", 
+                cat: "ekonomi", 
+                date: "10 Jan 2025", 
+                desc: "Sebuah Drama tentang Geopolitik & Keuangan Global", 
+                link: "post-6.html" 
+            },
+            { 
+                title: "Catatan Bagi Pemula Bisnis Forex", 
+                cat: "ekonomi", 
+                date: "12 Jan 2025", 
+                desc: "pasar valas adalah pasar keuangan nomor 1 terbesar di dunia. Kalau bisnis ini lebih banyak ruginya tentu tidak mungkin pasar valas menjadi terbesar di dunia", 
+                link: "post-7.html" 
+            },
+            { 
+                title: "analisis cadangan devisa dan rupiah", 
+                cat: "ekonomi", 
+                date: "10 Jan 2025", 
+                desc: "Paradoks Rupiah: Menganalisis Dominasi Faktor Permintaan Valas di Tengah Melimpahnya Cadangan Devisa", 
+                link: "post-10.html" 
+            },
 
             // --- KELOMPOK TEKNOLOGI ---
-            { title: "Studi Teknik dan Manajemen Industri", cat: "teknologi", date: "26 Nov 2025", desc: "Evolusi Disiplin, Fondasi Teoretis, dan Lanskap Akademik Global", link: "post-1.html" },
-            { title: "teknik industri dan SCM", cat: "teknologi", date: "18 Jan 2025", desc: "Arsitektur Aliran: Sebuah Kajian Mendalam Keterkaitan Teknik Industri dan Supply Chain Management", link: "post-11.html" },
-        
+            { 
+                title: "Studi Teknik dan Manajemen Industri", 
+                cat: "teknologi", 
+                date: "26 Nov 2025", 
+                desc: "Evolusi Disiplin, Fondasi Teoretis, dan Lanskap Akademik Global", 
+                link: "post-1.html" 
+            },
+            { 
+                title: "teknik industri dan SCM", 
+                cat: "teknologi", 
+                date: "18 Jan 2025", 
+                desc: "Arsitektur Aliran: Sebuah Kajian Mendalam Keterkaitan Teknik Industri dan Supply Chain Management", 
+                link: "post-11.html" 
+            },
 
             // --- KELOMPOK HUMANIORA ---
-            { title: "Amerika Itu Memang Perkasa", cat: "humaniora", date: "25 Jan 2025", desc: "Di Amerika di beberapa kota akan sering terlihat homeless alias gembel. Padahal AS dikenal sebagai negara kaya nomor 1 di dunia.", link: "post-8.html" },
-            { title: "Belajar Melawan Gelombang", cat: "humaniora", date: "28 Jan 2025", desc: "Saya engga mau kerja di perusahaan anda. Saya mohon dilibatkan sebagai team dalam proses private equity. Itu aja” kata Karen suatu waktu.", link: "post-9.html" },
-            { title: "pengendali arus uang ", cat: "humaniora", date: "01 Feb 2025", desc: "Total aset perusahaan kamu tumbuh agresif tiga tahun berturut-turut. Tapi hanya 10% yang berasal dari paid-up capital. Artinya, kamu hebat dalam leverage. Tapi leverage kamu bukan dari profitabilitas. Tapi dari… cerita.", link: "post-12.html" },
-             { title: "dunia persepsi  ", cat: "humaniora", date: "01 Feb 2025", desc: "Apa pandangan Anda tentang sektor IT di China?", link: "post-13.html" },
-                { title: "dilema dua raksasa ", cat: "humaniora", date: "27 Nov 2025", desc: "Selama puluhan tahun, "Bebas Aktif" menjadi mantra suci diplomasi Indonesia. Namun, di tengah persaingan memanas antara Amerika Serikat dan Tiongkok, apakah posisi netral masih menjadi tameng yang aman, atau justru jebakan yang berbahaya?", link: "post-14.html" },
-            
+            { 
+                title: "Amerika Itu Memang Perkasa", 
+                cat: "humaniora", 
+                date: "25 Jan 2025", 
+                desc: "Di Amerika di beberapa kota akan sering terlihat homeless alias gembel. Padahal AS dikenal sebagai negara kaya nomor 1 di dunia.", 
+                link: "post-8.html" 
+            },
+            { 
+                title: "Belajar Melawan Gelombang", 
+                cat: "humaniora", 
+                date: "28 Jan 2025", 
+                desc: "Saya engga mau kerja di perusahaan anda. Saya mohon dilibatkan sebagai team dalam proses private equity. Itu aja” kata Karen suatu waktu.", 
+                link: "post-9.html" 
+            },
+            { 
+                title: "pengendali arus uang", 
+                cat: "humaniora", 
+                date: "01 Feb 2025", 
+                desc: "Total aset perusahaan kamu tumbuh agresif tiga tahun berturut-turut. Tapi hanya 10% yang berasal dari paid-up capital. Artinya, kamu hebat dalam leverage. Tapi leverage kamu bukan dari profitabilitas. Tapi dari… cerita.", 
+                link: "post-12.html" 
+            },
+            { 
+                title: "dunia persepsi", 
+                cat: "humaniora", 
+                date: "01 Feb 2025", 
+                desc: "Apa pandangan Anda tentang sektor IT di China?", 
+                link: "post-13.html" 
+            },
+            { 
+                title: "dilema dua raksasa", 
+                cat: "humaniora", 
+                date: "27 Nov 2025", 
+                desc: 'Selama puluhan tahun, "Bebas Aktif" menjadi mantra suci diplomasi Indonesia. Namun, di tengah persaingan memanas antara Amerika Serikat dan Tiongkok, apakah posisi netral masih menjadi tameng yang aman, atau justru jebakan yang berbahaya?', 
+                link: "post-14.html" 
+            },
 
             // --- KELOMPOK BEBAS ---
-            { title: "Catatan Perjalanan: Bandung", cat: "bebas", date: "28 Nov 2025", desc: "Refleksi pagi hari di kota kembang.", link: "posts/post-14.html" },
-          
+            { 
+                title: "Catatan Perjalanan: Bandung", 
+                cat: "bebas", 
+                date: "28 Nov 2025", 
+                desc: "Refleksi pagi hari di kota kembang.", 
+                link: "post-15.html" 
+            },
         ];
 
-        // --- SYSTEM CORE LOGIC ---
+        // --- LOGIC SYSTEM ---
         let currentCategory = 'all';
-        let displayLimit = 15; // Jumlah awal artikel yang ditampilkan
+        let displayLimit = 15;
         let filteredList = [];
 
         const container = document.getElementById('posts-container');
@@ -308,11 +373,9 @@ Validasi dan Dekonstruksi Arsitektur Penguasaan Negara Melalui Finansialisasi Gl
         }
 
         function setCategory(cat, element) {
-            // 1. Update Tampilan Tab
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             if(element) element.classList.add('active');
 
-            // 2. Filter Data
             currentCategory = cat;
             if (cat === 'all') {
                 filteredList = allPosts;
@@ -320,14 +383,11 @@ Validasi dan Dekonstruksi Arsitektur Penguasaan Negara Melalui Finansialisasi Gl
                 filteredList = allPosts.filter(post => post.cat === cat);
             }
 
-            // 3. Reset dan Render
             renderList();
         }
 
         function renderList() {
-            container.innerHTML = ''; // Bersihkan container
-
-            // Ambil data sesuai limit (Pagination Logic)
+            container.innerHTML = '';
             const listToShow = filteredList.slice(0, displayLimit);
 
             if(listToShow.length === 0) {
@@ -351,7 +411,6 @@ Validasi dan Dekonstruksi Arsitektur Penguasaan Negara Melalui Finansialisasi Gl
                 container.appendChild(article);
             });
 
-            // Cek apakah tombol Load More perlu muncul
             if (displayLimit >= filteredList.length) {
                 loadBtn.style.display = 'none';
             } else {
@@ -360,13 +419,11 @@ Validasi dan Dekonstruksi Arsitektur Penguasaan Negara Melalui Finansialisasi Gl
         }
 
         function loadMore() {
-            displayLimit += 10; // Menambah 10 artikel setiap klik
+            displayLimit += 10;
             renderList();
         }
 
-        // Jalankan saat halaman siap
         window.addEventListener('DOMContentLoaded', init);
-
     </script>
 </body>
 </html>
