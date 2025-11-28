@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal Pemikiran | NVZE</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. CONFIGURATION --- */
+        :root {
+            --bg-color: #FAFAFA;      /* Putih gading, tidak menyilaukan */
+            --text-dark: #111111;     /* Hitam pekat untuk kontras tinggi */
+            --text-grey: #666666;     /* Abu-abu elegan untuk meta data */
+            --accent: #A67C00;        /* Emas tua, minimalis */
+            --line-color: #E5E5E5;
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-family: var(--font-sans);
+            font-weight: 300;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- 2. HEADER (TYPOGRAPHIC CENTERPIECE) --- */
+        header {
+            padding: 100px 20px 60px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-grey);
+        }
+
+        /* --- 3. STICKY NAVIGATION --- */
+        .nav-container {
+            position: sticky;
+            top: 0;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--line-color);
+            padding: 20px 0;
+            margin-bottom: 50px;
+        }
+
+        .nav-items {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            color: var(--text-dark);
+        }
+
+        .nav-btn.active::after {
+            content: "•"; /* Dot minimalist sebagai penanda aktif */
+            position: absolute;
+            bottom: -15px; /* Posisi di bawah teks */
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* --- 4. ARTICLE LIST (TEXT ONLY) --- */
+        .article-list {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .article-item {
+            display: block;
+            text-decoration: none;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--line-color);
+            transition: opacity 0.3s ease;
+        }
+
+        .article-item:hover {
+            opacity: 0.7;
+        }
+
+        .meta-top {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .article-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .article-excerpt {
+            font-family: var(--font-sans);
+            color: var(--text-grey);
+            font-size: 1rem;
+            max-width: 90%;
+        }
+
+        /* --- 5. FOOTER & UTILS --- */
+        .footer-loader {
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        button#loadMoreBtn {
+            background: transparent;
+            border: 1px solid var(--text-dark);
+            padding: 12px 30px;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        button#loadMoreBtn:hover {
+            background: var(--text-dark);
+            color: white;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .nav-items { gap: 20px; flex-wrap: wrap; }
+            .article-title { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>NVZE DASHBOARD</h1>
+        <p class="subtitle">Arsip Ekonomi, Teknologi & Humaniora</p>
+    </header>
+
+    <div class="nav-container">
+        <ul class="nav-items">
+            <li><button class="nav-btn active" onclick="filterCategory('all', this)">Index</button></li>
+            <li><button class="nav-btn" onclick="filterCategory('ekonomi', this)">Ekonomi</button></li>
+            <li><button class="nav-btn" onclick="filterCategory('teknologi', this)">Teknologi</button></li>
+            <li><button class="nav-btn" onclick="filterCategory('humaniora', this)">Humaniora</button></li>
+            <li><button class="nav-btn" onclick="filterCategory('bebas', this)">Bebas</button></li>
+        </ul>
+    </div>
+
+    <div id="content-area" class="article-list">
+        </div>
+
+    <div class="footer-loader">
+        <button id="loadMoreBtn" onclick="loadMore()">Muat Lebih Banyak</button>
+    </div>
+
+    <script>
+        // --- DATABASE ARTIKEL (Sesuai Urutan File Anda) ---
+        // PENTING: Edit 'title' dan 'desc' sesuai isi asli file post-X.html Anda.
+        
+        const posts = [
+            // KELOMPOK EKONOMI (Estimasi Post 1-4)
+            { id: 1, title: "Analisis Neraca Perdagangan & Utang Negara", cat: "ekonomi", desc: "Tinjauan kritis terhadap data fiskal terbaru dan dampaknya pada GDP.", link: "posts/post-1.html" },
+            { id: 2, title: "Dinamika Tax Ratio Indonesia 2025", cat: "ekonomi", desc: "Mengapa rasio pajak kita stagnan? Sebuah studi komparatif ASEAN.", link: "posts/post-2.html" },
+            { id: 3, title: "Hegemoni Ekonomi Global & Posisi RI", cat: "ekonomi", desc: "Membaca strategi geopolitik di tengah perang dagang superpower.", link: "posts/post-3.html" },
+            { id: 4, title: "Inflasi dan Daya Beli Kelas Menengah", cat: "ekonomi", desc: "Apakah data CPI mencerminkan realitas pasar tradisional?", link: "posts/post-4.html" },
+
+            // KELOMPOK TEKNOLOGI (Estimasi Post 5-8)
+            { id: 5, title: "Python untuk Industrial Engineering", cat: "teknologi", desc: "Penerapan library Pandas dan NumPy dalam optimasi rantai pasok.", link: "posts/post-5.html" },
+            { id: 6, title: "Metode Transportasi & Assignment", cat: "teknologi", desc: "Studi kasus Operations Research dalam logistik manufaktur.", link: "posts/post-6.html" },
+            { id: 7, title: "Total Quality Management (TQM) Modern", cat: "teknologi", desc: "Evolusi kontrol kualitas di era industri 4.0.", link: "posts/post-7.html" },
+            { id: 8, title: "Visualisasi Data 3D dengan ZBrush", cat: "teknologi", desc: "Teknik rendering digital untuk prototyping produk fisik.", link: "posts/post-8.html" },
+
+            // KELOMPOK HUMANIORA (Estimasi Post 9-11)
+            { id: 9, title: "Filosofi Bilangan Real & Limit", cat: "humaniora", desc: "Memahami kalkulus bukan sekadar hitungan, tapi pola pikir logis.", link: "posts/post-9.html" },
+            { id: 10, title: "Sejarah Pemikiran Ekonomi Klasik", cat: "humaniora", desc: "Relevansi teori Adam Smith dalam konteks pasar digital hari ini.", link: "posts/post-10.html" },
+            { id: 11, title: "Logika dan Retorika Kebijakan Publik", cat: "humaniora", desc: "Analisis struktur argumen dalam debat kebijakan nasional.", link: "posts/post-11.html" },
+
+            // KELOMPOK ARTIKEL BEBAS (Estimasi Post 12-15)
+            { id: 12, title: "Project Santoso: 1/7 Scale Figure", cat: "bebas", desc: "Jurnal pembuatan figur koleksi: Dari konsep hingga packaging.", link: "posts/post-12.html" },
+            { id: 13, title: "Catatan Pembelajaran Python: Minggu 1", cat: "bebas", desc: "Kesulitan dan pencerahan saat berpindah dari teori ke coding.", link: "posts/post-13.html" },
+            { id: 14, title: "Refleksi Akhir Tahun", cat: "bebas", desc: "Evaluasi target pribadi dan roadmap belajar tahun depan.", link: "posts/post-14.html" },
+            { id: 15, title: "Arsip Visual: Sketsa & Konsep", cat: "bebas", desc: "Kumpulan ide visual yang belum terwujud menjadi produk.", link: "posts/post-15.html" }
+        ];
+
+        // --- SYSTEM CORE ---
+        let currentCategory = 'all';
+        let itemsToShow = 15; // Langsung tampilkan semua 15 jika mau, atau ubah jadi 5
+        let filteredData = [];
+
+        const container = document.getElementById('content-area');
+        const loadBtn = document.getElementById('loadMoreBtn');
+
+        function init() {
+            // Untuk simulasi masa depan jika post > 1000, 
+            // array 'posts' ini nanti diganti fetch JSON eksternal.
+            filterCategory('all', document.querySelector('.nav-btn.active'));
+        }
+
+        function filterCategory(cat, btn) {
+            // Update UI Button
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            // Filter Data
+            currentCategory = cat;
+            if (cat === 'all') {
+                filteredData = posts;
+            } else {
+                filteredData = posts.filter(item => item.cat === cat);
+            }
+
+            render();
+        }
+
+        function render() {
+            container.innerHTML = '';
+            
+            // Logic Pagination Sederhana
+            // Jika post Anda masih 15, ini akan menampilkan semua.
+            // Jika nanti 1000, ubah itemsToShow jadi angka kecil (misal 10).
+            const dataSlice = filteredData.slice(0, itemsToShow);
+
+            if (dataSlice.length === 0) {
+                container.innerHTML = '<p style="text-align:center; padding:40px; color:#999;">Belum ada artikel di kategori ini.</p>';
+                loadBtn.style.display = 'none';
+                return;
+            }
+
+            dataSlice.forEach(post => {
+                const el = document.createElement('a');
+                el.href = post.link;
+                el.className = 'article-item';
+                el.innerHTML = `
+                    <div class="meta-top">${post.cat} • #${post.id}</div>
+                    <h3 class="article-title">${post.title}</h3>
+                    <p class="article-excerpt">${post.desc}</p>
+                `;
+                container.appendChild(el);
+            });
+
+            // Hide tombol load jika semua data sudah tampil
+            if (itemsToShow >= filteredData.length) {
+                loadBtn.style.display = 'none';
+            } else {
+                loadBtn.style.display = 'inline-block';
+            }
+        }
+
+        function loadMore() {
+            itemsToShow += 5;
+            render();
+        }
+
+        window.onload = init;
+
+    </script>
+</body>
+</html>
