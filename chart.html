@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grafik Inflasi Indonesia</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+    canvas { max-width: 800px; margin: 0 auto; display: block; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h2 { text-align: center; color: #333; }
+  </style>
+</head>
+<body>
+  <h2>Tren Inflasi Indonesia (2020-2025)</h2>
+  <canvas id="myChart"></canvas>
+
+  <script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const config = {
+      "type": "line",
+      "data": {
+        "labels": ["2020", "2021", "2022", "2023", "2024", "2025 (Sep)"],
+        "datasets": [{
+          "label": "Tingkat Inflasi (%)",
+          "data": [1.92, 1.56, 4.21, 3.71, 2.5, 2.65],
+          "borderColor": "#ff6b6b",
+          "backgroundColor": "rgba(255, 107, 107, 0.2)",
+          "fill": true,
+          "tension": 0.4
+        }]
+      },
+      "options": {
+        "responsive": true,
+        "plugins": {
+          "title": {
+            "display": true,
+            "text": "Tren Inflasi Indonesia (2020-2025): Naik Tajam pada 2022 & 2025"
+          },
+          "legend": { "display": true }
+        },
+        "scales": {
+          "y": { "beginAtZero": true, "title": { "display": true, "text": "Inflasi (%)" } },
+          "x": { "title": { "display": true, "text": "Tahun" } }
+        }
+      }
+    };
+    new Chart(ctx, config);
+  </script>
+</body>
+</html>
