@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekayasa Sistem dan Teknik Industri Komprehensif</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* Desain Web Akademik Sederhana & Fokus */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-color: #333333;
+            --bg-color: #f9f9f9;
+            --paper-color: #ffffff;
+        }
+
+        body {
+            font-family: "Merriweather", "Georgia", serif; /* Serif untuk nuansa akademik */
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: var(--paper-color);
+            padding: 60px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Sans-serif untuk heading */
+            color: var(--primary-color);
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            font-style: italic;
+        }
+
+        p {
+            margin-bottom: 1.5em;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5em;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* Styling Tabel Akademik */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-family: "Segoe UI", sans-serif;
+            font-size: 0.9em;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fbfbfb;
+        }
+
+        /* Styling Rumus/Contoh Soal */
+        .example-box {
+            background-color: #f0f7fb;
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin: 20px 0;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .math-display {
+            overflow-x: auto;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        /* Styling Daftar Pustaka */
+        .references {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+            font-size: 0.85em;
+            color: #555;
+        }
+
+        .references h2 {
+            font-size: 1.4em;
+            border-left: none;
+            padding-left: 0;
+        }
+
+        .ref-item {
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+
+        /* Tombol Navigasi */
+        .nav-button-container {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+
+        .btn-back {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: "Segoe UI", sans-serif;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 0;
+                width: 100%;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Simfoni Sistem: Sebuah Pengajaran Komprehensif tentang Rekayasa Sistem dan Hubungannya yang Mendasar dengan Teknik Industri</h1>
+
+    <h2>Bagian 1: Fondasi, Sejarah, dan Konteks Fundamental</h2>
+
+    <p>Rekayasa Sistem (Systems Engineering - SE) dapat dipahami melalui metafora seorang konduktor orkestra. Seorang konduktor tidak memainkan biola, meniup terompet, atau memukul timpani. Sebaliknya, sang konduktor adalah kekuatan integratif—seorang <em>systems engineer</em>—yang memastikan bahwa setiap musisi ahli (insinyur domain) bermain dalam harmoni, pada tempo yang tepat, dan pada volume yang benar. Tanpa konduktor, yang ada hanyalah kebisingan; dengan konduktor, terciptalah sebuah simfoni.</p>
+
+    <p>Peran insinyur sistem, seperti yang dijelaskan oleh NASA, adalah "seni" untuk mengetahui "kapan dan di mana harus menyelidiki" guna mengoptimalkan desain keseluruhan alih-alih mementingkan satu sistem/subsistem dengan mengorbankan yang lain. Ini adalah disiplin yang lahir dari kompleksitas, didorong oleh ekonomi, dan berfokus pada realisasi holistik dari sistem yang berfungsi.</p>
+
+    <h3>1.1 Tiga Definisi Kunci: Membedah Bahasa Rekayasa Sistem</h3>
+    <p>Untuk membangun pemahaman yang kokoh, kita harus terlebih dahulu menetapkan terminologi kita dengan presisi. International Council on Systems Engineering (INCOSE), sebagai badan otoritatif utama dalam bidang ini, menyediakan tiga definisi penting yang saling terkait:</p>
+
+    <ul>
+        <li><strong>Sistem (System):</strong> Pada tingkat paling dasar, "Sistem adalah susunan bagian atau elemen yang bersama-sama menunjukkan perilaku atau makna yang tidak dimiliki oleh konstituen individual". Inti dari definisi ini adalah konsep properti <em>emergent</em>—perilaku yang "muncul" hanya dari interaksi antar bagian, bukan dari bagian itu sendiri. Sebuah sepeda, misalnya, memiliki properti <em>emergent</em> "transportasi", yang tidak dimiliki oleh roda, rangka, atau rantai secara individual.</li>
+        <li><strong>Sistem Rekayasa (Engineered System):</strong> Ini adalah objek studi kita. Ini adalah "sistem yang dirancang atau diadaptasi untuk berinteraksi dengan lingkungan operasional yang diantisipasi untuk mencapai satu atau lebih tujuan yang dimaksudkan sambil mematuhi batasan yang berlaku". Ini membedakan sistem yang dibuat manusia (seperti pesawat terbang atau jaringan logistik) dari sistem yang murni alami (seperti ekosistem).</li>
+        <li><strong>Rekayasa Sistem (Systems Engineering - SE):</strong> Ini adalah disiplin atau proses yang kita terapkan. INCOSE mendefinisikannyasebagai "pendekatan transdisipliner dan integratif untuk memungkinkan realisasi, penggunaan, dan penonaktifan sistem rekayasa yang sukses, menggunakan prinsip dan konsep sistem, serta metode ilmiah, teknologi, dan manajemen". Kata kunci di sini adalah "transdisipliner" dan "integratif". SE adalah disiplin yang menjembatani berbagai silo teknik.</li>
+    </ul>
+
+    <h3>1.2 Perspektif Komplementer: Definisi NASA</h3>
+    <p>Jika definisi INCOSE bersifat filosofis dan holistik, definisi dari praktisi SE terbesar di dunia, NASA, bersifat praktis dan inklusif. NASA mendefinisikan "sistem" sebagai "kombinasi elemen yang berfungsi bersama untuk menghasilkan kapabilitas yang diperlukan untuk memenuhi suatu kebutuhan".</p>
+
+    <p>Secara krusial, NASA menjabarkan elemen-elemen ini secara luas, mencakup "...semua <em>hardware, software</em>, peralatan, fasilitas, personel, proses, dan prosedur yang diperlukan untuk tujuan ini".</p>
+
+    <p>Dengan menggabungkan kedua perspektif ini, gambaran lengkap muncul. Rekayasa Sistem adalah disiplin integratif (INCOSE) yang secara praktis harus mengelola dan menyeimbangkan tiga elemen kunci dalam sistem rekayasa modern mana pun: <em>hardware</em> (elemen fisik), <em>software</em> (elemen logis), dan <em>human systems</em> (personel, proses, dan prosedur). Keberhasilan atau kegagalan sebuah proyek SE sering kali ditentukan oleh seberapa baik ia mengelola antarmuka (interfaces) di antara ketiga elemen yang berbeda ini.</p>
+
+    <h3>1.3 Akar Sejarah: Mengapa Rekayasa Sistem Lahir?</h3>
+    <p>Rekayasa Sistem tidak diciptakan dalam ruang hampa akademis; ia lahir dari kebutuhan praktis yang mendesak. Istilah "systems engineering" itu sendiri berasal dari Bell Telephone Laboratories pada awal tahun 1940-an. Pendorongnya adalah skala dan kompleksitas proyek-proyek yang belum pernah terjadi sebelumnya pada era tersebut.</p>
+
+    <p>Proyek-proyek seperti pengembangan jaringan telekomunikasi nasional, sistem radar militer yang kompleks selama Perang Dunia II, dan program rudal balistik antarbenua setelahnya, memiliki karakteristik baru. Mereka melibatkan banyak disiplin ilmu teknik (mekanikal, elektrikal, sipil, dan kimia) yang bekerja secara bersamaan.</p>
+
+    <p>Para pemimpin proyek ini dengan cepat menyadari bahwa tantangan terbesar bukanlah merancang komponen individual—mereka memiliki insinyur listrik yang hebat untuk itu. Tantangan terbesarnya adalah membuat semua komponen tersebut bekerja bersama. Kegagalan proyek lebih sering terjadi karena kegagalan integrasi dan antarmuka daripada kegagalan komponen.</p>
+
+    <p>Rekayasa Sistem, oleh karena itu, muncul sebagai disiplin yang secara eksplisit berfokus pada keseluruhan sistem, perilaku <em>emergent</em>-nya, dan manajemen antarmuka antar-subsistem, sepanjang seluruh siklus hidup proyek.</p>
+
+    <h3>1.4 Justifikasi Ekonomi untuk SE: Grafik Biaya Siklus Hidup</h3>
+    <p>Mengapa menghabiskan begitu banyak upaya pada fase konseptual dan desain sebelum satu baut pun dipasang? Jawaban paling kuat terletak pada ekonomi proyek. Rekayasa Sistem adalah, pada intinya, sebuah disiplin manajemen risiko ekonomi.</p>
+
+    <p>Buku Pegangan Rekayasa Sistem NASA (NASA Systems Engineering Handbook) menyoroti hal ini melalui grafik "Dampak Biaya Siklus Hidup dari Pengambilan Keputusan Fase Awal". Analisis grafik ini mengungkapkan wawasan kritis:</p>
+
+    <ul>
+        <li><strong>Biaya yang Terkomitmen (Committed Life Cycle Costs):</strong> Kurva ini melonjak secara dramatis di awal siklus hidup. Pada saat <em>Preliminary Design Review (PDR)</em>—seringkali baru beberapa bulan dalam proyek multi-tahun—sekitar 75% dari total biaya siklus hidup proyek sudah terkunci oleh keputusan desain arsitektur.</li>
+        <li><strong>Biaya yang Dikeluarkan (Costs Expended):</strong> Sebaliknya, pada titik PDR yang sama, proyek mungkin baru membelanjakan 15% hingga 20% dari total anggarannya.</li>
+        <li><strong>Biaya untuk Mengubah Desain (Cost to Change Design):</strong> Kurva ini meningkat secara eksponensial. Sebuah perubahan desain yang mungkin berbiaya $1,000 untuk diperbaiki pada fase Konsep dapat berbiaya $20,000 pada fase Desain Rinci, $500,000 pada fase Produksi, dan lebih dari $1,000,000 (500x-1000x lipat) setelah sistem beroperasi dan kesalahan ditemukan.</li>
+    </ul>
+
+    <p>Implikasi strategisnya jelas: keputusan desain awal memiliki daya ungkit (leverage) tertinggi terhadap total biaya siklus hidup. Nilai fundamental dari Rekayasa Sistem adalah untuk menerapkan sumber daya dan ketelitian di muka—selama analisis kebutuhan, definisi arsitektur, dan studi <em>trade-off</em>—ketika biaya perubahan adalah yang terendah. SE adalah praktik mitigasi risiko ekonomi, memastikan bahwa sistem yang dibangun adalah sistem yang tepat, sejak pertama kali. Fokus pada biaya, efisiensi, dan optimalisasi sumber daya ini merupakan jembatan filosofis langsung ke dunia Teknik Industri.</p>
+
+    <h2>Bagian 2: Titik Temu Dua Disiplin: Rekayasa Sistem (SE) dan Teknik Industri (IE)</h2>
+    <p>Salah satu sumber kebingungan yang paling umum, namun juga sumber sinergi yang paling kuat, adalah hubungan antara Rekayasa Sistem (SE) dan Teknik Industri (IE). Kedua bidang ini sering tumpang tindih, dan di banyak universitas serta perusahaan, keduanya digabungkan. Untuk "betul-betul paham", kita harus membedah DNA dari kedua disiplin ini.</p>
+
+    <h3>2.1 Definisi Paralel: DNA Teknik Industri</h3>
+    <p>Kita mulai dengan definisi otoritatif dari IE. Institute of Industrial and Systems Engineers (IISE), badan profesional utama untuk IE, mendefinisikan <em>Industrial and Systems Engineering (ISE)</em> sebagai disiplin yang berkaitan dengan "...desain, perbaikan, dan instalasi sistem terintegrasi dari orang, material, informasi, peralatan, dan energi".</p>
+
+    <p>Koneksi langsungnya seharusnya sudah jelas. Mari kita sejajarkan definisi ini dengan definisi SE yang telah kita bahas:</p>
+    <ul>
+        <li><strong>IE (menurut IISE):</strong> Sistem terintegrasi dari... orang, material, informasi, peralatan, energi.</li>
+        <li><strong>SE (menurut NASA):</strong> Kombinasi elemen... hardware, software, fasilitas, personel, proses, prosedur.</li>
+        <li><strong>SE (menurut INCOSE):</strong> Sistem rekayasa... terdiri dari... orang, produk, layanan, informasi, proses.</li>
+    </ul>
+
+    <p>Definisi-definisi ini secara fungsional identik. Keduanya adalah disiplin integrasi yang berfokus pada sistem sosio-teknis yang kompleks. Perbedaan di antara keduanya tidak terletak pada <em>apa</em> yang mereka integrasikan, tetapi pada fokus historis, metode, dan ruang lingkup penerapan. Penggantian nama badan profesional dari "Institute of Industrial Engineers" menjadi "Institute of Industrial and Systems Engineers" (IISE) merupakan pengakuan formal bahwa SE adalah bagian integral dan fundamental dari praktik Teknik Industri modern.</p>
+
+    <h3>2.2 Membedah Badan Pengetahuan (BoK): SEBoK vs. ISEBoK</h3>
+    <p>Cara paling ampuh untuk membedakan kedua disiplin adalah dengan membandingkan "buku teks" inti mereka—badan pengetahuan (body of knowledge / BoK) masing-masing. Di sinilah perbedaan fokus menjadi sangat jelas.</p>
+
+    <h4>Dunia IE (ISEBoK): Fokus pada Teknik dan Alat</h4>
+    <p>Badan Pengetahuan IE (ISEBoK) diorganisasi sebagai kumpulan 14 Area Pengetahuan (Knowledge Areas - KA). Ini pada dasarnya adalah <em>toolkit</em> analitis yang sangat kuat untuk mengoptimalkan sistem. Seperti yang dicatat dalam perbandingan SEBoK, "IISEBoK lebih berfokus pada konsep dan teknik". Area pengetahuan inti IE meliputi:</p>
+    <ul>
+        <li><strong>Operations Research & Analysis (Riset Operasi):</strong> Penggunaan model matematika untuk pengambilan keputusan optimal (misalnya, Linear Programming, teori antrian).</li>
+        <li><strong>Work Design & Measurement (Desain & Pengukuran Kerja):</strong> Studi tentang bagaimana manusia bekerja paling efisien dan aman (misalnya, time and motion study).</li>
+        <li><strong>Engineering Economic Analysis (Analisis Ekonomi Teknik):</strong> Alat untuk membenarkan biaya proyek dan membandingkan alternatif.</li>
+        <li><strong>Ergonomics & Human Factors (Ergonomi & Faktor Manusia):</strong> Merancang sistem agar sesuai dengan kapabilitas dan keterbatasan manusia.</li>
+        <li><strong>Supply Chain Management (Manajemen Rantai Pasok):</strong> Merancang dan mengelola aliran material dan informasi dari pemasok ke pelanggan.</li>
+        <li><strong>Quality & Reliability Engineering (Rekayasa Kualitas & Keandalan):</strong> Penggunaan metode statistik untuk memastikan sistem memenuhi standar kinerja dari waktu ke waktu.</li>
+    </ul>
+
+    <h4>Dunia SE (SEBoK): Fokus pada Proses dan Siklus Hidup</h4>
+    <p>Sebaliknya, Badan Pengetahuan SE (SEBoK) diorganisasi di sekitar proses siklus hidup sistem. Ia selaras dengan standar internasional seperti ISO/IEC/IEEE 15288. "Bab-bab" SEBoK bukanlah alat, melainkan tahapan proses yang berurutan:</p>
+    <ul>
+        <li>Business or Mission Analysis (Analisis Misi/Bisnis)</li>
+        <li>Stakeholder Needs Definition (Definisi Kebutuhan Stakeholder)</li>
+        <li>Logical Architecture (Arsitektur Logis)</li>
+        <li>Physical Architecture (Arsitektur Fisik)</li>
+        <li>System Integration (Integrasi Sistem)</li>
+        <li>Verification (Verifikasi)</li>
+        <li>Validation (Validasi)</li>
+    </ul>
+
+    <p>Sintesis dari perbandingan ini memberikan kejelasan tertinggi. Jika membangun sebuah pabrik baru adalah proyeknya:</p>
+    <ul>
+        <li><strong>Insinyur Sistem (SE)</strong> bertindak sebagai Arsitek Utama dan Manajer Konstruksi Teknis. Mereka menjalankan proses untuk mendefinisikan apa yang harus dilakukan pabrik (kebutuhan), membuat cetak biru arsitektur (fungsional & fisik), dan mengelola proses untuk memastikan semua bagian (listrik, permesinan, IT, manusia) terintegrasi dengan benar untuk memenuhi kebutuhan awal.</li>
+        <li><strong>Insinyur Industri (IE)</strong> bertindak sebagai Pakar Optimasi Domain yang dipanggil oleh SE. Mereka akan menggunakan toolkit mereka untuk merancang layout pabrik (Facilities Engineering), memodelkan alur kerja untuk efisiensi maksimum (Operations Research), merancang stasiun kerja agar aman (Ergonomics), dan mengelola rantai pasoknya (Supply Chain Management).</li>
+    </ul>
+
+    <p>Jembatan formal antara keduanya adalah Area Pengetahuan ISEBoK ke-14: <strong>"System Design & Engineering"</strong>. Area ini secara eksplisit merujuk kembali ke SEBoK. Ini adalah pengakuan formal dari disiplin IE bahwa proses SE adalah metodologi kerangka kerja yang mereka gunakan untuk menerapkan 13 toolkit IE lainnya pada skala sistem yang besar dan kompleks.</p>
+
+    <h3>2.3 Bukti dalam Literatur: Integrasi Akademik dan Industri</h3>
+    <p>Keterkaitan yang mendalam ini tidak hanya bersifat teoretis; ini tercermin dalam literatur akademis dan industri. Penerbit besar seperti Routledge memiliki seri buku khusus yang disebut "Industrial and Systems Engineering Series," yang secara eksplisit menggabungkan kedua judul tersebut untuk mencerminkan praktik modern.</p>
+
+    <p>Buku panduan definitif dalam bidang ini, seperti "Handbook of Industrial and Systems Engineering," Edisi Kedua, menyatakan dalam strukturnya pemisahan yang jelas namun integratif: Bagian II mencakup "Fundamentals of Industrial Engineering," sementara Bagian III mencakup "Fundamentals of Systems Engineering". Demikian pula, "Maynard's Industrial and Systems Engineering Handbook" mendedikasikan bab-bab khusus untuk Systems Engineering dan Engineering Management bersama dengan pilar IE tradisional seperti Operations Research, Quality, dan Human Factors. Ini membuktikan bahwa di tingkat akademis dan profesional tertinggi, kedua bidang tersebut kini dipandang sebagai dua sisi dari mata uang yang sama: disiplin untuk merancang dan mengoptimalkan sistem terintegrasi yang kompleks.</p>
+
+    <h3>Tabel 1: Perbandingan Badan Pengetahuan: SEBoK vs. ISEBoK</h3>
+    <p>Tabel berikut memvisualisasikan perbedaan fokus inti antara kedua disiplin, berdasarkan analisis badan pengetahuan masing-masing.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Aspek</th>
+                <th>Rekayasa Sistem (SEBoK)</th>
+                <th>Teknik Industri & Sistem (ISEBoK)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Fokus Utama</strong></td>
+                <td><strong>Proses:</strong> <em>Bagaimana</em> merancang, merealisasikan, dan mengelola sistem yang kompleks sepanjang siklus hidupnya.</td>
+                <td><strong>Teknik & Konsep:</strong> <em>Alat</em> (tools) untuk mengoptimalkan kinerja, efisiensi, kualitas, dan biaya.</td>
+            </tr>
+            <tr>
+                <td><strong>Struktur</strong></td>
+                <td>Berbasis <strong>Siklus Hidup</strong> (Life Cycle). Selaras dengan standar proses (misalnya, ISO 15288).</td>
+                <td>Berbasis <strong>Area Pengetahuan</strong> (14 Knowledge Areas). Sebuah "Toolkit" disiplin.</td>
+            </tr>
+            <tr>
+                <td><strong>Standar Acuan</strong></td>
+                <td>Sangat berbasis standar (misalnya, ISO/IEC/IEEE 15288).</td>
+                <td>Umumnya tidak terikat pada satu standar (kecuali referensi individual seperti MIL-STD-0-882D untuk Keselamatan).</td>
+            </tr>
+            <tr>
+                <td><strong>Contoh "Bab"</strong></td>
+                <td>
+                    - Analisis Misi/Bisnis<br>
+                    - Definisi Kebutuhan Stakeholder<br>
+                    - Desain Arsitektur Logis/Fisik<br>
+                    - Integrasi, Verifikasi, Validasi (IV&V)
+                </td>
+                <td>
+                    - Riset Operasi & Analisis (OR)<br>
+                    - Desain & Pengukuran Kerja<br>
+                    - Ergonomi & Faktor Manusia<br>
+                    - Manajemen Rantai Pasok<br>
+                    - Rekayasa Kualitas & Keandalan
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Jembatan</strong></td>
+                <td>Menggunakan <em>teknik</em> IE (seperti OR, Kualitas) untuk melakukan <em>trade studies</em> dalam proses desainnya.</td>
+                <td>Area Pengetahuan #14, "System Design & Engineering", secara eksplisit mereferensikan SEBoK sebagai proses untuk menerapkan 13 area lainnya.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Bagian 3: Anatomi Proyek Sistem (Struktur "Buku Teks" SE)</h2>
+    <p>Untuk benar-benar memahami "bab dan sub-bab" dari buku teks Rekayasa Sistem, kita harus membedah prosesnya. Proses SE klasik paling sering divisualisasikan menggunakan <strong>"V-Model"</strong>. Ini adalah representasi grafis standar dari Siklus Hidup Pengembangan Sistem (SDLC) yang memetakan dekomposisi desain ke integrasi dan pengujian.</p>
+
+    <p>Model 'V' harus dibaca dari kiri atas, menuruni 'V', lalu naik ke kanan atas:</p>
+    <ul>
+        <li><strong>Sisi Kiri 'V' (Dekomposisi):</strong> Ini adalah desain top-down. Kita mulai dengan konsep sistem total dan secara metodis memecahnya (decompose) menjadi subsistem, komponen, dan spesifikasi rinci.</li>
+        <li><strong>Bagian Bawah 'V' (Realisasi):</strong> Di sinilah komponen individual dibangun, dikodekan, atau dibeli berdasarkan spesifikasi rinci.</li>
+        <li><strong>Sisi Kanan 'V' (Integrasi & Kualifikasi):</strong> Ini adalah integrasi bottom-up. Kita merakit komponen, mengujinya, mengintegrasikannya menjadi subsistem, mengujinya, dan akhirnya mengintegrasikannya menjadi sistem penuh, yang kemudian diuji terhadap konsep awal.</li>
+    </ul>
+    <p>Garis-garis horizontal yang melintasi 'V' adalah kuncinya: mereka menghubungkan apa yang didefinisikan di sisi kiri dengan bagaimana itu diuji di sisi kanan.</p>
+
+    <h3>3.1 Sisi Kiri 'V': Dari Ide Menjadi Spesifikasi (Dekomposisi)</h3>
+    <p>Ini adalah domain inti dari desain SE, di mana kita beralih dari "mengapa" ke "apa" dan akhirnya "bagaimana".</p>
+
+    <h4>Tahap 1: Definisi Konsep (Puncak 'V')</h4>
+    <p>Ini adalah titik awal. SE yang buruk dimulai dengan solusi ("Kita perlu aplikasi baru!"). SE yang baik dimulai dengan masalah.</p>
+    <ul>
+        <li><strong>Analisis Bisnis/Misi (Business or Mission Analysis):</strong> Langkah pertama adalah memahami mengapa sistem ini diperlukan. Apa masalah bisnis yang harus diselesaikan? Apa misi yang harus dicapai?.</li>
+        <li><strong>Definisi Kebutuhan Stakeholder (Stakeholder Needs Definition):</strong> Selanjutnya, kita mengidentifikasi siapa yang peduli dengan sistem ini. Stakeholder lebih dari sekadar "pengguna akhir". Mereka juga mencakup tim pemeliharaan, manajemen, regulator, tim manufaktur, dan tim pembuangan. Proses ini berfokus pada penggalian "kebutuhan" kualitatif mereka, yang seringkali samar. Contoh kebutuhan: "Pengguna membutuhkan sistem agar mudah digunakan," atau "Tim pemeliharaan membutuhkan sistem agar mudah diperbaiki".</li>
+    </ul>
+
+    <h4>Tahap 2: Rekayasa Persyaratan (Requirements Engineering)</h4>
+    <p>Ini adalah salah satu proses SE yang paling penting. Ini adalah disiplin teknis untuk menerjemahkan "kebutuhan" kualitatif dari Tahap 1 menjadi "persyaratan" (requirements) teknis yang spesifik, terukur, dapat dicapai, relevan, dan terikat waktu (SMART). Proses ini melibatkan elisitasi (misalnya, wawancara, survei), analisis, dokumentasi rinci, dan manajemen perubahan.</p>
+    <p>Terjemahan Kebutuhan -> Persyaratan:</p>
+    <ul>
+        <li><strong>Kebutuhan Stakeholder:</strong> "Pengguna membutuhkan sistem agar mudah digunakan."</li>
+        <li><strong>Persyaratan Sistem:</strong> "Sistem harus memungkinkan pengguna baru (didefinisikan sebagai seseorang tanpa pelatihan sebelumnya) untuk berhasil menyelesaikan dalam waktu kurang dari 3 menit dengan tingkat keberhasilan 95%."</li>
+    </ul>
+    <p>Persyaratan inilah yang menjadi "kontrak" teknis yang akan diverifikasi oleh tim di sisi kanan 'V'.</p>
+
+    <h4>Tahap 3: Desain Arsitektur (Menuruni 'V')</h4>
+    <p>Setelah kita tahu apa yang harus dilakukan sistem (persyaratan), kita sekarang merancang bagaimana sistem akan melakukannya. Proses ini biasanya terjadi dalam dua lapisan:</p>
+    <ol>
+        <li><strong>Arsitektur Fungsional & Logis:</strong>
+            <ul>
+                <li><strong>Dekomposisi Fungsional (Functional Decomposition):</strong> Ini adalah proses analitis untuk memecah fungsi tingkat tinggi (misalnya, "Sistem harus menjaga suhu ruangan") menjadi sub-fungsi komponen yang lebih kecil dan dapat dikelola (misalnya, "Ukur suhu udara," "Bandingkan suhu dengan setpoint," "Aktifkan kompresor," "Aktifkan kipas").</li>
+                <li><strong>Dekomposisi Logis (Logical Decomposition):</strong> Seperti yang didefinisikan oleh NASA, ini adalah langkah kunci di mana analisis fungsional digunakan untuk menciptakan arsitektur sistem dan mengalokasikan persyaratan ke fungsi-fungsi tersebut. Ini menciptakan cetak biru logis dari fungsi-fungsi, data yang mengalir di antara mereka, dan antarmukanya, terlepas dari hardware atau software apa yang akan menjalankannya.</li>
+            </ul>
+        </li>
+        <li><strong>Arsitektur Fisik:</strong>
+            <ul>
+                <li>Di sinilah keputusan kritis <em>trade-off</em> dibuat. Kita sekarang memutuskan komponen fisik (sensor hardware, mikrokontroler, unit perangkat lunak, aktuator mekanis, antarmuka pengguna manusia) yang akan mengimplementasikan arsitektur logis.</li>
+                <li><strong>Alokasi Fungsional (Functional Allocation):</strong> Ini adalah proses "menetapkan" setiap fungsi logis ke komponen fisik tertentu.
+                    <br>- Fungsi "Ukur suhu udara" -> dialokasikan ke -> "Sensor Termistor Model XYZ".
+                    <br>- Fungsi "Bandingkan suhu dengan setpoint" -> dialokasikan ke -> "Modul Software Kontrol Suhu" (yang berjalan di "Mikrokontroler ABC").
+                    <br>- Fungsi "Aktifkan kompresor" -> dialokasikan ke -> "Rangkaian Relai Fisik".
+                </li>
+            </ul>
+        </li>
+    </ol>
+
+    <h4>Tahap 4: Desain Komponen (Dasar 'V')</h4>
+    <p>Di bagian bawah 'V', arsitektur fisik telah sepenuhnya ditentukan. Spesifikasi untuk setiap komponen (spesifikasi hardware untuk termistor, spesifikasi software untuk modul kontrol, spesifikasi mekanis untuk rumahan) sekarang diserahkan kepada insinyur disiplin masing-masing (insinyur listrik, insinyur perangkat lunak, insinyur mesin, dan insinyur industri) untuk desain dan realisasi rinci.</p>
+
+    <h3>3.2 Sisi Kanan 'V': Dari Kode Menjadi Sistem (Integrasi & Kualifikasi)</h3>
+    <p>Sekarang kita membangun kembali ke atas, menguji secara metodis di setiap langkah.</p>
+
+    <h4>Tahap 5: Integrasi, Verifikasi, dan Validasi (IV&V)</h4>
+    <p>Ini adalah sisi kanan 'V', di mana kita memastikan sistem berfungsi. Istilah-istilah ini sering digunakan secara salah, tetapi dalam SE, mereka memiliki arti yang sangat spesifik:</p>
+    <ul>
+        <li><strong>Integrasi (Integration):</strong> Proses fisik merakit komponen menjadi subsistem, dan kemudian merakit subsistem tersebut menjadi sistem penuh.</li>
+        <li><strong>Verifikasi (Verification):</strong> Ini menjawab pertanyaan: "Apakah kita membangun sistem <em>dengan benar</em>?" Verifikasi adalah pengujian teknis yang ketat untuk memastikan sistem yang dibangun memenuhi persyaratan yang ditentukan dalam Tahap 2. Contoh: Menjalankan tes beban untuk membuktikan bahwa sistem secara teknis dapat menangani 1.000 pengguna secara bersamaan. Ini adalah tes lulus/gagal yang objektif.</li>
+        <li><strong>Validasi (Validation):</strong> Ini menjawab pertanyaan yang jauh lebih penting: "Apakah kita membangun sistem <em>yang benar</em>?" Validasi adalah pengujian operasional untuk memastikan sistem yang dibangun memenuhi kebutuhan stakeholder kualitatif dari Tahap 1. Contoh: Menempatkan pengguna baru di depan sistem dan mengamati apakah mereka merasa sistem itu "mudah digunakan". Ini seringkali bersifat subjektif.</li>
+    </ul>
+    <p>Sebuah tim dapat berhasil dalam Verifikasi (setiap persyaratan teknis terpenuhi) namun gagal total dalam Validasi (sistem secara teknis sempurna tetapi tidak memecahkan masalah pengguna). Paradoks IV&V ini hampir selalu merupakan kegagalan pada Tahap 2 (Rekayasa Persyaratan), di mana kebutuhan stakeholder tidak diterjemahkan secara akurat menjadi persyaratan teknis. SE yang baik berfokus pada validasi sepanjang proses, bukan hanya di akhir.</p>
+
+    <h3>3.3 Benang Merah: Peran Manajemen Teknis Rekayasa Sistem</h3>
+    <p>Siapa yang mengelola proses teknis yang sangat kompleks ini? Ini adalah kesalahan umum untuk berasumsi bahwa ini adalah peran Manajer Proyek (Project Manager - PM). Dalam SE, ada perbedaan peran yang jelas.</p>
+    <ul>
+        <li><strong>Manajer Proyek (PM):</strong> Fokus utamanya adalah pada "triple constraint" bisnis: biaya, jadwal, dan ruang lingkup keseluruhan. Mereka mengelola Rencana Manajemen Proyek (PMP) dan bertanggung jawab atas kesuksesan bisnis proyek.</li>
+        <li><strong>Insinyur Sistem (SE):</strong> Bertindak sebagai Manajer Proyek Teknis (Technical Project Manager - TPM). Fokus mereka adalah pada integritas teknis sistem. Mereka mengelola Rencana Manajemen Rekayasa Sistem (SEMP), yang merupakan dokumen teknis bawahan dari PMP.</li>
+    </ul>
+    <p>Insinyur Sistem adalah jembatan penting antara PM dan tim teknis disiplin. Mereka bertanggung jawab untuk memastikan bahwa ruang lingkup teknis terpenuhi, mengelola risiko teknis, dan yang terpenting, memberikan panduan teknis kepada PM. Ketika PM berkata, "Kita harus memotong anggaran sebesar 20%," Insinyur Sistem-lah yang harus melakukan analisis <em>trade-off</em> untuk menentukan dampak teknis dari pemotongan tersebut dan merekomendasikan solusi yang paling tidak merusak integritas misi.</p>
+
+    <h2>Bagian 4: Perangkat Analitis dan Kuantitatif (Rumus dan Contoh Soal)</h2>
+    <p>Bagian ini membahas permintaan untuk "rumus-rumus" dan "contoh soal". Di sinilah toolkit kuantitatif Teknik Industri (Riset Operasi, Statistik, Simulasi) menjadi sangat penting bagi Insinyur Sistem untuk membuat keputusan <em>trade-off</em> yang terinformasi dan dapat dibenarkan. SE mendefinisikan masalah desain; IE menyediakan alat untuk menyelesaikannya secara optimal.</p>
+
+    <h3>4.1 Analisis Kuantitatif 1: Rekayasa Keandalan (Reliability Engineering)</h3>
+    <p><strong>Konteks:</strong> Seorang Insinyur Sistem tidak hanya harus merancang sistem agar berfungsi saat pertama kali dinyalakan, tetapi juga agar tetap berfungsi sepanjang masa pakainya. Ini adalah domain inti dari Area Pengetahuan IE "Rekayasa Kualitas & Keandalan".</p>
+    <p><strong>Konsep Dasar:</strong></p>
+    <ul>
+        <li><strong>Keandalan (Reliability), \(R(t)\):</strong> Probabilitas bahwa suatu komponen atau sistem akan berfungsi seperti yang dimaksudkan untuk durasi waktu \(t\) dalam kondisi tertentu. Ini adalah angka antara 0 dan 1.</li>
+        <li><strong>Fungsi Distribusi Kumulatif (CDF), \(F(t)\):</strong> Probabilitas sistem akan gagal sebelum waktu \(t\). Hubungan dasarnya adalah \(F(t) = 1 - R(t)\).</li>
+        <li><strong>Tingkat Kegagalan (Failure Rate), \(\lambda\) (Lambda):</strong> Frekuensi kegagalan per unit waktu (misalnya, kegagalan per juta jam). Ini adalah metrik umum yang digunakan dalam analisis keandalan.</li>
+    </ul>
+
+    <h4>Rumus 1: Keandalan Sistem Seri</h4>
+    <p><strong>Logika:</strong> Dalam sistem seri, komponen terhubung dalam satu rantai. Sistem gagal jika salah satu komponennya gagal.</p>
+    <p><strong>Rumus:</strong> Keandalan sistem total (\(R_s\)) adalah produk dari keandalan masing-masing komponen.</p>
+    <div class="math-display">
+        $$R_s = R_1 \times R_2 \times \dots \times R_n$$
+    </div>
+    <p><strong>Implikasi SE/IE:</strong> Keandalan sistem seri selalu lebih buruk daripada komponen terlemahnya. Ini adalah "kutukan rantai". Jika sebuah sistem memiliki 10 komponen yang masing-masing 99% andal (\(R = 0.99\)), keandalan sistem totalnya adalah \(R_s = (0.99)^{10} \approx 0.904\), atau hanya 90.4% andal.</p>
+
+    <h4>Rumus 2: Keandalan Sistem Paralel (Redundansi)</h4>
+    <p><strong>Logika:</strong> Dalam sistem paralel, ada beberapa jalur redundan. Sistem hanya gagal jika semua komponen gagal.</p>
+    <p><strong>Rumus:</strong> Lebih mudah menghitung probabilitas kegagalan. Probabilitas kegagalan sistem (\(F_s\)) adalah produk dari probabilitas kegagalan masing-masing komponen (\(F_i = 1 - R_i\)).</p>
+    <div class="math-display">
+        $$F_s = F_1 \times F_2 \times \dots \times F_n = (1-R_1) \times (1-R_2) \times \dots \times (1-R_n)$$
+    </div>
+    <p>Keandalan sistem totalnya adalah:</p>
+    <div class="math-display">
+        $$R_s = 1 - F_s$$
+    </div>
+    <p><strong>Implikasi SE/IE:</strong> Ini adalah justifikasi matematis untuk redundansi. Jika satu komponen memiliki keandalan 90% (\(R = 0.9\)), menambahkan komponen identik kedua secara paralel akan menghasilkan \(R_s = 1 - [(1-0.9) \times (1-0.9)] = 1 - [0.1 \times 0.1] = 1 - 0.01 = 0.99\). Keandalan sistem melonjak menjadi 99%. Ini adalah <em>trade-off</em> SE/IE klasik: meningkatkan keandalan secara dramatis dengan mengorbankan peningkatan biaya, berat, daya, dan kompleksitas.</p>
+
+    <div class="example-box">
+        <h4>Contoh Soal 1: Analisis Keandalan Sistem Hibrida</h4>
+        <p><strong>Masalah:</strong> Seorang Insinyur Sistem merancang modul kontrol. Modul ini memiliki Komponen A (sebuah prosesor) dengan keandalan \(R_A = 0.94\), yang terhubung seri dengan subsistem catu daya (BC). Subsistem (BC) memiliki dua catu daya yang identik, Komponen B (\(R_B = 0.82\)) dan Komponen C (\(R_C = 0.87\)), yang terhubung secara paralel (redundansi). Hitung keandalan sistem total (\(R_s\)).</p>
+        
+        <p><strong>Langkah 1: Selesaikan subsistem paralel (BC) terlebih dahulu.</strong><br>
+        Kita menggunakan rumus keandalan paralel:<br>
+        \(R_{BC} = 1 - [(1-0.82) \times (1-0.87)]\)<br>
+        \(R_{BC} = 1 - [0.18 \times 0.13]\)<br>
+        \(R_{BC} = 1 - 0.0234\)<br>
+        \(R_{BC} = 0.9766\) (Keandalan subsistem catu daya adalah 97.66%)</p>
+        
+        <p><strong>Langkah 2: Selesaikan sistem seri total (A + BC).</strong><br>
+        Sekarang sistem dapat disederhanakan menjadi Komponen A secara seri dengan \(R_{BC}\). Kita menggunakan rumus keandalan seri:<br>
+        \(R_s = R_A \times R_{BC}\)<br>
+        \(R_s = 0.94 \times 0.9766\)<br>
+        \(R_s = 0.918004\)</p>
+        
+        <p><strong>Kesimpulan:</strong> Keandalan total sistem hibrida ini adalah sekitar 91.8%. Perhatikan bahwa meskipun subsistem redundan (BC) sangat andal (97.66%), keandalan total sistem ditarik ke bawah oleh komponen serinya (A), yang kini menjadi titik kegagalan tunggal (single point of failure) yang dominan.</p>
+    </div>
+
+    <h3>4.2 Analisis Kuantitatif 2: Riset Operasi (OR) dan Analisis Keputusan</h3>
+    <p><strong>Konteks:</strong> Riset Operasi (OR) adalah inti dari IE, yang berfokus pada "teknik pemecahan masalah yang berfokus pada peningkatan efisiensi sistem dan dukungan dalam proses pengambilan keputusan". Bagi SE, ini adalah alat utama untuk melakukan <em>trade studies</em> dan memilih desain yang optimal secara matematis di antara banyak alternatif.</p>
+
+    <h4>Rumus 3: Expected Value (EV) / Expected Monetary Value (EMV)</h4>
+    <p><strong>Logika:</strong> Digunakan dalam Decision Analysis (Analisis Keputusan) untuk memilih alternatif terbaik di bawah ketidakpastian. Ini menghitung <em>payoff</em> rata-rata yang diharapkan dari suatu keputusan jika keputusan itu diulang berkali-kali.</p>
+    <p><strong>Rumus:</strong> \(EV\) adalah jumlah dari (probabilitas setiap hasil) dikalikan dengan (nilai/payoff dari hasil tersebut).</p>
+    <div class="math-display">
+        $$EV = \sum_{i} [P(X_i) \times X_i]$$
+    </div>
+    <p>Di mana \(P(X_i)\) adalah probabilitas terjadinya "keadaan alam" \(i\), dan \(X_i\) adalah <em>payoff</em> (nilai moneter) jika keadaan \(i\) itu terjadi.</p>
+
+    <div class="example-box">
+        <h4>Contoh Soal 2: Analisis Keputusan EMV (Ukuran Pabrik)</h4>
+        <p><strong>Masalah:</strong> Seorang Insinyur Sistem-Industri harus merekomendasikan ukuran pabrik baru: <strong>Kecil</strong> atau <strong>Besar</strong>. Keputusan ini harus dibuat sebelum permintaan pasar diketahui.</p>
+        <p><strong>Data:</strong></p>
+        <ul>
+            <li>Alternatif 1 (Pabrik Besar): Biaya awal $10M. Payoff (pendapatan): $30M (jika Permintaan Tinggi) atau $5M (jika Permintaan Rendah).</li>
+            <li>Alternatif 2 (Pabrik Kecil): Biaya awal $4M. Payoff (pendapatan): $15M (jika Permintaan Tinggi) atau $8M (jika Permintaan Rendah).</li>
+            <li>Probabilitas (dari tim marketing): \(P(\text{Tinggi}) = 0.6\) (60%); \(P(\text{Rendah}) = 0.4\) (40%).</li>
+        </ul>
+
+        <p><strong>Langkah 1: Hitung EMV untuk "Pabrik Besar".</strong> (EMV adalah Payoff yang Diharapkan dikurangi Biaya Awal)<br>
+        \(EMV(\text{Besar}) = [(0.6 \times \$30M) + (0.4 \times \$5M)] - \$10M\)<br>
+        \(EMV(\text{Besar}) = [\$18M + \$2M] - \$10M = \$20M - \$10M = \$10M\)</p>
+        
+        <p><strong>Langkah 2: Hitung EMV untuk "Pabrik Kecil".</strong><br>
+        \(EMV(\text{Kecil}) = [(0.6 \times \$15M) + (0.4 \times \$8M)] - \$4M\)<br>
+        \(EMV(\text{Kecil}) = [\$9M + \$3.2M] - \$4M = \$12.2M - \$4M = \$8.2M\)</p>
+        
+        <p><strong>Keputusan:</strong> Berdasarkan analisis EMV, keputusan optimal adalah membangun <strong>Pabrik Besar</strong>, karena memiliki nilai moneter yang diharapkan lebih tinggi ($10M) dibandingkan dengan Pabrik Kecil ($8.2M).</p>
+    </div>
+
+    <div class="example-box">
+        <h4>Contoh Soal 3: Studi Kasus Optimasi Rantai Pasok (Aplikasi IE/OR)</h4>
+        <p><strong>Masalah:</strong> Sebuah studi kasus nyata berfokus pada optimalisasi jaringan rantai pasok untuk distribusi karet rakyat di Kabupaten Musirawas, Indonesia, untuk menentukan keuntungan maksimal.</p>
+        <p><strong>Metode:</strong> Ini adalah masalah optimasi klasik yang diselesaikan menggunakan Linear Programming (LP), sebuah teknik inti dari Riset Operasi.</p>
+        <p><strong>Model:</strong></p>
+        <ul>
+            <li><strong>Fungsi Tujuan (Objective Function):</strong> Memaksimalkan total keuntungan.</li>
+            <li><strong>Variabel Keputusan (Decision Variables):</strong> Jumlah produk (karet jenis A, B, dll.) yang akan didistribusikan melalui setiap saluran.</li>
+            <li><strong>Kendala (Constraints):</strong> Kendala sumber daya nyata, seperti kapasitas alat angkut (truk) dan jam tenaga kerja yang tersedia.</li>
+        </ul>
+        <p><strong>Analisis:</strong> Peneliti memodelkan tiga saluran distribusi yang berbeda (misalnya, Saluran 1: Petani -> Pengumpul Desa -> Pengumpul Kecamatan -> Pabrik; vs. Saluran 3: Petani -> Unit Pengolahan (UPPB) -> Pabrik).<br>
+        <strong>Hasil:</strong> Dengan menggunakan perangkat lunak Quantitative Management (QM) untuk menyelesaikan model LP, ditemukan bahwa Saluran 3 (melalui UPPB) menghasilkan keuntungan maksimal (Rp 5.567.063) dibandingkan dengan saluran lainnya.</p>
+        <p><strong>Implikasi SE/IE:</strong> Ini adalah contoh sempurna bagaimana toolkit IE (Linear Programming) digunakan untuk menganalisis dan merancang sistem sosio-teknis (rantai pasok) yang optimal, memberikan rekomendasi berbasis data yang jelas untuk desain sistem.</p>
+    </div>
+
+    <h3>4.3 Analisis Kuantitatif 3: Simulasi Sistem</h3>
+    <p><strong>Konteks:</strong> Ketika sistem menjadi terlalu kompleks untuk rumus matematika sederhana—melibatkan variabilitas acak, antrian, dan interaksi sumber daya yang dinamis (seperti di pabrik atau rantai pasok)—alat IE pilihan adalah Simulasi.
+    <br><strong>Metode:</strong> Simulasi kejadian diskrit (discrete-event simulation) memodelkan sistem sebagai urutan kejadian dari waktu ke waktu.</p>
+
+    <div class="example-box">
+        <h4>Contoh Soal 4: Studi Kasus Simulasi Desain Manufaktur</h4>
+        <p><strong>Masalah:</strong> Sebuah studi kasus nyata mengevaluasi desain sistem produksi baru untuk komponen otomotif (brake drum coupling).</p>
+        <p><strong>Tujuan SE/IE:</strong> "Membantu rekayasa sistem dan proses produksi baru," "Menganalisis layout dan aliran bahan," dan "Mengevaluasi alokasi sumber daya dan alternatif penjadwalan".</p>
+        <p><strong>Alat:</strong> Perangkat lunak simulasi khusus (seperti Arena) digunakan untuk membuat model digital sistem.</p>
+        <p><strong>Proses:</strong></p>
+        <ol>
+            <li><strong>Model "As-Is":</strong> Pertama, tim membangun model komputer dari pabrik yang ada dan memvalidasinya dengan data nyata untuk memastikan model tersebut akurat.</li>
+            <li><strong>Model "To-Be":</strong> Selanjutnya, mereka memodifikasi model untuk mencerminkan desain baru (misalnya, layout stasiun kerja yang berbeda, penambahan mesin baru, atau perubahan aturan penjadwalan).</li>
+            <li><strong>Eksperimen:</strong> Tim kemudian menjalankan model "To-Be" ratusan kali, menyimulasikan berbulan-bulan operasi dalam hitungan menit. Mereka melakukan eksperimen "bagaimana-jika" (what-if) untuk menemukan skenario terbaik berdasarkan target produksi. (Contoh: "Bagaimana throughput berubah jika kita menambahkan satu forklift?" "Apa yang terjadi pada bottleneck jika Mesin A rusak 10% dari waktu?").</li>
+        </ol>
+        <p><strong>Implikasi SE/IE:</strong> Simulasi adalah jembatan vital antara desain dan realitas. Ini memungkinkan insinyur untuk menguji, memverifikasi, dan memvalidasi desain sistem dalam lingkungan digital berbiaya rendah. Ini secara langsung mendukung justifikasi ekonomi SE dari Bagian 1: jauh lebih murah untuk menemukan bahwa layout baru tidak efisien dalam simulasi daripada setelah pabrik dibangun.</p>
+    </div>
+
+    <h2>Bagian 5: Evolusi dan Lanskap Mutakhir (Perkembangan Terbaru)</h2>
+    <p>Rekayasa Sistem dan Teknik Industri bukanlah disiplin yang statis; mereka terus berevolusi untuk menghadapi tantangan modern seperti kompleksitas perangkat lunak yang meroket, permintaan akan kecepatan, dan kebutuhan akan keberlanjutan. Bagian ini mencakup "perkembangan paling mutakhir" yang membentuk bidang ini.</p>
+
+    <h3>5.1 Pergeseran Metodologi: V-Model Tradisional vs. Agile Systems Engineering</h3>
+    <p>Selama beberapa dekade, V-Model (dijelaskan di Bagian 3) adalah standar emas. Ini adalah proses yang digerakkan oleh rencana, berurutan, dan sangat teliti. Ia bekerja dengan sangat baik di bawah asumsi bahwa persyaratan stabil dan dapat diketahui sepenuhnya di awal proyek.</p>
+
+    <p><strong>Kasus Penggunaan V-Model:</strong> V-Model tetap menjadi pilihan terbaik untuk sistem di mana persyaratan sangat stabil dan konsekuensi kegagalan sangat tinggi. Ini termasuk sistem kritis seperti aerospace (pesawat terbang), perangkat medis, dan sistem pertahanan.</p>
+
+    <p><strong>Tantangan (Agile):</strong> Namun, di dunia pengembangan software komersial, V-Model terlalu lambat. Persyaratan berubah setiap minggu, dan <em>time-to-market</em> adalah segalanya. Sebagai respons, Agile muncul.</p>
+
+    <p><strong>Agile Systems Engineering (Agile SE):</strong> Agile adalah pendekatan iteratif dan inkremental. Alih-alih satu siklus 'V' besar, Agile melakukan banyak siklus "mini-V" yang disebut <em>sprint</em>. Ini sangat adaptif terhadap perubahan persyaratan dan menekankan kolaborasi klien yang tinggi dan berkelanjutan.</p>
+
+    <p>Kenyataannya, pertarungan "V-Model vs. Agile" sebagian besar keliru. Tantangan SE modern yang sebenarnya bukanlah memilih salah satu, tetapi mengintegrasikan keduanya. Seorang praktisi menggambarkannya dengan sempurna: "Proses rekayasa saya yang sebenarnya... menggabungkan V-Model dengan agile, MBSE...".</p>
+    
+    <p>Pikirkan tentang merancang mobil baru:</p>
+    <ul>
+        <li>Sasis, mesin, dan sistem pengereman (hardware) kemungkinan besar dikembangkan menggunakan V-Model yang lambat, kaku, dan berfokus pada keselamatan.</li>
+        <li>Sistem infotainment dan aplikasi navigasi (software) dikembangkan oleh tim berbeda menggunakan sprint Agile dua mingguan.</li>
+    </ul>
+    <p>Tantangan Rekayasa Sistem modern adalah mengelola antarmuka antara siklus hidup "Vee" yang lambat dan siklus "Agile" yang cepat yang hidup berdampingan dalam satu produk.</p>
+
+    <h3>Tabel 2: Perbandingan Metodologi Pengembangan Sistem: V-Model vs. Agile SE</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Faktor</th>
+                <th>V-Model Tradisional</th>
+                <th>Agile Systems Engineering (Agile SE)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Pendekatan</strong></td>
+                <td>Berurutan (Sequential), Digerakkan Rencana (Plan-Driven)</td>
+                <td>Iteratif & Inkremental, Digerakkan Nilai (Value-Driven)</td>
+            </tr>
+            <tr>
+                <td><strong>Penanganan Persyaratan</strong></td>
+                <td>Didefinisikan di awal; stabil. Perubahan sulit dan mahal.</td>
+                <td>Menerima perubahan; persyaratan berkembang di setiap iterasi.</td>
+            </tr>
+            <tr>
+                <td><strong>Keterlibatan Klien</strong></td>
+                <td>Terbatas; terutama pada review formal (PDR, CDR) dan acceptance testing.</td>
+                <td>Tinggi dan berkelanjutan; klien adalah bagian dari tim pengembangan.</td>
+            </tr>
+            <tr>
+                <td><strong>Fokus Pengujian</strong></td>
+                <td>Dilakukan di akhir setiap fase (di sisi kanan 'V').</td>
+                <td>Terintegrasi dan berkelanjutan di setiap iterasi (sprint).</td>
+            </tr>
+            <tr>
+                <td><strong>Dokumentasi</strong></td>
+                <td>Sangat komprehensif; dokumentasi adalah deliverable utama.</td>
+                <td>Fokus pada working software/system di atas dokumentasi lengkap.</td>
+            </tr>
+            <tr>
+                <td><strong>Kasus Penggunaan Ideal</strong></td>
+                <td>Sistem Kritis (misalnya, Aerospace, Pertahanan), Proyek Hardware, Persyaratan sangat stabil.</td>
+                <td>Pengembangan Software, Kebutuhan tidak pasti atau cepat berubah, Startup.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>5.2 Revolusi Digital 1: Model-Based Systems Engineering (MBSE)</h3>
+    <p>Secara historis, "produk" dari Rekayasa Sistem adalah dokumen. Spesifikasi, gambar, analisis trade-off, dan rencana pengujian disimpan dalam ribuan file Word, Excel, PowerPoint, dan PDF yang saling terputus. Ini dikenal sebagai pendekatan <em>document-centric</em> (berbasis dokumen).</p>
+    <p><strong>Masalah:</strong> Pendekatan ini penuh dengan risiko. Jika seorang insinyur mengubah persyaratan dalam satu dokumen, tidak ada jaminan perubahan itu akan diperbarui di 50 dokumen lain yang merujuknya. Ini menciptakan inkonsistensi, ambiguitas dari interpretasi manusia, dan ketidakmampuan untuk mengelola kompleksitas sistem modern.</p>
+    <p><strong>Solusi (MBSE):</strong> <em>Model-Based Systems Engineering</em> (MBSE) adalah pergeseran paradigma fundamental dari document-centric ke model-centric. Dalam MBSE, model digital terpusat menjadi otoritas tunggal, bukan ribuan dokumen.</p>
+
+    <h4>Konsep Inti: "Single Source of Truth" (SSOT)</h4>
+    <p>Model Arsitektur Sistem (SAM) dalam MBSE bertindak sebagai "Single Source of Truth" (SSOT). Semua informasi—persyaratan, arsitektur fungsional, arsitektur fisik, parameter kinerja—terkandung dalam database model ini. Keuntungannya sangat besar:</p>
+    <ul>
+        <li><strong>Peningkatan Komunikasi:</strong> Semua orang (manajer, insinyur domain, penguji) melihat model yang sama yang selalu terbaru.</li>
+        <li><strong>Peningkatan Kualitas:</strong> Jika persyaratan diubah, perubahan itu secara otomatis disebarkan ke semua bagian sistem yang terhubung, memungkinkan insinyur untuk segera melihat dampaknya dan mengurangi kesalahan.</li>
+        <li><strong>Peningkatan Efisiensi:</strong> Memungkinkan pengembangan paralel dan otomatisasi. Lockheed Martin Space melaporkan percepatan 7x lipat dalam waktu penyelesaian untuk analisis misi setelah menerapkan MBSE.</li>
+    </ul>
+
+    <h4>Bahasa Pemodelan: SysML</h4>
+    <p>Untuk memiliki SSOT, semua insinyur harus "berbicara" dalam bahasa formal yang sama. Bahasa standar untuk MBSE adalah SysML (Systems Modeling Language). SysML adalah turunan dari UML (Unified Modeling Language) dari dunia perangkat lunak, tetapi disesuaikan secara khusus untuk kebutuhan Rekayasa Sistem. Ia menyediakan notasi visual standar untuk memodelkan semua aspek sistem:</p>
+    <ul>
+        <li><strong>Persyaratan:</strong> (Diagram Persyaratan)</li>
+        <li><strong>Struktur:</strong> (Diagram Blok)</li>
+        <li><strong>Perilaku:</strong> (Diagram Aktivitas, Diagram Urutan)</li>
+        <li><strong>Parametrik:</strong> (Menyematkan rumus teknik, seperti rumus keandalan dari Bagian 4, langsung ke dalam model).</li>
+    </ul>
+
+    <h4>Alat (Tools) MBSE Populer</h4>
+    <p>Untuk membuat model SysML ini, tim menggunakan alat khusus. Beberapa yang paling menonjol meliputi:</p>
+    <ul>
+        <li><strong>Cameo Systems Modeler (Dassault Systèmes):</strong> Dianggap sebagai pemimpin pasar, menawarkan dukungan SysML yang komprehensif dan integrasi yang kuat dengan alat CAD (seperti CATIA) dan PLM.</li>
+        <li><strong>Capella (Open-source, didukung oleh Thales):</strong> Alternatif open-source yang populer. Capella tidak murni berbasis SysML; ia menggunakan metodologi spesifik yang disebut Arcadia. Banyak yang menganggapnya lebih mudah dipelajari untuk arsitektur sistem.</li>
+        <li><strong>IBM DOORS (dan rangkaian ELM):</strong> Secara historis, standar industri untuk Manajemen Persyaratan (Requirements Management).</li>
+        <li><strong>Sparx Systems Enterprise Architect:</strong> Alat pemodelan serbaguna yang juga mendukung SysML.</li>
+    </ul>
+
+    <h3>5.3 Revolusi Digital 2: Digital Twins (Puncak Integrasi SE + IE)</h3>
+    <p>Jika MBSE adalah revolusi desain, <em>Digital Twin</em> (Kembaran Digital) adalah revolusi operasi. Ini adalah salah satu tren terpanas yang secara sempurna menyatukan SE dan IE.</p>
+    <p><strong>Definisi:</strong> Digital Twin adalah "representasi digital dari sistem fisik yang terhubung secara real-time". Penting untuk memahami perbedaan antara model MBSE dan Digital Twin:</p>
+    <ul>
+        <li><strong>Model MBSE:</strong> Adalah blueprint atau cetak biru. Ini dibuat selama fase desain (dipimpin SE) dan menggambarkan bagaimana sistem seharusnya bekerja.</li>
+        <li><strong>Digital Twin:</strong> Adalah mirror atau cermin. Ini digunakan selama fase operasi (dipimpin IE), terus-menerus diperbarui oleh data sensor Internet of Things (IoT) dari sistem fisik di lapangan, dan menggambarkan bagaimana sistem bekerja saat ini.</li>
+    </ul>
+    <p>Ini adalah penyerahan tongkat estafet yang sempurna: model MBSE yang dibuat oleh Insinyur Sistem selama desain sering kali menjadi fondasi atau benih untuk Digital Twin yang akan digunakan oleh Insinyur Industri untuk mengoptimalkan operasi selama puluhan tahun berikutnya.</p>
+
+    <h4>Peran dalam IE dan Manufaktur</h4>
+    <p>Bagi Insinyur Industri, Digital Twin adalah alat optimasi terbaik.</p>
+    <ul>
+        <li><strong>Optimasi Proses Real-time:</strong> Memantau sistem produksi secara langsung dan menggunakan simulasi pada twin untuk menguji skenario "bagaimana-jika" sebelum menerapkannya di lantai pabrik.</li>
+        <li><strong>Efisiensi dan Pengurangan Limbah:</strong> Mengidentifikasi pemborosan (bahan baku, konsumsi energi berlebih) secara real-time.</li>
+        <li><strong>Pemeliharaan Prediktif:</strong> Menganalisis data getaran dan suhu dari twin untuk memprediksi kegagalan mesin sebelum terjadi, menjadwalkan perbaikan, dan mengurangi downtime yang mahal.</li>
+    </ul>
+
+    <h4>Studi Kasus (Webinar Teknik Industri UII)</h4>
+    <p>Sebuah webinar oleh Program Studi Teknik Industri UII memberikan contoh sempurna dari sinergi ini.</p>
+    <ul>
+        <li><strong>Sistem Fisik:</strong> Sistem pick and place (seperti lengan robot) di lantai smart manufacturing.</li>
+        <li><strong>Integrasi (SE):</strong> Insinyur Sistem merancang sistem di mana konveyor fisik dihubungkan ke database departemen marketing.</li>
+        <li><strong>Optimasi (IE):</strong> Digital Twin memantau demand (permintaan) pelanggan secara real-time dari database tersebut.</li>
+        <li><strong>Aksi:</strong> Ketika Digital Twin mendeteksi demand tinggi, ia secara otomatis mengirimkan perintah ke sistem fisik untuk meningkatkan kecepatan konveyor dan produksi. Ketika demand rendah, ia memperlambat konveyor.</li>
+        <li><strong>Hasil:</strong> Produktivitas meningkat, biaya berkurang, dan masalah IE klasik yaitu overstock dan understock dihindari. Ini adalah perwujudan sempurna dari integrasi desain SE dan optimasi IE.</li>
+    </ul>
+
+    <h3>5.4 Horizon Berikutnya: Rekayasa Sistem untuk Keberlanjutan</h3>
+    <p>Tantangan terbesar berikutnya yang dihadapi kedua disiplin adalah keberlanjutan (sustainability). Ini memperluas cakupan SE dan IE melampaui sekadar kinerja dan biaya. Fokus baru bagi Insinyur Sistem-Industri adalah merancang sistem energi bersih, jaringan listrik yang tangguh, infrastruktur transportasi yang berkelanjutan, dan produk yang dapat didaur ulang dalam circular economy (ekonomi sirkular).</p>
+
+    <p>Tantangan ini memerlukan pemikiran <em>System of Systems (SoS)</em>. Sebuah SoS adalah sistem di mana komponen-komponennya sendiri adalah sistem independen yang kompleks (misalnya, jaringan listrik, jaringan transportasi, dan sistem ekonomi). Keberlanjutan mengharuskan sistem teknis kita berinteraksi secara harmonis dengan sistem ekologi, ekonomi, dan sosial. Rekayasa Sistem menyediakan arsitektur dan metodologi pemodelan, seperti penggunaan functional chains (rantai fungsional) untuk memodelkan dan mengoptimalkan efisiensi bahan bakar dan emisi di industri otomotif.</p>
+
+    <h2>Bagian 6: Kesimpulan: Sintesis Insinyur Sistem-Industri</h2>
+    <p>Pengajaran ini telah membawa kita dalam perjalanan dari asal-usul Rekayasa Sistem sebagai respons terhadap kompleksitas di Bell Labs hingga definisi modernnya yang berfokus pada integrasi oleh INCOSE.</p>
+
+    <p>Kita telah membedah pertanyaan inti tentang hubungan antara Rekayasa Sistem (SE) dan Teknik Industri (IE). Kita telah menetapkan bahwa keduanya adalah disiplin integrasi, tetapi dengan fokus yang berbeda. Teknik Industri adalah master toolkit kuantitatif, menyediakan alat-alat seperti Riset Operasi, Simulasi, Ergonomi, dan Rekayasa Keandalan. Rekayasa Sistem adalah master proses integrasi siklus hidup, menyediakan metodologi (seperti V-Model) untuk memandu sistem dari konsep, melalui analisis kebutuhan, desain arsitektur, hingga Integrasi, Verifikasi, dan Validasi (IV&V).</p>
+
+    <p>Kita telah melihat melalui contoh soal terperinci bagaimana toolkit IE (misalnya, Linear Programming, Simulasi, dan rumus Keandalan) sangat penting dan digunakan di dalam proses SE untuk membuat keputusan trade-off desain yang dapat dibenarkan secara kuantitatif.</p>
+
+    <p>Akhirnya, kita melihat bagaimana evolusi ini mencapai puncaknya pada tren modern. Pergeseran dari document-centric ke model-centric (MBSE) adalah tentang mengelola kompleksitas desain menggunakan "Single Source of Truth". Penerapan Digital Twins adalah perwujudan akhir dari sinergi SE/IE, di mana desain SE bertemu dengan optimasi IE secara real-time, seperti yang diilustrasikan oleh studi kasus manufaktur cerdas.</p>
+
+    <p>Pada akhirnya, Insinyur Sistem-Industri (ISE) modern bukanlah sekadar manajer efisiensi yang memegang stopwatch (citra lama IE), juga bukan sekadar manajer dokumen yang mengelola spesifikasi (citra lama SE). Mereka adalah arsitek dan konduktor dari sistem sosio-teknis yang sangat kompleks, menggunakan proses Rekayasa Sistem yang ketat dan toolkit analitis Teknik Industri yang kuat untuk mengubah ide-ide paling kompleks menjadi kenyataan yang fungsional, efisien, andal, dan berkelanjutan.</p>
+
+    <div class="references">
+        <h2>Works cited</h2>
+        <div class="ref-item">[1] SEH 2.0 Fundamentals of Systems Engineering - NASA, accessed on November 12, 2025, https://www.nasa.gov/reference/2-0-fundamentals-of-systems-engineering/</div>
+        <div class="ref-item">[2] incose-se-definitions-tp-2020-002-06.pdf, accessed on November 12, 2025, https://www.incose.org/docs/default-source/default-document-library/incose-se-definitions-tp-2020-002-06.pdf</div>
+        <div class="ref-item">[3] System and SE Definitions - incose, accessed on November 12, 2025, https://www.incose.org/about-systems-engineering/system-and-se-definitions</div>
+        <div class="ref-item">[4] NASA Systems Engineering Handbook, accessed on November 12, 2025, https://www.nasa.gov/wp-content/uploads/2018/09/nasa_systems_engineering_handbook_0.pdf</div>
+        <div class="ref-item">[5] What is INCOSE's definition of a SYSTEM?, accessed on November 12, 2025, https://www.incose.org/docs/default-source/north-star/Ambassador-Program/se-101.pdf?sfvrsn=2andsfvrsn=2</div>
+        <div class="ref-item">[6] Metode Jurnal Teknik Industri Vol. 11 (2): 300-309 2025, accessed on November 12, 2025, https://ejournal.um-sorong.ac.id/index.php/metode/article/download/4795/2445/23620</div>
+        <div class="ref-item">[7] Industrial and Systems Engineering BoK, accessed on November 12, 2025, https://www.iise.org/Details.aspx?id=43631</div>
+        <div class="ref-item">[8] Systems Engineering and Industrial Engineering - SEBoK, accessed on November 12, 2025, https://sebokwiki.org/wiki/Systems_Engineering_and_Industrial_Engineering</div>
+        <div class="ref-item">[9] Body of Knowledge - Institute of Industrial and Systems Engineers, accessed on November 12, 2025, https://www.iise.org/uploadedFiles/IIE/Technical_Resources/Publications/Industrial_and_Systems_Engineering_Body_of_Knowledge_2021.pdf</div>
+        <div class="ref-item">[10] Body of Knowledge - Institute of Industrial and Systems Engineers, accessed on November 12, 2025, https://iise.org/uploadedFiles/IIE/Technical_Resources/Publications/Industrial_and_Systems_Engineering_Body_of_Knowledge_2020_Draft.pdf</div>
+        <div class="ref-item">[11] INCOSE Systems Engineering Handbook - SEBoK, accessed on November 12, 2025, https://sebokwiki.org/wiki/INCOSE_Systems_Engineering_Handbook</div>
+        <div class="ref-item">[12] Industrial and Systems Engineering Series - Book Series - Routledge & CRC Press, accessed on November 12, 2025, https://www.routledge.com/Industrial-and-Systems-Engineering-Series/book-series/CRCINDSYSENG</div>
+        <div class="ref-item">[13] INDUSTRIAL and SYSTEMS ENGINEERING, accessed on November 12, 2025, https://ftp.idu.ac.id/wp-content/uploads/ebook/ip/BUKU%20INDUSTRIAL%20ENGINEERING/Handbook%20of%20Industrial%20and%20Systems%20Engineering%20(2nd%20Edition)%20(%20PDFDrive%20).pdf</div>
+        <div class="ref-item">[14] Maynard's Industrial and Systems Engineering Handbook, 6th Edition, accessed on November 12, 2025, https://www.accessengineeringlibrary.com/content/book/9781260461565</div>
+        <div class="ref-item">[15] Agile vs V-Model - StarAgile, accessed on November 12, 2025, https://staragile.com/blog/agile-vs-v-model</div>
+        <div class="ref-item">[16] Systems development life cycle - Wikipedia, accessed on November 12, 2025, https://en.wikipedia.org/wiki/Systems_development_life_cycle</div>
+        <div class="ref-item">[17] Analisis Kebutuhan Sistem: Panduan Lengkap untuk Pemula - UTI ..., accessed on November 12, 2025, https://csirt.teknokrat.ac.id/analisis-kebutuhan-sistem-panduan-lengkap-untuk-pemula/</div>
+        <div class="ref-item">[18] STUDI ANALISIS PERSYARATAN KEBUTUHAN SISTEM DALAM MENGHASILKAN PERANGKAT LUNAK YANG BERKUALITAS - sisfotenika, accessed on November 12, 2025, https://www.sisfotenika.stmikpontianak.ac.id/index.php/ST/article/viewFile/58/62</div>
+        <div class="ref-item">[19] rekayasa kebutuhan perangkat lunak pada perusahaan skala kecil dan menengah dengan pendekatan - Neliti, accessed on November 12, 2025, https://media.neliti.com/media/publications/223880-rekayasa-kebutuhan-perangkat-lunak-pada.pdf</div>
+        <div class="ref-item">[20] IBM Engineering Lifecycle Management, accessed on November 12, 2025, https://www.ibm.com/products/engineering-lifecycle-management</div>
+        <div class="ref-item">[21] Functional Decomposition: A Practical Guide to System Design ..., accessed on November 12, 2025, https://www.datacamp.com/tutorial/functional-decomposition</div>
+        <div class="ref-item">[22] 4.3 Logical Decomposition - NASA, accessed on November 12, 2025, https://www.nasa.gov/reference/4-3-logical-decomposition/</div>
+        <div class="ref-item">[23] Functional Architecture. What Is It and Why Every System Engineer Should Care., accessed on November 12, 2025, https://mbse.solutions/functional-architecture-using-sysml/</div>
+        <div class="ref-item">[24] Badan Pengetahuan Rekayasa Sistem (SEBoK) - Visure Solutions, accessed on November 12, 2025, https://visuresolutions.com/id/panduan-alm/sebok/</div>
+        <div class="ref-item">[25] Engineering Management vs Project Management: Key Differences Explained - Jellyfish, accessed on November 12, 2025, https://jellyfish.co/library/engineering-management-vs-project-management/</div>
+        <div class="ref-item">[26] Technical Project Manager (TPM) vs Project Manager (PM), accessed on November 12, 2025, https://project-management.com/it-project-manager-vs-project-manager/</div>
+        <div class="ref-item">[27] Project Engineer vs Project Manager (and the Tools You Need for Both) - BQE Core, accessed on November 12, 2025, https://www.bqe.com/blog/project-engineer-vs-project-manager-and-the-tools-you-need-for-both</div>
+        <div class="ref-item">[28] Relationships between Systems Engineering and Project ... - SEBoK, accessed on November 12, 2025, https://sebokwiki.org/wiki/Relationships_between_Systems_Engineering_and_Project_Management</div>
+        <div class="ref-item">[29] What is the difference between systems engineering and project management? - Reddit, accessed on November 12, 2025, https://www.reddit.com/r/AskEngineers/comments/2frs98/what_is_the_difference_between_systems/</div>
+        <div class="ref-item">[30] Reliability Engineering ( Rekayasa Keandalan ) PowerPoint Presentation - SlideServe, accessed on November 12, 2025, https://www.slideserve.com/eugene/reliability-engineering-rekayasa-keandalan</div>
+        <div class="ref-item">[31] Kurikulum 2024 | SIX - Institut Teknologi Bandung, accessed on November 12, 2025, https://six.itb.ac.id/pub/kur2024/matakuliah/51887</div>
+        <div class="ref-item">[32] System Reliability & Availability Calculations – BMC Software | Blogs, accessed on November 12, 2025, https://www.bmc.com/blogs/system-reliability-availability-calculations/</div>
+        <div class="ref-item">[33] Konsep Matematika Dasar dalam Rekayasa Reliabilitas - diklatkerja.com, accessed on November 12, 2025, https://www.diklatkerja.com/blog/konsep-matematika-dasar-dalam-rekayasa-reliabilitas</div>
+        <div class="ref-item">[34] Parallel Systems - Accendo Reliability, accessed on November 12, 2025, https://accendoreliability.com/parallel-systems/</div>
+        <div class="ref-item">[35] Series-Parallel System Reliability - YouTube, accessed on November 12, 2025, https://www.youtube.com/watch?v=k74WXpGqPhg</div>
+        <div class="ref-item">[36] Pemodelan Dan Optimasi | PDF - Scribd, accessed on November 12, 2025, https://id.scribd.com/document/876846808/Pemodelan-Dan-Optimasi</div>
+        <div class="ref-item">[37] What is decision tree analysis? 5 steps to make better decisions - Asana, accessed on November 12, 2025, https://asana.com/resources/decision-tree-analysis</div>
+        <div class="ref-item">[38] Expected Value: Definition, Formula, and Examples - Investopedia, accessed on November 12, 2025, https://www.investopedia.com/terms/e/expected-value.asp</div>
+        <div class="ref-item">[39] (PDF) Model Optimasi Jaringan Rantai Pasok Pada Sistem ..., accessed on November 12, 2025, https://www.researchgate.net/publication/367867994_Model_Optimasi_Jaringan_Rantai_Pasok_Pada_Sistem_Informasi_Harga_Karet_Rakyat_Berbasis_Web</div>
+        <div class="ref-item">[40] View of SIMULASI SISTEM MANUFAKTUR Studi Kasus : Proses ..., accessed on November 12, 2025, https://ejournal.unsrat.ac.id/v3/index.php/jtmu/article/view/33084/31281</div>
+        <div class="ref-item">[41] Agile or V-Shaped As a Software Development Life Cycle Model? - BairesDev, accessed on November 12, 2025, https://www.bairesdev.com/blog/agile-or-v-shaped/</div>
+        <div class="ref-item">[42] Difference between Traditional and Agile Software Development - GeeksforGeeks, accessed on November 12, 2025, https://www.geeksforgeeks.org/software-engineering/difference-between-traditional-and-agile-software-development/</div>
+        <div class="ref-item">[43] The all-mighty V. What does it mean to you? : r/systems_engineering - Reddit, accessed on November 12, 2025, https://www.reddit.com/r/systems_engineering/comments/p42daf/the_allmighty_v_what_does_it_mean_to_you/</div>
+        <div class="ref-item">[44] What is Model-Based Systems Engineering (MBSE)? - Ansys, accessed on November 12, 2025, https://www.ansys.com/blog/model-based-systems-engineering-explained</div>
+        <div class="ref-item">[45] Introduction To Model-Based System Engineering (MBSE) and SysML - incose, accessed on November 12, 2025, https://www.incose.org/docs/default-source/delaware-valley/mbse-overview-incose-30-july-2015.pdf</div>
+        <div class="ref-item">[46] What Is Model-Based Systems Engineering (MBSE)? - IBM, accessed on November 12, 2025, https://www.ibm.com/think/topics/model-based-systems-engineering</div>
+        <div class="ref-item">[47] Model-Based Systems Engineering Fundamentals | GTPE - Georgia Institute of Technology, accessed on November 12, 2025, https://pe.gatech.edu/blog/industry-trends/model-based-systems-engineering-fundamentals</div>
+        <div class="ref-item">[48] An Introduction to Model-Based Systems Engineering (MBSE), accessed on November 12, 2025, https://www.sei.cmu.edu/blog/introduction-model-based-systems-engineering-mbse/</div>
+        <div class="ref-item">[49] How to choose the right tool for MBSE - Starion Group, accessed on November 12, 2025, https://www.stariongroup.eu/how-to-choose-the-right-tool-for-mbse/</div>
+        <div class="ref-item">[50] An MBSE Tools List for Systems Engineers - SPEC Innovations, accessed on November 12, 2025, https://specinnovations.com/blog/what-tools-are-available-for-model-based-systems-engineering-mbse</div>
+        <div class="ref-item">[51] Best 15+ Model-Based Systems Engineering (MBSE) Software & Tools for 2025, accessed on November 12, 2025, https://visuresolutions.com/alm-guide/best-mbse-tools-and-solutions/</div>
+        <div class="ref-item">[52] Capella | Open Source MBSE Tool, accessed on November 12, 2025, https://mbse-capella.org/</div>
+        <div class="ref-item">[53] Overwhelmed by all of the tools for MBSE, would love some input/feedback! - Reddit, accessed on November 12, 2025, https://www.reddit.com/r/systems_engineering/comments/urnimb/overwhelmed_by_all_of_the_tools_for_mbse_would/</div>
+        <div class="ref-item">[54] Cerita Implementasi Digital Twin dalam Industri - Jurusan Teknik ..., accessed on November 12, 2025, https://industrial.uii.ac.id/cerita-implementasi-digital-twin-dalam-industri/</div>
+        <div class="ref-item">[55] Transformasi Manufaktur Berkelanjutan: Peran Strategis Digital ..., accessed on November 12, 2025, https://ftmm.unair.ac.id/transformasi-manufaktur-berkelanjutan-peran-strategis-digital/</div>
+        <div class="ref-item">[56] Sustainability and Resilience | Industrial & Enterprise Systems Engineering | Illinois, accessed on November 12, 2025, https://ise.illinois.edu/research/impact-areas/sustainability-resilience</div>
+        <div class="ref-item">[57] [2401.14047] Engineering a sustainable world by enhancing the scope of systems of systems engineering and mastering dynamics - arXiv, accessed on November 12, 2025, https://arxiv.org/abs/2401.14047</div>
+        <div class="ref-item">[58] Systems Engineering for Sustainability - incose, accessed on November 12, 2025, https://www.incose.org/docs/default-source/insight/insight_vol27-1_0202.pdf?sfvrsn=59494fc7_2</div>
+    </div>
+
+    <div class="nav-button-container">
+        <a href="https://nvze.github.io/dashboard/blog.html" class="btn-back">Kembali ke daftar jurnal</a>
+    </div>
+
+</div>
+
+</body>
+</html>
