@@ -6,44 +6,51 @@
     <title>Jurnal Pemikiran | NVZE</title>
     
     <style>
-        /* --- FLUENT DESIGN SYSTEM VARIABLES (WIN 11) --- */
+        /* --- DARK FLUENT DESIGN THEME (MATCHING SCREENSHOT) --- */
         :root {
-            /* Colors */
-            --mica-bg: #F3F3F3; /* Background Windows Light */
-            --card-bg: #FFFFFF;
-            --text-primary: #1A1A1A;
-            --text-secondary: #5D5D5D;
-            --accent-default: #0067C0; /* Windows Blue */
-            --accent-hover: #005DAD;
-            --accent-text: #FFFFFF;
-            --border-subtle: #E0E0E0;
-            --control-fill: #FFFFFF;
-            --control-fill-hover: #F6F6F6;
+            /* Background: Gradasi Radial dari Biru Malam ke Hitam */
+            --bg-gradient-top: #1e263b; /* Biru tua agak terang di tengah atas */
+            --bg-gradient-btm: #05070a; /* Hampir hitam di pinggir/bawah */
             
-            /* Elevation & Effects */
-            --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0,0,0,0.06);
-            --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.08), 0 0 2px rgba(0,0,0,0.06);
-            --acrylic-blur: blur(20px) saturate(125%);
+            /* Glassmorphism Cards (Dark) */
+            --card-bg: rgba(255, 255, 255, 0.03); /* Transparan sangat tipis */
+            --card-border: rgba(255, 255, 255, 0.08); /* Garis tepi halus */
+            --card-hover-bg: rgba(255, 255, 255, 0.07);
             
             /* Typography */
-            --font-stack: 'Segoe UI Variable', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0AEC0; /* Abu-abu kebiruan */
+            
+            /* Accents */
+            --accent-default: #60CDFF; /* Windows 11 Cyan Blue untuk Dark Mode */
+            --accent-hover: #99EBFF;
+            
+            /* Components */
+            --nav-glass: rgba(15, 20, 30, 0.6); /* Navigasi lebih gelap */
+            --acrylic-blur: blur(24px) saturate(120%);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
+            
+            /* Font */
+            --font-stack: 'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            background-color: var(--mica-bg);
+            /* Mengatur background agar mirip screenshot (Glow di tengah atas) */
+            background: radial-gradient(circle at 50% 0%, var(--bg-gradient-top) 0%, var(--bg-gradient-btm) 85%);
+            background-color: var(--bg-gradient-btm);
+            background-attachment: fixed; /* Agar background tetap saat scroll */
             color: var(--text-primary);
             font-family: var(--font-stack);
             font-size: 15px;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
-        /* --- TOP BAR (Breadcrumb style) --- */
+        /* --- TOP BAR --- */
         .top-bar {
             padding: 24px 32px 0;
             display: flex;
@@ -54,48 +61,50 @@
             text-decoration: none;
             color: var(--text-secondary);
             font-size: 14px;
-            font-weight: 400;
-            padding: 6px 12px;
-            border-radius: 4px;
-            transition: background 0.2s, color 0.2s;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            background: rgba(255,255,255,0.05); /* Sedikit background pada tombol */
+            border: 1px solid var(--card-border);
         }
 
         .btn-back:hover {
-            background-color: rgba(0,0,0,0.05);
+            background-color: rgba(255,255,255,0.1);
             color: var(--text-primary);
+            border-color: rgba(255,255,255,0.2);
         }
 
         /* --- HEADER --- */
         header {
-            padding: 40px 20px 30px;
+            padding: 50px 20px 30px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
-            animation: fadeInDown 0.6s ease-out;
         }
 
         h1 {
-            font-family: var(--font-stack);
-            font-size: 2.5rem; /* Lebih kecil & bold dari versi jurnal */
+            font-size: 2.8rem;
             font-weight: 600;
-            letter-spacing: -0.01em;
-            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
             color: var(--text-primary);
+            /* Memberikan sedikit efek glow pada teks judul */
+            text-shadow: 0 0 30px rgba(255,255,255,0.1);
         }
 
         .subtitle {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
             font-weight: 400;
         }
 
-        /* --- STICKY NAV (Acrylic Style) --- */
+        /* --- STICKY NAV (Dark Acrylic) --- */
         .sticky-nav {
             position: sticky;
-            top: 16px; /* Floating effect */
+            top: 20px;
             z-index: 100;
             display: flex;
             justify-content: center;
@@ -104,15 +113,17 @@
         }
 
         .nav-container {
-            background: rgba(255, 255, 255, 0.7);
+            background: var(--nav-glass);
             backdrop-filter: var(--acrylic-blur);
             -webkit-backdrop-filter: var(--acrylic-blur);
             padding: 6px;
-            border-radius: 8px;
-            border: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             display: flex;
             gap: 4px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .filter-btn {
@@ -120,43 +131,27 @@
             border: none;
             font-family: var(--font-stack);
             font-size: 14px;
-            font-weight: 500;
             color: var(--text-secondary);
             cursor: pointer;
-            padding: 8px 16px;
-            border-radius: 6px; /* Pill shape buttons */
+            padding: 8px 20px;
+            border-radius: 8px;
             transition: all 0.2s ease;
-            position: relative;
         }
 
         .filter-btn:hover {
-            background-color: rgba(0,0,0,0.04);
             color: var(--text-primary);
+            background-color: rgba(255,255,255,0.05);
         }
 
-        /* Active State - Windows 11 style (White pill with shadow OR Accent pill) 
-           Here using the Accent style for clarity */
+        /* Active State: Mirip highlight di Windows 11 Dark */
         .filter-btn.active {
-            background-color: var(--card-bg);
+            background-color: rgba(255,255,255,0.1);
             color: var(--text-primary);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             font-weight: 600;
-        }
-        
-        /* Optional: Indicator dot for active */
-        .filter-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: 4px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 16px;
-            height: 3px;
-            background-color: var(--accent-default);
-            border-radius: 2px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
         }
 
-        /* --- POST LIST (Card Grid) --- */
+        /* --- POST LIST (Dark Cards) --- */
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -166,39 +161,39 @@
 
         #posts-container {
             display: grid;
-            gap: 16px; /* Spacing between cards */
+            gap: 16px;
         }
 
         .article-card {
             display: block;
             text-decoration: none;
             background: var(--card-bg);
-            padding: 24px;
-            border-radius: 8px; /* Win 11 Geometry */
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-card);
-            transition: all 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+            padding: 28px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Shadow halus */
+            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
 
         .article-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-            border-color: rgba(0,0,0,0.1);
-            opacity: 1; /* Override old transparency */
+            background: var(--card-hover-bg);
+            border-color: rgba(255,255,255,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
         
-        /* Left Accent Border on Hover */
+        /* Aksen garis kiri saat hover */
         .article-card:hover::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 12px;
-            bottom: 12px;
+            top: 0;
+            bottom: 0;
             width: 4px;
             background: var(--accent-default);
-            border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 15px var(--accent-default); /* Efek neon/glow */
         }
 
         .meta-group {
@@ -208,99 +203,86 @@
             font-size: 12px;
             font-weight: 600;
             color: var(--accent-default);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
         
         .meta-date {
             color: var(--text-secondary);
             font-weight: 400;
             text-transform: none;
+            opacity: 0.7;
         }
 
         .post-title {
             font-family: var(--font-stack);
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: var(--text-primary);
             line-height: 1.3;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .post-excerpt {
             color: var(--text-secondary);
             font-size: 0.95rem;
-            line-height: 1.5;
-            max-width: 100%;
+            line-height: 1.6;
         }
 
-        /* --- FOOTER & UTILS --- */
+        /* --- BUTTONS & FOOTER --- */
         .load-more-container {
             text-align: center;
-            padding: 40px 0 60px;
+            padding: 50px 0 80px;
         }
 
         .btn-load {
-            background-color: var(--accent-default);
-            border: 1px solid transparent;
-            color: white;
-            padding: 8px 24px;
-            border-radius: 4px;
+            background-color: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-primary);
+            padding: 10px 30px;
+            border-radius: 6px;
             font-family: var(--font-stack);
-            font-weight: 500;
             font-size: 14px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.03);
         }
 
         .btn-load:hover {
-            background-color: var(--accent-hover);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            transform: scale(1.02);
-        }
-        
-        .btn-load:active {
-            transform: scale(0.98);
-            opacity: 0.9;
+            background-color: var(--accent-default);
+            color: #000; /* Teks hitam agar kontras dengan cyan */
+            border-color: var(--accent-default);
+            box-shadow: 0 0 20px rgba(96, 205, 255, 0.4); /* Glow effect */
         }
 
         footer {
             text-align: center;
             padding: 30px;
-            font-size: 12px;
+            font-size: 13px;
             color: var(--text-secondary);
-            background-color: #F9F9F9; /* Footer slightly darker */
-            border-top: 1px solid var(--border-subtle);
+            /* Footer menyatu dengan background, hanya opacity text dikurangi */
+            opacity: 0.6; 
             margin-top: auto;
         }
 
-        /* --- ANIMATION --- */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
         .article-card {
-            animation: fadeIn 0.4s ease-out;
+            animation: fadeIn 0.5s ease-out forwards;
         }
 
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .nav-container { 
-                flex-wrap: wrap; 
-                justify-content: center;
-                width: 100%;
-            }
-            .filter-btn { flex-grow: 1; text-align: center; font-size: 13px; }
-            .top-bar { padding: 20px; }
+            h1 { font-size: 2.2rem; }
+            .nav-container { width: 100%; border-radius: 12px; }
+            .filter-btn { flex: 1 1 auto; font-size: 13px; padding: 8px 12px; }
             .container { padding: 0 16px; }
+            .article-card { padding: 20px; }
         }
     </style>
 </head>
@@ -316,7 +298,7 @@
     </div>
 
     <header>
-        <h1>NvZE JURNAL</h1>
+        <h1>NvZE Jurnal</h1>
         <p class="subtitle">Arsip Ekonomi, Teknologi, Humaniora & Artikel Bebas</p>
     </header>
 
@@ -344,7 +326,7 @@
     </footer>
 
     <script>
-        /* DATABASE POST */
+        /* DATABASE POST (SAMA SEPERTI SEBELUMNYA) */
         const allPosts = [
              { 
                 title: "Negeri Di Ujung Tanduk ", 
@@ -525,7 +507,7 @@
                 filteredList = allPosts.filter(post => post.cat === cat);
             }
 
-            displayLimit = 15; // Reset limit saat ganti kategori
+            displayLimit = 15;
             renderList();
         }
 
@@ -543,7 +525,6 @@
                 const article = document.createElement('a');
                 article.href = post.link;
                 article.className = 'article-card';
-                // Struktur HTML sedikit disesuaikan agar rapi di Card
                 article.innerHTML = `
                     <div class="meta-group">
                         <span>${post.cat}</span>
