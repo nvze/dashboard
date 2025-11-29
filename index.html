@@ -9,10 +9,14 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      /* Background Gradient Modern */
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      color: #333;
+      /* Font standar Windows 11 */
+      font-family: "Segoe UI Variable Display", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      /* Background Abstract "Bloom" Simulation */
+      background: #f3f3f3;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgb(239, 246, 255) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgb(225, 240, 255) 0%, transparent 20%);
+      color: #1a1a1a;
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -20,121 +24,146 @@
       overflow: hidden;
     }
 
-    /* Container Utama dengan Efek Glassmorphism */
+    /* Container Utama - Style Window/Acrylic */
     .dashboard-card {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 3.5rem;
-      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.75); /* Acrylic opacity */
+      backdrop-filter: blur(30px) saturate(125%);
+      -webkit-backdrop-filter: blur(30px) saturate(125%);
+      padding: 2.5rem 3rem;
+      border-radius: 12px; 
       box-shadow: 
-        0 20px 50px rgba(0, 0, 0, 0.1),
-        0 1px 2px rgba(255, 255, 255, 0.5) inset;
+        0 16px 32px rgba(0, 0, 0, 0.08), 
+        0 2px 4px rgba(0, 0, 0, 0.04);
       text-align: center;
-      max-width: 480px;
+      max-width: 460px;
       width: 90%;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      transition: transform 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* --- WIDGET JAM (Windows 11 Style) --- */
+    .clock-widget {
+      margin-bottom: 2rem;
+      width: 100%;
+    }
+    
+    .time-display {
+      font-size: 3.5rem;
+      font-weight: 600; /* SemiBold */
+      color: #1a1a1a;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+      font-feature-settings: "tnum"; /* Tabular numbers agar lebar angka tetap */
+      letter-spacing: -1px;
+    }
+
+    .date-display {
+      font-size: 1.1rem;
+      color: #5f5f5f;
+      font-weight: 400;
     }
     
     /* Header: Avatar & Judul */
     .profile-avatar {
-      width: 80px;
-      height: 80px;
-      /* Google Blue Gradient */
-      background: linear-gradient(135deg, #4285f4, #1a73e8);
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #0078D4, #00539A);
       color: white;
-      font-size: 2.5rem;
-      font-weight: 700;
+      font-size: 1.75rem;
+      font-weight: 600;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 50%;
-      margin: 0 auto 1.5rem;
-      box-shadow: 0 10px 20px rgba(66, 133, 244, 0.3);
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 120, 212, 0.25);
     }
 
     h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #2d3436;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.5px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.25rem;
     }
 
     p.subtitle {
-      color: #636e72;
-      margin-bottom: 3rem;
-      font-size: 1rem;
-      font-weight: 400;
+      color: #5f5f5f;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
     }
 
     /* Grid Menu */
     .menu-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
+      gap: 1rem;
+      width: 100%;
     }
 
     /* Style Tombol Menu */
     a.menu-item {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       text-decoration: none;
-      background: #ffffff;
-      padding: 1.5rem 1rem;
-      border-radius: 20px;
-      border: 1px solid #f1f2f6;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      position: relative;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 1.25rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease-out;
     }
 
-    /* Hover Effect: Lift Up & Shadow */
     a.menu-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-      border-color: transparent;
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transform: scale(1.02);
+    }
+
+    a.menu-item:active {
+      transform: scale(0.98);
+      background: rgba(243, 243, 243, 0.8);
     }
 
     .item-icon {
-      font-size: 2.2rem;
+      font-size: 1.6rem;
       margin-bottom: 0.8rem;
-      transition: transform 0.3s ease;
+      filter: grayscale(20%);
     }
     
-    a.menu-item:hover .item-icon {
-      transform: scale(1.15) rotate(-5deg);
-    }
-
     .item-title {
-      font-weight: 700;
-      color: #2d3436;
-      font-size: 1rem;
-      margin-bottom: 0.2rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      font-size: 0.95rem;
+      margin-bottom: 0.1rem;
     }
     
     .item-desc {
       font-size: 0.75rem;
-      color: #b2bec3;
-      font-weight: 500;
+      color: #6e6e6e;
     }
 
-    /* Warna teks berubah saat hover */
-    a.menu-item:hover .item-title { color: #1a73e8; }
-    
-    /* Responsif untuk HP */
     @media (max-width: 480px) {
       .menu-grid { grid-template-columns: 1fr; }
-      .dashboard-card { padding: 2.5rem 2rem; }
+      .dashboard-card { padding: 2rem 1.5rem; }
+      .time-display { font-size: 2.8rem; }
+      a.menu-item { align-items: center; text-align: center; }
     }
   </style>
 </head>
 <body>
 
   <div class="dashboard-card">
+    
+    <div class="clock-widget">
+      <div class="time-display" id="clock-time">00:00</div>
+      <div class="date-display" id="clock-date">Memuat tanggal...</div>
+    </div>
+
     <div class="profile-avatar">N</div>
     <h1>NvZE Dashboard</h1>
     <p class="subtitle">Refleksi visual Knowledge & Knowhow</p>
@@ -153,6 +182,28 @@
       </a>
     </div>
   </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      
+      // Format Waktu (24 Jam ala Indonesia)
+      const timeOptions = { hour: '2-digit', minute: '2-digit' };
+      // Mengganti titik default (.) dengan titik dua (:) agar lebih estetik
+      const timeString = now.toLocaleTimeString('id-ID', timeOptions).replace('.', ':');
+      
+      // Format Tanggal (Hari, Tanggal Bulan)
+      const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
+      const dateString = now.toLocaleDateString('id-ID', dateOptions);
+
+      document.getElementById('clock-time').textContent = timeString;
+      document.getElementById('clock-date').textContent = dateString;
+    }
+
+    // Jalankan sekali saat load, lalu update setiap detik
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
 
 </body>
 </html>
