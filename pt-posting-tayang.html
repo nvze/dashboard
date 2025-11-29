@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NvZE Blog Manager (Root Mode)</title>
+    <title>NvZE Blog Manager (Fix V3)</title>
     <style>
         /* --- THEME CONFIGURATION (Dark Navy / Fluent) --- */
         :root {
@@ -71,7 +71,7 @@
         .separator::before, .separator::after { content: ""; position: absolute; top: 50%; width: 40%; height: 1px; background: var(--border-color); }
         .separator::before { left: 0; } .separator::after { right: 0; }
 
-        /* --- DETAILS / CONFIG BOX --- */
+        /* --- CONFIG BOX --- */
         details { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
         summary { padding: 15px; cursor: pointer; font-weight: 500; color: var(--accent-blue); outline: none; }
         .config-box { padding: 20px; border-top: 1px solid var(--border-color); }
@@ -83,7 +83,6 @@
         .tab-btn {
             background: none; border: none; padding: 15px; font-size: 15px; color: var(--text-secondary); cursor: pointer; width: 50%; transition: 0.3s; position: relative;
         }
-        .tab-btn:hover { color: #fff; background: rgba(255,255,255,0.02); }
         .tab-btn.active { color: var(--accent-blue); font-weight: bold; }
         .tab-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--accent-blue); box-shadow: 0 -2px 10px var(--accent-blue); }
 
@@ -94,9 +93,7 @@
         /* --- BUTTONS --- */
         button { cursor: pointer; padding: 12px; border-radius: 6px; font-size: 15px; font-weight: 600; border: none; width: 100%; margin-top: 20px; transition: all 0.2s; }
         .btn-check { background: linear-gradient(to right, #2563eb, #1d4ed8); color: white; } 
-        .btn-check:hover { box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); }
         .btn-save { background: linear-gradient(to right, #10b981, #059669); color: white; }
-        .btn-save:hover { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
         .btn-publish { background: linear-gradient(to right, #6366f1, #4f46e5); color: white; }
         button:disabled { background: #334155; color: #94a3b8; cursor: not-allowed; box-shadow: none; }
 
@@ -118,7 +115,7 @@
 <body>
 
     <div class="main-container">
-        <h2>🛠️ GitHub Blog Manager</h2>
+        <h2>🛠️ GitHub Blog Manager (Fix V3)</h2>
 
         <details open>
             <summary>⚙️ <b>Konfigurasi Akun</b> (Klik untuk isi)</summary>
@@ -144,32 +141,29 @@
         </div>
 
         <div id="tab-editor" class="tab-content active">
-            <h3>Buat Postingan Baru (Di Root Directory)</h3>
+            <h3>Buat/Edit File (Root Directory)</h3>
             <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 20px;">
-                File akan disimpan sejajar dengan index.html (tanpa folder tambahan).
+                Jika blog.html error, ketik "blog.html" di bawah, cek file, lalu hapus bagian yang error.
             </p>
             
             <div class="upload-zone">
-                <label for="file-upload" class="custom-file-upload">
-                    📂 Upload File .HTML dari Komputer
-                </label>
+                <label for="file-upload" class="custom-file-upload">📂 Upload File .HTML dari Komputer</label>
                 <input id="file-upload" type="file" accept=".html" onchange="handleFileUpload(this)"/>
-                <div style="margin-top:8px; font-size: 0.8rem; color: #64748b;">Isi file akan otomatis dimuat ke editor.</div>
             </div>
 
-            <div class="separator">ATAU EDIT MANUAL</div>
+            <div class="separator">ATAU MANUAL</div>
 
-            <label>Nama File Target (akhiran .html):</label>
+            <label>Nama File Target:</label>
             <div style="display: flex; gap: 10px;">
-                <input type="text" id="ed-filename" placeholder="contoh: artikel-baru.html" oninput="resetEditorView()">
+                <input type="text" id="ed-filename" placeholder="contoh: artikel.html" oninput="resetEditorView()">
                 <button onclick="checkFile()" class="btn-check" style="width: auto; margin-top: 5px;">🔍 Cek GitHub</button>
             </div>
             
             <div id="ed-status" class="status-box"></div>
 
             <div id="editor-wrapper">
-                <label>Isi Konten HTML:</label>
-                <textarea id="ed-content" class="code-editor" placeholder="<p>Tulis artikelmu disini...</p>"></textarea>
+                <label>Isi Konten:</label>
+                <textarea id="ed-content" class="code-editor"></textarea>
                 
                 <label>Pesan Commit:</label>
                 <input type="text" id="ed-msg" value="Update via Web Manager">
@@ -181,10 +175,7 @@
 
         <div id="tab-publish" class="tab-content">
             <h3>Daftarkan Artikel ke Daftar Blog</h3>
-            <div style="background: rgba(251, 191, 36, 0.1); color: #fcd34d; padding: 12px; font-size: 0.85rem; border: 1px solid rgba(251, 191, 36, 0.2); border-radius: 6px; margin-bottom: 20px;">
-                ⚠️ Fitur ini akan mengedit file <b>blog.html</b> (atau file target) untuk menambahkan link artikel baru.
-            </div>
-
+            
             <label>Target File Index:</label>
             <input type="text" id="pub-targetFile" value="blog.html" readonly>
 
@@ -216,7 +207,7 @@
             </div>
 
             <label>Deskripsi Singkat (Excerpt):</label>
-            <textarea id="pub-desc" rows="3" placeholder="Ringkasan artikel untuk halaman depan..."></textarea>
+            <textarea id="pub-desc" rows="3" placeholder="Ringkasan... (Enter akan otomatis diubah jadi spasi)"></textarea>
 
             <button onclick="publishPost()" id="btn-pub-submit" class="btn-publish">🚀 Posting ke Blog</button>
             <div id="pub-status" class="status-box"></div>
@@ -224,20 +215,25 @@
 
         <nav class="footer-nav">
             <a href="https://nvze.github.io/dashboard/blog.html" class="btn-back">⬅️ Kembali ke Daftar Blog</a>
-            <div style="margin-top: 15px; font-size: 0.75rem; color: #475569;">
-                © 2025 NVZE Dashboard - Bandung
-            </div>
+            <div style="margin-top: 15px; font-size: 0.75rem; color: #475569;">© 2025 NVZE Dashboard</div>
         </nav>
     </div>
 
     <script>
-        // --- CONSTANT ---
-        // SYSTEM AKAN MENGANGGAP SEMUA FILE ADA DI ROOT (KOSONGKAN PREFIX)
+        // --- CONFIG & UTILS ---
         const DEFAULT_FOLDER = ""; 
-
-        // --- LOGIC UMUM ---
         let currentShaEditor = null;
         document.getElementById('pub-dateInput').valueAsDate = new Date();
+
+        // FUNGSI PEMBERSIH TEKS (PENTING AGAR TIDAK ERROR)
+        function cleanText(str) {
+            if (!str) return "";
+            return str
+                .replace(/\\/g, '\\\\') // Escape backslash
+                .replace(/"/g, '\\"')   // Escape quote double
+                .replace(/\n/g, ' ')    // Ganti Enter jadi Spasi (CRUCIAL FIX)
+                .replace(/\r/g, '');    // Hapus carriage return
+        }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -259,35 +255,26 @@
             return { token, username, repo };
         }
 
-        // --- FUNGSI BARU: UPLOAD FILE ---
+        // --- TAB 1: EDITOR ---
         function handleFileUpload(input) {
             const file = input.files[0];
             if (!file) return;
-
-            // 1. Auto isi nama file (Tanpa folder tambahan)
             document.getElementById('ed-filename').value = file.name;
-            // 2. Auto isi link di tab publish (user experience)
             document.getElementById('pub-link').value = file.name;
-
-            // 3. Baca konten
             const reader = new FileReader();
             reader.onload = function(e) {
                 document.getElementById('ed-content').value = e.target.result;
-                
                 const statusEl = document.getElementById('ed-status');
                 statusEl.style.display = 'block';
-                statusEl.textContent = "📂 File berhasil dimuat dari komputer. Klik 'Simpan ke GitHub' untuk upload.";
+                statusEl.textContent = "📂 File dimuat. Klik 'Simpan ke GitHub' untuk upload.";
                 statusEl.className = "status-box status-info";
-
                 document.getElementById('ed-msg').value = "Upload " + file.name;
                 document.getElementById('editor-wrapper').classList.add('active');
-                
                 currentShaEditor = null; 
             };
             reader.readAsText(file);
         }
 
-        // --- FUNGSI TAB 1: EDITOR ---
         function resetEditorView() {
             document.getElementById('editor-wrapper').classList.remove('active');
             document.getElementById('ed-status').style.display = 'none';
@@ -298,14 +285,11 @@
         async function checkFile() {
             const cfg = getGlobalConfig();
             if (!cfg) return;
-
             const filename = document.getElementById('ed-filename').value.trim();
             if (!filename) { alert("Nama file belum diisi!"); return; }
             
-            // Gunakan folder default (ROOT / Kosong)
             const fullPath = DEFAULT_FOLDER + filename;
             const statusEl = document.getElementById('ed-status');
-
             statusEl.style.display = 'block';
             statusEl.textContent = "⏳ Menghubungi GitHub...";
             statusEl.className = "status-box status-loading";
@@ -319,22 +303,19 @@
                     const data = await res.json();
                     currentShaEditor = data.sha;
                     document.getElementById('ed-content').value = decodeURIComponent(escape(window.atob(data.content.replace(/\n/g, ""))));
-                    statusEl.textContent = "✅ File Ditemukan di Root GitHub (Mode Edit)";
+                    statusEl.textContent = "✅ File Ditemukan (Mode Edit)";
                     statusEl.className = "status-box status-success";
                     document.getElementById('ed-msg').value = "Update " + fullPath;
                 } else if (res.status === 404) { 
                     currentShaEditor = null;
                     document.getElementById('ed-content').value = "";
-                    statusEl.textContent = "✨ File Belum Ada (Mode Baru di Root)";
+                    statusEl.textContent = "✨ File Baru";
                     statusEl.className = "status-box status-info";
                     document.getElementById('ed-msg').value = "Create " + fullPath;
-                } else {
-                    throw new Error("Gagal akses (Cek Token/Repo)");
-                }
+                } else { throw new Error("Gagal akses (Cek Token/Repo)"); }
                 
                 editor.classList.add('active');
                 document.getElementById('pub-link').value = fullPath;
-
             } catch (err) {
                 statusEl.textContent = "❌ Error: " + err.message;
                 statusEl.className = "status-box status-error";
@@ -344,14 +325,11 @@
         async function saveFile() {
             const cfg = getGlobalConfig();
             if (!cfg) return;
-
             const content = document.getElementById('ed-content').value;
             const notif = document.getElementById('ed-save-notif');
-            // Path langsung nama file
             const fullPath = DEFAULT_FOLDER + document.getElementById('ed-filename').value.trim();
 
             if (!content) { alert("Konten kosong!"); return; }
-
             notif.style.display = 'block';
             notif.textContent = "Sedang menyimpan...";
             notif.className = "status-box status-loading";
@@ -365,7 +343,7 @@
                         const checkData = await checkRes.json();
                         currentShaEditor = checkData.sha; 
                     }
-                } catch(e) { /* Ignore */ }
+                } catch(e) {}
             }
 
             const payload = {
@@ -378,15 +356,10 @@
             try {
                 const res = await fetch(`https://api.github.com/repos/${cfg.username}/${cfg.repo}/contents/${fullPath}`, {
                     method: 'PUT',
-                    headers: { 
-                        'Authorization': `Bearer ${cfg.token}`,
-                        'Content-Type': 'application/json' 
-                    },
+                    headers: { 'Authorization': `Bearer ${cfg.token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-
                 const json = await res.json();
-
                 if (res.ok) {
                     notif.textContent = "✅ Berhasil Disimpan!";
                     notif.className = "status-box status-success";
@@ -401,14 +374,11 @@
             }
         }
 
-        // --- FUNGSI TAB 2: PUBLISHER ---
+        // --- TAB 2: PUBLISHER (FIXED) ---
         function formatDate(dateString) {
             const date = new Date(dateString);
             const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            const day = String(date.getDate()).padStart(2, '0');
-            const month = months[date.getMonth()];
-            const year = date.getFullYear();
-            return `${day} ${month} ${year}`;
+            return `${String(date.getDate()).padStart(2,'0')} ${months[date.getMonth()]} ${date.getFullYear()}`;
         }
 
         function showPubStatus(msg, type) {
@@ -429,7 +399,7 @@
             const title = document.getElementById('pub-title').value;
             const cat = document.getElementById('pub-category').value;
             const rawDate = document.getElementById('pub-dateInput').value;
-            const link = document.getElementById('pub-link').value; // Link sekarang murni nama file
+            const link = document.getElementById('pub-link').value;
             const desc = document.getElementById('pub-desc').value;
 
             if (!title || !link || !desc) {
@@ -438,6 +408,10 @@
             }
 
             const formattedDate = formatDate(rawDate);
+            // SANITASI TEKS AGAR TIDAK ERROR DI JS
+            const cleanTitle = cleanText(title);
+            const cleanDesc = cleanText(desc);
+
             btn.disabled = true;
             btn.textContent = "⏳ Membaca database blog...";
             showPubStatus("Sedang membaca file index...", "loading");
@@ -448,21 +422,22 @@
                     headers: { 'Authorization': `Bearer ${cfg.token}`, 'Accept': 'application/vnd.github.v3+json' }
                 });
 
-                if (!response.ok) throw new Error("Gagal akses file index.");
+                if (!response.ok) throw new Error("Gagal akses file index (blog.html). Cek nama file!");
                 
                 const data = await response.json();
                 const currentSha = data.sha;
                 const oldContent = decodeURIComponent(escape(window.atob(data.content.replace(/\n/g, ""))));
 
                 const searchString = "const allPosts = [";
-                if (!oldContent.includes(searchString)) throw new Error("Struktur 'const allPosts = [' tidak ditemukan!");
+                if (!oldContent.includes(searchString)) throw new Error("Struktur 'const allPosts = [' tidak ditemukan di blog.html!");
 
+                // FORMAT BARU (SAFE)
                 const newObjectString = `
             { 
-                title: "${title}", 
+                title: "${cleanTitle}", 
                 cat: "${cat}", 
                 date: "${formattedDate}", 
-                desc: "${desc.replace(/"/g, '\\"')}", 
+                desc: "${cleanDesc}", 
                 link: "${link}" 
             },`;
 
