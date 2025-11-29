@@ -3,249 +3,461 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Senja di Megakuningan: Neraca yang Tak Seimbang (Revisi)</title>
+    <title>Hikayat Neraca yang Retak: Laporan Ekonomi Naratif 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:wght@400;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Inter:wght@300;400;600;700&display=swap');
-        
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-        }
-        
-        .prose-content {
+            background-color: #f4f4f0;
+            color: #1a1a1a;
             font-family: 'Merriweather', serif;
-            line-height: 1.8;
-            color: #374151;
         }
-
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        .mono {
+            font-family: 'Roboto Mono', monospace;
+        }
         .drop-cap::first-letter {
             float: left;
-            font-size: 3.5rem;
+            font-size: 4.5rem;
             line-height: 0.8;
             font-weight: bold;
-            padding-right: 0.5rem;
-            color: #1f2937;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 3px;
+            color: #8b0000; /* Dark Red */
         }
-
-        .chapter-marker {
+        .sidebar {
+            background-color: #e8e8e8;
+            border-left: 4px solid #8b0000;
+        }
+        .quote-box {
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            padding: 2rem 0;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        .chart-placeholder {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 2rem 0;
-            color: #9ca3af;
+            border: 1px dashed #999;
+            color: #666;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.8rem;
         }
-        
-        .chapter-marker::before, .chapter-marker::after {
-            content: "";
-            height: 1px;
-            width: 50px;
-            background-color: #e5e7eb;
-            margin: 0 10px;
+        /* Reading Progress Bar */
+        #progress-container {
+            width: 100%;
+            height: 4px;
+            background: #ccc;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 50;
+        }
+        #progress-bar {
+            height: 4px;
+            background: #8b0000;
+            width: 0%;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="antialiased leading-relaxed">
 
-    <!-- Hero Section / Cover -->
-    <header class="bg-gray-900 text-white py-16 px-4 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-20">
-            <!-- Abstract background pattern -->
-            <svg class="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <path d="M0 100 L100 0 L100 100 Z" fill="#374151" />
-            </svg>
-        </div>
-        <div class="max-w-3xl mx-auto relative z-10 text-center">
-            <div class="inline-block px-3 py-1 mb-4 border border-gray-500 rounded-full text-xs tracking-widest uppercase text-gray-300">Fiksi Ekonomi</div>
-            <h1 class="text-4xl md:text-6xl font-serif font-bold mb-4 leading-tight">Senja di Megakuningan: <br/><span class="text-gray-400 italic font-light">Harga Sebuah Pembatalan</span></h1>
-            <p class="text-lg md:text-xl text-gray-300 mt-6 font-light">Ketika PPN 12% batal, tapi badai datang dari arah lain.</p>
-            <div class="mt-8 flex justify-center items-center space-x-2 text-sm text-gray-400">
-                <i class="far fa-calendar-alt"></i>
-                <span>Jakarta, 29 November 2025</span>
+    <div id="progress-container"><div id="progress-bar"></div></div>
+
+    <!-- Cover Section -->
+    <header class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative bg-gray-900 text-white overflow-hidden">
+        <div class="absolute inset-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
+        <div class="z-10 max-w-4xl">
+            <p class="mono text-red-500 tracking-widest mb-4">LAPORAN NARATIF EKONOMI • NOV 2025</p>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">HIKAYAT NERACA <br><span class="italic text-gray-400">YANG RETAK</span></h1>
+            <p class="text-xl md:text-2xl text-gray-300 font-light mb-10">
+                Sebuah kronik tentang lima manusia di Jakarta yang terhimpit di antara <br>
+                perang dagang Washington-Beijing, runtuhnya harga nikel, <br>
+                dan ilusi pembatalan pajak.
+            </p>
+            <div class="flex justify-center gap-4 text-sm mono text-gray-400">
+                <span><i class="fas fa-clock mr-2"></i>Long Read (45 Menit)</span>
+                <span><i class="fas fa-globe-asia mr-2"></i>Makro & Mikro</span>
+                <span><i class="fas fa-users mr-2"></i>Fiksi Realis</span>
             </div>
+        </div>
+        <div class="absolute bottom-10 animate-bounce">
+            <i class="fas fa-chevron-down text-2xl text-gray-500"></i>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 -mt-10 relative z-20 pb-20">
-        
-        <!-- Character Cards -->
-        <section class="bg-white rounded-xl shadow-lg p-6 mb-10 border-t-4 border-indigo-500">
-            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 border-b pb-2">Dramatis Personae</h2>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                <!-- Agung -->
-                <div class="text-center p-2">
-                    <div class="w-12 h-12 mx-auto bg-orange-100 rounded-full flex items-center justify-center text-orange-600 mb-2">
-                        <i class="fas fa-motorcycle"></i>
-                    </div>
-                    <h3 class="font-bold text-sm">Agung</h3>
-                    <p class="text-xs text-gray-500 mt-1">UMKM: Bertahan meski daya beli lesu</p>
+    <!-- Main Content Container -->
+    <main class="max-w-3xl mx-auto px-6 py-16">
+
+        <!-- Prologue -->
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-6 text-gray-900">Prolog: Kupu-Kupu di Wall Street</h2>
+            <p class="drop-cap mb-6 text-lg">
+                Dunia tidak runtuh dengan ledakan, tetapi dengan desahan napas para gubernur bank sentral. Pada minggu kedua November 2025, <em>Jerome Powell</em>, Ketua The Federal Reserve AS, mengumumkan keputusan yang membuat lantai bursa di Jakarta bergetar: suku bunga acuan AS (Fed Funds Rate) hanya turun 25 basis poin, tertahan di angka 4,25%. 
+            </p>
+            <p class="mb-6">
+                "Inflasi masih 'lengket' (*sticky*)," kata Powell dari podium di Washington D.C.
+            </p>
+            <p class="mb-6">
+                Di belahan bumi lain, Beijing sedang berjuang melawan "Hantu Jepang". China resmi masuk dalam deflasi struktural. Sektor properti mereka—yang selama dua dekade menyedot jutaan ton baja dan nikel dari Indonesia—kini menjadi kota-kota hantu. Permintaan komoditas anjlok. Harga nikel di London Metal Exchange (LME) terperosok ke $13.800 per ton, level terendah dalam empat tahun.
+            </p>
+            <p class="mb-6">
+                Sementara itu, Eropa yang kedinginan di musim gugur, memberlakukan tarif penuh CBAM (*Carbon Border Adjustment Mechanism*). Produk Indonesia yang dianggap "kotor" kini dikenai pajak masuk yang mencekik.
+            </p>
+            <p class="mb-6">
+                Tiga badai ini—dolar yang pulang kandang (*capital outflow*), China yang berhenti membeli, dan Eropa yang menutup pintu—bertemu di satu titik koordinat: **Jakarta**.
+            </p>
+            <p class="mb-6">
+                Di kota ini, pembatalan kenaikan PPN 12% pada Januari lalu yang sempat dirayakan sebagai kemenangan rakyat, kini terungkap wajah aslinya: sebuah bom waktu fiskal.
+            </p>
+        </section>
+
+        <hr class="border-gray-300 mb-20">
+
+        <!-- Chapter 1: Yulia -->
+        <section class="mb-24">
+            <div class="flex items-center mb-6">
+                <span class="text-6xl text-gray-200 font-bold mr-4">01</span>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Kementerian Keuangan, Lapangan Banteng</h2>
+                    <p class="mono text-sm text-red-700">YULIA - SANG ARSITEK YANG CEMAS</p>
                 </div>
-                <!-- Ega -->
-                <div class="text-center p-2">
-                    <div class="w-12 h-12 mx-auto bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-2">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 class="font-bold text-sm">Ega</h3>
-                    <p class="text-xs text-gray-500 mt-1">Startup: Korban efisiensi global</p>
-                </div>
-                <!-- Yulia -->
-                <div class="text-center p-2">
-                    <div class="w-12 h-12 mx-auto bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-2">
-                        <i class="fas fa-landmark"></i>
-                    </div>
-                    <h3 class="font-bold text-sm">Yulia</h3>
-                    <p class="text-xs text-gray-500 mt-1">Kemenkeu: Pusing cari pengganti PPN</p>
-                </div>
-                <!-- Resti -->
-                <div class="text-center p-2">
-                    <div class="w-12 h-12 mx-auto bg-purple-100 rounded-full flex items-center justify-center text-purple-600 mb-2">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                    <h3 class="font-bold text-sm">Resti</h3>
-                    <p class="text-xs text-gray-500 mt-1">Gen Z: Menganggur di tengah kota</p>
-                </div>
-                <!-- Pak Seno -->
-                <div class="text-center p-2 col-span-2 md:col-span-1">
-                    <div class="w-12 h-12 mx-auto bg-gray-200 rounded-full flex items-center justify-center text-gray-700 mb-2">
-                        <i class="fas fa-industry"></i>
-                    </div>
-                    <h3 class="font-bold text-sm">Pak Seno</h3>
-                    <p class="text-xs text-gray-500 mt-1">Industri: Dikejar target pajak</p>
-                </div>
+            </div>
+
+            <p class="mb-6">
+                Layar Bloomberg di ruangan Yulia (34) berkedip merah. Rupiah diperdagangkan di angka Rp 16.450 per Dolar AS. Sebagai Eselon III di Badan Kebijakan Fiskal, Yulia tahu angka ini bukan sekadar statistik. Ini adalah harga tempe yang akan naik minggu depan karena kedelai impor makin mahal.
+            </p>
+            <p class="mb-6">
+                "Defisit kita menyentuh 2,89% PDB, Bu Yul," staf mudanya, Reza, menyodorkan tablet dengan tangan gemetar. "Batas aman undang-undang 3%. Kita tinggal satu tarikan napas dari pelanggaran konstitusi."
+            </p>
+            <p class="mb-6">
+                Yulia memijat pelipisnya. Bau minyak kayu putih menyeruak, kontras dengan parfum <em>Jo Malone</em> yang biasa ia pakai. 
+            </p>
+            <p class="mb-6">
+                "Ini harga yang harus dibayar," gumam Yulia.
+            </p>
+            <p class="mb-6">
+                Januari 2025 lalu, Presiden baru mengambil keputusan populis: membatalkan kenaikan PPN 12%. Rakyat bersorak. Oposisi bungkam. Tapi di gedung ini, kepanikan terjadi. Hilangnya potensi penerimaan negara sebesar Rp 80 triliun harus ditambal. Dan karena utang sudah terlalu mahal (<em>yield</em> SBN 10 tahun tembus 7,2%), hanya ada satu cara: **Pemangkasan Subsidi**.
+            </p>
+            <p class="mb-6">
+                "Bagaimana data realisasi belanja bansos?" tanya Yulia.
+            </p>
+            <p class="mb-6">
+                "Sudah dipotong 15% untuk dialihkan ke pembayaran bunga utang, Bu. Program Makan Siang Gratis juga direvisi, menunya turun <em>grade</em>," jawab Reza.
+            </p>
+            <p class="mb-6">
+                Yulia menatap keluar jendela, ke arah Monas yang tertutup kabut polusi. Ia teringat rapat tertutup kemarin dengan Dirjen Pajak. Perintahnya jelas dan mengerikan: <em>"Zoo Hunting"</em>. Berburu di kebun binatang. Wajib pajak yang sudah patuh akan diperiksa ulang, dicari kesalahannya, didenda. Karena mencari wajib pajak baru di sektor informal terlalu susah dan lama.
+            </p>
+            <p class="mb-6">
+                "Siapkan berkas pemeriksaan untuk sektor manufaktur tekstil dan furnitur," perintah Yulia dingin. "Terutama yang berorientasi ekspor. Kita butuh devisa, tapi kita juga butuh pajak mereka."
+            </p>
+            <p class="mb-6">
+                "Tapi Bu, mereka sedang berdarah-darah karena pasar global lesu..."
+            </p>
+            <p class="mb-6">
+                "Lakukan saja, Reza. Pilihan kita cuma dua: mereka yang mati pelan-pelan, atau negara yang <em>default</em>."
+            </p>
+
+            <!-- Sidebar Insight -->
+            <div class="sidebar p-6 my-8 rounded-r-lg">
+                <h4 class="font-bold text-gray-900 mb-2 uppercase text-sm tracking-wider"><i class="fas fa-chart-line mr-2"></i>Insight Makro: Jebakan Fiskal</h4>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    Indonesia di akhir 2025 mengalami fenomena <em>"Fiscal Cliff"</em>. Pembatalan PPN 12% menjaga inflasi inti tetap rendah (2,1%), namun melebarkan defisit keseimbangan primer. Dengan rasio pajak (*tax ratio*) yang stagnan di 10,2%, pemerintah terpaksa menerbitkan <em>Front-Loading</em> SBN (Surat Berharga Negara) dengan bunga tinggi, menyedot likuiditas perbankan. Akibatnya? Bank enggan menyalurkan kredit ke UMKM, lebih memilih membeli surat utang negara yang "bebas risiko" dan berbunga tinggi. Inilah yang disebut <em>Crowding Out Effect</em>.
+                </p>
             </div>
         </section>
 
-        <!-- Main Story Content -->
-        <article class="bg-white rounded-none md:rounded-lg shadow-sm p-6 md:p-12 prose-content text-lg">
-            
-            <p class="drop-cap mb-6">
-                Hujan deras mengguyur kaca jendela kafe di lantai 25 sebuah gedung pencakar langit di kawasan Mega Kuningan. Di luar, Jakarta tampak buram, seburam wajah <strong>Yulia</strong> yang sedari tadi memijat keningnya.
-            </p>
-            
-            <p class="mb-6">
-                "Masih pusing, Bu Analis?" goda <strong>Agung</strong> sambil menyeruput kopi hitamnya. "Harusnya kamu senang dong. Kan Januari kemarin Presiden resmi batalin kenaikan PPN 12 persen. Kopi ini harganya masih masuk akal gara-gara keputusan itu."
-            </p>
-
-            <p class="mb-6">
-                Yulia menatap Agung tajam. "Kamu pikir pembatalan itu gratis, Gung? Negara kehilangan potensi penerimaan Rp 75 triliun tahun ini. Kau pikir darimana kami nambal bolongnya?"
-            </p>
-
-            <p class="mb-6">
-                Di meja bundar itu, lima kawan lama berkumpul. Suasana sore ini tegang, bukan karena hujan, tapi karena realita dompet mereka masing-masing di penghujung 2025.
-            </p>
-
-            <div class="chapter-marker"><i class="fas fa-file-invoice-dollar"></i></div>
-
-            <h3 class="text-2xl font-bold font-sans mb-4 text-gray-900">Babak 1: Buah Simalakama Fiskal</h3>
-
-            <p class="mb-6">
-                "Makanya subsidi BBM dipangkas bulan lalu kan?" sambar <strong>Pak Seno</strong>, nadanya dingin. "PPN batal naik, rakyat senang sesaat. Tapi diam-diam Pertalite dibatasi ketat, listrik nonsubsidi naik. Ongkos produksi pabrik saya di Cikarang malah bengkak 15 persen gara-gara biaya energi."
-            </p>
-
-            <p class="mb-6">
-                Agung terdiam. Kedai makanannya memang tidak kena PPN 12 persen, tapi harga bahan baku naik gila-gilaan karena biaya logistik.
-            </p>
-
-            <p class="mb-6">
-                "Itu pilihan sulit," Yulia membela diri. "Kalau PPN dinaikkan Januari lalu, konsumsi rumah tangga bakal *collapse*. Pemerintah pilih jaga daya beli. Tapi konsekuensinya, kami harus 'berburu' di kebun binatang."
-            </p>
-
-            <p class="mb-6">
-                "Berburu?" tanya <strong>Resti</strong>, yang sedari tadi sibuk merapikan CV di laptopnya.
-            </p>
-
-            <p class="mb-6">
-                "Iya. *Hunting* pajak," jawab Pak Seno ketus. "Sekarang orang pajak ngejar-ngejar pengusaha kayak saya lebih galak dari *debt collector*. Kami diperiksa sampai ke lubang semut. Katanya 'intensifikasi pajak' buat gantiin PPN yang batal. Ujung-ujungnya, saya nggak berani ekspansi. Boro-boro nambah pegawai."
-            </p>
-
-            <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-6 text-sm font-sans italic text-gray-600">
-                <i class="fas fa-info-circle mr-2"></i><strong>Fakta Ekonomi:</strong> Pembatalan kenaikan PPN 12% pada Januari 2025 menyebabkan <em>shortfall</em> penerimaan negara sekitar Rp 75-80 Triliun, memaksa pemerintah melakukan efisiensi subsidi energi dan intensifikasi pemeriksaan pajak korporasi.
-            </div>
-
-            <div class="chapter-marker"><i class="fas fa-chart-line"></i></div>
-
-            <h3 class="text-2xl font-bold font-sans mb-4 text-gray-900">Babak 2: Deflasi yang Tak Kunjung Pergi</h3>
-
-            <p class="mb-6">
-                "Tapi kan ekonomi masih tumbuh 5 persen, Mbak Yul?" tanya Resti polos.
-            </p>
-
-            <p class="mb-6">
-                <strong>Ega</strong>, sang founder startup, tertawa getir. "Itu angka semu, Res. Lo liat <em>market</em>? Daya beli kelas menengah itu udah abis. PPN batal naik cuma nahan biar nggak makin anjlok, tapi nggak bikin orang jadi royal belanja."
-            </p>
-
-            <p class="mb-6">
-                Ega menunjukkan layar tabletnya. "Liat *GMV* (Gross Merchandise Value) e-commerce. Stagnan. Orang cuma beli makan sama sabun. Barang sekunder? Mati. Startup gue valuasi turun lagi bulan ini. Investor bilang pasar Indonesia 'lelah'."
-            </p>
-
-            <p class="mb-6">
-                "Gue saksinya," potong Agung. "Pelanggan gue dulu pesen kopi susu plus roti bakar. Sekarang? Kopi item aja. 'Lagi hemat mas,' kata mereka. Tabungan mereka tergerus buat biaya sekolah anak sama cicilan yang bunganya nggak turun-turun."
-            </p>
-
-            <div class="chapter-marker"><i class="fas fa-user-clock"></i></div>
-
-            <h3 class="text-2xl font-bold font-sans mb-4 text-gray-900">Babak 3: Generasi Cemas</h3>
-
-            <p class="mb-6">
-                Resti menutup laptopnya kasar. "Dan karena Pak Seno nggak ekspansi, Mas Ega efisiensi, aku yang kena imbasnya. Udah 14 bulan, Mbak. Tiap wawancara kerja, jawabannya sama: *'Maaf, kami sedang freeze hiring karena ketidakpastian ekonomi'*."
-            </p>
-
-            <p class="mb-6">
-                "Sabar ya, Res," ujar Yulia pelan.
-            </p>
-
-            <p class="mb-6">
-                "Nggak bisa sabar, Mbak. Temen-temenku banyak yang terjerat pinjol buat makan. Kami ini 'Bonus Demografi' yang berubah jadi 'Bencana Demografi'. Data BPS bilang pengangguran muda 16 persen lebih kan? Itu kami."
-            </p>
-
-            <p class="mb-6">
-                Pak Seno menghela napas panjang. "Saya mau nambah orang gimana, Res? Ekspor furnitur saya ke China dan Eropa turun 20 persen tahun ini. Harga komoditas anjlok. Dunia lagi nggak baik-baik saja. Pemerintah neken pajak di dalam negeri, pasar luar negeri lesu. Kita kejepit."
-            </p>
-
-            <div class="chapter-marker"><i class="fas fa-umbrella"></i></div>
-
-            <h3 class="text-2xl font-bold font-sans mb-4 text-gray-900">Epilog: Payung yang Bocor</h3>
-
-            <p class="mb-6">
-                Hujan di luar mulai reda, menyisakan gerimis.
-            </p>
-
-            <p class="mb-6">
-                "Setidaknya," kata Agung sambil memecah keheningan, "Pemerintah dengerin suara rakyat soal PPN itu. Kalau kemarin jadi naik 12 persen... mungkin kita nggak bisa nongkrong di sini lagi."
-            </p>
-
-            <p class="mb-6">
-                "Ya," jawab Yulia sambil membereskan berkasnya. "Tapi payung anggaran kita bocor, Gung. Dan airnya mulai merembes ke mana-mana. Tahun 2026 nanti bakal lebih berat kalau kita nggak nemu sumber pendapatan baru selain malakin kelas menengah."
-            </p>
-
-            <p class="mb-6">
-                Mereka beranjak pulang. Jakarta di bawah sana berkelap-kelip. Indah, tapi menyimpan jutaan kecemasan di setiap lampu jendelanya. PPN 12% memang hanyalah sebuah angka yang batal, tapi efek dominonya—pemangkasan subsidi dan pengetatan ikat pinggang—baru saja dimulai.
-            </p>
-
-        </article>
-
-        <!-- Data References Footer -->
-        <footer class="mt-12 border-t pt-8 text-gray-600">
-            <h4 class="font-bold text-gray-900 mb-4 flex items-center">
-                <i class="fas fa-check-circle mr-2"></i> Update Konteks (November 2025)
-            </h4>
-            <div class="grid md:grid-cols-2 gap-6 text-sm">
-                <div class="space-y-3">
-                    <p><strong class="text-indigo-600">Status PPN:</strong> Tarif PPN tetap 11%. Rencana kenaikan ke 12% dibatalkan/ditunda oleh pemerintahan baru pada Januari 2025.</p>
-                    <p><strong class="text-indigo-600">Dampak Fiskal:</strong> Hilangnya potensi penerimaan (~Rp 75T) direspons dengan pemangkasan subsidi energi dan intensifikasi pajak (ekstensifikasi).</p>
-                </div>
-                <div class="space-y-3">
-                    <p><strong class="text-indigo-600">Daya Beli:</strong> Masih stagnan (deflasi sisi permintaan) karena pendapatan riil tidak naik, meski inflasi barang terkendali.</p>
-                    <p><strong class="text-indigo-600">Sektor Riil:</strong> Tertekan biaya energi (subsidi dicabut) dan permintaan global yang melemah (Tech Winter & China Slowdown).</p>
+        <!-- Chapter 2: Pak Seno -->
+        <section class="mb-24">
+            <div class="flex items-center mb-6">
+                <span class="text-6xl text-gray-200 font-bold mr-4">02</span>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Kawasan Industri Cikarang</h2>
+                    <p class="mono text-sm text-red-700">PAK SENO - RAKSASA YANG TERLUKA</p>
                 </div>
             </div>
-            <div class="text-center mt-8 text-xs text-gray-400">
-                &copy; 2025 Fiksi Ekonomi Indonesia (Revisi Timeline).
+
+            <p class="mb-6">
+                Suara mesin <em>cutting</em> kayu di pabrik PT. Jati Makmur Sejahtera terdengar tidak sebingar tahun lalu. Di lantai produksi yang luasnya dua hektar, Pak Seno (55) berjalan dengan langkah berat. Ia melihat tumpukan kursi rotan premium yang seharusnya dikirim ke Hamburg, Jerman, kini berdebu di gudang.
+            </p>
+            <p class="mb-6">
+                "Surat Peringatan Kedua dari Kantor Pajak Madya," HRD-nya, Bu Ratna, menyerahkan amplop cokelat itu seperti menyerahkan vonis mati.
+            </p>
+            <p class="mb-6">
+                Pak Seno tertawa getir. "Mereka bilang saya kurang bayar PPh Badan tahun 2023 sebesar 4 Miliar? Gila. Keuntungan tahun itu sudah habis buat bayar pesangon karyawan yang kita PHK."
+            </p>
+            <p class="mb-6">
+                Ponsel Pak Seno bergetar. Pesan WhatsApp dari <em>buyer</em> di China.
+                <br>
+                <span class="mono bg-gray-200 p-1 text-xs">Mr. Chen: "Seno, sorry. Construction project in Guizhou halted. Cancel order batch #402. Will pay penalty."</span>
+            </p>
+            <p class="mb-6">
+                Penalti. Uang penalti tidak akan cukup untuk membayar listrik industri yang subsidinya baru saja dicabut diam-diam bulan lalu melalui skema <em>tariff adjustment</em>.
+            </p>
+            <p class="mb-6">
+                "Pak, serikat pekerja minta pertemuan nanti sore," tambah Bu Ratna takut-takut. "Mereka menuntut kenaikan upah 10% tahun 2026. Alasan mereka, biaya hidup naik walau PPN batal naik."
+            </p>
+            <p class="mb-6">
+                Pak Seno menatap ribuan buruhnya. Ia melihat wajah-wajah lelah yang terhimpit. Ia tahu mereka benar. Harga beras stabil tinggi, harga telur naik, sewa kontrakan naik. Tapi ia juga tahu neracanya.
+            </p>
+            <p class="mb-6">
+                "Katakan pada mereka," suara Pak Seno parau, "Tawaran saya tetap 2%. Kalau tidak mau, silakan mogok. Atau opsi kedua: Saya tutup pabrik ini, saya jual mesinnya ke Vietnam, dan kita semua pulang kampung."
+            </p>
+            <p class="mb-6">
+                Ancaman relokasi bukan isapan jempol. Vietnam dan India menawarkan insentif pajak 0% untuk 5 tahun pertama dan tanah gratis. Di Indonesia? Ia dikejar-kejar orang pajak saat sedang sekarat, birokrasi perizinan daerah yang masih korup, dan biaya logistik pelabuhan Tanjung Priok yang 2x lipat dari Singapura.
+            </p>
+            <p class="mb-6">
+                "Deindustrialisasi Dini," batin Pak Seno mengingat istilah yang sering dipakai pengamat ekonomi di TV. "Ini bukan teori lagi. Ini yang sedang saya alami."
+            </p>
+        </section>
+
+        <!-- Chapter 3: Ega -->
+        <section class="mb-24">
+            <div class="flex items-center mb-6">
+                <span class="text-6xl text-gray-200 font-bold mr-4">03</span>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Co-Working Space, Jakarta Selatan</h2>
+                    <p class="mono text-sm text-red-700">EGA - MUSIM DINGIN DIGITAL</p>
+                </div>
             </div>
-        </footer>
+
+            <p class="mb-6">
+                Ega (33) menatap nanar ke arah MacBook Pro-nya. Email dari <em>Venture Capital</em> (VC) berbasis di Singapura itu singkat, padat, dan menyakitkan.
+            </p>
+            <p class="mb-6">
+                <em>"We are pivoting our portfolio to Generative AI Infrastructure in North America. No further Series B injection for SEA Fintech consumer apps."</em>
+            </p>
+            <p class="mb-6">
+                Habis sudah. <em>Runway</em> (sisa uang kas) startup pinjaman produktif miliknya, "ModalKawan", tinggal 3 bulan.
+            </p>
+            <p class="mb-6">
+                Fenomena <em>Tech Winter</em> yang dimulai 2023 ternyata bukan badai sesaat. Ini adalah perubahan iklim permanen. Di tahun 2025, investor tidak lagi peduli pada "Growth". Mereka hanya peduli pada "Profitability" dan "AI".
+            </p>
+            <p class="mb-6">
+                "Mas Ega, server AWS kita harus dibayar besok. Kurs dolar 16.500 bikin tagihannya bengkak 20 juta dari estimasi," CTO-nya melapor.
+            </p>
+            <p class="mb-6">
+                Ega melihat sekeliling ruangan kantor yang separuh kosong. Dulu, di 2021, tempat ini penuh dengan <em>bean bag</em> warna-warni, meja pingpong, dan 50 anak muda yang optimis mengubah dunia. Sekarang, hanya tersisa 12 orang.
+            </p>
+            <p class="mb-6">
+                Masalah Ega bukan hanya investasi. Masalah utamanya adalah: Kliennya, para UMKM, gagal bayar (*Non-Performing Loan* / NPL).
+            </p>
+            <p class="mb-6">
+                Data OJK November 2025 menunjukkan TWP90 (Tingkat Wanprestasi 90 hari) Fintech Lending tembus 4,8%, nyaris menyentuh batas bahaya 5%. Kenapa? Karena ekonomi bawah tanah Indonesia sedang sakit. Warung-warung sepi. Bengkel sepi. Toko baju online sepi.
+            </p>
+            <p class="mb-6">
+                "Algoritma *credit scoring* AI kita salah, Mas," kata Ega pada dirinya sendiri. "AI kita dilatih di tahun 2020-2023 saat ekonomi masih disuntik bansos pandemi. AI kita tidak siap menghadapi realita 2025 di mana kelas menengah runtuh."
+            </p>
+            <p class="mb-6">
+                Ega membuka tab baru. LinkedIn. Ia mulai mengetik status yang paling ia benci: <em>"Open for opportunities..."</em>. Sang Founder kini menjadi pencari kerja. Namun ia sadar, di luar sana, ribuan *software engineer* korban lay-off dari GoTo, Shopee, dan Ruangguru juga sedang berebut posisi yang sama dengan gaji yang sudah didiskon 40%.
+            </p>
+        </section>
+
+        <!-- Chapter 4: Agung -->
+        <section class="mb-24">
+            <div class="flex items-center mb-6">
+                <span class="text-6xl text-gray-200 font-bold mr-4">04</span>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Rumah Susun, Tebet</h2>
+                    <p class="mono text-sm text-red-700">AGUNG - KELAS MENENGAH YANG 'MANTAB'</p>
+                </div>
+            </div>
+
+            <p class="mb-6">
+                Agung (32) menutup aplikasi *mobile banking*-nya dengan desahan panjang. Saldonya: Rp 320.000. Padahal ini baru tanggal 20.
+            </p>
+            <p class="mb-6">
+                Istilah "MANTAB" (Makan Tabungan) bukan lagi lelucon internet baginya. Itu adalah gaya hidup. Agung, mantan manajer operasional yang banting setir jadi pengusaha kedai kopi dan <em>rice bowl</em>, merasakan betul dampak "Daya Beli Semu".
+            </p>
+            <p class="mb-6">
+                "Pah, susu kental manis naik lagi seribu perak. Gas elpiji yang melon (3kg) susah dicari, terpaksa beli yang pink (12kg/non-subsidi), harganya nyekik," lapor istrinya.
+            </p>
+            <p class="mb-6">
+                "Naikin harga jual nggak mungkin, Mah. Kemarin naik seribu aja, ojol pada nggak mau ambil orderan," jawab Agung frustasi.
+            </p>
+            <p class="mb-6">
+                Di sinilah ironi PPN batal naik. Di kertas, pajak tidak naik. Tapi di lapangan, subsidi energi dicabut perlahan. Biaya logistik naik.
+            </p>
+            <p class="mb-6">
+                Pelanggan Agung adalah karyawan kantoran di segitiga emas. Dulu, mereka pesan *Rice Bowl Beef Teriyaki* (Rp 35.000). Tahun 2024, mereka turun kelas ke *Chicken Katsu* (Rp 25.000). Sekarang, November 2025, pesanan paling laku adalah: *Nasi Telur Dadar + Sambal* (Rp 12.000).
+            </p>
+            <p class="mb-6">
+                "Kita mengalami <em>Downtrading</em> massal," pikir Agung. Konsumen tidak berhenti makan, mereka hanya mengganti menu ke yang paling murah. Kualitas gizi turun.
+            </p>
+            <p class="mb-6">
+                Sore itu, Agung memutuskan untuk tidak membuka kedai. Ia menyalakan motor matic-nya, mengenakan jaket hijau yang sudah agak pudar. Ia kembali ke jalanan. Menjadi pengemudi ojek online bukan lagi sampingan, tapi penopang hidup utama.
+            </p>
+            <p class="mb-6">
+                Namun, di jalanan pun persaingan brutal. Ribuan orang seperti Agung—korban PHK pabrik Pak Seno, korban efisiensi startup Ega—semua tumpah ruah ke sektor informal. *Gig Economy* di Jakarta 2025 adalah lautan manusia yang memperebutkan remah-remah algoritma.
+            </p>
+            <p class="mb-6">
+                "Orderan sepi, Bang?" sapa driver lain di lampu merah.
+                <br>
+                "Sepi. Orang kantor sekarang bawa bekal dari rumah," jawab Agung.
+            </p>
+        </section>
+
+        <!-- Chapter 5: Resti -->
+        <section class="mb-24">
+            <div class="flex items-center mb-6">
+                <span class="text-6xl text-gray-200 font-bold mr-4">05</span>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Kamar Kos, Palmerah</h2>
+                    <p class="mono text-sm text-red-700">RESTI - GENERASI SANDWICH YANG RAPUH</p>
+                </div>
+            </div>
+
+            <p class="mb-6">
+                Resti (23) adalah anomali statistik. Lulusan *Cum Laude* Ilmu Komunikasi dari universitas negeri ternama, fasih bahasa Inggris, aktif organisasi. Di atas kertas, ia adalah "Bonus Demografi". Di realita, ia adalah bagian dari 16,8% pengangguran usia muda (Youth Unemployment) Indonesia.
+            </p>
+            <p class="mb-6">
+                Ia baru saja menyelesaikan wawancara via Zoom untuk posisi *Social Media Admin*—pekerjaan yang tidak butuh sarjana—dengan gaji di bawah UMR Jakarta.
+            </p>
+            <p class="mb-6">
+                "Maaf Resti, kami mencari yang mau <em>WFO (Work From Office)</em> 6 hari seminggu, tahan tekanan, dan bersedia ijazah ditahan. Gaji Rp 3,8 juta <em>all in</em>. Tidak ada BPJS di 3 bulan pertama," kata pewawancara tanpa dosa.
+            </p>
+            <p class="mb-6">
+                Resti ingin menangis, tapi air matanya sudah habis di bulan ke-8 menganggur.
+            </p>
+            <p class="mb-6">
+                Di media sosial, ia melihat pejabat pemerintah membanggakan pertumbuhan ekonomi 5%. "5 persen punya siapa?" teriak batin Resti. "Sektor yang tumbuh cuma pertambangan di Halmahera dan Morowali. Apa aku harus jadi kuli nikel di sana?"
+            </p>
+            <p class="mb-6">
+                Resti membuka aplikasi pinjaman online. Bukan untuk belanja baju, tapi untuk menalangi biaya obat ibunya di kampung yang BPJS-nya menunggak. Generasi Z seperti Resti bukan lagi bermimpi beli rumah. Mimpi mereka sederhana: bulan ini tidak dikejar *debt collector*.
+            </p>
+            <p class="mb-6">
+                Ia mewakili bom waktu sosial terbesar Indonesia. Generasi terdidik yang frustasi, yang merasa dikhianati oleh janji "Indonesia Emas 2045". Bagi Resti, 2045 terlalu jauh. Ia butuh makan untuk 2025.
+            </p>
+        </section>
+
+        <!-- Chapter 6: The Intersection -->
+        <section class="mb-24 bg-white p-8 md:p-12 rounded-xl shadow-xl border-t-8 border-gray-800">
+            <h2 class="text-4xl font-bold mb-8 text-center">Pertemuan di Tengah Badai</h2>
+            
+            <p class="mb-6">
+                Sebuah warung kopi modern di bilangan Sabang, Jakarta Pusat. Hujan deras mengguyur aspal. Kelima tokoh kita bertemu. Bukan reuni yang direncanakan, tapi kebetulan nasib.
+            </p>
+            <p class="mb-6">
+                Agung datang mengantarkan pesanan kopi Ega. Ega sedang rapat (meminjam uang) dengan Pak Seno. Pak Seno baru saja keluar dari kantor pusat kementerian, habis berdebat dengan Yulia. Dan Resti? Ia sedang menjadi *part-time* barista di situ, pekerjaan ke-10 yang ia lamar bulan ini.
+            </p>
+            
+            <div class="quote-box">
+                "Kita seperti berada di perahu yang sama, tapi saling melubangi dindingnya."
+            </div>
+
+            <p class="mb-6">
+                <strong>Yulia:</strong> "Pak Seno, tolong mengerti posisi negara. Kalau bapak tidak bayar pajak, siapa yang bayar subsidi listrik Agung?"
+            </p>
+            <p class="mb-6">
+                <strong>Pak Seno:</strong> "Jangan balikkan logika, Bu. Kalau Ibu memeras saya sekarang, saya tutup pabrik. Ribuan orang seperti Agung dan Resti akan kehilangan pekerjaan selamanya. Ibu mau pajak dari mayat?"
+            </p>
+            <p class="mb-6">
+                <strong>Ega:</strong> "Sudahlah. Negara ini telat sadar. Kalian sibuk bangun infrastruktur fisik, tapi infrastruktur manusianya keropos. Startup saya mati karena tidak ada daya beli, bukan karena aplikasi saya jelek."
+            </p>
+            <p class="mb-6">
+                <strong>Agung:</strong> (Meletakkan kopi) "Saya nggak ngerti makro-ekonomi, Bu, Pak. Saya cuma tahu, dulu uang seratus ribu bisa buat belanja sayur seminggu. Sekarang cuma dapet minyak, beras literan, sama telur setengah kilo. Batalin PPN 12 persen itu bagus, tapi kalau harga barang tetep naik karena bensin naik, ya sama aja bohong."
+            </p>
+            <p class="mb-6">
+                <strong>Resti:</strong> (Menunduk membersihkan meja) "Kalian semua masih mending punya aset, punya jabatan. Saya? Saya lulusan terbaik yang cuma bisa ngelap meja kalian. Apa salah generasi saya? Kami lahir di waktu yang salah?"
+            </p>
+            
+            <p class="mb-6">
+                Hening. Suara hujan mengisi kekosongan argumen mereka.
+            </p>
+            <p class="mb-6">
+                Di luar, berita di TV menyiarkan <em>breaking news</em>: <br>
+                <strong>"Konflik Timur Tengah Memanas, Selat Hormuz Terancam Ditutup. Harga Minyak Dunia Melonjak ke $95/Barel."</strong>
+            </p>
+            <p class="mb-6">
+                Wajah Yulia memucat. Kenaikan harga minyak artinya subsidi energi akan meledak lagi. APBN akan jebol.
+                Wajah Pak Seno menegang. Biaya produksi akan naik lagi.
+                Agung dan Ega saling pandang. Inflasi gelombang kedua akan datang.
+            </p>
+            <p class="mb-6">
+                Resti hanya menghela napas, "Ya sudah. Setidaknya tip hari ini lumayan."
+            </p>
+        </section>
+
+        <!-- Data Visualization Section (Text Based) -->
+        <section class="mb-20 bg-gray-100 p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-6 text-gray-900 border-b-2 border-red-800 pb-2">DATA SHEET: INDONESIA NOV 2025</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="font-bold text-lg mb-2">Indikator Makro</h4>
+                    <ul class="list-disc pl-5 space-y-2 mono text-sm">
+                        <li><strong>Pertumbuhan PDB:</strong> 4.92% (Melambat dari 5.05%)</li>
+                        <li><strong>Kurs IDR/USD:</strong> Rp 16.480 (Terdepresiasi)</li>
+                        <li><strong>Cadangan Devisa:</strong> $128 Miliar (Tergerus intervensi BI)</li>
+                        <li><strong>Yield SBN 10Y:</strong> 7.15% (Biaya utang mahal)</li>
+                        <li><strong>PMI Manufaktur:</strong> 48.5 (Kontraksi 5 bulan beruntun)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-2">Indikator Kesejahteraan</h4>
+                    <ul class="list-disc pl-5 space-y-2 mono text-sm">
+                        <li><strong>Inflasi IHK:</strong> 2.8% (Rendah tapi semu)</li>
+                        <li><strong>Inflasi Pangan:</strong> 6.5% (Volatile Food tinggi)</li>
+                        <li><strong>Pengangguran Muda:</strong> 16.8% (Tertinggi di ASEAN-5)</li>
+                        <li><strong>Indeks Keyakinan Konsumen:</strong> 112 (Optimis tapi turun trennya)</li>
+                        <li><strong>Kelas Menengah:</strong> Menyusut 4% dibanding 2024</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 text-sm text-gray-600 italic">
+                *Data diolah dari proyeksi IMF World Economic Outlook (Okt 2025), Data BPS Triwulan III 2025, dan Bloomberg Consensus.*
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="mb-24">
+            <h2 class="text-3xl font-bold mb-6 text-gray-900">Epilog: Menanti Fajar 2026</h2>
+            <p class="mb-6">
+                Malam itu, Jakarta tetap gemerlap dilihat dari kejauhan. Lampu-lampu gedung pencakar langit menyala, menyembunyikan retakan di pondasinya.
+            </p>
+            <p class="mb-6">
+                Kisah November 2025 bukanlah kisah tentang kiamat ekonomi. Indonesia terlalu besar untuk runtuh dalam semalam. Ekonomi domestik yang disokong konsumsi 280 juta manusia masih menjadi bantalan udara (*airbag*) yang kuat. Pasar tradisional masih ramai, meski nilai transaksi mengecil. Warung kopi masih buka, meski ganti sasetan.
+            </p>
+            <p class="mb-6">
+                Ini adalah kisah tentang **"The Great Stagnation"**. Sebuah era di mana lari kencang terasa seperti jalan di tempat. Di mana mimpi mobilitas sosial vertikal (menjadi kaya) digantikan oleh perjuangan mobilitas horizontal (bertahan hidup).
+            </p>
+            <p class="mb-6">
+                Bagi Yulia, Pak Seno, Ega, Agung, dan Resti, tahun depan adalah pertaruhan. Apakah pemimpin baru berani melakukan reformasi struktural yang menyakitkan—memberantas korupsi birokrasi, efisiensi BUMN, dan transformasi pendidikan nyata—atau kembali memilih jalan pintas populisme yang memabukkan namun mematikan di jangka panjang?
+            </p>
+            <p class="mb-6 font-bold text-center text-xl mt-12">
+                Di ujung November yang basah, neraca itu masih retak. Dan kita semua sedang berusaha menahannya agar tidak pecah.
+            </p>
+        </section>
 
     </main>
 
+    <footer class="bg-gray-900 text-gray-400 py-12 text-center text-sm">
+        <p class="mb-4">&copy; 2025 Simulasi Naratif Ekonomi.</p>
+        <p>Ditulis berdasarkan analisis data ekonomi global dan domestik terkini (Proyeksi Nov 2025).</p>
+        <div class="mt-4 flex justify-center gap-4 text-xs mono">
+            <span>IMF WEO Oct 2025</span> | 
+            <span>World Bank Indonesia Outlook</span> | 
+            <span>BPS Data Sets</span> | 
+            <span>OECD Economic Survey</span>
+        </div>
+    </footer>
+
+    <script>
+        // Progress Bar Logic
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+    </script>
 </body>
 </html>
