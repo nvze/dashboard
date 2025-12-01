@@ -53,35 +53,39 @@
             align-items: center;
         }
 
-        /* Container untuk Logo agar rapi */
+        /* Container untuk Logo */
         .logo-container {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
+            /* Pastikan tidak ada background di container */
+            background: transparent; 
         }
 
-        /* LOGO STYLING (TRIK KHUSUS) */
+        /* LOGO STYLING (PERBAIKAN BACKGROUND) */
         .header-logo {
-            max-width: 200px; /* Ukuran logo, sesuaikan jika terlalu besar/kecil */
+            max-width: 220px; 
             height: auto;
             
-            /* Trik Magic CSS untuk Logo JPG (Background Putih) di Tema Gelap: */
-            filter: invert(1) contrast(1.2); /* Membalik warna (hitam jadi putih) */
-            mix-blend-mode: screen; /* Menghilangkan background hitam hasil invert agar transparan */
+            /* RUMUS PERBAIKAN:
+               1. grayscale(1): Buang warna (hitam putih saja).
+               2. brightness(1.5): Terangkan abu-abu background supaya jadi putih mentok.
+               3. contrast(3): Pertajam perbedaan hitam (teks) dan putih (bg).
+               4. invert(1): Balik warna (Bg Putih -> Hitam Pekat, Teks Hitam -> Putih).
+            */
+            filter: grayscale(100%) brightness(150%) contrast(300%) invert(100%);
             
-            opacity: 0.9; /* Sedikit transparan agar menyatu */
+            /* Hapus warna Hitam Pekat (background hasil invert) */
+            mix-blend-mode: screen; 
+            
+            /* Sedikit transparansi agar menyatu dengan bloom background */
+            opacity: 0.95; 
         }
 
-        h1 { 
-            font-size: 1.5rem; 
-            font-weight: 400; 
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-            color: var(--text-secondary); /* Warna teks jadi lebih soft karena sudah ada logo */
-            display: none; /* Sembunyikan teks H1 jika logo sudah ada tulisan NVZE */
-        }
+        /* Fallback text (disembunyikan) */
+        h1 { display: none; }
 
         #clock {
             font-size: 0.95rem;
@@ -268,11 +272,11 @@
 
     <header>
         <div class="logo-container">
-            <!-- Pastikan nama file gambar Anda adalah logo.jpg -->
+            <!-- Pastikan nama file gambar tetap logo.jpg -->
             <img src="logo.jpg" alt="NvZE Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('h1').style.display='block';">
         </div>
         
-        <!-- Text Fallback (Hanya muncul jika gambar gagal dimuat) -->
+        <!-- Text Fallback (Jika gambar error) -->
         <h1>NvZE Bookmark</h1>
 
         <div id="clock">Loading time...</div>
