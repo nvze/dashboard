@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NvZE Bookmark - Win11 Style</title>
+    <style>
+        /* === 1. WINDOWS 11 FLUENT DESIGN VARIABLES === */
+        :root {
+            /* Background "Bloom" Colors */
+            --bg-dark: #000000;
+            --bloom-blue: #1c2340;
+            --bloom-accent: #373e66;
+            
+            /* Acrylic / Mica Material */
+            --mica-bg: rgba(32, 32, 32, 0.65);
+            --mica-border: rgba(255, 255, 255, 0.08);
+            --hover-bg: rgba(255, 255, 255, 0.06);
+            
+            /* Text & Accents */
+            --text-primary: #ffffff;
+            --text-secondary: #aeb2ba;
+            --win-blue: #60cdff; /* Windows 11 Accent Blue */
+            
+            /* Spacing & Radius */
+            --radius-card: 8px;
+            --radius-input: 6px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            /* Imitasi Wallpaper Windows 11 "Bloom" Dark */
+            background: radial-gradient(circle at 50% 0%, var(--bloom-accent) 0%, var(--bloom-blue) 40%, var(--bg-dark) 90%);
+            background-attachment: fixed;
+            color: var(--text-primary); 
+            padding: 40px 20px; 
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            font-family: "Segoe UI Variable", "Segoe UI", sans-serif; /* Font asli Win11 */
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* === 2. HEADER === */
+        header { 
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Container untuk Logo agar rapi */
+        .logo-container {
+            margin-bottom: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* LOGO STYLING (TRIK KHUSUS) */
+        .header-logo {
+            max-width: 200px; /* Ukuran logo, sesuaikan jika terlalu besar/kecil */
+            height: auto;
+            
+            /* Trik Magic CSS untuk Logo JPG (Background Putih) di Tema Gelap: */
+            filter: invert(1) contrast(1.2); /* Membalik warna (hitam jadi putih) */
+            mix-blend-mode: screen; /* Menghilangkan background hitam hasil invert agar transparan */
+            
+            opacity: 0.9; /* Sedikit transparan agar menyatu */
+        }
+
+        h1 { 
+            font-size: 1.5rem; 
+            font-weight: 400; 
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary); /* Warna teks jadi lebih soft karena sudah ada logo */
+            display: none; /* Sembunyikan teks H1 jika logo sudah ada tulisan NVZE */
+        }
+
+        #clock {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-weight: 400;
+            margin-top: 5px;
+        }
+
+        /* Input Search ala Windows 11 Start Menu */
+        #searchInput {
+            width: 100%;
+            max-width: 600px;
+            padding: 12px 16px; 
+            border-radius: var(--radius-input);
+            border: 1px solid var(--mica-border);
+            border-bottom: 2px solid transparent; /* Untuk efek focus */
+            background-color: rgba(0, 0, 0, 0.25);
+            color: white; 
+            outline: none; 
+            font-size: 0.95rem; 
+            text-align: left;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        #searchInput::placeholder { color: rgba(255,255,255,0.4); }
+
+        #searchInput:focus { 
+            background-color: rgba(0, 0, 0, 0.4);
+            border-color: var(--mica-border);
+            border-bottom-color: var(--win-blue); /* Aksen biru di bawah saat ngetik */
+        }
+
+        /* === 3. GRID SYSTEM === */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 12px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1; 
+        }
+
+        /* === 4. ACCORDION CARD (MICA STYLE) === */
+        details.card {
+            background-color: var(--mica-bg);
+            backdrop-filter: blur(30px); /* Efek blur kaca */
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--mica-border);
+            border-radius: var(--radius-card);
+            overflow: hidden; 
+            transition: background-color 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        details.card:hover {
+            background-color: rgba(45, 45, 45, 0.75);
+        }
+
+        /* Judul Accordion */
+        summary.card-header {
+            padding: 14px 16px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: 0.2s;
+        }
+
+        summary.card-header::-webkit-details-marker { display: none; }
+
+        /* Icon Panah Chevron Win11 Style */
+        summary.card-header::after {
+            content: '\203A'; /* Chevron Right */
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            transform: rotate(90deg);
+            transition: transform 0.2s ease;
+            line-height: 0;
+            margin-top: -4px;
+        }
+
+        /* Saat Terbuka */
+        details[open] summary.card-header {
+            border-bottom: 1px solid var(--mica-border);
+            color: var(--win-blue);
+        }
+
+        details[open] summary.card-header::after {
+            transform: rotate(-90deg); /* Putar ke atas */
+            color: var(--win-blue);
+        }
+
+        /* === 5. ISI LINK === */
+        .link-list {
+            padding: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        /* Scrollbar Win11 Style (Tipis & Melayang) */
+        .link-list::-webkit-scrollbar { width: 4px; }
+        .link-list::-webkit-scrollbar-track { background: transparent; }
+        .link-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        .link-list::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+
+        .bookmark-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            padding: 10px 12px;
+            border-radius: 4px; /* Sedikit rounded di item list */
+            font-size: 0.9rem;
+            transition: background 0.1s;
+        }
+
+        .bookmark-link:hover {
+            background-color: var(--hover-bg); /* Efek hover list menu Windows */
+        }
+
+        .favicon {
+            width: 16px; height: 16px; margin-right: 12px; border-radius: 0; /* Icon tajam ala Windows */
+            flex-shrink: 0;
+        }
+
+        /* Animasi Slide Halus */
+        details[open] .link-list {
+            animation: fadeIn 0.25s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden { display: none !important; }
+
+        /* === 6. NAVIGATION BUTTONS === */
+        .navigation-bottom {
+            text-align: center;
+            margin: 40px 0 20px 0;
+        }
+
+        .btn-dashboard {
+            display: inline-block;
+            padding: 8px 24px;
+            background-color: var(--mica-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--mica-border);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-dashboard:hover {
+            background-color: var(--hover-bg);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center; 
+            color: var(--text-secondary); 
+            font-size: 0.75rem; 
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <!-- Pastikan nama file gambar Anda adalah logo.jpg -->
+            <img src="logo.jpg" alt="NvZE Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('h1').style.display='block';">
+        </div>
+        
+        <!-- Text Fallback (Hanya muncul jika gambar gagal dimuat) -->
+        <h1>NvZE Bookmark</h1>
+
+        <div id="clock">Loading time...</div>
+        <input type="text" id="searchInput" placeholder="Cari aplikasi, file, atau pengaturan..." onkeyup="filterLinks()">
+    </header>
+
+    <main class="grid-container">
+
+        <details class="card">
+            <summary class="card-header">&#128231; Email Services</summary>
+            <div class="link-list">
+                <a href="https://accounts.google.com/b/0/AddMailService" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=google.com" class="favicon">Gmail</a>
+                <a href="https://outlook.live.com/owa/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=outlook.live.com" class="favicon">Outlook</a>
+                <a href="https://login.yahoo.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=yahoo.com" class="favicon">Yahoo Mail</a>
+                <a href="https://protonmail.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=protonmail.com" class="favicon">ProtonMail</a>
+ <a href="https://nvze.github.io/dashboard/pt-posting-tayang.html" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=nvze.github.io/dashboard" class="favicon">Postingan Tayangkan</a>
+
+            </div>
+        </details>
+
+        <details class="card">
+            <summary class="card-header">&#128200; Finance & Trading</summary>
+            <div class="link-list">
+                <a href="https://mt4.octabroker.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=octabroker.com" class="favicon">Octa MetaTrader 4</a>
+                <a href="https://www.bloomberg.com/quote/USDIDR:CUR?embedded-checkout=true" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=bloomberg.com" class="favicon">Kurs Rupiah-Dollar 4</a>
+                <a href="https://www.tradingview.com/chart/?symbol=TVC%3ADXY" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=tradingview.com" class="favicon">DXY-Index Dollar</a>     
+                <a href="https://id.investing.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=investing.com" class="favicon">Investing.com</a>
+                <a href="https://tradingeconomics.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=tradingeconomics.com" class="favicon">Trading Economics</a>
+                <a href="https://www.paypal.com/id/home" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=paypal.com" class="favicon">PayPal</a>
+                <a href="https://app.kledo.com/#/user/login" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=kledo.com" class="favicon">Kledo Accounting</a>
+                <a href="https://djponline.pajak.go.id/account/login" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=pajak.go.id" class="favicon">DJP Online (Pajak)</a>
+                <a href="https://coretaxdjp.pajak.go.id/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=pajak.go.id" class="favicon">CORETAX DJP</a>
+                <a href="https://mitra.bgn.go.id/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=bgn.go.id" class="favicon">Mitra Badan Gizi Nasional</a>
+                <a href="https://www.numbeo.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=numbeo.com" class="favicon">Numbeo (Cek Harga)</a>
+            </div>
+        </details>
+
+        <details class="card">
+            <summary class="card-header">&#128172; Social & Chat</summary>
+            <div class="link-list">
+                <a href="https://web.whatsapp.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=whatsapp.com" class="favicon">WhatsApp Web</a>
+                <a href="https://web.telegram.org/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=telegram.org" class="favicon">Telegram Web</a>
+                <a href="http://www.facebook.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=facebook.com" class="favicon">Facebook</a>
+                <a href="https://x.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=x.com" class="favicon">X (Twitter)</a>
+            </div>
+        </details>
+
+        <details class="card">
+            <summary class="card-header">&#9729;&#65039; Cloud & Drive</summary>
+            <div class="link-list">
+                <a href="https://drive.google.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=drive.google.com" class="favicon">Google Drive</a>
+                <a href="https://onedrive.live.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=onedrive.live.com" class="favicon">OneDrive</a>
+                <a href="https://www.terabox.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=terabox.com" class="favicon">TeraBox</a>
+                <a href="https://www.box.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=box.com" class="favicon">Box</a>
+                <a href="https://mega.nz/login" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=mega.nz" class="favicon">MEGA</a>
+                <a href="https://drive.proton.me/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=proton.me" class="favicon">Proton Drive</a>
+                <a href="https://disk.yandex.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=yandex.com" class="favicon">Yandex Disk</a>
+                <a href="https://www.dropbox.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=dropbox.com" class="favicon">Dropbox</a>
+                <a href="https://www.mediafire.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=mediafire.com" class="favicon">MediaFire</a>
+                <a href="https://imnxx.odoo.com/odoo/documents" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=odoo.com" class="favicon">Odoo Docs</a>
+            </div>
+        </details>
+
+        <details class="card">
+            <summary class="card-header">&#129302; AI Tools</summary>
+            <div class="link-list">
+                <a href="https://chat.openai.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=openai.com" class="favicon">ChatGPT</a>
+                <a href="https://grok.com/c/5349981f-91c6-452a-839d-8917de6d6ffd" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=grok.com" class="favicon">Grok</a>
+                <a href="https://gemini.google.com/app" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=google.com" class="favicon">Gemini</a>
+                <a href="https://notebooklm.google/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=notebooklm.google" class="favicon">NotebookLM</a>
+                <a href="https://chat.deepseek.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=deepseek.com" class="favicon">DeepSeek</a>
+                <a href="https://chat.mistral.ai/chat" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=mistral.ai" class="favicon">Mistral AI</a>
+                <a href="https://www.perplexity.ai/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=perplexity.ai" class="favicon">Perplexity</a>
+                <a href="https://copilot.microsoft.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=microsoft.com" class="favicon">MS Copilot</a>
+                <a href="https://www.meta.ai/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=meta.ai" class="favicon">Meta AI</a>
+                <a href="https://chat.qwen.ai/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=qwen.ai" class="favicon">Qwen AI</a>
+                <a href="https://idx.google.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=google.com" class="favicon">Project IDX</a>
+            </div>
+        </details>
+
+        <details class="card">
+            <summary class="card-header">&#127916; Hiburan & TV</summary>
+            <div class="link-list">
+                <a href="https://music.youtube.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=music.youtube.com" class="favicon">YouTube Music</a>
+                <a href="https://www.youtube.com//" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=youtube.com" class="favicon">Youtube</a>                
+                <a href="https://www.vidio.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=vidio.com" class="favicon">Vidio (SCTV/Indosiar)</a>
+                <a href="https://www.visionplus.id/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=visionplus.id" class="favicon">Vision+</a>
+                <a href="https://www.rctiplus.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=rctiplus.com" class="favicon">RCTI+</a>
+                <a href="https://www.transtv.co.id/live" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=transtv.co.id" class="favicon">TransTV</a>
+                <a href="https://maxstream.tv/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=maxstream.tv" class="favicon">MAXStream</a>
+                <a href="https://streaming.klcbsofficial.com/public/klcbs" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=klcbsofficial.com" class="favicon">KLCBS Radio</a>
+            </div>
+        </details>
+
+        <details class="card">
+            <summary class="card-header">&#128221; Blog & Library</summary>
+            <div class="link-list">
+                <a href="https://ebandaro.id/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=ebandaro.id" class="favicon">Berpikir & Bertindak</a>
+                <a href="https://welib.org/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=welib.org" class="favicon">WeLib (Buku)</a>
+                <a href="https://nvze.wordpress.com/" class="bookmark-link" target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=nvze.wordpress.com/" class="favicon">nvze blog
+                </a>
+                <a href="https://esan.home.blog/" class="bookmark-link" target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=esan.home.blog/" class="favicon">Esan blog
+                </a>
+
+                <a href="https://kalamsastra.id/" class="bookmark-link" target="_blank">
+                    <img src="https://www.google.com/s2/favicons?domain=kalamsastra.id/" class="favicon">Kalam Sastra
+                </a>
+                <a href="https://cintokasiah.blogspot.com/?m=1" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=blogspot.com" class="favicon">Cerpen Kehidupan</a>
+                <a href="https://babo.lentera.biz/?m=1" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=lentera.biz" class="favicon">Lentera Babo</a>
+                <a href="https://erizeli.aboutbusiness.info/?m=1" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=aboutbusiness.info" class="favicon">About Business</a>
+                <a href="https://imnxx.home.blog/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=wordpress.com" class="favicon">The ImnXX Blog</a>
+                <a href="http://30hariceritacinta.blogspot.com/?m=0" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=blogspot.com" class="favicon">Sederet Cinta</a>
+            </div>
+        </details>
+
+        <details class="card">
+            <summary class="card-header">&#128203; Office & Docs</summary>
+            <div class="link-list">
+                <a href="https://docs.google.com/spreadsheets/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=google.com" class="favicon">Google Sheets</a>
+                <a href="https://workspace.google.com/products/docs/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=google.com" class="favicon">Google Docs</a>
+                <a href="https://www.notion.so/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=notion.so" class="favicon">Notion</a>
+                <a href="https://replit.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=replit.com" class="favicon">Replit</a>
+                <a href="https://github.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=github.com" class="favicon">GitHub</a>
+                <a href="https://app.simplenote.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=simplenote.com" class="favicon">Simplenote</a>
+                <a href="https://keep.google.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=keep.google.com" class="favicon">Google Keep</a>
+            </div>
+        </details>
+
+        <details class="card">
+            <summary class="card-header">&#128736;&#65039; Tools & System</summary>
+            <div class="link-list">
+                <a href="https://app.raindrop.io/my/0" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=raindrop.io" class="favicon">Raindrop </a>
+                <a href="https://www.virustotal.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=virustotal.com" class="favicon">VirusTotal</a>
+                <a href="https://github.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=github.com" class="favicon">Github </a>
+                <a href="https://fast.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=fast.com" class="favicon">Fast.com Speedtest</a>
+                <a href="https://app.netlify.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=app.netlify.com" class="favicon">Netlify </a>
+                <a href="https://snapdrop.net/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=snapdrop.net" class="favicon">Snapdrop</a>
+                <a href="https://pairdrop.net/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=pairdrop.net" class="favicon">PairDrop</a>
+                <a href="https://my.nextdns.io/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=nextdns.io" class="favicon">NextDNS Analytics</a>
+                <a href="https://https://vscode.dev//" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=vscode.dev" class="favicon">VScode</a> 
+                <a href="http://127.0.0.1:5000/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=localhost" class="favicon">Localhost:5000</a>
+                <a href="https://firmwarefile.com/lenovo-a7700" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=firmwarefile.com" class="favicon">Lenovo Firmware</a>
+                <a href="https://getintopc.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=getintopc.com" class="favicon">GetintoPC</a>
+            </div>
+        </details>
+
+    </main>
+
+    <div class="navigation-bottom">
+        <a href="https://nvze.github.io/dashboard/index.html" class="btn-dashboard">
+            &#8592; Kembali ke Dashboard
+        </a>
+    </div>
+
+    <footer>
+        &copy; 2025 NVZE Dashboard System<br>
+        <span style="font-size: 0.7rem; opacity: 0.5;">Fluent Design Inspired</span>
+    </footer>
+
+    <script>
+        // 1. JAM
+        function updateClock() {
+            try {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                document.getElementById('clock').textContent = now.toLocaleDateString('id-ID', options);
+            } catch(e) {}
+        }
+        setInterval(updateClock, 1000); updateClock();
+
+        // 2. FILTER SEARCH PINTAR
+        function filterLinks() {
+            const input = document.getElementById('searchInput').value.toUpperCase();
+            const details = document.querySelectorAll('details');
+
+            details.forEach(detail => {
+                let links = detail.querySelectorAll('a');
+                let hasVisible = false;
+
+                links.forEach(link => {
+                    if (link.textContent.toUpperCase().indexOf(input) > -1) {
+                        link.style.display = "flex";
+                        hasVisible = true;
+                    } else {
+                        link.style.display = "none";
+                    }
+                });
+
+                if (input.length > 0) {
+                    if (hasVisible) {
+                        detail.classList.remove('hidden');
+                        detail.open = true;
+                    } else {
+                        detail.classList.add('hidden');
+                        detail.open = false;
+                    }
+                } else {
+                    detail.classList.remove('hidden');
+                    detail.open = false;
+                    links.forEach(link => link.style.display = "flex");
+                }
+            });
+        }
+
+        // 3. LOGIKA ACCORDION (SATU TERBUKA)
+        const allDetails = document.querySelectorAll('details');
+        allDetails.forEach((targetDetail) => {
+            targetDetail.addEventListener('toggle', (e) => {
+                if (targetDetail.open) {
+                    allDetails.forEach((detail) => {
+                        if (detail !== targetDetail && detail.open) {
+                            detail.open = false;
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
