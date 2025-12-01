@@ -10,6 +10,7 @@
     
     body {
       font-family: "Segoe UI Variable Display", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      /* --- BACKGROUND WARNA --- */
       background-color: #050810; 
       background-image: radial-gradient(circle at 50% 0%, #1e2a45 0%, #050810 80%);
       color: #ffffff;
@@ -20,7 +21,7 @@
       overflow: hidden;
     }
 
-    /* Container Utama */
+    /* Container Utama - Style Dark Acrylic */
     .dashboard-card {
       background: rgba(18, 24, 38, 0.6); 
       backdrop-filter: blur(40px) saturate(110%);
@@ -29,7 +30,7 @@
       border-radius: 12px; 
       box-shadow: 
         0 25px 60px rgba(0, 0, 0, 0.5), 
-        0 1px 1px rgba(255, 255, 255, 0.05) inset;
+        0 1px 1px rgba(255, 255, 255, 0.05) inset; 
       text-align: center;
       max-width: 460px;
       width: 90%;
@@ -40,7 +41,7 @@
       align-items: center;
     }
 
-    /* --- WIDGET JAM --- */
+    /* --- WIDGET JAM (Dark Mode Style) --- */
     .clock-widget {
       margin-bottom: 2rem;
       width: 100%;
@@ -49,7 +50,7 @@
     .time-display {
       font-size: 3.5rem;
       font-weight: 600; 
-      color: #ffffff;
+      color: #ffffff; 
       line-height: 1;
       margin-bottom: 0.25rem;
       font-feature-settings: "tnum";
@@ -59,43 +60,18 @@
 
     .date-display {
       font-size: 1.1rem;
-      color: #a0aec0;
+      color: #a0aec0; 
       font-weight: 400;
     }
     
-    /* --- LOGO IMPLEMENTATION --- */
-    /* Menggunakan STYLE PERSIS dari bookmark.html */
-    .dashboard-logo {
-        width: 180px; 
-        height: auto;
-        margin-bottom: 0.5rem;
-        
-        /* COPY-PASTE DARI BOOKMARK.HTML */
-        filter: grayscale(100%) brightness(150%) contrast(300%) invert(100%);
-        mix-blend-mode: screen; 
-        opacity: 0.95; 
-        
-        transition: transform 0.3s ease;
-    }
-
-    .dashboard-logo:hover {
-        transform: scale(1.05); 
-    }
-
-    /* Fallback Avatar */
-    .profile-avatar-fallback {
-      display: none; 
-      width: 64px;
-      height: 64px;
-      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-      color: white;
-      font-size: 1.75rem;
-      font-weight: 600;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
+    /* Header: Logo Baru & Judul */
+    .profile-logo {
+      width: auto;
+      height: 64px; /* Ketinggian disesuaikan agar seimbang */
       margin-bottom: 1rem;
-      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+      /* Filter agar logo hitam terlihat jelas namun tetap serasi dengan tema gelap */
+      filter: brightness(1.2) contrast(1.1);
+      border-radius: 8px;
     }
 
     h1 {
@@ -119,7 +95,7 @@
       width: 100%;
     }
 
-    /* Style Tombol Menu */
+    /* Style Tombol Menu - Dark Tile */
     a.menu-item {
       display: flex;
       flex-direction: column;
@@ -181,13 +157,8 @@
       <div class="date-display" id="clock-date">Memuat tanggal...</div>
     </div>
 
-    <!-- LOGO IMPLEMENTATION -->
-    <img src="logo.jpg" alt="NvZE Logo" class="dashboard-logo" 
-         onerror="this.style.display='none'; document.querySelector('.profile-avatar-fallback').style.display='flex';">
-
-    <!-- Fallback Avatar -->
-    <div class="profile-avatar-fallback">N</div>
-
+    <img src="image_0.png" alt="NVZE SYSTEM Logo" class="profile-logo">
+    
     <h1>NvZE Dashboard</h1>
     <p class="subtitle">Refleksi visual Knowledge & Knowhow</p>
 
@@ -209,13 +180,17 @@
   <script>
     function updateClock() {
       const now = new Date();
+      
       const timeOptions = { hour: '2-digit', minute: '2-digit' };
       const timeString = now.toLocaleTimeString('id-ID', timeOptions).replace('.', ':');
+      
       const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
       const dateString = now.toLocaleDateString('id-ID', dateOptions);
+
       document.getElementById('clock-time').textContent = timeString;
       document.getElementById('clock-date').textContent = dateString;
     }
+
     updateClock();
     setInterval(updateClock, 1000);
   </script>
