@@ -10,7 +10,7 @@
     
     body {
       font-family: "Segoe UI Variable Display", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-      /* --- BACKGROUND WARNA --- */
+      /* --- BACKGROUND UTAMA --- */
       background-color: #050810; 
       background-image: radial-gradient(circle at 50% 0%, #1e2a45 0%, #050810 80%);
       color: #ffffff;
@@ -23,10 +23,10 @@
 
     /* Container Utama */
     .dashboard-card {
-      /* Background sedikit lebih gelap agar kontras dengan logo lebih baik */
-      background: rgba(13, 17, 28, 0.7); 
-      backdrop-filter: blur(40px) saturate(110%);
-      -webkit-backdrop-filter: blur(40px) saturate(110%);
+      /* PERBAIKAN: Menggunakan warna solid semi-transparan (tanpa blur) */
+      /* Ini menjamin kotak hitam pada logo akan hilang sempurna */
+      background: rgba(18, 24, 38, 0.95); 
+      
       padding: 3rem 2rem;
       border-radius: 16px; 
       box-shadow: 
@@ -35,7 +35,7 @@
       text-align: center;
       max-width: 420px;
       width: 85%;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -43,11 +43,12 @@
 
     /* --- WIDGET JAM --- */
     .clock-widget {
-      margin-bottom: 2.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
     }
     
     .time-display {
-      font-size: 3.2rem;
+      font-size: 3.5rem;
       font-weight: 500; 
       color: #ffffff; 
       line-height: 1;
@@ -61,30 +62,28 @@
       font-weight: 400;
     }
     
-    /* --- LOGO FIX ULTIMATE --- */
+    /* --- LOGO FIX (METODE SCREEN) --- */
     .logo-container {
-      /* Container ini memastikan blending mode bekerja dengan benar */
       margin-bottom: 0.5rem;
-      padding: 10px;
-      /* Background transparan */
+      padding: 5px;
     }
 
     .profile-logo {
-      width: 140px; /* Ukuran disesuaikan dengan contoh screenshot */
+      width: 140px; 
       height: auto;
       
-      /* TEKNIK THRESHOLDING: */
-      /* 1. Grayscale: Buat hitam putih */
-      /* 2. Brightness 200%: Bakar background off-white jadi Putih Murni */
-      /* 3. Contrast 200%: Pertegas teks hitam */
-      /* 4. Invert: Balik (Bg jadi Hitam Pekat, Teks jadi Putih) */
-      filter: grayscale(100%) brightness(200%) contrast(200%) invert(100%);
+      /* LANGKAH 1: Ubah gambar jadi Putih Text, Hitam Background */
+      /* Grayscale: Buang warna */
+      /* Contrast 150%: Pastikan hitam pekat dan putih terang */
+      /* Invert: Balik warna (Background putih jadi hitam) */
+      filter: grayscale(100%) contrast(150%) invert(100%);
       
-      /* Mix-blend-mode: Lighten atau Screen */
-      /* Lighten lebih aman untuk menghilangkan kotak abu-abu sisa */
-      mix-blend-mode: lighten; 
+      /* LANGKAH 2: Hilangkan warna Hitam (Background) */
+      /* Screen: Menjadikan warna hitam transparan */
+      mix-blend-mode: screen; 
       
       display: block;
+      opacity: 0.95;
     }
 
     h1 {
@@ -97,11 +96,11 @@
 
     p.subtitle {
       color: #64748b; 
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       font-size: 0.85rem;
     }
 
-    /* List Menu (Vertical seperti screenshot) */
+    /* List Menu */
     .menu-list {
       display: flex;
       flex-direction: column;
@@ -112,9 +111,9 @@
     a.menu-item {
       display: flex;
       align-items: center;
-      justify-content: space-between; /* Icon kanan, teks kiri */
+      justify-content: space-between;
       text-decoration: none;
-      background: rgba(30, 41, 59, 0.4); /* Darker tile */
+      background: rgba(30, 41, 59, 0.4); 
       padding: 1rem 1.2rem;
       border-radius: 8px;
       border: 1px solid rgba(255, 255, 255, 0.05);
@@ -149,7 +148,6 @@
       opacity: 0.8;
     }
     
-    /* Search Bar Imitasi (Opsional, sesuai screenshot) */
     .search-bar {
       width: 100%;
       background: rgba(0,0,0,0.2);
@@ -176,7 +174,7 @@
     <p class="subtitle">Refleksi visual Knowledge & Knowhow</p>
 
     <div class="clock-widget">
-       <div class="time-display" id="clock-time">00:00</div>
+      <div class="time-display" id="clock-time">00:00</div>
       <div class="date-display" id="clock-date">Memuat...</div>
     </div>
     
@@ -206,7 +204,7 @@
       const now = new Date();
       const timeOptions = { hour: '2-digit', minute: '2-digit' };
       const timeString = now.toLocaleTimeString('id-ID', timeOptions).replace('.', ':');
-      const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }; // Tambah tahun
+      const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }; 
       const dateString = now.toLocaleDateString('id-ID', dateOptions);
 
       document.getElementById('clock-time').textContent = timeString;
