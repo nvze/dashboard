@@ -64,14 +64,19 @@
       font-weight: 400;
     }
     
-    /* Header: Logo Baru & Judul */
+    /* Header: Logo */
     .profile-logo {
       width: auto;
-      height: 64px; /* Ketinggian disesuaikan agar seimbang */
+      height: 50px; /* Ukuran proporsional */
       margin-bottom: 1rem;
-      /* Filter agar logo hitam terlihat jelas namun tetap serasi dengan tema gelap */
-      filter: brightness(1.2) contrast(1.1);
-      border-radius: 8px;
+      
+      /* --- TRIK CSS AGAR LOGO JPG MENYATU --- */
+      /* Invert: Mengubah Putih jadi Hitam, Hitam jadi Putih */
+      filter: invert(1); 
+      /* Mix-blend-mode: Screen membuat warna hitam (hasil invert background) jadi transparan */
+      mix-blend-mode: screen; 
+      
+      opacity: 0.9;
     }
 
     h1 {
@@ -157,7 +162,7 @@
       <div class="date-display" id="clock-date">Memuat tanggal...</div>
     </div>
 
-    <img src="image_0.png" alt="NVZE SYSTEM Logo" class="profile-logo">
+    <img src="logo.jpg" alt="NVZE SYSTEM Logo" class="profile-logo">
     
     <h1>NvZE Dashboard</h1>
     <p class="subtitle">Refleksi visual Knowledge & Knowhow</p>
