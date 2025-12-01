@@ -60,45 +60,36 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            /* Pastikan tidak ada background di container */
             background: transparent; 
         }
 
-        /* === STYLE BARU UNTUK LOGO TEKS (OPSI 2) === */
-        .text-logo {
-            font-size: 2.5rem; /* Ukuran besar */
-            font-weight: 700;  /* Tebal */
-            letter-spacing: -1px; /* Rapat biar modern */
-            color: var(--text-primary);
-            line-height: 1.2;
-            cursor: default;
-            user-select: none;
+        /* LOGO STYLING (PERBAIKAN SESUAI PERMINTAAN) */
+        .header-logo {
+            max-width: 140px; /* Ukuran disamakan 140px */
+            width: 100%;
+            height: auto;
             
-            /* Efek Glow Biru Halus ala Windows */
-            text-shadow: 0 0 40px rgba(96, 205, 255, 0.3);
+            /* RUMUS CSS LOGO (Sama persis dengan halaman Blog): 
+               1. grayscale: pastikan hitam putih
+               2. contrast(200%): paksa putih jadi sangat putih, hitam jadi pekat (buang noise)
+               3. invert(1): balik warna (background putih -> hitam, teks hitam -> putih)
+            */
+            filter: grayscale(100%) contrast(200%) invert(1);
+            
+            /* Hapus warna Hitam Pekat (background hasil invert) agar transparan */
+            mix-blend-mode: screen; 
         }
 
-        .text-logo span {
-            color: var(--win-blue); /* Mewarnai teks "NvZE" jadi Biru */
-        }
-
-        .text-logo small {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 400;
-            letter-spacing: 2px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            margin-top: -5px;
-            opacity: 0.8;
-            text-shadow: none;
-        }
+        /* Fallback text (disembunyikan) */
+        h1 { display: none; }
 
         #clock {
             font-size: 0.95rem;
             color: var(--text-secondary);
             margin-bottom: 25px;
             font-weight: 400;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         /* Input Search ala Windows 11 Start Menu */
@@ -278,12 +269,11 @@
 
     <header>
         <div class="logo-container">
-            <div class="text-logo">
-                <span>NvZE</span> System
-                <small>Bookmark Manager</small>
-            </div>
+            <img src="logo.jpg" alt="NvZE Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('h1').style.display='block';">
         </div>
         
+        <h1>NvZE Bookmark</h1>
+
         <div id="clock">Loading time...</div>
         <input type="text" id="searchInput" placeholder="Cari aplikasi, file, atau pengaturan..." onkeyup="filterLinks()">
     </header>
@@ -297,7 +287,8 @@
                 <a href="https://outlook.live.com/owa/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=outlook.live.com" class="favicon">Outlook</a>
                 <a href="https://login.yahoo.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=yahoo.com" class="favicon">Yahoo Mail</a>
                 <a href="https://protonmail.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=protonmail.com" class="favicon">ProtonMail</a>
-                <a href="https://nvze.github.io/dashboard/pt-posting-tayang.html" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=nvze.github.io/dashboard" class="favicon">Postingan Tayangkan</a>
+ <a href="https://nvze.github.io/dashboard/pt-posting-tayang.html" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=nvze.github.io/dashboard" class="favicon">Postingan Tayangkan</a>
+
             </div>
         </details>
 
