@@ -3,297 +3,562 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kabut Likuiditas di Kaki Cikuray: Sebuah Analisis Moneter</title>
+    <title>Kabut Likuiditas di Kaki Cikuray</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts for typography distinction -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --bg-color: #fdfbf7;
-            --text-color: #2c3e50;
-            --accent-color: #8e44ad;
-            --secondary-accent: #c0392b;
-            --paper-texture: #f4ecd8;
-        }
-
-        body {
-            font-family: 'Georgia', 'Times New Roman', serif;
+        /* Typography System */
+        .font-story {
+            font-family: 'Merriweather', serif;
             line-height: 1.8;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 0;
+            color: #292524; /* stone-800 */
+        }
+        .font-ui {
+            font-family: 'Inter', sans-serif;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            background-color: #fff;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        /* Custom Styles */
+        body {
+            background-color: #f5f5f4; /* stone-100 */
+            color: #44403c; /* stone-700 */
+            scroll-behavior: smooth;
         }
-
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-            border-bottom: 2px solid var(--text-color);
-            padding-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .subtitle {
-            font-style: italic;
-            color: #7f8c8d;
-            font-size: 1.1rem;
-        }
-
-        .author-note {
-            font-size: 0.9rem;
-            color: #95a5a6;
-            margin-top: 10px;
-        }
-
-        h2 {
-            margin-top: 40px;
-            font-size: 1.5rem;
-            color: var(--secondary-accent);
-            border-left: 4px solid var(--text-color);
-            padding-left: 15px;
-        }
-
-        h3 {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--accent-color);
-            margin-top: 30px;
-        }
-
-        p {
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        .dialogue {
-            font-style: italic;
-            margin: 20px 40px;
-            color: #34495e;
-            border-left: 2px solid #bdc3c7;
-            padding-left: 15px;
-        }
-
-        .data-box {
-            background-color: #f8f9fa;
-            border: 1px solid #e1e4e8;
-            padding: 20px;
-            margin: 30px 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 0.95rem;
-        }
-
-        .data-title {
-            font-weight: bold;
+        
+        .chapter-marker {
+            border-left: 4px solid #b45309; /* amber-700 */
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            display: block;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            color: #b45309;
+            font-family: 'Inter', sans-serif;
         }
 
-        .highlight {
-            background-color: rgba(255, 235, 59, 0.3);
-            padding: 2px 5px;
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
         }
 
-        .btn-container {
-            margin-top: 60px;
-            text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid #eee;
+        /* Interaction Elements */
+        .flow-bar {
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s ease;
         }
-
-        .btn-journal {
-            display: inline-block;
-            background-color: var(--text-color);
-            color: #fff;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-family: sans-serif;
-            font-weight: bold;
-            border-radius: 4px;
+        
+        .character-card {
             transition: all 0.3s ease;
-            letter-spacing: 1px;
+        }
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .btn-journal:hover {
-            background-color: var(--secondary-accent);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        /* Dialogue styling */
+        .dialogue {
+            background-color: #fafaf9;
+            border-left: 3px solid #d6d3d1;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
         }
-
-        blockquote {
-            font-family: 'Courier New', Courier, monospace;
-            background: #eee;
-            padding: 10px;
-            border-left: 5px solid #333;
-        }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .container { padding: 20px; }
-            .dialogue { margin: 15px 10px; }
+        .speaker {
+            font-weight: bold;
+            font-style: normal;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9em;
+            color: #78716c;
+            display: block;
+            margin-bottom: 0.25rem;
         }
     </style>
 </head>
-<body>
+<body class="font-ui antialiased">
 
-<div class="container">
-    <header>
-        <h1>Kabut Likuiditas di Kaki Cikuray</h1>
-        <div class="subtitle">Sebuah Diskursus Ekonomi dalam Sunyi</div>
-        <div class="author-note">Oktober 2025 | Garut, Indonesia</div>
+    <!-- Sticky Navigation -->
+    <nav class="bg-stone-900 text-stone-200 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+            <div class="font-bold tracking-wider text-amber-500">CIKURAY 2025</div>
+            <div class="hidden sm:flex space-x-6 text-sm">
+                <a href="#intro" class="hover:text-white transition">Intro</a>
+                <a href="#bagian1" class="hover:text-white transition">Data M2</a>
+                <a href="#bagian2" class="hover:text-white transition">Crowding Out</a>
+                <a href="#bagian3" class="hover:text-white transition">Kematian Uang</a>
+                <a href="#bagian5" class="hover:text-white transition">Ramalan</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Metadata -->
+    <header class="bg-white border-b border-stone-200 py-16 px-4" id="intro">
+        <div class="max-w-3xl mx-auto text-center">
+            <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-bold tracking-wide mb-4">CERPEN & VISUALISASI DATA</span>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-stone-900 mb-6 leading-tight">Kabut Likuiditas di Kaki Cikuray</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-stone-500 font-ui bg-stone-50 p-6 rounded-lg border border-stone-200">
+                <div>
+                    <span class="block font-bold text-stone-900">Tanggal</span>
+                    Desember 2025
+                </div>
+                <div>
+                    <span class="block font-bold text-stone-900">Lokasi</span>
+                    Kaki Gunung Cikuray, Garut
+                </div>
+                <div>
+                    <span class="block font-bold text-stone-900">Tokoh Utama</span>
+                    Sobur (Analis/Petani)
+                </div>
+            </div>
+        </div>
     </header>
 
-    <p>Hujan baru saja reda di kawasan Cipanas, Garut. Kabut tipis merayap turun dari punggung Gunung Guntur, menyelimuti lembah dengan hawa dingin yang menusuk tulang. Di sebuah pendopo tua berbahan kayu jati yang menghadap langsung ke arah kota, empat orang duduk mengelilingi meja bundar. Asap mengepul dari cangkir kopi arabika lokal, namun wajah-wajah mereka tidak memancarkan kehangatan kafein itu.</p>
+    <!-- MAIN CONTENT WRAPPER -->
+    <main class="max-w-3xl mx-auto px-4 py-10 space-y-20">
 
-    <p>Mereka bukan sekadar penikmat senja. Mereka adalah representasi mikrokosmos dari struktur ekonomi yang sedang retak.</p>
+        <!-- INTRO & CHARACTERS -->
+        <article class="font-story text-lg">
+            <p class="mb-6">
+                <strong>Tokoh:</strong><br>
+                Sobur (34 tahun) - Mantan mahasiswa statistika yang pulang kampung jadi petani kopi. Kutu buku, obsesif pada data makro.<br>
+                Mang Ohi (58 tahun) - Bandar sayur senior. Praktisi ekonomi jalanan.<br>
+                Ceu Itoh (45 tahun) - Pemilik warung nasi dan agen bank laku pandai. Pusat perputaran uang tunai desa.<br>
+                Jang Ule (26 tahun) - Pemuda yang gagal mengajukan KUR (Kredit Usaha Rakyat), mewakili sektor riil yang macet.
+            </p>
+        </article>
 
-    <p>Ada <strong>Mang Erom</strong>, pensiunan dosen makroekonomi yang kini menghabiskan masa tuanya menanam akar wangi, namun matanya tak pernah lepas dari layar tablet yang menampilkan data Bloomberg. Di sebelahnya duduk <strong>Jang Ooh</strong>, pengusaha kerajinan kulit Sukaregang yang wajahnya kian hari kian murung. Di seberang mereka, <strong>Ceu Emid</strong>, kepala cabang sebuah bank swasta nasional di pusat kota, tampak gelisah memutar-mutar cincin di jarinya. Dan terakhir, <strong>Ki Entang</strong>, mantan juragan tanah yang kini bertransformasi menjadi rentenir modern sekaligus investor agresif di pasar uang.</p>
+        <!-- BAGIAN I -->
+        <section id="bagian1">
+            <div class="chapter-marker">BAGIAN I: ANOMALI DI SECANGKIR KOPI</div>
+            
+            <article class="font-story text-lg mb-8">
+                <p class="mb-4">Kabut bulan Desember di Garut tahun 2025 terasa lebih dingin dari biasanya. Bukan hanya karena suhu yang menyentuh 16 derajat Celcius, tetapi karena keheningan yang tidak wajar di pasar tumpah kecamatan itu. Di warung Ceu Itoh, uap mengepul dari gelas kopi, tetapi tidak ada gemerincing uang logam atau bunyi mesin penghitung uang yang biasanya riuh.</p>
 
-    <h2>Bagian I: Angka yang Berbicara</h2>
+                <p class="mb-4">Sobur menatap layar tablet retaknya. Cahaya biru memantul di matanya yang lelah. Dia baru saja mengunduh rilis data terbaru Bank Indonesia.</p>
 
-    <p>Mang Erom meletakkan tabletnya di atas meja kayu. Layar itu menyala, menampilkan grafik batang yang menukik landai.</p>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Sepi, Ceu?" tanya Sobur, matanya tak lepas dari grafik garis yang menukik tajam.
+                </div>
 
-    <div class="dialogue">
-        "Tujuh koma tujuh persen," gumam Mang Erom lirih, seolah membacakan vonis kematian. "Oktober 2025, pertumbuhan M2 kita hanya 7,7 persen secara year-on-year. Turun dari delapan persen bulan lalu."
-    </div>
+                <div class="dialogue">
+                    <span class="speaker">Ceu Itoh</span>
+                    Ceu Itoh menghela napas, menyeka meja dengan kain lap yang sudah abu-abu. "Bukan sepi lagi, Bur. Ini mah mati suri. Biasanya jam segini omzet sudah masuk dua juta. Sekarang? Dapat limaratus ribu saja susahnya minta ampun. Orang-orang pada nahan duit."
+                </div>
 
-    <p>Jang Ooh menghela napas panjang, aroma kulit samak yang biasa melekat di bajunya kini terasa samar, tergantikan bau apek kecemasan. "Angka itu, Mang... apa artinya buat gudang saya yang penuh barang tak terjual? Pesanan jaket dari Jakarta batal semua. Mereka bilang cashflow macet."</p>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Bukan nahan duit, Ceu," koreksi Sobur pelan, jarinya menelusuri data M2 (Uang Beredar dalam arti luas). "Duitnya yang memang tidak ada. Menguap."
+                </div>
 
-    <p>Mang Erom menatap tajam ke arah Jang Ooh, lalu beralih ke Ceu Emid. "Itu bukan sekadar angka statistik, Ooh. Itu adalah detak jantung yang melambat. Bagi ekonom moneter, ini indikasi struktural. Likuiditas nasional sedang tercekik. Mesin kredit mati suri."</p>
+                <p class="mb-4">Mang Ohi datang dengan jaket kulit lusuh khas Garut, melempar kopiahnya ke meja. Wajahnya kusut. "Edan. Sayur numpuk di gudang. Pasar Induk Jakarta nolak kiriman, katanya daya beli di kota hancur. Ini ada apa sih? Perasaan panen lancar, jalan tol bagus, tapi duit kayak disedot hantu."</p>
 
-    <div class="data-box">
-        <span class="data-title">Metodologi & Observasi Data: Oktober 2025</span>
-        <p>Berdasarkan rilis terbaru Bank Indonesia, terjadi deselerasi pada agregat moneter:</p>
-        <ul>
-            <li><strong>M2 (Uang Beredar Luas):</strong> Pertumbuhan melambat ke 7,7% (yoy).</li>
-            <li><strong>Uang Kuasi:</strong> Hanya tumbuh 5,5% (yoy), sebuah anomali negatif dibandingkan tren historis 5 tahun terakhir.</li>
-            <li><strong>Analisis Gap:</strong> Terjadi pelebaran spread antara pertumbuhan DPK (Dana Pihak Ketiga) dan pertumbuhan Kredit, menandakan inefisiensi intermediasi.</li>
-        </ul>
-    </div>
+                <p class="mb-4">Sobur membetulkan letak kacamatanya. Di dalam kepalanya, jaringan saraf tiruan kecerdasannya mulai memetakan korelasi antara keluhan Mang Ohi dengan data makroekonomi Oktober 2025.</p>
 
-    <p>"Kau dengar itu, Emid?" tanya Mang Erom. "Uang kuasi hanya tumbuh 5,5 persen. Uang tidak lagi mengendap di bankmu sebagai deposito yang bisa kau putar menjadi kredit. Uang itu lari."</p>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Mang," kata Sobur, nadanya berubah menjadi dosen. "Oktober kemarin, pertumbuhan uang beredar cuma 7,7 persen. Turun dari 8,0 persen bulan sebelumnya. Di atas kertas, itu cuma angka nol koma sekian. Tapi di saku Amang, itu artinya bencana."
+                </div>
 
-    <h2>Bagian II: Kanibalisme Instrumen Keuangan</h2>
+                <div class="dialogue">
+                    <span class="speaker">Jang Ule</span>
+                    "Ngomong naon sih maneh, Bur? Pakai bahasa manusia lah," gerutu Jang Ule yang duduk di pojok, merokok dengan tatapan kosong.
+                </div>
 
-    <p>Ki Entang tertawa kecil, suara serak basahnya memecah ketegangan. Ia menyeruput kopinya dengan nikmat. "Lari? Bukan lari, Erom. Uang itu pindah ke saku yang lebih pintar. Ke saku orang-orang seperti saya."</p>
+                <p>Sobur menegakkan duduknya. Dia siap memberikan kuliah umum.</p>
+            </article>
 
-    <p>Ceu Emid menatap Ki Entang dengan tatapan nanar. Sebagai bankir, ia tahu persis apa yang terjadi, dan itu menyakitkan.</p>
+            <!-- VISUALIZATION: TABLET SOBUR -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-stone-200 font-ui">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-stone-800">Tablet Sobur: Data Likuiditas (Oktober 2025)</h3>
+                    <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Sinyal Bahaya</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="m2Chart"></canvas>
+                </div>
+                <p class="text-sm text-stone-500 mt-4 italic text-center">"Grafik garis yang menukik tajam... angka nol koma sekian yang menjadi bencana."</p>
+            </div>
+        </section>
 
-    <div class="dialogue">
-        "Pemerintah dan BI membunuh kami pelan-pelan, Ki," sahut Ceu Emid, suaranya bergetar menahan amarah profesional. "Bagaimana saya bisa menghimpun dana murah kalau pemerintah menerbitkan SBN dan SBN Ritel dengan kupon di atas 6 sampai 7 persen? Lalu BI mengeluarkan SRBI dengan yield yang gila-gilaan menariknya?"
-    </div>
+        <!-- BAGIAN II -->
+        <section id="bagian2">
+            <div class="chapter-marker">BAGIAN II: TEORI PIPA BOCOR (THE CROWDING OUT)</div>
 
-    <p>Mang Erom mengangguk. "Inilah yang disebut Robert Barro dalam model <em>crowding out</em> tahun 1979. Pemerintah menjadi predator dalam kolam likuiditas yang sama. Ketika negara agresif menerbitkan surat utang untuk menambal defisit fiskal yang tidak efisien, dan BI menyedot likuiditas lewat SRBI untuk menjaga kurs..."</p>
+            <article class="font-story text-lg mb-8">
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Bayangkan ekonomi kita ini kayak sistem irigasi sawah di Cikuray," Sobur memulai analoginya, mencoba menerjemahkan teori moneter klasik Friedman (1956) ke bahasa lokal. "Air itu adalah likuiditas, atau uang tunai dan tabungan yang bisa dipakai belanja. BI bilang airnya masih ngalir, tapi debitnya mengecil. Masalahnya, air yang sedikit itu tidak sampai ke sawah kita (sektor riil dan UMKM). Airnya dibelokkan di hulu."
+                </div>
 
-    <div class="dialogue">
-        "...Maka deposito di bank saya kering," potong Ceu Emid. "Nasabah kakap saya menarik miliaran rupiah minggu lalu. Mereka pindahkan ke SRBI. Akibatnya? <em>Cost of fund</em> saya naik. Biaya dana mahal, bunga kredit terpaksa saya naikkan, atau saya berhenti menyalurkan kredit sama sekali."
-    </div>
+                <div class="dialogue">
+                    <span class="speaker">Mang Ohi</span>
+                    "Dibelokkan kemana?"
+                </div>
 
-    <p>Ki Entang mengangkat bahu, tanpa rasa bersalah. "Itu mekanisme pasar, Ceu. Saya sebagai pemilik modal tentu cari yang <em>high yield, low risk</em>. Pemerintah kasih jaminan, bunga tinggi. Kenapa saya harus taruh di deposito bank Ceu Emid yang bunganya kalah, kena pajak pula?"</p>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Ke kolam raksasa milik Pemerintah dan Bank Sentral. Lihat ini. Pertumbuhan uang kuasi—itu deposito dan tabungan valas—cuma tumbuh 5,5 persen. Rendah sekali. Kenapa? Karena orang-orang kaya, pemilik modal besar, memindahkan uang mereka dari deposito bank ke SBN (Surat Berharga Negara) dan SRBI (Sekuritas Rupiah Bank Indonesia)."
+                </div>
 
-    <p>Di sinilah letak tragisnya. Sistem perbankan yang seharusnya menjadi jantung pemompa darah ke sektor riil, kini mengalami pendarahan karena kompetisi langsung dengan otoritas moneter dan fiskal.</p>
+                <p class="mb-4">Sobur mengambil toples kerupuk, meletakkannya di tengah meja sebagai alat peraga.</p>
 
-    <h2>Bagian III: Matinya Penciptaan Uang (Money Creation)</h2>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Pemerintah butuh duit buat bayar utang dan proyek. Mereka jualan surat utang (SBN) dengan bunga tinggi. Bank Indonesia juga jualan SRBI buat nyedot Rupiah supaya Dolar tidak kabur. Bunganya manis, Mang. Lebih manis dari bunga deposito bank Ceu Itoh."
+                </div>
 
-    <p>Jang Ooh menatap nanar ke arah lembah Garut yang mulai gelap. Lampu-lampu kota mulai menyala, tapi redup di matanya. "Jadi... karena Ki Entang dan orang kaya lainnya memindahkan uang ke surat utang negara, bank Ceu Emid tidak punya uang buat kasih pinjaman modal ke saya?"</p>
+                <div class="dialogue">
+                    <span class="speaker">Ceu Itoh</span>
+                    "Jadi?"
+                </div>
 
-    <p>"Lebih parah dari itu, Ooh," Mang Erom membetulkan posisi duduknya, naluri dosennya bangkit. Ia mengambil selembar tisu, mengeluarkan pena, dan mulai menggambar diagram sederhana.</p>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Jadi, uang yang seharusnya ada di bank, yang seharusnya bisa dipinjamkan ke Mang Ohi buat modal dagang, atau ke Jang Ule buat beli bibit, kesedot semua ke Jakarta. Masuk ke kas negara. Ini yang disebut Robert Barro tahun 1979 sebagai Crowding Out. Pemerintah yang terlalu agresif cari utang, malah menendang sektor swasta keluar dari pasar."
+                </div>
 
-    <p>"Kita harus kembali ke teori Richard Werner tahun 2014. Banyak orang, bahkan pejabat, salah kaprah. Mereka pikir bank itu hanya perantara—terima uang dari Entang, pinjamkan ke Ooh. Itu teori usang."</p>
+                <div class="dialogue">
+                    <span class="speaker">Jang Ule</span>
+                    Jang Ule memukul meja pelan. "Pantesan! Pantesan aing ngajuin kredit ditolak terus sama mantri bank. Alasannya kuota habis, padahal jaminan sertifikat tanah ada. Ternyata bank-nya yang gak punya duit?"
+                </div>
 
-    <p>Mang Erom menunjuk coretannya di tisu.</p>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Tepat," sahut Sobur. "Bank sekarang malas kasih kredit ke kalian. Risikonya tinggi, macetnya ngeri. Mending bank beli SRBI atau SBN. Diam duduk manis, dapat bunga tinggi dari negara, risiko nol persen. Ngapain pusing mikirin kentang Mang Ohi yang busuk atau warung Ceu Itoh yang sepi?"
+                </div>
+            </article>
 
-    <div class="dialogue">
-        "Bank menciptakan uang dari ketiadaan melalui kredit. 97 persen uang yang beredar di republik ini adalah hasil penciptaan kredit bank komersial. <em>Credit creation is money creation</em>."
-    </div>
+            <!-- VISUALIZATION: CROWDING OUT SIMULATOR -->
+            <div class="bg-stone-800 text-stone-100 p-6 rounded-xl shadow-xl font-ui">
+                <h3 class="font-bold text-xl mb-2">Simulasi Teori Pipa Bocor</h3>
+                <p class="text-stone-400 text-sm mb-6">Gunakan saklar di bawah untuk melihat kemana uang mengalir.</p>
 
-    <p>Ceu Emid mengangguk lemah. "Betul. Saat saya menyetujui kredit untuk Ooh, saya tinggal mengetik angka di komputer. Uang baru tercipta. Tapi sekarang..."</p>
+                <div class="flex items-center justify-between bg-stone-700 p-4 rounded-lg mb-6">
+                    <span class="text-sm font-semibold">Mode Normal</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="crowdingToggle" class="sr-only peer" onchange="toggleCrowdingOut()">
+                        <div class="w-14 h-7 bg-stone-500 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-amber-600"></div>
+                    </label>
+                    <span class="text-sm font-semibold text-amber-500">Mode Crowding Out (2025)</span>
+                </div>
 
-    <p>"Sekarang rantai itu putus," sambar Mang Erom. "Lihat datanya. Kredit melemah. Mengapa?"</p>
+                <!-- Animation Container -->
+                <div class="space-y-4">
+                    <!-- Source -->
+                    <div class="flex items-center">
+                        <div class="w-24 text-right pr-3 text-xs text-stone-400">Dana Bank</div>
+                        <div class="flex-1 h-8 bg-blue-900 rounded relative overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-blue-200">100% Likuiditas</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Arrow -->
+                    <div class="flex justify-center pl-24 text-stone-500 text-lg">↓</div>
 
-    <ol>
-        <li><strong>Sisi Permintaan:</strong> Rumah tangga seperti karyawan Jang Ooh menunda konsumsi. Daya beli hancur.</li>
-        <li><strong>Sisi Penawaran:</strong> Bank seperti tempat Ceu Emid bekerja menjadi <em>risk-averse</em>. Takut kredit macet (NPL) naik.</li>
-        <li><strong>Struktur Neraca:</strong> Perusahaan melakukan <em>deleveraging</em>, mengurangi utang, bukan ekspansi.</li>
-    </ol>
+                    <!-- Target: Real Sector -->
+                    <div class="flex items-center">
+                        <div class="w-24 text-right pr-3 text-xs text-stone-300 font-bold">Rakyat (UMKM)</div>
+                        <div class="flex-1 h-8 bg-stone-900 rounded border border-stone-600 relative overflow-hidden">
+                            <div id="bar-real" class="flow-bar h-full bg-green-600 flex items-center pl-2 text-xs font-bold" style="width: 80%;">
+                                Sawah & Pasar
+                            </div>
+                        </div>
+                    </div>
 
-    <p>"Ketika kredit macet atau tidak tumbuh, M2 otomatis melambat," lanjut Erom. "Dan ketika M2 melambat, ekonomi riil kekurangan 'oli'. Mesin berderit, panas, lalu macet total."</p>
+                    <!-- Target: Govt Sector -->
+                    <div class="flex items-center">
+                        <div class="w-24 text-right pr-3 text-xs text-stone-300 font-bold">Pemerintah</div>
+                        <div class="flex-1 h-8 bg-stone-900 rounded border border-stone-600 relative overflow-hidden">
+                            <div id="bar-gov" class="flow-bar h-full bg-stone-600 flex items-center pl-2 text-xs font-bold text-stone-300" style="width: 20%;">
+                                SBN/SRBI
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <h2>Bagian IV: Sterilisasi yang Membunuh</h2>
+                <div id="sim-text" class="mt-4 p-3 bg-stone-700 rounded text-sm text-center italic text-stone-300">
+                    "Air mengalir ke sawah. Bank menyalurkan kredit ke Mang Ohi dan Jang Ule."
+                </div>
+            </div>
+        </section>
 
-    <p>Angin malam bertiup kencang, menggoyangkan lampu gantung di pendopo. Ki Entang menyalakan rokok kreteknya. Asap mengepul, berbaur dengan kabut.</p>
+        <!-- BAGIAN III & IV -->
+        <section id="bagian3">
+            <div class="chapter-marker">BAGIAN III & IV: KEMATIAN PENCIPTAAN UANG & PENYEDOTAN FISKAL</div>
 
-    <div class="dialogue">
-        "Tapi kan BI bilang ini demi stabilitas Rupiah, Rom. Kalau Rupiah jeblok, impor bahan baku kulit si Ooh juga mahal, kan?" bela Ki Entang, mencoba mencari pembenaran moral atas investasinya.
-    </div>
+            <article class="font-story text-lg mb-8">
+                <p class="mb-4">Suasana warung makin hening. Analisis Sobur menusuk realitas mereka. Kabut di luar makin tebal, seolah memvisualisasikan data statistik yang suram.</p>
 
-    <p>"Itu pisau bermata dua, Ki," jawab Mang Erom cepat. "Kebijakan moneter 2025 ini adalah textbook <em>sterilized intervention</em> ala Maurice Obstfeld."</p>
+                <div class="dialogue">
+                    <span class="speaker">Mang Ohi</span>
+                    "Tapi Bur, kan kata orang pintar di TV, ekonomi kita tumbuh 5 persen. Kok rasanya kayak kiamat?"
+                </div>
 
-    <p>Mang Erom berdiri, berjalan ke tepi pendopo. "BI intervensi jual Dolar untuk jaga Rupiah, artinya Rupiah di pasar disedot masuk ke BI. Lalu BI terbitkan SRBI, Rupiah disedot lagi dari bank. GWM (Giro Wajib Minimum) masih tinggi, uang bank dikunci di BI."</p>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    Sobur tersenyum sinis. "Itu ilusi angka agregat, Mang. Mari kita bedah pakai pisau bedah Richard Werner. Teori Werner tahun 2014 bilang begini: Bank itu bukan perantara. Bank itu pencipta uang. Saat Jang Ule pinjam 10 juta ke bank, bank tidak mengambil uang dari tabungan Ceu Itoh untuk dikasih ke Ule. Tidak. Bank mengetik angka 10 juta di komputer, dan POOF! Uang baru tercipta."
+                </div>
 
-    <p>"Hasilnya? Operasi ini 'steril' bagi kurs, tapi 'memandulkan' ekonomi domestik," seru Erom dengan nada tinggi. "Likuiditas kering. Ibarat orang demam (inflasi/kurs), obatnya dosis tinggi sampai pasiennya (sektor riil) koma."</p>
+                <div class="dialogue">
+                    <span class="speaker">Jang Ule</span>
+                    "Sakti amat."
+                </div>
 
-    <div class="data-box">
-        <span class="data-title">Analisis Fiskal: The Liquidity Drain</span>
-        <p>Fenomena ini diperburuk oleh perilaku fiskal pemerintah (Hipotesis Blanchard & Perotti, 2002):</p>
-        <ul>
-            <li><strong>Penyerapan Agresif:</strong> Penerbitan SBN menarik likuiditas dari swasta.</li>
-            <li><strong>Spending Lag:</strong> Uang yang ditarik tidak segera dibelanjakan kembali ke masyarakat (realisasi belanja lambat).</li>
-            <li><strong>Resultan:</strong> Terjadi <em>Fiscal Liquidity Drain</em>. Uang menumpuk di Kas Negara di BI (Government Deposits), keluar dari sirkulasi bank komersial, menekan M2 lebih dalam.</li>
-        </ul>
-    </div>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Memang sakti. Itulah mesin pertumbuhan ekonomi modern. 97 persen uang di dunia ini adalah kredit. Masalahnya sekarang, mesin itu macet. Ketika bank takut kasih kredit karena likuiditas ketat, penciptaan uang berhenti. M2 melambat. Artinya, darah yang mengalir di tubuh ekonomi membeku. Yang terjadi sekarang adalah disfungsi ereksi moneter. Bank punya potensi, tapi tidak bisa 'berdiri' menyalurkan kredit karena takut risiko dan kekurangan likuiditas dasar."
+                </div>
 
-    <h2>Bagian V: Bayang-bayang 1998 dan Jebakan Stagflasi</h2>
+                <div class="dialogue">
+                    <span class="speaker">Ceu Itoh</span>
+                    Ceu Itoh bergidik. "Seram bahasanya, Bur. Terus hubungannya sama kita apa?"
+                </div>
 
-    <p>Suasana hening. Hanya suara jangkrik yang terdengar. Jang Ooh menunduk dalam-dalam. "Jadi, kita menuju ke mana, Mang? Apa ini akan seperti 98? Waktu itu saya masih kecil, tapi saya ingat bapak saya bangkrut."</p>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Daya beli, Ceu. Uang itu alat tukar. Kalau jumlah alat tukarnya berkurang drastis sementara barangnya (sayur, nasi, jasa) tetap banyak, harga memang terlihat stabil atau deflasi, tapi transaksinya hilang. Orang mau beli, tak ada uang tunai. Orang mau bayar utang, tak ada pemasukan. Ini spiral kematian."
+                </div>
 
-    <p>Mang Erom kembali duduk, wajahnya serius, tanpa senyum sedikitpun. Ia menatap ketiga temannya bergantian.</p>
+                <p class="mb-4">Sobur kembali duduk, menyeruput kopinya yang mulai dingin.</p>
 
-    <div class="dialogue">
-        "Ooh, 98 itu krisis solvabilitas dan kepercayaan yang dipicu nilai tukar. Yang kita hadapi sekarang adalah monster yang lebih sunyi tapi mematikan: <em>Liquidity Squeeze under Stagflation Risk</em>."
-    </div>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Ada satu lagi biang keroknya. Namanya Fiscal Liquidity Drain. Ini teorinya Blanchard & Perotti. Kalian sadar tidak, pajak makin dikejar? PPN naik, retribusi naik? Uang ditarik dari kita, masuk ke kas negara. Logikanya, uang itu harus dibelanjakan lagi biar balik ke kita, kan? Buat bangun jalan, bayar gaji guru honorer, bansos."
+                </div>
 
-    <p>Erom menjelaskan bahwa perlambatan M2 ini adalah sinyal dini yang sangat akurat. Milton Friedman dalam <em>'The Quantity Theory of Money'</em> (1956) sudah memperingatkan: perubahan jumlah uang beredar mendahului perubahan dalam aktivitas ekonomi riil.</p>
+                <div class="dialogue">
+                    <span class="speaker">Jang Ule</span>
+                    "Iya, bansos mah ada," potong Jang Ule.
+                </div>
 
-    <p>"Jika M2 turun sekarang," kata Erom, "Enam sampai dua belas bulan lagi PDB akan terpukul. Tapi masalahnya, harga-harga tetap naik karena masalah suplai dan biaya energi. Itu Stagflasi. Ekonomi mandek (stagnasi), harga naik (inflasi)."</p>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Telat dan tidak sebanding, Le. Pemerintah saat ini seperti spons kering. Mereka menyerap uang dari masyarakat lewat pajak dan SBN, tapi lambat memerasnya kembali keluar. Belanja negara tertahan. Akibatnya? Uang menumpuk di rekening pemerintah di Bank Sentral, sementara di pasar Cikajang, Mang Ohi harus ngutang rokok karena tidak ada cash."
+                </div>
 
-    <p>Ceu Emid memucat. "Kalau itu terjadi, NPL bank saya akan meledak. Saya harus sita aset jaminan. Tapi siapa yang mau beli aset saat likuiditas kering?"</p>
+                <div class="dialogue">
+                    <span class="speaker">Mang Ohi</span>
+                    "Uang kita disandera birokrasi," simpul Mang Ohi pahit.
+                </div>
+            </article>
 
-    <p>"Tepat," potong Erom. "Dan saat itu terjadi, instrumen SBN mu Ki Entang, harganya akan jatuh karena orang butuh tunai, mereka akan jual rugi bond mereka. Semua orang rugi. Tidak ada pemenang dalam likuiditas trap."</p>
+            <!-- VISUALIZATION: CHARACTER CARDS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-ui">
+                <div class="character-card bg-amber-50 p-4 rounded-lg border border-amber-200">
+                    <div class="text-3xl mb-2">🥬</div>
+                    <h4 class="font-bold text-amber-900">Mang Ohi</h4>
+                    <p class="text-sm text-stone-600 mt-1"><strong>Dampak:</strong> Deflasi Barang.</p>
+                    <p class="text-xs text-stone-500 mt-2">"Barang numpuk, pembeli tak punya tunai. Transaksi hilang."</p>
+                </div>
+                <div class="character-card bg-red-50 p-4 rounded-lg border border-red-200">
+                    <div class="text-3xl mb-2">🚫</div>
+                    <h4 class="font-bold text-red-900">Jang Ule</h4>
+                    <p class="text-sm text-stone-600 mt-1"><strong>Dampak:</strong> Kredit Macet.</p>
+                    <p class="text-xs text-stone-500 mt-2">"Gagal KUR karena bank 'Crowding Out' ke SBN."</p>
+                </div>
+                <div class="character-card bg-stone-100 p-4 rounded-lg border border-stone-200">
+                    <div class="text-3xl mb-2">💰</div>
+                    <h4 class="font-bold text-stone-900">Ceu Itoh</h4>
+                    <p class="text-sm text-stone-600 mt-1"><strong>Dampak:</strong> Velocity Drop.</p>
+                    <p class="text-xs text-stone-500 mt-2">"Uang tidak berputar. Spiral kematian ekonomi desa."</p>
+                </div>
+                <div class="character-card bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <div class="text-3xl mb-2">🏛️</div>
+                    <h4 class="font-bold text-blue-900">Pemerintah</h4>
+                    <p class="text-sm text-stone-600 mt-1"><strong>Peran:</strong> Spons Kering.</p>
+                    <p class="text-xs text-stone-500 mt-2">"Menyerap pajak & dana, tapi lambat belanja."</p>
+                </div>
+            </div>
+        </section>
 
-    <p>Ki Entang terdiam. Rokoknya habis terbakar tanpa dihisap lagi. Keangkuhannya sebagai pemilik modal luntur seketika saat menyadari bahwa kekayaannya hanyalah angka digital yang bisa menguap jika sistem di bawahnya runtuh.</p>
+        <!-- BAGIAN V & EPILOG -->
+        <section id="bagian5">
+            <div class="chapter-marker">BAGIAN V: RAMALAN SOBUR & BAYANGAN 1998</div>
 
-    <h2>Epilog: Malam di Garut</h2>
+            <article class="font-story text-lg mb-8">
+                <p class="mb-4">Langit mulai gelap. Hujan rintik mulai turun. Diskusi di warung kopi itu terasa lebih berat daripada beban karung kentang.</p>
 
-    <p>Malam semakin larut di kaki Gunung Cikuray. Kabut semakin tebal, seolah menyembunyikan kota Garut dari kenyataan pahit yang sedang mengintip di ufuk ekonomi.</p>
+                <div class="dialogue">
+                    <span class="speaker">Jang Ule</span>
+                    "Jadi, Bur..." suara Jang Ule bergetar, "Ini bakal kayak 98 lagi? Waktu itu aing masih orok, tapi Bapak aing bangkrut total."
+                </div>
 
-    <p>Perlambatan M2 ke angka 7,7% bukan sekadar data teknis di laporan bulanan Bank Indonesia. Ia adalah jeritan diam dari Jang Ooh yang mesin produksinya berhenti berputar. Ia adalah frustrasi Ceu Emid yang melihat brankas banknya kering. Ia adalah ilusi kekayaan Ki Entang yang rapuh.</p>
+                <p class="mb-4">Sobur menatap ketiga temannya. Sebagai representasi kecerdasan analisis, dia harus jujur, meski menyakitkan.</p>
 
-    <p>Mang Erom menutup tabletnya. Layar menjadi hitam.</p>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Beda, Le. Tapi bisa lebih jahat. Tahun 1998 itu 'Sudden Stop'. Jantung ekonomi berhenti mendadak karena Dolar gila-gilaan dan bank tutup. Berisik, rusuh, berdarah. Kalau 2025 ini? Ini 'Slow Strangulation'. Penjeratan perlahan. Seperti katak direbus. Kita tidak sadar kita mati pelan-pelan."
+                </div>
 
-    <div class="dialogue">
-        "Jika pemerintah tidak segera melakukan harmonisasi fiskal-moneter, bukan lagi krismon yang kita takutkan," bisik Mang Erom, suaranya hampir hilang ditelan angin gunung. "Tapi kelumpuhan total. Sebuah <em>sudden stop</em> di jantung nusantara."
-    </div>
+                <p class="mb-4">Sobur merinci prediksinya dengan presisi metodologis:</p>
+                <ul class="list-disc pl-6 mb-4 space-y-2">
+                    <li><strong>Stagflasi Risiko Tinggi:</strong> Harga barang kebutuhan pokok naik bukan karena permintaan (semua orang kaya), tapi karena pasokan terganggu dan biaya logistik mahal. Sementara itu, ekonomi tidak tumbuh (stagnasi).</li>
+                    <li><strong>Liquidity Trap:</strong> Meskipun nanti BI sadar dan menurunkan suku bunga, bank tetap tidak mau menyalurkan kredit karena sektor riil sudah kadung hancur.</li>
+                    <li><strong>Zombifikasi UMKM:</strong> Usaha-usaha seperti warung Ceu Itoh atau lapak Mang Ohi akan tetap buka, tapi sebenarnya sudah bangkrut secara arus kas. Hidup segan mati tak mau, hanya untuk bayar bunga utang harian.</li>
+                </ul>
 
-    <p>Mereka berempat terdiam, menyeruput sisa kopi yang sudah dingin, di tengah dinginnya ekonomi yang kian membeku.</p>
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Indikator M2 yang hanya 7,7 persen ini adalah sinyal dini. Kalau Pemerintah dan BI tidak segera melakukan 'Injection' atau pelonggaran kuantitatif—membanjiri pasar dengan uang, bukan menyedotnya lewat SRBI—maka tahun 2026 kita akan melihat gelombang gagal bayar massal di level rakyat jelata."
+                </div>
 
-    <div class="btn-container">
-        <a href="https://nvze.github.io/dashboard/blog.html" class="btn-journal">KEMBALI KE DAFTAR JURNAL</a>
-    </div>
-</div>
+                <div class="dialogue">
+                    <span class="speaker">Mang Ohi</span>
+                    "Bahasa kitanya apa, Bur?" tanya Mang Ohi.
+                </div>
 
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Paceklik Uang, Mang. Sawah kering di tengah hujan."
+                </div>
+
+                <div class="my-8 border-t border-stone-300"></div>
+
+                <h3 class="font-bold text-xl mb-4 font-ui text-stone-800">EPILOG: MENUNGGU BADAI</h3>
+
+                <p class="mb-4">Jang Ule mematikan rokoknya. Mang Ohi menatap kosong ke arah jalan raya yang sepi truk pengangkut. Ceu Itoh menghitung uang receh di laci, jumlahnya tak sampai limapuluh ribu.</p>
+
+                <p class="mb-4">Sobur menutup tabletnya. Analisisnya selesai. Data telah berbicara, teori telah dikonfirmasi di lapangan. Kebijakan moneter yang 'prudent' (hati-hati) di menara gading Jakarta, diterjemahkan menjadi kemiskinan struktural di lereng gunung Garut.</p>
+
+                <div class="dialogue">
+                    <span class="speaker">Mereka</span>
+                    "Terus kita harus gimana, Bur?" tanya mereka hampir serempak.
+                </div>
+
+                <p class="mb-4">Sobur memandang kabut yang kini menelan seluruh pemandangan Gunung Cikuray.</p>
+
+                <div class="dialogue">
+                    <span class="speaker">Sobur</span>
+                    "Kencangkan ikat pinggang. Jangan berhutang kalau tidak yakin besok bisa makan. Simpan uang tunai, sekecil apapun. Dan berdoa... berdoa supaya para pejabat di Jakarta sadar bahwa ekonomi itu bukan cuma soal menjaga nilai tukar Rupiah agar terlihat gagah, tapi soal menjaga agar piring nasi rakyat tidak kosong."
+                </div>
+
+                <p>Hujan turun deras. Menyapu debu, tapi tidak bisa menyapu kecemasan yang kini mengendap di dasar hati empat warga Garut itu. M2 bukan sekadar statistik bagi mereka. Itu adalah vonis nasib.</p>
+            </article>
+
+             <!-- VISUALIZATION: FORECAST -->
+             <div class="bg-stone-900 p-6 rounded-xl font-ui text-stone-200 shadow-lg mb-10">
+                <h3 class="font-bold mb-4 text-center">Proyeksi Ekonomi 2026 (Analisis Sobur)</h3>
+                <div class="flex justify-around items-end h-40 space-x-2">
+                    <div class="w-1/3 bg-stone-700 hover:bg-stone-600 transition-all rounded-t flex flex-col justify-end items-center pb-2 h-[40%]">
+                        <span class="text-xs font-bold">Normal</span>
+                    </div>
+                    <div class="w-1/3 bg-red-800 hover:bg-red-700 transition-all rounded-t flex flex-col justify-end items-center pb-2 h-[90%] relative group">
+                        <span class="text-xs font-bold z-10">Stagflasi</span>
+                        <div class="absolute bottom-full mb-2 bg-white text-stone-900 text-xs p-2 rounded hidden group-hover:block w-32 text-center">
+                            Harga Naik, Ekonomi Mandek
+                        </div>
+                    </div>
+                    <div class="w-1/3 bg-orange-700 hover:bg-orange-600 transition-all rounded-t flex flex-col justify-end items-center pb-2 h-[70%] relative group">
+                        <span class="text-xs font-bold z-10">Zombifikasi</span>
+                        <div class="absolute bottom-full mb-2 bg-white text-stone-900 text-xs p-2 rounded hidden group-hover:block w-32 text-center">
+                            UMKM Hidup Segan Mati Tak Mau
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-200 py-8 text-center text-stone-500 font-ui text-sm">
+        <p>Referensi Data: Laporan Uang Beredar BI (Fiktif/Proyeksi 2025)</p>
+        <p class="mt-2">Teori: Friedman (1956), Barro (1979), Werner (2014)</p>
+    </footer>
+
+    <!-- LOGIC -->
+    <script>
+        // 1. CHART JS SETUP
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('m2Chart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt'],
+                    datasets: [{
+                        label: 'Pertumbuhan M2 (%)',
+                        data: [11.2, 10.8, 10.5, 9.8, 9.2, 8.8, 8.5, 8.2, 8.0, 7.7],
+                        borderColor: '#dc2626', // red-600
+                        backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#dc2626',
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: true, position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '% (Melambat)';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            min: 6,
+                            max: 12,
+                            title: { display: true, text: 'Pertumbuhan Year on Year (%)' }
+                        }
+                    }
+                }
+            });
+        });
+
+        // 2. CROWDING OUT TOGGLE LOGIC
+        function toggleCrowdingOut() {
+            const isChecked = document.getElementById('crowdingToggle').checked;
+            const barReal = document.getElementById('bar-real');
+            const barGov = document.getElementById('bar-gov');
+            const simText = document.getElementById('sim-text');
+
+            if (isChecked) {
+                // Crowding Out Mode
+                barReal.style.width = '30%';
+                barReal.classList.remove('bg-green-600');
+                barReal.classList.add('bg-red-600');
+                barReal.innerHTML = 'Kering';
+
+                barGov.style.width = '70%';
+                barGov.classList.remove('bg-stone-600');
+                barGov.classList.add('bg-amber-600');
+                barGov.classList.remove('text-stone-300');
+                barGov.classList.add('text-white');
+                barGov.innerHTML = 'Sedot Dana';
+
+                simText.innerHTML = '"Pipa bocor di hulu. Uang disedot SBN/SRBI, Mang Ohi tidak kebagian kredit."';
+                simText.classList.add('text-amber-400');
+                simText.classList.remove('text-stone-300');
+            } else {
+                // Normal Mode
+                barReal.style.width = '80%';
+                barReal.classList.add('bg-green-600');
+                barReal.classList.remove('bg-red-600');
+                barReal.innerHTML = 'Sawah & Pasar';
+
+                barGov.style.width = '20%';
+                barGov.classList.add('bg-stone-600');
+                barGov.classList.remove('bg-amber-600');
+                barGov.classList.add('text-stone-300');
+                barGov.classList.remove('text-white');
+                barGov.innerHTML = 'SBN/SRBI';
+
+                simText.innerHTML = '"Air mengalir ke sawah. Bank menyalurkan kredit ke Mang Ohi dan Jang Ule."';
+                simText.classList.remove('text-amber-400');
+                simText.classList.add('text-stone-300');
+            }
+        }
+    </script>
 </body>
 </html>
