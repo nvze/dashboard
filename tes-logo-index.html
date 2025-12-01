@@ -64,19 +64,22 @@
       font-weight: 400;
     }
     
-    /* Header: Logo */
+    /* --- PERBAIKAN LOGO --- */
     .profile-logo {
       width: auto;
-      height: 50px; /* Ukuran proporsional */
+      height: 55px; /* Sedikit diperbesar agar proporsional */
       margin-bottom: 1rem;
       
-      /* --- TRIK CSS AGAR LOGO JPG MENYATU --- */
-      /* Invert: Mengubah Putih jadi Hitam, Hitam jadi Putih */
-      filter: invert(1); 
-      /* Mix-blend-mode: Screen membuat warna hitam (hasil invert background) jadi transparan */
+      /* TRIK BARU: */
+      /* 1. grayscale: Buang warna warni (jadi hitam putih) */
+      /* 2. contrast & brightness: PAKSA background abu-abu muda jadi Putih Murni */
+      /* 3. invert: Balik Putih Murni jadi Hitam Murni (agar hilang kena Screen) */
+      filter: grayscale(100%) contrast(150%) brightness(120%) invert(1);
+      
+      /* Mix-blend-mode: Screen membuat warna Hitam Murni jadi transparan */
       mix-blend-mode: screen; 
       
-      opacity: 0.9;
+      opacity: 0.95;
     }
 
     h1 {
