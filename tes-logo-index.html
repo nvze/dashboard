@@ -23,12 +23,11 @@
 
     /* Container Utama - Style Dark Acrylic */
     .dashboard-card {
-      /* Latar belakang transparan gelap */
       background: rgba(18, 24, 38, 0.65); 
       backdrop-filter: blur(40px) saturate(110%);
       -webkit-backdrop-filter: blur(40px) saturate(110%);
       
-      /* PENTING: Membuat konteks tumpukan baru agar blending bekerja benar */
+      /* ISOLATION: PENTING untuk rendering blend-mode yang benar di HP */
       isolation: isolate; 
       
       padding: 2.5rem 3rem;
@@ -46,7 +45,7 @@
       align-items: center;
     }
 
-    /* --- WIDGET JAM (Dark Mode Style) --- */
+    /* --- WIDGET JAM --- */
     .clock-widget {
       margin-bottom: 2rem;
       width: 100%;
@@ -69,26 +68,22 @@
       font-weight: 400;
     }
     
-    /* --- LOGO UTAMA --- */
-    /* LOGIC PERBAIKAN BACKGROUND */
+    /* --- PERBAIKAN LOGO (AGRESIF) --- */
     .dashboard-logo {
         width: 180px; 
         height: auto;
         margin-bottom: 0.5rem;
         
-        /* RUMUS BARU YANG LEBIH KUAT: */
-        /* 1. grayscale: Hitam putih */
-        /* 2. contrast(500%): Paksa abu-abu muda jadi PUTIH TOTAL */
-        /* 3. brightness(200%): Terangkan lagi untuk memastikan tidak ada noda */
-        /* 4. invert(100%): Balik Putih -> HITAM PEKAT (#000000) */
-        filter: grayscale(100%) contrast(500%) brightness(200%) invert(100%);
+        /* RUMUS FILTER BARU (Lebih Galak): */
+        /* 1. grayscale: Buang warna. */
+        /* 2. brightness(1.2): Terangkan sedikit agar background abu-abu jadi putih. */
+        /* 3. contrast(5): PENTING! Memaksa semua yang agak putih jadi PUTIH MENTOK, semua yang agak hitam jadi HITAM MENTOK. */
+        /* 4. invert(1): Balik warna. Putih Mentok -> Hitam Pekat (#000000). */
+        filter: grayscale(100%) brightness(1.2) contrast(5) invert(100%);
         
-        /* Ganti SCREEN menjadi LIGHTEN */
-        /* Lighten lebih aman untuk menghilangkan warna hitam pada background gelap */
-        mix-blend-mode: lighten; 
+        /* Gunakan SCREEN (Standar terbaik untuk menghilangkan warna hitam) */
+        mix-blend-mode: screen; 
         
-        /* Pastikan tidak ada opacity yang mengganggu blending */
-        opacity: 1; 
         transition: transform 0.3s ease;
     }
 
@@ -133,7 +128,7 @@
       width: 100%;
     }
 
-    /* Style Tombol Menu - Dark Tile */
+    /* Style Tombol Menu */
     a.menu-item {
       display: flex;
       flex-direction: column;
@@ -196,10 +191,11 @@
     </div>
 
     <!-- LOGO IMPLEMENTATION -->
+    <!-- Pastikan file logo.jpg ada di folder yang sama -->
     <img src="logo.jpg" alt="NvZE Logo" class="dashboard-logo" 
          onerror="this.style.display='none'; document.querySelector('.profile-avatar-fallback').style.display='flex';">
 
-    <!-- Fallback Avatar -->
+    <!-- Fallback Avatar (Muncul kalau gambar error) -->
     <div class="profile-avatar-fallback">N</div>
 
     <h1>NvZE Dashboard</h1>
