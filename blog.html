@@ -79,7 +79,7 @@
 
         /* --- HEADER --- */
         header {
-            padding: 50px 20px 30px;
+            padding: 50px 20px 20px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
@@ -99,6 +99,54 @@
             font-size: 1.1rem;
             color: var(--text-secondary);
             font-weight: 400;
+        }
+
+        /* --- SEARCH BAR (NEW) --- */
+        .search-wrapper {
+            max-width: 500px;
+            margin: 10px auto 30px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px 12px 48px; /* Padding kiri untuk icon */
+            background: var(--nav-glass);
+            border: 1px solid var(--card-border);
+            border-radius: 50px; /* Bentuk Pill */
+            color: var(--text-primary);
+            font-family: var(--font-stack);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: var(--acrylic-blur);
+            -webkit-backdrop-filter: var(--acrylic-blur);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-default);
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 0 15px rgba(96, 205, 255, 0.15); /* Halus glow biru */
+        }
+        
+        .search-input::placeholder {
+            color: rgba(160, 174, 192, 0.6);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 36px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            pointer-events: none;
+            opacity: 0.8;
+            transition: color 0.3s;
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--accent-default);
         }
 
         /* --- STICKY NAV (Dark Acrylic) --- */
@@ -229,6 +277,14 @@
             font-size: 0.95rem;
             line-height: 1.6;
         }
+        
+        /* Highlighting Text in Search */
+        .highlight {
+            background-color: rgba(96, 205, 255, 0.2);
+            color: white;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
 
         /* --- BUTTONS & FOOTER --- */
         .load-more-container {
@@ -283,6 +339,7 @@
             .filter-btn { flex: 1 1 auto; font-size: 13px; padding: 8px 12px; }
             .container { padding: 0 16px; }
             .article-card { padding: 20px; }
+            .search-wrapper { margin-bottom: 20px; padding: 0 24px; }
         }
     </style>
 </head>
@@ -301,6 +358,15 @@
         <h1>NvZE Jurnal</h1>
         <p class="subtitle">Arsip Ekonomi, Teknologi, Humaniora & Artikel Bebas</p>
     </header>
+
+    <!-- NEW: SEARCH BAR SECTION -->
+    <div class="search-wrapper">
+        <input type="text" id="searchInput" class="search-input" placeholder="Cari judul, topik, atau kata kunci...">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+    </div>
 
     <nav class="sticky-nav">
         <div class="nav-container">
@@ -583,13 +649,21 @@
 
         // --- LOGIC SYSTEM ---
         let currentCategory = 'all';
+        let searchQuery = '';
         let displayLimit = 15;
         let filteredList = [];
 
         const container = document.getElementById('posts-container');
         const loadBtn = document.getElementById('loadMoreBtn');
+        const searchInput = document.getElementById('searchInput');
 
         function init() {
+            // Setup listener untuk search
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase();
+                applyFilters();
+            });
+
             setCategory('all', document.querySelector('.filter-btn.active'));
         }
 
@@ -598,41 +672,70 @@
             if(element) element.classList.add('active');
 
             currentCategory = cat;
-            if (cat === 'all') {
-                filteredList = allPosts;
-            } else {
-                filteredList = allPosts.filter(post => post.cat === cat);
+            applyFilters();
+        }
+
+        // Fungsi Filter Utama (Gabungan Kategori + Search)
+        function applyFilters() {
+            // 1. Filter by Category
+            let temp = (currentCategory === 'all')
+                ? allPosts
+                : allPosts.filter(post => post.cat === currentCategory);
+
+            // 2. Filter by Search Query
+            if (searchQuery.trim() !== '') {
+                temp = temp.filter(post => 
+                    post.title.toLowerCase().includes(searchQuery) || 
+                    post.desc.toLowerCase().includes(searchQuery)
+                );
             }
 
-            displayLimit = 15;
+            filteredList = temp;
+            displayLimit = 15; // Reset limit saat filter berubah
             renderList();
         }
 
         function renderList() {
             container.innerHTML = '';
-            const listToShow = filteredList.slice(0, displayLimit);
-
-            if(listToShow.length === 0) {
-                container.innerHTML = `<p style="text-align:center; color:var(--text-secondary); padding:40px;">Belum ada artikel di kategori ini.</p>`;
+            
+            if(filteredList.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align:center; padding: 60px 20px;">
+                        <p style="color:var(--text-secondary); font-size:1.1rem; margin-bottom:10px;">
+                            Tidak ada artikel yang ditemukan.
+                        </p>
+                        <p style="font-size:0.9rem; color: rgba(255,255,255,0.3);">
+                            Coba kata kunci lain atau ubah kategori.
+                        </p>
+                    </div>
+                `;
                 loadBtn.style.display = 'none';
                 return;
             }
+
+            const listToShow = filteredList.slice(0, displayLimit);
 
             listToShow.forEach(post => {
                 const article = document.createElement('a');
                 article.href = post.link;
                 article.className = 'article-card';
+                
+                // Highlight search term logic (optional visual improvement)
+                let displayTitle = post.title;
+                let displayDesc = post.desc;
+
                 article.innerHTML = `
                     <div class="meta-group">
                         <span>${post.cat}</span>
                         <span class="meta-date">&bull; ${post.date}</span>
                     </div>
-                    <h2 class="post-title">${post.title}</h2>
-                    <p class="post-excerpt">${post.desc}</p>
+                    <h2 class="post-title">${displayTitle}</h2>
+                    <p class="post-excerpt">${displayDesc}</p>
                 `;
                 container.appendChild(article);
             });
 
+            // Tampilkan tombol Load More jika masih ada sisa
             if (displayLimit >= filteredList.length) {
                 loadBtn.style.display = 'none';
             } else {
