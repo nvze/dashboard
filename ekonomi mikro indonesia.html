@@ -3,948 +3,637 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Warung Pak Joko: Cerita Ekonomi Mikro Indonesia 2025</title>
+    <title>Kisah Rintisan: Empat Jiwa dalam Pusaran Ekonomi Mikro 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f0f9ff;
+            --dark: #0f172a;
         }
         
         body {
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: #334155;
+            line-height: 1.8;
         }
         
-        .container {
+        .story-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
         }
         
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease-out;
+        .story-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark);
         }
         
         h1 {
-            font-size: 3.2rem;
-            margin-bottom: 15px;
-            background: linear-gradient(to right, #ffd700, #ffec8b);
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
         
-        .subtitle {
-            font-size: 1.4rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            color: #e6f7ff;
-        }
-        
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-        }
-        
-        .card-header {
-            background: linear-gradient(to right, #2c3e50, #4a6491);
-            color: white;
-            padding: 25px 30px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .card-header i {
-            font-size: 2rem;
-            margin-right: 15px;
-        }
-        
-        .card-content {
-            padding: 30px;
-        }
-        
-        .character-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+        .chapter {
+            margin-bottom: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 2px dashed #cbd5e1;
         }
         
         .character-card {
             background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 6px solid var(--primary);
         }
         
         .character-card:hover {
-            transform: scale(1.03);
-        }
-        
-        .character-img {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .character-info {
-            padding: 20px;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
         }
         
         .character-name {
+            color: var(--primary);
+            font-weight: 700;
             font-size: 1.5rem;
-            color: #2c3e50;
-            margin-bottom: 5px;
+            margin-bottom: 0.5rem;
         }
         
         .character-role {
-            color: #7f8c8d;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .data-visualization {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-top: 6px solid var(--accent);
+        }
+        
+        .chart-title {
+            color: var(--primary);
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        
+        .dialogue {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--secondary);
             font-style: italic;
-            margin-bottom: 15px;
         }
         
-        .story-section {
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-        }
-        
-        .story-section p {
-            margin-bottom: 20px;
-            text-align: justify;
+        .speaker {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
         }
         
         .highlight {
-            background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-            padding: 15px 25px;
-            border-radius: 10px;
-            margin: 25px 0;
-            border-left: 5px solid #1a2980;
+            background: linear-gradient(120deg, #bae6fd 0%, #bae6fd 100%);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
         }
         
-        .economy-dashboard {
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
         
-        .economy-card {
+        .stat-card {
             background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            border-top: 5px solid #26d0ce;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
         
-        .economy-card h3 {
-            color: #1a2980;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .economy-card h3 i {
-            margin-right: 10px;
-            color: #26d0ce;
-        }
-        
-        .stat {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed #eee;
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
         }
         
         .stat-value {
-            font-weight: bold;
-            color: #1a2980;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
         }
         
-        .interactive-section {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 40px 0;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        .stat-label {
+            color: #64748b;
+            font-size: 0.9rem;
         }
         
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 12px 25px;
-            background: linear-gradient(to right, #1a2980, #26d0ce);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 14px rgba(26, 41, 128, 0.3);
-        }
-        
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: white;
-            margin-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .character-dialogue {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 5px solid #ffd700;
-            font-style: italic;
-        }
-        
-        .character-name-dialogue {
-            font-weight: bold;
-            color: #1a2980;
-            margin-bottom: 5px;
-        }
-        
-        .scene-break {
-            text-align: center;
-            margin: 30px 0;
-            color: #7f8c8d;
+        .timeline {
             position: relative;
+            padding-left: 2rem;
+            margin: 3rem 0;
         }
         
-        .scene-break::before {
-            content: "";
+        .timeline::before {
+            content: '';
             position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: #ddd;
-            z-index: 1;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
         }
         
-        .scene-break span {
-            background: white;
-            padding: 0 20px;
+        .timeline-item {
             position: relative;
-            z-index: 2;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+        
+        .footer-note {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e2e8f0;
+            color: #64748b;
+            font-size: 0.9rem;
         }
         
         @media (max-width: 768px) {
+            .story-container {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+            
             h1 {
                 font-size: 2.5rem;
             }
             
-            .character-section {
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .economy-dashboard {
-                grid-template-columns: 1fr;
-            }
-            
-            .controls {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-        
-        /* Tambahan untuk visualisasi data */
-        .chart-container {
-            height: 200px;
-            margin: 20px 0;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            background: #f8f9fa;
-        }
-        
-        .chart-bar {
-            height: 100%;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-around;
-            padding: 20px;
-        }
-        
-        .chart-item {
-            width: 60px;
-            background: linear-gradient(to top, #1a2980, #26d0ce);
-            border-radius: 5px 5px 0 0;
-            position: relative;
-            transition: height 1s ease;
-        }
-        
-        .chart-label {
-            position: absolute;
-            bottom: -25px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #333;
-        }
-        
-        .chart-value {
-            position: absolute;
-            top: -25px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-weight: bold;
-            color: #1a2980;
-        }
-        
-        /* Timeline styling */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 40px auto;
-        }
-        
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background-color: #26d0ce;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-            border-radius: 3px;
-        }
-        
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-        }
-        
-        .timeline-item:nth-child(odd) {
-            left: 0;
-        }
-        
-        .timeline-item:nth-child(even) {
-            left: 50%;
-        }
-        
-        .timeline-content {
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .timeline-date {
-            font-weight: bold;
-            color: #1a2980;
-            margin-bottom: 5px;
-        }
-        
-        /* Efek parallax untuk judul */
-        .parallax-title {
-            transform: translateY(calc(var(--scroll) * 0.5px));
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1 class="parallax-title">Warung Pak Joko: Cerita Ekonomi Mikro Indonesia 2025</h1>
-            <p class="subtitle">Sebuah cerita tentang empat tokoh yang merefleksikan kondisi ekonomi mikro Indonesia di tahun 2025, berdasarkan data ekonomi riil</p>
-            <div class="controls">
-                <button class="btn" id="themeToggle"><i class="fas fa-moon"></i> Mode Gelap</button>
-                <button class="btn" id="playAudio"><i class="fas fa-volume-up"></i> Musik Latar</button>
-                <button class="btn" id="showCharts"><i class="fas fa-chart-line"></i> Tampilkan Grafik</button>
+<body class="min-h-screen py-10 px-4">
+    <div class="story-container">
+        <!-- Header Cerita -->
+        <header class="text-center mb-12">
+            <h1>Kisah Rintisan</h1>
+            <p class="text-xl text-slate-600">Empat Jiwa dalam Pusaran Ekonomi Mikro Indonesia 2025</p>
+            <div class="flex justify-center items-center mt-6 space-x-4">
+                <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Fiksi Ekonomi</span>
+                <span class="px-4 py-2 bg-amber-100 text-amber-800 rounded-full text-sm font-medium">Drama Kehidupan</span>
+                <span class="px-4 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium">Data Nyata</span>
             </div>
         </header>
         
-        <section class="character-section">
-            <div class="character-card">
-                <div class="character-img" style="background: linear-gradient(to bottom right, #4a6491, #2c3e50);"></div>
-                <div class="character-info">
-                    <h3 class="character-name">Joko Santoso</h3>
-                    <p class="character-role">Pemilik Warung Makan "Sederhana"</p>
-                    <p>Usia 52 tahun. Telah menjalankan warung makan selama 25 tahun. Merasakan langsung gelombang perubahan ekonomi Indonesia dari krisis 1998 hingga pandemi 2020-an.</p>
+        <!-- Pengenalan Tokoh -->
+        <section class="chapter">
+            <h2 class="text-3xl mb-8 text-center">Para Pelaku</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="character-card">
+                    <div class="character-name">Budi Santoso</div>
+                    <div class="character-role">Pemilik UMKM Kerajinan "Bumi Nusantara"</div>
+                    <p>Seorang pengusaha kecil berusia 45 tahun dari Yogyakarta yang berjuang mempertahankan usaha kerajinan kayu warisan keluarganya. Setelah sempat bangkit pasca-pandemi, usahanya kembali terpuruk di awal 2025 akibat kenaikan harga bahan baku dan daya beli yang melemah.</p>
                 </div>
-            </div>
-            
-            <div class="character-card">
-                <div class="character-img" style="background: linear-gradient(to bottom right, #1a2980, #26d0ce);"></div>
-                <div class="character-info">
-                    <h3 class="character-name">Budi Hartono</h3>
-                    <p class="character-role">Pengusaha UMKM Konveksi</p>
-                    <p>Usia 38 tahun. Memiliki usaha konveksi kecil dengan 15 karyawan. Sangat terpengaruh oleh fluktuasi nilai tukar Rupiah dan permintaan ekspor.</p>
+                
+                <div class="character-card">
+                    <div class="character-name">Rina Wijaya</div>
+                    <div class="character-role">Analis Ekonomi di Bank Indonesia</div>
+                    <p>Perempuan berusia 32 tahun yang setiap hari memantau data inflasi, pertumbuhan ekonomi, dan kesehatan sektor keuangan. Di tengah tekanan untuk menaikkan suku bunga, dia harus mempertimbangkan dampaknya terhadap jutaan UMKM seperti Budi.</p>
                 </div>
-            </div>
-            
-            <div class="character-card">
-                <div class="character-img" style="background: linear-gradient(to bottom right, #ff7e5f, #feb47b);"></div>
-                <div class="character-info">
-                    <h3 class="character-name">Sari Dewi</h3>
-                    <p class="character-role">Ibu Rumah Tangga & Konsumen</p>
-                    <p>Usia 45 tahun. Mengelola keuangan keluarga dengan suami yang bekerja sebagai pegawai negeri. Sensitif terhadap perubahan harga bahan pokok.</p>
+                
+                <div class="character-card">
+                    <div class="character-name">Ahmad Fauzi</div>
+                    <div class="character-role">Pengusaha Muda Start-up Digital</div>
+                    <p>Lulusan IT berusia 28 tahun yang mendirikan platform e-commerce untuk UMKM lokal. Meski optimis dengan transformasi digital, dia menghadapi kendala pendanaan dan adaptasi pelaku UMKM terhadap teknologi.</p>
                 </div>
-            </div>
-            
-            <div class="character-card">
-                <div class="character-img" style="background: linear-gradient(to bottom right, #614385, #516395);"></div>
-                <div class="character-info">
-                    <h3 class="character-name">Rina Wijaya</h3>
-                    <p class="character-role">Analis Bank & Pakar Keuangan</p>
-                    <p>Usia 32 tahun. Bekerja di divisi riset bank nasional. Memahami data makro dan mikro ekonomi serta kebijakan moneter Bank Indonesia.</p>
+                
+                <div class="character-card">
+                    <div class="character-name">Sari Dewi</div>
+                    <div class="character-role">Ibu Rumah Tangga & Konsumen</div>
+                    <p>Ibu dua anak berusia 35 tahun yang merasakan langsung dampak kenaikan harga kebutuhan pokok. Pengeluaran keluarga yang semakin ketat membuatnya harus memilih dengan hati-hati setiap pembelian, termasuk mengurangi pembelian barang non-esensial seperti kerajinan.</p>
                 </div>
             </div>
         </section>
         
-        <div class="card">
-            <div class="card-header">
-                <i class="fas fa-book-open"></i>
-                <h2>Cerita: Pertemuan di Warung Pak Joko</h2>
+        <!-- Bab 1: Awal Tahun yang Tak Menentu -->
+        <section class="chapter">
+            <h2 class="text-3xl mb-6">Bab 1: Januari 2025 - Awal Tahun yang Tak Menentu</h2>
+            
+            <p>Kabut pagi masih menyelimuti Kota Yogyakarta ketika <span class="highlight">Budi Santoso</span> membuka pintu bengkel kerajinannya yang sederhana. Matanya menatap lembaran laporan keuangan di meja kerjanya. Omset Desember 2024 turun 30% dibanding tahun sebelumnya. "Ini belum apa-apa," gumamnya, mengingat pesanan untuk kuartal pertama 2025 bahkan lebih suram.</p>
+            
+            <div class="dialogue">
+                <div class="speaker">Budi (berbicara kepada istrinya melalui telepon)</div>
+                "Katanya ekonomi tumbuh 5%, tapi kenapa toko kita sepi? Harga kayu mahal sekali, belum lagi upah tukang. Aku harus putar otak lagi."
             </div>
-            <div class="card-content">
-                <div class="story-section">
-                    <p>Hari itu, 18 November 2025, cuaca di Jakarta terasa cukup panas meski musim hujan sudah seharusnya tiba. Di Warung Makan "Sederhana" milik Pak Joko, kipas angin berdengung keras mencoba mengusir panas yang menyengat. Warung yang terletak di pinggiran Jakarta ini biasanya ramai di jam makan siang, tetapi hari ini terasa lebih sepi dari biasanya.</p>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Pak Joko</div>
-                        "Dulu, warung ini selalu penuh di jam makan siang. Sekarang? Lihat sendiri, baru separuh terisi. Orang-orang lebih hati-hati keluarin uangnya."
+            
+            <p>Di Jakarta, <span class="highlight">Rina Wijaya</span> sedang menyiapkan presentasi untuk rapat Dewan Gubernur Bank Indonesia. Data di layar komputernya menunjukkan <span class="highlight">inflasi tahun-ke-tahun di angka 1,95%</span> — relatif rendah dan dalam sasaran. Tapi dia tahu angka aggregate itu menyembunyikan realitas yang lebih kompleks.</p>
+            
+            <!-- Grafik Pertumbuhan Ekonomi -->
+            <div class="data-visualization">
+                <div class="chart-title">Lanskap Ekonomi Indonesia Awal 2025</div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <canvas id="growthChart"></canvas>
                     </div>
-                    
-                    <p>Pak Joko membersihkan meja sambil sesekali melirik ke arah televisi yang menayangkan berita ekonomi. Nilai tukar Rupiah terhadap Dolar AS hari ini mencapai Rp16.735, melemah 0,69% dibanding akhir Oktober. Berita itu membuatnya mengelus dada.</p>
-                    
-                    <div class="scene-break">
-                        <span><i class="fas fa-asterisk"></i></span>
-                    </div>
-                    
-                    <p>Tepat pukul 12.30, Budi Hartono masuk dengan wajah sedikit lesu. Ia langsung duduk di meja favoritnya dekat kipas angin.</p>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Budi</div>
-                        "Lauk yang ada dagingnya, Pak. Hari ini perlu energi ekstra."
-                    </div>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Pak Joko</div>
-                        "Lagi banyak orderan, Bud?"
-                    </div>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Budi</div>
-                        "Justru sebaliknya, Pak. Orderan ekspor lagi sepi. Ditambah nilai tukar Rupiah yang melemah, bahan baku impor jadi lebih mahal. Untungnya konsumsi dalam negeri masih lumayan, jadi produksi untuk pasar lokal masih jalan."
-                    </div>
-                    
-                    <p>Tak lama kemudian, Sari Dewi datang membawa tas belanjaan. Wajahnya tampak kecapaian.</p>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Sari</div>
-                        "Pak Joko, nasi rames satu. Hari ini habis keliling pasar, harga cabai naik lagi. Padahal inflasi katanya cuma 2,86% tahun ke tahun, tapi kok di pasar terasa lebih dari itu ya?"
-                    </div>
-                    
-                    <p>Sambil menunggu pesanan, Sari bergabung dengan Budi. Mereka mulai berbincang tentang kondisi ekonomi terkini. Tak lama kemudian, Rina Wijaya yang kebetulan lewat dan ingin makan siang juga bergabung.</p>
-                    
-                    <div class="highlight">
-                        <p><strong>Konteks Ekonomi:</strong> Inflasi Indonesia Oktober 2025 berada di 2,86% (yoy), dengan inflasi inti 2,36%. Sementara itu, pertumbuhan ekonomi Triwulan III 2025 mencapai 5,04%, didorong oleh ekspor dan konsumsi pemerintah. Nilai tukar Rupiah berada di Rp16.735/USD dengan kecenderungan melemah.</p>
-                    </div>
-                    
-                    <div class="scene-break">
-                        <span><i class="fas fa-asterisk"></i></span>
-                    </div>
-                    
-                    <p>Rina, sebagai analis bank, menjelaskan kondisi ekonomi dengan data yang ia kuasai:</p>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Rina</div>
-                        "Secara makro, ekonomi Indonesia tumbuh 5,04% di Triwulan III 2025. Tapi yang menarik, kontribusi konsumsi rumah tangga terhadap PDB sekitar 54%. Artinya, kita masih sangat bergantung pada konsumsi domestik. UMKM seperti usaha Pak Joko dan Mas Budi adalah tulang punggung ekonomi riil."
-                    </div>
-                    
-                    <p>Budi mengangguk pelan, "Tapi tantangan kami banyak, Rin. Literasi digital, akses pembiayaan, produktivitas, dan perizinan yang rumit. Apalagi dengan 30,18 juta unit UMKM di Indonesia, menurut data hingga Desember 2024, persaingan juga ketat."</p>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Rina</div>
-                        "Benar, Bud. Tapi ada kabar baik. Bank Indonesia sudah menurunkan suku bunga acuan menjadi 4,75% di November 2025, turun dari 5,00% di Agustus. Ini bisa mempermudah akses kredit untuk UMKM."
-                    </div>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Sari</div>
-                        "Tapi sebagai ibu rumah tangga, saya merasakan daya beli semakin tertekan. Gaji suami naiknya tidak secepat kenaikan harga kebutuhan sehari-hari. Kata Rina tadi inflasi cuma 2,86%, tapi di lapangan terasa lebih tinggi."
-                    </div>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Rina</div>
-                        "Itu karena inflasi yang Ibu Sari rasakan berbeda dengan inflasi agregat. Harga bahan makanan seperti cabai, bawang, dan daging memang lebih volatil. Inflasi inti yang 2,36% lebih mencerminkan tren jangka panjang."
-                    </div>
-                    
-                    <div class="economy-dashboard">
-                        <div class="economy-card">
-                            <h3><i class="fas fa-chart-line"></i> Pertumbuhan Ekonomi 2025</h3>
-                            <div class="stat">
-                                <span>Triwulan I 2025</span>
-                                <span class="stat-value">4,87%</span>
-                            </div>
-                            <div class="stat">
-                                <span>Triwulan II 2025</span>
-                                <span class="stat-value">5,12%</span>
-                            </div>
-                            <div class="stat">
-                                <span>Triwulan III 2025</span>
-                                <span class="stat-value">5,04%</span>
-                            </div>
-                            <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">Sumber: Badan Pusat Statistik</p>
-                        </div>
-                        
-                        <div class="economy-card">
-                            <h3><i class="fas fa-money-bill-wave"></i> Indikator Kunci</h3>
-                            <div class="stat">
-                                <span>Inflasi (Oktober 2025)</span>
-                                <span class="stat-value">2,86%</span>
-                            </div>
-                            <div class="stat">
-                                <span>Suku Bunga BI (Nov 2025)</span>
-                                <span class="stat-value">4,75%</span>
-                            </div>
-                            <div class="stat">
-                                <span>Nilai Tukar (18 Nov 2025)</span>
-                                <span class="stat-value">Rp16.735/USD</span>
-                            </div>
-                            <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">Sumber: Bank Indonesia</p>
-                        </div>
-                    </div>
-                    
-                    <div class="scene-break">
-                        <span><i class="fas fa-asterisk"></i></span>
-                    </div>
-                    
-                    <p>Pembicaraan berlanjut hingga sore hari. Pak Joko bergabung kembali setelah jam makan siang usai. Ia bercerita tentang tantangan menjalankan warung makan di tengah perubahan perilaku konsumen.</p>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Pak Joko</div>
-                        "Sekarang orang lebih suka pesan makanan online. Saya sudah coba kerja sama dengan aplikasi pesan-antar, tapi komisinya besar, bisa 15-20%. Akhirnya harga jadi lebih mahal untuk konsumen atau untung saya yang menipis."
-                    </div>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Budi</div>
-                        "Sama, Pak. Saya juga harus beradaptasi. Dulu fokus ekspor, sekarang lebih ke pasar domestik. Tapi persaingan ketat, apalagi dengan masuknya produk impor yang lebih murah."
-                    </div>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Rina</div>
-                        "Data menunjukkan bahwa UMKM di sektor perdagangan besar/eceran mencapai 14,4 juta unit, dan akomodasi & makanan 6,4 juta unit. Ini sektor yang sangat padat persaingan. Tapi di sisi lain, digitalisasi juga membuka peluang pasar yang lebih luas."
-                    </div>
-                    
-                    <div class="interactive-section" id="chartsSection" style="display:none;">
-                        <h3><i class="fas fa-chart-bar"></i> Visualisasi Data Ekonomi Mikro Indonesia 2025</h3>
-                        
-                        <h4 style="margin-top: 20px; color: #1a2980;">Pertumbuhan Ekonomi per Triwulan 2025</h4>
-                        <div class="chart-container">
-                            <div class="chart-bar">
-                                <div class="chart-item" style="height: 70%;">
-                                    <div class="chart-value">4.87%</div>
-                                    <div class="chart-label">Q1</div>
-                                </div>
-                                <div class="chart-item" style="height: 80%;">
-                                    <div class="chart-value">5.12%</div>
-                                    <div class="chart-label">Q2</div>
-                                </div>
-                                <div class="chart-item" style="height: 75%;">
-                                    <div class="chart-value">5.04%</div>
-                                    <div class="chart-label">Q3</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h4 style="margin-top: 30px; color: #1a2980;">Distribusi UMKM per Sektor (Juta Unit)</h4>
-                        <div class="chart-container">
-                            <div class="chart-bar">
-                                <div class="chart-item" style="height: 90%; background: linear-gradient(to top, #1a2980, #4a6491);">
-                                    <div class="chart-value">14.4</div>
-                                    <div class="chart-label">Perdagangan</div>
-                                </div>
-                                <div class="chart-item" style="height: 40%; background: linear-gradient(to top, #26d0ce, #1a2980);">
-                                    <div class="chart-value">6.4</div>
-                                    <div class="chart-label">Akomodasi & Makanan</div>
-                                </div>
-                                <div class="chart-item" style="height: 60%; background: linear-gradient(to top, #614385, #516395);">
-                                    <div class="chart-value">9.38</div>
-                                    <div class="chart-label">Lainnya</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-content">
-                                    <div class="timeline-date">Januari - Maret 2025</div>
-                                    <p>Pertumbuhan ekonomi 4,87%, didorong konsumsi rumah tangga yang kuat.</p>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-content">
-                                    <div class="timeline-date">April - Juni 2025</div>
-                                    <p>Pertumbuhan mencapai 5,12%, dipicu libur panjang keagamaan dan konsumsi rumah tangga.</p>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-content">
-                                    <div class="timeline-date">Juli - September 2025</div>
-                                    <p>Pertumbuhan 5,04%, ditopang ekspor dan konsumsi pemerintah.</p>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-content">
-                                    <div class="timeline-date">Agustus 2025</div>
-                                    <p>BI Rate turun 25 bps menjadi 5,00%.</p>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-content">
-                                    <div class="timeline-date">November 2025</div>
-                                    <p>BI Rate bertahan di 4,75%. Nilai tukar Rupiah Rp16.735/USD.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="scene-break">
-                        <span><i class="fas fa-asterisk"></i></span>
-                    </div>
-                    
-                    <p>Pertemuan di warung Pak Joko hari itu menjadi cerminan kondisi ekonomi mikro Indonesia di akhir 2025. Meski data makro menunjukkan pertumbuhan positif, di tingkat akar rumput, tantangan tetap dirasakan nyata. Dari empat tokoh tersebut, terlihat bagaimana kebijakan moneter, inflasi, nilai tukar, dan transformasi digital berdampak langsung pada kehidupan sehari-hari.</p>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Rina</div>
-                        "Intinya, ekonomi Indonesia di 2025 menunjukkan ketahanan yang baik dengan pertumbuhan sekitar 5%. Tapi tantangan ke depan adalah memastikan pertumbuhan ini inklusif, sampai ke tingkat UMKM dan rumah tangga."
-                    </div>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Pak Joko</div>
-                        "Buat saya sederhana saja. Yang penting warung ini tetap bisa menghidupi keluarga, karyawan dapat gaji tepat waktu, dan pelanggan dapat makanan enak dengan harga terjangkau."
-                    </div>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Budi</div>
-                        "Dan buat saya, usaha bisa terus jalan, karyawan tidak ada yang di-PHK, dan orderan tetap masuk."
-                    </div>
-                    
-                    <div class="character-dialogue">
-                        <div class="character-name-dialogue">Sari</div>
-                        "Saya sih berharap harga-harga di pasar stabil, dan daya beli keluarga tidak terus tergerus."
-                    </div>
-                    
-                    <p>Mereka pun berpisah saat matahari mulai terbenam, masing-masing membawa cerita dan keprihatinan tentang ekonomi Indonesia, tetapi juga harapan untuk masa depan yang lebih baik. Di luar warung, lampu-lampu kota mulai menyala, menandakan aktivitas ekonomi malam hari yang akan segera dimulai.</p>
-                    
-                    <div class="highlight">
-                        <p><strong>Refleksi Akhir 2025:</strong> Ekonomi mikro Indonesia ditandai dengan ketahanan UMKM sebagai tulang punggung ekonomi, daya beli masyarakat yang tertekan meski inflasi rendah, transformasi digital yang membawa peluang dan tantangan, serta kebijakan moneter yang mulai akomodatif. Tantangan ke depan adalah memastikan pertumbuhan ekonomi yang inklusif dan berkelanjutan.</p>
+                    <div>
+                        <canvas id="inflationChart"></canvas>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="interactive-section">
-            <h3><i class="fas fa-cogs"></i> Interaksi dengan Cerita</h3>
-            <p>Jelajahi aspek ekonomi mikro Indonesia 2025 melalui interaksi berikut:</p>
-            <div class="controls">
-                <button class="btn" id="showSummary"><i class="fas fa-file-alt"></i> Ringkasan Ekonomi</button>
-                <button class="btn" id="togglePerspective"><i class="fas fa-eye"></i> Ganti Sudut Pandang</button>
-                <button class="btn" id="simulateEconomy"><i class="fas fa-calculator"></i> Simulasi Dampak</button>
+                <p class="text-sm text-slate-500 mt-4 text-center">Sumber data: Badan Pusat Statistik, Bank Indonesia (diolah untuk keperluan fiksi)</p>
             </div>
             
-            <div id="summaryBox" style="display:none; margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 5px solid #26d0ce;">
-                <h4>Ringkasan Kondisi Ekonomi Mikro Indonesia 2025</h4>
-                <ul style="margin-top: 10px; padding-left: 20px;">
-                    <li>Pertumbuhan ekonomi stabil di kisaran 5%, didorong konsumsi rumah tangga (54% PDB)</li>
-                    <li>UMKM mendominasi dengan 30,18 juta unit, terutama di sektor perdagangan dan akomodasi</li>
-                    <li>Inflasi terkendali (2,86%) namun daya beli masyarakat menengah-bawah tertekan</li>
-                    <li>BI Rate turun menjadi 4,75%, berpotensi mempermudah akses kredit UMKM</li>
-                    <li>Nilai tukar Rupiah melemah (Rp16.735/USD), berdampak pada usaha berbahan baku impor</li>
-                    <li>Transformasi digital membawa peluang sekaligus tantangan bagi UMKM tradisional</li>
-                </ul>
-            </div>
-        </div>
+            <p>Di sudut lain ibu kota, <span class="highlight">Ahmad Fauzi</span> sedang mempresentasikan proposal pendanaan series A untuk platform "UMKMGo" kepada calon investor. "Kami sudah menghubungkan 2.000 UMKM dengan pasar digital," katanya dengan penuh semangat. Tapi salah satu investor menanggapi dingin, "Pertumbuhan private investment kuartal I hanya 2,12%, kami harus lebih hati-hati."</p>
+            
+            <p>Sementara itu, di pasar tradisional Depok, <span class="highlight">Sari Dewi</span> mengelus dahinya melihat harga cabai dan bawang yang melonjak. "Duit 50 ribu dulu bisa dapat belanja lengkap, sekarang cuma cukup untuk lauk-pauk saja," keluhnya kepada temannya sesama ibu-ibu. Pengeluaran untuk barang sekunder seperti hiasan rumah jelas sudah dihapus dari daftar belanjaannya.</p>
+        </section>
         
-        <footer>
-            <p>Cerita fiksi berdasarkan data ekonomi riil Indonesia 2025 | Dibuat untuk tujuan edukasi</p>
-            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
-                <i class="fas fa-database"></i> Sumber data: Badan Pusat Statistik, Bank Indonesia, Kementerian Keuangan
+        <!-- Bab 2: Musim Semi yang Tak Kunjung Datang -->
+        <section class="chapter">
+            <h2 class="text-3xl mb-6">Bab 2: April 2025 - Musim Semi yang Tak Kunjung Datang</h2>
+            
+            <p>Memasuki kuartal kedua 2025, angin perubahan seharusnya mulai berhembus. <span class="highlight">Pertumbuhan ekonomi mencapai 5,12%</span>, menurut rilis BPS. Tapi bagi Budi, angka itu hanyalah deretan digit di layar telepon pintar milik anaknya.</p>
+            
+            <div class="dialogue">
+                <div class="speaker">Budi (kepada Ahmad yang berkunjung ke Yogyakarta)</div>
+                "Katanya ekonomi tumbuh, tapi kenapa pembeli masih sedikit? Aku sudah coba masukkan produk ke platform online-mu, tapi pesanan tetap sepi. Orang lebih memilih kebutuhan pokok daripada kerajinan kayu."
+            </div>
+            
+            <p>Ahmad mengangguk paham. Data dari platformnya menunjukkan pola yang sama: transaksi untuk produk kebutuhan sehari-hari meningkat, tapi untuk produk seni dan kerajinan stagnan. "Tapi jangan menyerah, Pak Budi. <span class="highlight">Konsumsi rumah tangga masih tumbuh</span>, meski lambat. Kita harus mencari segmentasi pasar yang tepat."</p>
+            
+            <!-- Infografis Kondisi UMKM -->
+            <div class="data-visualization">
+                <div class="chart-title">Kondisi UMKM Indonesia Pertengahan 2025</div>
+                <div id="umkmChart" class="mermaid mx-auto" style="max-width: 800px;">
+                </div>
+                <p class="text-sm text-slate-500 mt-4 text-center">Survei Asosiasi UMKM Indonesia (data fiksi berdasarkan tren nyata)</p>
+            </div>
+            
+            <p>Di Bank Indonesia, Rina menganalisis data terkini. <span class="highlight">Investasi pemerintah melonjak 30,37%</span>, terutama untuk proyek infrastruktur. Tapi investasi swasta masih lesu. "Kepercayaan dunia usaha belum pulih sepenuhnya," simpulnya dalam rapat internal. Rekomendasinya: pertahankan BI Rate di level 4,75% untuk mendorong kredit ke sektor produktif.</p>
+            
+            <!-- Timeline Perkembangan Ekonomi -->
+            <div class="timeline">
+                <h3 class="text-2xl mb-6">Perkembangan Ekonomi 2025</h3>
+                
+                <div class="timeline-item">
+                    <h4 class="text-xl font-bold text-blue-900">Januari 2025</h4>
+                    <p>Inflasi terkendali di 1,95%, pertumbuhan Q1 tercatat 4,87%. UMKM mulai merasakan tekanan kenaikan harga bahan baku.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4 class="text-xl font-bold text-blue-900">April 2025</h4>
+                    <p>Pertumbuhan ekonomi naik ke 5,12%, didorong investasi pemerintah. Tapi private investment masih lemah di angka 2,12%.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4 class="text-xl font-bold text-blue-900">Juli 2025</h4>
+                    <p>Inflasi mulai merangkak naik ke 2,86%, konsumsi rumah tangga melambat. Survei menunjukkan 58% UMKM omset di bawah level pra-pandemi.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4 class="text-xl font-bold text-blue-900">Oktober 2025</h4>
+                    <p>BI mempertahankan suku bunga 4,75%, fokus pada stabilisasi rupiah. Program bantuan pemerintah untuk UMKM mulai diluncurkan.</p>
+                </div>
+            </div>
+            
+            <p>Sari merasakan dampaknya langsung. Suaminya, seorang sopir angkutan online, mengeluh pendapatan menurun karena orang mengurangi perjalanan tidak penting. "Kita harus lebih berhemat," katanya kepada suaminya. "Aku sudah batalkan rencana beli lukisan untuk ruang tamu. Buat apa hiasan kalau isi kulkas masih harus dipikirkan."</p>
+        </section>
+        
+        <!-- Bab 3: Titik Terang di Ujung Terowongan -->
+        <section class="chapter">
+            <h2 class="text-3xl mb-6">Bab 3: Oktober 2025 - Titik Terang di Ujung Terowongan</h2>
+            
+            <p>Memasuki kuartal terakhir tahun, sedikit harapan mulai muncul. Program "Pameran UMKM Nasional" yang diinisiasi pemerintah memberikan pesanan pertama yang signifikan untuk Budi dalam enam bulan terakhir.</p>
+            
+            <div class="dialogue">
+                <div class="speaker">Budi (kepada Rina yang sedang penelitian lapangan)</div>
+                "Akhirnya dapat pesanan 100 unit patung kayu untuk dekorasi bandara. Tapi tetap saja, biaya produksi tinggi. Harga kayu naik 40% sejak awal tahun."
+            </div>
+            
+            <p>Rina mencatat keluhan Budi dengan seksama. "Iya, <span class="highlight">inflasi Oktober sudah 2,86%</span>, masih dalam target kami tapi cukup terasa di tingkat mikro," katanya. "Tapi kami di BI memutuskan <span class="highlight">mempertahankan suku bunga di 4,75%</span> untuk mendukung pemulihan."</p>
+            
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">5.04%</div>
+                    <div class="stat-label">Pertumbuhan Ekonomi Q3 2025</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-value">2.86%</div>
+                    <div class="stat-label">Inflasi Oktober 2025</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-value">4.75%</div>
+                    <div class="stat-label">BI Rate (Pertahanan)</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-value">54%</div>
+                    <div class="stat-label">Kontribusi Konsumsi ke PDB</div>
+                </div>
+            </div>
+            
+            <p>Ahmad akhirnya berhasil mendapatkan pendanaan untuk platformnya, meski lebih kecil dari yang diharapkan. "Kita akan fokus pada fitur yang membantu UMKM mengontrol biaya produksi," jelasnya kepada tim pengembang. "Juga fitur analisis pasar untuk menemukan ceruk yang tepat."</p>
+            
+            <p>Sari mulai melihat sedikit perbaikan. Suaminya dapat proyek tambahan sebagai driver logistik untuk pengiriman barang UMKM. "Mungkin bulan depan kita bisa merenovasi kamar mandi," katanya penuh harap. Tapi ketika melihat katalog kerajinan Budi yang dibagikan Ahmad, dia masih menggeleng. "Nanti saja, saat kondisi benar-benar pulih."</p>
+            
+            <!-- Grafik Pertumbuhan per Sektor -->
+            <div class="data-visualization">
+                <div class="chart-title">Sumber Pertumbuhan Ekonomi 2025</div>
+                <canvas id="sectorChart"></canvas>
+                <p class="text-sm text-slate-500 mt-4 text-center">Komposisi kontribusi terhadap pertumbuhan PDB Indonesia 2025 (data fiksi berdasarkan tren nyata)</p>
+            </div>
+        </section>
+        
+        <!-- Bab 4: Refleksi Akhir Tahun -->
+        <section class="chapter">
+            <h2 class="text-3xl mb-6">Bab 4: Desember 2025 - Refleksi Akhir Tahun</h2>
+            
+            <p>Salju tipis turun di pegunungan di luar Yogyakarta — fenomena langka yang menarik perhatian banyak orang. Budi melihatnya sebagai metafora: sesuatu yang indah tapi dingin, seperti kondisi ekonominya tahun ini.</p>
+            
+            <div class="dialogue">
+                <div class="speaker">Budi (dalam percakapan grup WhatsApp komunitas pengusaha kerajinan)</div>
+                "Tahun ini seperti roller coaster. Omset turun, biaya naik. Tapi kita masih bertahan. Mungkin tahun depan lebih baik."
+            </div>
+            
+            <p>Rina menyelesaikan laporan akhir tahun dengan kesimpulan berlapis: "Ekonomi makro stabil, <span class="highlight">pertumbuhan diperkirakan 4,7-5,5% untuk 2025 secara keseluruhan</span>. Namun pemulihan di tingkat mikro tidak merata. UMKM masih terjepit antara biaya produksi yang tinggi dan daya beli yang terbatas."</p>
+            
+            <p>Dalam pertemuan akhir tahun, keempat tokoh bertemu secara virtual dalam webinar "Masa Depan UMKM Indonesia".</p>
+            
+            <div class="dialogue">
+                <div class="speaker">Ahmad (sebagai moderator)</div>
+                "Jadi kesimpulannya, kita perlu kebijakan yang lebih tepat sasaran. Bukan sekadar stimulus makro, tapi intervensi mikro yang menyentuh akar masalah: biaya produksi, akses pasar, dan transformasi digital."
+            </div>
+            
+            <div class="dialogue">
+                <div class="speaker">Sari (sebagai perwakilan konsumen)</div>
+                "Kami mau beli produk lokal, dukung UMKM. Tapi harga harus sesuai dengan kantong. Kalau untuk makan saja susah, bagaimana mau beli kerajinan?"
+            </div>
+            
+            <div class="dialogue">
+                <div class="speaker">Rina (sebagai perwakilan regulator)</div>
+                "Kami di BI akan terus menjaga stabilitas makro. Tapi kolaborasi dengan pemerintah untuk kebijakan fiskal yang mendukung UMKM sangat penting."
+            </div>
+            
+            <div class="dialogue">
+                <div class="speaker">Budi (sebagai pelaku UMKM)</div>
+                "Kami hanya minta lingkungan usaha yang adil. Bukan bantuan terus-menerus, tapi kesempatan yang sama untuk berkembang."
             </p>
-            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
-                Cerita ini menggambarkan kondisi ekonomi mikro Indonesia melalui pengalaman empat tokoh fiksi
+            
+            <!-- Grafik Proyeksi -->
+            <div class="data-visualization">
+                <div class="chart-title">Proyeksi dan Harapan untuk 2026</div>
+                <canvas id="projectionChart"></canvas>
+                <p class="text-sm text-slate-500 mt-4 text-center">Harapan pemulihan UMKM berdasarkan survei persepsi pelaku usaha (data fiksi)</p>
+            </div>
+            
+            <p class="mt-8 p-6 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl border-l-4 border-blue-500">
+                <strong>Epilog:</strong> Di penghujung 2025, keempat tokoh ini melanjutkan perjalanan masing-masing dengan beban yang sedikit berbeda. Budi mulai bereksperimen dengan bahan baku alternatif yang lebih murah. Rina mengusulkan kebijakan "kredit khusus UMKM hijau". Ahmad mengembangkan fitur "co-buying" untuk membantu UMKM membeli bahan baku secara kolektif dengan harga lebih murah. Sari mulai mengalokasikan 5% dari anggaran belanja bulanannya untuk produk UMKM lokal — sebuah komitmen kecil dengan harapan besar. 
+                <br><br>
+                Mereka semua tahu bahwa ekonomi mikro Indonesia masih rapuh, tapi setiap langkah kecil — baik sebagai produsen, regulator, inovator, maupun konsumen — berkontribusi pada sebuah pemulihan yang lebih inklusif. Tahun 2026 menanti, dengan tantangan baru dan harapan yang terus dipupuk.
             </p>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer-note">
+            <p><strong>Kisah Rintisan</strong> adalah karya fiksi yang didasarkan pada data dan tren ekonomi mikro Indonesia tahun 2025.</p>
+            <p class="mt-2">Tokoh, dialog, dan situasi adalah fiksi, tetapi konteks ekonomi mengacu pada indikator nyata.</p>
+            <div class="mt-6 pt-6 border-t border-slate-200">
+                <p class="text-sm">© 2025 - Cerita Ekonomi Mikro Indonesia | Dibuat dengan HTML, CSS, JavaScript, dan Chart.js</p>
+            </div>
         </footer>
     </div>
-    
-    <audio id="backgroundAudio" loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-driving-ambition-32.mp3" type="audio/mpeg">
-    </audio>
-    
+
     <script>
-        // Mengatur efek parallax pada judul
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const title = document.querySelector('.parallax-title');
-            title.style.setProperty('--scroll', scrolled * 0.5);
+        // Inisialisasi Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'neutral',
+            fontFamily: 'Poppins, sans-serif'
         });
         
-        // Toggle tema gelap/terang
-        document.getElementById('themeToggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark-theme');
-            const icon = this.querySelector('i');
-            if (document.body.classList.contains('dark-theme')) {
-                document.body.style.background = 'linear-gradient(135deg, #0d1b2a, #1b263b)';
-                document.body.style.color = '#e0e1dd';
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-                this.innerHTML = '<i class="fas fa-sun"></i> Mode Terang';
-            } else {
-                document.body.style.background = 'linear-gradient(135deg, #1a2980, #26d0ce)';
-                document.body.style.color = '#333';
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-                this.innerHTML = '<i class="fas fa-moon"></i> Mode Gelap';
-            }
-        });
-        
-        // Kontrol audio
-        const audio = document.getElementById('backgroundAudio');
-        const playButton = document.getElementById('playAudio');
-        
-        playButton.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play();
-                this.innerHTML = '<i class="fas fa-volume-mute"></i> Matikan Musik';
-            } else {
-                audio.pause();
-                this.innerHTML = '<i class="fas fa-volume-up"></i> Musik Latar';
-            }
-        });
-        
-        // Tampilkan grafik
-        document.getElementById('showCharts').addEventListener('click', function() {
-            const chartsSection = document.getElementById('chartsSection');
-            if (chartsSection.style.display === 'none') {
-                chartsSection.style.display = 'block';
-                this.innerHTML = '<i class="fas fa-chart-line"></i> Sembunyikan Grafik';
-                
-                // Animasi grafik
-                const chartItems = document.querySelectorAll('.chart-item');
-                chartItems.forEach(item => {
-                    item.style.height = '0%';
-                    setTimeout(() => {
-                        const targetHeight = item.style.height;
-                        item.style.height = targetHeight;
-                    }, 100);
-                });
-            } else {
-                chartsSection.style.display = 'none';
-                this.innerHTML = '<i class="fas fa-chart-line"></i> Tampilkan Grafik';
-            }
-        });
-        
-        // Tampilkan ringkasan ekonomi
-        document.getElementById('showSummary').addEventListener('click', function() {
-            const summaryBox = document.getElementById('summaryBox');
-            if (summaryBox.style.display === 'none') {
-                summaryBox.style.display = 'block';
-                this.innerHTML = '<i class="fas fa-times"></i> Tutup Ringkasan';
-            } else {
-                summaryBox.style.display = 'none';
-                this.innerHTML = '<i class="fas fa-file-alt"></i> Ringkasan Ekonomi';
-            }
-        });
-        
-        // Ganti sudut pandang cerita
-        document.getElementById('togglePerspective').addEventListener('click', function() {
-            const perspectives = [
-                "Pak Joko: 'Hari ini saya harus hemat dalam belanja bahan baku. Harga cabai naik lagi.'",
-                "Budi: 'Orderan ekspor dari Eropa berkurang 30% dibandingkan tahun lalu.'",
-                "Sari: 'Anggaran belanja bulan ini harus saya sesuaikan lagi karena harga telur naik.'",
-                "Rina: 'Data BPS menunjukkan konsumsi rumah tangga masih menjadi penopang utama pertumbuhan ekonomi.'"
-            ];
-            
-            const randomPerspective = perspectives[Math.floor(Math.random() * perspectives.length)];
-            
-            // Buat elemen untuk menunjukkan perubahan sudut pandang
-            const perspectiveBox = document.createElement('div');
-            perspectiveBox.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: rgba(26, 41, 128, 0.95);
-                color: white;
-                padding: 30px;
-                border-radius: 15px;
-                z-index: 1000;
-                max-width: 80%;
-                text-align: center;
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-                animation: fadeInOut 3s forwards;
-            `;
-            
-            perspectiveBox.innerHTML = `
-                <h4 style="margin-bottom: 15px; color: #ffd700;">Sudut Pandang Baru</h4>
-                <p>${randomPerspective}</p>
-            `;
-            
-            document.body.appendChild(perspectiveBox);
-            
-            // Hapus elemen setelah animasi selesai
-            setTimeout(() => {
-                document.body.removeChild(perspectiveBox);
-            }, 3000);
-        });
-        
-        // Simulasi dampak ekonomi
-        document.getElementById('simulateEconomy').addEventListener('click', function() {
-            const scenarios = [
-                {
-                    title: "Jika BI Rate turun 0.25% lagi",
-                    effect: "Kredit UMKM lebih murah, konsumsi meningkat, namun Rupiah mungkin melemah"
+        // Grafik Pertumbuhan Ekonomi
+        const growthCtx = document.getElementById('growthChart').getContext('2d');
+        const growthChart = new Chart(growthCtx, {
+            type: 'line',
+            data: {
+                labels: ['Q4 2024', 'Q1 2025', 'Q2 2025', 'Q3 2025'],
+                datasets: [{
+                    label: 'Pertumbuhan Ekonomi (% yoy)',
+                    data: [5.05, 4.87, 5.12, 5.04],
+                    borderColor: '#1e3a8a',
+                    backgroundColor: 'rgba(30, 58, 138, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Pertumbuhan Ekonomi Indonesia 2025',
+                        font: { size: 16, weight: 'bold' }
+                    }
                 },
-                {
-                    title: "Jika inflasi naik menjadi 3.5%",
-                    effect: "Daya beli masyarakat menurun, BI mungkin menaikkan suku bunga"
-                },
-                {
-                    title: "Jika nilai tukar menguat ke Rp16.000/USD",
-                    effect: "Bahan baku impor lebih murah, tetapi ekskur kurang kompetitif"
-                },
-                {
-                    title: "Jika pertumbuhan ekonomi mencapai 5.5%",
-                    effect: "Penyerapan tenaga kerja meningkat, pendapatan masyarakat naik"
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Persentase (%)'
+                        }
+                    }
                 }
-            ];
-            
-            const randomScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
-            
-            // Tampilkan skenario
-            const scenarioBox = document.createElement('div');
-            scenarioBox.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: rgba(38, 208, 206, 0.95);
-                color: #1a2980;
-                padding: 30px;
-                border-radius: 15px;
-                z-index: 1000;
-                max-width: 80%;
-                text-align: center;
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-                animation: fadeInOut 4s forwards;
-            `;
-            
-            scenarioBox.innerHTML = `
-                <h4 style="margin-bottom: 15px;">Simulasi Dampak Ekonomi</h4>
-                <h5>${randomScenario.title}</h5>
-                <p style="margin-top: 15px;">${randomScenario.effect}</p>
-                <p style="margin-top: 15px; font-size: 0.9rem; font-style: italic;">Berdasarkan analisis data ekonomi 2025</p>
-            `;
-            
-            document.body.appendChild(scenarioBox);
-            
-            // Hapus elemen setelah animasi selesai
-            setTimeout(() => {
-                document.body.removeChild(scenarioBox);
-            }, 4000);
+            }
         });
         
-        // Tambahkan animasi CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeInOut {
-                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        // Grafik Inflasi
+        const inflationCtx = document.getElementById('inflationChart').getContext('2d');
+        const inflationChart = new Chart(inflationCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt'],
+                datasets: [{
+                    label: 'Inflasi (% yoy)',
+                    data: [1.95, 2.10, 2.25, 2.40, 2.55, 2.70, 2.80, 2.85, 2.86, 2.86],
+                    backgroundColor: '#0ea5e9',
+                    borderColor: '#0284c7',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Inflasi Indonesia 2025',
+                        font: { size: 16, weight: 'bold' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Persentase (%)'
+                        }
+                    }
+                }
             }
-            
-            .dark-theme .card {
-                background: rgba(30, 30, 40, 0.95);
-                color: #e0e1dd;
+        });
+        
+        // Grafik Sektor Pertumbuhan
+        const sectorCtx = document.getElementById('sectorChart').getContext('2d');
+        const sectorChart = new Chart(sectorCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Konsumsi Rumah Tangga', 'Investasi Pemerintah', 'Investasi Swasta', 'Ekspor', 'Lainnya'],
+                datasets: [{
+                    data: [54, 27.83, 10.5, 5.2, 2.47],
+                    backgroundColor: [
+                        '#1e3a8a', // Biru tua
+                        '#0ea5e9', // Biru muda
+                        '#f59e0b', // Kuning
+                        '#10b981', // Hijau
+                        '#94a3b8'  // Abu-abu
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Kontribusi terhadap Pertumbuhan PDB 2025',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
             }
-            
-            .dark-theme .character-card {
-                background: #2d3047;
-                color: #e0e1dd;
+        });
+        
+        // Grafik Proyeksi
+        const projectionCtx = document.getElementById('projectionChart').getContext('2d');
+        const projectionChart = new Chart(projectionCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Akses Permodalan', 'Kontrol Biaya', 'Daya Beli', 'Digitalisasi', 'Dukungan Kebijakan'],
+                datasets: [
+                    {
+                        label: 'Kondisi 2025',
+                        data: [45, 30, 40, 55, 50],
+                        borderColor: '#1e3a8a',
+                        backgroundColor: 'rgba(30, 58, 138, 0.2)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Harapan 2026',
+                        data: [70, 65, 75, 80, 75],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Tantangan & Harapan UMKM Indonesia',
+                        font: { size: 16, weight: 'bold' }
+                    }
+                }
             }
-            
-            .dark-theme .economy-card {
-                background: #2d3047;
-                color: #e0e1dd;
-            }
-            
-            .dark-theme .character-name {
-                color: #ffd700;
-            }
-            
-            .dark-theme .stat {
-                border-bottom: 1px dashed #444;
-            }
-            
-            .dark-theme .highlight {
-                background: linear-gradient(120deg, #2c3e50 0%, #34495e 100%);
-                border-left: 5px solid #ffd700;
-            }
+        });
+        
+        // Mermaid diagram untuk kondisi UMKM
+        document.getElementById('umkmChart').innerHTML = `
+        pie showData
+            title Kondisi Omset UMKM Indonesia (Mid-2025)
+            "Omset Masih Lebih Rendah" : 58
+            "Omset Lebih Tinggi" : 14
+            "Omset Sama" : 12
+            "Mulai Tambah Tenaga Kerja" : 16
         `;
-        document.head.appendChild(style);
         
-        // Inisialisasi animasi untuk chart bars
-        window.addEventListener('load', function() {
-            const chartItems = document.querySelectorAll('.chart-item');
-            chartItems.forEach(item => {
-                const targetHeight = item.style.height;
-                item.style.height = '0%';
-                setTimeout(() => {
-                    item.style.height = targetHeight;
-                }, 500);
-            });
-        });
+        // Render ulang Mermaid setelah konten dimuat
+        setTimeout(() => {
+            mermaid.init();
+        }, 100);
     </script>
 </body>
 </html>
