@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerdas Financial: Hikmah dari Jepara</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+        
+        body {
+            background-color: #f8f5f0;
+            color: #333;
+            line-height: 1.8;
+            padding: 20px;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M20,20 L80,80 M80,20 L20,80" stroke="%23e8e2d6" stroke-width="1" opacity="0.3"/></svg>');
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid #e8e2d6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a5f7a 0%, #2a7a9a 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, #d4af37 0%, #ffd700 50%, #d4af37 100%);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            font-style: italic;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .character-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 25px;
+            background-color: #f9f7f3;
+            border-bottom: 2px dashed #d4af37;
+        }
+        
+        .character {
+            flex: 1;
+            min-width: 250px;
+            margin: 15px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-top: 5px solid #1a5f7a;
+            transition: transform 0.3s ease;
+        }
+        
+        .character:hover {
+            transform: translateY(-5px);
+        }
+        
+        .character h3 {
+            color: #1a5f7a;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+            border-bottom: 1px solid #e8e2d6;
+            padding-bottom: 8px;
+        }
+        
+        .character p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .chapter {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e8e2d6;
+        }
+        
+        .chapter-title {
+            color: #1a5f7a;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid #d4af37;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+        
+        .highlight {
+            background-color: #fff9e6;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #d4af37;
+            margin: 25px 0;
+            font-style: italic;
+            color: #5a4a2a;
+        }
+        
+        .wisdom-box {
+            background-color: #f0f7fa;
+            border: 1px solid #b8d8e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.03);
+        }
+        
+        .wisdom-title {
+            color: #1a5f7a;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .wisdom-title:before {
+            content: "💡";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .quote {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.3rem;
+            text-align: center;
+            padding: 30px;
+            color: #5a4a2a;
+            font-style: italic;
+            background-color: #f9f7f3;
+            border-radius: 10px;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .quote:before, .quote:after {
+            content: '"';
+            font-size: 3rem;
+            color: #d4af37;
+            opacity: 0.5;
+            position: absolute;
+        }
+        
+        .quote:before {
+            top: 10px;
+            left: 20px;
+        }
+        
+        .quote:after {
+            bottom: 10px;
+            right: 20px;
+        }
+        
+        .footer {
+            background-color: #1a5f7a;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+            border-top: 10px solid #d4af37;
+        }
+        
+        .footer p {
+            text-align: center;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .jepara-decoration {
+            text-align: center;
+            margin: 20px 0;
+            color: #1a5f7a;
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .character-container {
+                flex-direction: column;
+            }
+            
+            .character {
+                margin: 10px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cerdas Financial: Hikmah dari Jepara</h1>
+            <div class="subtitle">Sebuah cerita tentang tiga sahabat yang menemukan arti kebebasan finansial</div>
+            <div class="jepara-decoration">✻ Ukiran Kehidupan ✻</div>
+        </header>
+        
+        <div class="character-container">
+            <div class="character">
+                <h3>Raden Bima</h3>
+                <p>Pengusaha mebel Jepara berusia 45 tahun. Pernah mengalami kebangkrutan empat kali sebelum akhirnya menemukan formula cerdas dalam mengelola keuangan. Teguh pada prinsip pemisahan keuangan pribadi dan bisnis.</p>
+            </div>
+            
+            <div class="character">
+                <h3>Joko Santoso</h3>
+                <p>Guru SMA berusia 42 tahun, sahabat Raden sejak kecil. Hidup sederhana dengan gaji pas-pasan tetapi selalu merasa kekurangan. Seringkali terjebak dalam pola konsumtif dan utang konsumtif.</p>
+            </div>
+            
+            <div class="character">
+                <h3>Lisa Wijaya</h3>
+                <p>Desainer interior berusia 38 tahun, adik kelas Raden dan Joko. Sukses secara karir tetapi belum memahami cara mengelola penghasilan dengan bijak. Baru mulai belajar investasi setelah mengalami kerugian.</p>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="chapter">
+                <h2 class="chapter-title">Pertemuan di Warung Kopi Tua</h2>
+                
+                <p>Kabut pagi masih menyelimuti kota Jepara ketika tiga sahabat itu duduk di warung kopi tua "Lestari" yang terletak di jalan RA. Kartini. Warung itu telah menjadi saksi bisik-bisik rencana, tawa riang, dan juga air mata kepedihan mereka sejak remaja. Raden Bima, dengan wajah teduh dan mata berbinar penuh keyakinan, baru saja kembali dari ekspansi bisnisnya ke Malaysia. Joko Santoso duduk di hadapannya dengan wajah sedikit murung, sementara Lisa Wijaya sedang asyik menghitung sesuatu di ponselnya.</p>
+                
+                <p>"Kenapa wajahmu muram sekali, Jo?" tanya Raden sambil menyeruput kopi tubruk khas warung itu.</p>
+                
+                <p>Joko menghela napas panjang. "Anak kedua saya harus dirawat di rumah sakit seminggu, Bim. Biayanya tidak sedikit. Istri sampai harus meminjam ke tetangga untuk tambahan biaya. Gaji guru seperti saya ini memang tidak pernah cukup."</p>
+                
+                <p>Lisa mengangkat wajahnya dari ponsel. "Saya juga sedang pusing, Bang Raden. Meskipun penghasilan sebagai desainer interior cukup besar, tapi kok uang selalu habis di pertengahan bulan. Padahal tidak beli apa-apa yang khusus."</p>
+                
+                <div class="highlight">
+                    Raden tersenyum kecil. "Kalian tahu, dulu saya lebih parah dari kalian. Empat kali bangkrut. Pernah tidak punya uang sepeserpun untuk membeli susu anak saya. Tapi dari situlah saya belajar prinsip cerdas financial."
+                </div>
+                
+                <p>Mata Joko dan Lisa tertuju pada Raden. Mereka tahu perjalanan sahabat mereka ini penuh liku. Dari nol, bangkrut berulang kali, sampai akhirnya sukses mengembangkan bisnis mebelnya ke mancanegara.</p>
+                
+                <p>"Prinsip apa itu, Bim?" tanya Lisa penasaran.</p>
+                
+                <p>Raden menatap kedua sahabatnya dengan serius. "Pertama, pemisahan keuangan pribadi dan bisnis. Kedua, selalu siap dana darurat. Ketiga, hindari invisible cost. Keempat, investasi pada pengetahuan. Kelima, bangun passive income."</p>
+                
+                <p>Joko mengerutkan kening. "Apa itu invisible cost?"</p>
+            </div>
+            
+            <div class="chapter">
+                <h2 class="chapter-title">Kisah Empat Kebangkrutan</h2>
+                
+                <p>Raden mulai bercerita tentang perjalanannya. Usia 25 tahun, ia memulai usaha mebel kecil-kecilan dengan modal pinjaman dari bank. Tahun pertama lancar, tahun kedua mulai ekspansi tetapi tanpa perhitungan matang. Tahun ketiga, bangkrut pertama kali.</p>
+                
+                <p>"Waktu itu saya mencampuradukkan uang pribadi dan bisnis," kenang Raden. "Uang hasil penjualan saya pakai untuk beli mobil mewah dengan alasan untuk meeting dengan klien. Padahal bisnis belum stabil. Itu invisible cost pertama saya."</p>
+                
+                <div class="wisdom-box">
+                    <div class="wisdom-title">Prinsip Cerdas Financial #1</div>
+                    <p>Selalu pisahkan keuangan pribadi dan bisnis. Hitung gaji untuk diri sendiri sebagai direktur, dan jangan pernah menggunakan uang perusahaan untuk kebutuhan pribadi. Dengan begitu, akuntansi perusahaan tidak bias dan kesehatan keuangan bisnis dapat dipantau dengan jelas.</p>
+                </div>
+                
+                <p>Setelah bangkrut pertama, Raden bangkit lagi. Kali ini dengan mitra bisnis. Usahanya berkembang pesat, hingga akhirnya mitra bisnisnya melakukan penyelewengan. Bangkrut kedua kalinya.</p>
+                
+                <p>"Dari situ saya belajar untuk selalu memiliki dana darurat yang terpisah. Istri saya, meski awalnya protes, akhirnya sepakat untuk tidak membeli asuransi kesehatan. Kami menabung sendiri setiap bulan untuk dana kesehatan. Lebih fleksibel, dan jika tidak terpakai, uangnya tetap milik kami," jelas Raden.</p>
+                
+                <p>Joko terlihat bingung. "Tapi bagaimana kalau sakitnya berat? Biaya rumah sakit sekarang mahal, Bim."</p>
+                
+                <p>Raden mengangguk. "Itulah pentingnya dana darurat yang cukup. Kami menghitung risiko tertinggi, lalu menabung sampai mencapai jumlah itu. Selama ini, alhamdulillah, selalu ada uang untuk merawat keluarga dengan layanan VIP kalau sakit. Pakai uang sendiri, bukan karena kaya, tapi karena perencanaan yang matang."</p>
+                
+                <div class="quote">
+                    "Uang yang disisihkan setiap bulan dengan disiplin lebih berdaya daripada uang banyak yang datangnya tidak menentu."
+                </div>
+                
+                <p>Bangkrut ketiga dan keempat terjadi ketika Raden terlalu agresif berekspansi tanpa diversifikasi. Semua laba ditanamkan kembali ke bisnis tanpa cadangan. Ketika krisis ekonomi melanda, bisnisnya kolaps.</p>
+                
+                <p>"Setelah bangkrut keempat, saya menyadari kesalahan fundamental. Saya selalu menempatkan semua laba untuk pengembangan bisnis, tanpa menyisihkan untuk investasi lain yang likuid. Padahal bisnis itu seperti roda, kadang di atas, kadang di bawah," ujar Raden dengan nada penuh penyesalan namun juga syukur.</p>
+            </div>
+            
+            <div class="chapter">
+                <h2 class="chapter-title">Revolusi Pola Pikir</h2>
+                
+                <p>Setelah bangkrut keempat di usia 35 tahun, Raden melakukan introspeksi mendalam. Ia membaca buku-buku keuangan, mengikuti seminar, dan belajar dari pengusaha senior. Dari sanalah ia menemukan filosofi "Cerdas Financial" yang kini dipegang teguh.</p>
+                
+                <div class="wisdom-box">
+                    <div class="wisdom-title">Prinsip Cerdas Financial #2</div>
+                    <p>Hindari invisible cost seperti pembelian barang mewah dengan penyusutan tinggi dan perawatan mahal. Fokuslah pada pengembangan bisnis dan investasi pada aset yang menghasilkan atau minimal mempertahankan nilai.</p>
+                </div>
+                
+                <p>"Dulu saya suka membeli mobil mewah setiap kali bisnis untung. Padahal, mobil itu penyusutannya tinggi dan perawatannya mahal. Sekarang saya pakai mobil sederhana yang reliable. Uangnya saya alihkan untuk beli emas atau tanah," jelas Raden.</p>
+                
+                <p>Lisa mengangguk-angguk. "Saya juga sering terjebak, Bang. Gaji bulanan langsung terkikis untuk bayar cicilan tas branded, sepatu, dan makan di restoran mahal. Padahal kalau dihitung-hitung, dalam setahun bisa untuk beli emas beberapa gram."</p>
+                
+                <p>Raden tersenyum. "Tidak apa-apa menikmati hasil kerja, Lis. Tapi harus proporsional. Saya juga tidak melarang diri untuk konsumsi. Tapi konsumsinya harus yang meningkatkan value. Untuk pendidikan, kursus, buku, networking, atau amal, saya tidak pernah ragu. Karena waktu perlu berproses meningkatkan pengetahuan dan spiritual."</p>
+                
+                <div class="highlight">
+                    "Tanpa konsumsi untuk pengembangan diri, laba yang terkumpul tidak bisa di-leverage karena wawasan sudah mentok. Bisa jadi kita justru menjadi rakus karena tidak punya pandangan yang luas," tambah Raden.
+                </div>
+                
+                <p>Joko yang selama ini terdiam akhirnya bicara. "Tapi bagaimana dengan orang seperti saya, Bim? Gaji pas-pasan, bulan ini cukup untuk bulan ini saja. Bagaimana mungkin menabung atau investasi?"</p>
+                
+                <p>Raden menatap sahabatnya dengan penuh empati. "Jo, justru karena penghasilan terbatas, perencanaan keuangan semakin penting. Mari kita hitung bersama pengeluaranmu bulan ini..."</p>
+            </div>
+            
+            <div class="chapter">
+                <h2 class="chapter-title">Perjalanan Menuju Kebebasan Finansial</h2>
+                
+                <p>Selama tiga bulan berikutnya, Raden menjadi mentor keuangan tidak resmi bagi Joko dan Lisa. Pertemuan di warung kopi "Lestari" menjadi ritual mingguan mereka. Raden mengajarkan prinsip-prinsip dasar yang telah menyelamatkannya dari jurang kebangkrutan berkali-kali.</p>
+                
+                <p>Pertama, Raden membantu Joko membuat catatan keuangan sederhana. Dari situ terungkap bahwa 30% gaji Joko habis untuk rokok dan kopi kemasan. 15% untuk biaya transportasi yang tidak efisien. Dan 20% untuk pembelian barang yang tidak perlu.</p>
+                
+                <p>"Jo, coba kurangi rokok setengahnya. Uangnya kita alihkan untuk dana darurat. Dalam setahun, kamu sudah punya tabungan untuk berobat keluarga," saran Raden.</p>
+                
+                <p>Untuk Lisa, Raden membantu membuat sistem pembagian gaji: 50% untuk kebutuhan pokok, 20% untuk investasi, 10% untuk pengembangan diri, 10% untuk hiburan, dan 10% untuk amal.</p>
+                
+                <div class="wisdom-box">
+                    <div class="wisdom-title">Prinsip Cerdas Financial #3</div>
+                    <p>Diversifikasi penggunaan laba. Tidak melulu di tabungan atau emas, tetapi masuk ke passive income seperti properti yang disewakan, saham blue chip, atau bisnis portfolio. Belajar meleverage aset agar portfolio berkembang.</p>
+                </div>
+                
+                <p>Enam bulan kemudian, perubahan mulai terlihat. Joko berhasil menabung untuk pertama kalinya dalam lima tahun terakhir. Lisa mulai investasi di reksadana dan emas. Keduanya juga mulai belajar tentang pasar saham dan properti dari Raden.</p>
+                
+                <p>"Raden, kemarin saya dapat klien dari Singapore," cerita Lisa suatu sore. "Karena saya ikut kursus bahasa Inggris online seperti saranmu, saya bisa komunikasi langsung dengan mereka. Fee-nya lima kali klien lokal!"</p>
+                
+                <p>Raden tersenyum bangga. "Itulah gunanya investasi pada pengetahuan, Lis. Hasilnya bisa berlipat ganda."</p>
+                
+                <div class="quote">
+                    "Orang yang berhenti belajar adalah orang tua, meski umurnya masih muda. Orang yang tidak pernah berhenti belajar akan selamanya muda."
+                </div>
+                
+                <p>Untuk Joko, perubahan terjadi lebih subtil namun berarti. Ia mulai menulis buku tentang pendidikan karakter, sesuatu yang menjadi passion-nya selama ini. Dengan bantuan Raden, buku itu diterbitkan secara indie dan mulai menghasilkan royalti kecil.</p>
+                
+                <p>"Saya tidak menyangka menulis bisa menghasilkan uang," ujar Joko dengan mata berbinar. "Selama ini saya pikir hanya mengajar saja."</p>
+            </div>
+            
+            <div class="chapter">
+                <h2 class="chapter-title">Ujian dan Kemenangan</h2>
+                
+                <p>Tahun berikutnya, bisnis Raden menghadapi ujian besar. Ekspansi ke Thailand menghadapi kendala serius karena perubahan regulasi. Perusahaannya terancam merugi besar. Namun, kali ini Raden tidak panik.</p>
+                
+                <p>"Dulu, situasi seperti ini akan membuat saya jual aset pribadi, meminjam ke mana-mana, dan stres berat," kata Raden kepada Joko dan Lisa di warung kopi mereka. "Sekarang, saya tenang. Aset perusahaan terstruktur dengan sehat dan likuid. Itu sumber bayar kewajiban yang default."</p>
+                
+                <div class="highlight">
+                    Raden menjelaskan: "Secara personal saya tidak ikut default karena aset perusahaan dan laba tidak pernah saya pakai untuk pribadi. Itulah buah smart financial planner. Kebangkrutan perusahaan tidak berarti kebangkrutan pribadi."
+                </div>
+                
+                <p>Lisa dan Joko terkesima. Mereka melihat ketenangan sahabat mereka yang berbeda dengan cerita-cerita masa lalunya yang penuh kepanikan.</p>
+                
+                <p>"Jadi bisnis kamu akan bangkrut lagi, Bim?" tanya Joko dengan cemas.</p>
+                
+                <p>Raden menggeleng. "Tidak sampai bangkrut, Jo. Hanya mengalami kerugian besar. Tapi saya sudah siap dengan skenario terburuk. Dana darurat perusahaan cukup untuk bertahan satu tahun tanpa pendapatan. Selain itu, passive income dari sewa ruko dan dividen saham bisa menutupi kebutuhan pribadi keluarga saya."</p>
+                
+                <p>Benar saja, tiga bulan kemudian krisis mulai teratasi. Raden berhasil menegosiasikan ulang kontrak dengan pihak Thailand. Bisnisnya selamat, meski dengan catatan kerugian yang tidak kecil.</p>
+                
+                <div class="wisdom-box">
+                    <div class="wisdom-title">Prinsip Cerdas Financial #4</div>
+                    <p>Pengalaman bangkrut adalah guru terbaik. Pengetahuan yang terus bertambah membangun kepercayaan diri. Kecerdasan finansial yang sudah mendarah daging membuat kita tidak mudah frustrasi. Itu adalah investasi bernilai tinggi untuk terbang lebih tinggi.</p>
+                </div>
+                
+                <p>Di usia 40 tahun, Raden merasa lebih matang. "Insting bisnis saya sudah terlatih, sixth sense sudah terbentuk. Dalam lima tahun ke depan saya targetkan bisa kembangkan bisnis ke Eropa. Besarnya mungkin 100 kali dari bisnis yang empat kali bangkrut di usia emas dulu."</p>
+                
+                <p>Tapi yang lebih penting dari semua target bisnis, kata Raden, adalah kenyamanan batin. "Puncak dari semua pencapaian bukanlah harta dan tahta, tetapi self-fulfillment yang memungkinkan kita beribadah dengan lapang dan selalu ada waktu bersama keluarga dan sahabat."</p>
+            </div>
+            
+            <div class="chapter">
+                <h2 class="chapter-title">Warisan yang Tak Ternilai</h2>
+                
+                <p>Lima tahun telah berlalu sejak pertemuan di warung kopi "Lestari" itu. Kini, Joko telah menerbitkan tiga buku dan menjadi narasumber di berbagai seminar pendidikan. Tabungannya sudah cukup untuk membeli rumah kecil sendiri. Ia juga tidak lagi khawatir dengan biaya pendidikan anak-anaknya.</p>
+                
+                <p>Lisa telah membuka biro desain interior sendiri dengan tiga karyawan. Portfolionya mencakup proyek-proyek di tiga negara ASEAN. Ia rutin berinvestasi di saham dan properti, dan sedang mempertimbangkan untuk membuka usaha kos-kosan sebagai sumber passive income.</p>
+                
+                <p>Sementara Raden, seperti yang diramalkannya, telah berhasil mengembangkan bisnisnya ke Belanda dan Jerman. Omzetnya ratusan kali lipat dari bisnisnya yang dulu empat kali bangkrut.</p>
+                
+                <p>Suatu sore, mereka bertiga duduk kembali di warung kopi "Lestari" yang telah direnovasi namun tetap mempertahankan nuansa klasiknya. Kali ini, mereka tidak membahas masalah keuangan, tetapi tentang rencana membangun komunitas edukasi finansial untuk warga Jepara.</p>
+                
+                <div class="quote">
+                    "Kelemahan kita orang Indonesia, sangat tidak cerdas soal keuangan. Pegang uang seakan besok tidak ada hari lagi. Males berinvestasi pengetahuan. Merasa puas dengan ijazah yang ada. Rakus, sehingga males berproses yang butuh waktu tidak sebentar; maunya serba instan. Serba tergantung dengan orang lain. Akibatnya ditelan oleh waktu."
+                </div>
+                
+                <p>"Kita harus berbagi, Bim," kata Lisa dengan semangat. "Banyak orang seperti saya dulu, penghasilan besar tetapi habis begitu saja."</p>
+                
+                <p>Joko mengangguk. "Dan banyak juga guru-guru seperti saya, hidup pas-pasan dan merasa tidak punya harapan untuk memperbaiki keadaan."</p>
+                
+                <p>Raden tersenyum. Itulah puncak dari perjalanannya. Bukan gedung pencakar langit di ibu kota, bukan mobil mewah di garasi, tetapi kemampuan untuk membagikan pengetahuan yang telah menyelamatkan hidupnya berkali-kali.</p>
+                
+                <p>"Kita akan buat 'Sekolah Cerdas Financial' untuk warga Jepara," usul Raden. "Gratis. Dengan kurikulum praktis yang langsung bisa diterapkan."</p>
+                
+                <p>Mereka bertiga kemudian merencanakan dengan detail. Joko akan menulis modul sederhana. Lisa akan mendesain materi yang menarik. Raden akan menyediakan tempat dan sebagian dana operasional.</p>
+                
+                <div class="highlight">
+                    Enam bulan kemudian, "Sekolah Cerdas Financial" resmi dibuka dengan 30 peserta angkatan pertama. Pesertanya beragam: pedagang pasar, guru, pegawai, ibu rumah tangga, bahkan pelajar SMA. Mereka belajar tentang dasar-dasar pengelolaan keuangan, investasi sederhana, dan cara menghindari jebakan utang konsumtif.
+                </div>
+                
+                <p>Di akhir sesi pertama, Raden berdiri di depan kelas dengan hati penuh syukur. Dari kebangkrutan yang pahit, ia menemukan hikmah yang manis. Dari kegagalan yang menyakitkan, ia mendapatkan pengetahuan yang membebaskan. Dan sekarang, ia bisa membagikan kebebasan itu kepada orang lain.</p>
+                
+                <p>"Ingat," katanya kepada para peserta, "cerdas financial bukan tentang menjadi kaya raya. Tapi tentang menjadi tuan atas uang kita sendiri. Tentang memiliki pilihan. Tentang tidur nyenyak tanpa khawatir besok tidak ada uang. Tentang bisa beribadah dengan tenang dan punya waktu berkualitas dengan keluarga."</p>
+                
+                <p>Di luar jendela, matahari terbenam di atas kota Jepara, menebarkan cahaya keemasan. Warung kopi "Lestari" masih berdiri kokoh, menyaksikan perjalanan tiga sahabat yang telah berubah, dan kini siap mengubah orang lain.</p>
+                
+                <p>Perjalanan cerdas financial tidak pernah berakhir. Ia terus berkembang, seperti ukiran khas Jepara yang membutuhkan kesabaran, ketelitian, dan visi yang jelas. Dan seperti kayu jati yang semakin kuat seiring waktu, kebijaksanaan finansial akan membuat kehidupan semakin kokoh menghadapi badai apa pun.</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Cerdas Financial: Hikmah dari Jepara</strong></p>
+            <p>Sebuah cerita fiksi yang terinspirasi dari prinsip-prinsip pengelolaan keuangan bijak</p>
+            <p>✻ Ukiran kehidupan terindah adalah yang dibuat dengan kesabaran dan kebijaksanaan ✻</p>
+            <p style="margin-top: 20px; font-size: 0.8rem;">Cerita ini dibuat untuk tujuan edukasi dan inspirasi finansial</p>
+        </div>
+    </div>
+</body>
+</html>
