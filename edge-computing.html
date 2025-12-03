@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memahami Edge Computing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-cloud: #8b5cf6; /* Purple */
+            --accent-edge: #06b6d4; /* Cyan */
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--accent-edge), var(--accent-cloud));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.05em;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-edge);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .highlight-box {
+            background: rgba(6, 182, 212, 0.1);
+            border-left: 4px solid var(--accent-edge);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Animation Section (CSS Illustration) */
+        .illustration-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .node {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            z-index: 2;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .node-cloud {
+            background: var(--accent-cloud);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .node-edge {
+            background: var(--accent-edge);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+        }
+
+        .path-line {
+            position: absolute;
+            height: 2px;
+            background: #334155;
+            z-index: 1;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            position: absolute;
+            top: -4px;
+        }
+
+        /* Button */
+        .btn-back {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid var(--accent-edge);
+            color: var(--accent-edge);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background: var(--accent-edge);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+
+        /* Fade In Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* List Styling */
+        ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--accent-edge);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="fade-in">
+            <h1>Edge Computing</h1>
+            <p style="font-size: 1.2rem; color: var(--text-primary);">
+                Pemrosesan data semakin bergeser dari cloud ke perangkat tepi (edge) seperti sensor IoT, kendaraan otonom, dan perangkat mobile. Ini memungkinkan analisis real-time dengan latensi rendah dan mengurangi beban bandwidth.
+            </p>
+            <div class="highlight-box">
+                <p style="margin:0; color: var(--text-primary);"><strong>Konsep Inti:</strong> Daripada mengirim semua data mentah ke "pusat" (Cloud) yang jauh, kita memprosesnya langsung di "lokasi kejadian" (Edge).</p>
+            </div>
+        </header>
+
+        <section class="fade-in">
+            <h2>1. Ilustrasi: "Otak vs. Refleks"</h2>
+            <p>Bayangkan tubuh manusia sebagai sistem jaringan:</p>
+            
+            <div class="card">
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div>
+                        <h3 style="color: var(--accent-cloud);">Cloud (Awan/Pusat) = Otak Anda</h3>
+                        <p style="font-size: 0.9rem;">Otak sangat cerdas dan bisa memikirkan hal kompleks, tapi posisinya ada di kepala (jauh dari tangan/kaki).</p>
+                    </div>
+                    <div style="height: 1px; background: #334155; width: 100%;"></div>
+                    <div>
+                        <h3 style="color: var(--accent-edge);">Edge (Tepi) = Sistem Syaraf Refleks</h3>
+                        <p style="font-size: 0.9rem;">Ini tidak secerdas otak, tapi posisinya langsung di tempat kejadian (tangan).</p>
+                    </div>
+                </div>
+            </div>
+
+            <p><strong>Skenario: Anda tidak sengaja menyentuh panci panas.</strong></p>
+
+            <div class="illustration-container">
+                <div class="node node-edge">
+                    <span>EDGE</span>
+                    <small>(Tangan)</small>
+                </div>
+                <div style="flex-grow: 1; height: 2px; background: #334155; margin: 0 20px; position: relative;">
+                    <div style="position: absolute; top: -25px; width: 100%; text-align: center; font-size: 0.8rem; color: var(--text-secondary);">Jarak Jauh (Latensi)</div>
+                </div>
+                <div class="node node-cloud">
+                    <span>CLOUD</span>
+                    <small>(Otak)</small>
+                </div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--danger);">
+                <h3>Cara Lama (Cloud Processing)</h3>
+                <p>Jari menyentuh panas &rarr; Kirim sinyal ke Otak &rarr; Otak memproses: "Ini panas, bahaya!" &rarr; Otak kirim perintah balik: "Tarik tangan!" &rarr; Tangan ditarik.</p>
+                <p><em>Masalah:</em> Terlalu lama. Tangan Anda sudah keburu terbakar sebelum perintah sampai (Latensi tinggi).</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--success);">
+                <h3>Cara Baru (Edge Processing)</h3>
+                <p>Jari menyentuh panas &rarr; Syaraf di tangan langsung memproses &rarr; Tangan ditarik seketika (Refleks) &rarr; Baru setelah itu melapor ke otak: "Tadi saya kena panas."</p>
+                <p><em>Hasil:</em> Tindakan instan (Real-time), kerusakan minimal.</p>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>2. Membedah Istilah Teknis</h2>
+            <p>Berikut adalah arti dari poin-poin dalam teks awal berdasarkan ilustrasi di atas:</p>
+
+            <div class="card">
+                <h3 style="color: var(--accent-edge);">A. "Analisis Real-time dengan Latensi Rendah"</h3>
+                <p><strong>Maksudnya:</strong> Tidak ada jeda waktu tunggu (delay/loading).</p>
+                <p><strong>Contoh pada Kendaraan Otonom (Mobil Tanpa Sopir):</strong><br>
+                Jika ada anak kecil menyeberang mendadak, mobil harus mengerem dalam hitungan milidetik.</p>
+                <ul>
+                    <li><strong>Jika Cloud:</strong> Mobil harus "bertanya" dulu ke server pusat: "Itu gambar apa? Apa saya harus ngerem?", maka akan terjadi tabrakan karena butuh waktu kirim data bolak-balik.</li>
+                    <li><strong>Jika Edge:</strong> Komputer di dalam mobil memutuskan sendiri saat itu juga untuk mengerem.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--accent-edge);">B. "Mengurangi Beban Bandwidth"</h3>
+                <p><strong>Maksudnya:</strong> Menghemat kapasitas "pipa" internet.</p>
+                <p><strong>Ilustrasi CCTV Keamanan:</strong></p>
+                <ul>
+                    <li><strong>Cloud:</strong> CCTV mengirim video 24 jam non-stop ke pusat, padahal 90% isinya hanya jalanan kosong. Ini memacetkan jaringan internet (Boros Bandwidth).</li>
+                    <li><strong>Edge:</strong> CCTV pintar hanya mengirim data <em>jika</em> mendeteksi kecelakaan atau pelanggaran. Sisa waktunya dia diam. Ini membuat internet jauh lebih lancar.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>3. Kenapa Pergeseran Ini Terjadi?</h2>
+            <div class="card">
+                <p>Dulu, perangkat kecil (HP, sensor) tidak punya "otak" (processor) yang kuat, jadi semua harus dikirim ke pusat.</p>
+                <p>Sekarang, perangkat kecil (Sensor IoT, HP) sudah punya processor yang sangat canggih dan kuat. Mereka mampu berpikir sendiri tanpa harus selalu bergantung pada pusat. Cloud tetap digunakan, tapi hanya untuk analisis jangka panjang atau penyimpanan data arsip, bukan untuk keputusan detik-demi-detik.</p>
+            </div>
+        </section>
+
+        <footer class="fade-in" style="text-align: center; padding-bottom: 40px;">
+            <hr style="border: 0; border-top: 1px solid #334155; margin: 40px 0;">
+            <a href="https://nvze.github.io/dashboard/blog.html" class="btn-back">
+                &larr; Kembali ke Jurnal
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
