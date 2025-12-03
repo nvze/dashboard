@@ -10,10 +10,11 @@
     
     body {
       font-family: "Segoe UI Variable Display", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-      /* --- BACKGROUND UTAMA (TETAP CERAH) --- */
+      
+      /* --- BACKGROUND UTAMA --- */
       background-color: #2855c9; 
-      /* Gradasi Pink - Biru - Pink */
-      background-image: linear-gradient(135deg, #ff9aeb 0%, #2855c9 35%, #2855c9 65%, #ff9aeb 100%);
+      /* Gradasi Pink Kiri Atas -> Biru -> Pink Kanan Bawah */
+      background-image: linear-gradient(135deg, #ff9aeb 0%, #2855c9 40%, #2855c9 60%, #ff9aeb 100%);
       
       color: #ffffff;
       height: 100vh;
@@ -23,86 +24,98 @@
       overflow: hidden;
     }
 
-    /* Container Utama - Ubah ke Kaca Gelap (Dark Glass) agar Logo Putih terlihat */
+    /* Wrapper untuk menengahkan Logo (di luar) dan Card */
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 420px;
+      /* Jarak antara Logo dan Card */
+      gap: 1.5rem; 
+    }
+
+    /* --- LOGO (DI LUAR CARD) --- */
+    .logo-container {
+      /* Tidak ada padding background, murni gambar */
+      display: flex;
+      justify-content: center;
+      /* Animasi halus saat loading */
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .profile-logo {
+      width: 150px; /* Ukuran sedikit diperbesar karena diluar card */
+      height: auto;
+      display: block;
+      /* Filter Putih Mutlak agar kontras dengan background biru/pink */
+      filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+    }
+
+    /* --- DASHBOARD CARD (EFEK KACA/GLASSMORPHISM) --- */
     .dashboard-card {
-      /* Latar belakang biru gelap transparan */
-      background: rgba(10, 25, 60, 0.7); 
-      
-      /* Efek blur */
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      
-      padding: 3rem 2rem;
+      width: 85%;
+      text-align: center;
+      padding: 2.5rem 2rem;
       border-radius: 24px;
       
-      box-shadow: 
-        0 30px 70px rgba(0, 0, 0, 0.4), 
-        inset 0 1px 1px rgba(255, 255, 255, 0.1); 
+      /* EFEK KACA TRANSPARAN */
+      background: rgba(255, 255, 255, 0.1); /* Sangat transparan */
+      backdrop-filter: blur(20px);           /* Efek blur kuat */
+      -webkit-backdrop-filter: blur(20px);
       
-      text-align: center;
-      max-width: 420px;
-      width: 85%;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      /* Border tipis putih untuk efek pinggiran kaca */
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      
+      /* Shadow halus untuk kedalaman */
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+      
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    p.subtitle {
+      color: #dbeafe; /* Biru sangat muda */
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
     /* --- WIDGET JAM --- */
     .clock-widget {
-      margin-top: 1.5rem;
+      margin-top: 0.5rem;
       margin-bottom: 2rem;
     }
     
     .time-display {
       font-size: 3.5rem;
       font-weight: 600; 
-      /* Jam Putih */
       color: #ffffff; 
       line-height: 1;
       margin-bottom: 0.25rem;
       letter-spacing: -1px;
-      text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      /* Shadow teks agar terbaca jelas di atas kaca */
+      text-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
 
     .date-display {
       font-size: 1rem;
-      color: #b0c4de; /* Biru muda pucat */
-      font-weight: 400;
+      color: #e2e8f0;
+      font-weight: 500;
     }
     
-    /* --- LOGO SETTINGS --- */
-    .logo-container {
-      margin-bottom: 0.5rem;
-      padding: 5px;
-    }
-
-    .profile-logo {
-      width: 140px; 
-      height: auto;
-      display: block;
-      opacity: 1;
-      /* FILTER PENTING: Mengubah gambar logo hitam/warna menjadi Putih Mutlak */
-      filter: brightness(0) invert(1);
-    }
-
-    h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      /* Judul menjadi Putih */
-      color: #ffffff;
-      margin-bottom: 0.2rem;
-      letter-spacing: 0.5px;
-    }
-
-    p.subtitle {
-      color: #b0c4de; 
-      margin-bottom: 2rem;
-      font-size: 0.85rem;
-      font-weight: 400;
-    }
-
-    /* List Menu */
+    /* --- LIST MENU --- */
     .menu-list {
       display: flex;
       flex-direction: column;
@@ -115,19 +128,20 @@
       align-items: center;
       justify-content: space-between;
       text-decoration: none;
-      /* Tombol transparan putih */
-      background: rgba(255, 255, 255, 0.08); 
+      /* Background tombol semi-transparan */
+      background: rgba(255, 255, 255, 0.15); 
       padding: 1rem 1.2rem;
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       transition: all 0.3s ease;
     }
 
     a.menu-item:hover {
-      /* Hover: Putih lebih terang */
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.4);
+      /* Hover efek lebih terang */
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
       transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     
     .item-content {
@@ -144,7 +158,7 @@
     
     .item-desc {
       font-size: 0.75rem;
-      color: #dbeafe; /* Biru sangat muda */
+      color: #f1f5f9;
       margin-top: 2px;
       opacity: 0.8;
     }
@@ -153,42 +167,52 @@
       font-size: 1.2rem;
       color: #ffffff;
     }
+
+    /* Keyframe sederhana untuk animasi masuk */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     
   </style>
 </head>
 <body>
 
-  <div class="dashboard-card">
+  <div class="main-wrapper">
     
     <div class="logo-container">
       <img src="logo.png" alt="NVZE SYSTEM" class="profile-logo">
     </div>
 
-    <h1>Dashboard</h1>
-    <p class="subtitle">Refleksi visual Knowledge & Knowhow</p>
-
-    <div class="clock-widget">
-      <div class="time-display" id="clock-time">00:00</div>
-      <div class="date-display" id="clock-date">Memuat...</div>
-    </div>
-    
-    <div class="menu-list">
-      <a href="blog.html" class="menu-item">
-        <div class="item-content">
-          <div class="item-title">Arsip Tulisan</div>
-          <div class="item-desc">Pemikiran & Catatan</div>
-        </div>
-        <div class="item-icon">📝</div>
-      </a>
+    <div class="dashboard-card">
       
-      <a href="bookmark.html" class="menu-item">
-        <div class="item-content">
-          <div class="item-title">Bookmarks</div>
-          <div class="item-desc">Akses Link Cepat</div>
-        </div>
-        <div class="item-icon">🔖</div>
-      </a>
+      <h1>Dashboard</h1>
+      <p class="subtitle">Refleksi visual Knowledge & Knowhow</p>
+
+      <div class="clock-widget">
+        <div class="time-display" id="clock-time">00:00</div>
+        <div class="date-display" id="clock-date">Memuat...</div>
+      </div>
+      
+      <div class="menu-list">
+        <a href="blog.html" class="menu-item">
+          <div class="item-content">
+            <div class="item-title">Arsip Tulisan</div>
+            <div class="item-desc">Pemikiran & Catatan</div>
+          </div>
+          <div class="item-icon">📝</div>
+        </a>
+        
+        <a href="bookmark.html" class="menu-item">
+          <div class="item-content">
+            <div class="item-title">Bookmarks</div>
+            <div class="item-desc">Akses Link Cepat</div>
+          </div>
+          <div class="item-icon">🔖</div>
+        </a>
+      </div>
     </div>
+
   </div>
 
   <script>
