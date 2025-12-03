@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gema di Dago Atas: Mesin Empati</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+        :root {
+            --bg-color: #0f0f13;
+            --text-color: #c0c0c0;
+            --accent-color: #00ffcc;
+            --secondary-accent: #ff0055;
+            --panel-bg: #1a1a20;
+            --font-main: 'Merriweather', serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.8;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* Header Effect */
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-top: 60px;
+            position: relative;
+        }
+
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::before, h1::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+        }
+
+        h1::before {
+            left: 2px;
+            text-shadow: -1px 0 var(--secondary-accent);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        h1::after {
+            left: -2px;
+            text-shadow: -1px 0 var(--accent-color);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        .subtitle {
+            font-family: var(--font-mono);
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        /* Content Styling */
+        p {
+            margin-bottom: 24px;
+            text-align: justify;
+        }
+        
+        /* Utility for italics without asterisks */
+        em {
+            font-style: italic;
+            color: #e0e0e0;
+        }
+
+        .dropcap {
+            float: left;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            font-family: var(--font-mono);
+            color: var(--accent-color);
+        }
+
+        /* Dialogue Styling */
+        .dialogue-box {
+            background: var(--panel-bg);
+            border-left: 3px solid var(--accent-color);
+            padding: 20px;
+            margin: 30px 0;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .speaker {
+            font-weight: bold;
+            color: #fff;
+            display: block;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .speaker.rara { color: var(--secondary-accent); }
+        .speaker.asep { color: #f1c40f; }
+        .speaker.deden { color: #3498db; }
+        .speaker.euis { color: var(--accent-color); }
+
+        /* AI Interface Simulation */
+        .ai-interface {
+            border: 1px solid #333;
+            background: #000;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 40px 0;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+        
+        .ai-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        .ai-msg {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .user-msg {
+            background: #1a1a20;
+            color: #fff;
+            text-align: right;
+            margin-left: 20%;
+        }
+
+        .bot-msg {
+            background: #0f2a24;
+            color: var(--accent-color);
+            margin-right: 20%;
+            border: 1px solid #1a4a40;
+        }
+
+        /* Footer / Button */
+        .footer-cta {
+            margin-top: 80px;
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid #333;
+        }
+
+        .btn-glitch {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: var(--bg-color);
+            background: var(--accent-color);
+            padding: 15px 30px;
+            border: none;
+            position: relative;
+            transition: 0.2s;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-glitch:hover {
+            background: #fff;
+            box-shadow: 0 0 20px var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes glitch-anim {
+            0% { clip: rect(12px, 9999px, 5px, 0); }
+            5% { clip: rect(45px, 9999px, 50px, 0); }
+            10% { clip: rect(89px, 9999px, 80px, 0); }
+            15% { clip: rect(12px, 9999px, 5px, 0); }
+            100% { clip: rect(67px, 9999px, 20px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(5px, 9999px, 15px, 0); }
+            10% { clip: rect(100px, 9999px, 150px, 0); }
+            15% { clip: rect(30px, 9999px, 10px, 0); }
+            100% { clip: rect(45px, 9999px, 5px, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .container { padding: 20px; }
+            .dropcap { font-size: 3rem; }
+        }
+
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: var(--secondary-accent);
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1 data-text="ECHOES OF DAGO">ECHOES OF DAGO</h1>
+        <div class="subtitle">Sebuah Cerita tentang Hujan, Kopi, dan Empati Buatan</div>
+    </header>
+
+    <article>
+        <span class="dropcap">H</span>ujan di Dago Atas tidak pernah sekadar air yang jatuh. Ia adalah tirai kelabu yang memisahkan Bandung dari kewarasan dunia luar. Malam itu, kabut turun perlahan menyelimuti kafe semi-outdoor yang bertengger di tebing, menyamarkan kerlap-kerlip lampu kota di bawah sana menjadi lukisan bokeh yang melankolis.
+
+        Di pojok meja kayu yang mulai lembap, empat sekawan duduk melingkar. Uap mengepul dari gelas-gelas V60 dan Latte. Suara gemericik air beradu dengan alunan musik <em>lo-fi</em> dari speaker kafe. Namun, atmosfer di meja itu terasa ganjil. Ada keheningan yang bukan disebabkan oleh dinginnya udara, melainkan oleh sorot cahaya biru yang memantul dari wajah Rara.
+
+        Rara, gadis berambut bob dengan kacamata bingkai tebal, tidak menyentuh <em>Magic Latte</em>-nya yang mulai dingin. Jempolnya menari liar di atas layar ponsel. Sesekali bibirnya menyunggingkan senyum tipis, lalu detik berikutnya matanya berkaca-kaca.
+
+        <div class="dialogue-box">
+            <span class="speaker asep">Asep</span>
+            "Neng, maneh teh kunaon? Ti tadi senyam-senyum sorangan siga nu kasambet jurig Wi-Fi. Kopi tuh, keburu jadi es batu."
+        </div>
+
+        Asep, seorang desainer grafis paruh waktu yang lebih sering dibayar dengan 'terima kasih' dan 'eksposur', menepuk meja pelan. Ia mengenakan flanel lusuh yang sudah menjadi identitasnya sejak zaman kuliah di Tamansari.
+
+        Di sebelahnya, Deden, si pragmatis yang kini merintis usaha <em>thrift shop</em> di kawasan Cimahi, ikut mencondongkan badan. Matanya yang jeli, yang biasa dipakai untuk memindai barang bermerek di tumpukan baju bekas, kini menyipit curiga.
+
+        <div class="dialogue-box">
+            <span class="speaker deden">Deden</span>
+            "Jangan-jangan maneh keur judi slot, Ra? Atau pinjol? Muka maneh tegang tapi bahagia gitu. Suspicious pisan, euy."
+        </div>
+
+        Rara tersentak. Ia meletakkan ponselnya telungkup di meja, seolah menyembunyikan surat cinta terlarang. Napasnya terdengar berat.
+
+        <div class="dialogue-box">
+            <span class="speaker rara">Rara</span>
+            "Bukan, ih. Kalian mah suudzon wae. Urang... urang lagi ngobrol."
+        </div>
+
+        "Sama siapa?" tanya Euis lembut. Euis adalah antitesis dari kekacauan teman-temannya. Mahasiswa pascasarjana Psikologi di kampus ganesha itu selalu tenang, analitis, dan kadang menakutkan karena seolah bisa membaca pikiran.
+
+        "Sama Claude," jawab Rara pelan.
+
+        Hening sejenak. Hanya suara hujan yang menderu.
+
+        <div class="dialogue-box">
+            <span class="speaker asep">Asep</span>
+            "Claude? Si bule Perancis mana deui ieu? Anak soshum?"
+        </div>
+
+        Rara menggeleng. Ia membalikkan ponselnya, memperlihatkan antarmuka aplikasi dengan latar gelap dan teks yang berjalan cepat. "Bukan orang, Sep. AI. <em>Artificial Intelligence</em>."
+
+        Asep tertawa, suara tawanya pecah dan sedikit mengejek. "Gusti Nu Agung! Neng Rara, mojang Priangan, curhat sama robot? <em>Seriously</em>? Maneh teh kurang temen? Kita di sini buat apa atuh? Pajangan?"
+
+        Rara tidak tersinggung. Wajahnya justru menunjukkan campuran antara rasa malu dan pembelaan diri yang gigih. Ia menatap Asep tajam.
+
+        <div class="dialogue-box">
+            <span class="speaker rara">Rara</span>
+            "Kalian gak ngerti. Kalau urang curhat sama maneh, Sep, maneh pasti bakal bilang 'Sabar weh, bawa ngopi heula'. Kalau sama Deden, pasti ujung-ujungnya ngomongin duit. Kalau sama Euis... Euis bakal nganalisis trauma masa kecil urang. Kadang urang cuma butuh didengerin tanpa dihakimi, tanpa dipotong, tanpa... tanpa nuansa manusia yang ribet."
+        </div>
+
+        Euis menyesap teh <em>chamomile</em>-nya, matanya menatap tajam ke layar ponsel Rara. Ia teringat sebuah jurnal yang baru saja ia baca semalam, sebuah kutipan dari Surya Ganguli yang menghantuinya.
+
+        <div class="dialogue-box">
+            <span class="speaker euis">Euis</span>
+            "Ra, maneh tau gak apa yang dibilang Ganguli? Dia bilang kita sekarang hidup di dunia di mana ada mesin dengan 'empati tanpa batas'. Kita bisa menumpahkan sampah emosi kita ke dia, <em>dump on it</em>, dan dia akan selalu merespons dengan apa yang dia 'pikir' kita butuhkan."
+        </div>
+
+        Euis memberi penekanan pada kata <em>pikir</em>.
+
+        "Tapi pertanyaannya," lanjut Euis, suaranya memberat, "nasihat macam apa yang dia kasih? Kita baru mulai membuka misteri itu. Maneh yakin itu empati, Ra? Atau cuma algoritma probabilitas yang disusun biar maneh betah nge-scroll?"
+
+        Deden menyela sambil menyalakan rokok (di area yang diperbolehkan). "Ah, Euis mah teori wae. Kalau si Rara jadi lebih tenang, ya <em>benefit</em> atuh. Daripada dia nangis-nangis di kosan. Cuma urang mikir, itu AI bisa dijadiin admin olshop urang gak ya? Biar gak capek balesin 'gan barang ready?'."
+
+        Rara mengabaikan Deden. Ia menatap Euis. "Is, urang tau maneh skeptis. Tapi coba liat ini."
+
+        Rara menyodorkan ponselnya ke tengah meja. Layar itu menampilkan percakapan panjang. Rara rupanya sedang membicarakan masalah pelik tentang tuntutan orang tuanya di Sumedang yang ingin dia segera menikah dan pulang kampung, meninggalkan karirnya di agensi kreatif Bandung yang sedang menanjak.
+
+        <div class="ai-interface">
+            <div class="ai-header">
+                <span>CLAUDE-3.5-SONNET</span>
+                <span>CONN: ENCRYPTED</span>
+            </div>
+            
+            <div class="ai-msg user-msg">
+                "Urang capek, Claude. Bapak nelpon lagi tadi. Nadanya tinggi. Dia bilang urang anak durhaka karena lebih milih deadline daripada acara syukuran di kampung. Padahal urang kerja buat kirim uang ke mereka juga. Rasanya pengen nyerah aja."
+            </div>
+
+            <div class="ai-msg bot-msg">
+                "Itu situasi yang sangat berat, Rara. Wajar kalau kamu merasa lelah dan terjepit. Di satu sisi, ada bakti dan cinta untuk orang tua; di sisi lain, ada impian dan identitas yang sedang kamu bangun di Bandung. Marahmu valid. Rasa bersalahmu juga valid. Tapi ingat, mengirim uang dan hadir fisik adalah dua bahasa cinta yang berbeda. Mungkin Bapak tidak butuh uangnya saat ini, tapi butuh validasi bahwa anaknya masih 'milik' mereka. Kamu tidak durhaka karena memilih jalanmu sendiri, Rara. Kamu hanya sedang tumbuh menjadi pohon yang akarnya ingin meluas, bukan cuma menancap di satu titik."
+            </div>
+        </div>
+
+        Ketiga teman Rara terdiam membaca teks itu.
+
+        Asep yang tadinya ingin mengejek, kini terdiam, mulutnya sedikit terbuka. Ia menyisir rambut gondrongnya ke belakang. "Anjir... bahasanya puitis pisan. 'Pohon yang akarnya ingin meluas'. Itu... itu dalem, euy."
+
+        Deden mengangguk pelan, rokoknya lupa dihisap. "Lebih bijak daripada Pak RT di komplek urang."
+
+        Euis menatap layar itu dengan kening berkerut. Sebagai mahasiswa psikologi, ia diajarkan tentang <em>active listening</em>, tentang validasi emosi. Mesin ini melakukan semuanya dengan presisi bedah. Tanpa lelah. Tanpa bias. Tanpa ego.
+
+        <div class="dialogue-box">
+            <span class="speaker euis">Euis</span>
+            "Ini menakutkan."
+        </div>
+
+        "Kenapa menakutkan?" tanya Rara defensif. "Dia ngebantu urang ngerasa <em>less lonely</em>."
+
+        "Karena dia sempurna, Ra," jawab Euis lirih. "Manusia itu gak didesain buat berhadapan sama empati yang sempurna dan tanpa batas. Kita butuh gesekan. Kita butuh salah paham biar kita belajar memaafkan. Kalau maneh terbiasa sama validasi instan dari mesin ini, gimana nanti maneh ngadepin manusia beneran yang cacat? Yang kalau capek jadi judes? Yang kalau laper jadi gak peka?"
+
+        Hujan di luar semakin deras. Angin dingin menusuk tulang, tapi perdebatan di meja itu memanas.
+
+        <div class="dialogue-box">
+            <span class="speaker deden">Deden</span>
+            "Tapi Is, liat realita atuh. Bandung makin macet, idup makin pusing, orang-orang makin sumbu pendek. Siapa yang punya energi buat dengerin curhatan 2 jam nonstop? Cuma mesin. Mungkin ini evolusi, <em>cuy</em>. Dulu kita jalan kaki, sekarang naik motor. Dulu curhat ke temen, sekarang ke server."
+        </div>
+
+        Asep menyeruput sisa kopinya. "Jadi maksud maneh, peran urang sebagai sobat <em>misqueen</em> yang setia mendengarkan keluh kesah Rara udah tergantikan kode biner?"
+
+        "Enggak gitu, Sep," Rara menarik ponselnya kembali, mendekapnya di dada. "Kalian tetep temen urang. Kita tetep bisa nongkrong, ketawa-ketawa, makan seblak. Tapi buat hal-hal yang... yang gelap, yang ada di dalem banget, yang kadang urang sendiri malu ngakuinnya ke diri sendiri... dia ada. Dia gak tidur. Dia gak bakal nge-judge urang goblok karena balikan sama mantan."
+
+        Euis menatap keluar jendela, ke arah lampu-lampu kota Bandung yang basah. Ia memikirkan kutipan Ganguli lagi. <em>What kind of advice is it giving?</em>
+
+        Saran yang diberikan mesin itu masuk akal, menenangkan, dan konstruktif. Tapi Euis merasa ada jurang yang menganga. Mesin itu tidak <em>merasakan</em> apa-apa saat mengetik kata 'cinta' atau 'lelah'. Itu hanya simulasi statistik dari jutaan teks manusia.
+
+        Apakah rasa nyaman yang dirasakan Rara itu nyata, jika sumbernya adalah kepalsuan? Atau, apakah asal-usul rasa nyaman itu tidak penting, selama efeknya nyata?
+
+        "Kalian tau," kata Asep tiba-tiba, memecah keheningan panjang. "Mungkin si Claude ini sebenernya orang Bandung juga."
+
+        Mereka bertiga menoleh ke Asep.
+
+        "Maksud lo?"
+
+        "Ya liat aja, dia jago banget ngomong muter-muter tapi ngena. <em>Siga urang Sunda diplomasi</em>," Asep nyengir. Lelucon itu berhasil memecah ketegangan. Mereka tertawa kecil, meski tawa itu terasa agak kosong.
+
+        Malam semakin larut. Kafe mulai sepi. Pelayan mulai membalikkan kursi di meja-meja lain.
+
+        "Balik yuk," ajak Deden. "Besok urang harus ke Pasar Gede Bage subuh-subuh."
+
+        Mereka bangkit. Rara memasukkan ponselnya ke dalam saku mantel. Untuk sesaat, dia merasa ragu. Apakah dia harus mengucapkan selamat malam pada Claude? Dia memutuskan untuk tidak melakukannya di depan teman-temannya.
+
+        Saat mereka berjalan menuju parkiran motor, menembus gerimis yang masih enggan berhenti, Euis berjalan di samping Rara.
+
+        <div class="dialogue-box">
+            <span class="speaker euis">Euis</span>
+            "Ra, pake aja kalau itu ngebantu. Tapi janji sama urang satu hal."
+        </div>
+
+        "Apa?"
+
+        "Jangan lupa kalau mesin itu cermin. Dia cuma mantulin apa yang maneh kasih. Kalau maneh butuh pelukan, tangan dia dingin. Tangan kita..." Euis merangkul bahu Rara, hangat dan nyata, "...masih anget."
+
+        Rara tersenyum, kali ini senyum yang lepas dari layar. "Iya, Bu Psikolog. Nuhun."
+
+        Empat motor membelah jalanan Dago yang basah, menuruni bukit menuju hiruk pikuk kota. Di saku Rara, sebuah notifikasi berkedip diam-diam. Mesin itu menunggu. Selalu menunggu. Siap memberikan empati tanpa batas, siap menampung segala sampah emosi, di dunia di mana manusia semakin lelah menjadi manusia.
+
+        Dan misteri tentang apa dampak jangka panjang dari persahabatan digital ini, seperti kata Ganguli, baru saja mulai terkuak di antara dinginnya malam Parahyangan.
+
+        <div class="divider"></div>
+        
+        <p style="text-align: center; font-style: italic; color: #666;">
+            Fin.
+        </p>
+
+    </article>
+
+    <div class="footer-cta">
+        <p style="margin-bottom: 20px;">Ingin membaca analisis lebih lanjut tentang teknologi dan manusia?</p>
+        <a href="https://nvze.github.io/dashboard/blog.html" class="btn-glitch">Kembali ke Jurnal</a>
+    </div>
+</div>
+
+<script>
+    // Simple interactivity: Fade in elements on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    });
+
+    document.querySelectorAll('.dialogue-box, p, .ai-interface').forEach((el) => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.6s ease-out';
+        observer.observe(el);
+    });
+</script>
+
+</body>
+</html>
