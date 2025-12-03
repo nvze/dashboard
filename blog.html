@@ -3,473 +3,855 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NvZE Bookmark - Blue Pink Gradient</title>
+    <title>Jurnal Pemikiran | NVZE</title>
+    
     <style>
-        /* === 1. VARIABLES === */
+        /* --- VIBRANT BLUE & PINK GRADIENT THEME --- */
         :root {
-            /* Background Colors */
-            --bg-blue-dom: #2855c9; 
-            --bg-pink-accent: #ff69b4; 
-
-            /* Acrylic / Mica Material (LIGHT BASE) */
-            --mica-bg: rgba(255, 255, 255, 0.15); 
-            --mica-border: rgba(255, 255, 255, 0.25);
-            --hover-bg: rgba(255, 255, 255, 0.25); 
-            --card-hover-bg: rgba(255, 255, 255, 0.2); 
+            /* Warna Utama */
+            --blue-dominant: #2855c9;
+            --pink-accent: #ff4da6; /* Pink magenta terang untuk gradasi dan aksen */
             
-            /* Text & Accents */
-            --text-primary: #ffffff; 
-            --text-secondary: #e0e0e0; 
-            --accent-pink: var(--bg-pink-accent); 
+            /* Background Gradient Variables */
+            --bg-grad-start: var(--pink-accent);
+            --bg-grad-mid: var(--blue-dominant);
+            --bg-grad-end: var(--pink-accent);
             
-            /* Spacing & Radius */
-            --radius-card: 8px;
-            --radius-input: 6px;
+            /* Glassmorphism Cards (Disesuaikan untuk background biru terang) */
+            /* Menggunakan basis biru tua transparan agar teks putih terbaca jelas */
+            --card-bg: rgba(10, 30, 80, 0.3); 
+            --card-border: rgba(255, 77, 166, 0.3); /* Garis tepi pink transparan */
+            --card-hover-bg: rgba(10, 30, 80, 0.5);
+            
+            /* Typography */
+            --text-primary: #FFFFFF;
+            --text-secondary: #dceaff; /* Biru muda keputihan agar serasi */
+            
+            /* Accents (Menggunakan Pink sebagai aksen utama) */
+            --accent-default: var(--pink-accent); 
+            --accent-hover: #ff99cc; /* Pink lebih muda saat hover */
+            
+            /* Components */
+            --nav-glass: rgba(20, 40, 100, 0.5); /* Navigasi biru tua transparan */
+            --acrylic-blur: blur(24px) saturate(120%);
+            /* Shadow menggunakan warna biru tua/ungu */
+            --shadow-card: 0 4px 20px rgba(40, 85, 201, 0.4);
+            
+            /* Font */
+            --font-stack: 'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        body { 
-            /* Background Gradasi Blue-Pink */
-            background: linear-gradient(135deg, var(--bg-pink-accent) 0%, var(--bg-blue-dom) 30%, var(--bg-blue-dom) 70%, var(--bg-pink-accent) 100%);
-            background-attachment: fixed;
-            color: var(--text-primary); 
-            padding: 40px 20px; 
-            min-height: 100vh; 
+        body {
+            /* Setup Background Baru: Gradasi Linear 135 derajat */
+            /* Pink kiri atas (0%) -> Dominasi Biru di tengah (25%-75%) -> Pink kanan bawah (100%) */
+            background: linear-gradient(
+                135deg, 
+                var(--bg-grad-start) 0%, 
+                var(--bg-grad-mid) 25%, 
+                var(--bg-grad-mid) 75%, 
+                var(--bg-grad-end) 100%
+            );
+            background-color: var(--blue-dominant); /* Fallback color */
+            background-attachment: fixed; 
+            color: var(--text-primary);
+            font-family: var(--font-stack);
+            font-size: 15px;
+            line-height: 1.6;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
-            -webkit-font-smoothing: antialiased;
         }
 
-        /* === 2. HEADER === */
-        header { 
-            max-width: 800px;
-            margin: 0 auto 40px auto;
+        /* --- TOP BAR --- */
+        .top-bar {
+            padding: 24px 32px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 20, 60, 0.2); /* Background tombol lebih gelap */
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-back:hover {
+            background-color: var(--accent-default);
+            color: white;
+            border-color: var(--accent-hover);
+            box-shadow: 0 0 10px rgba(255, 77, 166, 0.4);
+        }
+
+        /* --- HEADER & LOGO --- */
+        header {
+            padding: 40px 20px 20px;
             text-align: center;
-            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .logo-container {
-            margin-bottom: 5px;
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: transparent; 
-        }
-
-        /* LOGO STYLING (MODIFIKASI DI SINI) */
-        .header-logo {
-            max-width: 140px;
+        /* CSS LOGO (Dipertahankan) */
+        /* Filter ini sudah efektif mengubah logo hitam menjadi putih */
+        .site-logo {
+            max-width: 140px; 
             width: 100%;
             height: auto;
-            
-            /* --- FILTER PEMUTIH LOGO --- */
-            /* brightness(0) -> Mengubah gambar jadi hitam total (siluet) */
-            /* invert(1)     -> Membalikkan hitam menjadi PUTIH */
-            filter: brightness(0) invert(1);
+            margin-bottom: 15px;
+            /* Grayscale+Contrast+Invert = Mengubah hitam jadi putih, putih jadi hitam.
+               Screen mode = Menghilangkan bagian hitam (hasil invert dari background putih asli) */
+            filter: grayscale(100%) contrast(200%) invert(1);
+            mix-blend-mode: screen; 
         }
 
-        h1 { display: none; }
-
-        #clock {
-            font-size: 0.95rem;
+        .subtitle {
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-bottom: 25px;
             font-weight: 400;
             margin-top: 5px;
         }
 
-        /* Input Search */
-        #searchInput {
+        /* --- SEARCH BAR --- */
+        .search-wrapper {
+            max-width: 500px;
+            margin: 10px auto 30px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .search-input {
             width: 100%;
-            max-width: 600px;
-            padding: 12px 16px; 
-            border-radius: var(--radius-input);
-            border: 1px solid var(--mica-border);
-            border-bottom: 2px solid transparent;
-            background-color: var(--mica-bg); 
-            color: white; 
-            outline: none; 
-            font-size: 0.95rem; 
-            text-align: left;
-            transition: all 0.2s ease;
-            backdrop-filter: blur(10px);
+            padding: 12px 20px 12px 48px;
+            background: var(--nav-glass);
+            border: 1px solid var(--card-border);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-family: var(--font-stack);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: var(--acrylic-blur);
+            -webkit-backdrop-filter: var(--acrylic-blur);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-default);
+            background: rgba(20, 40, 100, 0.6);
+            /* Glow diubah menjadi pink */
+            box-shadow: 0 0 15px rgba(255, 77, 166, 0.3); 
         }
         
-        #searchInput::placeholder { color: rgba(255,255,255,0.6); }
-
-        #searchInput:focus { 
-            background-color: var(--hover-bg);
-            border-color: var(--mica-border);
-            border-bottom-color: var(--accent-pink); 
-        }
-
-        /* === 3. GRID SYSTEM === */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 12px;
-            max-width: 1000px;
-            margin: 0 auto;
-            width: 100%;
-            flex: 1; 
-        }
-
-        /* === 4. ACCORDION CARD === */
-        details.card {
-            background-color: var(--mica-bg); 
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid var(--mica-border);
-            border-radius: var(--radius-card);
-            overflow: hidden; 
-            transition: background-color 0.2s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        details.card:hover {
-            background-color: var(--card-hover-bg);
-        }
-
-        summary.card-header {
-            padding: 14px 16px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-            transition: 0.2s;
-        }
-
-        summary.card-header::-webkit-details-marker { display: none; }
-
-        summary.card-header::after {
-            content: '\203A';
-            font-size: 1.4rem;
+        .search-input::placeholder {
             color: var(--text-secondary);
-            transform: rotate(90deg);
-            transition: transform 0.2s ease, color 0.2s ease;
-            line-height: 0;
-            margin-top: -4px;
+            opacity: 0.7;
         }
 
-        details[open] summary.card-header {
-            border-bottom: 1px solid var(--mica-border);
-            color: var(--accent-pink);
+        .search-icon {
+            position: absolute;
+            left: 36px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            pointer-events: none;
+            opacity: 0.8;
+            transition: color 0.3s;
         }
 
-        details[open] summary.card-header::after {
-            transform: rotate(-90deg);
-            color: var(--accent-pink);
+        .search-input:focus + .search-icon {
+            color: var(--accent-default);
         }
 
-        /* === 5. ISI LINK === */
-        .link-list {
-            padding: 6px;
+        /* --- STICKY NAV --- */
+        .sticky-nav {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
             display: flex;
-            flex-direction: column;
-            gap: 2px;
-            max-height: 400px;
-            overflow-y: auto;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            background: var(--nav-glass);
+            backdrop-filter: var(--acrylic-blur);
+            -webkit-backdrop-filter: var(--acrylic-blur);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            /* Shadow disesuaikan dengan tema biru */
+            box-shadow: 0 8px 32px rgba(20, 40, 100, 0.4);
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: none;
+            font-family: var(--font-stack);
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            color: var(--text-primary);
+            background-color: rgba(255, 77, 166, 0.15); /* Hover pink tipis */
+        }
+
+        /* Active State: Menggunakan Aksen Pink */
+        .filter-btn.active {
+            background-color: var(--accent-default);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 0 10px rgba(255, 77, 166, 0.3);
+        }
+
+        /* --- POST LIST --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            flex: 1;
+        }
+
+        #posts-container {
+            display: grid;
+            gap: 16px;
+        }
+
+        .article-card {
+            display: block;
+            text-decoration: none;
+            background: var(--card-bg);
+            padding: 28px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-card);
+            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-card:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(40, 85, 201, 0.6);
         }
         
-        .link-list::-webkit-scrollbar { width: 4px; }
-        .link-list::-webkit-scrollbar-track { background: transparent; }
-        .link-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }
-        .link-list::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.5); }
+        /* Aksen garis kiri saat hover (Sekarang Pink) */
+        .article-card:hover::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent-default);
+            /* Glow effect pink */
+            box-shadow: 0 0 15px var(--accent-default); 
+        }
 
-        .bookmark-link {
+        .meta-group {
             display: flex;
             align-items: center;
-            text-decoration: none;
+            gap: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-default); /* Teks kategori jadi pink */
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        
+        .meta-date {
+            color: var(--text-secondary);
+            font-weight: 400;
+            text-transform: none;
+            opacity: 0.8;
+        }
+
+        .post-title {
+            font-family: var(--font-stack);
+            font-size: 1.4rem;
+            font-weight: 600;
             color: var(--text-primary);
-            padding: 10px 12px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            transition: background 0.1s;
+            line-height: 1.3;
+            margin-bottom: 10px;
         }
 
-        .bookmark-link:hover {
-            background-color: var(--hover-bg);
+        .post-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* Highlighting Text in Search (Disesuaikan jadi pink) */
+        .highlight {
+            background-color: rgba(255, 77, 166, 0.3);
+            color: white;
+            padding: 0 2px;
+            border-radius: 2px;
         }
 
-        .favicon {
-            width: 16px; height: 16px; margin-right: 12px; border-radius: 0;
-            flex-shrink: 0;
+        /* --- BUTTONS & FOOTER --- */
+        .load-more-container {
+            text-align: center;
+            padding: 50px 0 80px;
         }
 
-        details[open] .link-list {
-            animation: fadeIn 0.25s ease-out;
+        .btn-load {
+            background-color: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-primary);
+            padding: 10px 30px;
+            border-radius: 6px;
+            font-family: var(--font-stack);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(20, 40, 100, 0.3);
         }
+
+        .btn-load:hover {
+            background-color: var(--accent-default);
+            color: white; 
+            border-color: var(--accent-default);
+            /* Glow effect pink */
+            box-shadow: 0 0 20px rgba(255, 77, 166, 0.5); 
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            opacity: 0.8; 
+            margin-top: auto;
+        }
+
+        /* --- ANIMATIONS --- */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .hidden { display: none !important; }
-
-        /* === 6. NAVIGATION BUTTONS === */
-        .navigation-bottom {
-            text-align: center;
-            margin: 40px 0 20px 0;
+        
+        .article-card {
+            animation: fadeIn 0.5s ease-out forwards;
         }
 
-        .btn-dashboard {
-            display: inline-block;
-            padding: 8px 24px;
-            background-color: var(--mica-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--mica-border);
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-dashboard:hover {
-            background-color: var(--hover-bg);
-            border-color: rgba(255,255,255,0.4);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center; 
-            color: var(--text-secondary); 
-            font-size: 0.75rem; 
-            margin-top: 20px;
-            opacity: 0.8;
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .nav-container { width: 100%; border-radius: 12px; }
+            .filter-btn { flex: 1 1 auto; font-size: 13px; padding: 8px 12px; }
+            .container { padding: 0 16px; }
+            .article-card { padding: 20px; }
+            .search-wrapper { margin-bottom: 20px; padding: 0 24px; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <img src="logo.png" alt="NvZE Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('h1').style.display='block';">
-        </div>
-        
-        <h1>NvZE Bookmark</h1>
-
-        <div id="clock">Loading time...</div>
-        <input type="text" id="searchInput" placeholder="Cari aplikasi, file, atau pengaturan..." onkeyup="filterLinks()">
-    </header>
-
-    <main class="grid-container">
-        <details class="card">
-            <summary class="card-header">&#128231; Email Services</summary>
-            <div class="link-list">
-                <a href="https://accounts.google.com/b/0/AddMailService" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=google.com" class="favicon">Gmail</a>
-                <a href="https://outlook.live.com/owa/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=outlook.live.com" class="favicon">Outlook</a>
-                <a href="https://login.yahoo.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=yahoo.com" class="favicon">Yahoo Mail</a>
-                <a href="https://protonmail.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=protonmail.com" class="favicon">ProtonMail</a>
-                <a href="https://nvze.github.io/dashboard/pt-posting-tayang.html" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=nvze.github.io/dashboard" class="favicon">Postingan Tayangkan</a>
-            </div>
-        </details>
-
-        <details class="card">
-            <summary class="card-header">&#128200; Finance & Trading</summary>
-            <div class="link-list">
-                <a href="https://mt4.octabroker.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=octabroker.com" class="favicon">Octa MetaTrader 4</a>
-                <a href="https://www.bloomberg.com/quote/USDIDR:CUR?embedded-checkout=true" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=bloomberg.com" class="favicon">Kurs Rupiah-Dollar 4</a>
-                <a href="https://www.tradingview.com/chart/?symbol=TVC%3ADXY" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=tradingview.com" class="favicon">DXY-Index Dollar</a>      
-                <a href="https://id.investing.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=investing.com" class="favicon">Investing.com</a>
-                <a href="https://tradingeconomics.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=tradingeconomics.com" class="favicon">Trading Economics</a>
-                <a href="https://www.paypal.com/id/home" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=paypal.com" class="favicon">PayPal</a>
-                <a href="https://app.kledo.com/#/user/login" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=kledo.com" class="favicon">Kledo Accounting</a>
-                <a href="https://djponline.pajak.go.id/account/login" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=pajak.go.id" class="favicon">DJP Online (Pajak)</a>
-                <a href="https://coretaxdjp.pajak.go.id/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=pajak.go.id" class="favicon">CORETAX DJP</a>
-                <a href="https://mitra.bgn.go.id/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=bgn.go.id" class="favicon">Mitra Badan Gizi Nasional</a>
-                <a href="https://www.numbeo.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=numbeo.com" class="favicon">Numbeo (Cek Harga)</a>
-            </div>
-        </details>
-
-        <details class="card">
-            <summary class="card-header">&#128172; Social & Chat</summary>
-            <div class="link-list">
-                <a href="https://web.whatsapp.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=whatsapp.com" class="favicon">WhatsApp Web</a>
-                <a href="https://web.telegram.org/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=telegram.org" class="favicon">Telegram Web</a>
-                <a href="https://arimbi.bandung.go.id/atcs/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=arimbi.bandung.go.id" class="favicon">CCTV Bandung</a>
-                <a href="http://www.facebook.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=facebook.com" class="favicon">Facebook</a>
-                <a href="https://x.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=x.com" class="favicon">X (Twitter)</a>
-            </div>
-        </details>
-
-        <details class="card">
-            <summary class="card-header">&#9729;&#65039; Cloud & Drive</summary>
-            <div class="link-list">
-                <a href="https://drive.google.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=drive.google.com" class="favicon">Google Drive</a>
-                <a href="https://onedrive.live.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=onedrive.live.com" class="favicon">OneDrive</a>
-                <a href="https://www.terabox.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=terabox.com" class="favicon">TeraBox</a>
-                <a href="https://www.box.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=box.com" class="favicon">Box</a>
-                <a href="https://mega.nz/login" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=mega.nz" class="favicon">MEGA</a>
-                <a href="https://drive.proton.me/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=proton.me" class="favicon">Proton Drive</a>
-                <a href="https://disk.yandex.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=yandex.com" class="favicon">Yandex Disk</a>
-                <a href="https://www.dropbox.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=dropbox.com" class="favicon">Dropbox</a>
-                <a href="https://www.mediafire.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=mediafire.com" class="favicon">MediaFire</a>
-                <a href="https://imnxx.odoo.com/odoo/documents" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=odoo.com" class="favicon">Odoo Docs</a>
-            </div>
-        </details>
-
-        <details class="card">
-            <summary class="card-header">&#129302; AI Tools</summary>
-            <div class="link-list">
-                <a href="https://chat.openai.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=openai.com" class="favicon">ChatGPT</a>
-                <a href="https://grok.com/c/5349981f-91c6-452a-839d-8917de6d6ffd" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=grok.com" class="favicon">Grok</a>
-                <a href="https://gemini.google.com/app" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=google.com" class="favicon">Gemini</a>
-                <a href="https://notebooklm.google/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=notebooklm.google" class="favicon">NotebookLM</a>
-                <a href="https://chat.deepseek.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=deepseek.com" class="favicon">DeepSeek</a>
-                <a href="https://chat.mistral.ai/chat" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=mistral.ai" class="favicon">Mistral AI</a>
-                <a href="https://www.perplexity.ai/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=perplexity.ai" class="favicon">Perplexity</a>
-                <a href="https://copilot.microsoft.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=microsoft.com" class="favicon">MS Copilot</a>
-                <a href="https://www.meta.ai/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=meta.ai" class="favicon">Meta AI</a>
-                <a href="https://chat.qwen.ai/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=qwen.ai" class="favicon">Qwen AI</a>
-                <a href="https://idx.google.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=google.com" class="favicon">Project IDX</a>
-            </div>
-        </details>
-
-        <details class="card">
-            <summary class="card-header">&#127916; Hiburan & TV</summary>
-            <div class="link-list">
-                <a href="https://music.youtube.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=music.youtube.com" class="favicon">YouTube Music</a>
-                <a href="https://www.youtube.com//" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=youtube.com" class="favicon">Youtube</a>                
-                <a href="https://www.vidio.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=vidio.com" class="favicon">Vidio (SCTV/Indosiar)</a>
-                <a href="https://www.visionplus.id/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=visionplus.id" class="favicon">Vision+</a>
-                <a href="https://www.rctiplus.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=rctiplus.com" class="favicon">RCTI+</a>
-                <a href="https://www.transtv.co.id/live" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=transtv.co.id" class="favicon">TransTV</a>
-                <a href="https://maxstream.tv/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=maxstream.tv" class="favicon">MAXStream</a>
-                <a href="https://streaming.klcbsofficial.com/public/klcbs" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=klcbsofficial.com" class="favicon">KLCBS Radio</a>
-            </div>
-        </details>
-
-        <details class="card">
-            <summary class="card-header">&#128221; Blog & Library</summary>
-            <div class="link-list">
-                <a href="https://ebandaro.id/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=ebandaro.id" class="favicon">Berpikir & Bertindak</a>
-                <a href="https://welib.org/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=welib.org" class="favicon">WeLib (Buku)</a>
-                <a href="https://imvnxx.blogspot.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=imvnxx.blogspot.com" class="favicon">imvnxx blog</a>
-                <a href="https://esan.home.blog/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=esan.home.blog/" class="favicon">Esan blog</a>
-                <a href="https://kalamsastra.id/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=kalamsastra.id/" class="favicon">Kalam Sastra</a>
-                <a href="https://cintokasiah.blogspot.com/?m=1" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=blogspot.com" class="favicon">Cerpen Kehidupan</a>
-                <a href="https://babo.lentera.biz/?m=1" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=lentera.biz" class="favicon">Lentera Babo</a>
-                <a href="https://erizeli.aboutbusiness.info/?m=1" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=aboutbusiness.info" class="favicon">About Business</a>
-                <a href="https://imnxx.home.blog/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=wordpress.com" class="favicon">The ImnXX Blog</a>
-                <a href="http://30hariceritacinta.blogspot.com/?m=0" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=blogspot.com" class="favicon">Sederet Cinta</a>
-            </div>
-        </details>
-
-        <details class="card">
-            <summary class="card-header">&#128203; Office & Docs</summary>
-            <div class="link-list">
-                <a href="https://docs.google.com/spreadsheets/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=google.com" class="favicon">Google Sheets</a>
-                <a href="https://workspace.google.com/products/docs/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=google.com" class="favicon">Google Docs</a>
-                <a href="https://www.notion.so/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=notion.so" class="favicon">Notion</a>
-                <a href="https://replit.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=replit.com" class="favicon">Replit</a>
-                <a href="https://excel.cloud.microsoft/en-us/?wdOrigin=MAIL.SHELL%2CAPPHOME-WEB.UNAUTH%2CAPPHOME-WEB.SHELL.SIGNIN" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=excel.cloud.microsoft/en-us" class="favicon">EXCEL online</a>
-                <a href="https://app.simplenote.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=simplenote.com" class="favicon">Simplenote</a>
-                <a href="https://keep.google.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=keep.google.com" class="favicon">Google Keep</a>
-            </div>
-        </details>
-
-        <details class="card">
-            <summary class="card-header">&#128736;&#65039; Tools & System</summary>
-            <div class="link-list">
-                <a href="https://app.raindrop.io/my/0" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=raindrop.io" class="favicon">Raindrop </a>
-                <a href="https://www.virustotal.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=virustotal.com" class="favicon">VirusTotal</a>
-                <a href="https://github.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=github.com" class="favicon">Github </a>
-                <a href="https://fast.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=fast.com" class="favicon">Fast.com Speedtest</a>
-                <a href="https://app.netlify.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=app.netlify.com" class="favicon">Netlify </a>
-                <a href="https://snapdrop.net/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=snapdrop.net" class="favicon">Snapdrop</a>
-                <a href="https://pairdrop.net/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=pairdrop.net" class="favicon">PairDrop</a>
-                <a href="https://my.nextdns.io/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=nextdns.io" class="favicon">NextDNS Analytics</a>
-                <a href="https://vscode.dev/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=vscode.dev" class="favicon">VScode</a> 
-                <a href="http://127.0.0.1:5000/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=localhost" class="favicon">Localhost:5000</a>
-                <a href="https://firmwarefile.com/lenovo-a7700" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=firmwarefile.com" class="favicon">Lenovo Firmware</a>
-                <a href="https://getintopc.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=getintopc.com" class="favicon">GetintoPC</a>
-            </div>
-        </details>
-
-    </main>
-
-    <div class="navigation-bottom">
-        <a href="https://nvze.github.io/dashboard/index.html" class="btn-dashboard">
-            &#8592; Kembali ke Dashboard
+    <div class="top-bar">
+        <a href="https://nvze.github.io/dashboard/index.html" class="btn-back">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.21967 12.0303L2.46967 8.28033C2.17678 7.98744 2.17678 7.51256 2.46967 7.21967L6.21967 3.46967C6.51256 3.17678 6.98744 3.17678 7.28033 3.46967C7.57322 3.76256 7.57322 4.23744 7.28033 4.53033L4.81066 7H13.5C13.9142 7 14.25 7.33579 14.25 7.75C14.25 8.16421 13.9142 8.5 13.5 8.5H4.81066L7.28033 10.9697C7.57322 11.2626 7.57322 11.7374 7.28033 12.0303C6.98744 12.3232 6.51256 12.3232 6.21967 12.0303Z"/>
+            </svg>
+            Kembali ke Dashboard
         </a>
     </div>
 
+    <header>
+        <img src="logo.png" alt="NvZE Logo" class="site-logo">
+        
+        <p class="subtitle">Jurnal Ekonomi, Teknologi, Humaniora & Artikel Bebas</p>
+    </header>
+
+    <div class="search-wrapper">
+        <input type="text" id="searchInput" class="search-input" placeholder="Cari judul, topik, atau kata kunci...">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+    </div>
+
+    <nav class="sticky-nav">
+        <div class="nav-container">
+            <button class="filter-btn active" onclick="setCategory('all', this)">Indeks</button>
+            <button class="filter-btn" onclick="setCategory('ekonomi', this)">Ekonomi</button>
+            <button class="filter-btn" onclick="setCategory('teknologi', this)">Teknologi</button>
+            <button class="filter-btn" onclick="setCategory('humaniora', this)">Humaniora</button>
+            <button class="filter-btn" onclick="setCategory('bebas', this)">Bebas</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="posts-container"></div>
+
+        <div class="load-more-container">
+            <button id="loadMoreBtn" class="btn-load" onclick="loadMore()">Muat Lebih Banyak</button>
+        </div>
+    </div>
+
     <footer>
-        &copy; 2025 NVZE Dashboard System<br>
-        <span style="font-size: 0.7rem; opacity: 0.6;">Fluent Design Inspired</span>
+        &copy;2025 nvze dashboard system
     </footer>
 
     <script>
-        // 1. JAM
-        function updateClock() {
-            try {
-                const now = new Date();
-                const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-                document.getElementById('clock').textContent = now.toLocaleDateString('id-ID', options);
-            } catch(e) {}
-        }
-        setInterval(updateClock, 1000); updateClock();
+        /* DATABASE POST */
+        const allPosts = [
+            { 
+                title: "Bayang-Bayang Empati di Kota Kembang", 
+                cat: "humaniora", 
+                date: "03 Dec 2025", 
+                desc: "Sebuah cerita tentang empat warga Bandung yang masing-masing menemukan teknologi dengan \"empati tak terbatas\", dan bagaimana pertemuan itu mengubah perspektif mereka tentang koneksi manusia di era digital.  Sebuah cerpen tentang teknologi, kemanusiaan, dan identitas urban di Bandung", 
+                link: "empati-dikotabandung.html" 
+            },
+            { 
+                title: "Echoes of Dago", 
+                cat: "teknologi", 
+                date: "03 Dec 2025", 
+                desc: "Sebuah Cerita tentang Hujan, Kopi, dan Empati Buatan", 
+                link: "dago-echoes.html" 
+            },
+            { 
+                title: "Anatomi Ekonomi Eksternal", 
+                cat: "ekonomi", 
+                date: "03 Dec 2025", 
+                desc: "Bedah Tuntas Balance of Trade, Current Account, dan Neraca Pembayaran Indonesia (2015–2025)", 
+                link: "anatomi-ekonomi.html" 
+            },
+            { 
+                title: "Edge Computing ", 
+                cat: "teknologi", 
+                date: "03 Dec 2025", 
+                desc: "Pemrosesan data semakin bergeser dari cloud ke perangkat tepi (edge) seperti sensor IoT, kendaraan otonom, dan perangkat mobile. Ini memungkinkan analisis real-time dengan latensi rendah dan mengurangi beban bandwidth.", 
+                link: "edge-computing.html" 
+            },
+            { 
+                title: "Big Data: Elaborasi Komprehensif", 
+                cat: "teknologi", 
+                date: "03 Dec 2025", 
+                desc: "Dari Fondasi Filosofis hingga Implementasi Teknologi Mutakhir - Sebuah Pandangan Holistik tentang Revolusi Data", 
+                link: "big-data.html" 
+            },
+            { 
+                title: "Cerdas Financial: Hikmah dari Jepara", 
+                cat: "humaniora", 
+                date: "03 Dec 2025", 
+                desc: "Sebuah cerita tentang tiga sahabat yang menemukan arti kebebasan finansial", 
+                link: "cerdas-finansial.html" 
+            },
+            { 
+                title: "Tiga Jejak di Tanah Kebumen", 
+                cat: "humaniora", 
+                date: "02 Dec 2025", 
+                desc: "“Kayu itu seperti manusia, Nak,” begitu ia selalu berkata kepada siapapun yang mau mendengarkan. “Ada yang keras kepala seperti jati, ada yang lentur seperti bambu, ada yang harum seperti cendana. Tugas kita bukan melawan sifatnya, tapi menemukan bentuk yang paling cocok untuk jiwanya.”", 
+                link: "tiga-jejak.html" 
+            },
+            { 
+                title: "kondisi ekonomi mikro indonesia 2025", 
+                cat: "ekonomi", 
+                date: "03 Dec 2025", 
+                desc: "kondisi ekonomi mikro Indonesia 2025 melalui percakapan empat tokoh fiksi di Warung Pak Joko", 
+                link: "ekonomi mikro indonesia.html" 
+            },
+            { 
+                title: "Apa itu kalkulus?", 
+                cat: "teknologi", 
+                date: "02 Dec 2025", 
+                desc: "Banyak orang gagal belajar kalkulus karena kehilangan peta besar (big picture). Ini adalah matematika tentang perubahan (dinamis), bukan benda diam (statis).", 
+                link: "kalkulus.html" 
+            },
+            { 
+                title: "Kabut Likuiditas di Kaki Cikuray", 
+                cat: "ekonomi", 
+                date: "02 Dec 2025", 
+                desc: "Sebuah Diskursus Ekonomi dalam Sunyi", 
+                link: "kabut-likuiditas.html" 
+            },
+            { 
+                title: "Ditipu Hilirisasi", 
+                cat: "humaniora", 
+                date: "01 Dec 2025", 
+                desc: "Sebuah Diskusi Senja Tentang Nikel, LFP, dan Fatamorgana Ekonomi", 
+                link: "hilirisasi.html" 
+            },
+            { 
+                title: "Bayang-Bayang Leviathan", 
+                cat: "ekonomi", 
+                date: "01 Dec 2025", 
+                desc: "Laporan Investigatif & Naratif - Desember 2025", 
+                link: "bayang-bayang.html" 
+            },
+            { 
+                title: "Hegemoni Senyap", 
+                cat: "ekonomi", 
+                date: "01 Dec 2025", 
+                desc: "Sebuah Studi Kasus Naratif Tentang Alokasi Sumber Daya Absolut", 
+                link: "hegemoni-senyap.html" 
+            },
+            { 
+                title: "The Alpha Equilibrium", 
+                cat: "humaniora", 
+                date: "01 Dec 2025", 
+                desc: "Sebuah Otopsi Ambisi & Arsitektur Kapital", 
+                link: "the-alpha.html" 
+            },
+            { 
+                title: "Protokol Antartika ", 
+                cat: "humaniora", 
+                date: "01 Dec 2025", 
+                desc: "Di mana kepercayaan dibekukan, dan nilai hanyalah sebuah konsensus", 
+                link: "antartika.html" 
+            },
+            { 
+                title: "Arsitektur Ketidakberdayaan ", 
+                cat: "humaniora", 
+                date: "01 Dec 2025", 
+                desc: "Sebuah Dialog Tentang Kemiskinan by Design", 
+                link: "ketidakberdayaan.html" 
+            },
+            { 
+                title: "Anatomi Kebijakan Publik", 
+                cat: "ekonomi", 
+                date: "01 Dec 2025", 
+                desc: "Realitas tidak dibentuk oleh niat baik, melainkan oleh insentif, ketertiban, dan kompromi elit yang menyakitkan", 
+                link: "tirai-kebijakan.html" 
+            },
+            { 
+                title: "The Nexus Protokol ", 
+                cat: "humaniora", 
+                date: "01 Dec 2025", 
+                desc: "Sebuah narasi tentang melampaui batas kognitif manusia.", 
+                link: "belajar-cepat.html" 
+            },
+            { 
+                title: "Neuro-Reading: Hacking Otakmu untuk Jatuh Cinta pada Buku", 
+                cat: "humaniora", 
+                date: "30 Nov 2025", 
+                desc: "Bukan salah niatmu, tapi salah strategimu.", 
+                link: "neuro-reading.html" 
+            },
+            { 
+                title: "Roadmap Teknik Industri ", 
+                cat: "teknologi", 
+                date: "30 Nov 2025", 
+                desc: "Panduan Komprehensif & Peta Jalan Penguasaan Teknik Industri ", 
+                link: "ti-roadmap-ti.html" 
+            },
+            { 
+                title: "Perencanaan dan pengendalian produksi ", 
+                cat: "teknologi", 
+                date: "29 Nov 2025", 
+                desc: "Studi Akademik Perencanaan dan Pengendalian Produksi: Sebuah Tinjauan Komprehensif dari Prinsip Fondasi, Khasanah Akademik Global, hingga Transformasi Digital", 
+                link: "ti-ppc.html" 
+            },
+            { 
+                title: "Rekayasa Sistem ", 
+                cat: "teknologi", 
+                date: "29 Nov 2025", 
+                desc: "Rekayasa Sistem dan Teknik Industri Komprehensif", 
+                link: "ti-rekayasa_sistem.html" 
+            },
+            { 
+                title: "Postingan Tayangkan", 
+                cat: "bebas", 
+                date: "29 Nov 2025", 
+                desc: "Silahkan coba...", 
+                link: "postingan-tayangkan.html" 
+            },
+            { 
+                title: "Ergonomi ", 
+                cat: "teknologi", 
+                date: "29 Nov 2025", 
+                desc: "Laporan Komprehensif Human Factors dan Ergonomi (HF&E) dalam Disiplin Teknik Industri", 
+                link: "ti-ergonomi.html" 
+            },
+            { 
+                title: "Science, Technology, Engineering, and Mathematics (STEM)", 
+                cat: "teknologi", 
+                date: "29 Nov 2025", 
+                desc: "Fondasi Teknik Industri: Elaborasi Komprehensif 5W1H Keterkaitan Erat dengan Science, Technology, Engineering, and Mathematics (STEM)", 
+                link: "ti-stem.html" 
+            },
+             { 
+                title: "Negeri Di Ujung Tanduk ", 
+                cat: "humaniora", 
+                date: "29 Nov 2025", 
+                desc: "Kisah tentang paradoks pembangunan, di mana negara hidup dari mengeruk tanahnya sendiri, namun tetap miskin, sementara rakyatnya menjadi tumbal statistik.", 
+                link: "negeri-diujung-tanduk.html" 
+            },
+            { 
+                title: "Neraca yang tidak seimbang ", 
+                cat: "ekonomi", 
+                date: "29 Nov 2025", 
+                desc: "Sebuah potret kelas menengah, elit birokrasi, dan generasi cemas di penghujung 2025.", 
+                link: "Cerpen-neraca.html" 
+            },
+            { 
+                title: "Riset Operasi ", 
+                cat: "teknologi", 
+                date: "29 Nov 2025", 
+                desc: "Silahkan dibaca aja", 
+                link: "or.html" 
+            },
+            { 
+                title: "Update Catatan ", 
+                cat: "bebas", 
+                date: "28 Nov 2025", 
+                desc: "Dimulai dari sini..", 
+                link: "wkwk.txt" 
+            },
+            { 
+                title: "TQM", 
+                cat: "teknologi", 
+                date: "28 Nov 2025", 
+                desc: "Manajemen Kualitas Total (TQM) dan Rekayasa Keandalan: Sebuah Tinjauan Komprehensif dalam Konteks Teknik Industri", 
+                link: "tqm.html" 
+            },
+            // --- KELOMPOK EKONOMI ---
+            { 
+                title: "rekayasa finansial global", 
+                cat: "ekonomi", 
+                date: "01 Nov 2025", 
+                desc: "Kajian Analisis Strategis: Validasi dan Dekonstruksi Arsitektur Penguasaan Negara Melalui Finansialisasi Global", 
+                link: "post-2.html" 
+            },
+            { 
+                title: "ANALISIS DAMPAK YEN CARRY TRADE TERHADAP PASAR KEUANGAN INDONESIA", 
+                cat: "ekonomi", 
+                date: "05 Jan 2025", 
+                desc: "Yen Carry Trade adalah strategi arbitrase finansial di mana investor global meminjam dana dalam mata uang Yen Jepang (JPY) karena tingkat suku bunga yang sangat rendah", 
+                link: "post-5.html" 
+            },
+            { 
+                title: "teater modal", 
+                cat: "ekonomi", 
+                date: "10 Jan 2025", 
+                desc: "Sebuah Drama tentang Geopolitik & Keuangan Global", 
+                link: "post-6.html" 
+            },
+            { 
+                title: "Catatan Bagi Pemula Bisnis Forex", 
+                cat: "ekonomi", 
+                date: "12 Jan 2025", 
+                desc: "pasar valas adalah pasar keuangan nomor 1 terbesar di dunia. Kalau bisnis ini lebih banyak ruginya tentu tidak mungkin pasar valas menjadi terbesar di dunia", 
+                link: "post-7.html" 
+            },
+            { 
+                title: "analisis cadangan devisa dan rupiah", 
+                cat: "ekonomi", 
+                date: "10 Jan 2025", 
+                desc: "Paradoks Rupiah: Menganalisis Dominasi Faktor Permintaan Valas di Tengah Melimpahnya Cadangan Devisa", 
+                link: "post-10.html" 
+            },
 
-        // 2. FILTER SEARCH PINTAR
-        function filterLinks() {
-            const input = document.getElementById('searchInput').value.toUpperCase();
-            const details = document.querySelectorAll('details');
+            // --- KELOMPOK TEKNOLOGI ---
+            { 
+                title: "Studi Teknik dan Manajemen Industri", 
+                cat: "teknologi", 
+                date: "26 Nov 2025", 
+                desc: "Evolusi Disiplin, Fondasi Teoretis, dan Lanskap Akademik Global", 
+                link: "post-1.html" 
+            },
+            { 
+                title: "teknik industri dan SCM", 
+                cat: "teknologi", 
+                date: "18 Jan 2025", 
+                desc: "Arsitektur Aliran: Sebuah Kajian Mendalam Keterkaitan Teknik Industri dan Supply Chain Management", 
+                link: "post-11.html" 
+            },
+             { 
+                title: "Berpikir Komputasional", 
+                cat: "teknologi", 
+                date: "28 Nov 2025", 
+                desc: "Dari Konsep Fundamental Menuju Paradigma Keempat Ilmu Pengetahuan", 
+                link: "post-15.html" 
+            },
 
-            details.forEach(detail => {
-                let links = detail.querySelectorAll('a');
-                let hasVisible = false;
+            // --- KELOMPOK HUMANIORA ---
+            { 
+                title: "Amerika Itu Memang Perkasa", 
+                cat: "humaniora", 
+                date: "25 Jan 2025", 
+                desc: "Di Amerika di beberapa kota akan sering terlihat homeless alias gembel. Padahal AS dikenal sebagai negara kaya nomor 1 di dunia.", 
+                link: "post-8.html" 
+            },
+            { 
+                title: "Belajar Melawan Gelombang", 
+                cat: "humaniora", 
+                date: "28 Jan 2025", 
+                desc: "Saya engga mau kerja di perusahaan anda. Saya mohon dilibatkan sebagai team dalam proses private equity. Itu aja” kata Karen suatu waktu.", 
+                link: "post-9.html" 
+            },
+            { 
+                title: "pengendali arus uang", 
+                cat: "humaniora", 
+                date: "01 Feb 2025", 
+                desc: "Total aset perusahaan kamu tumbuh agresif tiga tahun berturut-turut. Tapi hanya 10% yang berasal dari paid-up capital. Artinya, kamu hebat dalam leverage. Tapi leverage kamu bukan dari profitabilitas. Tapi dari… cerita.", 
+                link: "post-12.html" 
+            },
+            { 
+                title: "Al-A'immah Al-Arba'ah", 
+                cat: "humaniora", 
+                date: "29 Nov 2025", 
+                desc: "Analisis Komprehensif Biografi, Metodologi, dan Warisan Intelektual Empat Imam Mazhab Sunni", 
+                link: "post-16.html" 
+            },
+            { 
+                title: "dunia persepsi", 
+                cat: "humaniora", 
+                date: "01 Feb 2025", 
+                desc: "Apa pandangan Anda tentang sektor IT di China?", 
+                link: "post-13.html" 
+            },
+            { 
+                title: "dilema dua raksasa", 
+                cat: "humaniora", 
+                date: "27 Nov 2025", 
+                desc: 'Selama puluhan tahun, "Bebas Aktif" menjadi mantra suci diplomasi Indonesia. Namun, di tengah persaingan memanas antara Amerika Serikat dan Tiongkok, apakah posisi netral masih menjadi tameng yang aman, atau justru jebakan yang berbahaya?', 
+                link: "post-14.html" 
+            },
 
-                links.forEach(link => {
-                    if (link.textContent.toUpperCase().indexOf(input) > -1) {
-                        link.style.display = "flex";
-                        hasVisible = true;
-                    } else {
-                        link.style.display = "none";
-                    }
-                });
+            // --- KELOMPOK BEBAS ---
+            { 
+                title: "TAYANGKAN", 
+                cat: "bebas", 
+                date: "28 Nov 2025", 
+                desc: "pastikan artikelnya sudah ada di repo", 
+                link: "post-3.html" 
+            },
+            { 
+                title: "posting", 
+                cat: "bebas", 
+                date: "29 Nov 2025", 
+                desc: "bikin baru dan edit", 
+                link: "post-19.html" 
+            },
+        ];
 
-                if (input.length > 0) {
-                    if (hasVisible) {
-                        detail.classList.remove('hidden');
-                        detail.open = true;
-                    } else {
-                        detail.classList.add('hidden');
-                        detail.open = false;
-                    }
-                } else {
-                    detail.classList.remove('hidden');
-                    detail.open = false;
-                    links.forEach(link => link.style.display = "flex");
-                }
+        // --- LOGIC SYSTEM ---
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let displayLimit = 15;
+        let filteredList = [];
+
+        const container = document.getElementById('posts-container');
+        const loadBtn = document.getElementById('loadMoreBtn');
+        const searchInput = document.getElementById('searchInput');
+
+        function init() {
+            // Setup listener untuk search
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase();
+                applyFilters();
             });
+
+            setCategory('all', document.querySelector('.filter-btn.active'));
         }
 
-        // 3. LOGIKA ACCORDION (SATU TERBUKA)
-        const allDetails = document.querySelectorAll('details');
-        allDetails.forEach((targetDetail) => {
-            targetDetail.addEventListener('toggle', (e) => {
-                if (targetDetail.open) {
-                    allDetails.forEach((detail) => {
-                        if (detail !== targetDetail && detail.open) {
-                            detail.open = false;
-                        }
-                    });
-                }
+        function setCategory(cat, element) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            if(element) element.classList.add('active');
+
+            currentCategory = cat;
+            applyFilters();
+        }
+
+        // Fungsi Filter Utama (Gabungan Kategori + Search)
+        function applyFilters() {
+            // 1. Filter by Category
+            let temp = (currentCategory === 'all')
+                ? allPosts
+                : allPosts.filter(post => post.cat === currentCategory);
+
+            // 2. Filter by Search Query
+            if (searchQuery.trim() !== '') {
+                temp = temp.filter(post => 
+                    post.title.toLowerCase().includes(searchQuery) || 
+                    post.desc.toLowerCase().includes(searchQuery)
+                );
+            }
+
+            filteredList = temp;
+            displayLimit = 15; // Reset limit saat filter berubah
+            renderList();
+        }
+
+        function renderList() {
+            container.innerHTML = '';
+            
+            if(filteredList.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align:center; padding: 60px 20px;">
+                        <p style="color:var(--text-secondary); font-size:1.1rem; margin-bottom:10px;">
+                            Tidak ada artikel yang ditemukan.
+                        </p>
+                        <p style="font-size:0.9rem; color: rgba(255,255,255,0.5);">
+                            Coba kata kunci lain atau ubah kategori.
+                        </p>
+                    </div>
+                `;
+                loadBtn.style.display = 'none';
+                return;
+            }
+
+            const listToShow = filteredList.slice(0, displayLimit);
+
+            listToShow.forEach(post => {
+                const article = document.createElement('a');
+                article.href = post.link;
+                article.className = 'article-card';
+                
+                // Highlight search term logic (optional visual improvement)
+                let displayTitle = post.title;
+                let displayDesc = post.desc;
+
+                article.innerHTML = `
+                    <div class="meta-group">
+                        <span>${post.cat}</span>
+                        <span class="meta-date">&bull; ${post.date}</span>
+                    </div>
+                    <h2 class="post-title">${displayTitle}</h2>
+                    <p class="post-excerpt">${displayDesc}</p>
+                `;
+                container.appendChild(article);
             });
-        });
+
+            // Tampilkan tombol Load More jika masih ada sisa
+            if (displayLimit >= filteredList.length) {
+                loadBtn.style.display = 'none';
+            } else {
+                loadBtn.style.display = 'inline-block';
+            }
+        }
+
+        function loadMore() {
+            displayLimit += 10;
+            renderList();
+        }
+
+        window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
