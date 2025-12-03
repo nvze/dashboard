@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NvZE Bookmark - Win11 Style</title>
+    <title>NvZE Bookmark - Blue Pink Gradient</title>
     <style>
-        /* === 1. WINDOWS 11 FLUENT DESIGN VARIABLES === */
+        /* === 1. VARIABLES === */
         :root {
-            /* Background "Bloom" Colors */
-            --bg-dark: #000000;
-            --bloom-blue: #1c2340;
-            --bloom-accent: #373e66;
-            
-            /* Acrylic / Mica Material */
-            --mica-bg: rgba(32, 32, 32, 0.65);
-            --mica-border: rgba(255, 255, 255, 0.08);
-            --hover-bg: rgba(255, 255, 255, 0.06);
+            /* Background Colors */
+            --bg-blue-dom: #2855c9; 
+            --bg-pink-accent: #ff69b4; 
+
+            /* Acrylic / Mica Material (LIGHT BASE) */
+            --mica-bg: rgba(255, 255, 255, 0.15); 
+            --mica-border: rgba(255, 255, 255, 0.25);
+            --hover-bg: rgba(255, 255, 255, 0.25); 
+            --card-hover-bg: rgba(255, 255, 255, 0.2); 
             
             /* Text & Accents */
-            --text-primary: #ffffff;
-            --text-secondary: #aeb2ba;
-            --win-blue: #60cdff; /* Windows 11 Accent Blue */
+            --text-primary: #ffffff; 
+            --text-secondary: #e0e0e0; 
+            --accent-pink: var(--bg-pink-accent); 
             
             /* Spacing & Radius */
             --radius-card: 8px;
@@ -30,15 +30,15 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body { 
-            /* Imitasi Wallpaper Windows 11 "Bloom" Dark */
-            background: radial-gradient(circle at 50% 0%, var(--bloom-accent) 0%, var(--bloom-blue) 40%, var(--bg-dark) 90%);
+            /* Background Gradasi Blue-Pink */
+            background: linear-gradient(135deg, var(--bg-pink-accent) 0%, var(--bg-blue-dom) 30%, var(--bg-blue-dom) 70%, var(--bg-pink-accent) 100%);
             background-attachment: fixed;
             color: var(--text-primary); 
             padding: 40px 20px; 
             min-height: 100vh; 
             display: flex;
             flex-direction: column;
-            font-family: "Segoe UI Variable", "Segoe UI", sans-serif; /* Font asli Win11 */
+            font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -53,35 +53,27 @@
             align-items: center;
         }
 
-        /* Container untuk Logo */
         .logo-container {
             margin-bottom: 5px;
             padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Pastikan tidak ada background di container */
             background: transparent; 
         }
 
-        /* LOGO STYLING (PERBAIKAN SESUAI PERMINTAAN) */
+        /* LOGO STYLING (MODIFIKASI DI SINI) */
         .header-logo {
-            max-width: 140px; /* Ukuran disamakan 140px */
+            max-width: 140px;
             width: 100%;
             height: auto;
             
-            /* RUMUS CSS LOGO (Sama persis dengan halaman Blog): 
-               1. grayscale: pastikan hitam putih
-               2. contrast(200%): paksa putih jadi sangat putih, hitam jadi pekat (buang noise)
-               3. invert(1): balik warna (background putih -> hitam, teks hitam -> putih)
-            */
-            filter: grayscale(100%) contrast(200%) invert(1);
-            
-            /* Hapus warna Hitam Pekat (background hasil invert) agar transparan */
-            mix-blend-mode: screen; 
+            /* --- FILTER PEMUTIH LOGO --- */
+            /* brightness(0) -> Mengubah gambar jadi hitam total (siluet) */
+            /* invert(1)     -> Membalikkan hitam menjadi PUTIH */
+            filter: brightness(0) invert(1);
         }
 
-        /* Fallback text (disembunyikan) */
         h1 { display: none; }
 
         #clock {
@@ -92,15 +84,15 @@
             margin-top: 5px;
         }
 
-        /* Input Search ala Windows 11 Start Menu */
+        /* Input Search */
         #searchInput {
             width: 100%;
             max-width: 600px;
             padding: 12px 16px; 
             border-radius: var(--radius-input);
             border: 1px solid var(--mica-border);
-            border-bottom: 2px solid transparent; /* Untuk efek focus */
-            background-color: rgba(0, 0, 0, 0.25);
+            border-bottom: 2px solid transparent;
+            background-color: var(--mica-bg); 
             color: white; 
             outline: none; 
             font-size: 0.95rem; 
@@ -109,12 +101,12 @@
             backdrop-filter: blur(10px);
         }
         
-        #searchInput::placeholder { color: rgba(255,255,255,0.4); }
+        #searchInput::placeholder { color: rgba(255,255,255,0.6); }
 
         #searchInput:focus { 
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: var(--hover-bg);
             border-color: var(--mica-border);
-            border-bottom-color: var(--win-blue); /* Aksen biru di bawah saat ngetik */
+            border-bottom-color: var(--accent-pink); 
         }
 
         /* === 3. GRID SYSTEM === */
@@ -128,23 +120,22 @@
             flex: 1; 
         }
 
-        /* === 4. ACCORDION CARD (MICA STYLE) === */
+        /* === 4. ACCORDION CARD === */
         details.card {
-            background-color: var(--mica-bg);
-            backdrop-filter: blur(30px); /* Efek blur kaca */
+            background-color: var(--mica-bg); 
+            backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--mica-border);
             border-radius: var(--radius-card);
             overflow: hidden; 
             transition: background-color 0.2s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         details.card:hover {
-            background-color: rgba(45, 45, 45, 0.75);
+            background-color: var(--card-hover-bg);
         }
 
-        /* Judul Accordion */
         summary.card-header {
             padding: 14px 16px;
             font-weight: 600;
@@ -161,26 +152,24 @@
 
         summary.card-header::-webkit-details-marker { display: none; }
 
-        /* Icon Panah Chevron Win11 Style */
         summary.card-header::after {
-            content: '\203A'; /* Chevron Right */
+            content: '\203A';
             font-size: 1.4rem;
             color: var(--text-secondary);
             transform: rotate(90deg);
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, color 0.2s ease;
             line-height: 0;
             margin-top: -4px;
         }
 
-        /* Saat Terbuka */
         details[open] summary.card-header {
             border-bottom: 1px solid var(--mica-border);
-            color: var(--win-blue);
+            color: var(--accent-pink);
         }
 
         details[open] summary.card-header::after {
-            transform: rotate(-90deg); /* Putar ke atas */
-            color: var(--win-blue);
+            transform: rotate(-90deg);
+            color: var(--accent-pink);
         }
 
         /* === 5. ISI LINK === */
@@ -193,11 +182,10 @@
             overflow-y: auto;
         }
         
-        /* Scrollbar Win11 Style (Tipis & Melayang) */
         .link-list::-webkit-scrollbar { width: 4px; }
         .link-list::-webkit-scrollbar-track { background: transparent; }
-        .link-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
-        .link-list::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+        .link-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }
+        .link-list::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.5); }
 
         .bookmark-link {
             display: flex;
@@ -205,21 +193,20 @@
             text-decoration: none;
             color: var(--text-primary);
             padding: 10px 12px;
-            border-radius: 4px; /* Sedikit rounded di item list */
+            border-radius: 4px;
             font-size: 0.9rem;
             transition: background 0.1s;
         }
 
         .bookmark-link:hover {
-            background-color: var(--hover-bg); /* Efek hover list menu Windows */
+            background-color: var(--hover-bg);
         }
 
         .favicon {
-            width: 16px; height: 16px; margin-right: 12px; border-radius: 0; /* Icon tajam ala Windows */
+            width: 16px; height: 16px; margin-right: 12px; border-radius: 0;
             flex-shrink: 0;
         }
 
-        /* Animasi Slide Halus */
         details[open] .link-list {
             animation: fadeIn 0.25s ease-out;
         }
@@ -252,7 +239,7 @@
 
         .btn-dashboard:hover {
             background-color: var(--hover-bg);
-            border-color: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.4);
         }
 
         /* Footer */
@@ -261,7 +248,7 @@
             color: var(--text-secondary); 
             font-size: 0.75rem; 
             margin-top: 20px;
-            opacity: 0.7;
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -269,7 +256,7 @@
 
     <header>
         <div class="logo-container">
-            <img src="logo.jpg" alt="NvZE Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('h1').style.display='block';">
+            <img src="logo.png" alt="NvZE Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('h1').style.display='block';">
         </div>
         
         <h1>NvZE Bookmark</h1>
@@ -279,7 +266,6 @@
     </header>
 
     <main class="grid-container">
-
         <details class="card">
             <summary class="card-header">&#128231; Email Services</summary>
             <div class="link-list">
@@ -287,8 +273,7 @@
                 <a href="https://outlook.live.com/owa/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=outlook.live.com" class="favicon">Outlook</a>
                 <a href="https://login.yahoo.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=yahoo.com" class="favicon">Yahoo Mail</a>
                 <a href="https://protonmail.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=protonmail.com" class="favicon">ProtonMail</a>
- <a href="https://nvze.github.io/dashboard/pt-posting-tayang.html" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=nvze.github.io/dashboard" class="favicon">Postingan Tayangkan</a>
-
+                <a href="https://nvze.github.io/dashboard/pt-posting-tayang.html" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=nvze.github.io/dashboard" class="favicon">Postingan Tayangkan</a>
             </div>
         </details>
 
@@ -312,9 +297,9 @@
         <details class="card">
             <summary class="card-header">&#128172; Social & Chat</summary>
             <div class="link-list">
-                <a ="https://web.whrefhatsapp.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=whatsapp.com" class="favicon">WhatsApp Web</a>
+                <a href="https://web.whatsapp.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=whatsapp.com" class="favicon">WhatsApp Web</a>
                 <a href="https://web.telegram.org/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=telegram.org" class="favicon">Telegram Web</a>
-<a href="https://arimbi.bandung.go.id/atcs/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=arimbi.bandung.go.id" class="favicon">CCTV Bandung</a>
+                <a href="https://arimbi.bandung.go.id/atcs/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=arimbi.bandung.go.id" class="favicon">CCTV Bandung</a>
                 <a href="http://www.facebook.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=facebook.com" class="favicon">Facebook</a>
                 <a href="https://x.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=x.com" class="favicon">X (Twitter)</a>
             </div>
@@ -372,16 +357,9 @@
             <div class="link-list">
                 <a href="https://ebandaro.id/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=ebandaro.id" class="favicon">Berpikir & Bertindak</a>
                 <a href="https://welib.org/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=welib.org" class="favicon">WeLib (Buku)</a>
-                <a href="https://imvnxx.blogspot.com/" class="bookmark-link" target="_blank">
-                    <img src="https://www.google.com/s2/favicons?domain=imvnxx.blogspot.com" class="favicon">imvnxx blog
-                </a>
-                <a href="https://esan.home.blog/" class="bookmark-link" target="_blank">
-                    <img src="https://www.google.com/s2/favicons?domain=esan.home.blog/" class="favicon">Esan blog
-                </a>
-
-                <a href="https://kalamsastra.id/" class="bookmark-link" target="_blank">
-                    <img src="https://www.google.com/s2/favicons?domain=kalamsastra.id/" class="favicon">Kalam Sastra
-                </a>
+                <a href="https://imvnxx.blogspot.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=imvnxx.blogspot.com" class="favicon">imvnxx blog</a>
+                <a href="https://esan.home.blog/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=esan.home.blog/" class="favicon">Esan blog</a>
+                <a href="https://kalamsastra.id/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=kalamsastra.id/" class="favicon">Kalam Sastra</a>
                 <a href="https://cintokasiah.blogspot.com/?m=1" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=blogspot.com" class="favicon">Cerpen Kehidupan</a>
                 <a href="https://babo.lentera.biz/?m=1" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=lentera.biz" class="favicon">Lentera Babo</a>
                 <a href="https://erizeli.aboutbusiness.info/?m=1" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=aboutbusiness.info" class="favicon">About Business</a>
@@ -414,7 +392,7 @@
                 <a href="https://snapdrop.net/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=snapdrop.net" class="favicon">Snapdrop</a>
                 <a href="https://pairdrop.net/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=pairdrop.net" class="favicon">PairDrop</a>
                 <a href="https://my.nextdns.io/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=nextdns.io" class="favicon">NextDNS Analytics</a>
-                <a href="https://https://vscode.dev//" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=vscode.dev" class="favicon">VScode</a> 
+                <a href="https://vscode.dev/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=vscode.dev" class="favicon">VScode</a> 
                 <a href="http://127.0.0.1:5000/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=localhost" class="favicon">Localhost:5000</a>
                 <a href="https://firmwarefile.com/lenovo-a7700" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=firmwarefile.com" class="favicon">Lenovo Firmware</a>
                 <a href="https://getintopc.com/" class="bookmark-link" target="_blank"><img src="https://www.google.com/s2/favicons?domain=getintopc.com" class="favicon">GetintoPC</a>
@@ -431,7 +409,7 @@
 
     <footer>
         &copy; 2025 NVZE Dashboard System<br>
-        <span style="font-size: 0.7rem; opacity: 0.5;">Fluent Design Inspired</span>
+        <span style="font-size: 0.7rem; opacity: 0.6;">Fluent Design Inspired</span>
     </footer>
 
     <script>
