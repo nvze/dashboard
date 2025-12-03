@@ -10,15 +10,12 @@
     
     body {
       font-family: "Segoe UI Variable Display", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-      /* --- BACKGROUND UTAMA BARU --- */
-      /* Warna dasar biru yang diminta */
+      /* --- BACKGROUND UTAMA (TETAP CERAH) --- */
       background-color: #2855c9; 
-      /* Gradasi Linear: Pink Kiri Atas (135deg start) -> Biru Dominan Tengah -> Pink Kanan Bawah */
-      /* Saya menggunakan pink terang (#ff9aeb) agar serasi dengan birunya dan tampak cerah */
+      /* Gradasi Pink - Biru - Pink */
       background-image: linear-gradient(135deg, #ff9aeb 0%, #2855c9 35%, #2855c9 65%, #ff9aeb 100%);
       
-      /* Warna teks dasar diubah menjadi gelap */
-      color: #1a243d; 
+      color: #ffffff;
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -26,28 +23,26 @@
       overflow: hidden;
     }
 
-    /* Container Utama - Ubah ke tema terang (Glassmorphism) */
+    /* Container Utama - Ubah ke Kaca Gelap (Dark Glass) agar Logo Putih terlihat */
     .dashboard-card {
-      /* Background putih transparan */
-      background: rgba(255, 255, 255, 0.85); 
-      /* Efek blur di belakang kartu */
+      /* Latar belakang biru gelap transparan */
+      background: rgba(10, 25, 60, 0.7); 
+      
+      /* Efek blur */
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       
       padding: 3rem 2rem;
-      border-radius: 24px; /* Radius sedikit diperbesar untuk tampilan lebih modern */
+      border-radius: 24px;
       
-      /* Shadow diubah menjadi warna biru lembut */
       box-shadow: 
-        0 30px 70px rgba(40, 85, 201, 0.3), 
-        0 5px 15px rgba(0,0,0,0.05),
-        inset 0 1px 1px rgba(255, 255, 255, 0.4); 
+        0 30px 70px rgba(0, 0, 0, 0.4), 
+        inset 0 1px 1px rgba(255, 255, 255, 0.1); 
       
       text-align: center;
       max-width: 420px;
       width: 85%;
-      /* Border halus berwarna biru muda */
-      border: 1px solid rgba(40, 85, 201, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -62,21 +57,21 @@
     .time-display {
       font-size: 3.5rem;
       font-weight: 600; 
-      /* Warna jam menggunakan biru utama agar menonjol */
-      color: #2855c9; 
+      /* Jam Putih */
+      color: #ffffff; 
       line-height: 1;
       margin-bottom: 0.25rem;
       letter-spacing: -1px;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
     .date-display {
       font-size: 1rem;
-      /* Warna tanggal abu-abu kebiruan gelap */
-      color: #546385; 
-      font-weight: 500;
+      color: #b0c4de; /* Biru muda pucat */
+      font-weight: 400;
     }
     
-    /* --- LOGO FIX (Hapus filter mode gelap) --- */
+    /* --- LOGO SETTINGS --- */
     .logo-container {
       margin-bottom: 0.5rem;
       padding: 5px;
@@ -85,28 +80,26 @@
     .profile-logo {
       width: 140px; 
       height: auto;
-      /* Filter sebelumnya dihapus agar logo asli terlihat di background terang */
-      /* filter: grayscale(100%) contrast(150%) invert(100%); */
-      /* mix-blend-mode: screen; */ 
       display: block;
-      opacity: 0.9; /* Sedikit transparan agar menyatu */
+      opacity: 1;
+      /* FILTER PENTING: Mengubah gambar logo hitam/warna menjadi Putih Mutlak */
+      filter: brightness(0) invert(1);
     }
 
     h1 {
       font-size: 1.4rem;
       font-weight: 700;
-      /* Warna Judul Biru Tua */
-      color: #1a243d;
+      /* Judul menjadi Putih */
+      color: #ffffff;
       margin-bottom: 0.2rem;
       letter-spacing: 0.5px;
     }
 
     p.subtitle {
-      /* Warna Subtitle abu-abu kebiruan */
-      color: #546385; 
+      color: #b0c4de; 
       margin-bottom: 2rem;
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: 400;
     }
 
     /* List Menu */
@@ -122,21 +115,19 @@
       align-items: center;
       justify-content: space-between;
       text-decoration: none;
-      /* Background menu: tint biru sangat muda */
-      background: rgba(40, 85, 201, 0.06); 
+      /* Tombol transparan putih */
+      background: rgba(255, 255, 255, 0.08); 
       padding: 1rem 1.2rem;
       border-radius: 12px;
-      /* Border menu halus */
-      border: 1px solid rgba(40, 85, 201, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       transition: all 0.3s ease;
     }
 
     a.menu-item:hover {
-      /* Hover state: berubah menjadi tint pink muda menyesuaikan gradasi */
-      background: rgba(255, 154, 235, 0.15);
-      border-color: rgba(255, 154, 235, 0.3);
+      /* Hover: Putih lebih terang */
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(40, 85, 201, 0.1);
     }
     
     .item-content {
@@ -147,24 +138,20 @@
 
     .item-title {
       font-weight: 600;
-      /* Judul item menu menggunakan biru utama */
-      color: #2855c9; 
+      color: #ffffff; 
       font-size: 0.95rem;
     }
     
     .item-desc {
       font-size: 0.75rem;
-      /* Deskripsi item menu abu-abu gelap */
-      color: #546385;
+      color: #dbeafe; /* Biru sangat muda */
       margin-top: 2px;
-      font-weight: 500;
+      opacity: 0.8;
     }
 
     .item-icon {
       font-size: 1.2rem;
-      opacity: 0.8;
-      /* Icon sedikit diberi warna biru */
-      color: #2855c9;
+      color: #ffffff;
     }
     
   </style>
@@ -177,7 +164,7 @@
       <img src="logo.png" alt="NVZE SYSTEM" class="profile-logo">
     </div>
 
-    <h1>Dashboard</h1>
+    <h1>NvZE Dashboard</h1>
     <p class="subtitle">Refleksi visual Knowledge & Knowhow</p>
 
     <div class="clock-widget">
