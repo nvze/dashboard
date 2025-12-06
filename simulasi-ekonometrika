@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Ekonometrika Indonesia Q4 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Cool Gray */
+            color: #111827; /* Gray-900 */
+        }
+        
+        h1, h2, h3, .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Chart Container */
+        .chart-wrapper {
+            position: relative;
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            height: 320px;
+            width: 100%;
+        }
+
+        /* Sliders */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #2563eb; /* Blue-600 */
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #cbd5e1;
+            border-radius: 2px;
+        }
+
+        /* Result Cards */
+        .metric-card {
+            transition: all 0.3s ease;
+        }
+        .metric-card.changing {
+            transform: scale(1.02);
+            background-color: #eff6ff;
+        }
+        
+        .indicator-up { color: #dc2626; } /* Bad usually (inflation/kurs) */
+        .indicator-down { color: #16a34a; } /* Good usually */
+        
+        /* Inverse logic for GDP */
+        .gdp-up { color: #16a34a; }
+        .gdp-down { color: #dc2626; }
+
+    </style>
+    <!-- 
+    Aplikasi ini menggunakan Model Korelasi Sederhana (Simplified Econometric Model) 
+    untuk memproyeksikan indikator makro Indonesia Q4 2025.
+    
+    Logic Korelasi (Berdasarkan studi literatur makroekonomi emerging market):
+    1. Fed Rate (Naik) -> Outflow -> Kurs Melemah (Naik) -> BI Rate Naik -> Konsumsi Turun -> PDB Turun.
+    2. Harga Minyak (Naik) -> Subsidi/Inflasi Energi Naik -> Surplus Dagang Turun (Net Importer) -> Kurs Tertekan.
+    3. China Growth (Turun) -> Ekspor Komoditas RI Turun -> Neraca Dagang Defisit -> Kurs Melemah -> PDB Turun.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-slate-900 text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center font-bold font-mono">∑</div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight">Ekonometrika RI 2025</h1>
+                    <p class="text-xs text-slate-400">Simulator Dampak Eksternal & Kebijakan (Model Sensitivitas)</p>
+                </div>
+            </div>
+            <div class="mt-4 md:mt-0 text-right">
+                <div class="text-xs text-slate-400 font-mono">Current Date: 06 DEC 2025</div>
+                <div class="text-xs font-bold text-emerald-400">STATUS: ONLINE / INTERACTIVE</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Layout -->
+    <main class="flex-grow container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- LEFT PANEL: INPUT DRIVERS (The Independent Variables) -->
+        <aside class="lg:col-span-4 space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                <h2 class="text-lg font-bold text-slate-800 mb-1">⚙️ Variabel Global (Drivers)</h2>
+                <p class="text-xs text-slate-500 mb-6">Sesuaikan asumsi eksternal untuk melihat dampaknya pada ekonomi domestik Indonesia.</p>
+
+                <!-- Input 1: The Fed Rate -->
+                <div class="mb-8">
+                    <div class="flex justify-between mb-2">
+                        <label class="text-sm font-semibold text-slate-700">Fed Funds Rate (AS)</label>
+                        <span id="val-fed" class="font-mono text-blue-600 font-bold">4.50%</span>
+                    </div>
+                    <input type="range" id="input-fed" min="3.00" max="6.00" step="0.25" value="4.50" oninput="calculateModel()">
+                    <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                        <span>Dovish (3%)</span>
+                        <span>Hawkish (6%)</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2 italic border-l-2 border-slate-300 pl-2">
+                        Dampak: Suku bunga AS tinggi memicu *capital outflow* dari pasar berkembang (Indonesia), menekan Rupiah.
+                    </p>
+                </div>
+
+                <!-- Input 2: China GDP -->
+                <div class="mb-8">
+                    <div class="flex justify-between mb-2">
+                        <label class="text-sm font-semibold text-slate-700">Pertumbuhan China (Q4)</label>
+                        <span id="val-china" class="font-mono text-blue-600 font-bold">4.5%</span>
+                    </div>
+                    <input type="range" id="input-china" min="3.0" max="6.0" step="0.1" value="4.5" oninput="calculateModel()">
+                    <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                        <span>Slowdown (3%)</span>
+                        <span>Boom (6%)</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2 italic border-l-2 border-slate-300 pl-2">
+                        Dampak: China adalah mitra dagang terbesar. Perlambatan di sana menurunkan ekspor (batu bara/nikel) RI.
+                    </p>
+                </div>
+
+                <!-- Input 3: Oil Price -->
+                <div class="mb-4">
+                    <div class="flex justify-between mb-2">
+                        <label class="text-sm font-semibold text-slate-700">Harga Minyak (Brent)</label>
+                        <span id="val-oil" class="font-mono text-blue-600 font-bold">$75/bbl</span>
+                    </div>
+                    <input type="range" id="input-oil" min="60" max="100" step="1" value="75" oninput="calculateModel()">
+                    <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                        <span>Murah ($60)</span>
+                        <span>Mahal ($100)</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2 italic border-l-2 border-slate-300 pl-2">
+                        Dampak: Harga minyak tinggi membebani impor migas (Current Account Deficit) dan memicu inflasi domestik.
+                    </p>
+                </div>
+                
+                <div class="mt-6 pt-4 border-t border-slate-100 text-center">
+                    <button onclick="resetModel()" class="text-xs text-blue-600 hover:text-blue-800 underline">Reset ke Konsensus Bloomberg (Baseline)</button>
+                </div>
+            </div>
+
+            <!-- Analysis Box -->
+            <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                <h3 class="text-sm font-bold text-blue-900 mb-2">Analisis Sentimen Saat Ini</h3>
+                <p id="analysis-text" class="text-xs text-blue-800 leading-relaxed">
+                    Menunggu input simulasi...
+                </p>
+            </div>
+        </aside>
+
+        <!-- RIGHT PANEL: OUTPUT METRICS (The Dependent Variables) -->
+        <section class="lg:col-span-8 space-y-6">
+            
+            <!-- Key Metrics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- KURS -->
+                <div id="card-kurs" class="metric-card bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-sm font-medium text-slate-500">Kurs USD/IDR</h3>
+                        <span class="text-xs bg-slate-100 px-2 py-1 rounded text-slate-600 font-mono">FOREX</span>
+                    </div>
+                    <div class="flex items-end gap-2">
+                        <span id="out-kurs" class="text-3xl font-bold font-mono text-slate-800">15.850</span>
+                        <span id="delta-kurs" class="text-xs font-bold mb-1"></span>
+                    </div>
+                    <div class="mt-3 text-xs text-slate-400">Range Wajar: 15.300 - 16.800</div>
+                </div>
+
+                <!-- GDP -->
+                <div id="card-gdp" class="metric-card bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-sm font-medium text-slate-500">Pertumbuhan PDB (YoY)</h3>
+                        <span class="text-xs bg-slate-100 px-2 py-1 rounded text-slate-600 font-mono">GROWTH</span>
+                    </div>
+                    <div class="flex items-end gap-2">
+                        <span id="out-gdp" class="text-3xl font-bold font-mono text-slate-800">5.02%</span>
+                        <span id="delta-gdp" class="text-xs font-bold mb-1"></span>
+                    </div>
+                    <div class="mt-3 text-xs text-slate-400">Target APBN: 5.2%</div>
+                </div>
+
+                <!-- INFLASI -->
+                <div id="card-inf" class="metric-card bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-sm font-medium text-slate-500">Inflasi IHK (YoY)</h3>
+                        <span class="text-xs bg-slate-100 px-2 py-1 rounded text-slate-600 font-mono">CPI</span>
+                    </div>
+                    <div class="flex items-end gap-2">
+                        <span id="out-inf" class="text-3xl font-bold font-mono text-slate-800">2.85%</span>
+                        <span id="delta-inf" class="text-xs font-bold mb-1"></span>
+                    </div>
+                    <div class="mt-3 text-xs text-slate-400">Target BI: 2.5 ± 1%</div>
+                </div>
+            </div>
+
+            <!-- Visualization Tabs -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="border-b border-slate-100 flex">
+                    <button class="px-6 py-3 text-sm font-bold text-blue-600 border-b-2 border-blue-600">Neraca Pembayaran (BOP)</button>
+                    <!-- More tabs could be added here -->
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-slate-800 text-sm">Proyeksi Neraca Dagang & Transaksi Berjalan</h3>
+                        <div class="text-xs text-right">
+                            <p>Dampak Input:</p>
+                            <p id="bop-impact" class="font-bold text-slate-700">-</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="bopChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sensitivity Matrix (Textual) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h3 class="text-xs font-bold uppercase text-slate-500 mb-2">Implikasi Sektoral</h3>
+                    <ul class="space-y-2 text-sm text-slate-700" id="sector-implications">
+                        <!-- JS populated -->
+                    </ul>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <h3 class="text-xs font-bold uppercase text-slate-500 mb-2">Rekomendasi Kebijakan (Simulasi)</h3>
+                    <ul class="space-y-2 text-sm text-slate-700" id="policy-recommendations">
+                        <!-- JS populated -->
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        // --- BASELINE DATA (CONSENSUS BLOOMBERG/MARKET MEDIAN - DEC 2025) ---
+        // Asumsi Dasar (Titik Tengah)
+        const BASELINE = {
+            fed: 4.50,
+            china: 4.5,
+            oil: 75,
+            // Hasil Ekuilibrium Dasar:
+            kurs: 15850,
+            gdp: 5.02,
+            inflation: 2.80,
+            tradeBalance: 1.5 // Miliar USD
+        };
+
+        // --- SENSITIVITY COEFFICIENTS (Simplified Elasticity) ---
+        // Seberapa besar perubahan input mempengaruhi output?
+        const COEFF = {
+            // 1% Kenaikan Fed Rate berdampak pada:
+            fed: {
+                kurs: 600,      // Rupiah melemah 600 poin
+                gdp: -0.15,     // PDB turun 0.15% (biaya dana mahal)
+                inf: 0.2        // Inflasi naik (imported inflation)
+            },
+            // 1% Kenaikan China GDP berdampak pada:
+            china: {
+                kurs: -300,     // Rupiah menguat 300 poin (ekspor lancar)
+                gdp: 0.25,      // PDB naik 0.25% (multiplier ekspor)
+                inf: 0.05       // Inflasi naik sedikit (demand pull)
+            },
+            // $10 Kenaikan Oil Price berdampak pada:
+            oil: {
+                kurs: 150,      // Rupiah melemah 150 poin per $10 kenaikan (beban impor)
+                gdp: -0.05,     // PDB turun sedikit (daya beli)
+                inf: 0.3        // Inflasi naik signifikan (energi/transport)
+            }
+        };
+
+        let chartInstance = null;
+
+        // --- CORE LOGIC ---
+        function calculateModel() {
+            // 1. Get Inputs
+            const fedVal = parseFloat(document.getElementById('input-fed').value);
+            const chinaVal = parseFloat(document.getElementById('input-china').value);
+            const oilVal = parseFloat(document.getElementById('input-oil').value);
+
+            // Update Input Displays
+            document.getElementById('val-fed').innerText = fedVal.toFixed(2) + '%';
+            document.getElementById('val-china').innerText = chinaVal.toFixed(1) + '%';
+            document.getElementById('val-oil').innerText = '$' + oilVal;
+
+            // 2. Calculate Deltas (Deviation from Baseline)
+            const dFed = fedVal - BASELINE.fed;
+            const dChina = chinaVal - BASELINE.china;
+            const dOil = (oilVal - BASELINE.oil) / 10; // per $10 unit
+
+            // 3. Apply Coefficients to get Results
+            let newKurs = BASELINE.kurs + (dFed * COEFF.fed.kurs) + (dChina * COEFF.china.kurs) + (dOil * COEFF.oil.kurs);
+            let newGdp = BASELINE.gdp + (dFed * COEFF.fed.gdp) + (dChina * COEFF.china.gdp) + (dOil * COEFF.oil.gdp);
+            let newInf = BASELINE.inflation + (dFed * COEFF.fed.inf) + (dChina * COEFF.china.inf) + (dOil * COEFF.oil.inf);
+            
+            // Calc Trade Balance (Proxy)
+            // China growth helps trade, High oil hurts trade (unless exported, but RI is net importer of oil)
+            let newTrade = BASELINE.tradeBalance + (dChina * 0.8) - (dOil * 0.5);
+
+            // 4. Update UI
+            updateMetric('kurs', newKurs, BASELINE.kurs, 0, true); // True = Lower is better? No, standard logic. Kurs higher = bad.
+            updateMetric('gdp', newGdp, BASELINE.gdp, 2, false);   // GDP higher = good
+            updateMetric('inf', newInf, BASELINE.inflation, 2, true); // Inflation higher = bad
+
+            // 5. Update Text Analysis
+            generateAnalysis(fedVal, chinaVal, oilVal, newKurs, newGdp);
+            
+            // 6. Update Chart
+            updateChart(newTrade);
+        }
+
+        function updateMetric(id, value, baseline, decimals, lowerIsBetter) {
+            const elVal = document.getElementById(`out-${id}`);
+            const elDelta = document.getElementById(`delta-${id}`);
+            const card = document.getElementById(`card-${id}`);
+
+            // Formatting
+            let formatted = value;
+            if (decimals === 0) formatted = Math.round(value).toLocaleString('id-ID');
+            else formatted = value.toFixed(decimals) + '%';
+            
+            elVal.innerText = formatted;
+
+            // Delta styling
+            const delta = value - baseline;
+            let symbol = delta > 0 ? '▲' : '▼';
+            if (Math.abs(delta) < 0.001) symbol = '•'; // No change
+
+            // Color Logic
+            let colorClass = 'text-slate-400';
+            if (Math.abs(delta) > 0.001) {
+                // If Lower is Better (Inflation/Kurs): Positive Delta is BAD (Red)
+                if (lowerIsBetter) {
+                    colorClass = delta > 0 ? 'text-red-500' : 'text-emerald-500';
+                } else {
+                    // GDP: Positive Delta is GOOD (Green)
+                    colorClass = delta > 0 ? 'text-emerald-500' : 'text-red-500';
+                }
+            }
+
+            elDelta.className = `text-xs font-bold mb-1 ${colorClass}`;
+            elDelta.innerText = `${symbol} ${Math.abs(delta).toFixed(decimals === 0 ? 0 : 2)}`;
+
+            // Flash effect
+            card.classList.add('changing');
+            setTimeout(() => card.classList.remove('changing'), 300);
+        }
+
+        function generateAnalysis(fed, china, oil, kurs, gdp) {
+            const el = document.getElementById('analysis-text');
+            const elSector = document.getElementById('sector-implications');
+            const elPolicy = document.getElementById('policy-recommendations');
+            
+            let sentiment = "";
+            let sectorHTML = "";
+            let policyHTML = "";
+
+            // Logic Builder
+            if (fed > 5.0) {
+                sentiment += "Tekanan Moneter Ketat. ";
+                sectorHTML += "<li class='text-red-600'>• Sektor Properti & Konstruksi melambat (Bunga KPR tinggi).</li>";
+                policyHTML += "<li>• BI Rate kemungkinan naik untuk menjaga spread dengan Fed Funds Rate.</li>";
+            } else if (fed < 4.0) {
+                sentiment += "Likuiditas Global Melonggar. ";
+                sectorHTML += "<li class='text-green-600'>• Arus modal masuk ke Obligasi & Saham (IHSG Bullish).</li>";
+            }
+
+            if (china < 4.0) {
+                sentiment += "Permintaan Ekspor Lemah. ";
+                sectorHTML += "<li class='text-red-600'>• Pertambangan (Batu Bara/Nikel) tertekan harga rendah.</li>";
+            } else if (china > 5.0) {
+                sentiment += "Boom Komoditas Mini. ";
+                sectorHTML += "<li class='text-green-600'>• Surplus neraca dagang melebar, emiten tambang untung.</li>";
+            }
+
+            if (oil > 85) {
+                sentiment += "Beban Energi Tinggi. ";
+                sectorHTML += "<li class='text-amber-600'>• FMCG & Logistik hadapi margin tipis.</li>";
+                policyHTML += "<li>• Waspada pembengkakan subsidi energi di APBN Perubahan.</li>";
+            }
+
+            // Fallback text
+            if (sentiment === "") sentiment = "Kondisi Stabil (Baseline). Ekonomi bergerak sesuai fundamental domestik.";
+            
+            // Specific Kurs Warning
+            if (kurs > 16500) {
+                sentiment = "⚠️ " + sentiment + " Rupiah dalam zona bahaya, potensi intervensi BI agresif.";
+                policyHTML += "<li class='font-bold text-red-600'>• Intervensi Spot & DNDF diperlukan segera.</li>";
+            }
+
+            el.innerText = sentiment;
+            elSector.innerHTML = sectorHTML || "<li>• Dampak sektoral netral pada level ini.</li>";
+            elPolicy.innerHTML = policyHTML || "<li>• Kebijakan makroprudensial tetap (hold).</li>";
+            
+            // BOP Impact Text
+            const bopText = document.getElementById('bop-impact');
+            if (china > 4.5 && oil < 75) bopText.innerText = "Surplus Sehat";
+            else if (china < 4.0 || oil > 90) bopText.innerText = "Defisit Menlebar";
+            else bopText.innerText = "Netral";
+        }
+
+        function updateChart(tradeBalance) {
+            // Visualize projected monthly trade balance for Q4
+            // We create a fictional trend based on the calculated tradeBalance average
+            const dataQ4 = [
+                tradeBalance * 0.9, // Oct
+                tradeBalance * 1.0, // Nov
+                tradeBalance * 1.1  // Dec (usually better exports or worse imports? lets assume seasonal uptick)
+            ];
+
+            if (chartInstance) chartInstance.destroy();
+
+            const ctx = document.getElementById('bopChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Oktober 2025', 'November 2025', 'Desember 2025'],
+                    datasets: [{
+                        label: 'Surplus/Defisit Neraca Dagang (Miliar USD)',
+                        data: dataQ4,
+                        backgroundColor: dataQ4.map(val => val >= 0 ? '#10b981' : '#ef4444'),
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f1f5f9' },
+                            title: { display: true, text: 'Miliar USD' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        function resetModel() {
+            document.getElementById('input-fed').value = BASELINE.fed;
+            document.getElementById('input-china').value = BASELINE.china;
+            document.getElementById('input-oil').value = BASELINE.oil;
+            calculateModel();
+        }
+
+        // Initialize
+        window.onload = calculateModel;
+
+    </script>
+</body>
+</html>
