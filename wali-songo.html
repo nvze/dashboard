@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wali Songo: Transformasi Teologis & Sosiopolitik Nusantara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a202c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d69e2e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b7791f;
+        }
+
+        /* Typography Override */
+        h1, h2, h3, .font-heading {
+            font-family: 'Cinzel', serif;
+        }
+        h4, h5, blockquote {
+            font-family: 'Playfair Display', serif;
+        }
+        body, p, li, td {
+            font-family: 'Lato', sans-serif;
+        }
+
+        /* Background Pattern (Subtle Batik/Islamic Geo feel) */
+        .bg-pattern {
+            background-color: #0f172a;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C4221' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Text Shadow */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(214, 158, 46, 0.3);
+        }
+
+        /* Drop Cap */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            font-weight: bold;
+            color: #d69e2e; /* Gold */
+            margin-right: 0.5rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Card Hover Effects */
+        .wali-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .wali-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(214, 158, 46, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-pattern text-gray-300 antialiased leading-relaxed overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-yellow-600/30 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-yellow-500 font-heading font-bold text-xl tracking-wider">
+                WALI SONGO
+            </div>
+            <div class="hidden md:flex space-x-6 text-sm font-medium text-gray-400">
+                <a href="#bab1" class="hover:text-yellow-400 transition">Konteks</a>
+                <a href="#bab2" class="hover:text-yellow-400 transition">Historiografi</a>
+                <a href="#bab3" class="hover:text-yellow-400 transition">Struktur</a>
+                <a href="#bab4" class="hover:text-yellow-400 transition">Profil</a>
+                <a href="#bab5" class="hover:text-yellow-400 transition">Politik</a>
+                <a href="#bab6" class="hover:text-yellow-400 transition">Konflik</a>
+                <a href="#bab7" class="hover:text-yellow-400 transition">Arsitektur</a>
+            </div>
+            <!-- Mobile Menu Icon (Simulated) -->
+            <div class="md:hidden text-yellow-500 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center text-center px-4 overflow-hidden">
+        <!-- Overlay Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/80 to-slate-900 z-10"></div>
+        
+        <!-- Background Image Fallback / Decorative -->
+        <div class="absolute inset-0 z-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=2071&auto=format&fit=crop')] bg-cover bg-center bg-fixed"></div>
+
+        <div class="relative z-20 max-w-4xl mx-auto space-y-6 reveal active">
+            <div class="inline-block border-b-2 border-yellow-500 pb-2 mb-4 text-yellow-500 tracking-[0.2em] text-sm uppercase">Studi Komprehensif</div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white text-glow leading-tight">
+                Transformasi Teologis & <span class="text-yellow-500">Sosiopolitik</span> Nusantara
+            </h1>
+            <p class="text-xl text-gray-300 font-light italic font-serif">
+                Dewan Wali Songo dalam Pembentukan Peradaban Islam Jawa
+            </p>
+            <div class="pt-8">
+                <a href="#bab1" class="px-8 py-3 border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-slate-900 transition duration-300 uppercase tracking-widest text-sm font-bold">
+                    Mulai Membaca
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main class="container mx-auto px-4 md:px-12 lg:px-24 py-12 relative z-10">
+
+        <!-- BAB 1 -->
+        <article id="bab1" class="mb-24 reveal">
+            <div class="flex items-center space-x-4 mb-8">
+                <span class="text-6xl font-heading text-slate-700 select-none">01</span>
+                <div>
+                    <h2 class="text-3xl md:text-4xl text-yellow-100 mb-2">Pendahuluan dan Konteks Sosiologis Transisi Majapahit</h2>
+                    <div class="h-1 w-24 bg-yellow-600"></div>
+                </div>
+            </div>
+
+            <div class="prose prose-lg prose-invert max-w-none text-gray-300 text-justify">
+                <p class="drop-cap">
+                    Transisi peradaban di pulau Jawa pada abad ke-15 dan ke-16 Masehi merupakan salah satu fenomena sejarah yang paling kompleks dan signifikan di Asia Tenggara. Periode ini tidak sekadar menandai pergantian dinasti politik dari imperium talasokrasi Majapahit yang bercorak Hindu-Buddha menuju kesultanan-kesultanan Islam pesisir, melainkan sebuah metamorfosis kultural, teologis, dan sosial yang fundamental.
+                </p>
+                <p>
+                    Di pusat pusaran perubahan ini, berdiri sebuah entitas kolektif yang dikenal sebagai <strong>Wali Songo</strong>. Narasi sejarah seringkali mereduksi peran mereka menjadi sekadar tokoh-tokoh mitologis dengan kekuatan supranatural, namun analisis mendalam terhadap sumber-sumber historiografi, serat, babad, dan peninggalan arkeologis mengungkapkan bahwa Wali Songo beroperasi sebagai sebuah dewan dakwah (<em>Council of Da'wah</em>) yang terstruktur, memiliki visi geopolitik yang tajam, dan strategi rekayasa sosial yang canggih.
+                </p>
+                <div class="bg-slate-800/50 p-6 border-l-4 border-yellow-600 my-6 italic">
+                    Laporan ini bertujuan untuk menguraikan secara ektensif eksistensi Wali Songo, melampaui batas-batas cerita rakyat, dengan menempatkan mereka dalam konteks dinamika jaringan perdagangan maritim Asia, kontestasi politik pasca-Hayam Wuruk, dan diskursus teologis tasawuf yang berkembang saat itu.
+                </div>
+
+                <h3 class="text-2xl text-yellow-500 mt-8 mb-4">1.1 Krisis Majapahit dan Kekosongan Spiritual</h3>
+                <p>
+                    Untuk memahami urgensi kehadiran Wali Songo, analisis harus dimulai dari kondisi sosiologis masyarakat Jawa pada era akhir Majapahit. Pasca kematian Mahapatih Gajah Mada dan Prabu Hayam Wuruk, Majapahit terperosok dalam perang saudara berkepanjangan yang dikenal sebagai Perang Paregreg. Konflik internal ini melemahkan kontrol pusat terhadap wilayah-wilayah pesisir (pasisiran) yang merupakan urat nadi ekonomi.
+                </p>
+                <p>
+                    Secara sosial, masyarakat Majapahit terstratifikasi secara kaku dalam sistem kasta (Catur Warna). Akses terhadap spiritualitas tinggi dan pendidikan agama seringkali menjadi privilese kaum Brahmana dan Ksatria, sementara rakyat jelata (Sudra) hidup dalam keterbatasan akses teologis dan seringkali masih mempraktikkan animisme lokal. Dalam kondisi disorientasi sosial dan penderitaan akibat perang serta kelaparan, Islam datang membawa tawaran yang revolusioner: <strong>egaliterisme</strong>. Konsep bahwa semua manusia setara di hadapan Tuhan (Allah SWT) dan tidak adanya sistem kasta dalam ibadah menjadi daya tarik psikologis yang kuat bagi masyarakat lapisan bawah. Wali Songo memahami celah sosiologis ini dan memanfaatkannya bukan dengan pedang, melainkan dengan pendekatan pengayoman sosial dan pemberdayaan ekonomi.
+                </p>
+
+                <h3 class="text-2xl text-yellow-500 mt-8 mb-4">1.2 Definisi, Etimologi, dan Cakupan Studi</h3>
+                <p>
+                    Istilah "Wali Songo" sendiri mengundang perdebatan etimologis yang mencerminkan kedalaman makna di baliknya. Secara harfiah, "Wali Songo" diterjemahkan sebagai "Sembilan Wali". Kata <em>Wali</em> berasal dari bahasa Arab <em>Waliyullah</em> (kekasih Allah/pelindung), menyiratkan otoritas spiritual dan kedekatan transendental. Namun, interpretasi terhadap kata <em>Songo</em> (sembilan) bervariasi:
+                </p>
+                <ul class="list-none space-y-4 my-6">
+                    <li class="flex items-start">
+                        <span class="text-yellow-500 mr-3 text-xl">✦</span>
+                        <div><strong class="text-yellow-200">Interpretasi Numerik:</strong> Merujuk pada jumlah sembilan orang anggota dewan inti pada satu periode waktu tertentu. Angka sembilan juga memiliki signifikansi kosmologis dalam budaya Jawa (sebagai angka tertinggi) dan sistem kenasionalan Majapahit (delapan penjuru angin plus satu pusat).</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-yellow-500 mr-3 text-xl">✦</span>
+                        <div><strong class="text-yellow-200">Interpretasi Fonetis:</strong> Sejarawan Moh. Adnan mengajukan tesis bahwa <em>songo</em> adalah distorsi lidah Jawa dari kata Arab <em>tsana</em> yang berarti "mulia" atau "terpuji".</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-yellow-500 mr-3 text-xl">✦</span>
+                        <div><strong class="text-yellow-200">Interpretasi Lokasi:</strong> R. Tanojo mengaitkannya dengan kata <em>sana</em> yang bermakna tempat atau wilayah, mengindikasikan bahwa mereka adalah wali yang menguasai wilayah-wilayah tertentu.</div>
+                    </li>
+                </ul>
+                <p>
+                    Terlepas dari perdebatan etimologis, studi ini mendefinisikan Wali Songo sebagai sebuah institusi dakwah yang keanggotaannya bersifat dinamis—ada yang wafat dan digantikan—namun tetap mempertahankan jumlah sembilan sebagai simbol keutuhan dewan. Fokus analisis akan diarahkan pada sembilan figur kanonik yang disepakati mayoritas sejarawan: Maulana Malik Ibrahim, Sunan Ampel, Sunan Bonang, Sunan Giri, Sunan Drajat, Sunan Kalijaga, Sunan Kudus, Sunan Muria, dan Sunan Gunung Jati.
+                </p>
+            </div>
+        </article>
+
+        <hr class="border-slate-800 my-12">
+
+        <!-- BAB 2 -->
+        <article id="bab2" class="mb-24 reveal">
+            <div class="flex items-center space-x-4 mb-8">
+                <span class="text-6xl font-heading text-slate-700 select-none">02</span>
+                <div>
+                    <h2 class="text-3xl md:text-4xl text-yellow-100 mb-2">Historiografi dan Polemik Genealogi</h2>
+                    <h4 class="text-xl text-yellow-600/80 italic">Melacak Jejak Identitas</h4>
+                </div>
+            </div>
+
+            <div class="prose prose-lg prose-invert max-w-none text-gray-300 text-justify">
+                <p>
+                    Salah satu dimensi paling menantang dalam rekonstruksi sejarah Wali Songo adalah memisahkan fakta historis dari lapisan mitos, serta menelusuri asal-usul etnis mereka di tengah klaim-klaim yang saling bersaing antara narasi Arab/Hadramaut, Champa, dan Tionghoa.
+                </p>
+
+                <h3 class="text-2xl text-yellow-500 mt-8">2.1 Teori Hadramaut dan Legitimasi Keturunan Nabi</h3>
+                <p>
+                    Narasi dominan yang dipegang oleh kaum santri dan didukung oleh banyak naskah silsilah di pesantren adalah bahwa Wali Songo merupakan keturunan langsung Nabi Muhammad SAW melalui jalur Sayyid atau Habib dari Hadramaut, Yaman. Silsilah ini biasanya ditarik melalui jalur Husein bin Ali, berlanjut ke imigran-imigran dari Hadramaut yang menetap di Gujarat (India) sebelum masuk ke Nusantara.
+                </p>
+                <p>
+                    Tokoh sentral dalam teori ini adalah Syekh Jumadil Kubro (Jamaluddin Akbar al-Husaini). Beliau dianggap sebagai "Bapak Para Wali" karena sebagian besar Wali Songo (seperti Sunan Ampel dan Sunan Giri) adalah keturunan biologisnya. Bukti epigrafi pada nisan Maulana Malik Ibrahim di Gresik, yang wafat pada 1419 M, menunjukkan gaya seni Gujarat dan inskripsi Arab yang fasih, memperkuat argumen koneksi Timur Tengah-India ini. Gelar-gelar seperti "Maulana", "Syarif", dan "Makhdum" yang melekat pada nama mereka juga merupakan penanda status kebangsawanan agama dari tradisi Persia-Arab.
+                </p>
+
+                <h3 class="text-2xl text-yellow-500 mt-8">2.2 Jalur Champa: Vernakularisasi Islam di Asia Tenggara</h3>
+                <p>
+                    Jalur Champa (Vietnam Selatan sekarang) memberikan dimensi Asia Tenggara yang kental pada identitas Wali Songo. Sunan Ampel (Raden Rahmat) secara historis tercatat lahir di Champa. Ayahnya, Ibrahim Asmarakandi, menikah dengan putri Raja Champa. Hal ini krusial karena menunjukkan bahwa Islam yang dibawa ke Jawa bukanlah Islam yang "asing" sepenuhnya, melainkan Islam yang telah berinteraksi dengan budaya Austronesia dan tradisi kerajaan di daratan Asia Tenggara. Koneksi Champa juga menjelaskan akses politik Sunan Ampel ke istana Majapahit, mengingat bibinya, Dewi Dwarawati, adalah permaisuri Raja Brawijaya V (Kertabhumi).
+                </p>
+
+                <h3 class="text-2xl text-yellow-500 mt-8">2.3 Kontroversi Teori Tionghoa: Tesis Slamet Muljana</h3>
+                <div class="flex flex-col md:flex-row gap-6 my-6 items-center">
+                    <div class="flex-1">
+                        <p>
+                            Pada tahun 1968, sejarawan Prof. Dr. Slamet Muljana menerbitkan karya seminal berjudul "Runtuhnya Kerajaan Hindu-Jawa dan Timbulnya Negara-Negara Islam di Nusantara". Menggunakan sumber dari Kronik Melayu dan catatan di Klenteng Sam Poo Kong (Gedung Batu) Semarang, Muljana mengajukan tesis yang mengguncang kemapanan historiografi nasional: bahwa Wali Songo sebagian besar adalah peranakan Tionghoa.
+                        </p>
+                    </div>
+                    <div class="bg-slate-800 p-5 rounded-lg border border-yellow-600/30 w-full md:w-1/3 text-sm">
+                        <h5 class="text-yellow-500 font-bold mb-3 border-b border-gray-700 pb-2">Identifikasi Muljana:</h5>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between"><span>Raden Patah</span> <span class="text-gray-400">Jin Bun</span></li>
+                            <li class="flex justify-between"><span>Sunan Ampel</span> <span class="text-gray-400">Bong Swi Hoo</span></li>
+                            <li class="flex justify-between"><span>Sunan Kalijaga</span> <span class="text-gray-400">Gan Si Cang</span></li>
+                            <li class="flex justify-between"><span>Sunan Gunung Jati</span> <span class="text-gray-400">Toh A Bo</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <p>
+                    Teori ini berargumen bahwa komunitas Muslim Tionghoa mazhab Hanafi mendominasi perdagangan di pesisir utara Jawa pada abad ke-15 dan memainkan peran kunci dalam mendirikan entitas politik Islam pertama. Buku ini sempat dilarang pada era Orde Baru karena sensitivitas politik rasial saat itu. Namun, tinjauan akademis modern cenderung melihat ini sebagai bukti kosmopolitanisme: bahwa para Wali mungkin memiliki darah campuran (amalgamasi) antara Arab, Champa, Tionghoa, dan Jawa. Penggunaan nama Tionghoa bisa jadi merupakan nama ganda yang digunakan dalam konteks administrasi perdagangan komunitas Tionghoa yang kuat saat itu, tanpa menegasikan silsilah Arab mereka.
+                </p>
+
+                <h3 class="text-2xl text-yellow-500 mt-8">2.4 Sintesis Genealogi: Klan Azmatkhan</h3>
+                <p>
+                    Penelitian terkini mencoba mengintegrasikan teori-teori di atas melalui penelusuran klan <strong>Azmatkhan</strong>. Klan ini adalah keluarga bangsawan keturunan Rasulullah yang berdiaspora ke India, kemudian ke Champa dan Tiongkok, sebelum akhirnya ke Nusantara. Dalam perjalanannya, mereka melakukan pernikahan strategis dengan putri-putri bangsawan lokal. Oleh karena itu, seorang wali seperti Sunan Ampel bisa secara biologis berdarah Arab-Champa, memiliki nama Tionghoa karena lahir di lingkungan komunitas diaspora di Champa/Tiongkok, dan secara budaya menjadi Jawa setelah menetap. Ini menjadikan Wali Songo sebagai figur "Hibrida Agung" yang mampu menjembatani berbagai kebudayaan.
+                </p>
+
+                <!-- Responsive Table -->
+                <div class="mt-10 overflow-x-auto rounded-lg border border-yellow-600/30">
+                    <table class="min-w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+                        <thead class="bg-slate-900 uppercase tracking-wider border-b border-yellow-600 font-heading text-yellow-500">
+                            <tr>
+                                <th class="px-6 py-4">Nama Populer</th>
+                                <th class="px-6 py-4">Nama Asli / Gelar</th>
+                                <th class="px-6 py-4">Asal & Etnis</th>
+                                <th class="px-6 py-4">Hubungan</th>
+                                <th class="px-6 py-4">Wilayah</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 bg-slate-800/40">
+                            <tr class="hover:bg-slate-800 transition">
+                                <td class="px-6 py-4 font-bold text-yellow-100">Sunan Gresik</td>
+                                <td class="px-6 py-4">Maulana Malik Ibrahim</td>
+                                <td class="px-6 py-4">Persia/Samarkand</td>
+                                <td class="px-6 py-4">Saudara Maulana Ishaq</td>
+                                <td class="px-6 py-4">Gresik</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800 transition">
+                                <td class="px-6 py-4 font-bold text-yellow-100">Sunan Ampel</td>
+                                <td class="px-6 py-4">Raden Rahmat</td>
+                                <td class="px-6 py-4">Champa (Vietnam)</td>
+                                <td class="px-6 py-4">Putra Ibrahim Asmarakandi</td>
+                                <td class="px-6 py-4">Surabaya</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800 transition">
+                                <td class="px-6 py-4 font-bold text-yellow-100">Sunan Bonang</td>
+                                <td class="px-6 py-4">Raden Makdum Ibrahim</td>
+                                <td class="px-6 py-4">Jawa-Champa</td>
+                                <td class="px-6 py-4">Putra Sunan Ampel</td>
+                                <td class="px-6 py-4">Tuban</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800 transition">
+                                <td class="px-6 py-4 font-bold text-yellow-100">Sunan Drajat</td>
+                                <td class="px-6 py-4">Raden Qasim</td>
+                                <td class="px-6 py-4">Jawa-Champa</td>
+                                <td class="px-6 py-4">Putra Sunan Ampel</td>
+                                <td class="px-6 py-4">Lamongan</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800 transition">
+                                <td class="px-6 py-4 font-bold text-yellow-100">Sunan Giri</td>
+                                <td class="px-6 py-4">Raden Paku</td>
+                                <td class="px-6 py-4">Blambangan (Jawa)</td>
+                                <td class="px-6 py-4">Putra Maulana Ishaq</td>
+                                <td class="px-6 py-4">Gresik (Giri)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800 transition">
+                                <td class="px-6 py-4 font-bold text-yellow-100">Sunan Kalijaga</td>
+                                <td class="px-6 py-4">Raden Sahid</td>
+                                <td class="px-6 py-4">Jawa Asli (Tuban)</td>
+                                <td class="px-6 py-4">Putra Adipati Tuban</td>
+                                <td class="px-6 py-4">Demak/Kadilangu</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800 transition">
+                                <td class="px-6 py-4 font-bold text-yellow-100">Sunan Kudus</td>
+                                <td class="px-6 py-4">Ja'far Shadiq</td>
+                                <td class="px-6 py-4">Palestina/Jawa</td>
+                                <td class="px-6 py-4">Putra Sunan Ngudung</td>
+                                <td class="px-6 py-4">Kudus</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800 transition">
+                                <td class="px-6 py-4 font-bold text-yellow-100">Sunan Muria</td>
+                                <td class="px-6 py-4">Raden Umar Said</td>
+                                <td class="px-6 py-4">Jawa</td>
+                                <td class="px-6 py-4">Putra Sunan Kalijaga</td>
+                                <td class="px-6 py-4">Gunung Muria</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800 transition">
+                                <td class="px-6 py-4 font-bold text-yellow-100">Sunan Gunung Jati</td>
+                                <td class="px-6 py-4">Syarif Hidayatullah</td>
+                                <td class="px-6 py-4">Pasai/Mesir/Pajajaran</td>
+                                <td class="px-6 py-4">Cucu Prabu Siliwangi</td>
+                                <td class="px-6 py-4">Cirebon</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="p-2 text-xs text-gray-500 text-right italic">Tabel 2.1: Matriks Identitas dan Genealogi Wali Songo</div>
+                </div>
+            </div>
+        </article>
+
+        <hr class="border-slate-800 my-12">
+
+        <!-- BAB 3 -->
+        <article id="bab3" class="mb-24 reveal">
+            <div class="flex items-center space-x-4 mb-8">
+                <span class="text-6xl font-heading text-slate-700 select-none">03</span>
+                <div>
+                    <h2 class="text-3xl md:text-4xl text-yellow-100 mb-2">Struktur Dewan Wali (Council of Saints)</h2>
+                    <h4 class="text-xl text-yellow-600/80 italic">Organisasi dan Pembagian Tugas</h4>
+                </div>
+            </div>
+
+            <div class="prose prose-lg prose-invert max-w-none text-gray-300 text-justify">
+                <p>
+                    Wali Songo tidak bekerja secara atomistik atau terisolasi satu sama lain. Bukti-bukti sejarah menunjukkan adanya koordinasi yang rapi, menyerupai struktur kabinet pemerintahan atau dewan syura. Mereka mengadakan pertemuan berkala (misalnya di Masjid Demak) untuk membahas strategi dakwah, hukum agama, dan masalah politik kenegaraan.
+                </p>
+
+                <h3 class="text-2xl text-yellow-500 mt-8 mb-4">3.1 Pembagian Generasi dan Regenerasi</h3>
+                <p class="mb-6">Keanggotaan dewan ini tidak statis. Dapat diidentifikasi setidaknya ada beberapa angkatan atau periode:</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800 p-6 rounded border-l-4 border-emerald-600">
+                        <h5 class="text-emerald-400 font-bold mb-2">Angkatan Pertama</h5>
+                        <p class="text-sm">Dipimpin oleh Maulana Malik Ibrahim dan Syekh Jumadil Kubro. Fokus pada pembukaan lahan dakwah (<em>babat alas</em>) dan pendekatan dagang.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded border-l-4 border-emerald-600">
+                        <h5 class="text-emerald-400 font-bold mb-2">Angkatan Kedua</h5>
+                        <p class="text-sm">Dipimpin oleh Sunan Ampel. Fokus pada kaderisasi (pendidikan pesantren) dan infiltrasi politik ke Majapahit.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded border-l-4 border-emerald-600">
+                        <h5 class="text-emerald-400 font-bold mb-2">Angkatan Ketiga</h5>
+                        <p class="text-sm">Dipimpin oleh Sunan Giri dan Sunan Bonang, bersama Raden Patah. Fokus pada pendirian negara Islam (Demak) dan legitimasi kekuasaan.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded border-l-4 border-emerald-600">
+                        <h5 class="text-emerald-400 font-bold mb-2">Angkatan Keempat</h5>
+                        <p class="text-sm">Didominasi oleh Sunan Kudus, Sunan Muria, dan Sunan Gunung Jati. Fokus pada ekspansi wilayah, pelembagaan syariat, dan akulturasi budaya mendalam.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl text-yellow-500 mt-10 mb-4">3.2 Pembagian Wilayah Kerja (Territorial Command)</h3>
+                <p>Pembagian wilayah dakwah Wali Songo menunjukkan strategi "Pengepungan Budaya" terhadap pedalaman Jawa yang masih Hindu:</p>
+                
+                <div class="space-y-4 mt-6">
+                    <div class="flex flex-col md:flex-row bg-slate-800/60 rounded overflow-hidden">
+                        <div class="bg-yellow-700/20 w-full md:w-32 p-4 flex items-center justify-center font-bold text-yellow-500 uppercase tracking-widest text-center">Poros Timur</div>
+                        <div class="p-4">
+                            <strong class="block text-yellow-100">Jawa Timur</strong>
+                            <p class="text-sm mt-1">Dikelola oleh Sunan Ampel (Surabaya), Sunan Giri (Gresik), Sunan Bonang (Tuban), dan Sunan Drajat (Lamongan). Wilayah ini adalah gerbang perdagangan dan basis pendidikan.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row bg-slate-800/60 rounded overflow-hidden">
+                        <div class="bg-yellow-700/20 w-full md:w-32 p-4 flex items-center justify-center font-bold text-yellow-500 uppercase tracking-widest text-center">Poros Tengah</div>
+                        <div class="p-4">
+                            <strong class="block text-yellow-100">Jawa Tengah</strong>
+                            <p class="text-sm mt-1">Dikelola oleh Sunan Kalijaga (Demak/Kadilangu), Sunan Kudus (Kudus), dan Sunan Muria (Gunung Muria). Wilayah ini menjadi pusat kekuasaan politik dan akulturasi budaya Kejawen.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row bg-slate-800/60 rounded overflow-hidden">
+                        <div class="bg-yellow-700/20 w-full md:w-32 p-4 flex items-center justify-center font-bold text-yellow-500 uppercase tracking-widest text-center">Poros Barat</div>
+                        <div class="p-4">
+                            <strong class="block text-yellow-100">Jawa Barat</strong>
+                            <p class="text-sm mt-1">Dikelola oleh Sunan Gunung Jati (Cirebon, Banten). Wilayah ini difungsikan sebagai benteng pertahanan maritim melawan Portugis dan pusat penyebaran Islam ke tatar Sunda.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <hr class="border-slate-800 my-12">
+
+        <!-- BAB 4: PROFIL (Grid Layout) -->
+        <article id="bab4" class="mb-24 reveal">
+            <div class="text-center mb-16">
+                <span class="text-6xl font-heading text-slate-700 block mb-2">04</span>
+                <h2 class="text-4xl text-yellow-100">Profil Mendalam & Analisis Strategi</h2>
+                <div class="w-24 h-1 bg-yellow-600 mx-auto mt-4"></div>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Setiap anggota Wali Songo memiliki "spesialisasi" metodologis yang unik.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="wali-card bg-slate-800 rounded-lg p-6 border-t-4 border-yellow-600">
+                    <h3 class="text-xl font-heading text-yellow-400 mb-1">Maulana Malik Ibrahim</h3>
+                    <div class="text-xs text-gray-500 uppercase mb-4">Diplomat Pertanian & Pengobatan</div>
+                    <p class="text-sm text-gray-300 mb-4">Sebagai figur perintis, strategi beliau adalah <em>Dakwah Bil-Hal</em>.</p>
+                    <ul class="text-sm space-y-2 text-gray-400 list-disc pl-4">
+                        <li><strong>Reformasi Pertanian:</strong> Mengajarkan irigasi efisien.</li>
+                        <li><strong>Pengobatan Gratis:</strong> Ramuan herbal menarik simpati rakyat.</li>
+                        <li><strong>Diplomasi:</strong> Dialog intelektual dengan istana Majapahit.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="wali-card bg-slate-800 rounded-lg p-6 border-t-4 border-yellow-600">
+                    <h3 class="text-xl font-heading text-yellow-400 mb-1">Sunan Ampel</h3>
+                    <div class="text-xs text-gray-500 uppercase mb-4">Arsitek Sosial & Ideolog</div>
+                    <p class="text-sm text-gray-300 mb-4">Pendiri Pesantren Ampel Denta dan perumus falsafah moral.</p>
+                    <div class="bg-slate-900 p-3 rounded mb-2">
+                        <strong class="text-emerald-400 block mb-1">Falsafah Moh Limo:</strong>
+                        <div class="grid grid-cols-2 gap-1 text-xs">
+                            <span>Moh Main (Judi)</span>
+                            <span>Moh Ngombe (Mabuk)</span>
+                            <span>Moh Maling (Curi)</span>
+                            <span>Moh Madat (Candu)</span>
+                            <span class="col-span-2">Moh Madon (Zina)</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2">Strategi politik perkawinan silang antara ulama dan bangsawan.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="wali-card bg-slate-800 rounded-lg p-6 border-t-4 border-yellow-600">
+                    <h3 class="text-xl font-heading text-yellow-400 mb-1">Sunan Giri</h3>
+                    <div class="text-xs text-gray-500 uppercase mb-4">The Pope of the East</div>
+                    <p class="text-sm text-gray-300 mb-4">Mendirikan pemerintahan mandiri di Giri Kedaton dan menjadi legitimator kekuasaan raja-raja Islam.</p>
+                    <div class="text-sm text-gray-400 border-t border-gray-700 pt-3">
+                        <strong>Dakwah via Permainan:</strong> Menciptakan <em>Jelungan</em>, <em>Jamuran</em>, dan tembang <em>Cublak-cublak Suweng</em> yang sarat makna tauhid.
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="wali-card bg-slate-800 rounded-lg p-6 border-t-4 border-yellow-600">
+                    <h3 class="text-xl font-heading text-yellow-400 mb-1">Sunan Bonang</h3>
+                    <div class="text-xs text-gray-500 uppercase mb-4">Sufisme Estetik</div>
+                    <p class="text-sm text-gray-300 mb-4">Seniman dan intelektual sufi yang menambahkan instrumen Bonang pada gamelan.</p>
+                    <ul class="text-sm space-y-2 text-gray-400 list-disc pl-4">
+                        <li><strong>Tombo Ati:</strong> Tembang terapi jiwa.</li>
+                        <li><strong>Suluk Wujil:</strong> Masterpiece tasawuf Nusantara tentang <em>Ma'rifatullah</em> dan pengenalan diri.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="wali-card bg-slate-800 rounded-lg p-6 border-t-4 border-yellow-600 col-span-1 md:col-span-2 lg:col-span-1">
+                    <h3 class="text-xl font-heading text-yellow-400 mb-1">Sunan Kalijaga</h3>
+                    <div class="text-xs text-gray-500 uppercase mb-4">Budayawan Sinkretis</div>
+                    <p class="text-sm text-gray-300 mb-4">Wali paling "njawani". Memodifikasi Wayang Purwa agar sesuai fiqih (distorsi artistik) dan menafsir ulang pusaka <em>Kalimasada</em> menjadi Kalimat Syahadat.</p>
+                    <div class="bg-slate-900 p-3 rounded italic text-xs text-gray-400">
+                        "Lir-ilir... Penekno blimbing kuwi..." (Simbol Rukun Islam & Shalat 5 Waktu).
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="wali-card bg-slate-800 rounded-lg p-6 border-t-4 border-yellow-600">
+                    <h3 class="text-xl font-heading text-yellow-400 mb-1">Sunan Drajat</h3>
+                    <div class="text-xs text-gray-500 uppercase mb-4">Pelopor Kesalehan Sosial</div>
+                    <p class="text-sm text-gray-300 mb-4">Fokus pada <em>Social Welfare</em> melalui Catur Piwulang:</p>
+                    <ol class="text-xs space-y-1 text-gray-400 list-decimal pl-4">
+                        <li>Beri tongkat pada yang buta (Ilmu).</li>
+                        <li>Beri makan pada yang lapar (Ekonomi).</li>
+                        <li>Beri pakaian pada yang telanjang (Etika).</li>
+                        <li>Beri payung pada yang kehujanan (Lindungan).</li>
+                    </ol>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="wali-card bg-slate-800 rounded-lg p-6 border-t-4 border-yellow-600">
+                    <h3 class="text-xl font-heading text-yellow-400 mb-1">Sunan Kudus</h3>
+                    <div class="text-xs text-gray-500 uppercase mb-4">Toleransi dalam Ortodoksi</div>
+                    <p class="text-sm text-gray-300 mb-4">Ahli Fiqih (Wali al-'Ilmi) namun sangat toleran.</p>
+                    <ul class="text-sm space-y-2 text-gray-400 list-disc pl-4">
+                        <li><strong>Larangan Sembelih Sapi:</strong> Menghormati umat Hindu, menggantinya dengan kerbau.</li>
+                        <li><strong>Menara Kudus:</strong> Arsitektur corak candi Majapahit untuk menara adzan.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="wali-card bg-slate-800 rounded-lg p-6 border-t-4 border-yellow-600">
+                    <h3 class="text-xl font-heading text-yellow-400 mb-1">Sunan Muria</h3>
+                    <div class="text-xs text-gray-500 uppercase mb-4">Dakwah Kaum Marginal</div>
+                    <p class="text-sm text-gray-300 mb-4">Tinggal di gunung sunyi. Metodenya <em>Tapa Ngeli</em> (menghanyutkan diri bersama rakyat jelata).</p>
+                    <p class="text-sm text-gray-400">Mengajarkan bercocok tanam, melaut, dan konservasi alam melalui tembang <em>Sinom</em> dan <em>Kinanthi</em>.</p>
+                </div>
+
+                <!-- Card 9 -->
+                <div class="wali-card bg-slate-800 rounded-lg p-6 border-t-4 border-yellow-600">
+                    <h3 class="text-xl font-heading text-yellow-400 mb-1">Sunan Gunung Jati</h3>
+                    <div class="text-xs text-gray-500 uppercase mb-4">Negarawan & Ekspansionis</div>
+                    <p class="text-sm text-gray-300 mb-4">Satu-satunya wali yang mendirikan dinasti raja (Cirebon & Banten).</p>
+                    <div class="text-sm text-gray-400 border-t border-gray-700 pt-3">
+                        Bersama Fatahillah merebut Sunda Kelapa (1527), mengubahnya menjadi <strong>Jayakarta</strong>, memblokir Portugis.
+                    </div>
+                </div>
+
+            </div>
+        </article>
+
+        <hr class="border-slate-800 my-12">
+
+        <!-- BAB 5 -->
+        <article id="bab5" class="mb-24 reveal">
+            <div class="flex items-center space-x-4 mb-8">
+                <span class="text-6xl font-heading text-slate-700 select-none">05</span>
+                <div>
+                    <h2 class="text-3xl md:text-4xl text-yellow-100 mb-2">Peran Politik: Bidan Lahirnya Kesultanan Demak</h2>
+                </div>
+            </div>
+
+            <div class="prose prose-lg prose-invert max-w-none text-gray-300 text-justify">
+                <p>
+                    Wali Songo tidak hanya pemimpin agama, tetapi <em>King Makers</em> yang merancang peralihan kekuasaan politik dari Majapahit ke Demak.
+                </p>
+
+                <h3 class="text-2xl text-yellow-500 mt-8 mb-4">5.1 Pendirian Demak Bintoro</h3>
+                <p>
+                    Raden Patah, putra Brawijaya V yang dididik oleh Sunan Ampel, disiapkan untuk memimpin entitas politik baru. Pemilihan lokasi di Glagahwangi (Demak) yang merupakan pesisir dan rawa-rawa adalah strategi ekonomi untuk menguasai jalur perdagangan laut, meninggalkan basis agraria pedalaman Majapahit yang mulai merosot. Dewan Wali berfungsi sebagai lembaga <em>Ahl al-Hall wa al-'Aqd</em> (lembaga yang berwenang mengangkat dan memberhentikan pemimpin). Dukungan penuh Wali Songo memberikan legitimasi teologis mutlak bagi Raden Patah sebagai <em>Sultan Syah Alam Akbar I</em>.
+                </p>
+
+                <h3 class="text-2xl text-yellow-500 mt-8 mb-4">5.2 Ekspansi dan Integrasi Nusantara</h3>
+                <p>
+                    Di bawah bimbingan Wali, Demak melakukan ekspansi ke timur dan barat. Penyerangan ke Malaka (di bawah Pati Unus) untuk mengusir Portugis pada 1511 dan 1521 adalah bukti bahwa Wali Songo memiliki wawasan geopolitik internasional. Mereka memahami bahwa jatuhnya Malaka ke tangan Kristen Portugis adalah ancaman bagi jaringan dagang dan dakwah Islam di Nusantara.
+                </p>
+            </div>
+        </article>
+
+        <!-- BAB 6: Special Darker Section for Conflict -->
+        <article id="bab6" class="mb-24 reveal bg-red-900/10 p-8 rounded-xl border border-red-900/30">
+            <div class="flex items-center space-x-4 mb-8">
+                <span class="text-6xl font-heading text-red-900/50 select-none">06</span>
+                <div>
+                    <h2 class="text-3xl md:text-4xl text-red-100 mb-2">Konflik Teologis: Kasus Syekh Siti Jenar</h2>
+                    <h4 class="text-xl text-red-300/80 italic">Dinamika Internal dan Benturan Doktrin</h4>
+                </div>
+            </div>
+
+            <div class="prose prose-lg prose-invert max-w-none text-gray-300 text-justify">
+                <p>
+                    Sejarah Wali Songo tidak sepi dari konflik. Kasus Syekh Siti Jenar (Syekh Lemah Abang) adalah representasi benturan antara Islam Syariat (Ortodoks) dan Islam Hakikat (Heterodoks/Mistis).
+                </p>
+
+                <h3 class="text-2xl text-red-400 mt-8 mb-4">6.1 Doktrin Manunggaling Kawula Gusti</h3>
+                <p>
+                    Siti Jenar mengajarkan paham <em>Sasahidan</em> atau <em>Manunggaling Kawula Gusti</em> (Penyatuan Hamba dan Tuhan). Dalam pandangannya, Allah adalah zat yang nyata, dan manusia adalah manifestasi-Nya. Oleh karena itu, syariat formal seperti shalat lima waktu hanyalah latihan fisik yang tidak diperlukan bagi mereka yang sudah mencapai tingkat makrifat. Ajarannya sangat populer di kalangan rakyat jelata yang kecewa dengan feodalisme, karena Siti Jenar juga mengajarkan kesetaraan radikal dan menolak otoritas raja.
+                </p>
+
+                <h3 class="text-2xl text-red-400 mt-8 mb-4">6.2 Pengadilan Dewan Wali</h3>
+                <p>Dewan Wali Songo memandang ajaran ini berbahaya karena dua alasan:</p>
+                <ul class="list-disc pl-5 my-4 space-y-2">
+                    <li><strong class="text-red-300">Alasan Syariat:</strong> Menganggap diri sebagai Tuhan (<em>Ana al-Haqq</em>) adalah kesesatan yang bisa merusak akidah awam.</li>
+                    <li><strong class="text-red-300">Alasan Politik:</strong> Penolakan Siti Jenar terhadap kewajiban syariat dan otoritas kesultanan mengancam stabilitas negara Demak yang baru berdiri. Gerakan Siti Jenar berpotensi menjadi pemberontakan sipil (<em>bughat</em>).</li>
+                </ul>
+                <p>
+                    Sunan Kudus dan Sunan Kalijaga ditugaskan untuk mengadili Siti Jenar. Dialog teologis terjadi, di mana Siti Jenar tetap teguh pada pendiriannya bahwa kematian adalah jalan menuju kehidupan sejati. Akhirnya, Dewan Wali memutuskan hukuman mati. Eksekusi dilakukan (versi babad menyebutkan dengan keris Sunan Kudus atau dipancung) di Masjid Demak. Kematian Siti Jenar menandai kemenangan Islam institusional atas mistisisme anarkis, namun ajarannya tetap hidup di bawah tanah dalam bentuk aliran kebatinan Jawa (<em>Kejawen</em>).
+                </p>
+            </div>
+        </article>
+
+        <!-- BAB 7 -->
+        <article id="bab7" class="mb-24 reveal">
+            <div class="flex items-center space-x-4 mb-8">
+                <span class="text-6xl font-heading text-slate-700 select-none">07</span>
+                <div>
+                    <h2 class="text-3xl md:text-4xl text-yellow-100 mb-2">Arsitektur dan Tata Ruang</h2>
+                    <h4 class="text-xl text-yellow-600/80 italic">Simbolisme Islam Jawa</h4>
+                </div>
+            </div>
+
+            <div class="prose prose-lg prose-invert max-w-none text-gray-300 text-justify">
+                <p>Wali Songo meninggalkan warisan fisik yang merefleksikan sintesis budaya.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8">
+                    <div>
+                        <h3 class="text-2xl text-yellow-500 mb-4">7.1 Masjid Agung Demak</h3>
+                        <p class="mb-4">Masjid ini adalah prototipe masjid Nusantara. Berbeda dengan masjid Timur Tengah yang berkubah, Masjid Demak menggunakan atap <em>Tajug</em> (limas bersusun tiga).</p>
+                        <ul class="space-y-4">
+                            <li class="bg-slate-800 p-4 rounded border-l-2 border-yellow-500">
+                                <strong class="block text-yellow-200">Filosofi Atap</strong>
+                                <span class="text-sm">Tiga susun atap melambangkan trikotomi ajaran Islam: Iman, Islam, Ihsan (atau Syariat, Tarekat, Hakikat).</span>
+                            </li>
+                            <li class="bg-slate-800 p-4 rounded border-l-2 border-yellow-500">
+                                <strong class="block text-yellow-200">Soko Guru</strong>
+                                <span class="text-sm">Empat tiang utama penyangga masjid konon dibuat oleh empat wali. Tiang buatan Kalijaga disebut <em>Soko Tatal</em> (serpihan kayu), melambangkan persatuan umat yang beragam.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl text-yellow-500 mb-4">7.2 Konsep Catur Gatra Tunggal</h3>
+                        <p class="mb-4">Wali Songo memperkenalkan konsep tata ruang pusat pemerintahan Jawa yang disebut <em>Catur Gatra Tunggal</em> (Empat Elemen dalam Satu Kesatuan):</p>
+                        <div class="grid grid-cols-2 gap-4 text-center mt-6">
+                            <div class="bg-slate-700 p-4 rounded text-yellow-100 font-bold flex items-center justify-center h-24">MASJID<br><span class="text-xs font-normal text-gray-400">(Barat - Ibadah)</span></div>
+                            <div class="bg-slate-700 p-4 rounded text-yellow-100 font-bold flex items-center justify-center h-24">KERATON<br><span class="text-xs font-normal text-gray-400">(Selatan - Pemerintah)</span></div>
+                            <div class="bg-slate-700 p-4 rounded text-yellow-100 font-bold flex items-center justify-center h-24 col-span-2">ALUN-ALUN<br><span class="text-xs font-normal text-gray-400">(Tengah - Ruang Publik)</span></div>
+                            <div class="bg-slate-700 p-4 rounded text-yellow-100 font-bold flex items-center justify-center h-24 col-span-2">PASAR<br><span class="text-xs font-normal text-gray-400">(Sekitar - Ekonomi)</span></div>
+                        </div>
+                        <p class="text-sm mt-4 italic text-gray-400">Pola ini diterapkan di Demak, Cirebon, Banten, hingga Mataram Yogyakarta, menunjukkan integrasi utuh antara kehidupan duniawi dan ukhrawi.</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <hr class="border-slate-800 my-12">
+
+        <!-- BAB 8 -->
+        <article id="bab8" class="mb-24 reveal text-center max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-heading text-yellow-500 mb-8">Kesimpulan</h2>
+            <h4 class="text-2xl text-white mb-8 font-serif">Relevansi Wali Songo Bagi Indonesia Modern</h4>
+
+            <div class="prose prose-lg prose-invert text-gray-300 text-justify mx-auto">
+                <p>
+                    Wali Songo telah meletakkan fondasi bagi apa yang kini disebut sebagai "Islam Nusantara". Keberhasilan mereka mengislamkan Jawa secara damai (<em>penetrasi pacifique</em>) dalam waktu relatif singkat (kurang dari 100 tahun kekuasaan Majapahit runtuh total) adalah prestasi dakwah yang fenomenal dalam sejarah dunia Islam.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center gap-6 my-10">
+                    <div class="bg-slate-800 p-4 rounded flex-1">
+                        <strong class="text-emerald-400 block mb-2">Moderasi Beragama</strong>
+                        <span class="text-sm">Sikap toleran terhadap budaya lokal menjadi DNA keberagamaan Indonesia.</span>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded flex-1">
+                        <strong class="text-emerald-400 block mb-2">Pendidikan Pesantren</strong>
+                        <span class="text-sm">Sistem pendidikan asrama yang menjadi benteng moral bangsa.</span>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded flex-1">
+                        <strong class="text-emerald-400 block mb-2">Seni Budaya</strong>
+                        <span class="text-sm">Kelestarian tembang macapat dan wayang kulit yang bernafaskan Islam.</span>
+                    </div>
+                </div>
+                <p>
+                    Studi tentang Wali Songo mengajarkan bahwa transformasi masyarakat tidak harus melalui revolusi berdarah, melainkan bisa melalui evolusi kebudayaan yang terencana, pendidikan yang memberdayakan, dan politik yang bermartabat. Di tengah tantangan radikalisme global, model dakwah Wali Songo yang merangkul (<em>embracing</em>) bukan memukul, tetap sangat relevan untuk dikaji dan diterapkan kembali.
+                </p>
+            </div>
+        </article>
+
+        <!-- REFERENSI -->
+        <footer class="mt-24 pt-12 border-t border-slate-800 text-sm text-gray-500 pb-24">
+            <h3 class="text-xl text-gray-400 mb-6 font-bold uppercase tracking-widest">Catatan Referensi & Sumber Data</h3>
+            <p class="mb-6">Laporan ini disusun berdasarkan sintesis data dari berbagai sumber primer dan sekunder yang terverifikasi dalam korpus penelitian, mencakup babad tradisional, analisis sejarawan modern, dan temuan arkeologis. Analisis dilakukan dengan metode historiografi kritis untuk menjembatani narasi tradisional dan fakta akademis.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-64 overflow-y-auto pr-4 custom-scrollbar">
+                <p>Peran dan Kedudukan (Dewan) Wali Sanga, diakses Desember 10, 2025, https://serbasejarah.wordpress.com/2009/11/30/peran-dan-kedudukan-dewan-wali-sanga/</p>
+                <p>Dewan Wali | PDF - Scribd, diakses Desember 10, 2025, https://id.scribd.com/document/16386639/dewan-wali</p>
+                <p>Kehidupan Politik Kerajaan Demak dan Perannya dalam Penyebaran Islam di Jawa, diakses Desember 10, 2025, https://www.gramedia.com/literasi/kehidupan-politik-kerajaan-demak-di-jawa/</p>
+                <p>(PDF) Produksi Hukum Islam di Jawa Abad ke-15: Studi Historis atas Peran Walisongo dalam Kesultanan Demak - ResearchGate, diakses Desember 10, 2025, https://www.researchgate.net/publication/393271221_Produksi_Hukum_Islam_di_Jawa_Abad_ke-15_Studi_Historis_atas_Peran_Walisongo_dalam_Kesultanan_Demak</p>
+                <p>Wali Songo : Strategi Penyebaran Islam dan Akulturasi Budaya di Jawa - Kompasiana.com, diakses Desember 10, 2025, https://www.kompasiana.com/lathifatulaqwa9885/67d9eb03ed6415392c787e12/wali-songo-strategi-penyebaran-islam-dan-akulturasi-budaya-di-jawa?page=2</p>
+                <p>Mengenal Sejarah dan Silsilah Wali Songo, Kesembilan Tokoh Penyebar Ajaran Islam di Jawa - PAGE ALL : Okezone News, diakses Desember 10, 2025, https://news.okezone.com/read/2022/09/10/337/2664871/mengenal-sejarah-dan-silsilah-wali-songo-kesembilan-tokoh-penyebar-ajaran-islam-di-jawa?page=all</p>
+                <p>Wali Sanga - Wikipedia bahasa Indonesia, ensiklopedia bebas, diakses Desember 10, 2025, https://id.wikipedia.org/wiki/Wali_Sanga</p>
+                <p>Lebih dekat dengan MAULANA MALIK IBRAHIM - UIN Malang, diakses Desember 10, 2025, https://uin-malang.ac.id/blog/post/read/131101/lebih-dekat-dengan-maulana-malik-ibrahim.html</p>
+                <p>Mengenal 9 Wali Songo Beserta Nama Aslinya, Siapa Saja? - detikcom, diakses Desember 10, 2025, https://www.detik.com/hikmah/khazanah/d-7187306/mengenal-9-wali-songo-beserta-nama-aslinya-siapa-saja</p>
+                <p>9 Nama Wali Songo beserta Nama Asli dan Asal Daerahnya | kumparan.com, diakses Desember 10, 2025, https://kumparan.com/berita-terkini/9-nama-wali-songo-beserta-nama-asli-dan-asal-daerahnya-222CUOik62a</p>
+                <p>Sejarah Wali Songo dan Wali Sepuluh - Terjemah Kitab Kuning, diakses Desember 10, 2025, https://www.alkhoirot.org/2024/09/sejarah-wali-songo-dan-wali-sepuluh.html</p>
+                <p>Runtuhnya Kerajaan Hindu-Jawa dan Timbulnya Negara-Negara Islam di Nusantara - Prof. Dr. Slamet Muljana - Google Book, diakses Desember 10, 2025, https://books.google.co.id/books?id=LHFaDwAAQBAJ&printsec=frontcover</p>
+                <p>RUNTUHNYA KERAJAAN HINDU-JAWA DAN TIMBULNYA NEGARA-NEGARA ISLAM DI NUSANTARA - Catatan Nusantara, diakses Desember 10, 2025, https://www.catatannusantara.com/pustaka/mj779mcb2cagc8y-smc45-jf6ec-nh8jf-h3fgh-sybre-y3rg8-rc2hn-ekmw4-2nxgg-apeay-teyd7-myjgr-ag4we-cf8cg-ry6e3-l438t-wk97y-89dkz-2nsk6-7tlnl-5l263-ntazr-l324r-g2a2b</p>
+                <p>Runtuhnya Kerajaan Hindu-Jawa dan Timbulnya Negara-Negara Islam di Nusantara, diakses Desember 10, 2025, https://archive.org/download/kumpulan-berbagai-buku/Runtuhnya%20Kerajaan%20Hindu-Jawa.pdf</p>
+                <p>Teori Asal Walisongo | PDF | Ilmu Sosial | Sejarah - Scribd, diakses Desember 10, 2025, https://id.scribd.com/document/319769360/Teori-Asal-Walisongo</p>
+                <p>Sejarah Hidup Sunan Drajat dan 7 Dasar Ajaran Dakwah Islam - Tirto.id, diakses Desember 10, 2025, https://tirto.id/sejarah-hidup-sunan-drajat-dan-7-dasar-ajaran-dakwah-islam-gcJm</p>
+                <p>Kitab Bonang: Asal Usul dan Isinya | kumparan.com, diakses Desember 10, 2025, https://kumparan.com/sejarah-dan-sosial/kitab-bonang-asal-usul-dan-isinya-22b4eOLL4kP</p>
+                <p>SULUK SUNAN BONANG - MA'RIFATULLAH, diakses Desember 10, 2025, http://jamaluddinab.blogspot.com/2011/01/suluk-sunan-bonang-1.html</p>
+                <p>SPIRITUALITAS ISLAM DALAM SULUK WUJIL KARYA SUNAN BONANG BERDASARKAN KAJIAN SEMIOTIK, diakses Desember 10, 2025, https://jurnal.uns.ac.id/hsb/article/download/61592/43200</p>
+                <p>Makna Filosofis Tembang Dolanan "Ilir-Ilir" - Kompas.com, diakses Desember 10, 2025, https://www.kompas.com/skola/read/2024/03/19/163000169/makna-filosofis-tembang-dolanan-ilir-ilir-</p>
+                <p>7 Ajaran Sunan Drajat | PDF | Pengembangan Diri | Kesehatan Holistik - Scribd, diakses Desember 10, 2025, https://id.scribd.com/document/689475866/7-ajaran-Sunan-Drajat</p>
+                <p>Alasan Sunan Kudus Larang Sembelih Sapi Saat Idul Adha | kumparan.com, diakses Desember 10, 2025, https://kumparan.com/berita-terkini/alasan-sunan-kudus-larang-sembelih-sapi-saat-idul-adha-22kECMXbS7o</p>
+                <p>Kenapa Sunan Kudus Melarang Penyembelihan Sapi saat Idul Kurban? - Tirto.id, diakses Desember 10, 2025, https://tirto.id/kenapa-sunan-kudus-melarang-penyembelihan-sapi-saat-idul-kurban-gZiP</p>
+                <p>Kisah Sunan Muria yang Berdakwah Melalui Kesenian dan Mengajar Keterampilan Gratis pada Masyarakat | Orami, diakses Desember 10, 2025, https://www.orami.co.id/magazine/sunan-muria</p>
+                <p>Tapa Ngeli Cara Berdakwah Sunan Muria - Obsessionnews.com, diakses Desember 10, 2025, https://www.obsessionnews.com/read/2018/11/06/tapa-ngeli-cara-berdakwah-sunan-muria</p>
+                <p>4 Metode Dakwah Sunan Muria Dalam Menyebarkan Agama Islam | kumparan.com, diakses Desember 10, 2025, https://m.kumparan.com/berita-hari-ini/4-metode-dakwah-sunan-muria-dalam-menyebarkan-agama-islam-1upvbY6j6gX</p>
+                <p>Perjuangan Sunan Gunung Jati - Docx Selanjutnya | PDF - Scribd, diakses Desember 10, 2025, https://id.scribd.com/document/701473065/Perjuangan-Sunan-Gunung-Jati-docx-Selanjutnya</p>
+                <p>Syekh Siti Jenar Sosok Kontroversial di Era Wali Songo - Koran Sulindo, diakses Desember 10, 2025, https://koransulindo.com/syekh-siti-jenar-sosok-kontroversial-di-era-wali-songo/</p>
+                <p>Manunggaling Kawula Gusti dalam Sugih Tanpa Bandha Sudjiwo Tejo = Manunggaling Kawula Gusti on Sudjiwo Tejo's Sugih Tanpa Bandha - lib@ui, diakses Desember 10, 2025, https://lib.ui.ac.id/detail?id=9999920535488&lokasi=lokal</p>
+                <p>Inilah Dialog Kontroversi Siti Jenar dengan Sunan Muria saat Pemanggilan Sidang Wali, diakses Desember 10, 2025, https://portalmajalengka.pikiran-rakyat.com/khazanah/pr-834082363/inilah-dialog-kontroversi-siti-jenar-dengan-sunan-muria-saat-pemanggilan-sidang-wali</p>
+                <p>Syekh Siti Jenar: Wali yang Melampaui Batas - Jakartamu.com, diakses Desember 10, 2025, https://www.jakartamu.com/syekh-siti-jenar-wali-yang-melampaui-batas-21394</p>
+                <p>Peran Wali Songo di Kerajaan Demak - detikcom, diakses Desember 10, 2025, https://www.detik.com/jateng/budaya/d-6711495/peran-wali-songo-di-kerajaan-demak</p>
+                <p>Profil – Masjid Agung Demak, diakses Desember 10, 2025, https://masjidagungdemak.org/id/profil/</p>
+                <p>Cirebon: Kota Wali yang Menyatu dalam Budaya, Sejarah, dan Modernitas, diakses Desember 10, 2025, https://pgmi.uinssc.ac.id/cirebon-kota-wali-yang-menyatu-dalam-budaya-sejarah-dan-modernitas/</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Scroll Script -->
+    <script>
+        // Simple Intersection Observer for Fade In animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 150;
+
+                reveals.forEach((reveal) => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); // Trigger once on load
+        });
+    </script>
+
+</body>
+</html>
