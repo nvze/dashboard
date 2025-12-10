@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risiko Utang Pemerintah & Yield Obligasi - Laporan 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        accent: {
+                            blue: '#38bdf8',
+                            gold: '#fbbf24',
+                            red: '#f87171',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #020617;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(251, 191, 36, 0.05) 0px, transparent 50%);
+            color: #e2e8f0;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .prose-custom p {
+            margin-bottom: 1.5em;
+            line-height: 1.8;
+        }
+        .prose-custom h1, .prose-custom h2, .prose-custom h3 {
+            color: #f1f5f9;
+            margin-top: 2.5em;
+            margin-bottom: 1em;
+            letter-spacing: -0.025em;
+        }
+        .highlight-box {
+            border-left: 4px solid #38bdf8;
+            background: rgba(56, 189, 248, 0.05);
+        }
+        .stat-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans selection:bg-accent-blue selection:text-slate-900">
+
+    <!-- Progress Bar -->
+    <div class="fixed top-0 left-0 h-1 bg-gradient-to-r from-accent-blue to-accent-gold z-50 transition-all duration-300" id="progressBar" style="width: 0%"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 bg-slate-950/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-chart-line text-accent-blue"></i>
+                <span class="font-bold tracking-tight text-white">Econ<span class="text-accent-blue">Intel</span> 2025</span>
+            </div>
+            <div class="text-xs font-mono text-slate-400">
+                <span class="hidden sm:inline">STATUS: </span><span class="text-emerald-400">PUBLISHED</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-accent-blue text-xs font-mono mb-6">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+                </span>
+                KAJIAN TEKNIS & SIMULASI EKONOMI 2025
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6 tracking-tight">
+                Gelombang Pasang <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-blue to-cyan-200">Utang Global</span> & Risiko Fiskal Indonesia
+            </h1>
+            <p class="text-xl text-slate-400 max-w-2xl leading-relaxed">
+                Sebuah analisis mendalam tentang gravitasi ekonomi baru di era "Higher-for-Longer" dan dampaknya terhadap stabilitas makroekonomi domestik.
+            </p>
+            
+            <div class="mt-8 flex flex-wrap gap-4 text-sm text-slate-500 font-mono">
+                <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-calendar"></i> Desember 2025
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> Tim Kajian Ekonomi Makro
+                </div>
+            </div>
+        </div>
+        
+        <!-- Background Elements -->
+        <div class="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/3 w-96 h-96 bg-accent-blue/20 rounded-full blur-[100px] -z-10"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 pb-20">
+        
+        <!-- Executive Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+            <div class="stat-card glass-panel p-4 rounded-xl border border-white/5">
+                <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">Yield US Treasury 10Y</div>
+                <div class="text-2xl font-mono font-bold text-accent-red">4.14%</div>
+                <div class="text-xs text-slate-500 mt-2">Benchmark Global</div>
+            </div>
+            <div class="stat-card glass-panel p-4 rounded-xl border border-white/5">
+                <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">Yield SBN RI 10Y</div>
+                <div class="text-2xl font-mono font-bold text-accent-gold">6.19%</div>
+                <div class="text-xs text-slate-500 mt-2">Relatif Stabil</div>
+            </div>
+            <div class="stat-card glass-panel p-4 rounded-xl border border-white/5">
+                <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">Beban Bunga 2025</div>
+                <div class="text-2xl font-mono font-bold text-white">Rp552 T</div>
+                <div class="text-xs text-slate-500 mt-2">Melampaui Bansos</div>
+            </div>
+            <div class="stat-card glass-panel p-4 rounded-xl border border-white/5">
+                <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">Rasio Utang/PDB</div>
+                <div class="text-2xl font-mono font-bold text-emerald-400">38.66%</div>
+                <div class="text-xs text-slate-500 mt-2">Batas Aman < 60%</div>
+            </div>
+        </div>
+
+        <article class="prose-custom text-slate-300">
+            
+            <!-- Chapter 1 -->
+            <section class="mb-16">
+                <h2 class="text-2xl font-bold text-white border-b border-white/10 pb-4 mb-6 flex items-center gap-3">
+                    <span class="bg-accent-blue/10 text-accent-blue w-8 h-8 flex items-center justify-center rounded text-sm font-mono">01</span>
+                    Pendahuluan: Gravitasi Ekonomi Baru
+                </h2>
+                
+                <p>Pada penghujung tahun 2025, lanskap ekonomi global tidak lagi menyerupai dekade sebelumnya yang ditandai dengan uang murah (<em>easy money</em>) dan suku bunga mendekati nol. Kita kini memasuki era baru yang dalam terminologi <em>pop science</em> dapat dianalogikan sebagai <strong>"Era Gravitasi Tinggi"</strong>. Jika suku bunga adalah gaya gravitasi yang menarik modal, maka planet-planet raksasa ekonomi dunia—Amerika Serikat, China, dan Jepang—sedang meningkatkan massa gravitasinya secara signifikan. Fenomena ini menciptakan tarikan yang kuat terhadap likuiditas global, memaksa negara-negara berkembang (<em>emerging markets</em>) seperti Indonesia untuk menyesuaikan orbit fiskal mereka agar tidak terlempar dari sistem stabilitas makroekonomi atau, sebaliknya, tersedot ke dalam lubang hitam krisis utang.</p>
+
+                <p>Laporan ini menyajikan kajian teknis mendalam dan simulasi ekonomi mengenai posisi fiskal Indonesia di tengah dinamika utang global yang semakin ketat. Fokus utama analisis adalah pada mekanisme transmisi risiko dari kenaikan imbal hasil (<em>yield</em>) obligasi global terhadap biaya utang pemerintah Indonesia, serta dampaknya terhadap keberlanjutan Anggaran Pendapatan dan Belanja Negara (APBN) dan sektor riil. Data mutakhir hingga Desember 2025 digunakan sebagai basis asumsi, mencakup posisi utang publik, imbal hasil obligasi, dan postur anggaran.</p>
+
+                <div class="highlight-box p-6 my-8 rounded-r-lg bg-slate-900/50">
+                    <h3 class="text-lg font-bold text-accent-blue mt-0 mb-3">1.1 Premis Dasar: Mengapa Utang Global Menjadi Masalah Kita?</h3>
+                    <p class="mb-0 text-sm">Seringkali, utang negara lain dianggap sebagai masalah domestik mereka. Namun, dalam sistem keuangan global yang terinterkoneksi, utang Amerika Serikat atau Jepang adalah masalah bagi seluruh dunia. Pasar obligasi pemerintah AS (<em>US Treasury</em>) berfungsi sebagai "tingkat suku bunga bebas risiko" (<em>global risk-free rate</em>) yang menjadi tolok ukur bagi harga aset keuangan di seluruh planet. Ketika pemerintah AS menerbitkan utang dalam jumlah masif untuk membiayai defisitnya, mereka menyedot likuiditas dolar dari seluruh dunia, memaksa negara lain membayar bunga lebih tinggi untuk menarik investor yang sama.</p>
+                </div>
+
+                <p>Pada tahun 2024 dan 2025, kita menyaksikan fenomena di mana utang publik global mencapai rekor tertinggi, baik secara nominal maupun rasio terhadap PDB. IMF mencatat bahwa rasio utang publik global telah stabil di level yang sangat tinggi, didorong oleh dua ekonomi terbesar, Amerika Serikat dan China. Kenaikan utang ini bukan tanpa konsekuensi; ia datang bersamaan dengan rezim suku bunga tinggi yang persisten (<em>persistent high-interest rate environment</em>). Bagi Indonesia, ini berarti "biaya sewa" atas modal pembangunan menjadi semakin mahal, sebuah realitas yang tercermin dalam alokasi pembayaran bunga utang yang membengkak dalam APBN.</p>
+            </section>
+
+            <!-- Chapter 2 -->
+            <section class="mb-16">
+                <h2 class="text-2xl font-bold text-white border-b border-white/10 pb-4 mb-6 flex items-center gap-3">
+                    <span class="bg-accent-blue/10 text-accent-blue w-8 h-8 flex items-center justify-center rounded text-sm font-mono">02</span>
+                    Anatomi Samudra Utang Global
+                </h2>
+                
+                <p>Sebelum membedah situasi domestik Indonesia, kita perlu memahami dinamika di tiga pusat kekuatan ekonomi yang menjadi sumber guncangan: Amerika Serikat, Jepang, dan China. Ketiganya sedang mengalami transformasi struktural dalam pengelolaan utang mereka yang mengirimkan gelombang kejut ke pasar negara berkembang.</p>
+
+                <h3 class="text-xl font-semibold text-white mt-8 mb-4">2.1 Amerika Serikat: Sang Penyedot Likuiditas Utama</h3>
+                <p>Amerika Serikat, sebagai penerbit mata uang cadangan dunia, memiliki "hak istimewa selangit" (<em>exorbitant privilege</em>) untuk berutang dalam mata uangnya sendiri. Namun, data menunjukkan bahwa AS sedang menguji batas dari keistimewaan tersebut. Rasio utang pemerintah umum AS terhadap PDB telah melonjak hingga kisaran 121% pada tahun 2024 dan terus menunjukkan tren peningkatan di tahun 2025.</p>
+                <p>Implikasi teknis dari defisit fiskal AS yang persisten adalah banjirnya pasokan surat utang <em>US Treasury</em> di pasar sekunder. Sesuai hukum permintaan dan penawaran, ketika pasokan barang (obligasi) melimpah, harganya cenderung turun. Dalam dunia obligasi, harga yang turun berarti imbal hasil (<em>yield</em>) yang naik. Inilah yang terjadi pada Desember 2025, di mana <em>yield</em> US Treasury tenor 10 tahun—benchmark terpenting di dunia keuangan—bertengger di level 4,14% hingga 4,15%.</p>
+                <p class="italic text-slate-400 border-l-2 border-slate-600 pl-4">"Angka 4,14% ini memiliki daya rusak yang luar biasa... Jika uang bisa mendapatkan hasil 4,14% dengan risiko nol di Amerika, maka uang tersebut tidak akan mau pergi ke Indonesia kecuali ditawari hasil yang jauh lebih tinggi."</p>
+
+                <h3 class="text-xl font-semibold text-white mt-8 mb-4">2.2 Jepang: Bangkitnya Naga Tidur dan Ancaman Carry Trade</h3>
+                <p>Perkembangan paling dramatis di akhir 2025 mungkin bukan datang dari Barat, melainkan dari Timur. Jepang, yang selama puluhan tahun menjadi jangkar suku bunga rendah dunia, mulai melakukan normalisasi kebijakan moneter. <em>Yield</em> obligasi pemerintah Jepang (JGB) tenor 10 tahun tercatat naik signifikan ke level 1,98% pada Desember 2025, level tertinggi sejak 2007.</p>
+                <p>Secara <em>pop science</em>, Jepang selama ini bertindak sebagai "ATM gratis" bagi investor global. Melalui mekanisme <em>Yen Carry Trade</em>, investor meminjam Yen dengan bunga mendekati 0%, lalu menukarnya ke Dolar atau Rupiah untuk membeli aset dengan bunga tinggi. Namun, ketika <em>yield</em> JGB naik mendekati 2%, biaya meminjam di "ATM Jepang" tidak lagi murah. Ini memicu potensi pembalikan arus modal (<em>capital reversal</em>).</p>
+
+                <h3 class="text-xl font-semibold text-white mt-8 mb-4">2.3 China: Deflasi dan Utang Tersembunyi</h3>
+                <p>Di sisi lain, China menghadapi masalah yang berbeda: perlambatan pertumbuhan dan utang pemerintah daerah yang masif. Rasio utang publik China tercatat meningkat tajam, dari 88,33% menuju angka proyeksi di atas 96%. Berbeda dengan AS yang mengekspor inflasi biaya dana, China mengekspor deflasi permintaan.</p>
+
+                <!-- Table 2.1 -->
+                <div class="my-8 overflow-hidden rounded-xl border border-slate-700 shadow-2xl">
+                    <div class="bg-slate-800/50 px-4 py-3 border-b border-slate-700 flex justify-between items-center">
+                        <span class="text-sm font-bold text-accent-gold font-mono">TABEL 2.1: DATA KOMPARATIF GLOBAL (ESTIMASI 2025)</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-xs text-slate-400 uppercase bg-slate-800/30">
+                                <tr>
+                                    <th class="px-6 py-3">Indikator Ekonomi</th>
+                                    <th class="px-6 py-3 text-right">Amerika Serikat</th>
+                                    <th class="px-6 py-3 text-right">Jepang</th>
+                                    <th class="px-6 py-3 text-right">China</th>
+                                    <th class="px-6 py-3 text-right text-accent-blue bg-accent-blue/5">Indonesia</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-700/50">
+                                <tr class="bg-slate-900/50">
+                                    <td class="px-6 py-4 font-medium">Rasio Utang/PDB</td>
+                                    <td class="px-6 py-4 text-right">~121%</td>
+                                    <td class="px-6 py-4 text-right">~236%</td>
+                                    <td class="px-6 py-4 text-right">~96%</td>
+                                    <td class="px-6 py-4 text-right font-bold text-accent-blue bg-accent-blue/5">38,66%</td>
+                                </tr>
+                                <tr class="bg-slate-900/30">
+                                    <td class="px-6 py-4 font-medium">Yield Obligasi 10Y</td>
+                                    <td class="px-6 py-4 text-right text-accent-red">4,14%</td>
+                                    <td class="px-6 py-4 text-right">1,98%</td>
+                                    <td class="px-6 py-4 text-right">~2,1%</td>
+                                    <td class="px-6 py-4 text-right font-bold text-accent-blue bg-accent-blue/5">6,19%</td>
+                                </tr>
+                                <tr class="bg-slate-900/50">
+                                    <td class="px-6 py-4 font-medium">Tren Utang</td>
+                                    <td class="px-6 py-4 text-right">Meningkat</td>
+                                    <td class="px-6 py-4 text-right">Stabil Tinggi</td>
+                                    <td class="px-6 py-4 text-right">Meningkat Cepat</td>
+                                    <td class="px-6 py-4 text-right text-accent-blue bg-accent-blue/5">Terkendali</td>
+                                </tr>
+                                <tr class="bg-slate-900/30">
+                                    <td class="px-6 py-4 font-medium">Dampak Global</td>
+                                    <td class="px-6 py-4 text-right">Benchmark</td>
+                                    <td class="px-6 py-4 text-right">Carry Trade</td>
+                                    <td class="px-6 py-4 text-right">Permintaan</td>
+                                    <td class="px-6 py-4 text-right text-accent-blue bg-accent-blue/5">Price Taker</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter 3 -->
+            <section class="mb-16">
+                <h2 class="text-2xl font-bold text-white border-b border-white/10 pb-4 mb-6 flex items-center gap-3">
+                    <span class="bg-accent-blue/10 text-accent-blue w-8 h-8 flex items-center justify-center rounded text-sm font-mono">03</span>
+                    Diagnosis Kesehatan Fiskal Indonesia
+                </h2>
+                
+                <p>Sebelum kita melakukan simulasi dampak badai global tersebut, kita perlu melakukan <em>check-up</em> menyeluruh terhadap kondisi fiskal Indonesia saat ini.</p>
+
+                <h3 class="text-xl font-semibold text-white mt-8 mb-4">3.1 Profil Utang: Aman di Permukaan, Berisiko di Kedalaman</h3>
+                <p>Berdasarkan data Kementerian Keuangan per Oktober 2024, total utang pemerintah Indonesia mencapai <strong>Rp8.560,36 triliun</strong>. Rasio utang terhadap PDB Indonesia berada di level 38,66%. Angka ini jauh di bawah batas aman undang-undang sebesar 60% dan relatif rendah dibandingkan negara-negara maju (G7). Ini memberikan <em>buffer</em> yang cukup baik.</p>
+                <p>Namun, indikator yang lebih mencemaskan bukan terletak pada <em>stok</em> utang, melainkan pada <em>arus</em> pembayaran bunga. Data APBN 2025 menunjukkan alokasi pembayaran bunga utang mencapai angka fantastis: <strong>Rp552 triliun</strong>.</p>
+
+                <h3 class="text-xl font-semibold text-white mt-8 mb-4">3.2 Transformasi Struktur Kepemilikan</h3>
+                <p>Salah satu temuan paling menarik dari data 2024-2025 adalah perubahan drastis dalam siapa yang memegang utang Indonesia. Kepemilikan asing di SBN telah menyusut drastis ke kisaran 14% pada akhir 2025.</p>
+                
+                <div class="bg-slate-800/40 p-5 rounded-lg border border-slate-700 my-6">
+                    <div class="flex items-start gap-3">
+                        <i class="fa-solid fa-lightbulb text-accent-gold mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-accent-gold mb-2 text-sm uppercase">Analisis Pop Science: "Dari Turis Asing ke Tetangga Sendiri"</h4>
+                            <p class="text-sm mb-0">Bayangkan SBN sebagai surat saham sebuah perusahaan negara. Dulu, 40% saham ini dimiliki oleh "turis asing" yang mudah panik. Sekarang, saham itu mayoritas dibeli oleh "warga lokal" (bank-bank BUMN, dana pensiun, asuransi). Warga lokal cenderung lebih setia, tidak mudah panik, dan tidak akan menukar Rupiah mereka ke Dolar secara massal saat krisis.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mt-8 mb-4">3.3 Fenomena "Crowding Out"</h3>
+                <p>Namun, stabilitas ini tidak gratis. Ketika perbankan domestik memborong SBN, likuiditas mereka tersedot ke instrumen negara. Ini menciptakan fenomena <em>Crowding Out</em> atau "pendesakan". Sektor swasta harus bersaing dengan pemerintah untuk mendapatkan dana dari bank. Dampaknya terlihat pada pertumbuhan kredit yang melambat menjadi 7,36% pada Oktober 2025.</p>
+            </section>
+
+            <!-- Chapter 4 -->
+            <section class="mb-16">
+                <h2 class="text-2xl font-bold text-white border-b border-white/10 pb-4 mb-6 flex items-center gap-3">
+                    <span class="bg-accent-blue/10 text-accent-blue w-8 h-8 flex items-center justify-center rounded text-sm font-mono">04</span>
+                    Beban Bunga: "The Silent Killer"
+                </h2>
+                
+                <p>Alokasi pembayaran bunga utang sebesar Rp552 triliun dalam APBN 2025 bukanlah sekadar angka akuntansi. Ini adalah representasi dari hilangnya kesempatan (<em>opportunity cost</em>) pembangunan.</p>
+
+                <!-- Visualization of Spending -->
+                <div class="grid grid-cols-1 gap-6 my-8">
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-accent-red font-bold">Pembayaran Bunga Utang</span>
+                                <span class="font-mono">Rp 552,0 T</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-4">
+                                <div class="bg-accent-red h-4 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-emerald-400">Perlindungan Sosial</span>
+                                <span class="font-mono">Rp 504,7 T</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-4">
+                                <div class="bg-emerald-400 h-4 rounded-full opacity-80" style="width: 91%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-blue-400">Infrastruktur</span>
+                                <span class="font-mono">Rp 400,3 T</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-4">
+                                <div class="bg-blue-400 h-4 rounded-full opacity-70" style="width: 72%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-cyan-400">Kesehatan</span>
+                                <span class="font-mono">Rp 197,8 T</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-4">
+                                <div class="bg-cyan-400 h-4 rounded-full opacity-50" style="width: 35%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p>Fakta bahwa negara menghabiskan uang lebih banyak untuk membayar "sewa uang" (bunga) daripada untuk menjaga kesehatan seluruh rakyat Indonesia adalah indikator ketidakefisienan struktural. Rasio beban bunga terhadap pendapatan negara diperkirakan berada di kisaran 15% - 19%, level yang menandakan fleksibilitas fiskal yang terbatas.</p>
+            </section>
+
+            <!-- Chapter 5 -->
+            <section class="mb-16">
+                <h2 class="text-2xl font-bold text-white border-b border-white/10 pb-4 mb-6 flex items-center gap-3">
+                    <span class="bg-accent-blue/10 text-accent-blue w-8 h-8 flex items-center justify-center rounded text-sm font-mono">05</span>
+                    Simulasi Teknis & Stress Test
+                </h2>
+                
+                <p class="mb-6">Simulasi ini menggunakan pendekatan sensitivitas fiskal dengan <em>baseline</em> APBN 2025.</p>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Scenario A -->
+                    <div class="glass-panel p-6 rounded-xl border-t-4 border-emerald-500 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-emerald-500/5 group-hover:bg-emerald-500/10 transition-colors"></div>
+                        <h4 class="font-bold text-emerald-400 mb-2">SKENARIO A<br><span class="text-sm font-normal text-slate-400">Soft Landing</span></h4>
+                        <ul class="text-sm space-y-2 list-disc pl-4 marker:text-emerald-500">
+                            <li>Yield US Treasury: 3.8%</li>
+                            <li>Yield SBN: 6.0% - 6.3%</li>
+                            <li>Dampak: Ruang fiskal melonggar</li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-white/10">
+                            <span class="text-xs font-mono bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded">Probabilitas: 30%</span>
+                        </div>
+                    </div>
+
+                    <!-- Scenario B -->
+                    <div class="glass-panel p-6 rounded-xl border-t-4 border-accent-gold relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-amber-500/5 group-hover:bg-amber-500/10 transition-colors"></div>
+                        <h4 class="font-bold text-accent-gold mb-2">SKENARIO B<br><span class="text-sm font-normal text-slate-400">Higher-for-Longer</span></h4>
+                        <ul class="text-sm space-y-2 list-disc pl-4 marker:text-amber-500">
+                            <li>Yield US Treasury: 4.5%</li>
+                            <li>Yield SBN: 6.5% - 7.0%</li>
+                            <li>Dampak: Disiplin ketat, Crowding out</li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-white/10">
+                            <span class="text-xs font-mono bg-amber-500/20 text-amber-300 px-2 py-1 rounded">Probabilitas: 50%</span>
+                        </div>
+                    </div>
+
+                    <!-- Scenario C -->
+                    <div class="glass-panel p-6 rounded-xl border-t-4 border-accent-red relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-red-500/5 group-hover:bg-red-500/10 transition-colors"></div>
+                        <h4 class="font-bold text-accent-red mb-2">SKENARIO C<br><span class="text-sm font-normal text-slate-400">Perfect Storm</span></h4>
+                        <ul class="text-sm space-y-2 list-disc pl-4 marker:text-red-500">
+                            <li>Rupiah: Rp17.500/USD</li>
+                            <li>Yield SBN: 8.5%</li>
+                            <li>Dampak: Beban bunga > Rp600T</li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-white/10">
+                            <span class="text-xs font-mono bg-red-500/20 text-red-300 px-2 py-1 rounded">Probabilitas: 20%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter 6 -->
+            <section class="mb-16">
+                <h2 class="text-2xl font-bold text-white border-b border-white/10 pb-4 mb-6 flex items-center gap-3">
+                    <span class="bg-accent-blue/10 text-accent-blue w-8 h-8 flex items-center justify-center rounded text-sm font-mono">06</span>
+                    Dampak Sektor Riil
+                </h2>
+                
+                <p>Analisis utang seringkali terjebak di menara gading angka-angka. Namun, implikasi dari kenaikan biaya utang ini sangat nyata bagi kehidupan sehari-hari masyarakat Indonesia.</p>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white">6.1 Transmisi ke Daya Beli: Fenomena Deflasi 2025</h3>
+                        <p>Sepanjang 2025, Indonesia mencatat beberapa kali deflasi bulanan. Ketika pemerintah harus menyisihkan Rp552 triliun untuk bunga utang, stimulus ekonomi menjadi terbatas. Anggaran negara tersandera oleh masa lalu, menyebabkan uang beredar berkurang dan deflasi terjadi karena lemahnya permintaan.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white">6.2 Kredit yang "Macet" di Pipa</h3>
+                        <p>Bank berlogika: "Mengapa saya harus meminjamkan ke pengusaha dengan bunga 11% (risiko tinggi), kalau negara mau meminjam uang saya lewat SBN dengan bunga 7% (bebas risiko)?" Akibatnya, sektor riil kekurangan modal kerja.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white">6.3 Risiko Pajak yang Mengintai</h3>
+                        <p>Siapa yang membayar bunga Rp552 triliun itu? Pembayar Pajak. Risiko ke depan adalah intensifikasi pajak yang menyasar kelas menengah atau kenaikan tarif PPN.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter 7 -->
+            <section class="mb-16">
+                <h2 class="text-2xl font-bold text-white border-b border-white/10 pb-4 mb-6 flex items-center gap-3">
+                    <span class="bg-accent-blue/10 text-accent-blue w-8 h-8 flex items-center justify-center rounded text-sm font-mono">07</span>
+                    Strategi Mitigasi
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-900 border border-slate-700 p-5 rounded-lg">
+                        <i class="fa-solid fa-users text-accent-blue mb-3 text-2xl"></i>
+                        <h4 class="font-bold text-white">Demokratisasi Utang</h4>
+                        <p class="text-sm mt-2">Memperbanyak SBN Ritel agar bunga utang dinikmati rakyat sendiri, bukan asing.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-5 rounded-lg">
+                        <i class="fa-solid fa-piggy-bank text-accent-gold mb-3 text-2xl"></i>
+                        <h4 class="font-bold text-white">Cash Buffer (SAL)</h4>
+                        <p class="text-sm mt-2">Menggunakan Saldo Anggaran Lebih saat pasar panik untuk menghindari penerbitan utang bunga tinggi.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-5 rounded-lg">
+                        <i class="fa-solid fa-chart-pie text-emerald-400 mb-3 text-2xl"></i>
+                        <h4 class="font-bold text-white">Financial Deepening</h4>
+                        <p class="text-sm mt-2">Memperluas basis investor domestik agar kebal guncangan eksternal.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-5 rounded-lg">
+                        <i class="fa-solid fa-scissors text-accent-red mb-3 text-2xl"></i>
+                        <h4 class="font-bold text-white">Efisiensi Belanja</h4>
+                        <p class="text-sm mt-2">Memotong belanja birokrasi, fokus pada infrastruktur produktif.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conclusion -->
+            <section class="p-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl border border-slate-700 mb-16">
+                <h2 class="text-2xl font-bold text-white mb-4">Kesimpulan: Waspada, Namun Optimis</h2>
+                <p>Kajian teknis ini menyimpulkan bahwa risiko peningkatan biaya utang pemerintah Indonesia adalah <strong>nyata, signifikan, dan sedang berlangsung</strong>. Kita tidak sedang berada di tepi jurang krisis seperti 1998, namun kita sedang berjalan di tanjakan terjal dengan beban ransel yang semakin berat.</p>
+                <p class="mb-0">Bagi pemerintah, disiplin fiskal bukan lagi pilihan, melainkan satu-satunya jalan untuk mencegah gelombang pasang utang global menenggelamkan cita-cita kesejahteraan nasional.</p>
+            </section>
+
+            <!-- References -->
+            <section class="border-t border-slate-800 pt-12">
+                <h3 class="text-lg font-bold text-white mb-6 uppercase tracking-wider text-sm">Referensi Data & Jurnal</h3>
+                <div class="grid gap-3 text-xs font-mono text-slate-500">
+                    <a href="https://www.imf.org/external/datamapper/GDD/2024%20Global%20Debt%20Monitor.pdf" target="_blank" class="hover:text-accent-blue transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> GLOBAL DEBT MONITOR 2024 - IMF
+                    </a>
+                    <a href="https://tradingeconomics.com/indonesia/government-bond-yield" target="_blank" class="hover:text-accent-blue transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> Indonesia 10-Year Government Bond Yield - Trading Economics
+                    </a>
+                    <a href="https://www.advisorperspectives.com/dshort/updates/2025/12/05/treasury-yields-snapshot-december-5-2025" target="_blank" class="hover:text-accent-blue transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> Treasury Yields Snapshot Dec 2025
+                    </a>
+                    <a href="https://www.imf.org/en/blogs/articles/2025/09/17/global-debt-remains-above-235-of-world-gdp" target="_blank" class="hover:text-accent-blue transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> IMF Blog: Global Debt Remains Above 235%
+                    </a>
+                    <a href="https://tradingeconomics.com/united-states/government-bond-yield" target="_blank" class="hover:text-accent-blue transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> US 10 Year Treasury Note Yield
+                    </a>
+                    <a href="https://tradingeconomics.com/japan/government-bond-yield" target="_blank" class="hover:text-accent-blue transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> Japan 10 Year Government Bond Yield
+                    </a>
+                    <a href="https://infobanknews.com/utang-pemerintah-ri-naik-lagi-di-oktober-2024-jadi-rp8-56036-triliun/" target="_blank" class="hover:text-accent-blue transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> Utang Pemerintah RI Naik - Infobanknews
+                    </a>
+                    <a href="https://www.bloombergtechnoz.com/detail-news/76804/ri-bayar-bunga-utang-rp552-triliun-2025-lebih-besar-dari-bansos" target="_blank" class="hover:text-accent-blue transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> RI Bayar Bunga Utang Rp552 T - Bloomberg
+                    </a>
+                    <a href="https://fiskal.kemenkeu.go.id/files/red/file/1762242078_red-okt-2025.pdf" target="_blank" class="hover:text-accent-blue transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> Recent Economic Development - Kemenkeu
+                    </a>
+                </div>
+            </section>
+
+        </article>
+
+        <!-- CTA Button -->
+        <div class="mt-20 flex justify-center pb-10">
+            <a href="https://nvze.github.io/dashboard/blog.html" class="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-slate-900 border border-white/20 font-mono rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-blue hover:bg-slate-800 hover:border-accent-blue hover:scale-105 active:scale-95">
+                <span class="mr-2">Kembali ke daftar Jurnal</span>
+                <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                <div class="absolute inset-0 rounded-full ring-2 ring-white/10 group-hover:ring-accent-blue/50 transition-all"></div>
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950 py-12">
+        <div class="max-w-4xl mx-auto px-6 text-center text-slate-600 text-sm">
+            <p>&copy; 2025 Kajian Ekonomi Makro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Progress Bar Script
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
