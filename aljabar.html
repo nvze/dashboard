@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aljabar Eksplorer: Panduan Interaktif</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js for Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- KaTeX for Professional Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafaf9; /* stone-50 */
+            color: #1c1917; /* stone-900 */
+        }
+
+        /* Chart Container Styling - Mandatory & Responsive */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-width: 600px;
+            }
+        }
+
+        /* Card Hover Effects */
+        .topic-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .topic-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f5f5f4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d6d3d1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e;
+        }
+        
+        /* Math Display Adjustments */
+        .katex-display {
+            margin: 0.5em 0 !important;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+    </style>
+    <!-- Chosen Palette: Stone (Background), Indigo (Primary Accent), Emerald/Rose (Secondary Indicators) -->
+    <!-- Application Structure Plan: 
+         - Using KaTeX library ensures all formulas are rendered with LaTeX precision (no broken fractions or bad alignment).
+         - Layout remains responsive with a sidebar for quick navigation.
+         - Interactive 'Labs' are embedded alongside the precise formulas to bridge theory and practice.
+    -->
+    <!-- Visualization & Content Choices:
+         - Charts are constrained strictly to prevent layout shifts.
+         - Math notation follows Indonesian conventions (e.g., prescript logs ^a log b).
+         - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. Formulas rendered via KaTeX.
+    -->
+</head>
+<body class="flex h-screen overflow-hidden text-stone-800">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-stone-900 text-stone-200 hidden md:flex flex-col flex-shrink-0 h-full overflow-y-auto">
+        <div class="p-6 border-b border-stone-700">
+            <h1 class="text-2xl font-bold text-white tracking-tight">Aljabar<span class="text-indigo-400">.Pro</span></h1>
+            <p class="text-xs text-stone-400 mt-2">Panduan Rumus & Visualisasi</p>
+        </div>
+        <nav class="flex-1 px-4 py-6 space-y-2">
+            <a href="#intro" class="nav-item block px-4 py-2 rounded-lg hover:bg-stone-800 transition-colors text-sm font-medium text-stone-300">Pengantar</a>
+            <a href="#eksponen" class="nav-item block px-4 py-2 rounded-lg hover:bg-stone-800 transition-colors text-sm font-medium">1. Eksponen</a>
+            <a href="#akar" class="nav-item block px-4 py-2 rounded-lg hover:bg-stone-800 transition-colors text-sm font-medium">2. Bentuk Akar</a>
+            <a href="#pemfaktoran" class="nav-item block px-4 py-2 rounded-lg hover:bg-stone-800 transition-colors text-sm font-medium">3. Pemfaktoran</a>
+            <a href="#kuadrat" class="nav-item block px-4 py-2 rounded-lg bg-indigo-900/50 text-indigo-300 transition-colors text-sm font-bold border border-indigo-700/50">4. Persamaan Kuadrat ✨</a>
+            <a href="#logaritma" class="nav-item block px-4 py-2 rounded-lg hover:bg-stone-800 transition-colors text-sm font-medium">5. Logaritma</a>
+            <a href="#barisan" class="nav-item block px-4 py-2 rounded-lg hover:bg-stone-800 transition-colors text-sm font-medium">6. Barisan & Deret 📊</a>
+            <a href="#mutlak" class="nav-item block px-4 py-2 rounded-lg hover:bg-stone-800 transition-colors text-sm font-medium">7. Nilai Mutlak</a>
+        </nav>
+        <div class="p-4 border-t border-stone-800 text-xs text-stone-500 text-center">
+            Menggunakan KaTeX Rendering
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 h-full overflow-y-auto relative scroll-smooth bg-stone-50">
+        
+        <!-- Mobile Header -->
+        <div class="md:hidden bg-stone-900 text-white p-4 sticky top-0 z-50 flex justify-between items-center shadow-md">
+            <span class="font-bold text-lg">Aljabar.Pro</span>
+            <button id="mobile-menu-btn" class="text-stone-300 hover:text-white focus:outline-none">
+                ☰ Menu
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-stone-900/95 z-40 hidden flex flex-col justify-center items-center space-y-6 text-xl">
+            <a href="#eksponen" class="mobile-link text-stone-300 hover:text-white">Eksponen</a>
+            <a href="#kuadrat" class="mobile-link text-stone-300 hover:text-white">Persamaan Kuadrat</a>
+            <a href="#barisan" class="mobile-link text-stone-300 hover:text-white">Barisan & Deret</a>
+            <button id="close-mobile-menu" class="mt-8 text-indigo-400 font-bold">Tutup</button>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-4 py-8 md:px-8 md:py-12 space-y-16">
+
+            <!-- Intro Section -->
+            <section id="intro" class="text-center space-y-4 pt-4 pb-8 border-b border-stone-200">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">Kumpulan Rumus <span class="text-indigo-600">Aljabar</span> Lengkap</h1>
+                <p class="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
+                    Referensi lengkap matematika dengan penulisan rumus yang presisi (LaTeX) dan simulasi interaktif.
+                </p>
+            </section>
+
+            <!-- 1. Eksponen -->
+            <section id="eksponen" class="scroll-mt-20">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="h-8 w-8 rounded bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold">1</div>
+                    <h2 class="text-2xl font-bold text-stone-800">Sifat-Sifat Eksponen (Perpangkatan)</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Theory Cards -->
+                    <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm topic-card">
+                            <h3 class="text-xs font-bold text-stone-400 uppercase tracking-wide mb-2">Operasi Dasar</h3>
+                            <div class="text-stone-800 text-lg">
+                                $$ a^m \times a^n = a^{m+n} $$
+                                $$ \frac{a^m}{a^n} = a^{m-n} $$
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm topic-card">
+                            <h3 class="text-xs font-bold text-stone-400 uppercase tracking-wide mb-2">Pangkat Majemuk</h3>
+                            <div class="text-stone-800 text-lg">
+                                $$ (a^m)^n = a^{m \cdot n} $$
+                                $$ (ab)^m = a^m b^m $$
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm topic-card sm:col-span-2">
+                            <h3 class="text-xs font-bold text-stone-400 uppercase tracking-wide mb-2">Pangkat Negatif & Nol</h3>
+                            <div class="flex flex-col sm:flex-row justify-around items-center text-stone-800 text-lg">
+                                <div>$$ a^{-n} = \frac{1}{a^n} $$</div>
+                                <div>$$ a^0 = 1 \quad (a \neq 0) $$</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interaction: Simple Power Calc -->
+                    <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100 flex flex-col justify-center">
+                        <h3 class="font-bold text-indigo-900 mb-4 text-sm uppercase tracking-wider">Simulasi Hitung</h3>
+                        <div class="space-y-4">
+                            <div class="flex space-x-2 items-center justify-center">
+                                <div class="relative">
+                                    <input type="number" id="exp-base" value="2" class="w-16 p-2 text-center text-xl font-bold rounded border border-indigo-200 outline-none focus:ring-2 focus:ring-indigo-400 text-indigo-900">
+                                    <label class="block text-[10px] text-center text-indigo-500 mt-1">Basis (a)</label>
+                                </div>
+                                <div class="pb-6">
+                                    <input type="number" id="exp-pow" value="5" class="w-12 p-1 text-center text-sm font-bold rounded border border-indigo-200 outline-none focus:ring-2 focus:ring-indigo-400 text-indigo-900 mb-4">
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-indigo-100 text-center">
+                                <div class="text-xs text-stone-500 mb-1">Hasil:</div>
+                                <div class="text-2xl font-mono font-bold text-indigo-600" id="exp-result">32</div>
+                                <div class="text-xs text-stone-400 mt-1 font-mono break-all" id="exp-detail">2 x 2 x 2 x 2 x 2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Bentuk Akar -->
+            <section id="akar" class="scroll-mt-20 border-t border-stone-200 pt-8">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="h-8 w-8 rounded bg-stone-200 flex items-center justify-center text-stone-700 font-bold">2</div>
+                    <h2 class="text-2xl font-bold text-stone-800">Sifat-Sifat Bentuk Akar</h2>
+                </div>
+                <div class="bg-white rounded-xl border border-stone-200 shadow-sm p-6">
+                    <p class="text-stone-600 mb-6 text-sm">Hubungan dasar akar dan pangkat pecahan:</p>
+                    <div class="flex justify-center mb-8">
+                        <span class="bg-stone-100 px-4 py-2 rounded-lg border border-stone-200">
+                            $$ \sqrt[n]{a^m} = a^{\frac{m}{n}} $$
+                        </span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="p-4 bg-stone-50 rounded-lg hover:bg-stone-100 transition-colors">
+                            <div class="text-xs font-bold text-stone-500 uppercase mb-2">Perkalian</div>
+                            <div>$$ \sqrt{a} \times \sqrt{b} = \sqrt{ab} $$</div>
+                        </div>
+                        <div class="p-4 bg-stone-50 rounded-lg hover:bg-stone-100 transition-colors">
+                            <div class="text-xs font-bold text-stone-500 uppercase mb-2">Pembagian</div>
+                            <div>$$ \frac{\sqrt{a}}{\sqrt{b}} = \sqrt{\frac{a}{b}} $$</div>
+                        </div>
+                        <div class="p-4 bg-stone-50 rounded-lg hover:bg-stone-100 transition-colors">
+                            <div class="text-xs font-bold text-stone-500 uppercase mb-2">Akar Bersusun</div>
+                            <div>$$ \sqrt[m]{\sqrt[n]{a}} = \sqrt[mn]{a} $$</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Pemfaktoran -->
+            <section id="pemfaktoran" class="scroll-mt-20 border-t border-stone-200 pt-8">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="h-8 w-8 rounded bg-stone-200 flex items-center justify-center text-stone-700 font-bold">3</div>
+                    <h2 class="text-2xl font-bold text-stone-800">Pemfaktoran & Aljabar Khusus</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-orange-50 p-6 rounded-xl border border-orange-100">
+                        <h3 class="font-bold text-orange-900 mb-4 border-b border-orange-200 pb-2 text-sm uppercase">Bentuk Kuadrat (Pangkat 2)</h3>
+                        <div class="text-stone-800 space-y-2">
+                            $$ (a + b)^2 = a^2 + 2ab + b^2 $$
+                            $$ (a - b)^2 = a^2 - 2ab + b^2 $$
+                            <div class="bg-white p-3 rounded border border-orange-200 mt-2">
+                                <p class="text-xs text-orange-600 font-bold mb-1">PENTING (Selisih Dua Kuadrat):</p>
+                                $$ a^2 - b^2 = (a + b)(a - b) $$
+                            </div>
+                            $$ (a + b + c)^2 = a^2 + b^2 + c^2 + 2(ab+bc+ca) $$
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
+                        <h3 class="font-bold text-blue-900 mb-4 border-b border-blue-200 pb-2 text-sm uppercase">Bentuk Kubik (Pangkat 3)</h3>
+                        <div class="text-stone-800 text-sm space-y-2">
+                            $$ (a \pm b)^3 = a^3 \pm 3a^2b + 3ab^2 \pm b^3 $$
+                            <div class="mt-4 pt-4 border-t border-blue-200/50">
+                                $$ a^3 + b^3 = (a + b)(a^2 - ab + b^2) $$
+                                $$ a^3 - b^3 = (a - b)(a^2 + ab + b^2) $$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Persamaan Kuadrat (Interactive Lab) -->
+            <section id="kuadrat" class="scroll-mt-20 border-t border-stone-200 pt-8">
+                <div class="bg-stone-900 rounded-2xl overflow-hidden shadow-2xl">
+                    <div class="p-6 md:p-8 bg-gradient-to-br from-indigo-900 to-stone-900 text-white">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="h-8 w-8 rounded bg-indigo-500 flex items-center justify-center text-white font-bold">4</div>
+                            <h2 class="text-2xl font-bold">Persamaan Kuadrat</h2>
+                        </div>
+                        
+                        <p class="text-indigo-200 mb-8 max-w-3xl text-sm leading-relaxed">
+                            Bentuk umum: $ ax^2 + bx + c = 0 $. Gunakan panel kontrol di bawah untuk mengubah koefisien dan melihat dampaknya terhadap grafik parabola dan akar-akar persamaan.
+                        </p>
+
+                        <div class="flex flex-col lg:flex-row gap-8">
+                            <!-- Controls -->
+                            <div class="w-full lg:w-1/3 space-y-6 bg-white/5 p-6 rounded-xl border border-white/10 backdrop-blur-sm">
+                                <h3 class="font-bold text-indigo-300 uppercase text-xs tracking-wider border-b border-indigo-500/30 pb-2">Kontrol Koefisien</h3>
+                                
+                                <div class="space-y-5">
+                                    <div class="input-group">
+                                        <div class="flex justify-between text-sm font-medium mb-1">
+                                            <span>Koefisien $ a $</span>
+                                            <span class="text-indigo-300 font-mono" id="val-a">1</span>
+                                        </div>
+                                        <input type="range" id="input-a" min="-5" max="5" step="0.5" value="1" class="w-full h-2 bg-indigo-900/50 rounded-lg appearance-none cursor-pointer accent-indigo-400">
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="flex justify-between text-sm font-medium mb-1">
+                                            <span>Koefisien $ b $</span>
+                                            <span class="text-indigo-300 font-mono" id="val-b">0</span>
+                                        </div>
+                                        <input type="range" id="input-b" min="-10" max="10" step="1" value="0" class="w-full h-2 bg-indigo-900/50 rounded-lg appearance-none cursor-pointer accent-indigo-400">
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="flex justify-between text-sm font-medium mb-1">
+                                            <span>Konstanta $ c $</span>
+                                            <span class="text-indigo-300 font-mono" id="val-c">-4</span>
+                                        </div>
+                                        <input type="range" id="input-c" min="-10" max="10" step="1" value="-4" class="w-full h-2 bg-indigo-900/50 rounded-lg appearance-none cursor-pointer accent-indigo-400">
+                                    </div>
+                                </div>
+
+                                <div class="pt-4 border-t border-white/10 space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-indigo-200">Diskriminan ($ D $)</span>
+                                        <span class="font-mono font-bold" id="result-d">16</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-indigo-200">Akar $ x_1 $</span>
+                                        <span class="font-mono font-bold text-emerald-400" id="result-x1">2</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-indigo-200">Akar $ x_2 $</span>
+                                        <span class="font-mono font-bold text-emerald-400" id="result-x2">-2</span>
+                                    </div>
+                                    <div class="text-xs text-center bg-indigo-950/50 p-2 rounded text-indigo-300 mt-2 italic" id="root-type">
+                                        Dua akar riil berbeda
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Visualization -->
+                            <div class="w-full lg:w-2/3 bg-white rounded-xl p-2 text-stone-900 flex flex-col items-center justify-center relative shadow-lg">
+                                <div class="chart-container">
+                                    <canvas id="quadChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Formula Reference Footer -->
+                    <div class="bg-black/40 backdrop-blur-md p-6 border-t border-white/5 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-indigo-100">
+                        <div>
+                            <span class="block text-indigo-400 text-xs font-bold uppercase mb-2">Rumus ABC</span>
+                            <div>$$ x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$</div>
+                        </div>
+                        <div>
+                            <span class="block text-indigo-400 text-xs font-bold uppercase mb-2">Diskriminan</span>
+                            <div>$$ D = b^2 - 4ac $$</div>
+                        </div>
+                        <div>
+                            <span class="block text-indigo-400 text-xs font-bold uppercase mb-2">Teorema Vieta</span>
+                            <div class="flex gap-4">
+                                <span>$$ x_1 + x_2 = -\frac{b}{a} $$</span>
+                                <span>$$ x_1 \cdot x_2 = \frac{c}{a} $$</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Logaritma -->
+            <section id="logaritma" class="scroll-mt-20 border-t border-stone-200 pt-8">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="h-8 w-8 rounded bg-stone-200 flex items-center justify-center text-stone-700 font-bold">5</div>
+                    <h2 class="text-2xl font-bold text-stone-800">Logaritma</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="md:col-span-2 bg-white rounded-xl border border-stone-200 shadow-sm p-6">
+                        <h3 class="text-xs font-bold text-stone-400 uppercase tracking-wide mb-4">Sifat-Sifat Utama</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 text-stone-700">
+                            <div>$$ {}^a\log(b \cdot c) = {}^a\log b + {}^a\log c $$</div>
+                            <div>$$ {}^a\log\left(\frac{b}{c}\right) = {}^a\log b - {}^a\log c $$</div>
+                            <div>$$ {}^a\log b^n = n \cdot {}^a\log b $$</div>
+                            <div>$$ {}^a\log b = \frac{1}{{}^b\log a} $$</div>
+                            <div>$$ {}^a\log b \cdot {}^b\log c = {}^a\log c $$</div>
+                            <div>$$ a^{{}^a\log b} = b $$</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-teal-50 rounded-xl border border-teal-100 p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-teal-900 mb-2 text-sm uppercase">Definisi</h3>
+                            <div class="mb-6 text-teal-800">
+                                $$ {}^a\log b = c \iff a^c = b $$
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-2 bg-white p-2 rounded border border-teal-100">
+                                    <span class="text-xs font-bold text-teal-600 w-12">Basis (a)</span>
+                                    <input type="number" id="log-base" value="2" class="w-full p-1 text-sm rounded outline-none text-right font-bold text-teal-900">
+                                </div>
+                                <div class="flex items-center gap-2 bg-white p-2 rounded border border-teal-100">
+                                    <span class="text-xs font-bold text-teal-600 w-12">Numerus (b)</span>
+                                    <input type="number" id="log-num" value="8" class="w-full p-1 text-sm rounded outline-none text-right font-bold text-teal-900">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-teal-600 p-3 rounded text-center shadow-lg">
+                            <span class="text-xs text-teal-100 block mb-1">Hasil ($c$)</span>
+                            <span class="text-2xl font-bold text-white" id="log-result">3</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Barisan & Deret -->
+            <section id="barisan" class="scroll-mt-20 border-t border-stone-200 pt-8">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="h-8 w-8 rounded bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold">6</div>
+                    <h2 class="text-2xl font-bold text-stone-800">Barisan & Deret</h2>
+                </div>
+                
+                <div class="bg-white rounded-xl border border-stone-200 shadow-lg overflow-hidden">
+                    <!-- Controls -->
+                    <div class="bg-stone-50 p-4 border-b border-stone-200 flex flex-wrap gap-4 items-end justify-between">
+                        <div class="flex gap-4">
+                            <div>
+                                <label class="block text-[10px] font-bold text-stone-500 uppercase mb-1">Awal ($a$)</label>
+                                <input type="number" id="seq-a" value="2" class="p-2 border rounded w-20 text-center font-bold text-stone-700 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-stone-500 uppercase mb-1">Beda/Rasio ($b/r$)</label>
+                                <input type="number" id="seq-b" value="2" class="p-2 border rounded w-20 text-center font-bold text-stone-700 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-stone-500 uppercase mb-1">Suku ($n$)</label>
+                                <input type="number" id="seq-n" value="6" max="15" class="p-2 border rounded w-20 text-center font-bold text-stone-700 text-sm">
+                            </div>
+                        </div>
+                        <button id="btn-update-seq" class="bg-stone-800 hover:bg-stone-900 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
+                            Update Grafik
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <!-- Arithmetic Column -->
+                        <div class="p-6 border-b lg:border-b-0 lg:border-r border-stone-200">
+                            <h3 class="font-bold text-blue-600 mb-2 flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full inline-block"></span> Aritmetika
+                            </h3>
+                            <div class="text-sm text-stone-500 mb-4 bg-blue-50 p-2 rounded">
+                                $$ U_n = a + (n-1)b $$
+                                $$ S_n = \frac{n}{2}(2a + (n-1)b) $$
+                            </div>
+                            <div class="chart-container h-48 mb-4">
+                                <canvas id="arithChart"></canvas>
+                            </div>
+                            <div class="flex justify-between items-center text-sm border-t pt-2 border-stone-100">
+                                <span class="text-stone-500">Deret ($S_n$):</span>
+                                <span id="arith-sum" class="font-bold text-blue-600 text-lg">...</span>
+                            </div>
+                        </div>
+
+                        <!-- Geometric Column -->
+                        <div class="p-6">
+                            <h3 class="font-bold text-purple-600 mb-2 flex items-center gap-2">
+                                <span class="w-2 h-2 bg-purple-500 rounded-full inline-block"></span> Geometri
+                            </h3>
+                            <div class="text-sm text-stone-500 mb-4 bg-purple-50 p-2 rounded">
+                                $$ U_n = a \cdot r^{n-1} $$
+                                $$ S_n = \frac{a(r^n - 1)}{r - 1} $$
+                            </div>
+                            <div class="chart-container h-48 mb-4">
+                                <canvas id="geoChart"></canvas>
+                            </div>
+                            <div class="flex justify-between items-center text-sm border-t pt-2 border-stone-100">
+                                <span class="text-stone-500">Deret ($S_n$):</span>
+                                <span id="geo-sum" class="font-bold text-purple-600 text-lg">...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Nilai Mutlak -->
+            <section id="mutlak" class="scroll-mt-20 border-t border-stone-200 pt-8 pb-12">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="h-8 w-8 rounded bg-stone-200 flex items-center justify-center text-stone-700 font-bold">7</div>
+                    <h2 class="text-2xl font-bold text-stone-800">Nilai Mutlak</h2>
+                </div>
+                
+                <div class="bg-rose-50 rounded-xl border border-rose-100 p-8 flex flex-col items-center">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-rose-200 mb-6">
+                        $$
+                        |x| = \begin{cases} x & \text{jika } x \geq 0 \\ -x & \text{jika } x < 0 \end{cases}
+                        $$
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl">
+                        <div class="bg-white/50 p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-rose-800 mb-2 text-sm">Sifat Pertidaksamaan 1</h4>
+                            <div>$$ |x| < a \iff -a < x < a $$</div>
+                        </div>
+                        <div class="bg-white/50 p-4 rounded-lg text-center">
+                            <h4 class="font-bold text-rose-800 mb-2 text-sm">Sifat Pertidaksamaan 2</h4>
+                            <div>$$ |x| > a \iff x < -a \text{ atau } x > a $$</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        
+        <footer class="bg-stone-900 text-stone-400 py-8 text-center text-sm border-t border-stone-800 mt-12">
+            <p>&copy; 2025 Aljabar.Pro.</p>
+        </footer>
+    </main>
+
+    <!-- Interactive Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize KaTeX Auto-render
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+
+            // --- Navigation Logic ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenuBtn = document.getElementById('close-mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function toggleMenu() {
+                mobileMenu.classList.toggle('hidden');
+            }
+
+            if(mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+                closeMenuBtn.addEventListener('click', toggleMenu);
+                mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+            }
+
+            // --- 1. Exponent Calculator ---
+            const expBase = document.getElementById('exp-base');
+            const expPow = document.getElementById('exp-pow');
+            const expResult = document.getElementById('exp-result');
+            const expDetail = document.getElementById('exp-detail');
+
+            function updateExponent() {
+                const b = parseFloat(expBase.value) || 0;
+                const p = parseFloat(expPow.value) || 0;
+                
+                if(p > 20) {
+                    expResult.innerText = "Terlalu Besar";
+                    expDetail.innerText = "Maks pangkat 20 untuk demo";
+                    return;
+                }
+
+                const res = Math.pow(b, p);
+                expResult.innerText = res.toLocaleString('id-ID');
+
+                if (p >= 0 && Number.isInteger(p)) {
+                    if (p === 0) expDetail.innerText = "Pangkat 0 selalu 1";
+                    else if (p === 1) expDetail.innerText = `${b} = ${b}`;
+                    else {
+                        expDetail.innerText = Array(p).fill(b).join(' x ');
+                    }
+                } else {
+                    expDetail.innerText = "1 / (" + Array(Math.abs(p)).fill(b).join(' x ') + ")";
+                }
+            }
+
+            if(expBase) {
+                expBase.addEventListener('input', updateExponent);
+                expPow.addEventListener('input', updateExponent);
+            }
+
+            // --- 4. Quadratic Interactive Graph ---
+            const ctxQuad = document.getElementById('quadChart').getContext('2d');
+            let quadChart;
+
+            function initQuadChart() {
+                quadChart = new Chart(ctxQuad, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'f(x)',
+                            data: [],
+                            borderColor: '#6366f1', // Indigo-500
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Akar',
+                            data: [],
+                            backgroundColor: '#34d399', // Emerald-400
+                            borderColor: '#10b981',
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            showLine: false,
+                            type: 'scatter'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { intersect: false, mode: 'index' },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { 
+                                callbacks: {
+                                    label: (context) => `(${context.parsed.x.toFixed(2)}, ${context.parsed.y.toFixed(2)})`
+                                }
+                            }
+                        },
+                        scales: {
+                            x: { 
+                                grid: { color: '#f5f5f4' },
+                                title: { display: true, text: 'x' }
+                            },
+                            y: { 
+                                grid: { color: '#f5f5f4' },
+                                title: { display: true, text: 'y' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            const inputA = document.getElementById('input-a');
+            const inputB = document.getElementById('input-b');
+            const inputC = document.getElementById('input-c');
+            const valA = document.getElementById('val-a');
+            const valB = document.getElementById('val-b');
+            const valC = document.getElementById('val-c');
+
+            const resD = document.getElementById('result-d');
+            const resX1 = document.getElementById('result-x1');
+            const resX2 = document.getElementById('result-x2');
+            const typeText = document.getElementById('root-type');
+
+            function updateQuad() {
+                const a = parseFloat(inputA.value);
+                const b = parseFloat(inputB.value);
+                const c = parseFloat(inputC.value);
+
+                valA.innerText = a;
+                valB.innerText = b;
+                valC.innerText = c;
+
+                const D = (b*b) - (4*a*c);
+                resD.innerText = D.toFixed(2);
+
+                let x1, x2, roots = [];
+                
+                if (a === 0) {
+                    typeText.innerText = "Bukan Persamaan Kuadrat (Linear)";
+                    resX1.innerText = "-";
+                    resX2.innerText = "-";
+                } else if (D > 0) {
+                    x1 = (-b + Math.sqrt(D)) / (2*a);
+                    x2 = (-b - Math.sqrt(D)) / (2*a);
+                    resX1.innerText = x1.toFixed(2);
+                    resX2.innerText = x2.toFixed(2);
+                    typeText.innerText = "Dua akar riil berbeda";
+                    roots = [{x: x1, y: 0}, {x: x2, y: 0}];
+                } else if (D === 0) {
+                    x1 = -b / (2*a);
+                    resX1.innerText = x1.toFixed(2);
+                    resX2.innerText = x1.toFixed(2);
+                    typeText.innerText = "Satu akar kembar";
+                    roots = [{x: x1, y: 0}];
+                } else {
+                    resX1.innerText = "Im";
+                    resX2.innerText = "Im";
+                    typeText.innerText = "Tidak ada akar riil (Imajiner)";
+                }
+
+                const labels = [];
+                const dataPoints = [];
+                const range = 10;
+                let vertexX = (a !== 0) ? -b/(2*a) : 0;
+                if(vertexX < -5) vertexX = -5;
+                if(vertexX > 5) vertexX = 5;
+
+                const start = vertexX - range;
+                const end = vertexX + range;
+                const step = range/20;
+
+                for(let x = start; x <= end; x += step) {
+                    labels.push(x.toFixed(1));
+                    dataPoints.push({x: x, y: (a*x*x) + (b*x) + c});
+                }
+
+                quadChart.data.labels = labels;
+                quadChart.data.datasets[0].data = dataPoints;
+                quadChart.data.datasets[1].data = roots;
+                quadChart.update();
+            }
+
+            if(inputA) {
+                inputA.addEventListener('input', updateQuad);
+                inputB.addEventListener('input', updateQuad);
+                inputC.addEventListener('input', updateQuad);
+                initQuadChart();
+                updateQuad();
+            }
+
+            // --- 5. Logarithm Calc ---
+            const logBase = document.getElementById('log-base');
+            const logNum = document.getElementById('log-num');
+            const logRes = document.getElementById('log-result');
+
+            function updateLog() {
+                const b = parseFloat(logBase.value);
+                const n = parseFloat(logNum.value);
+                if(b > 0 && b !== 1 && n > 0) {
+                    const val = Math.log(n) / Math.log(b);
+                    logRes.innerText = Number.isInteger(val) ? val : val.toFixed(4);
+                } else {
+                    logRes.innerText = "Err";
+                }
+            }
+            if(logBase) {
+                logBase.addEventListener('input', updateLog);
+                logNum.addEventListener('input', updateLog);
+            }
+
+            // --- 6. Sequences Visualizer ---
+            const ctxArith = document.getElementById('arithChart').getContext('2d');
+            const ctxGeo = document.getElementById('geoChart').getContext('2d');
+            let arithChart, geoChart;
+
+            const seqA = document.getElementById('seq-a');
+            const seqB = document.getElementById('seq-b'); 
+            const seqN = document.getElementById('seq-n');
+            const btnUpdateSeq = document.getElementById('btn-update-seq');
+
+            function initSeqCharts() {
+                const commonOptions = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                };
+
+                arithChart = new Chart(ctxArith, {
+                    type: 'bar',
+                    data: { labels: [], datasets: [{ data: [], backgroundColor: '#3b82f6' }] },
+                    options: commonOptions
+                });
+
+                geoChart = new Chart(ctxGeo, {
+                    type: 'bar',
+                    data: { labels: [], datasets: [{ data: [], backgroundColor: '#9333ea' }] },
+                    options: commonOptions
+                });
+            }
+
+            function updateSequences() {
+                const a = parseFloat(seqA.value);
+                const br = parseFloat(seqB.value); 
+                let n = parseInt(seqN.value);
+                if (n > 20) n = 20; 
+
+                const aLabels = [], aData = [];
+                let aSum = 0;
+                for(let i=1; i<=n; i++) {
+                    const val = a + (i-1)*br;
+                    aLabels.push('U'+i);
+                    aData.push(val);
+                    aSum += val;
+                }
+                
+                const gLabels = [], gData = [];
+                let gSum = 0;
+                for(let i=1; i<=n; i++) {
+                    const val = a * Math.pow(br, i-1);
+                    gLabels.push('U'+i);
+                    gData.push(val);
+                    gSum += val;
+                }
+
+                document.getElementById('arith-sum').innerText = aSum.toLocaleString();
+                document.getElementById('geo-sum').innerText = gSum.toLocaleString();
+
+                arithChart.data.labels = aLabels;
+                arithChart.data.datasets[0].data = aData;
+                arithChart.update();
+
+                geoChart.data.labels = gLabels;
+                geoChart.data.datasets[0].data = gData;
+                geoChart.update();
+            }
+
+            if(btnUpdateSeq) {
+                btnUpdateSeq.addEventListener('click', updateSequences);
+                initSeqCharts();
+                updateSequences();
+            }
+        });
+    </script>
+</body>
+</html>
