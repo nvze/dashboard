@@ -1,0 +1,559 @@
+<!-- Chosen Palette: Modern Industrial (Warm Neutral Background: #fafaf9, Text: #1c1917, Accents: #0284c7 (Tech Blue), #d97706 (Safety Orange)) -->
+<!-- Application Structure Plan:
+    1.  **Hero Section**: Sets the tone for the STEM evolution.
+    2.  **The Paradigm Shift (Interactive Radar)**: Visualizes the skill gap. Includes a fallback if Chart.js fails.
+    3.  **Skill Explorer**: Tabbed interface for deep diving into the 3 core STEM pillars.
+    4.  **Scenario Simulator**: "Problem vs Solution" interactive comparison.
+    5.  **Robustness**: Added error handling for CDNs.
+-->
+<!-- Visualization & Content Choices:
+    * **Radar Chart**: Best for multivariate skill comparison.
+    * **Dynamic Cards**: Clean organization of complex technical data.
+    * **Interactive Toggles**: Comparison of methodologies.
+-->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknik Industri: STEM Evolution</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; background-color: #fafaf9; color: #1c1917; }
+        
+        /* Chart Container - Strict Constraints */
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 600px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            height: 350px; 
+            max-height: 400px; 
+        }
+        @media (min-width: 768px) { 
+            .chart-container { height: 400px; } 
+        }
+
+        /* Interactive Elements */
+        .card-hover:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+        }
+        .transition-all-300 { transition: all 0.3s ease-in-out; }
+        
+        /* Tabs */
+        .active-tab { border-bottom: 2px solid #0284c7; color: #0284c7; font-weight: 600; background-color: #f0f9ff; }
+        .inactive-tab { color: #78716c; background-color: transparent; }
+        .inactive-tab:hover { color: #44403c; background-color: #f5f5f4; }
+        
+        /* Scrollbar */
+        .skill-detail::-webkit-scrollbar { width: 6px; }
+        .skill-detail::-webkit-scrollbar-track { background: #f1f1f1; }
+        .skill-detail::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 3px; }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-stone-800 tracking-tight">STEM<span class="text-blue-600">IE</span></span>
+                </div>
+                <div class="flex items-center space-x-2 md:space-x-6 text-xs md:text-sm font-medium">
+                    <button onclick="scrollToSection('radar-section')" class="px-2 py-1 hover:text-blue-600 transition-colors">Profil</button>
+                    <button onclick="scrollToSection('skills-section')" class="px-2 py-1 hover:text-blue-600 transition-colors">Kompetensi</button>
+                    <button onclick="scrollToSection('simulation-section')" class="px-2 py-1 hover:text-blue-600 transition-colors">Simulasi</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-stone-50 pt-16 pb-12 border-b border-stone-200">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold mb-4 tracking-wide uppercase">Industrial Engineering 4.0</div>
+            <h1 class="text-3xl md:text-5xl font-bold text-stone-900 mb-6 tracking-tight leading-tight">
+                Evolusi Teknik Industri:<br>
+                <span class="text-blue-600">Hardcore STEM</span> & Engineering
+            </h1>
+            <p class="text-base md:text-lg text-stone-600 mb-8 leading-relaxed max-w-2xl mx-auto">
+                Transformasi dari sekadar "Manajemen Operasional" menuju integrasi mendalam Matematika, Komputasi, dan Fisika Sistem untuk merekayasa masa depan.
+            </p>
+            <div class="flex justify-center gap-4">
+                <button onclick="scrollToSection('radar-section')" class="bg-stone-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-stone-800 transition-colors shadow-lg flex items-center gap-2">
+                    <span>🚀</span> Jelajahi Profil
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: The Paradigm Shift (Radar Chart) -->
+    <section id="radar-section" class="py-16 bg-white">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-stone-900">Pergeseran Paradigma Kompetensi</h2>
+                <p class="text-stone-600 mt-2 max-w-2xl mx-auto">
+                    Perbandingan visual antara pendekatan tradisional dan tuntutan modern.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <!-- Controls -->
+                <div class="md:col-span-1 space-y-6 order-2 md:order-1">
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-100 shadow-sm">
+                        <h3 class="font-bold text-lg mb-4 text-stone-800">Pilih Model:</h3>
+                        <div class="flex flex-col gap-3">
+                            <button id="btn-trad" onclick="updateRadar('traditional')" class="w-full text-left px-4 py-4 rounded-lg border transition-all-300 bg-white border-stone-200 hover:border-stone-400 group relative overflow-hidden">
+                                <div class="relative z-10">
+                                    <span class="block font-bold text-stone-700 group-hover:text-stone-900 text-sm md:text-base">🏢 Tradisional</span>
+                                    <span class="text-xs text-stone-500">Administratif & Manajerial</span>
+                                </div>
+                            </button>
+                            <button id="btn-stem" onclick="updateRadar('stem')" class="w-full text-left px-4 py-4 rounded-lg border transition-all-300 bg-blue-50 border-blue-500 ring-1 ring-blue-500 shadow-sm group relative overflow-hidden">
+                                <div class="relative z-10">
+                                    <span class="block font-bold text-blue-700 text-sm md:text-base">🚀 STEM Modern</span>
+                                    <span class="text-xs text-blue-600">Data, Math & Physics</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="md:col-span-2 flex flex-col items-center justify-center order-1 md:order-2">
+                    <div id="chart-wrapper" class="chart-container">
+                        <canvas id="skillRadarChart"></canvas>
+                        <!-- Fallback message if JS/Canvas fails -->
+                        <div id="chart-error" class="hidden absolute inset-0 flex items-center justify-center bg-stone-100 text-stone-500 text-center p-4">
+                            Visualisasi grafik tidak dapat dimuat. Pastikan JavaScript aktif.
+                        </div>
+                    </div>
+                    <p class="text-xs text-stone-400 mt-4 text-center italic">
+                        *Skala 0-100% merepresentasikan fokus dan kedalaman keahlian.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Skill Explorer (Tabs & Cards) -->
+    <section id="skills-section" class="py-16 bg-stone-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl font-bold text-stone-900">Eksplorasi Keahlian Inti</h2>
+                <p class="text-stone-600 mt-3 max-w-3xl mx-auto">
+                    Tiga pilar utama yang membedakan Industrial Engineer modern. Klik tab untuk melihat detail teknis.
+                </p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button onclick="switchTab('math')" id="tab-math" class="active-tab px-4 md:px-6 py-3 rounded-t-lg md:rounded-lg text-sm md:text-lg transition-all focus:outline-none flex items-center gap-2">
+                    <span>📐</span> Math & Tech
+                </button>
+                <button onclick="switchTab('eng')" id="tab-eng" class="inactive-tab px-4 md:px-6 py-3 rounded-t-lg md:rounded-lg text-sm md:text-lg transition-all focus:outline-none flex items-center gap-2">
+                    <span>⚙️</span> Fisika & Otomasi
+                </button>
+                <button onclick="switchTab('cog')" id="tab-cog" class="inactive-tab px-4 md:px-6 py-3 rounded-t-lg md:rounded-lg text-sm md:text-lg transition-all focus:outline-none flex items-center gap-2">
+                    <span>🧠</span> Cognitive Skills
+                </button>
+            </div>
+
+            <!-- Content Area -->
+            <div id="skill-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[400px]">
+                <!-- Dynamic Content Loaded Here via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Scenario Simulator -->
+    <section id="simulation-section" class="py-16 bg-white border-t border-stone-100">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-stone-900">Studi Kasus: Old vs New</h2>
+                <p class="text-stone-600 mt-3 max-w-2xl mx-auto">
+                    Simulasi pemecahan masalah. Pilih skenario untuk melihat perbedaan pendekatan.
+                </p>
+            </div>
+
+            <div class="bg-stone-50 rounded-2xl p-4 md:p-8 shadow-sm border border-stone-200">
+                <!-- Scenario Selector -->
+                <div class="flex flex-wrap justify-center gap-3 mb-8">
+                    <button onclick="loadScenario('production')" id="scen-prod" class="px-4 py-2 rounded-full text-xs md:text-sm font-semibold bg-blue-600 text-white shadow-md transition-all hover:bg-blue-700 focus:ring-2 focus:ring-blue-300">
+                        📉 Line Produksi Macet
+                    </button>
+                    <button onclick="loadScenario('warehouse')" id="scen-ware" class="px-4 py-2 rounded-full text-xs md:text-sm font-semibold bg-white text-stone-600 border border-stone-200 hover:bg-stone-200 transition-all focus:ring-2 focus:ring-stone-300">
+                        📦 Gudang Penuh
+                    </button>
+                    <button onclick="loadScenario('quality')" id="scen-qual" class="px-4 py-2 rounded-full text-xs md:text-sm font-semibold bg-white text-stone-600 border border-stone-200 hover:bg-stone-200 transition-all focus:ring-2 focus:ring-stone-300">
+                        ❌ Kualitas Buruk
+                    </button>
+                </div>
+
+                <!-- Comparison Display -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+                    <!-- Left: Old School -->
+                    <div class="bg-white p-6 rounded-xl border-l-4 border-stone-400 shadow-sm transition-all duration-500 hover:shadow-md flex flex-col h-full">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="p-2 bg-stone-100 rounded-lg text-lg">👔</div>
+                            <h4 class="text-stone-500 uppercase text-xs font-bold tracking-wider">Pendekatan Tradisional</h4>
+                        </div>
+                        <div id="old-solution" class="text-stone-800 font-medium text-lg leading-snug flex-grow flex items-center transition-opacity duration-300">
+                            Mengamati operator, memotivasi pekerja, mengubah SOP kerja.
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-stone-100">
+                            <span class="inline-block px-2 py-1 bg-stone-100 text-stone-600 text-xs rounded font-mono font-bold">Metode: Kualitatif</span>
+                        </div>
+                    </div>
+
+                    <!-- Right: STEM -->
+                    <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-500 shadow-sm transition-all duration-500 hover:shadow-md flex flex-col h-full">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="p-2 bg-blue-100 rounded-lg text-lg">🔬</div>
+                            <h4 class="text-blue-600 uppercase text-xs font-bold tracking-wider">Pendekatan STEM Modern</h4>
+                        </div>
+                        <div id="new-solution" class="text-stone-900 font-medium text-lg leading-snug flex-grow flex items-center transition-opacity duration-300">
+                            Memasang sensor IoT untuk deteksi micro-stoppages, analisis log PLC, simulasi bottleneck.
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-blue-100">
+                            <span class="inline-block px-2 py-1 bg-blue-200 text-blue-800 text-xs rounded font-mono font-bold">Metode: Kuantitatif & Teknis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-8 mt-auto border-t border-stone-800">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-sm font-medium text-stone-300">Knowledge Base: Teknik Industri Berbasis STEM</p>
+            <p class="text-xs mt-2 opacity-50">Generated for Educational Purposes © 2025</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Data Sources ---
+        const skillsData = {
+            math: [
+                {
+                    title: "Advanced OR & Optimization",
+                    icon: "📊",
+                    desc: "Pemodelan matematis tingkat tinggi untuk sistem kompleks.",
+                    details: [
+                        "<strong>Stochastic Processes:</strong> Rantai Markov & Teori Antrean.",
+                        "<strong>Metaheuristics:</strong> Genetic Algorithms & Simulated Annealing.",
+                        "<strong>Dynamic Programming:</strong> Optimasi keputusan bertingkat."
+                    ]
+                },
+                {
+                    title: "Industrial Data Science",
+                    icon: "💾",
+                    desc: "Penerapan Big Data, Statistik, dan Machine Learning.",
+                    details: [
+                        "<strong>Coding:</strong> Python (Pandas, Scikit-learn) atau R.",
+                        "<strong>Database:</strong> SQL & Relational DB Management.",
+                        "<strong>Predictive Analytics:</strong> Forecasting & Predictive Maintenance."
+                    ]
+                },
+                {
+                    title: "Simulasi & Digital Twin",
+                    icon: "🎮",
+                    desc: "Replika virtual sistem fisik yang valid secara statistik.",
+                    details: [
+                        "<strong>Discrete Event (DES):</strong> Arena, FlexSim, Logic Programming.",
+                        "<strong>Digital Twin:</strong> Integrasi real-time sensor ke model.",
+                        "<strong>System Dynamics:</strong> Pemodelan persamaan diferensial."
+                    ]
+                }
+            ],
+            eng: [
+                {
+                    title: "Otomasi & Robotika",
+                    icon: "🤖",
+                    desc: "Integrasi hardware fisik dan logika kontrol.",
+                    details: [
+                        "<strong>PLC:</strong> Ladder Logic & Control Systems.",
+                        "<strong>Sensors:</strong> Pneumatik, Hidrolik, Proximity.",
+                        "<strong>Cobots:</strong> Kolaborasi manusia-robot yang aman."
+                    ]
+                },
+                {
+                    title: "Industrial IoT (IIoT)",
+                    icon: "📡",
+                    desc: "Konektivitas dan akuisisi data mesin.",
+                    details: [
+                        "<strong>Protokol:</strong> MQTT, Modbus, OPC UA.",
+                        "<strong>Smart Sensors:</strong> Monitoring getaran & suhu real-time."
+                    ]
+                },
+                {
+                    title: "Rekayasa Manufaktur",
+                    icon: "🏭",
+                    desc: "Pemahaman proses fisik material dan produksi.",
+                    details: [
+                        "<strong>CNC/CAM:</strong> G-Code & Machine Tools.",
+                        "<strong>Additive Mfg:</strong> 3D Printing Optimization.",
+                        "<strong>Material Handling:</strong> Fisika beban & AGV design."
+                    ]
+                }
+            ],
+            cog: [
+                {
+                    title: "Algorithmic Thinking",
+                    icon: "🧩",
+                    desc: "Menerjemahkan masalah dunia nyata ke logika komputasi.",
+                    details: [
+                        "Dekomposisi masalah fisik ke urutan logis.",
+                        "Membuat pseudocode dari SOP operasional."
+                    ]
+                },
+                {
+                    title: "Abstraction Capability",
+                    icon: "🔍",
+                    desc: "Menyederhanakan kompleksitas tanpa menghilangkan esensi.",
+                    details: [
+                        "Modeling sistem ruwet menjadi diagram blok.",
+                        "Identifikasi variabel kunci dalam noise data."
+                    ]
+                },
+                {
+                    title: "Technical Decomposition",
+                    icon: "🔨",
+                    desc: "Memecah sistem besar menjadi komponen terhitung.",
+                    details: [
+                        "Analisis subsistem supply chain.",
+                        "Merakit kembali solusi parsial menjadi total."
+                    ]
+                }
+            ]
+        };
+
+        const scenarios = {
+            production: {
+                old: "Mengamati operator, memotivasi pekerja, mengubah SOP kerja.",
+                new: "Memasang sensor IoT untuk deteksi <em>micro-stoppages</em>, analisis log PLC, simulasi <em>bottleneck</em>."
+            },
+            warehouse: {
+                old: "Mengatur ulang tata letak rak agar rapi, menegur staf gudang.",
+                new: "Menggunakan algoritma <em>Genetic Algorithm</em> untuk optimasi rute forklift, menerapkan WMS Barcode/RFID."
+            },
+            quality: {
+                old: "Membuat poster kampanye kualitas, pelatihan kesadaran karyawan.",
+                new: "Melakukan <em>Design of Experiment</em> (DoE), analisis kapabilitas proses (Cp, Cpk), menstandarisasi toleransi."
+            }
+        };
+
+        // --- Logic ---
+        let radarChart;
+
+        function initRadar() {
+            // Safety check for Chart.js
+            if (typeof Chart === 'undefined') {
+                document.getElementById('chart-error').classList.remove('hidden');
+                return;
+            }
+
+            try {
+                const ctx = document.getElementById('skillRadarChart').getContext('2d');
+                radarChart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Manajemen SDM', 'Matematika/Statistik', 'Coding/IT', 'Fisika/Mesin', 'Soft Skill Kognitif'],
+                        datasets: [{
+                            label: 'Pendekatan STEM Modern',
+                            data: [40, 95, 90, 85, 90],
+                            fill: true,
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            borderColor: 'rgb(59, 130, 246)',
+                            pointBackgroundColor: 'rgb(59, 130, 246)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgb(59, 130, 246)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: { color: '#e5e7eb' },
+                                grid: { color: '#e5e7eb' },
+                                pointLabels: {
+                                    font: { size: 11, family: "'Inter', sans-serif", weight: '600' },
+                                    color: '#44403c'
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                                ticks: { display: false, stepSize: 20 }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: true, position: 'bottom', labels: { font: { family: "'Inter', sans-serif" } } },
+                            tooltip: {
+                                backgroundColor: 'rgba(28, 25, 23, 0.9)',
+                                titleFont: { family: "'Inter', sans-serif" },
+                                bodyFont: { family: "'Inter', sans-serif" },
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + context.raw + '% Focus';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error("Chart Init Error", e);
+                document.getElementById('chart-error').classList.remove('hidden');
+            }
+        }
+
+        function updateRadar(mode) {
+            if (!radarChart) return;
+
+            const btnTrad = document.getElementById('btn-trad');
+            const btnStem = document.getElementById('btn-stem');
+            
+            // Base Classes
+            const baseClass = "w-full text-left px-4 py-4 rounded-lg border transition-all-300 bg-white border-stone-200 hover:border-stone-400 group relative overflow-hidden";
+            const activeStemClass = "w-full text-left px-4 py-4 rounded-lg border transition-all-300 bg-blue-50 border-blue-500 ring-1 ring-blue-500 shadow-sm group relative overflow-hidden";
+            const activeTradClass = "w-full text-left px-4 py-4 rounded-lg border transition-all-300 bg-stone-100 border-stone-500 ring-1 ring-stone-500 shadow-sm group relative overflow-hidden";
+
+            if (mode === 'traditional') {
+                btnTrad.className = activeTradClass;
+                btnStem.className = baseClass;
+                
+                radarChart.data.datasets[0].data = [90, 40, 20, 30, 50]; // High Mgmt, Low Tech
+                radarChart.data.datasets[0].label = 'Pendekatan Tradisional';
+                radarChart.data.datasets[0].backgroundColor = 'rgba(120, 113, 108, 0.2)';
+                radarChart.data.datasets[0].borderColor = 'rgb(120, 113, 108)';
+                radarChart.data.datasets[0].pointBackgroundColor = 'rgb(120, 113, 108)';
+                radarChart.data.datasets[0].pointHoverBorderColor = 'rgb(120, 113, 108)';
+            } else {
+                btnStem.className = activeStemClass;
+                btnTrad.className = baseClass;
+
+                radarChart.data.datasets[0].data = [40, 95, 90, 85, 90]; // High STEM
+                radarChart.data.datasets[0].label = 'Pendekatan STEM Modern';
+                radarChart.data.datasets[0].backgroundColor = 'rgba(59, 130, 246, 0.2)';
+                radarChart.data.datasets[0].borderColor = 'rgb(59, 130, 246)';
+                radarChart.data.datasets[0].pointBackgroundColor = 'rgb(59, 130, 246)';
+                radarChart.data.datasets[0].pointHoverBorderColor = 'rgb(59, 130, 246)';
+            }
+            radarChart.update();
+        }
+
+        function renderSkillCards(category) {
+            const container = document.getElementById('skill-content');
+            if(!container) return;
+            
+            container.innerHTML = '';
+            
+            skillsData[category].forEach((skill, index) => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-xl p-6 border border-stone-200 card-hover flex flex-col h-full animate-fade-in opacity-0';
+                card.style.animationDelay = `${index * 100}ms`;
+                
+                let detailsList = skill.details.map(d => `<li class="mb-2 text-stone-600 pl-4 border-l-2 border-blue-200 text-sm leading-relaxed">${d}</li>`).join('');
+                
+                let badgeColor = category === 'math' ? 'text-blue-600 bg-blue-50 border-blue-100' : 
+                                 category === 'eng' ? 'text-orange-600 bg-orange-50 border-orange-100' : 
+                                 'text-purple-600 bg-purple-50 border-purple-100';
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-10 h-10 flex items-center justify-center bg-stone-50 rounded-lg text-xl border border-stone-100">${skill.icon}</div>
+                        <span class="text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide border ${badgeColor}">
+                            ${category.toUpperCase()}
+                        </span>
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">${skill.title}</h3>
+                    <p class="text-stone-500 text-sm mb-4 flex-grow border-b border-stone-100 pb-4">${skill.desc}</p>
+                    <div class="w-full">
+                        <ul class="skill-detail max-h-48 overflow-y-auto pr-1">
+                            ${detailsList}
+                        </ul>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function switchTab(category) {
+            // Update Tab UI
+            ['math', 'eng', 'cog'].forEach(t => {
+                const tab = document.getElementById(`tab-${t}`);
+                if (t === category) {
+                    tab.className = "active-tab px-4 md:px-6 py-3 rounded-t-lg md:rounded-lg text-sm md:text-lg transition-all focus:outline-none flex items-center gap-2";
+                } else {
+                    tab.className = "inactive-tab px-4 md:px-6 py-3 rounded-t-lg md:rounded-lg text-sm md:text-lg transition-all focus:outline-none flex items-center gap-2";
+                }
+            });
+            renderSkillCards(category);
+        }
+
+        function loadScenario(type) {
+            // Reset Buttons
+            ['prod', 'ware', 'qual'].forEach(t => {
+                const btn = document.getElementById(`scen-${t}`);
+                if(btn) btn.className = "px-4 py-2 rounded-full text-xs md:text-sm font-semibold bg-white text-stone-600 border border-stone-200 hover:bg-stone-200 transition-all focus:ring-2 focus:ring-stone-300";
+            });
+            
+            // Activate selected
+            const activeBtn = document.getElementById(`scen-${type.substring(0, 4)}`);
+            if(activeBtn) activeBtn.className = "px-4 py-2 rounded-full text-xs md:text-sm font-semibold bg-blue-600 text-white shadow-md transition-all hover:bg-blue-700 focus:ring-2 focus:ring-blue-300";
+
+            // Update Text
+            const oldDiv = document.getElementById('old-solution');
+            const newDiv = document.getElementById('new-solution');
+            
+            if(oldDiv && newDiv) {
+                oldDiv.style.opacity = 0;
+                newDiv.style.opacity = 0;
+
+                setTimeout(() => {
+                    oldDiv.innerHTML = scenarios[type].old;
+                    newDiv.innerHTML = scenarios[type].new;
+                    oldDiv.style.opacity = 1;
+                    newDiv.style.opacity = 1;
+                }, 300);
+            }
+        }
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize
+        window.addEventListener('load', function() {
+            initRadar();
+            renderSkillCards('math');
+            loadScenario('production');
+        });
+
+    </script>
+</body>
+</html>
