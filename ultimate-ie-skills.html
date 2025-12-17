@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Industrial Engineering Skill Set</title>
+    
+    <!-- Fonts: Orbitron (Tech) & Inter (Readability) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        ieBlue: '#00f0ff',
+                        iePurple: '#7000ff',
+                        ieDark: '#0a0a0f',
+                        ieCard: 'rgba(20, 20, 35, 0.7)',
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f2937 1px, transparent 1px), linear-gradient(to bottom, #1f2937 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050508;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Mesh */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(112, 0, 255, 0.08), transparent 25%), 
+                radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.08), transparent 25%);
+            background-size: cover;
+        }
+        
+        .bg-grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            z-index: -1;
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(13, 13, 18, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 10px 40px -10px rgba(0, 240, 255, 0.15);
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #00f0ff;
+            box-shadow: 0 0 10px #00f0ff;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f0ff; 
+        }
+
+        .list-bullet {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .list-bullet::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #00f0ff;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Background Elements -->
+    <div class="bg-mesh"></div>
+    <div class="bg-grid-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-card !border-x-0 !border-t-0 !rounded-none top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <span class="font-tech font-bold text-xl text-white tracking-wider"><i class="fa-solid fa-gears text-ieBlue mr-2"></i>IE<span class="text-ieBlue">.ULTIMATE</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#classic" class="text-gray-300 hover:text-ieBlue px-3 py-2 rounded-md text-sm font-medium transition-colors">Classic</a>
+                        <a href="#modern" class="text-gray-300 hover:text-ieBlue px-3 py-2 rounded-md text-sm font-medium transition-colors">Modern STEM</a>
+                        <a href="#interpersonal" class="text-gray-300 hover:text-ieBlue px-3 py-2 rounded-md text-sm font-medium transition-colors">Interpersonal</a>
+                        <a href="#cognitive" class="text-gray-300 hover:text-ieBlue px-3 py-2 rounded-md text-sm font-medium transition-colors">Cognitive</a>
+                        <a href="#summary" class="bg-ieBlue/10 border border-ieBlue text-ieBlue hover:bg-ieBlue hover:text-black px-4 py-2 rounded-md text-sm font-bold transition-all">T-Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative pt-32 pb-20 sm:pt-40 sm:pb-24 overflow-hidden">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            <div data-aos="fade-down" data-aos-duration="1000">
+                <h2 class="text-ieBlue font-tech text-sm tracking-[0.3em] uppercase mb-4 animate-pulse">Industrial Engineering Mastery</h2>
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6 font-tech">
+                    THE ULTIMATE <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-ieBlue to-iePurple neon-text">SKILL SET</span>
+                </h1>
+                <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-400 font-light">
+                    Gabungan Komprehensif: <span class="text-white font-semibold">Classic Foundation</span> & <span class="text-white font-semibold">Modern STEM</span>.
+                </p>
+            </div>
+            
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass-card p-4 rounded-xl border-l-4 border-l-blue-500 text-left">
+                    <div class="text-xs text-gray-500 uppercase tracking-wider mb-1">Kuadran 1</div>
+                    <div class="font-bold text-blue-400">Hard Skills Klasik</div>
+                    <div class="text-xs text-gray-400 mt-1">Tulang punggung keilmuan TI.</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl border-l-4 border-l-purple-500 text-left">
+                    <div class="text-xs text-gray-500 uppercase tracking-wider mb-1">Kuadran 2</div>
+                    <div class="font-bold text-purple-400">Hard Skills Modern</div>
+                    <div class="text-xs text-gray-400 mt-1">Evolusi teknologi dan data.</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl border-l-4 border-l-green-500 text-left">
+                    <div class="text-xs text-gray-500 uppercase tracking-wider mb-1">Kuadran 3</div>
+                    <div class="font-bold text-green-400">Interpersonal (Social)</div>
+                    <div class="text-xs text-gray-400 mt-1">Kemampuan berhubungan dengan manusia.</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl border-l-4 border-l-yellow-500 text-left">
+                    <div class="text-xs text-gray-500 uppercase tracking-wider mb-1">Kuadran 4</div>
+                    <div class="font-bold text-yellow-400">Kognitif (Analytical)</div>
+                    <div class="text-xs text-gray-400 mt-1">Cara berpikir dan memecahkan masalah.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
+
+        <!-- BAGIAN 1: KLASIK -->
+        <section id="classic" class="relative">
+            <div class="flex items-center mb-12" data-aos="fade-right">
+                <div class="bg-blue-600 w-12 h-12 flex items-center justify-center rounded-lg shadow-lg shadow-blue-500/30 mr-6">
+                    <i class="fa-solid fa-industry text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-tech font-bold text-white section-title">BAGIAN 1: HARD SKILLS (KLASIK)</h2>
+                    <p class="mt-2 text-gray-400 max-w-3xl italic border-l-2 border-blue-500 pl-4">
+                        "Jangan pernah meremehkan skill ini. Ini adalah 'Bread and Butter' seorang IE. Tanpa ini, Anda hanya Data Analyst, bukan Engineer."
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="0">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-blue-400 mr-2">01.</span> Work Design & Measurement
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Time Study:</strong> Pengukuran waktu kerja menggunakan stopwatch (metode langsung).</li>
+                        <li class="list-bullet"><strong class="text-white">Motion Study:</strong> Analisis gerakan mikro (Therblig) untuk menghilangkan gerakan tidak perlu.</li>
+                        <li class="list-bullet"><strong class="text-white">Work Sampling:</strong> Mengukur produktivitas tanpa mengamati terus-menerus.</li>
+                        <li class="list-bullet"><strong class="text-white">Standard Time Calculation:</strong> Menghitung waktu baku dengan faktor penyesuaian (rating factor) dan kelonggaran (allowance).</li>
+                        <li class="list-bullet"><strong class="text-white">MOST / MTM:</strong> Predetermine time systems (menghitung waktu kerja berdasarkan tabel standar gerakan, tanpa stopwatch).</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-blue-400 mr-2">02.</span> Quality Control & Management
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">7 QC Tools:</strong> Check sheet, Pareto chart, Fishbone diagram, Histogram, Scatter diagram, Stratification, Control chart.</li>
+                        <li class="list-bullet"><strong class="text-white">Statistical Process Control (SPC):</strong> Menghitung Cp, Cpk, dan memantau variabilitas proses.</li>
+                        <li class="list-bullet"><strong class="text-white">Six Sigma (DMAIC):</strong> Metodologi Define, Measure, Analyze, Improve, Control.</li>
+                        <li class="list-bullet"><strong class="text-white">Total Quality Management (TQM):</strong> Filosofi kualitas menyeluruh.</li>
+                        <li class="list-bullet"><strong class="text-white">ISO Standards:</strong> Pemahaman audit ISO 9001 (Mutu), ISO 14001 (Lingkungan), ISO 45001 (K3).</li>
+                        <li class="list-bullet"><strong class="text-white">Acceptance Sampling:</strong> Menentukan jumlah sampel lot untuk inspeksi masuk/keluar.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-blue-400 mr-2">03.</span> PPIC
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Forecasting (Klasik):</strong> Moving Average, Exponential Smoothing, Linear Regression.</li>
+                        <li class="list-bullet"><strong class="text-white">Inventory Management:</strong> EOQ (Economic Order Quantity), ROP (Reorder Point), Safety Stock calculation.</li>
+                        <li class="list-bullet"><strong class="text-white">MRP (Material Requirements Planning):</strong> Bill of Materials (BOM), Master Production Schedule (MPS).</li>
+                        <li class="list-bullet"><strong class="text-white">Capacity Planning:</strong> Rough Cut Capacity Planning (RCCP), Capacity Requirements Planning (CRP).</li>
+                        <li class="list-bullet"><strong class="text-white">Scheduling:</strong> Job shop scheduling, Flow shop scheduling, Gantt Charting, Line Balancing.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-blue-400 mr-2">04.</span> Supply Chain & Logistics
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Warehouse Layout:</strong> Perancangan tata letak gudang, manajemen lokasi (Bin management).</li>
+                        <li class="list-bullet"><strong class="text-white">Transportation Problem:</strong> VRP (Vehicle Routing Problem), Milk-run system.</li>
+                        <li class="list-bullet"><strong class="text-white">Purchasing & Procurement:</strong> Negosiasi vendor, pemilihan supplier.</li>
+                        <li class="list-bullet"><strong class="text-white">Incoterms:</strong> Memahami istilah perdagangan internasional (FOB, CIF, EXW).</li>
+                    </ul>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-blue-400 mr-2">05.</span> Ergonomi & Human Factors
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Anthropometry:</strong> Pengukuran dimensi tubuh untuk desain alat kerja.</li>
+                        <li class="list-bullet"><strong class="text-white">Biomechanics:</strong> Analisis beban angkat (NIOSH Lifting Equation), analisis postur (RULA, REBA).</li>
+                        <li class="list-bullet"><strong class="text-white">Physiology of Work:</strong> Pengukuran beban kerja fisik (denyut jantung, konsumsi oksigen).</li>
+                        <li class="list-bullet"><strong class="text-white">Environmental Ergonomics:</strong> Pencahayaan, kebisingan, temperatur, dan getaran.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-blue-400 mr-2">06.</span> Ekonomi Teknik
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Cost Accounting:</strong> HPP (Harga Pokok Produksi), Activity Based Costing (ABC).</li>
+                        <li class="list-bullet"><strong class="text-white">Investment Analysis:</strong> NPV (Net Present Value), IRR (Internal Rate of Return), Payback Period, ROI.</li>
+                        <li class="list-bullet"><strong class="text-white">Depreciation:</strong> Perhitungan penyusutan aset (Garis lurus, saldo menurun).</li>
+                        <li class="list-bullet"><strong class="text-white">Break-Even Analysis:</strong> Menghitung titik impas.</li>
+                    </ul>
+                </div>
+
+                 <!-- Card 7 -->
+                 <div class="glass-card rounded-2xl p-6 md:col-span-2 lg:col-span-3 border-t-4 border-t-blue-500" data-aos="fade-up" data-aos-delay="600">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-blue-400 mr-2">07.</span> Operations Research (Klasik/Deterministik)
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <ul class="space-y-3 text-gray-300 text-sm">
+                            <li class="list-bullet"><strong class="text-white">Linear Programming:</strong> Simplex method, sensivitas analisis.</li>
+                            <li class="list-bullet"><strong class="text-white">Integer Programming & Goal Programming.</strong></li>
+                        </ul>
+                        <ul class="space-y-3 text-gray-300 text-sm">
+                            <li class="list-bullet"><strong class="text-white">Transportation & Assignment Models.</strong></li>
+                            <li class="list-bullet"><strong class="text-white">Network Planning:</strong> CPM (Critical Path Method), PERT.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIVIDER -->
+        <div class="w-full h-px bg-gradient-to-r from-transparent via-purple-600 to-transparent opacity-50"></div>
+
+        <!-- BAGIAN 2: MODERN STEM -->
+        <section id="modern" class="relative">
+            <div class="flex items-center mb-12" data-aos="fade-right">
+                <div class="bg-purple-600 w-12 h-12 flex items-center justify-center rounded-lg shadow-lg shadow-purple-500/30 mr-6">
+                    <i class="fa-solid fa-microchip text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-tech font-bold text-white section-title !after:bg-purple-500 !after:shadow-purple-500">BAGIAN 2: MODERN STEM & INDUSTRY 4.0</h2>
+                    <p class="mt-2 text-gray-400 max-w-3xl italic border-l-2 border-purple-500 pl-4">
+                        "Ini adalah skill yang membuat Anda dibayar mahal di era digital dan membedakan Anda dari lulusan manajemen."
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-card rounded-2xl p-6 border-purple-500/30" data-aos="fade-up">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-purple-400 mr-2">01.</span> Data Science & Advanced Analytics
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Programming Languages:</strong> Python (Wajib: Pandas, NumPy), R.</li>
+                        <li class="list-bullet"><strong class="text-white">Database Management:</strong> SQL (Querying, Join, Aggregate), NoSQL (MongoDB - dasar).</li>
+                        <li class="list-bullet"><strong class="text-white">Data Visualization:</strong> Tableau, Power BI, Google Looker Studio (Dashboarding interaktif).</li>
+                        <li class="list-bullet"><strong class="text-white">Machine Learning (Supervised):</strong> Regression, Classification (Decision Trees, Random Forest).</li>
+                        <li class="list-bullet"><strong class="text-white">Machine Learning (Unsupervised):</strong> Clustering (K-Means untuk segmentasi customer), Association Rules.</li>
+                        <li class="list-bullet"><strong class="text-white">Big Data Tools:</strong> Dasar-dasar Hadoop atau Spark (untuk data skala masif).</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card rounded-2xl p-6 border-purple-500/30" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-purple-400 mr-2">02.</span> Advanced Simulation & Digital Twin
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Discrete Event Simulation (DES):</strong> Arena, FlexSim, AnyLogic, ProModel (Logika simulasi stokastik).</li>
+                        <li class="list-bullet"><strong class="text-white">Agent-Based Modeling:</strong> Memodelkan perilaku individu otonom dalam sistem.</li>
+                        <li class="list-bullet"><strong class="text-white">System Dynamics:</strong> Vensim, Stella (Memodelkan loop umpan balik/feedback loops).</li>
+                        <li class="list-bullet"><strong class="text-white">Digital Twin Creation:</strong> Menghubungkan model simulasi dengan data real-time sensor.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card rounded-2xl p-6 border-purple-500/30" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-purple-400 mr-2">03.</span> Industrial Automation & IoT (IIoT)
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Sensor Knowledge:</strong> Memahami cara kerja sensor (proximity, vision, temperature).</li>
+                        <li class="list-bullet"><strong class="text-white">PLC Basics:</strong> Memahami Ladder Logic atau Functional Block Diagram.</li>
+                        <li class="list-bullet"><strong class="text-white">Connectivity Protocols:</strong> MQTT, Modbus, OPC-UA (Cara mesin "berbicara" ke server).</li>
+                        <li class="list-bullet"><strong class="text-white">SCADA Basics:</strong> Memahami antarmuka pengawas mesin.</li>
+                        <li class="list-bullet"><strong class="text-white">Cyber-Physical Systems:</strong> Integrasi IT (Information Tech) dan OT (Operational Tech).</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-card rounded-2xl p-6 border-purple-500/30" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-purple-400 mr-2">04.</span> Advanced OR (Stokastik)
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Metaheuristics:</strong> Genetic Algorithms, Ant Colony Optimization, Simulated Annealing (untuk masalah optimasi yang terlalu rumit untuk matematika biasa).</li>
+                        <li class="list-bullet"><strong class="text-white">Queueing Theory (Lanjut):</strong> M/M/1, M/M/k models untuk analisis antrean layanan atau server.</li>
+                        <li class="list-bullet"><strong class="text-white">Markov Chains:</strong> Analisis probabilitas transisi keadaan.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="glass-card rounded-2xl p-6 border-purple-500/30" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-purple-400 mr-2">05.</span> Product Design (CAD/CAM)
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">3D CAD Modeling:</strong> SolidWorks, AutoCAD, Fusion 360, CATIA.</li>
+                        <li class="list-bullet"><strong class="text-white">Additive Manufacturing:</strong> Design for 3D Printing (DfAM).</li>
+                        <li class="list-bullet"><strong class="text-white">Rapid Prototyping:</strong> Laser cutting, 3D printing operasional.</li>
+                        <li class="list-bullet"><strong class="text-white">Product Lifecycle Management (PLM):</strong> Software manajemen siklus hidup produk (seperti Teamcenter).</li>
+                    </ul>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="glass-card rounded-2xl p-6 border-purple-500/30" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <span class="text-purple-400 mr-2">06.</span> Software Engineering Basics
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Version Control:</strong> Git & GitHub (Manajemen kode).</li>
+                        <li class="list-bullet"><strong class="text-white">API Integration:</strong> Cara menarik data dari sistem lain (REST API).</li>
+                        <li class="list-bullet"><strong class="text-white">Basic Web Development:</strong> HTML/CSS (Untuk membuat dashboard kustom sederhana).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIVIDER -->
+        <div class="w-full h-px bg-gradient-to-r from-transparent via-green-600 to-transparent opacity-50"></div>
+
+        <!-- BAGIAN 3: SOFT SKILLS (INTERPERSONAL) -->
+        <section id="interpersonal" class="relative">
+             <div class="flex items-center mb-12" data-aos="fade-right">
+                <div class="bg-green-600 w-12 h-12 flex items-center justify-center rounded-lg shadow-lg shadow-green-500/30 mr-6">
+                    <i class="fa-solid fa-users text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-tech font-bold text-white section-title !after:bg-green-500 !after:shadow-green-500">BAGIAN 3: SOFT SKILLS (INTERPERSONAL)</h2>
+                    <p class="mt-2 text-gray-400 max-w-3xl italic border-l-2 border-green-500 pl-4">
+                        "Teknik Industri selalu bekerja dengan manusia. Skill ini memastikan solusi teknis Anda diterima."
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                 <!-- Card 1 -->
+                 <div class="glass-card rounded-2xl p-6 border-b-4 border-b-green-500" data-aos="fade-up">
+                    <h3 class="text-xl font-bold text-white mb-4">
+                        <span class="text-green-400 mr-2">01.</span> Komunikasi & Persuasi
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Translasi Teknis:</strong> Menjelaskan hasil regresi statistik kepada operator pabrik atau CEO dengan bahasa awam.</li>
+                        <li class="list-bullet"><strong class="text-white">Public Speaking:</strong> Presentasi proposal proyek.</li>
+                        <li class="list-bullet"><strong class="text-white">Technical Writing:</strong> Membuat SOP (Standard Operating Procedure) yang tidak ambigu dan mudah dibaca.</li>
+                        <li class="list-bullet"><strong class="text-white">Storytelling with Data:</strong> Tidak sekadar menunjukkan grafik, tapi menceritakan "mengapa" grafik itu naik/turun.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card rounded-2xl p-6 border-b-4 border-b-green-500" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold text-white mb-4">
+                        <span class="text-green-400 mr-2">02.</span> Kepemimpinan & Manajemen
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Conflict Resolution:</strong> Menengahi perselisihan antara departemen produksi dan QC.</li>
+                        <li class="list-bullet"><strong class="text-white">Delegation:</strong> Mengetahui kapan harus mengerjakan sendiri dan kapan membagi tugas.</li>
+                        <li class="list-bullet"><strong class="text-white">Empathy:</strong> Memahami kelelahan pekerja lantai pabrik (bukan melihat mereka sebagai robot).</li>
+                        <li class="list-bullet"><strong class="text-white">Change Management:</strong> Mengelola resistensi (penolakan) karyawan terhadap sistem baru.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card rounded-2xl p-6 border-b-4 border-b-green-500" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold text-white mb-4">
+                        <span class="text-green-400 mr-2">03.</span> Negosiasi & Kolaborasi
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Vendor Negotiation:</strong> Mendapatkan harga atau term pembayaran terbaik.</li>
+                        <li class="list-bullet"><strong class="text-white">Cross-Functional Collaboration:</strong> Bekerja luwes dengan tim IT, Finance, dan HRD.</li>
+                        <li class="list-bullet"><strong class="text-white">Stakeholder Management:</strong> Mengelola ekspektasi atasan, klien, dan tim.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIVIDER -->
+        <div class="w-full h-px bg-gradient-to-r from-transparent via-yellow-600 to-transparent opacity-50"></div>
+
+        <!-- BAGIAN 4: SOFT SKILLS (KOGNITIF) -->
+        <section id="cognitive" class="relative">
+            <div class="flex items-center mb-12" data-aos="fade-right">
+                <div class="bg-yellow-600 w-12 h-12 flex items-center justify-center rounded-lg shadow-lg shadow-yellow-500/30 mr-6">
+                    <i class="fa-solid fa-brain text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-tech font-bold text-white section-title !after:bg-yellow-500 !after:shadow-yellow-500">BAGIAN 4: SOFT SKILLS (KOGNITIF)</h2>
+                    <p class="mt-2 text-gray-400 max-w-3xl italic border-l-2 border-yellow-500 pl-4">
+                        "Ini adalah 'Operating System' otak seorang Engineer yang cerdas."
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 <!-- Card 1 -->
+                 <div class="glass-card rounded-2xl p-6 border-yellow-500/20" data-aos="fade-up">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <i class="fa-solid fa-network-wired text-yellow-400 mr-3"></i> 01. Systems Thinking
+                    </h3>
+                    <span class="inline-block bg-yellow-500/20 text-yellow-300 text-xs px-2 py-1 rounded mb-3">SKILL PALING KRUSIAL</span>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Holistic View:</strong> Melihat dampak perubahan di satu stasiun kerja terhadap keseluruhan pabrik (The Butterfly Effect).</li>
+                        <li class="list-bullet"><strong class="text-white">Feedback Loops:</strong> Memahami lingkaran sebab-akibat (Causal Loop Diagrams).</li>
+                        <li class="list-bullet"><strong class="text-white">Trade-off Analysis:</strong> Memahami bahwa "lebih cepat" mungkin berarti "lebih mahal" atau "kualitas turun", dan bisa menyeimbangkannya.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card rounded-2xl p-6 border-yellow-500/20" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <i class="fa-solid fa-puzzle-piece text-yellow-400 mr-3"></i> 02. Critical Problem Solving
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Root Cause Analysis:</strong> 5 Whys, Fishbone (mencari akar, bukan gejala).</li>
+                        <li class="list-bullet"><strong class="text-white">First Principles Thinking:</strong> Membedah masalah hingga ke kebenaran paling dasar, lalu membangun solusi dari sana (ala Elon Musk).</li>
+                        <li class="list-bullet"><strong class="text-white">Hypothesis Driven:</strong> Merumuskan dugaan sebelum mengolah data, agar tidak tersesat dalam lautan data.</li>
+                    </ul>
+                </div>
+
+                 <!-- Card 3 -->
+                 <div class="glass-card rounded-2xl p-6 border-yellow-500/20" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <i class="fa-solid fa-rocket text-yellow-400 mr-3"></i> 03. Adaptabilitas & Learning Agility
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Unlearning:</strong> Bersedia melupakan metode lama (misal: sampling manual) demi metode baru (sensor IoT).</li>
+                        <li class="list-bullet"><strong class="text-white">Tech-Savviness:</strong> Tidak takut mencoba software baru.</li>
+                        <li class="list-bullet"><strong class="text-white">Resilience:</strong> Tahan banting saat proyek gagal atau data berantakan.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-card rounded-2xl p-6 border-yellow-500/20" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <i class="fa-solid fa-head-side-virus text-yellow-400 mr-3"></i> 04. Cognitive Ergonomics
+                    </h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="list-bullet"><strong class="text-white">Mental Workload:</strong> Memahami batas beban otak manusia dalam mengambil keputusan.</li>
+                        <li class="list-bullet"><strong class="text-white">Human-Computer Interaction (HCI):</strong> Mampu mendesain antarmuka sistem yang user-friendly agar tidak terjadi human error.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- RINGKASAN: T-SHAPED ENGINEER -->
+        <section id="summary" class="glass-card rounded-3xl p-8 sm:p-12 border-2 border-ieBlue relative overflow-hidden" data-aos="zoom-in">
+            <!-- Decorative Glow -->
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-ieBlue rounded-full blur-[100px] opacity-30"></div>
+            <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-iePurple rounded-full blur-[100px] opacity-30"></div>
+
+            <div class="relative z-10 text-center">
+                <h2 class="text-3xl sm:text-4xl font-tech font-bold text-white mb-6">PROFIL IDEAL: <span class="text-ieBlue">The T-Shaped Engineer</span></h2>
+                <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">Seorang ahli Teknik Industri yang cerdas dan produktif harus memiliki profil "T":</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-gray-900/50 p-6 rounded-xl border border-gray-700">
+                        <h3 class="text-xl font-bold text-white mb-2">Garis Horizontal (Generalis)</h3>
+                        <div class="h-1 w-full bg-ieBlue mb-4 shadow-[0_0_15px_#00f0ff]"></div>
+                        <p class="text-sm text-gray-400">Memahami dasar-dasar dari <strong class="text-white">SEMUA</strong> poin di atas (tahu apa itu SPC, tahu apa itu Python, tahu cara baca Laporan Keuangan).</p>
+                    </div>
+                    
+                    <div class="bg-gray-900/50 p-6 rounded-xl border border-gray-700">
+                        <h3 class="text-xl font-bold text-white mb-2">Garis Vertikal (Spesialis)</h3>
+                        <div class="h-16 w-1 mx-auto bg-iePurple mb-4 shadow-[0_0_15px_#7000ff]"></div>
+                        <p class="text-sm text-gray-400 mb-2">Menjadi SANGAT AHLI di salah satu bidang spesifik, misalnya:</p>
+                        <ul class="text-xs text-left space-y-2 bg-black/40 p-3 rounded">
+                            <li class="text-gray-300"><i class="fa-solid fa-check text-green-500 mr-2"></i><strong>Spesialis Supply Chain Data Scientist</strong> (Logistik + Python + ML)</li>
+                            <li class="text-gray-300"><i class="fa-solid fa-check text-green-500 mr-2"></i><strong>Spesialis Smart Manufacturing</strong> (Lean + IoT + Simulation)</li>
+                            <li class="text-gray-300"><i class="fa-solid fa-check text-green-500 mr-2"></i><strong>Spesialis Human Factors</strong> (Ergonomi Fisik + Kognitif + Safety)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-600 text-sm py-12">
+            <p class="font-tech tracking-widest uppercase">Industrial Engineering Ultimate Skill Set</p>
+            <p class="mt-2 text-xs opacity-50">Designed with Cyber-Industrial Aesthetics</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // Initialize Animate On Scroll
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+    </script>
+</body>
+</html>
