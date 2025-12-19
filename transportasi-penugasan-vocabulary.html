@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glosarium Riset Operasi: Transportasi & Penugasan</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font-size: 16px;
+            line-height: 1.5;
+            word-wrap: break-word;
+            color: #24292f;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1012px;
+            margin-right: auto;
+            margin-left: auto;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 32px;
+            background-color: #ffffff;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 16px;
+            font-weight: 600;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid #d8dee4;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid #d8dee4;
+        }
+
+        h3 {
+            font-size: 1.25em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            display: block;
+            width: 100%;
+            width: max-content;
+            max-width: 100%;
+            overflow: auto;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        table tr {
+            background-color: #ffffff;
+            border-top: 1px solid #d0d7de;
+        }
+
+        table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+
+        table th, table td {
+            padding: 6px 13px;
+            border: 1px solid #d0d7de;
+        }
+
+        table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+            text-align: left;
+        }
+
+        code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            white-space: break-spaces;
+            background-color: #afb8c133;
+            border-radius: 6px;
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+        }
+
+        .lead {
+            font-size: 1.1em;
+            color: #57606a;
+        }
+
+        /* Button Style Style GitHub */
+        .btn-container {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #d0d7de;
+        }
+
+        .btn {
+            appearance: none;
+            background-color: #f6f8fa;
+            border: 1px solid rgba(27, 31, 35, 0.15);
+            border-radius: 6px;
+            box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0;
+            box-sizing: border-box;
+            color: #24292f;
+            cursor: pointer;
+            display: inline-block;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            padding: 5px 16px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            user-select: none;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background-color: #f3f4f6;
+            text-decoration: none;
+            transition-duration: 0.1s;
+        }
+
+        .btn:active {
+            background-color: #ebecf0;
+            box-shadow: rgba(27, 31, 35, 0.15) 0 1px 0 inset;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Glosarium Riset Operasi: Transportasi & Penugasan</h1>
+    
+    <p class="lead">Dokumen ini berisi daftar istilah teknis yang digunakan dalam Operations Research (Riset Operasi), khususnya yang berkaitan dengan Transportation Problem (Masalah Transportasi) dan Assignment Problem (Masalah Penugasan).</p>
+
+    <h2>1. Konsep Dasar (General Concepts)</h2>
+    <p>Istilah-istilah ini berlaku umum untuk model pemrograman linear, termasuk transportasi dan penugasan.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>English Term</th>
+                <th>Terjemahan Indonesia</th>
+                <th>Penjelasan Singkat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Operations Research (OR)</td>
+                <td>Riset Operasi</td>
+                <td>Disiplin ilmu memecahkan masalah dan pengambilan keputusan.</td>
+            </tr>
+            <tr>
+                <td>Linear Programming</td>
+                <td>Pemrograman Linear</td>
+                <td>Metode matematika untuk mengalokasikan sumber daya terbatas.</td>
+            </tr>
+            <tr>
+                <td>Objective Function</td>
+                <td>Fungsi Tujuan</td>
+                <td>Rumus yang ingin dimaksimalkan (laba) atau diminimalkan (biaya).</td>
+            </tr>
+            <tr>
+                <td>Constraints</td>
+                <td>Kendala / Batasan</td>
+                <td>Syarat atau batasan yang harus dipenuhi (misal: kapasitas gudang).</td>
+            </tr>
+            <tr>
+                <td>Optimization</td>
+                <td>Optimasi</td>
+                <td>Proses mencari solusi terbaik.</td>
+            </tr>
+            <tr>
+                <td>Minimize</td>
+                <td>Meminimalkan</td>
+                <td>Biasanya digunakan untuk biaya (cost) atau waktu.</td>
+            </tr>
+            <tr>
+                <td>Maximize</td>
+                <td>Memaksimalkan</td>
+                <td>Biasanya digunakan untuk keuntungan (profit).</td>
+            </tr>
+            <tr>
+                <td>Feasible Solution</td>
+                <td>Solusi Layak</td>
+                <td>Solusi yang memenuhi semua kendala yang ada.</td>
+            </tr>
+            <tr>
+                <td>Optimal Solution</td>
+                <td>Solusi Optimal</td>
+                <td>Solusi layak yang memberikan nilai fungsi tujuan terbaik.</td>
+            </tr>
+            <tr>
+                <td>Iteration</td>
+                <td>Iterasi</td>
+                <td>Langkah pengulangan perhitungan untuk mendekati hasil optimal.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2. Masalah Transportasi (Transportation Problem)</h2>
+    <p>Model ini berkaitan dengan pendistribusian barang dari sumber ke tujuan dengan biaya minimal.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>English Term</th>
+                <th>Terjemahan Indonesia</th>
+                <th>Penjelasan Singkat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Source / Origin</td>
+                <td>Sumber / Asal</td>
+                <td>Tempat barang berasal (misal: Pabrik).</td>
+            </tr>
+            <tr>
+                <td>Destination</td>
+                <td>Tujuan</td>
+                <td>Tempat barang dikirim (misal: Gudang).</td>
+            </tr>
+            <tr>
+                <td>Supply / Capacity</td>
+                <td>Penawaran / Kapasitas</td>
+                <td>Jumlah barang yang tersedia di sumber.</td>
+            </tr>
+            <tr>
+                <td>Demand / Requirement</td>
+                <td>Permintaan / Kebutuhan</td>
+                <td>Jumlah barang yang dibutuhkan di tujuan.</td>
+            </tr>
+            <tr>
+                <td>Unit Cost</td>
+                <td>Biaya per Unit</td>
+                <td>Biaya mengirim satu unit barang dari satu sumber ke satu tujuan.</td>
+            </tr>
+            <tr>
+                <td>Route / Cell</td>
+                <td>Rute / Sel</td>
+                <td>Jalur pengiriman antar satu sumber dan satu tujuan.</td>
+            </tr>
+            <tr>
+                <td>Balanced Problem</td>
+                <td>Masalah Seimbang</td>
+                <td>Kondisi di mana Total Supply = Total Demand.</td>
+            </tr>
+            <tr>
+                <td>Unbalanced Problem</td>
+                <td>Masalah Tidak Seimbang</td>
+                <td>Kondisi di mana Total Supply &ne; Total Demand.</td>
+            </tr>
+            <tr>
+                <td>Dummy Source</td>
+                <td>Sumber Semu (Dummy)</td>
+                <td>Sumber fiktif yang ditambahkan jika Demand > Supply.</td>
+            </tr>
+            <tr>
+                <td>Dummy Destination</td>
+                <td>Tujuan Semu (Dummy)</td>
+                <td>Tujuan fiktif yang ditambahkan jika Supply > Demand.</td>
+            </tr>
+            <tr>
+                <td>Degeneracy</td>
+                <td>Degenerasi / Kemerosotan</td>
+                <td>Kondisi di mana jumlah sel terisi kurang dari (<code>m + n - 1</code>).</td>
+            </tr>
+            <tr>
+                <td>Rim Conditions</td>
+                <td>Syarat Batas</td>
+                <td>Syarat ketersediaan (supply) dan permintaan (demand).</td>
+            </tr>
+            <tr>
+                <td>Basic Cells</td>
+                <td>Sel Basis</td>
+                <td>Sel yang memiliki alokasi (jumlah barang > 0).</td>
+            </tr>
+            <tr>
+                <td>Non-basic Cells</td>
+                <td>Sel Non-Basis</td>
+                <td>Sel yang kosong (tidak ada pengiriman).</td>
+            </tr>
+            <tr>
+                <td>Penalty Cost</td>
+                <td>Biaya Penalti</td>
+                <td>Selisih biaya (biasanya digunakan dalam metode VAM).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>3. Masalah Penugasan (Assignment Problem)</h2>
+    <p>Kasus khusus dari masalah transportasi di mana Supply dan Demand masing-masing bernilai 1.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>English Term</th>
+                <th>Terjemahan Indonesia</th>
+                <th>Penjelasan Singkat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Assignee / Agent</td>
+                <td>Petugas / Agen / Pekerja</td>
+                <td>Pihak yang akan mengerjakan tugas (baris dalam matriks).</td>
+            </tr>
+            <tr>
+                <td>Task / Job</td>
+                <td>Tugas / Pekerjaan</td>
+                <td>Pekerjaan yang harus diselesaikan (kolom dalam matriks).</td>
+            </tr>
+            <tr>
+                <td>One-to-one basis</td>
+                <td>Basis satu-satu</td>
+                <td>Satu pekerja hanya boleh mengerjakan satu tugas.</td>
+            </tr>
+            <tr>
+                <td>Cost Matrix</td>
+                <td>Matriks Biaya</td>
+                <td>Tabel yang menunjukkan biaya jika pekerja X mengerjakan tugas Y.</td>
+            </tr>
+            <tr>
+                <td>Opportunity Cost</td>
+                <td>Biaya Peluang</td>
+                <td>Nilai yang hilang karena tidak memilih alternatif terbaik.</td>
+            </tr>
+            <tr>
+                <td>Reduced Matrix</td>
+                <td>Matriks Tereduksi</td>
+                <td>Matriks setelah dilakukan pengurangan baris dan kolom.</td>
+            </tr>
+            <tr>
+                <td>Zero Assignment</td>
+                <td>Penugasan Nol</td>
+                <td>Mengalokasikan tugas pada sel yang bernilai nol.</td>
+            </tr>
+            <tr>
+                <td>Prohibited Assignment</td>
+                <td>Penugasan Terlarang</td>
+                <td>Penugasan yang tidak boleh terjadi (biayanya dianggap <i>M</i> atau tak hingga).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>4. Metode Penyelesaian (Solution Methods)</h2>
+    <p>Nama-nama algoritma atau metode yang sering digunakan.</p>
+
+    <h3>A. Initial Solution (Solusi Awal Transportasi)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>English Term</th>
+                <th>Terjemahan Indonesia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Northwest Corner Rule (NWC)</td>
+                <td>Aturan Sudut Barat Laut</td>
+            </tr>
+            <tr>
+                <td>Least Cost Method</td>
+                <td>Metode Biaya Terkecil</td>
+            </tr>
+            <tr>
+                <td>Vogel's Approximation Method (VAM)</td>
+                <td>Metode Pendekatan Vogel</td>
+            </tr>
+            <tr>
+                <td>Russell's Approximation Method</td>
+                <td>Metode Pendekatan Russell</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>B. Optimal Solution (Uji Optimalitas Transportasi)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>English Term</th>
+                <th>Terjemahan Indonesia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Stepping Stone Method</td>
+                <td>Metode Batu Loncatan</td>
+            </tr>
+            <tr>
+                <td>MODI (Modified Distribution) Method</td>
+                <td>Metode Distribusi Termodifikasi</td>
+            </tr>
+            <tr>
+                <td>Closed Path / Loop</td>
+                <td>Jalur Tertutup / Loop (digunakan di Stepping Stone)</td>
+            </tr>
+            <tr>
+                <td>Shadow Price / Dual Price</td>
+                <td>Harga Bayangan (berkaitan dengan variabel dual <i>u<sub>i</sub></i> dan <i>v<sub>j</sub></i>)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>C. Assignment Method (Metode Penugasan)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>English Term</th>
+                <th>Terjemahan Indonesia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Hungarian Method</td>
+                <td>Metode Hungaria</td>
+            </tr>
+            <tr>
+                <td>Row Reduction</td>
+                <td>Pengurangan Baris</td>
+            </tr>
+            <tr>
+                <td>Column Reduction</td>
+                <td>Pengurangan Kolom</td>
+            </tr>
+            <tr>
+                <td>Line Covering</td>
+                <td>Penutupan Garis (menarik garis minimum untuk menutup semua nol)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="btn-container">
+        <a href="https://nvze.github.io/dashboard/blog.html" class="btn">Kembali ke daftar jurnal</a>
+    </div>
+
+</div>
+
+</body>
+</html>
