@@ -483,6 +483,18 @@
             box-shadow: 0 10px 20px rgba(0, 243, 255, 0.4);
         }
         
+        /* Back to blog specific style */
+        .btn-back {
+            background: linear-gradient(90deg, #333, #555);
+            color: white;
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-back:hover {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: var(--dark);
+        }
+        
         /* Highlight tag */
         .highlight {
             display: inline-block;
@@ -571,6 +583,13 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
+            <!-- Back Button added here -->
+            <div style="margin-bottom: 20px;">
+                <a href="https://nvze.github.io/dashboard/blog.html" class="interactive-btn btn-back">
+                    <i class="fas fa-arrow-left"></i> kembali ke daftar jurnal
+                </a>
+            </div>
+
             <h1 class="title">THE ULTIMATE INDUSTRIAL ENGINEERING SKILL MATRIX</h1>
             <p class="subtitle">Sebuah panduan komprehensif yang menggabungkan fondasi klasik TI dengan teknologi modern STEM untuk menciptakan engineer masa depan</p>
             
@@ -828,6 +847,9 @@
                 © 2024 IE Future Lab | "Engineering the Future of Industry"
             </p>
             <div style="margin-top: 30px;">
+                <a href="https://nvze.github.io/dashboard/blog.html" class="interactive-btn btn-back">
+                    <i class="fas fa-arrow-left"></i> kembali ke daftar jurnal
+                </a>
                 <button class="interactive-btn" onclick="sharePage()">
                     <i class="fas fa-share-alt"></i> Bagikan
                 </button>
