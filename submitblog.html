@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buat Postingan Blog Baru</title>
+    <link rel="stylesheet" href="style.css"> <!-- Pakai CSS yang sama -->
+    <style>
+        body { max-width: 800px; margin: 40px auto; padding: 20px; }
+        textarea { width: 100%; height: 400px; font-family: monospace; }
+        input, button { padding: 10px; margin-top: 10px; font-size: 16px; }
+        button { background: #0070f3; color: white; border: none; cursor: pointer; }
+        button:hover { background: #005edc; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Buat Postingan Blog Baru</h1>
+        <a href="index.html">Kembali ke Home</a>
+    </header>
+    <main>
+        <form id="post-form">
+            <label for="title">Judul Postingan:</label><br>
+            <input type="text" id="title" required placeholder="Masukkan judul di sini"><br><br>
+
+            <label for="content">Isi Postingan:</label><br>
+            <textarea id="content" required placeholder="Tulis konten blog kamu di sini...&#10;Baris baru akan otomatis jadi paragraf baru."></textarea><br>
+
+            <button type="submit">Submit & Download .txt</button>
+        </form>
+
+        <p id="info" style="margin-top: 20px; color: #555;">
+            Setelah download file .txt:<br>
+            1. Buka GitHub repo kamu → folder <code>posts/</code><br>
+            2. Klik "Add file" → "Upload files" → drag file .txt yang baru download<br>
+            3. Commit changes → dalam 1 menit, post baru muncul di blog!<br>
+            (Vercel otomatis deploy ulang)
+        </p>
+    </main>
+
+    <script>
+        document.getElementById('post-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('title').value.trim();
+            const content = document.getElementById('content').value;
+
+            if (!title || !content) {
+                alert('Judul dan isi harus diisi!');
+                return;
+            }
+
+            // Buat slug sederhana dari judul (lowercase, ganti spasi jadi -)
+            const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+            const filename = `${slug}.txt`;
+
+            // Konten file .txt
+            const fileContent = content;
+
+            // Create Blob dan download
+            const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            alert(`File "${filename}" berhasil di-download!\nUpload ke folder posts/ di GitHub untuk publish.`);
+        });
+    </script>
+</body>
+</html>
