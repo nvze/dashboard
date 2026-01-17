@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulus & Luas Lingkaran: Pembuktian Visual</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fdfbf7; color: #1f2937; }
+        h1, h2, h3, .math-font { font-family: 'Merriweather', serif; }
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 600px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            height: 350px; 
+            max-height: 400px; 
+        }
+        .math-block {
+            background-color: #ffffff;
+            border-left: 4px solid #4f46e5;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-family: 'Merriweather', serif;
+            overflow-x: auto;
+        }
+        .fraction {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            margin: 0 0.2rem;
+        }
+        .fraction > span { display: block; padding: 0.1rem; }
+        .fraction span.numerator { border-bottom: 1px solid currentColor; }
+        .fraction span.denominator { border-top: 1px solid transparent; }
+        .nav-btn.active {
+            background-color: #4f46e5;
+            color: white;
+            border-bottom: 2px solid #312e81;
+        }
+        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        canvas { touch-action: none; }
+    </style>
+    <!-- Chosen Palette: Academic Calm (Warm Off-White #fdfbf7, Slate #1f2937, Indigo #4f46e5 for primary actions/highlights) -->
+    <!-- Application Structure Plan: 
+         1. Header: Title and context.
+         2. Navigation: Tabs for "Konsep", "Metode Cincin", "Metode Grafik", and "Kalkulator".
+         3. Content Sections:
+            - Intro: Why we need Calculus.
+            - Ring Method: Split view. Left: Explanation & Math steps. Right: Interactive Canvas where slider controls the radius 'r' of the ring, visually "unrolling" it to show the rectangle approximation.
+            - Graph Method: Split view. Left: Substitution steps (Trig). Right: Chart.js visualization of y = sqrt(R^2 - x^2) with a slider to move x and show the angle theta.
+            - Calculator: Practical application. Inputs for R, showing the final formula calculation.
+         This structure moves from intuition (Rings) to formal rigor (Graph) to application (Calculator).
+    -->
+    <!-- Visualization & Content Choices:
+         1. Ring Method: Custom Canvas API. Goal: Intuition. Method: Draw circle and a highlight ring that changes size with slider. Draw corresponding "unrolled" rectangle. Justification: "Unrolling" is a geometric transformation best handled by raw canvas drawing commands for smooth animation.
+         2. Graph Method: Chart.js. Goal: Formal graphing. Method: Line chart filling area under curve. Interaction: Slider moves a point on the curve. Justification: Chart.js provides clean axes and grid lines essential for understanding Cartesian coordinate proofs.
+         3. Math: HTML/CSS styled math blocks. Goal: Readability. Justification: Lightweight compared to MathJax, fits single file constraint.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl md:text-2xl font-bold text-slate-800">Kalkulus & Lingkaran</h1>
+                <p class="text-xs md:text-sm text-slate-500">Membuktikan A = &pi;r&sup2;</p>
+            </div>
+            <nav class="hidden md:flex space-x-2">
+                <button onclick="switchTab('intro')" id="nav-intro" class="nav-btn active px-4 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 hover:bg-slate-100">Pengantar</button>
+                <button onclick="switchTab('ring')" id="nav-ring" class="nav-btn px-4 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 hover:bg-slate-100">Metode Cincin</button>
+                <button onclick="switchTab('graph')" id="nav-graph" class="nav-btn px-4 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 hover:bg-slate-100">Metode Grafik</button>
+                <button onclick="switchTab('calc')" id="nav-calc" class="nav-btn px-4 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 hover:bg-slate-100">Simulasi</button>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600">
+                <span class="text-2xl">&#9776;</span>
+            </button>
+        </div>
+        <!-- Mobile Nav -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 p-4 space-y-2 shadow-lg absolute w-full">
+            <button onclick="switchTab('intro')" class="block w-full text-left px-4 py-2 rounded hover:bg-slate-50 text-slate-700">Pengantar</button>
+            <button onclick="switchTab('ring')" class="block w-full text-left px-4 py-2 rounded hover:bg-slate-50 text-slate-700">Metode Cincin</button>
+            <button onclick="switchTab('graph')" class="block w-full text-left px-4 py-2 rounded hover:bg-slate-50 text-slate-700">Metode Grafik</button>
+            <button onclick="switchTab('calc')" class="block w-full text-left px-4 py-2 rounded hover:bg-slate-50 text-slate-700">Simulasi</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- INTRO TAB -->
+        <section id="intro" class="tab-content active">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <h2 class="text-3xl font-bold text-slate-900">Mengapa Menggunakan Kalkulus?</h2>
+                <p class="text-lg text-slate-700 leading-relaxed">
+                    Dalam matematika dasar, kita menghafal rumus luas lingkaran <span class="math-font font-bold text-indigo-600">A = &pi;R&sup2;</span>. 
+                    Tetapi dari mana rumus ini berasal? Kalkulus memberi kita alat untuk "membedah" bentuk lengkung seperti lingkaran menjadi bagian-bagian kecil yang mudah dihitung, lalu menyatukannya kembali.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 text-left">
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="switchTab('ring')">
+                        <div class="h-12 w-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mb-4 text-2xl font-bold">1</div>
+                        <h3 class="text-xl font-bold mb-2">Metode Cincin (Kulit Bawang)</h3>
+                        <p class="text-slate-600">Pendekatan intuitif. Membayangkan lingkaran sebagai kumpulan cincin tipis yang disusun dari pusat ke luar. Kita menjumlahkan luas setiap cincin.</p>
+                        <span class="inline-block mt-4 text-indigo-600 font-semibold text-sm">Pelajari &rarr;</span>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="switchTab('graph')">
+                        <div class="h-12 w-12 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center mb-4 text-2xl font-bold">2</div>
+                        <h3 class="text-xl font-bold mb-2">Metode Grafik (Integral Tentu)</h3>
+                        <p class="text-slate-600">Pendekatan formal. Menggunakan persamaan lingkaran dalam koordinat Kartesius dan teknik substitusi trigonometri.</p>
+                        <span class="inline-block mt-4 text-teal-600 font-semibold text-sm">Pelajari &rarr;</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- METHOD 1: RINGS TAB -->
+        <section id="ring" class="tab-content">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-slate-900 border-b pb-2 mb-4">Pendekatan 1: Metode Cincin (Kulit Bawang)</h2>
+                <p class="text-slate-700">
+                    Bayangkan lingkaran bukan sebagai bidang padat, melainkan kumpulan <strong>cincin tipis</strong> yang tak terhingga banyaknya. 
+                    Jika kita bisa menghitung luas satu cincin tipis, kita bisa menggunakan integral untuk menjumlahkan semuanya.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <!-- Visualization Column -->
+                <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-lg order-2 lg:order-1">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-slate-700">Visualisasi Cincin</h3>
+                        <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">Interaktif</span>
+                    </div>
+                    
+                    <!-- Ring Canvas Container -->
+                    <div class="chart-container bg-stone-50 rounded border border-stone-100 flex justify-center items-center">
+                        <canvas id="ringCanvas"></canvas>
+                    </div>
+
+                    <div class="mt-6 space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Posisi Cincin (Jari-jari <span class="math-font italic">r</span>)</label>
+                            <input type="range" id="ringSlider" min="0" max="100" value="50" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                            <div class="flex justify-between text-xs text-slate-500 mt-1">
+                                <span>Pusat (0)</span>
+                                <span>Tepi Luar (R)</span>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-indigo-50 rounded-md text-sm text-indigo-800 border border-indigo-100">
+                            <strong>Intuisi Geometri:</strong> Jika cincin kuning di atas dipotong dan diluruskan, ia menjadi persegi panjang (bawah) dengan:
+                            <ul class="list-disc list-inside mt-1 ml-1 space-y-1">
+                                <li>Panjang &approx; Keliling (<span class="math-font">2&pi;r</span>)</li>
+                                <li>Lebar &approx; Ketebalan (<span class="math-font">dr</span>)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theory Column -->
+                <div class="space-y-6 order-1 lg:order-2">
+                    <div class="math-block text-lg">
+                        <div class="font-bold text-sm text-slate-400 uppercase tracking-wider mb-2">Konsep Luas Elemen</div>
+                        $$ dA \approx 2\pi r \, dr $$
+                    </div>
+                    
+                    <p class="text-slate-700">
+                        Untuk mendapatkan luas total (<span class="math-font italic">A</span>), kita integralkan dari pusat (<span class="math-font italic">r=0</span>) ke jari-jari luar (<span class="math-font italic">R</span>).
+                    </p>
+
+                    <div class="space-y-2">
+                        <div class="p-3 bg-white border border-stone-200 rounded hover:bg-stone-50 transition-colors">
+                            <h4 class="font-bold text-sm text-slate-800">1. Bentuk Integral</h4>
+                            <div class="math-font text-indigo-700 mt-1">
+                                A = &int;<sub>0</sub><sup>R</sup> 2&pi;r dr
+                            </div>
+                        </div>
+                        <div class="p-3 bg-white border border-stone-200 rounded hover:bg-stone-50 transition-colors">
+                            <h4 class="font-bold text-sm text-slate-800">2. Keluarkan Konstanta</h4>
+                            <div class="math-font text-slate-700 mt-1">
+                                A = 2&pi; &int;<sub>0</sub><sup>R</sup> r dr
+                            </div>
+                        </div>
+                        <div class="p-3 bg-white border border-stone-200 rounded hover:bg-stone-50 transition-colors">
+                            <h4 class="font-bold text-sm text-slate-800">3. Aturan Pangkat</h4>
+                            <div class="math-font text-slate-700 mt-1 flex items-center">
+                                A = 2&pi; <span class="text-2xl mx-2">[</span> 
+                                <div class="fraction">
+                                    <span class="numerator">r&sup2;</span>
+                                    <span class="denominator">2</span>
+                                </div>
+                                <span class="text-2xl mx-2">]</span>
+                                <sub class="self-end mb-1">0</sub><sup class="self-start mt-1">R</sup>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-green-50 border border-green-200 rounded hover:bg-green-100 transition-colors">
+                            <h4 class="font-bold text-sm text-green-800">4. Hasil Akhir</h4>
+                            <div class="math-font text-green-700 font-bold text-xl mt-1">
+                                A = &pi;R&sup2;
+                            </div>
+                            <p class="text-xs text-green-600 mt-1">Terbukti!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- METHOD 2: GRAPH TAB -->
+        <section id="graph" class="tab-content">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-slate-900 border-b pb-2 mb-4">Pendekatan 2: Integral Tentu (Grafik)</h2>
+                <p class="text-slate-700">
+                    Kita menggunakan persamaan lingkaran <span class="math-font bg-stone-100 px-1 rounded">x&sup2; + y&sup2; = R&sup2;</span>. 
+                    Kita hitung luas seperempat lingkaran di kuadran pertama, lalu dikalikan 4.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Theory Column (Left on Desktop) -->
+                <div class="space-y-6">
+                    <div class="math-block">
+                        <div class="font-bold text-sm text-slate-400 uppercase tracking-wider mb-2">Integral Awal</div>
+                        <div class="text-lg">
+                            A = 4 &int;<sub>0</sub><sup>R</sup> &radic;(R&sup2; - x&sup2;) dx
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100 text-sm">
+                        <h4 class="font-bold text-indigo-900 mb-2">Trik: Substitusi Trigonometri</h4>
+                        <p class="mb-2">Integral di atas sulit dipecahkan langsung. Kita ganti variabel <span class="math-font italic">x</span> dengan sudut <span class="math-font italic">&theta;</span>.</p>
+                        <ul class="space-y-2 list-none pl-0 math-font text-indigo-800">
+                            <li>Misal: <strong>x = R sin(&theta;)</strong></li>
+                            <li>Turunan: <strong>dx = R cos(&theta;) d&theta;</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-2 text-slate-700 text-sm">
+                        <p>Setelah substitusi dan menggunakan identitas <span class="math-font">1 - sin&sup2;&theta; = cos&sup2;&theta;</span>, integral menjadi:</p>
+                        <div class="p-2 bg-white border border-stone-200 rounded math-font">
+                            A = 4R&sup2; &int; cos&sup2;&theta; d&theta;
+                        </div>
+                        <p>Menggunakan sudut rangkap dan batas integral baru (<span class="math-font">0 ke &pi;/2</span>), kita dapatkan:</p>
+                        <div class="p-3 bg-green-50 border border-green-200 rounded font-bold text-green-800 text-center text-lg math-font">
+                            A = &pi;R&sup2;
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Graph Column -->
+                <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-slate-700">Grafik Kuadran I</h3>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="graphChart"></canvas>
+                    </div>
+
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Posisi x (Substitusi)</label>
+                        <input type="range" id="graphSlider" min="0" max="100" value="50" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-teal-600">
+                        
+                        <div class="grid grid-cols-3 gap-2 mt-4 text-center">
+                            <div class="bg-stone-50 p-2 rounded border border-stone-200">
+                                <div class="text-xs text-slate-500">Nilai x</div>
+                                <div class="font-mono font-bold text-teal-600" id="val-x">0.50 R</div>
+                            </div>
+                            <div class="bg-stone-50 p-2 rounded border border-stone-200">
+                                <div class="text-xs text-slate-500">Sudut &theta;</div>
+                                <div class="font-mono font-bold text-indigo-600" id="val-theta">30&deg;</div>
+                            </div>
+                            <div class="bg-stone-50 p-2 rounded border border-stone-200">
+                                <div class="text-xs text-slate-500">Tinggi y</div>
+                                <div class="font-mono font-bold text-slate-600" id="val-y">0.87 R</div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-center text-slate-400 mt-2">Geser slider untuk melihat hubungan x dan &theta;</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATION / CALCULATOR TAB -->
+        <section id="calc" class="tab-content">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900">Simulasi Numerik</h2>
+                    <p class="text-slate-600">Buktikan rumusnya sendiri dengan angka nyata.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-md">
+                    <div class="flex flex-col sm:flex-row gap-4 items-end justify-center mb-6">
+                        <div class="w-full sm:w-1/2">
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Masukkan Jari-jari (R)</label>
+                            <input type="number" id="inputRadius" value="5" class="w-full p-3 border border-stone-300 rounded-lg text-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Contoh: 5">
+                        </div>
+                        <button onclick="calculateArea()" class="w-full sm:w-auto px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-colors">
+                            Hitung
+                        </button>
+                    </div>
+
+                    <div id="resultArea" class="hidden animate-pulse">
+                        <div class="border-t border-dashed border-stone-300 my-6"></div>
+                        
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Hasil Perhitungan:</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-3 bg-stone-50 rounded">
+                                <span class="text-slate-600">Rumus:</span>
+                                <span class="math-font font-bold text-lg">A = &pi;R&sup2;</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-stone-50 rounded">
+                                <span class="text-slate-600">Substitusi:</span>
+                                <span class="math-font text-lg">A = &pi; &times; (<span id="disp-r">5</span>)&sup2;</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-stone-50 rounded">
+                                <span class="text-slate-600">Eksak:</span>
+                                <span class="math-font font-bold text-indigo-600 text-xl"><span id="disp-sq">25</span>&pi;</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-indigo-600 text-white rounded-lg shadow-lg transform scale-105">
+                                <span class="font-medium">Perkiraan Nilai:</span>
+                                <span class="font-mono font-bold text-2xl" id="disp-final">78.54</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-100 border-t border-stone-200 py-6 mt-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
+            <p>Dibangun berdasarkan laporan "Luas Lingkaran Kalkulus". &copy; 2026 NvzeEduMath.</p>
+        </div>
+    </footer>
+
+    <script>
+        // State Management
+        let currentTab = 'intro';
+        const state = {
+            r: 50, // percent for slider
+            graphX: 50, // percent for graph slider
+            radiusInput: 5
+        };
+
+        // Navigation Logic
+        function switchTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+                el.style.display = 'none'; // Ensure display none for clean transition
+            });
+            
+            // Show selected
+            const activeTab = document.getElementById(tabId);
+            activeTab.style.display = 'block';
+            // Small delay to allow display block to apply before adding opacity class if needed
+            setTimeout(() => activeTab.classList.add('active'), 10);
+
+            // Update Buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            const navBtn = document.getElementById(`nav-${tabId}`);
+            if(navBtn) navBtn.classList.add('active');
+
+            // Mobile menu close
+            document.getElementById('mobile-menu').classList.add('hidden');
+
+            currentTab = tabId;
+
+            // Trigger specific renders
+            if (tabId === 'ring') {
+                setTimeout(initRingCanvas, 50); // Delay to ensure container size is calculated
+            } else if (tabId === 'graph') {
+                setTimeout(initGraphChart, 50);
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // --- METHOD 1: RING CANVAS VISUALIZATION ---
+        let ringCanvas, ctx;
+        
+        function initRingCanvas() {
+            const container = document.querySelector('#ring .chart-container');
+            ringCanvas = document.getElementById('ringCanvas');
+            
+            // Set canvas resolution match display size
+            const rect = container.getBoundingClientRect();
+            ringCanvas.width = rect.width;
+            ringCanvas.height = rect.height;
+            
+            ctx = ringCanvas.getContext('2d');
+            drawRingScene(state.r);
+        }
+
+        function drawRingScene(percent) {
+            if (!ctx) return;
+            const w = ringCanvas.width;
+            const h = ringCanvas.height;
+            const centerX = w / 2;
+            const centerY = h / 3; // Circle centered in top third
+            const maxRadius = Math.min(w, h/1.5) / 2 - 20;
+            const currentRadius = (percent / 100) * maxRadius;
+            
+            ctx.clearRect(0, 0, w, h);
+
+            // 1. Draw Main Circle Outline
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, maxRadius, 0, Math.PI * 2);
+            ctx.strokeStyle = '#e5e7eb'; // gray-200
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // 2. Draw Filled "Inner" Area (Accumulated) - Optional, let's just show the ring
+            // ctx.beginPath();
+            // ctx.arc(centerX, centerY, currentRadius, 0, Math.PI * 2);
+            // ctx.fillStyle = 'rgba(79, 70, 229, 0.05)';
+            // ctx.fill();
+
+            // 3. Draw The "Ring" (dr)
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, currentRadius, 0, Math.PI * 2);
+            ctx.strokeStyle = '#4f46e5'; // Indigo-600
+            ctx.lineWidth = 6; // Exaggerated dr
+            ctx.stroke();
+
+            // 4. Draw Radius Line
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(centerX + currentRadius, centerY);
+            ctx.strokeStyle = '#dc2626'; // Red
+            ctx.lineWidth = 2;
+            ctx.setLineDash([4, 2]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Label r
+            ctx.fillStyle = '#dc2626';
+            ctx.font = '12px Inter';
+            if (currentRadius > 10) ctx.fillText('r', centerX + currentRadius/2, centerY - 5);
+
+            // 5. Draw "Unrolled" Rectangle below
+            const rectY = centerY + maxRadius + 40;
+            const maxCircumference = 2 * Math.PI * maxRadius;
+            const currentCircumference = 2 * Math.PI * currentRadius;
+            
+            // Scale circumference to fit canvas width (for visualization purposes)
+            const scaleFactor = (w - 40) / maxCircumference; 
+            const drawWidth = currentCircumference * scaleFactor;
+            
+            // Draw rectangle center aligned
+            const rectX = (w - drawWidth) / 2;
+            
+            ctx.fillStyle = '#4f46e5';
+            ctx.fillRect(rectX, rectY, drawWidth, 8); // Height 8 represents dr
+
+            // Arrow indicating unrolling
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY + currentRadius + 5);
+            ctx.lineTo(centerX, rectY - 5);
+            ctx.strokeStyle = '#9ca3af';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([2, 2]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Text labels for rectangle
+            ctx.fillStyle = '#1f2937';
+            ctx.textAlign = 'center';
+            ctx.fillText(`Panjang ≈ 2πr`, centerX, rectY + 25);
+            ctx.fillText(`Tebal ≈ dr`, centerX + drawWidth/2 + 25, rectY + 8);
+        }
+
+        // Ring Slider Listener
+        document.getElementById('ringSlider').addEventListener('input', (e) => {
+            state.r = e.target.value;
+            drawRingScene(state.r);
+        });
+        
+        // Window Resize Listener for Canvas
+        window.addEventListener('resize', () => {
+            if (currentTab === 'ring') initRingCanvas();
+        });
+
+
+        // --- METHOD 2: CHART.JS GRAPH ---
+        let graphChart = null;
+
+        function initGraphChart() {
+            if (graphChart) return; // Already initialized
+
+            const ctxGraph = document.getElementById('graphChart').getContext('2d');
+            
+            // Generate data points for circle quadrant
+            const dataPoints = [];
+            const radius = 10; // conceptual radius for chart
+            for (let i = 0; i <= 100; i++) {
+                const x = (i / 100) * radius;
+                const y = Math.sqrt(radius*radius - x*x);
+                dataPoints.push({x: x, y: y});
+            }
+
+            graphChart = new Chart(ctxGraph, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'y = √(R² - x²)',
+                        data: dataPoints,
+                        borderColor: '#0d9488', // Teal-600
+                        backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        pointRadius: 0,
+                        pointHoverRadius: 0
+                    },
+                    {
+                        label: 'Titik x', // The interactive point
+                        data: [{x: 5, y: Math.sqrt(100 - 25)}],
+                        pointRadius: 6,
+                        pointBackgroundColor: '#4f46e5',
+                        borderColor: '#fff',
+                        borderWidth: 2,
+                        type: 'scatter',
+                        showLine: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            min: 0,
+                            max: 10, // slightly more than R
+                            title: { display: true, text: 'x' },
+                            grid: { color: '#e5e7eb' }
+                        },
+                        y: {
+                            min: 0,
+                            max: 10,
+                            title: { display: true, text: 'y' },
+                            grid: { color: '#e5e7eb' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false } // Custom tooltip via HTML text
+                    },
+                    animation: { duration: 0 } // Performance optimization for slider
+                }
+            });
+            updateGraph(50);
+        }
+
+        function updateGraph(percent) {
+            if (!graphChart) return;
+            
+            const R = 10;
+            const xVal = (percent / 100) * R;
+            const yVal = Math.sqrt(R*R - xVal*xVal);
+            
+            // Update Point
+            graphChart.data.datasets[1].data = [{x: xVal, y: yVal}];
+            graphChart.update('none'); // Update without animation
+
+            // Update Text Data
+            const thetaRad = Math.asin(xVal / R);
+            const thetaDeg = (thetaRad * 180 / Math.PI).toFixed(0);
+            
+            document.getElementById('val-x').innerText = (xVal/R).toFixed(2) + " R";
+            document.getElementById('val-y').innerText = (yVal/R).toFixed(2) + " R";
+            document.getElementById('val-theta').innerText = thetaDeg + "°";
+        }
+
+        document.getElementById('graphSlider').addEventListener('input', (e) => {
+            state.graphX = e.target.value;
+            updateGraph(state.graphX);
+        });
+
+
+        // --- METHOD 3: CALCULATOR ---
+        function calculateArea() {
+            const rInput = document.getElementById('inputRadius').value;
+            const r = parseFloat(rInput);
+            
+            if (isNaN(r) || r < 0) {
+                alert("Mohon masukkan jari-jari yang valid (angka positif).");
+                return;
+            }
+
+            const areaExact = r * r;
+            const areaApprox = (Math.PI * areaExact).toFixed(2);
+
+            // Update DOM
+            document.getElementById('disp-r').innerText = r;
+            document.getElementById('disp-sq').innerText = areaExact;
+            document.getElementById('disp-final').innerText = areaApprox;
+
+            // Show result
+            const resDiv = document.getElementById('resultArea');
+            resDiv.classList.remove('hidden');
+            resDiv.classList.remove('animate-pulse');
+            void resDiv.offsetWidth; // trigger reflow
+            resDiv.classList.add('animate-pulse');
+            setTimeout(() => resDiv.classList.remove('animate-pulse'), 500);
+        }
+
+        // Initialize first tab
+        switchTab('intro');
+
+    </script>
+</body>
+</html>
