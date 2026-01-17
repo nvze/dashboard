@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skema Investasi Infrastruktur - Contoh dan Perhitungan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #2c3e50;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin: 25px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        h3 {
+            color: #16a085;
+            margin: 20px 0 10px 0;
+        }
+        
+        h4 {
+            color: #27ae60;
+            margin: 15px 0 8px 0;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background-color: #2c3e50;
+            color: white;
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #f1f8ff;
+        }
+        
+        .formula {
+            font-family: 'Courier New', monospace;
+            background-color: #f1f1f1;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 3px solid #e74c3c;
+        }
+        
+        .note {
+            background-color: #fffde7;
+            border: 1px solid #ffeb3b;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        
+        .calculation-example {
+            background-color: #e8f5e9;
+            border: 1px solid #4caf50;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 25px 0;
+        }
+        
+        .scheme-comparison {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .scheme-card {
+            flex: 1;
+            min-width: 300px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-top: 4px solid #3498db;
+        }
+        
+        .scheme-card h4 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 10px;
+            }
+            
+            .note, .highlight, .calculation-example {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CONTOH SKEMA INVESTASI INFRASTRUKTUR DAN CARA MENGHITUNGNYA</h1>
+            <p><strong>Dokumen Edukasi Investasi Infrastruktur</strong></p>
+            <p>Tanggal: <span id="currentDate"></span></p>
+        </header>
+        
+        <section>
+            <h2>1. Pendahuluan</h2>
+            <p>Investasi infrastruktur biasanya dilakukan dengan skema kerjasama pemerintah dan swasta (Public-Private Partnership/PPP) atau oleh BUMN/swasta murni. Dokumen ini akan menjelaskan contoh skema dan perhitungan dasarnya.</p>
+        </section>
+        
+        <section>
+            <h2>2. Contoh Skema: Build-Operate-Transfer (BOT) untuk Jalan Tol</h2>
+            
+            <div class="highlight">
+                <h3>Deskripsi Proyek:</h3>
+                <ul>
+                    <li>Pembangunan jalan tol sepanjang 30 km</li>
+                    <li>Masa konstruksi: 3 tahun</li>
+                    <li>Masa konsesi (operasi): 30 tahun setelah konstruksi selesai</li>
+                    <li>Setelah masa konsesi, jalan tol diserahkan (transfer) kepada pemerintah</li>
+                    <li>Sumber pendapatan: tarif tol dari pengguna</li>
+                </ul>
+                
+                <h3>Pihak Terlibat:</h3>
+                <ul>
+                    <li><strong>Pemerintah (Pemilik Konsesi):</strong> Memberikan izin, lahan, dan mungkin jaminan tertentu</li>
+                    <li><strong>Perusahaan Khusus (SPV - Special Purpose Vehicle):</strong> Konsorsium swasta/BUMN yang membangun, mendanai, dan mengoperasikan tol</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section>
+            <h2>3. Cara Menghitung Kelayakan Investasi</h2>
+            <p>Perhitungan berfokus pada analisis finansial untuk menentukan apakah proyek layak (feasible) dan memberikan imbal hasil yang menarik.</p>
+            
+            <h3>A. Komponen Perhitungan</h3>
+            
+            <h4>1. Estimasi Biaya (Cash Outflow)</h4>
+            <ul>
+                <li><strong>Biaya Konstruksi (Capex):</strong> Rp 6 triliun (Rp 200 miliar/km). Dibayar bertahap selama 3 tahun.</li>
+                <li><strong>Biaya Operasi & Pemeliharaan (Opex) Tahunan:</strong> Setelah operasi, misal 2% dari pendapatan kotor per tahun.</li>
+                <li><strong>Biaya Lain:</strong> Administrasi, asuransi, dll.</li>
+            </ul>
+            
+            <h4>2. Estimasi Pendapatan (Cash Inflow)</h4>
+            <ul>
+                <li><strong>Tarif Tol:</strong> Rp 10.000 untuk golongan I (mobil)</li>
+                <li><strong>Volume Lalu Lintas:</strong> Diproyeksikan berdasarkan studi lalu lintas
+                    <ul>
+                        <li>Tahun ke-1 operasi: 50.000 kendaraan/hari</li>
+                        <li>Pertumbuhan lalu lintas: 5% per tahun</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <div class="formula">
+                <strong>Rumus Pendapatan Tahunan:</strong><br>
+                Pendapatan = (Tarif Tol) × (Volume Harian) × 365 hari
+            </div>
+            
+            <div class="calculation-example">
+                <h4>Contoh Perhitungan Tahun-1:</h4>
+                <p>Pendapatan = Rp 10.000 × 50.000 × 365 = <strong>Rp 182,5 miliar</strong></p>
+            </div>
+            
+            <h4>3. Pendanaan (Financing)</h4>
+            <ul>
+                <li><strong>Struktur:</strong> 70% Utang (Debt), 30% Modal Sendiri (Equity)</li>
+                <li><strong>Utang:</strong> Pinjaman bank senilai Rp 4,2 triliun, bunga 10% per tahun, tenor 15 tahun</li>
+                <li><strong>Modal Sendiri:</strong> Rp 1,8 triliun dari pemegang saham SPV</li>
+            </ul>
+            
+            <h4>4. Asumsi Kunci</h4>
+            <ul>
+                <li><strong>Tingkat Diskonto (Discount Rate/WACC):</strong> 11% (mencerminkan risiko proyek dan biaya modal rata-rata)</li>
+                <li><strong>Inflasi:</strong> 3% per tahun (mempengaruhi kenaikan tarif tol dan biaya)</li>
+                <li><strong>Masa Konsesi:</strong> 30 tahun operasi</li>
+            </ul>
+            
+            <h3>B. Metode Perhitungan & Indikator Kelayakan</h3>
+            
+            <h4>1. Arus Kas Bebas Proyek (Project Free Cash Flow)</h4>
+            <div class="formula">
+                <strong>Rumus Sederhana per Tahun:</strong><br>
+                Arus Kas = Pendapatan Operasi - Biaya Operasi - Biaya Pemeliharaan - Pajak - Pembayaran Bunga & Pokok Utang
+            </div>
+            
+            <h4>2. Indikator Kelayakan Utama</h4>
+            
+            <div class="scheme-card">
+                <h4>a. NPV (Net Present Value)</h4>
+                <p>Menjumlahkan semua arus kas masa depan (inflow dan outflow) yang didiskontokan ke nilai saat ini.</p>
+                <div class="formula">
+                    <strong>Rumus:</strong> NPV = Σ [Arus Kas Tahunan / (1 + Tingkat Diskonto)<sup>Tahun</sup>]
+                </div>
+                <p><strong>Keputusan:</strong> Jika <strong>NPV > 0</strong>, proyek layak secara finansial. Semakin besar, semakin baik.</p>
+                <p><strong>Contoh Simulasi:</strong> Jika total arus kas didiskontokan menghasilkan <strong>Rp 500 miliar</strong>, proyek menciptakan nilai.</p>
+            </div>
+            
+            <div class="scheme-card">
+                <h4>b. IRR (Internal Rate of Return)</h4>
+                <p>Tingkat diskonto yang membuat NPV = 0.</p>
+                <p><strong>Keputusan:</strong> Jika <strong>IRR > Tingkat Diskonto/WACC (11%)</strong>, proyek layak.</p>
+                <p><strong>Contoh Simulasi:</strong> Jika IRR proyek = 13%, berarti lebih tinggi dari biaya modal (11%), sehingga layak.</p>
+            </div>
+            
+            <div class="scheme-card">
+                <h4>c. DSCR (Debt Service Coverage Ratio)</h4>
+                <p>Mengukur kemampuan arus kas proyek membayar utang.</p>
+                <div class="formula">
+                    <strong>Rumus:</strong> DSCR = Arus Kas Operasi / Total Pembayaran Utang (bunga+pokok) per Tahun
+                </div>
+                <p><strong>Keputusan:</strong> <strong>DSCR > 1,2x - 1,5x</strong> biasanya menjadi syarat bank. Misal DSCR = 1,3, artinya arus kas 1,3x lebih besar dari kewajiban utang tahun itu.</p>
+            </div>
+            
+            <h3>C. Contoh Tabel Perhitungan Sederhana (Ilustratif)</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tahun</th>
+                        <th>Arus Kas Konstruksi (Out)</th>
+                        <th>Arus Kas Operasi (In)</th>
+                        <th>Arus Kas Bersih</th>
+                        <th>Arus Kas Terdiskonto (DF 11%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0-2</td>
+                        <td>-Rp 2.000 Miliar/th</td>
+                        <td>Rp 0</td>
+                        <td>-Rp 2.000 M</td>
+                        <td>(Dihitung per tahun)</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>-Rp 500 M</td>
+                        <td>Rp 182.500 M</td>
+                        <td>-Rp 317.500 M</td>
+                        <td>-Rp 232.1 M</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Rp 0</td>
+                        <td>Rp 191.625 M</td>
+                        <td>Rp 191.625 M</td>
+                        <td>Rp 126.2 M</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Rp 0</td>
+                        <td>Rp 201.206 M</td>
+                        <td>Rp 201.206 M</td>
+                        <td>Rp 119.4 M</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                    <tr>
+                        <td>33</td>
+                        <td>Rp 0</td>
+                        <td>Rp 450.000 M (contoh)</td>
+                        <td>Rp 450.000 M</td>
+                        <td>Rp 17.8 M</td>
+                    </tr>
+                    <tr style="background-color: #e8f4fd; font-weight: bold;">
+                        <td><strong>Total</strong></td>
+                        <td><strong>-Rp 6.500 M</strong></td>
+                        <td><strong>+Rp 7.200 M</strong></td>
+                        <td><strong>+Rp 700 M</strong></td>
+                        <td><strong>NPV = +Rp 500 M</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="note">
+                <p><strong>Catatan:</strong> Angka sangat disederhanakan. Perhitungan nyata melibatkan puluhan variabel dan asumsi seperti pajak, depresiasi, perubahan tarif, risiko lalu lintas, dan faktor ekonomi makro.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>4. Skema Investasi Infrastruktur Lainnya</h2>
+            
+            <div class="scheme-comparison">
+                <div class="scheme-card">
+                    <h4>1. Availability Payment (AP)</h4>
+                    <p><strong>Karakteristik:</strong> Pemerintah membayar investor swasta berdasarkan "ketersediaan" infrastruktur yang memenuhi standar (misal: jalan mulus, lampu menyala). Tidak bergantung pada jumlah pengguna.</p>
+                    <p><strong>Perhitungan:</strong> Fokus pada biaya konstruksi + operasi + margin. Pemerintah membayar angsuran tahunan tetap yang telah dihitung agar NPV proyek = 0 atau IRR tertentu (misal 12%). Risiko permintaan (demand risk) ditanggung pemerintah.</p>
+                </div>
+                
+                <div class="scheme-card">
+                    <h4>2. Joint Venture (JV) BUMN-Swasta</h4>
+                    <p><strong>Karakteristik:</strong> Pembagian kepemilikan dan risiko. Misal, BUMN penyertaan 51%, swasta 49%.</p>
+                    <p><strong>Perhitungan:</strong> Sama seperti BOT, tetapi pembagian keuntungan berdasarkan porsi saham. Sering digunakan untuk proyek strategis seperti pelabuhan atau energi.</p>
+                </div>
+                
+                <div class="scheme-card">
+                    <h4>3. Infrastruktur sebagai Aset (Yieldco)</h4>
+                    <p><strong>Karakteristik:</strong> Aset infrastruktur yang sudah beroperasi (misal PLTS, jalan tol yang sudah ramai) "dibundel" dan dijual sebagai produk investasi yang memberikan dividen stabil.</p>
+                    <p><strong>Perhitungan:</strong> Fokus pada <strong>Yield</strong> (Dividen per Tahun / Harga Aset). Investor membeli untuk arus kas jangka panjang yang stabil.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>5. Kesimpulan</h2>
+            <p>Inti dari menghitung skema investasi infrastruktur adalah:</p>
+            <ol>
+                <li><strong>Memproyeksikan semua arus kas masuk dan keluar</strong> selama masa proyek</li>
+                <li><strong>Mendiskontokan</strong> arus kas tersebut dengan tingkat bunga yang mencerminkan risiko</li>
+                <li><strong>Menganalisis kelayakan</strong> dengan indikator <strong>NPV, IRR, dan DSCR</strong></li>
+                <li><strong>Mengelola risiko</strong> melalui struktur pembiayaan yang tepat (utang vs modal) dan alokasi risiko dalam kontrak</li>
+            </ol>
+            
+            <div class="highlight">
+                <p>Perhitungan aktual jauh lebih kompleks, melibatkan analisis sensitivitas (bagaimana jika lalu lintas hanya 80% dari proyeksi?), risiko mata uang, dan regulasi. Skema yang dipilih sangat bergantung pada sifat proyek, kemampuan fiskal pemerintah, dan daya tarik proyek bagi swasta.</p>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Dokumen ini disusun untuk tujuan edukasi dan referensi dalam memahami skema investasi infrastruktur.</p>
+            <p>© 2026 - Contoh Studi Kasus Investasi Infrastruktur</p>
+            <p>Semua angka dan contoh dalam dokumen ini adalah ilustrasi untuk tujuan edukasi.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Menambahkan tanggal saat ini ke dokumen
+        const currentDate = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = currentDate.toLocaleDateString('id-ID', options);
+        
+        // Menambahkan nomor halaman untuk cetakan
+        window.onbeforeprint = function() {
+            const totalPages = Math.ceil(document.body.scrollHeight / 1123); // Approximate pages for A4
+            document.body.insertAdjacentHTML('beforeend', 
+                `<style>
+                    @media print {
+                        @page {
+                            margin: 20mm;
+                        }
+                        body:after {
+                            content: "Halaman " counter(page) " dari ${totalPages}";
+                            position: fixed;
+                            bottom: 10mm;
+                            right: 20mm;
+                            font-size: 10pt;
+                            color: #666;
+                        }
+                    }
+                </style>`
+            );
+        }
+    </script>
+</body>
+</html>
