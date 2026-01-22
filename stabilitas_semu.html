@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stabilitas Semu di Tepi Jurang: Kajian Ekonomi Politik Struktural</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Merriweather', serif;
+            color: #1f2937;
+            background-color: #f9fafb;
+        }
+        h1, h2, h3, h4, h5, h6, th, nav, .sans-serif {
+            font-family: 'Inter', sans-serif;
+        }
+        .prose-custom {
+            max-width: 65ch;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        .prose-custom p {
+            margin-bottom: 1.5em;
+            text-align: justify;
+        }
+        .prose-custom ul, .prose-custom ol {
+            margin-bottom: 1.5em;
+            padding-left: 1.5em;
+        }
+        .prose-custom li {
+            margin-bottom: 0.5em;
+        }
+        .citation {
+            vertical-align: super;
+            font-size: 0.7em;
+            color: #2563eb;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .highlight-box {
+            background-color: #fff1f2;
+            border-left: 4px solid #be123c;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+        /* Smooth scrolling for TOC */
+        html {
+            scroll-behavior: smooth;
+        }
+        @media print {
+            body { background-color: white; }
+            nav, .no-print { display: none; }
+            .prose-custom { max-width: 100%; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Progress Bar -->
+    <div class="fixed top-0 left-0 h-1 bg-red-700 z-50 transition-all duration-300" id="progressBar" style="width: 0%"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-slate-900 text-white sticky top-0 z-40 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-lg tracking-tight">Kajian Ekonomi Struktural</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4 text-sm">
+                        <a href="#abstrak" class="hover:bg-slate-700 px-3 py-2 rounded-md transition">Abstrak</a>
+                        <a href="#bagian-1" class="hover:bg-slate-700 px-3 py-2 rounded-md transition">Konteks</a>
+                        <a href="#bagian-2" class="hover:bg-slate-700 px-3 py-2 rounded-md transition">Fiskal</a>
+                        <a href="#bagian-3" class="hover:bg-slate-700 px-3 py-2 rounded-md transition">Institusi</a>
+                        <a href="#bagian-5" class="hover:bg-slate-700 px-3 py-2 rounded-md transition">Proyeksi</a>
+                        <a href="#rekomendasi" class="bg-red-700 hover:bg-red-800 px-3 py-2 rounded-md transition font-semibold">Rekomendasi</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button (simple implementation) -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="bg-slate-800 p-2 rounded-md text-gray-400 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-slate-800" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#abstrak" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-slate-700">Abstrak</a>
+                <a href="#bagian-2" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-slate-700">Analisis Fiskal</a>
+                <a href="#rekomendasi" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-red-700">Rekomendasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-4xl mx-auto py-16 px-4 sm:px-6 lg:px-8 text-center">
+            <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-red-700 uppercase bg-red-100 rounded-full">
+                Laporan Analisis
+            </span>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+                Stabilitas Semu di Tepi Jurang
+            </h1>
+            <p class="text-xl text-gray-600 font-light italic">
+                Analisis Ekonomi Politik Struktural atas "Tujuh Desakan Darurat Ekonomi" dan Proyeksi Kegagalan Reformasi 2026-2030
+            </p>
+            <div class="mt-8 flex justify-center space-x-4 text-sm text-gray-500 sans-serif">
+                <span><strong class="text-slate-900">Topik:</strong> Ekonomi Politik</span>
+                <span>&bull;</span>
+                <span><strong class="text-slate-900">Fokus:</strong> Fiskal & Kelembagaan</span>
+                <span>&bull;</span>
+                <span><strong class="text-slate-900">Tanggal:</strong> Januari 2026</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="prose-custom text-gray-800">
+
+            <!-- Abstrak -->
+            <section id="abstrak" class="mb-16">
+                <div class="bg-slate-50 border-l-4 border-slate-900 p-6 md:p-8 rounded-r-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 font-sans">Abstrak Eksekutif</h2>
+                    <p class="mb-0 italic text-gray-700">
+                        Laporan ini menyajikan analisis komprehensif mengenai kondisi perekonomian Indonesia pada transisi tahun 2025-2026, dengan fokus khusus pada manifesto "Tujuh Desakan Darurat Ekonomi" (7DDE) yang dikeluarkan oleh Aliansi Ekonom Indonesia (AEI). Di tengah narasi resmi pemerintah yang membanggakan pertumbuhan ekonomi di kisaran 5 persen, terdapat keretakan struktural yang mendalam—mulai dari misalokasi fiskal yang ekstrem, erosi independensi institusi, hingga distorsi pasar oleh dominasi Badan Usaha Milik Negara (BUMN). Kajian ini berargumen bahwa stabilitas makroekonomi yang terlihat saat ini bersifat rapuh (<em>fragile stability</em>), ditopang oleh kebijakan fiskal populis yang tidak berkelanjutan dan intervensi pasar yang mendistorsi insentif sektor swasta. Melalui pendekatan ekonomi kelembagaan dan analisis data mutakhir, laporan ini memproyeksikan bahwa kegagalan dalam merespons ketujuh desakan tersebut akan menjebak Indonesia dalam ekuilibrium pertumbuhan rendah, krisis fiskal, dan regresi demokrasi ekonomi yang parah pada periode 2026-2030.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Bagian I -->
+            <section id="bagian-1" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b pb-2 font-sans">Bagian I: Pendahuluan dan Konteks Makroekonomi</h2>
+                
+                <h3 class="text-xl font-bold text-slate-800 mt-8 mb-4 font-sans">1.1 Paradoks Pertumbuhan: "Stability Under Strain"</h3>
+                <p>
+                    Pada kuartal ketiga tahun 2025, Indonesia mencatatkan pertumbuhan ekonomi sebesar 5,04 persen secara tahunan (<em>year-on-year</em>), sebuah angka yang sering dikutip oleh pejabat pemerintah sebagai bukti ketangguhan ekonomi domestik di tengah ketidakpastian global.<a href="#" class="citation">[1]</a> Dana Moneter Internasional (IMF) bahkan merevisi proyeksi pertumbuhan Indonesia tahun 2026 menjadi 5,1 persen, didukung oleh konsumsi domestik yang kuat.<a href="#" class="citation">[1]</a> Namun, angka agregat ini menyembunyikan patologi serius yang menggerogoti fondasi ekonomi.
+                </p>
+                <p>
+                    Centre for Strategic and International Studies (CSIS) menggambarkan kondisi ini sebagai "stability under strain" atau stabilitas di bawah tekanan.<a href="#" class="citation">[2]</a> Kualitas pertumbuhan menurun secara signifikan. Sektor manufaktur mengalami tekanan deindustrialisasi prematur, sementara penciptaan lapangan kerja formal gagal menyerap lonjakan angkatan kerja muda terdidik. Data Badan Pusat Statistik (BPS) menunjukkan bahwa ketimpangan pengeluaran, yang diukur dengan rasio Gini, meningkat menjadi 0,381 pada September 2024, naik dari periode sebelumnya.<a href="#" class="citation">[3]</a> Hal ini mengindikasikan bahwa kue pembangunan semakin terkonsentrasi pada segelintir elit, sementara kelas menengah—mesin utama perekonomian—mengalami penyusutan jumlah dan daya beli.<a href="#" class="citation">[4]</a>
+                </p>
+
+                <h3 class="text-xl font-bold text-slate-800 mt-8 mb-4 font-sans">1.2 Munculnya Aliansi Ekonom Indonesia (AEI)</h3>
+                <p>
+                    Di tengah disonansi antara klaim pemerintah dan realitas lapangan inilah Aliansi Ekonom Indonesia (AEI) terbentuk. Pada 9 September 2025, aliansi yang terdiri dari 436 ekonom dan 262 tokoh non-ekonom ini meluncurkan manifesto "Tujuh Desakan Darurat Ekonomi".<a href="#" class="citation">[5, 6]</a> Gerakan ini bukan sekadar kritik oposisi, melainkan intervensi teknokratis dari komunitas epistemik yang mengkhawatirkan arah kebijakan ekonomi nasional yang semakin menjauh dari prinsip rasionalitas dan keadilan sosial.
+                </p>
+                <p>
+                    Para ekonom, termasuk tokoh senior seperti Emil Salim dan mantan pejabat otoritas moneter, menyoroti bahwa Indonesia sedang menghadapi "darurat ekonomi" yang ditandai oleh kebijakan fiskal yang ugal-ugalan, politisasi lembaga negara, dan pengabaian terhadap kaidah <em>good governance</em>.<a href="#" class="citation">[6]</a> Respons pemerintah, yang diwakili oleh Menteri Keuangan Purbaya Yudhi Sadewa, cenderung defensif dengan menyatakan bahwa fundamental ekonomi masih kuat dan pelemahan nilai tukar tidak akan memicu krisis.<a href="#" class="citation">[5]</a> Namun, realitas di pasar finansial dan sektor riil menceritakan kisah yang berbeda.
+                </p>
+            </section>
+
+            <!-- Bagian II -->
+            <section id="bagian-2" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b pb-2 font-sans">Bagian II: Analisis Kritis Misalokasi Fiskal dan Kanibalisme Anggaran</h2>
+                <p class="mb-6">
+                    Desakan pertama dan paling mendesak dari AEI berkaitan dengan postur Anggaran Pendapatan dan Belanja Negara (APBN), khususnya mengenai program populis yang mengorbankan investasi jangka panjang.
+                </p>
+
+                <h3 class="text-xl font-bold text-slate-800 mt-8 mb-4 font-sans">2.1 Anatomi APBN 2026: Ilusi Pemenuhan Mandat Pendidikan</h3>
+                <p>
+                    Analisis mendalam terhadap dokumen APBN 2026 mengungkapkan sebuah manuver akuntansi yang mengkhawatirkan, yang oleh Indonesia Corruption Watch (ICW) disebut sebagai "tipu-tipu" pemenuhan mandat konstitusi.<a href="#" class="citation">[7]</a> UUD 1945 mengamanatkan alokasi minimal 20 persen APBN untuk fungsi pendidikan. Pemerintah mengklaim telah memenuhi target ini dengan total anggaran pendidikan mencapai Rp 722,6 triliun hingga Rp 769,1 triliun.<a href="#" class="citation">[7, 8]</a>
+                </p>
+                <p>
+                    Namun, struktur anggaran ini sangat terdistorsi oleh masuknya program "Makan Bergizi Gratis" (MBG) yang dikelola oleh Badan Gizi Nasional (BGN).
+                </p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>
+                        <strong>Kanibalisme Anggaran:</strong> Data menunjukkan bahwa sebesar Rp 223,55 triliun dialokasikan untuk BGN, yang dimasukkan secara paksa ke dalam pos fungsi pendidikan.<a href="#" class="citation">[9]</a> Angka ini setara dengan <strong>47,51 persen</strong> dari total belanja pemerintah pusat untuk pendidikan, atau hampir 30 persen dari total anggaran pendidikan nasional.<a href="#" class="citation">[8, 10]</a>
+                    </li>
+                    <li>
+                        <strong>Dampak pada Layanan Esensial:</strong> Akibat besarnya porsi MBG, pos-pos krusial lainnya mengalami pemangkasan. Target penerima Program Indonesia Pintar (PIP) menurun dari 20,8 juta siswa (2024) menjadi 20,4 juta siswa (2025). Lebih parah lagi, target Tunjangan Profesi Guru (TPG) non-PNS dipangkas drastis dari 577,7 ribu guru menjadi 477,7 ribu guru.<a href="#" class="citation">[7]</a>
+                    </li>
+                </ul>
+                <div class="highlight-box">
+                    <p class="font-semibold text-red-800 mb-0">
+                        Ini adalah bentuk misalokasi sumber daya yang ekstrem (<em>gross misallocation</em>). Mengalihkan dana yang seharusnya digunakan untuk meningkatkan kualitas guru, infrastruktur sekolah, dan riset menjadi belanja konsumtif (makanan) adalah kebijakan yang mengorbankan pembentukan modal manusia (<em>human capital</em>) jangka panjang demi popularitas politik jangka pendek.
+                    </p>
+                </div>
+
+                <h3 class="text-xl font-bold text-slate-800 mt-8 mb-4 font-sans">2.2 Studi Komparatif: Kegagalan Desain Program MBG</h3>
+                <p>
+                    Pemerintah sering merujuk pada program serupa di negara lain sebagai pembenaran. Namun, perbandingan dengan China menunjukkan perbedaan desain yang fundamental.
+                </p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>
+                        <strong>Model China:</strong> Program nutrisi siswa di China, dimulai tahun 2011, bersifat <strong>targetted</strong> (terarah). Program ini hanya menyasar siswa miskin di wilayah pedesaan (<em>rural areas</em>) dengan anggaran sekitar Rp 83 triliun per tahun untuk 37 juta siswa (sekitar 13% dari total populasi siswa).<a href="#" class="citation">[11]</a> Fokusnya adalah pengentasan gizi buruk di kantong kemiskinan.
+                    </li>
+                    <li>
+                        <strong>Model Indonesia:</strong> Indonesia menerapkan pendekatan <strong>universal</strong> yang ambisius namun ceroboh secara fiskal. Dengan anggaran Rp 223 triliun, program ini mencoba mencakup populasi yang jauh lebih luas tanpa memandang status ekonomi, sehingga menciptakan inefisiensi masif (<em>deadweight loss</em>). Anak-anak dari keluarga mampu, yang tidak membutuhkan subsidi makan, turut menikmati anggaran negara, sementara guru honorer di daerah terpencil justru kehilangan tunjangan.
+                    </li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-slate-800 mt-8 mb-4 font-sans">2.3 Proyeksi Dampak Kegagalan: Generasi Emas yang Hilang</h3>
+                <p>Jika desakan untuk merevisi misalokasi ini gagal dilakukan:</p>
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li><strong>Penurunan Kualitas Pendidikan:</strong> Dengan berkurangnya anggaran riil untuk operasional sekolah dan kesejahteraan guru, skor PISA Indonesia yang sudah rendah diproyeksikan akan semakin terpuruk.</li>
+                    <li><strong>Jebakan Keterampilan Rendah:</strong> Bonus demografi akan berubah menjadi bencana demografi. Lulusan sekolah yang tidak kompeten akan membanjiri pasar tenaga kerja, tidak mampu bersaing di era ekonomi digital, melanggengkan siklus kemiskinan antargenerasi.</li>
+                    <li><strong>Krisis Fiskal Pendidikan:</strong> Sekolah-sekolah swasta dan perguruan tinggi akan terpaksa menaikkan biaya (seperti UKT) untuk menutupi kekurangan subsidi, membuat akses pendidikan semakin elitis dan eksklusif.</li>
+                </ol>
+            </section>
+
+            <!-- Bagian III -->
+            <section id="bagian-3" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b pb-2 font-sans">Bagian III: Erosi Kelembagaan dan Risiko Dominasi Fiskal</h2>
+                <p>
+                    Desakan kedua AEI menyoroti independensi institusi negara seperti Bank Indonesia (BI), Komisi Pemberantasan Korupsi (KPK), dan Badan Pusat Statistik (BPS). Dalam ekonomi institusional, kredibilitas lembaga adalah determinan utama stabilitas jangka panjang.
+                </p>
+
+                <h3 class="text-xl font-bold text-slate-800 mt-8 mb-4 font-sans">3.1 Revisi UU P2SK dan Ancaman Independensi Moneter</h3>
+                <p>
+                    Revisi Undang-Undang Pengembangan dan Penguatan Sektor Keuangan (P2SK) telah membuka kotak pandora intervensi politik terhadap kebijakan moneter. Menteri Keuangan Purbaya Yudhi Sadewa berargumen bahwa perluasan mandat BI untuk mendukung pertumbuhan ekonomi adalah langkah positif untuk koordinasi fiskal-moneter.<a href="#" class="citation">[12]</a> Namun, para ekonom melihat ini sebagai pintu masuk menuju <strong>Fiscal Dominance</strong>.
+                </p>
+                <p>
+                    Dalam kondisi <em>fiscal dominance</em>, bank sentral kehilangan kemampuan untuk mengendalikan inflasi karena dipaksa membiayai defisit anggaran pemerintah (misalnya melalui pembelian Surat Berharga Negara/SBN di pasar perdana atau <em>burden sharing</em>). Jika program populis seperti MBG menyebabkan defisit membengkak, BI akan ditekan untuk mencetak uang (<em>monetization of debt</em>). Risikonya adalah inflasi struktural yang sulit dikendalikan dan depresiasi Rupiah yang permanen, seperti yang dikhawatirkan oleh pasar ketika nilai tukar mendekati Rp 17.000 per USD.<a href="#" class="citation">[5]</a>
+                </p>
+
+                <h3 class="text-xl font-bold text-slate-800 mt-8 mb-4 font-sans">3.2 Kredibilitas Data dan Politisasi BPS</h3>
+                <p>
+                    Salah satu poin kritis dalam 7DDE adalah transparansi data. Ekonom Universitas Gadjah Mada (UGM), Gumilang Aryo Sahadewo, menyoroti anomali dalam rilis data pertumbuhan ekonomi BPS yang menyimpang jauh dari prediksi konsensus ekonom.<a href="#" class="citation">[13]</a> Jika data statistik dimanipulasi untuk menciptakan citra kesuksesan semu ("Asal Bapak Senang"), maka pembuat kebijakan akan terbang buta (<em>flying blind</em>). Diagnosis ekonomi menjadi keliru, dan resep kebijakan yang diambil akan kontraproduktif.
+                </p>
+
+                <h3 class="text-xl font-bold text-slate-800 mt-8 mb-4 font-sans">3.3 Pelemahan KPK dan Indeks Persepsi Korupsi</h3>
+                <p>
+                    Meskipun ada klaim peningkatan Indeks Persepsi Korupsi (IPK) menjadi 37/100 pada 2024 <a href="#" class="citation">[14]</a>, skor ini masih menunjukkan tingkat korupsi yang akut. Pelemahan KPK secara sistematis telah meningkatkan biaya transaksi ekonomi. Korupsi tidak lagi tersentralisasi, melainkan terdesentralisasi ke daerah-daerah, menciptakan ekonomi biaya tinggi yang membebani sektor swasta.
+                </p>
+            </section>
+
+            <!-- Bagian IV -->
+            <section id="bagian-4" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b pb-2 font-sans">Bagian IV: Distorsi Pasar, BUMN, dan Deregulasi</h2>
+                <p>
+                    Dominasi BUMN yang berlebihan (<em>state capitalism</em>) dan iklim usaha yang buruk menjadi fokus desakan ketiga dan keempat AEI.
+                </p>
+
+                <h3 class="text-xl font-bold text-slate-800 mt-8 mb-4 font-sans">4.1 Efek "Crowding Out" dan Krisis BUMN Karya</h3>
+                <p>
+                    Laporan Bank Dunia 2025 secara eksplisit memperingatkan tentang efek <em>crowding out</em> di Indonesia, di mana investasi pemerintah yang agresif melalui BUMN justru mendesak keluar investasi swasta.<a href="#" class="citation">[15]</a>
+                </p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Monopoli Infrastruktur:</strong> BUMN Karya mendominasi proyek-proyek strategis nasional, seringkali melalui penugasan langsung tanpa tender yang kompetitif. Hal ini mematikan kontraktor swasta menengah-kecil.</li>
+                    <li><strong>Krisis Utang:</strong> Ekspansi agresif ini dibiayai oleh utang yang tidak berkelanjutan. Emiten BUMN Karya seperti Waskita dan Wijaya Karya mengalami tekanan likuiditas hebat, dengan rasio utang yang melonjak dan arus kas yang berdarah-darah.<a href="#" class="citation">[16, 17]</a> Dampaknya adalah kemacetan pembayaran kepada ribuan vendor UMKM, menciptakan efek domino kebangkrutan di rantai pasok konstruksi.</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-slate-800 mt-8 mb-4 font-sans">4.2 Iklim Usaha: Premanisme dan Ketidakpastian Hukum</h3>
+                <p>
+                    Kasus di Cilegon, di mana oknum Kadin daerah diduga melakukan intimidasi dan meminta "jatah" proyek senilai triliunan rupiah kepada investor asing, adalah cerminan buruknya kepastian hukum.<a href="#" class="citation">[18, 19]</a> Praktik premanisme berkedok ormas atau asosiasi bisnis ini meningkatkan <em>Incremental Capital Output Ratio</em> (ICOR), yang berarti investasi di Indonesia menjadi sangat tidak efisien dan mahal.
+                </p>
+                <p>
+                    Selain itu, kebijakan Tingkat Komponen Dalam Negeri (TKDN) yang kaku dan birokratis seringkali menjadi hambatan bagi industri yang membutuhkan input global. Meskipun Kementerian Perindustrian mengklaim telah melakukan reformasi dengan mempermudah sertifikasi <a href="#" class="citation">[20]</a>, pelaku usaha masih merasakan beban biaya dan waktu yang signifikan, yang pada akhirnya menggerus daya saing ekspor manufaktur.
+                </p>
+            </section>
+
+            <!-- Bagian V -->
+            <section id="bagian-5" class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6 border-b pb-2 font-sans">Bagian V: Proyeksi Dampak Kegagalan Reformasi (2026-2030)</h2>
+                <p>
+                    Jika pemerintah mengabaikan ketujuh desakan darurat ini dan melanjutkan <em>status quo</em>, analisis proyeksi menunjukkan skenario suram bagi perekonomian Indonesia.
+                </p>
+
+                <div class="grid gap-6 mt-8">
+                    <!-- Skenario 1 -->
+                    <div class="bg-white p-6 border border-gray-200 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-bold text-red-700 font-sans mb-3">5.1 Skenario I: Stagflasi dan Krisis Biaya Hidup</h3>
+                        <p class="mb-4">Kegagalan mereformasi kebijakan pangan dan menghentikan stimulus fiskal yang tidak produktif (MBG ugal-ugalan) akan memicu inflasi persisten.</p>
+                        <ul class="text-sm list-disc pl-5 space-y-1 text-gray-700">
+                            <li><strong>Mekanisme:</strong> <em>Demand-pull inflation</em> dari belanja pemerintah berinteraksi dengan <em>cost-push inflation</em> akibat inefisiensi rantai pasok dan pelemahan Rupiah. Data BPS September 2025 menunjukkan inflasi <em>volatile food</em> tembus 6,44%, dipicu oleh percepatan program MBG yang mendistorsi harga telur dan ayam.<a href="#" class="citation">[21]</a></li>
+                            <li><strong>Dampak:</strong> Daya beli kelas menengah-bawah akan hancur. Indonesia akan mengalami stagflasi: pertumbuhan ekonomi stagnan (di bawah 5%), namun harga-harga kebutuhan pokok melambung tinggi. Ini akan meningkatkan angka kemiskinan ekstrem dan memperlebar ketimpangan (Gini ratio > 0,40).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Skenario 2 -->
+                    <div class="bg-white p-6 border border-gray-200 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-bold text-red-700 font-sans mb-3">5.2 Skenario II: Perangkap Utang dan Penurunan Peringkat Kredit</h3>
+                        <p class="mb-4">Tanpa perbaikan alokasi anggaran dan disiplin fiskal, defisit APBN akan melebar melampaui batas aman 3 persen.</p>
+                        <ul class="text-sm list-disc pl-5 space-y-1 text-gray-700">
+                            <li><strong>Proyeksi:</strong> Defisit yang direncanakan sebesar 2,68-2,92% pada 2026 <a href="#" class="citation">[22]</a> sangat rentan meleset (<em>slippage</em>). Jika penerimaan negara stagnan akibat <em>crowding out</em> sektor swasta, pemerintah harus berutang lebih banyak dengan bunga tinggi (<em>yield</em> SBN naik).</li>
+                            <li><strong>Dampak:</strong> Lembaga pemeringkat internasional dapat menurunkan <em>sovereign credit rating</em> Indonesia, memicu pelarian modal asing (<em>capital flight</em>). Rupiah bisa terdepresiasi tajam menembus Rp 17.000-Rp 18.000 per USD, memukul sektor riil yang bergantung pada bahan baku impor.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Skenario 3 -->
+                    <div class="bg-white p-6 border border-gray-200 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-bold text-red-700 font-sans mb-3">5.3 Skenario III: Kemunduran Demokrasi dan Oligarki Ekonomi</h3>
+                        <p class="mb-4">Pengabaian terhadap independensi institusi dan revisi UU TNI/Polri yang memperluas dwifungsi <a href="#" class="citation">[23, 24]</a> akan memperkuat cengkeraman oligarki.</p>
+                        <ul class="text-sm list-disc pl-5 space-y-1 text-gray-700">
+                            <li><strong>Analisis:</strong> Indeks Demokrasi Indonesia yang sudah masuk kategori "cacat" (skor 6,44) akan terus merosot.<a href="#" class="citation">[25]</a> Ekonomi akan semakin terkonsentrasi pada segelintir elit yang memiliki akses politik (koncoisme).</li>
+                            <li><strong>Dampak:</strong> Inovasi akan mati karena persaingan usaha tidak sehat. Indonesia akan gagal melakukan transformasi struktural menuju ekonomi berbasis pengetahuan, dan selamanya terjebak sebagai negara pengekspor komoditas mentah dengan nilai tambah rendah.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bagian VI -->
+            <section id="rekomendasi" class="mb-16">
+                <div class="bg-slate-900 text-slate-100 p-8 rounded-lg">
+                    <h2 class="text-3xl font-bold mb-6 font-sans text-white border-b border-gray-600 pb-2">Bagian VI: Kesimpulan dan Rekomendasi Teknokratis</h2>
+                    <p class="mb-6">
+                        Manifesto "Tujuh Desakan Darurat Ekonomi" dari Aliansi Ekonom Indonesia adalah sinyal bahaya yang valid dan berbasis data. Analisis ini menunjukkan bahwa fondasi ekonomi Indonesia sedang mengalami pengeroposan dari dalam akibat populisme fiskal, pelemahan institusi, dan dominasi negara yang eksesif.
+                    </p>
+
+                    <h3 class="text-xl font-bold text-red-400 mt-6 mb-3 font-sans">Rekomendasi Kebijakan (Jangka Pendek & Menengah):</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold text-white mb-2">1. Restrukturisasi Total Program MBG:</h4>
+                            <ul class="list-disc pl-5 text-gray-300 text-sm space-y-1">
+                                <li>Ubah skema dari <strong>universal</strong> menjadi <strong>targeted</strong> (hanya untuk daerah 3T dan kantong kemiskinan ekstrem) meniru model keberhasilan China dan India.</li>
+                                <li>Kembalikan Rp 100-150 triliun anggaran BGN ke pos fungsi pendidikan murni untuk perbaikan sekolah rusak dan kesejahteraan guru non-PNS.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white mb-2">2. Pemulihan Kredibilitas Institusi:</h4>
+                            <ul class="list-disc pl-5 text-gray-300 text-sm space-y-1">
+                                <li>Hentikan intervensi politik terhadap Bank Indonesia. Tegaskan kembali mandat utama BI untuk stabilitas harga dalam aturan turunan UU P2SK.</li>
+                                <li>Jamin independensi BPS dengan audit eksternal berkala terhadap metodologi data strategis.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white mb-2">3. Reformasi BUMN dan Iklim Usaha:</h4>
+                            <ul class="list-disc pl-5 text-gray-300 text-sm space-y-1">
+                                <li>Lakukan moratorium penugasan baru pada BUMN Karya yang sedang sakit. Prioritaskan <em>deleveraging</em> (pengurangan utang).</li>
+                                <li>Tindak tegas praktik premanisme berkedok ormas/asosiasi di daerah industri (seperti kasus Cilegon) melalui satgas penegakan hukum terpadu.</li>
+                                <li>Sederhanakan aturan TKDN agar menjadi insentif, bukan hambatan, bagi integrasi ke rantai pasok global.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p class="mt-8 italic text-gray-400 border-t border-gray-700 pt-4">
+                        Kegagalan untuk bertindak sekarang bukan hanya soal angka pertumbuhan yang meleset, tetapi tentang hilangnya masa depan satu generasi bangsa. Pilihan ada di tangan pemerintah: mengambil pil pahit reformasi struktural, atau membiarkan Indonesia hanyut dalam arus populisme menuju krisis yang tak terelakkan.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Lampiran Data -->
+            <section id="lampiran" class="mb-16">
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 font-sans">Lampiran Data</h2>
+
+                <div class="mb-8">
+                    <h4 class="font-bold mb-3 font-sans">Tabel 1: Perbandingan Alokasi Anggaran Pendidikan vs Program MBG (APBN 2026)</h4>
+                    <div class="overflow-x-auto shadow-sm border border-gray-200 rounded-lg">
+                        <table class="min-w-full text-sm text-left">
+                            <thead class="bg-gray-100 text-gray-700 font-bold uppercase text-xs">
+                                <tr>
+                                    <th class="px-6 py-3">Komponen Anggaran</th>
+                                    <th class="px-6 py-3 text-center">Nilai (Triliun Rp)</th>
+                                    <th class="px-6 py-3 text-center">Persentase thd Total Fungsi Pendidikan</th>
+                                    <th class="px-6 py-3">Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 bg-white">
+                                <tr class="bg-blue-50">
+                                    <td class="px-6 py-4 font-bold">Total Anggaran Pendidikan</td>
+                                    <td class="px-6 py-4 text-center font-bold">Rp 722,6 - Rp 769,1</td>
+                                    <td class="px-6 py-4 text-center font-bold">100%</td>
+                                    <td class="px-6 py-4">Klaim Pemerintah memenuhi 20% APBN <a href="#" class="citation">[7, 8]</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4">Alokasi Badan Gizi Nasional (MBG)</td>
+                                    <td class="px-6 py-4 text-center">Rp 223,55</td>
+                                    <td class="px-6 py-4 text-center">~30% - 47,5%</td>
+                                    <td class="px-6 py-4">Dana konsumsi (makan), bukan investasi pendidikan <a href="#" class="citation">[9]</a></td>
+                                </tr>
+                                <tr class="bg-yellow-50">
+                                    <td class="px-6 py-4 font-bold text-gray-900">Anggaran Pendidikan Murni (Riil)</td>
+                                    <td class="px-6 py-4 text-center font-bold text-gray-900">Rp 499,0 - Rp 545,5</td>
+                                    <td class="px-6 py-4 text-center font-bold text-gray-900">~53% - 70%</td>
+                                    <td class="px-6 py-4">Dana riil untuk sekolah, guru, kurikulum</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 italic text-gray-500">Estimasi Persentase Pendidikan Murni thd APBN</td>
+                                    <td class="px-6 py-4 text-center">-</td>
+                                    <td class="px-6 py-4 text-center italic text-red-600">~14% - 15%</td>
+                                    <td class="px-6 py-4 font-bold text-red-600">Gagal memenuhi amanat konstitusi (20%)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="font-bold mb-3 font-sans">Tabel 2: Indikator Ekonomi Makro & Kesejahteraan (2024-2025)</h4>
+                    <div class="overflow-x-auto shadow-sm border border-gray-200 rounded-lg">
+                        <table class="min-w-full text-sm text-left">
+                            <thead class="bg-gray-100 text-gray-700 font-bold uppercase text-xs">
+                                <tr>
+                                    <th class="px-6 py-3">Indikator</th>
+                                    <th class="px-6 py-3">Data Terkini</th>
+                                    <th class="px-6 py-3">Tren / Status</th>
+                                    <th class="px-6 py-3">Sumber Data</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 bg-white">
+                                <tr>
+                                    <td class="px-6 py-4 font-medium">Inflasi Pangan (Volatile Food)</td>
+                                    <td class="px-6 py-4">6,44% (Sept 2025)</td>
+                                    <td class="px-6 py-4 text-red-600 font-bold">Sangat Tinggi (Bahaya)</td>
+                                    <td class="px-6 py-4">BPS <a href="#" class="citation">[21]</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-medium">Rasio Gini</td>
+                                    <td class="px-6 py-4">0,381 (Sept 2024)</td>
+                                    <td class="px-6 py-4">Meningkat (Ketimpangan Melebar)</td>
+                                    <td class="px-6 py-4">BPS <a href="#" class="citation">[3]</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-medium">Pertumbuhan Ekonomi</td>
+                                    <td class="px-6 py-4">5,04% (Q3 2025)</td>
+                                    <td class="px-6 py-4">Stabil Semu (<em>Stagnan</em>)</td>
+                                    <td class="px-6 py-4">BPS/IMF <a href="#" class="citation">[1]</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-medium">Indeks Persepsi Korupsi</td>
+                                    <td class="px-6 py-4">37/100 (2024)</td>
+                                    <td class="px-6 py-4 text-red-600">Rendah (Korupsi Tinggi)</td>
+                                    <td class="px-6 py-4">KPK/TI <a href="#" class="citation">[14]</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-medium">Indeks Demokrasi</td>
+                                    <td class="px-6 py-4">6,44 (2024)</td>
+                                    <td class="px-6 py-4">Menurun (<em>Flawed Democracy</em>)</td>
+                                    <td class="px-6 py-4">EIU <a href="#" class="citation">[25]</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-medium">Target Defisit APBN 2026</td>
+                                    <td class="px-6 py-4">2,68% - 2,92%</td>
+                                    <td class="px-6 py-4 text-yellow-600 font-bold">Mendekati Batas 3%</td>
+                                    <td class="px-6 py-4">Kemenkeu <a href="#" class="citation">[22]</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <p class="mb-4 font-serif italic text-sm">
+                <strong>Disclaimer:</strong> Analisis ini disusun berdasarkan data yang tersedia hingga Januari 2026 dan proyeksi teoritis ekonomi makro. Perubahan kebijakan yang drastis dapat mengubah trajektori yang diprediksi.
+            </p>
+            <p class="text-xs uppercase tracking-widest mt-8">
+                &copy; 2026 Dokumen Kajian Ekonomi.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Reading Progress Bar Logic
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
