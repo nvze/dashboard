@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Imsakiyah Bandung 1447 H - ESVN System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --accent-color: #ff9966;
+            --text-dark: #333;
+            --text-light: #fff;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Background Gradient mirip dengan nuansa logo */
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,1));
+            border-bottom: 2px solid #eee;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            max-width: 150px; /* Ukuran logo disesuaikan */
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            mix-blend-mode: multiply; /* Agar menyatu dengan background putih header */
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+
+        thead {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+        }
+
+        th {
+            padding: 18px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            color: #555;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        /* Zebra Striping */
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* Hover Effect pada Baris */
+        tbody tr:hover {
+            background-color: #eef2ff;
+            transform: scale(1.01);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        /* Kolom Ramadhan Style Khusus */
+        tbody td:first-child {
+            font-weight: 700;
+            color: var(--secondary-color);
+            background-color: rgba(37, 117, 252, 0.05);
+        }
+
+        /* Kolom Maghrib Highlight (Waktu Buka) */
+        tbody td:nth-child(6) {
+            font-weight: 700;
+            color: #d35400; /* Warna oranye gelap */
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.8);
+            margin-top: 20px;
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsif untuk HP */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+            th, td { padding: 10px 5px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="Screenshot_20260217-143631.jpg" alt="ESVN System Logo" class="logo-img">
+            </div>
+            <h1>Jadwal Imsakiyah</h1>
+            <h2>Kota Bandung - Ramadhan 1447 H</h2>
+        </header>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ramadhan</th>
+                        <th>Imsak</th>
+                        <th>Subuh</th>
+                        <th>Zuhur</th>
+                        <th>Ashar</th>
+                        <th>Maghrib</th>
+                        <th>Isya</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>04.28</td><td>04.38</td><td>12.07</td><td>15.16</td><td>18.20</td><td>19.26</td></tr>
+                    <tr><td>2</td><td>04.28</td><td>04.38</td><td>12.07</td><td>15.15</td><td>18.19</td><td>19.25</td></tr>
+                    <tr><td>3</td><td>04.28</td><td>04.38</td><td>12.07</td><td>15.15</td><td>18.19</td><td>19.25</td></tr>
+                    <tr><td>4</td><td>04.28</td><td>04.38</td><td>12.07</td><td>15.14</td><td>18.19</td><td>19.24</td></tr>
+                    <tr><td>5</td><td>04.28</td><td>04.38</td><td>12.06</td><td>15.13</td><td>18.18</td><td>19.24</td></tr>
+                    <tr><td>6</td><td>04.28</td><td>04.38</td><td>12.06</td><td>15.12</td><td>18.18</td><td>19.24</td></tr>
+                    <tr><td>7</td><td>04.29</td><td>04.39</td><td>12.06</td><td>15.11</td><td>18.18</td><td>19.23</td></tr>
+                    <tr><td>8</td><td>04.29</td><td>04.39</td><td>12.06</td><td>15.10</td><td>18.17</td><td>19.23</td></tr>
+                    <tr><td>9</td><td>04.29</td><td>04.39</td><td>12.06</td><td>15.09</td><td>18.17</td><td>19.22</td></tr>
+                    <tr><td>10</td><td>04.29</td><td>04.39</td><td>12.06</td><td>15.08</td><td>18.17</td><td>19.22</td></tr>
+                    <tr><td>11</td><td>04.29</td><td>04.39</td><td>12.05</td><td>15.07</td><td>18.16</td><td>19.21</td></tr>
+                    <tr><td>12</td><td>04.29</td><td>04.39</td><td>12.05</td><td>15.06</td><td>18.16</td><td>19.21</td></tr>
+                    <tr><td>13</td><td>04.29</td><td>04.39</td><td>12.05</td><td>15.05</td><td>18.15</td><td>19.20</td></tr>
+                    <tr><td>14</td><td>04.29</td><td>04.39</td><td>12.05</td><td>15.06</td><td>18.15</td><td>19.20</td></tr>
+                    <tr><td>15</td><td>04.29</td><td>04.39</td><td>12.05</td><td>15.06</td><td>18.15</td><td>19.20</td></tr>
+                    <tr><td>16</td><td>04.29</td><td>04.39</td><td>12.04</td><td>15.07</td><td>18.14</td><td>19.19</td></tr>
+                    <tr><td>17</td><td>04.29</td><td>04.39</td><td>12.04</td><td>15.07</td><td>18.14</td><td>19.19</td></tr>
+                    <tr><td>18</td><td>04.29</td><td>04.39</td><td>12.04</td><td>15.08</td><td>18.13</td><td>19.18</td></tr>
+                    <tr><td>19</td><td>04.29</td><td>04.39</td><td>12.04</td><td>15.08</td><td>18.13</td><td>19.18</td></tr>
+                    <tr><td>20</td><td>04.29</td><td>04.39</td><td>12.03</td><td>15.08</td><td>18.12</td><td>19.17</td></tr>
+                    <tr><td>21</td><td>04.29</td><td>04.39</td><td>12.03</td><td>15.09</td><td>18.12</td><td>19.17</td></tr>
+                    <tr><td>22</td><td>04.29</td><td>04.39</td><td>12.03</td><td>15.09</td><td>18.11</td><td>19.16</td></tr>
+                    <tr><td>23</td><td>04.29</td><td>04.39</td><td>12.03</td><td>15.09</td><td>18.11</td><td>19.16</td></tr>
+                    <tr><td>24</td><td>04.29</td><td>04.39</td><td>12.02</td><td>15.09</td><td>18.10</td><td>19.15</td></tr>
+                    <tr><td>25</td><td>04.29</td><td>04.39</td><td>12.02</td><td>15.10</td><td>18.10</td><td>19.15</td></tr>
+                    <tr><td>26</td><td>04.29</td><td>04.39</td><td>12.02</td><td>15.10</td><td>18.10</td><td>19.14</td></tr>
+                    <tr><td>27</td><td>04.29</td><td>04.39</td><td>12.01</td><td>15.10</td><td>18.09</td><td>19.14</td></tr>
+                    <tr><td>28</td><td>04.29</td><td>04.39</td><td>12.01</td><td>15.10</td><td>18.09</td><td>19.13</td></tr>
+                    <tr><td>29</td><td>04.29</td><td>04.39</td><td>12.01</td><td>15.11</td><td>18.08</td><td>19.13</td></tr>
+                    <tr><td>30</td><td>04.29</td><td>04.39</td><td>12.01</td><td>15.11</td><td>18.08</td><td>19.12</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 ESVN System. All Rights Reserved.
+    </footer>
+
+</body>
+</html>
