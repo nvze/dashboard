@@ -12,6 +12,8 @@
             --bg: #f8f9fa;        /* Abu sangat muda */
             --maghrib: #d35400;   /* Oranye Bata */
             --text: #2c3e50;
+            --highlight-today: #d1e7dd; /* Hijau Muda untuk Hari Ini */
+            --border-today: #badbcc;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -62,7 +64,7 @@
             font-weight: 400;
         }
 
-        /* --- TAMPILAN DESKTOP/LAPTOP (Tabel Biasa) --- */
+        /* --- TAMPILAN DESKTOP (Tabel) --- */
         .desktop-view {
             width: 100%;
             border-collapse: collapse;
@@ -90,23 +92,16 @@
         .desktop-view tr:nth-child(even) { background-color: #fcfcfc; }
         .desktop-view tr:hover { background-color: #f0f7f4; }
 
-        /* Highlight Desktop */
         .d-ramadhan { font-weight: bold; color: var(--primary); }
-        .d-date { color: #555; font-size: 0.9rem; }
         .d-maghrib { color: var(--maghrib); font-weight: bold; background: rgba(211, 84, 0, 0.05); }
 
-        /* --- TAMPILAN MOBILE (HP) --- */
-        /* Kita sembunyikan tabel desktop di HP, dan tampilkan layout khusus */
+        /* --- TAMPILAN MOBILE (Kartu) --- */
         .mobile-list { display: none; }
 
         @media (max-width: 768px) {
-            /* Sembunyikan Tabel Desktop */
             .desktop-view { display: none; }
-            
-            /* Tampilkan List Mobile */
             .mobile-list { display: block; padding: 10px; }
 
-            /* Kartu per Hari */
             .day-card {
                 background: white;
                 border: 1px solid #e0e0e0;
@@ -114,9 +109,31 @@
                 margin-bottom: 15px;
                 box-shadow: 0 2px 5px rgba(0,0,0,0.05);
                 overflow: hidden;
+                transition: transform 0.2s;
             }
 
-            /* Header Kartu (Tanggal) */
+            /* Style Khusus Jika Hari Ini (Diaktifkan via JS) */
+            .day-card.today-active {
+                background-color: var(--highlight-today) !important;
+                border: 2px solid var(--primary);
+                transform: scale(1.02);
+                box-shadow: 0 5px 15px rgba(15, 81, 50, 0.2);
+            }
+            
+            /* Ubah warna header kartu jika hari ini */
+            .day-card.today-active .card-header {
+                background-color: var(--primary); /* Tetap hijau tua agar kontras */
+            }
+
+            /* Ubah warna grid waktu jika hari ini */
+            .day-card.today-active .time-item {
+                background-color: transparent; /* Agar warna hijau muda terlihat */
+            }
+            
+            .day-card.today-active .time-grid {
+                 background: #a3cfbb; /* Garis grid lebih gelap dikit */
+            }
+
             .card-header {
                 background: var(--primary);
                 color: white;
@@ -136,17 +153,13 @@
                 text-transform: uppercase;
             }
 
-            .date-text {
-                font-weight: 600;
-                font-size: 0.95rem;
-            }
+            .date-text { font-weight: 600; font-size: 0.95rem; }
 
-            /* Grid Waktu Sholat (3 Kolom x 2 Baris) */
             .time-grid {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr); /* 3 Kolom */
-                gap: 1px; /* Gap kecil untuk border */
-                background: #eee; /* Warna garis pemisah */
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1px;
+                background: #eee;
                 border-top: 1px solid #eee;
             }
 
@@ -161,7 +174,7 @@
 
             .time-label {
                 font-size: 0.7rem;
-                color: #888;
+                color: #666; /* Sedikit lebih gelap agar terbaca di background hijau */
                 text-transform: uppercase;
                 margin-bottom: 2px;
             }
@@ -172,9 +185,7 @@
                 color: var(--text);
             }
 
-            /* Highlight Maghrib di Mobile */
             .is-maghrib .time-value { color: var(--maghrib); }
-            .is-maghrib .time-label { color: var(--maghrib); font-weight: bold; }
             .is-maghrib { background-color: #fff5eb; }
         }
 
@@ -209,13 +220,10 @@
                     <th>Isya</th>
                 </tr>
             </thead>
-            <tbody id="desktopBody">
-                </tbody>
+            <tbody id="desktopBody"></tbody>
         </table>
 
-        <div class="mobile-list" id="mobileBody">
-            </div>
-
+        <div class="mobile-list" id="mobileBody"></div>
     </div>
 
     <footer>
@@ -223,7 +231,6 @@
     </footer>
 
     <script>
-        // Data Jadwal Lengkap
         const scheduleData = [
             { r: 1, d: "Kamis, 19 Feb", im: "04.28", su: "04.38", zu: "12.07", as: "15.16", ma: "18.20", is: "19.26" },
             { r: 2, d: "Jumat, 20 Feb", im: "04.28", su: "04.38", zu: "12.07", as: "15.15", ma: "18.19", is: "19.25" },
@@ -235,7 +242,6 @@
             { r: 8, d: "Kamis, 26 Feb", im: "04.29", su: "04.39", zu: "12.06", as: "15.10", ma: "18.17", is: "19.23" },
             { r: 9, d: "Jumat, 27 Feb", im: "04.29", su: "04.39", zu: "12.06", as: "15.09", ma: "18.17", is: "19.22" },
             { r: 10, d: "Sabtu, 28 Feb", im: "04.29", su: "04.39", zu: "12.06", as: "15.08", ma: "18.17", is: "19.22" },
-            // MARET
             { r: 11, d: "Minggu, 1 Mar", im: "04.29", su: "04.39", zu: "12.05", as: "15.07", ma: "18.16", is: "19.21" },
             { r: 12, d: "Senin, 2 Mar", im: "04.29", su: "04.39", zu: "12.05", as: "15.06", ma: "18.16", is: "19.21" },
             { r: 13, d: "Selasa, 3 Mar", im: "04.29", su: "04.39", zu: "12.05", as: "15.05", ma: "18.15", is: "19.20" },
@@ -258,15 +264,34 @@
             { r: 30, d: "Jumat, 20 Mar", im: "04.29", su: "04.39", zu: "12.01", as: "15.11", ma: "18.08", is: "19.12" }
         ];
 
+        // --- Logic Pengecekan Tanggal Hari Ini ---
+        function isToday(dateString) {
+            // dateString ex: "Kamis, 19 Feb"
+            const parts = dateString.split(' '); // ["Kamis,", "19", "Feb"]
+            if (parts.length < 3) return false;
+
+            const day = parseInt(parts[1], 10);
+            const monthStr = parts[2];
+            
+            // Map nama bulan ke index (Jan=0, Feb=1, dst)
+            const monthMap = { "Jan": 0, "Feb": 1, "Mar": 2, "Apr": 3 };
+            const month = monthMap[monthStr];
+
+            const today = new Date();
+            // Cek apakah tanggal & bulan sama (Tahun diasumsikan 2026 sesuai konteks)
+            // Catatan: Ini akan highlight jika user membuka file ini pas tanggalnya sesuai.
+            return today.getDate() === day && today.getMonth() === month;
+        }
+
         const desktopBody = document.getElementById('desktopBody');
         const mobileBody = document.getElementById('mobileBody');
 
         scheduleData.forEach(item => {
-            // 1. Render Desktop Table Row
+            // Render Desktop
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td class="d-ramadhan">${item.r}</td>
-                <td class="d-date">${item.d}</td>
+                <td>${item.d}</td>
                 <td>${item.im}</td>
                 <td>${item.su}</td>
                 <td>${item.zu}</td>
@@ -276,9 +301,12 @@
             `;
             desktopBody.appendChild(tr);
 
-            // 2. Render Mobile Card
+            // Render Mobile
             const card = document.createElement('div');
-            card.className = 'day-card';
+            // Cek apakah hari ini?
+            const activeClass = isToday(item.d) ? 'today-active' : '';
+            
+            card.className = `day-card ${activeClass}`;
             card.innerHTML = `
                 <div class="card-header">
                     <span class="ramadhan-badge">Ramadhan ${item.r}</span>
@@ -296,6 +324,5 @@
             mobileBody.appendChild(card);
         });
     </script>
-
 </body>
 </html>
