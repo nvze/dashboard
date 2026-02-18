@@ -3,162 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jadwal Imsakiyah Bandung 1447 H - ESVN System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Jadwal Imsakiyah Ramadhan 1447 H</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #6a11cb;
-            --secondary-color: #2575fc;
-            --accent-color: #ff9966;
-            --text-dark: #333;
-            --text-light: #fff;
-            --glass-bg: rgba(255, 255, 255, 0.95);
+            --primary: #0f5132;   /* Hijau Zamrud */
+            --gold: #c5a059;      /* Emas */
+            --bg: #f8f9fa;        /* Abu sangat muda */
+            --maghrib: #d35400;   /* Oranye Bata */
+            --text: #2c3e50;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
-            /* Background Gradient mirip dengan nuansa logo */
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: var(--text-dark);
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 15px;
         }
 
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            background: var(--glass-bg);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             overflow: hidden;
-            animation: fadeIn 1s ease-in-out;
+            border-top: 5px solid var(--primary);
         }
 
         header {
             text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,1));
+            padding: 25px 15px;
+            background: white;
             border-bottom: 2px solid #eee;
         }
 
-        .logo-container {
-            margin-bottom: 20px;
-        }
-
-        .logo-img {
-            max-width: 150px; /* Ukuran logo disesuaikan */
-            height: auto;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-            mix-blend-mode: multiply; /* Agar menyatu dengan background putih header */
-        }
-
-        .logo-img:hover {
-            transform: scale(1.05);
+        .bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: block;
         }
 
         h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 10px;
+            font-size: 1.4rem;
+            color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 700;
         }
 
         h2 {
-            font-size: 1.2rem;
+            font-size: 0.95rem;
             color: #666;
+            margin-top: 5px;
             font-weight: 400;
         }
 
-        .table-responsive {
-            overflow-x: auto;
-            padding: 20px;
-        }
-
-        table {
+        /* --- TAMPILAN DESKTOP/LAPTOP (Tabel Biasa) --- */
+        .desktop-view {
             width: 100%;
             border-collapse: collapse;
-            border-radius: 10px;
-            overflow: hidden;
-            background-color: white;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
         }
 
-        thead {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: var(--text-light);
+        .desktop-view thead {
+            background-color: var(--primary);
+            color: white;
         }
 
-        th {
-            padding: 18px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.95rem;
+        .desktop-view th {
+            padding: 15px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        td {
-            padding: 15px;
+        .desktop-view td {
+            padding: 12px;
             text-align: center;
             border-bottom: 1px solid #eee;
-            color: #555;
-            font-size: 0.9rem;
-            transition: all 0.2s;
+            font-size: 0.95rem;
         }
 
-        /* Zebra Striping */
-        tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
+        .desktop-view tr:nth-child(even) { background-color: #fcfcfc; }
+        .desktop-view tr:hover { background-color: #f0f7f4; }
 
-        /* Hover Effect pada Baris */
-        tbody tr:hover {
-            background-color: #eef2ff;
-            transform: scale(1.01);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            font-weight: 500;
-            color: var(--primary-color);
-        }
+        /* Highlight Desktop */
+        .d-ramadhan { font-weight: bold; color: var(--primary); }
+        .d-date { color: #555; font-size: 0.9rem; }
+        .d-maghrib { color: var(--maghrib); font-weight: bold; background: rgba(211, 84, 0, 0.05); }
 
-        /* Kolom Ramadhan Style Khusus */
-        tbody td:first-child {
-            font-weight: 700;
-            color: var(--secondary-color);
-            background-color: rgba(37, 117, 252, 0.05);
-        }
+        /* --- TAMPILAN MOBILE (HP) --- */
+        /* Kita sembunyikan tabel desktop di HP, dan tampilkan layout khusus */
+        .mobile-list { display: none; }
 
-        /* Kolom Maghrib Highlight (Waktu Buka) */
-        tbody td:nth-child(6) {
-            font-weight: 700;
-            color: #d35400; /* Warna oranye gelap */
+        @media (max-width: 768px) {
+            /* Sembunyikan Tabel Desktop */
+            .desktop-view { display: none; }
+            
+            /* Tampilkan List Mobile */
+            .mobile-list { display: block; padding: 10px; }
+
+            /* Kartu per Hari */
+            .day-card {
+                background: white;
+                border: 1px solid #e0e0e0;
+                border-radius: 10px;
+                margin-bottom: 15px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                overflow: hidden;
+            }
+
+            /* Header Kartu (Tanggal) */
+            .card-header {
+                background: var(--primary);
+                color: white;
+                padding: 10px 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .ramadhan-badge {
+                background: var(--gold);
+                color: var(--primary);
+                padding: 2px 8px;
+                border-radius: 4px;
+                font-size: 0.8rem;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            .date-text {
+                font-weight: 600;
+                font-size: 0.95rem;
+            }
+
+            /* Grid Waktu Sholat (3 Kolom x 2 Baris) */
+            .time-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr); /* 3 Kolom */
+                gap: 1px; /* Gap kecil untuk border */
+                background: #eee; /* Warna garis pemisah */
+                border-top: 1px solid #eee;
+            }
+
+            .time-item {
+                background: white;
+                padding: 10px 5px;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .time-label {
+                font-size: 0.7rem;
+                color: #888;
+                text-transform: uppercase;
+                margin-bottom: 2px;
+            }
+
+            .time-value {
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--text);
+            }
+
+            /* Highlight Maghrib di Mobile */
+            .is-maghrib .time-value { color: var(--maghrib); }
+            .is-maghrib .time-label { color: var(--maghrib); font-weight: bold; }
+            .is-maghrib { background-color: #fff5eb; }
         }
 
         footer {
             text-align: center;
             padding: 20px;
             font-size: 0.8rem;
-            color: rgba(255,255,255,0.8);
-            margin-top: 20px;
-        }
-
-        /* Animasi */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsif untuk HP */
-        @media (max-width: 600px) {
-            h1 { font-size: 1.5rem; }
-            th, td { padding: 10px 5px; font-size: 0.8rem; }
+            color: #888;
+            border-top: 1px solid #eee;
         }
     </style>
 </head>
@@ -166,65 +191,111 @@
 
     <div class="container">
         <header>
-            <div class="logo-container">
-                <img src="Screenshot_20260217-143631.jpg" alt="ESVN System Logo" class="logo-img">
-            </div>
+            <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
             <h1>Jadwal Imsakiyah</h1>
-            <h2>Kota Bandung - Ramadhan 1447 H</h2>
+            <h2>Kota Bandung & Sekitarnya - 1447 H / 2026 M</h2>
         </header>
 
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ramadhan</th>
-                        <th>Imsak</th>
-                        <th>Subuh</th>
-                        <th>Zuhur</th>
-                        <th>Ashar</th>
-                        <th>Maghrib</th>
-                        <th>Isya</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>1</td><td>04.28</td><td>04.38</td><td>12.07</td><td>15.16</td><td>18.20</td><td>19.26</td></tr>
-                    <tr><td>2</td><td>04.28</td><td>04.38</td><td>12.07</td><td>15.15</td><td>18.19</td><td>19.25</td></tr>
-                    <tr><td>3</td><td>04.28</td><td>04.38</td><td>12.07</td><td>15.15</td><td>18.19</td><td>19.25</td></tr>
-                    <tr><td>4</td><td>04.28</td><td>04.38</td><td>12.07</td><td>15.14</td><td>18.19</td><td>19.24</td></tr>
-                    <tr><td>5</td><td>04.28</td><td>04.38</td><td>12.06</td><td>15.13</td><td>18.18</td><td>19.24</td></tr>
-                    <tr><td>6</td><td>04.28</td><td>04.38</td><td>12.06</td><td>15.12</td><td>18.18</td><td>19.24</td></tr>
-                    <tr><td>7</td><td>04.29</td><td>04.39</td><td>12.06</td><td>15.11</td><td>18.18</td><td>19.23</td></tr>
-                    <tr><td>8</td><td>04.29</td><td>04.39</td><td>12.06</td><td>15.10</td><td>18.17</td><td>19.23</td></tr>
-                    <tr><td>9</td><td>04.29</td><td>04.39</td><td>12.06</td><td>15.09</td><td>18.17</td><td>19.22</td></tr>
-                    <tr><td>10</td><td>04.29</td><td>04.39</td><td>12.06</td><td>15.08</td><td>18.17</td><td>19.22</td></tr>
-                    <tr><td>11</td><td>04.29</td><td>04.39</td><td>12.05</td><td>15.07</td><td>18.16</td><td>19.21</td></tr>
-                    <tr><td>12</td><td>04.29</td><td>04.39</td><td>12.05</td><td>15.06</td><td>18.16</td><td>19.21</td></tr>
-                    <tr><td>13</td><td>04.29</td><td>04.39</td><td>12.05</td><td>15.05</td><td>18.15</td><td>19.20</td></tr>
-                    <tr><td>14</td><td>04.29</td><td>04.39</td><td>12.05</td><td>15.06</td><td>18.15</td><td>19.20</td></tr>
-                    <tr><td>15</td><td>04.29</td><td>04.39</td><td>12.05</td><td>15.06</td><td>18.15</td><td>19.20</td></tr>
-                    <tr><td>16</td><td>04.29</td><td>04.39</td><td>12.04</td><td>15.07</td><td>18.14</td><td>19.19</td></tr>
-                    <tr><td>17</td><td>04.29</td><td>04.39</td><td>12.04</td><td>15.07</td><td>18.14</td><td>19.19</td></tr>
-                    <tr><td>18</td><td>04.29</td><td>04.39</td><td>12.04</td><td>15.08</td><td>18.13</td><td>19.18</td></tr>
-                    <tr><td>19</td><td>04.29</td><td>04.39</td><td>12.04</td><td>15.08</td><td>18.13</td><td>19.18</td></tr>
-                    <tr><td>20</td><td>04.29</td><td>04.39</td><td>12.03</td><td>15.08</td><td>18.12</td><td>19.17</td></tr>
-                    <tr><td>21</td><td>04.29</td><td>04.39</td><td>12.03</td><td>15.09</td><td>18.12</td><td>19.17</td></tr>
-                    <tr><td>22</td><td>04.29</td><td>04.39</td><td>12.03</td><td>15.09</td><td>18.11</td><td>19.16</td></tr>
-                    <tr><td>23</td><td>04.29</td><td>04.39</td><td>12.03</td><td>15.09</td><td>18.11</td><td>19.16</td></tr>
-                    <tr><td>24</td><td>04.29</td><td>04.39</td><td>12.02</td><td>15.09</td><td>18.10</td><td>19.15</td></tr>
-                    <tr><td>25</td><td>04.29</td><td>04.39</td><td>12.02</td><td>15.10</td><td>18.10</td><td>19.15</td></tr>
-                    <tr><td>26</td><td>04.29</td><td>04.39</td><td>12.02</td><td>15.10</td><td>18.10</td><td>19.14</td></tr>
-                    <tr><td>27</td><td>04.29</td><td>04.39</td><td>12.01</td><td>15.10</td><td>18.09</td><td>19.14</td></tr>
-                    <tr><td>28</td><td>04.29</td><td>04.39</td><td>12.01</td><td>15.10</td><td>18.09</td><td>19.13</td></tr>
-                    <tr><td>29</td><td>04.29</td><td>04.39</td><td>12.01</td><td>15.11</td><td>18.08</td><td>19.13</td></tr>
-                    <tr><td>30</td><td>04.29</td><td>04.39</td><td>12.01</td><td>15.11</td><td>18.08</td><td>19.12</td></tr>
+        <table class="desktop-view">
+            <thead>
+                <tr>
+                    <th>Ramadhan</th>
+                    <th>Hari & Tanggal</th>
+                    <th>Imsak</th>
+                    <th>Subuh</th>
+                    <th>Zuhur</th>
+                    <th>Ashar</th>
+                    <th>Maghrib</th>
+                    <th>Isya</th>
+                </tr>
+            </thead>
+            <tbody id="desktopBody">
                 </tbody>
-            </table>
-        </div>
+        </table>
+
+        <div class="mobile-list" id="mobileBody">
+            </div>
+
     </div>
 
     <footer>
-        &copy; 2026 ESVN System. All Rights Reserved.
+        &copy; 2026 ESAN System. <br> Selamat Menunaikan Ibadah Puasa
     </footer>
+
+    <script>
+        // Data Jadwal Lengkap
+        const scheduleData = [
+            { r: 1, d: "Kamis, 19 Feb", im: "04.28", su: "04.38", zu: "12.07", as: "15.16", ma: "18.20", is: "19.26" },
+            { r: 2, d: "Jumat, 20 Feb", im: "04.28", su: "04.38", zu: "12.07", as: "15.15", ma: "18.19", is: "19.25" },
+            { r: 3, d: "Sabtu, 21 Feb", im: "04.28", su: "04.38", zu: "12.07", as: "15.15", ma: "18.19", is: "19.25" },
+            { r: 4, d: "Minggu, 22 Feb", im: "04.28", su: "04.38", zu: "12.07", as: "15.14", ma: "18.19", is: "19.24" },
+            { r: 5, d: "Senin, 23 Feb", im: "04.28", su: "04.38", zu: "12.06", as: "15.13", ma: "18.18", is: "19.24" },
+            { r: 6, d: "Selasa, 24 Feb", im: "04.28", su: "04.38", zu: "12.06", as: "15.12", ma: "18.18", is: "19.24" },
+            { r: 7, d: "Rabu, 25 Feb", im: "04.29", su: "04.39", zu: "12.06", as: "15.11", ma: "18.18", is: "19.23" },
+            { r: 8, d: "Kamis, 26 Feb", im: "04.29", su: "04.39", zu: "12.06", as: "15.10", ma: "18.17", is: "19.23" },
+            { r: 9, d: "Jumat, 27 Feb", im: "04.29", su: "04.39", zu: "12.06", as: "15.09", ma: "18.17", is: "19.22" },
+            { r: 10, d: "Sabtu, 28 Feb", im: "04.29", su: "04.39", zu: "12.06", as: "15.08", ma: "18.17", is: "19.22" },
+            // MARET
+            { r: 11, d: "Minggu, 1 Mar", im: "04.29", su: "04.39", zu: "12.05", as: "15.07", ma: "18.16", is: "19.21" },
+            { r: 12, d: "Senin, 2 Mar", im: "04.29", su: "04.39", zu: "12.05", as: "15.06", ma: "18.16", is: "19.21" },
+            { r: 13, d: "Selasa, 3 Mar", im: "04.29", su: "04.39", zu: "12.05", as: "15.05", ma: "18.15", is: "19.20" },
+            { r: 14, d: "Rabu, 4 Mar", im: "04.29", su: "04.39", zu: "12.05", as: "15.06", ma: "18.15", is: "19.20" },
+            { r: 15, d: "Kamis, 5 Mar", im: "04.29", su: "04.39", zu: "12.05", as: "15.06", ma: "18.15", is: "19.20" },
+            { r: 16, d: "Jumat, 6 Mar", im: "04.29", su: "04.39", zu: "12.04", as: "15.07", ma: "18.14", is: "19.19" },
+            { r: 17, d: "Sabtu, 7 Mar", im: "04.29", su: "04.39", zu: "12.04", as: "15.07", ma: "18.14", is: "19.19" },
+            { r: 18, d: "Minggu, 8 Mar", im: "04.29", su: "04.39", zu: "12.04", as: "15.08", ma: "18.13", is: "19.18" },
+            { r: 19, d: "Senin, 9 Mar", im: "04.29", su: "04.39", zu: "12.04", as: "15.08", ma: "18.13", is: "19.18" },
+            { r: 20, d: "Selasa, 10 Mar", im: "04.29", su: "04.39", zu: "12.03", as: "15.08", ma: "18.12", is: "19.17" },
+            { r: 21, d: "Rabu, 11 Mar", im: "04.29", su: "04.39", zu: "12.03", as: "15.09", ma: "18.12", is: "19.17" },
+            { r: 22, d: "Kamis, 12 Mar", im: "04.29", su: "04.39", zu: "12.03", as: "15.09", ma: "18.11", is: "19.16" },
+            { r: 23, d: "Jumat, 13 Mar", im: "04.29", su: "04.39", zu: "12.03", as: "15.09", ma: "18.11", is: "19.16" },
+            { r: 24, d: "Sabtu, 14 Mar", im: "04.29", su: "04.39", zu: "12.02", as: "15.09", ma: "18.10", is: "19.15" },
+            { r: 25, d: "Minggu, 15 Mar", im: "04.29", su: "04.39", zu: "12.02", as: "15.10", ma: "18.10", is: "19.15" },
+            { r: 26, d: "Senin, 16 Mar", im: "04.29", su: "04.39", zu: "12.02", as: "15.10", ma: "18.10", is: "19.14" },
+            { r: 27, d: "Selasa, 17 Mar", im: "04.29", su: "04.39", zu: "12.01", as: "15.10", ma: "18.09", is: "19.14" },
+            { r: 28, d: "Rabu, 18 Mar", im: "04.29", su: "04.39", zu: "12.01", as: "15.10", ma: "18.09", is: "19.13" },
+            { r: 29, d: "Kamis, 19 Mar", im: "04.29", su: "04.39", zu: "12.01", as: "15.11", ma: "18.08", is: "19.13" },
+            { r: 30, d: "Jumat, 20 Mar", im: "04.29", su: "04.39", zu: "12.01", as: "15.11", ma: "18.08", is: "19.12" }
+        ];
+
+        const desktopBody = document.getElementById('desktopBody');
+        const mobileBody = document.getElementById('mobileBody');
+
+        scheduleData.forEach(item => {
+            // 1. Render Desktop Table Row
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="d-ramadhan">${item.r}</td>
+                <td class="d-date">${item.d}</td>
+                <td>${item.im}</td>
+                <td>${item.su}</td>
+                <td>${item.zu}</td>
+                <td>${item.as}</td>
+                <td class="d-maghrib">${item.ma}</td>
+                <td>${item.is}</td>
+            `;
+            desktopBody.appendChild(tr);
+
+            // 2. Render Mobile Card
+            const card = document.createElement('div');
+            card.className = 'day-card';
+            card.innerHTML = `
+                <div class="card-header">
+                    <span class="ramadhan-badge">Ramadhan ${item.r}</span>
+                    <span class="date-text">${item.d}</span>
+                </div>
+                <div class="time-grid">
+                    <div class="time-item"><span class="time-label">Imsak</span><span class="time-value">${item.im}</span></div>
+                    <div class="time-item"><span class="time-label">Subuh</span><span class="time-value">${item.su}</span></div>
+                    <div class="time-item"><span class="time-label">Zuhur</span><span class="time-value">${item.zu}</span></div>
+                    <div class="time-item"><span class="time-label">Ashar</span><span class="time-value">${item.as}</span></div>
+                    <div class="time-item is-maghrib"><span class="time-label">Maghrib</span><span class="time-value">${item.ma}</span></div>
+                    <div class="time-item"><span class="time-label">Isya</span><span class="time-value">${item.is}</span></div>
+                </div>
+            `;
+            mobileBody.appendChild(card);
+        });
+    </script>
 
 </body>
 </html>
