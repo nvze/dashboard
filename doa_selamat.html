@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gambar Doa Selamat</title>
+    <!-- Import Google Fonts: Amiri for Arabic, Poppins for Latin -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Library untuk mengubah HTML menjadi Gambar (Canvas) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body class="bg-slate-100 min-h-screen flex flex-col items-center justify-center p-4 font-['Poppins']">
+
+    <!-- Area Kartu Doa (Ini yang akan dijadikan gambar) -->
+    <div id="prayer-card" class="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-2xl w-full relative">
+        
+        <!-- Aksen Dekorasi Atas -->
+        <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-emerald-400 to-teal-600"></div>
+        
+        <!-- Watermark/Background Pattern Halus -->
+        <div class="absolute inset-0 opacity-5 pointer-events-none" 
+             style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M54.627 0l.83.83-1.66 1.66L54.627 0zm-1.66 1.66l-1.66-1.66.83-.83 1.66 1.66-.83.83zM0 54.627l.83.83-1.66 1.66L0 54.627zm-1.66 1.66l-1.66-1.66.83-.83 1.66 1.66-.83.83zM54.627 60l.83-.83-1.66-1.66L54.627 60zm-1.66-1.66l-1.66 1.66.83.83 1.66-1.66-.83-.83zM0 5.373l.83-.83-1.66-1.66L0 5.373zm-1.66-1.66l-1.66 1.66.83.83 1.66-1.66-.83-.83zM30 31.66l-1.66 1.66-.83-.83L30 30l2.49 2.49-.83.83L30 31.66zm0-3.32l1.66-1.66.83.83L30 30l-2.49-2.49.83-.83L30 28.34z\' fill=\'%23059669\' fill-rule=\'evenodd\'/%3E%3C/svg%3E');">
+        </div>
+
+        <div class="p-8 md:p-12 relative z-10 flex flex-col items-center">
+             
+             <!-- Judul -->
+             <div class="inline-block px-4 py-1 rounded-full bg-emerald-50 border border-emerald-100 mb-8">
+                 <h2 class="text-emerald-800 font-semibold tracking-wider text-xs md:text-sm uppercase">Doa Selamat</h2>
+             </div>
+             
+             <!-- Teks Arab -->
+             <p class="font-['Amiri'] text-3xl md:text-4xl leading-[2.5] text-gray-900 mb-8 text-center" dir="rtl">
+                اَللّٰهُمَّ اِنَّا نَسْئَلُكَ سَلَامَةً فِى الدِّيْنِ، وَعَافِيَةً فِى الْجَسَدِ، وَزِيَادَةً فِى الْعِلْمِ، وَبَرَكَةً فِى الرِّزْقِ، وَتَوْبَةً قَبْلَ الْمَوْتِ، وَرَحْمَةً عِنْدَ الْمَوْتِ، وَمَغْفِرَةً بَعْدَ الْمَوْتِ. اَللّٰهُمَّ هَوِّنْ عَلَيْنَا فِىْ سَكَرَاتِ الْمَوْتِ، وَالنَّجَاةَ مِنَ النَّارِ، وَالْعَفْوَ عِنْدَ الْحِسَابِ
+             </p>
+
+             <hr class="w-24 border-emerald-200 mb-8">
+
+             <!-- Teks Latin -->
+             <p class="italic text-emerald-700 text-lg md:text-xl leading-relaxed mb-6 text-center font-medium">
+                "Allahumma inna nas'aluka salamatan fid-diin, wa 'aafiyatan fil jasad, wa ziyaadatan fil 'ilmi, wa barakatan fir-rizqi, wa taubatan qablal maut, wa rahmatan 'indal maut, wa maghfiratan ba'dal maut. Allahumma hawwin 'alainaa fii sakaraatil maut, wan najaata minan-naar, wal 'afwa 'indal hisaab."
+             </p>
+
+             <!-- Terjemahan -->
+             <div class="bg-gray-50 p-6 rounded-2xl w-full border border-gray-100">
+                 <p class="text-gray-500 text-xs md:text-sm font-semibold uppercase tracking-widest mb-2 text-center">Artinya</p>
+                 <p class="text-gray-600 text-sm md:text-base leading-relaxed text-center">
+                    Ya Allah, sesungguhnya kami memohon kepada-Mu keselamatan dalam agama, kesehatan dalam tubuh, tambahan dalam ilmu, keberkahan dalam rezeki, taubat sebelum mati, rahmat ketika mati, dan ampunan setelah mati. Ya Allah, mudahkanlah kami saat menghadapi sakaratul maut, selamatkanlah kami dari siksa api neraka, dan ampunilah kami pada saat hisab.
+                 </p>
+             </div>
+        </div>
+    </div>
+
+    <!-- Tombol Aksi -->
+    <div class="mt-8 flex gap-4">
+        <button id="download-btn" onclick="downloadImage()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-medium shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Unduh sebagai Gambar
+        </button>
+    </div>
+
+    <script>
+        function downloadImage() {
+            const card = document.getElementById('prayer-card');
+            const btn = document.getElementById('download-btn');
+            
+            // Ubah teks tombol saat memproses
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Memproses...';
+            btn.disabled = true;
+
+            // Pastikan font sudah dimuat sebelum render
+            document.fonts.ready.then(function() {
+                // Konversi div ke canvas
+                html2canvas(card, {
+                    scale: 2, // Kualitas resolusi tinggi (retina)
+                    useCORS: true,
+                    backgroundColor: "#ffffff"
+                }).then(canvas => {
+                    // Buat link download
+                    const link = document.createElement('a');
+                    link.download = 'Doa-Selamat.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    
+                    // Kembalikan tombol ke semula
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                });
+            });
+        }
+    </script>
+</body>
+</html>
