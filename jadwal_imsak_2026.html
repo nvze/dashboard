@@ -37,31 +37,17 @@
 
         header {
             text-align: center;
-            padding: 25px 15px;
+            padding: 0;
             background: white;
             border-bottom: 2px solid #eee;
+            overflow: hidden;
         }
 
-        .bismillah {
-            font-family: 'Amiri', serif;
-            font-size: 1.6rem;
-            color: var(--primary);
-            margin-bottom: 10px;
+        .header-logo {
+            max-width: 100%;
+            height: auto;
             display: block;
-        }
-
-        h1 {
-            font-size: 1.4rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        h2 {
-            font-size: 0.95rem;
-            color: #666;
-            margin-top: 5px;
-            font-weight: 400;
+            margin: 0 auto;
         }
 
         /* --- TAMPILAN DESKTOP (Tabel) --- */
@@ -110,9 +96,28 @@
                 box-shadow: 0 2px 5px rgba(0,0,0,0.05);
                 overflow: hidden;
                 transition: transform 0.2s;
+                position: relative; /* Ditambahkan agar overlay centang bisa di tengah */
             }
 
-            /* Style Khusus Jika Hari Ini (Diaktifkan via JS) */
+            /* Efek redup untuk hari yang sudah lewat */
+            .day-card.past-card {
+                opacity: 0.65;
+            }
+
+            /* Style untuk overlay centang raksasa */
+            .checkmark-overlay {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 8rem;
+                color: rgba(15, 81, 50, 0.15); /* Hijau transparan */
+                z-index: 10;
+                pointer-events: none; /* Agar tidak mengganggu klik/scroll */
+                font-weight: bold;
+            }
+
+            /* Style Khusus Jika Hari Ini */
             .day-card.today-active {
                 background-color: var(--highlight-today) !important;
                 border: 2px solid var(--primary);
@@ -120,18 +125,16 @@
                 box-shadow: 0 5px 15px rgba(15, 81, 50, 0.2);
             }
             
-            /* Ubah warna header kartu jika hari ini */
             .day-card.today-active .card-header {
-                background-color: var(--primary); /* Tetap hijau tua agar kontras */
+                background-color: var(--primary); 
             }
 
-            /* Ubah warna grid waktu jika hari ini */
             .day-card.today-active .time-item {
-                background-color: transparent; /* Agar warna hijau muda terlihat */
+                background-color: transparent;
             }
             
             .day-card.today-active .time-grid {
-                 background: #a3cfbb; /* Garis grid lebih gelap dikit */
+                 background: #a3cfbb;
             }
 
             .card-header {
@@ -141,6 +144,8 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                position: relative;
+                z-index: 2;
             }
 
             .ramadhan-badge {
@@ -161,6 +166,8 @@
                 gap: 1px;
                 background: #eee;
                 border-top: 1px solid #eee;
+                position: relative;
+                z-index: 2;
             }
 
             .time-item {
@@ -174,7 +181,7 @@
 
             .time-label {
                 font-size: 0.7rem;
-                color: #666; /* Sedikit lebih gelap agar terbaca di background hijau */
+                color: #666;
                 text-transform: uppercase;
                 margin-bottom: 2px;
             }
@@ -202,9 +209,7 @@
 
     <div class="container">
         <header>
-            <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
-            <h1>Jadwal Imsakiyah</h1>
-            <h2>Kota Bandung & Sekitarnya - 1447 H / 2026 M</h2>
+            <img src="kurawa_imsak.jpg" alt="Logo Jadwal Imsakiyah" class="header-logo">
         </header>
 
         <table class="desktop-view">
@@ -227,7 +232,7 @@
     </div>
 
     <footer>
-        &copy; 2026 ESAN System. <br> Selamat Menunaikan Ibadah Puasa
+        &copy; 2026 Kurawa 20. <br> Selamat Menunaikan Ibadah Puasa
     </footer>
 
     <script>
@@ -264,23 +269,40 @@
             { r: 30, d: "Jumat, 20 Mar", im: "04.29", su: "04.39", zu: "12.01", as: "15.11", ma: "18.08", is: "19.12" }
         ];
 
-        // --- Logic Pengecekan Tanggal Hari Ini ---
-        function isToday(dateString) {
-            // dateString ex: "Kamis, 19 Feb"
-            const parts = dateString.split(' '); // ["Kamis,", "19", "Feb"]
-            if (parts.length < 3) return false;
+        // Fungsi untuk mengekstrak objek Date dari string jadwal
+        function parseScheduleDate(dateString) {
+            const parts = dateString.split(' ');
+            if (parts.length < 3) return null;
 
             const day = parseInt(parts[1], 10);
             const monthStr = parts[2];
             
-            // Map nama bulan ke index (Jan=0, Feb=1, dst)
             const monthMap = { "Jan": 0, "Feb": 1, "Mar": 2, "Apr": 3 };
             const month = monthMap[monthStr];
 
             const today = new Date();
-            // Cek apakah tanggal & bulan sama (Tahun diasumsikan 2026 sesuai konteks)
-            // Catatan: Ini akan highlight jika user membuka file ini pas tanggalnya sesuai.
-            return today.getDate() === day && today.getMonth() === month;
+            // Asumsi tahun adalah tahun saat ini (2026)
+            return new Date(today.getFullYear(), month, day, 0, 0, 0);
+        }
+
+        // Cek apakah tanggal adalah hari ini
+        function isToday(dateString) {
+            const itemDate = parseScheduleDate(dateString);
+            if (!itemDate) return false;
+
+            const today = new Date();
+            return today.getDate() === itemDate.getDate() && today.getMonth() === itemDate.getMonth();
+        }
+
+        // Cek apakah tanggal sudah lewat
+        function isPast(dateString) {
+            const itemDate = parseScheduleDate(dateString);
+            if (!itemDate) return false;
+
+            const today = new Date();
+            const currentDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+
+            return itemDate < currentDate;
         }
 
         const desktopBody = document.getElementById('desktopBody');
@@ -302,12 +324,19 @@
             desktopBody.appendChild(tr);
 
             // Render Mobile
-            const card = document.createElement('div');
-            // Cek apakah hari ini?
-            const activeClass = isToday(item.d) ? 'today-active' : '';
+            const isCurrentDay = isToday(item.d);
+            const isPastDay = isPast(item.d);
             
-            card.className = `day-card ${activeClass}`;
+            let cardClasses = 'day-card';
+            if (isCurrentDay) cardClasses += ' today-active';
+            if (isPastDay) cardClasses += ' past-card'; // Tambahkan class redup jika sudah lewat
+
+            const checkmarkHtml = isPastDay ? '<div class="checkmark-overlay">✓</div>' : '';
+
+            const card = document.createElement('div');
+            card.className = cardClasses;
             card.innerHTML = `
+                ${checkmarkHtml}
                 <div class="card-header">
                     <span class="ramadhan-badge">Ramadhan ${item.r}</span>
                     <span class="date-text">${item.d}</span>
