@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisasi Area Persegi</title>
+    <!-- Memuat Tailwind CSS untuk styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animasi sederhana untuk transisi teks */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Transisi halus untuk elemen SVG */
+        polygon, rect, line {
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+        
+        <!-- Header -->
+        <div class="bg-slate-800 text-white p-6">
+            <h1 class="text-2xl font-bold">Visualisasi: Area Persegi dalam Setengah Lingkaran</h1>
+            <p class="text-slate-300 mt-2">Pilih langkah di bawah ini untuk melihat ilustrasi dari setiap perhitungan.</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row">
+            
+            <!-- Kolom Visualisasi SVG -->
+            <div class="w-full md:w-1/2 p-4 flex flex-col items-center border-b md:border-b-0 md:border-r border-slate-200">
+                <svg viewBox="0 0 600 400" class="w-full max-w-md bg-slate-900 rounded-xl shadow-inner">
+                    <!-- Garis Dasar (Diameter) -->
+                    <line x1="50" y1="320" x2="550" y2="320" stroke="#475569" stroke-width="2" />
+                    
+                    <!-- Setengah Lingkaran -->
+                    <!-- Titik pusat: 300, 320. Jari-jari: ~156.52 -->
+                    <path 
+                        d="M 143.48 320 A 156.52 156.52 0 0 1 456.52 320" 
+                        fill="none" 
+                        stroke="#e2e8f0" 
+                        stroke-width="2" 
+                        stroke-dasharray="5,5"
+                    />
+
+                    <!-- Segitiga 1: OBC (Mencari Jari-jari) -->
+                    <polygon 
+                        id="poly-obc"
+                        points="300,320 230,320 230,180"
+                        fill="rgba(148, 163, 184, 0.2)"
+                        stroke="transparent"
+                        stroke-width="2"
+                    />
+
+                    <!-- Segitiga 2: ABC (Persamaan Utama) -->
+                    <polygon 
+                        id="poly-abc"
+                        points="143.48,320 230,320 230,180"
+                        fill="transparent"
+                        stroke="transparent"
+                        stroke-width="2"
+                    />
+
+                    <!-- Persegi -->
+                    <rect 
+                        id="rect-main"
+                        x="230" 
+                        y="180" 
+                        width="140" 
+                        height="140" 
+                        fill="rgba(148, 163, 184, 0.2)" 
+                        stroke="#94a3b8" 
+                        stroke-width="3" 
+                    />
+
+                    <!-- Garis Jari-jari OC -->
+                    <line 
+                        id="line-oc"
+                        x1="300" y1="320" 
+                        x2="230" y2="180" 
+                        stroke="#38bdf8" 
+                        stroke-width="2" 
+                        stroke-dasharray="4,4" 
+                    />
+                    
+                    <!-- Garis Merah AC -->
+                    <line 
+                        id="line-ac"
+                        x1="143.48" y1="320" 
+                        x2="230" y2="180" 
+                        stroke="#f43f5e" 
+                        stroke-width="5" 
+                    />
+
+                    <!-- Penanda Sudut Siku-siku di B -->
+                    <polyline 
+                        points="245,320 245,305 230,305"
+                        fill="none"
+                        stroke="#cbd5e1"
+                        stroke-width="2"
+                    />
+
+                    <!-- Titik-titik Poin -->
+                    <circle cx="300" cy="320" r="4" fill="#fff" /> <!-- O -->
+                    <circle cx="230" cy="320" r="4" fill="#fff" /> <!-- B -->
+                    <circle cx="230" cy="180" r="4" fill="#fff" /> <!-- C -->
+                    <circle cx="143.48" cy="320" r="4" fill="#fff" /> <!-- A -->
+
+                    <!-- Label Teks -->
+                    <text x="295" y="340" fill="#fff" font-size="14">O (0,0)</text>
+                    <text x="220" y="340" fill="#fff" font-size="14">B</text>
+                    <text x="220" y="170" fill="#fff" font-size="14">C</text>
+                    <text x="133.48" y="340" fill="#fff" font-size="14">A</text>
+                    
+                    <!-- Label Panjang Garis -->
+                    <text x="255" y="355" fill="#94a3b8" font-size="16">s/2</text>
+                    <text x="240" y="255" fill="#94a3b8" font-size="16">s</text>
+                    
+                    <text 
+                        x="156.74" 
+                        y="240" 
+                        fill="#f43f5e" 
+                        font-size="18" 
+                        font-weight="bold"
+                    >
+                        5 cm
+                    </text>
+                    
+                    <!-- Label R (Jari-jari) -->
+                    <text 
+                        id="label-r"
+                        x="275" 
+                        y="255" 
+                        fill="#38bdf8" 
+                        font-size="16" 
+                        font-weight="bold"
+                    >
+                        R
+                    </text>
+                </svg>
+
+                <!-- Tombol Interaktif -->
+                <div class="flex gap-2 mt-6 w-full max-w-md">
+                    <button 
+                        id="btn-0"
+                        onclick="setStep(0)"
+                        class="flex-1 py-2 rounded-lg text-sm font-semibold transition-colors bg-slate-800 text-white"
+                    >
+                        Tampilkan Semua
+                    </button>
+                    <button 
+                        id="btn-1"
+                        onclick="setStep(1)"
+                        class="flex-1 py-2 rounded-lg text-sm font-semibold transition-colors bg-sky-100 text-sky-700 hover:bg-sky-200"
+                    >
+                        Segitiga 1 (OBC)
+                    </button>
+                    <button 
+                        id="btn-2"
+                        onclick="setStep(2)"
+                        class="flex-1 py-2 rounded-lg text-sm font-semibold transition-colors bg-rose-100 text-rose-700 hover:bg-rose-200"
+                    >
+                        Segitiga 2 (ABC)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kolom Penjelasan -->
+            <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-center min-h-[400px]">
+                
+                <!-- Penjelasan Langkah 0 -->
+                <div id="text-0" class="fade-in">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Pengaturan Awal</h3>
+                    <p class="text-slate-600 mb-3">
+                        Mari kita letakkan titik tengah dasar setengah lingkaran di titik koordinat asal <strong>O(0,0)</strong>. Misalkan panjang sisi persegi adalah <strong>s</strong>.
+                    </p>
+                    <p class="text-slate-600 mb-3">
+                        Karena persegi berada persis di tengah, sudut kiri bawah persegi (titik B) berada pada jarak <strong>s/2</strong> ke kiri dari pusat. Tingginya adalah <strong>s</strong> (titik C).
+                    </p>
+                    <p class="text-slate-600 italic">
+                        *Klik tombol "Segitiga 1" atau "Segitiga 2" di sebelah kiri untuk melihat langkah perhitungan secara visual.
+                    </p>
+                </div>
+
+                <!-- Penjelasan Langkah 1 -->
+                <div id="text-1" class="hidden fade-in">
+                    <h3 class="text-xl font-bold text-sky-600 mb-4">Langkah 1: Menentukan Jari-jari (R)</h3>
+                    <p class="text-slate-600 mb-4">
+                        Perhatikan segitiga siku-siku biru <strong>&#9651;OBC</strong>. Sisi miringnya adalah jari-jari lingkaran (<strong>R</strong>). Titik C menyentuh busur lingkaran.
+                    </p>
+                    <div class="bg-sky-50 p-4 rounded-lg border border-sky-100 font-mono text-sm">
+                        <p>Alas (OB) = s/2</p>
+                        <p>Tinggi (BC) = s</p>
+                        <hr class="my-2 border-sky-200" />
+                        <p class="font-semibold text-sky-800">Teorema Pythagoras:</p>
+                        <p>R² = (s/2)² + s²</p>
+                        <p>R² = s²/4 + 4s²/4</p>
+                        <p>R² = 5s²/4</p>
+                        <p class="mt-2 font-bold text-sky-700">R = (s&radic;5) / 2</p>
+                    </div>
+                </div>
+
+                <!-- Penjelasan Langkah 2 -->
+                <div id="text-2" class="hidden fade-in">
+                    <h3 class="text-xl font-bold text-rose-600 mb-4">Langkah 2: Memecahkan Persamaan</h3>
+                    <p class="text-slate-600 mb-4">
+                        Sekarang perhatikan segitiga siku-siku merah <strong>&#9651;ABC</strong>. Garis merah miring panjangnya <strong>5 cm</strong>. Titik A adalah ujung kiri lingkaran.
+                    </p>
+                    <div class="bg-rose-50 p-4 rounded-lg border border-rose-100 font-mono text-sm mb-4">
+                        <p>Jarak O ke A = R</p>
+                        <p>Jarak O ke B = s/2</p>
+                        <p class="text-rose-700 font-semibold mt-2">Alas Segitiga (AB):</p>
+                        <p>AB = Jarak(A,B) = R - s/2</p>
+                        <p>Tinggi (BC) = s</p>
+                    </div>
+                    <div class="bg-slate-100 p-4 rounded-lg font-mono text-sm">
+                        <p class="font-semibold text-slate-800 mb-2">Pythagoras pada &#9651;ABC:</p>
+                        <p>5² = AB² + BC²</p>
+                        <p>25 = (R - s/2)² + s²</p>
+                        <p class="text-xs text-slate-500 my-1">Substitusi nilai R dari Langkah 1:</p>
+                        <p>25 = ((s&radic;5)/2 - s/2)² + s²</p>
+                        <p>25 = s² * ((&radic;5 - 1)/2)² + s²</p>
+                        <p>...</p>
+                        <p class="mt-2 text-rose-700 font-bold">Luas (s²) = (25 + 5&radic;5) / 2 cm²</p>
+                        <p class="text-rose-700 font-bold">Luas &approx; 18.09 cm²</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Logika Interaktif (JavaScript) -->
+    <script>
+        function setStep(step) {
+            // 1. Ambil semua elemen DOM yang diperlukan
+            const polyOBC = document.getElementById('poly-obc');
+            const polyABC = document.getElementById('poly-abc');
+            const rectMain = document.getElementById('rect-main');
+            const lineOC = document.getElementById('line-oc');
+            const lineAC = document.getElementById('line-ac');
+            const labelR = document.getElementById('label-r');
+            
+            const text0 = document.getElementById('text-0');
+            const text1 = document.getElementById('text-1');
+            const text2 = document.getElementById('text-2');
+            
+            const btn0 = document.getElementById('btn-0');
+            const btn1 = document.getElementById('btn-1');
+            const btn2 = document.getElementById('btn-2');
+
+            // 2. Reset semua state ke keadaan tersembunyi/default
+            // Reset SVG styles
+            polyOBC.setAttribute('fill', 'transparent');
+            polyOBC.setAttribute('stroke', 'transparent');
+            polyABC.setAttribute('fill', 'transparent');
+            polyABC.setAttribute('stroke', 'transparent');
+            rectMain.setAttribute('fill', 'transparent');
+            lineOC.setAttribute('stroke-width', '2');
+            lineAC.setAttribute('stroke-width', '2');
+            labelR.style.display = 'none';
+
+            // Reset Teks
+            text0.classList.add('hidden');
+            text1.classList.add('hidden');
+            text2.classList.add('hidden');
+
+            // Reset Tombol
+            btn0.className = "flex-1 py-2 rounded-lg text-sm font-semibold transition-colors bg-slate-200 text-slate-700 hover:bg-slate-300";
+            btn1.className = "flex-1 py-2 rounded-lg text-sm font-semibold transition-colors bg-sky-100 text-sky-700 hover:bg-sky-200";
+            btn2.className = "flex-1 py-2 rounded-lg text-sm font-semibold transition-colors bg-rose-100 text-rose-700 hover:bg-rose-200";
+
+            // 3. Terapkan state berdasarkan langkah yang dipilih
+            if (step === 0) {
+                rectMain.setAttribute('fill', 'rgba(148, 163, 184, 0.2)');
+                lineAC.setAttribute('stroke-width', '5');
+                labelR.style.display = 'block';
+                
+                text0.classList.remove('hidden');
+                
+                btn0.className = "flex-1 py-2 rounded-lg text-sm font-semibold transition-colors bg-slate-800 text-white";
+                
+            } else if (step === 1) {
+                polyOBC.setAttribute('fill', 'rgba(56, 189, 248, 0.4)');
+                polyOBC.setAttribute('stroke', '#38bdf8');
+                lineOC.setAttribute('stroke-width', '4');
+                labelR.style.display = 'block';
+                
+                text1.classList.remove('hidden');
+                
+                btn1.className = "flex-1 py-2 rounded-lg text-sm font-semibold transition-colors bg-sky-500 text-white";
+                
+            } else if (step === 2) {
+                polyABC.setAttribute('fill', 'rgba(244, 63, 94, 0.4)');
+                polyABC.setAttribute('stroke', '#f43f5e');
+                lineAC.setAttribute('stroke-width', '5');
+                
+                text2.classList.remove('hidden');
+                
+                btn2.className = "flex-1 py-2 rounded-lg text-sm font-semibold transition-colors bg-rose-500 text-white";
+            }
+        }
+
+        // Jalankan langkah 0 (Tampilkan Semua) saat halaman pertama kali dimuat
+        window.onload = () => setStep(0);
+    </script>
+</body>
+</html>
