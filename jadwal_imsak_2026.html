@@ -31,16 +31,19 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            overflow: hidden;
+            /* overflow: hidden dihapus agar sticky header berfungsi */
             border-top: 5px solid var(--primary);
         }
 
         header {
+            position: sticky;     /* Membuat header menempel */
+            top: 0;               /* Jarak tempel dari atas layar */
+            z-index: 999;         /* Memastikan header selalu di atas tabel/kartu */
             text-align: center;
             padding: 0;
             background: white;
             border-bottom: 2px solid #eee;
-            overflow: hidden;
+            border-radius: 7px 7px 0 0; /* Menjaga sudut atas tetap melengkung */
         }
 
         .header-logo {
