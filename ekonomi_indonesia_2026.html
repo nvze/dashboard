@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Ekonomi Makro Indonesia 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(30, 64, 175, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .indicator-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4 animate-fade-in">
+            <div>
+                <h1 class="text-4xl font-extrabold tracking-tight mb-2">
+                    <span class="gradient-text">Ekonomi Indonesia</span> 2026
+                </h1>
+                <p class="text-slate-400 font-medium">Laporan Indikator Makro Terkini • Sumber Data: BPS RI</p>
+            </div>
+            <div class="px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-sm font-semibold flex items-center">
+                <span class="relative flex h-2 w-2 mr-3">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                Data Terakhir: Februari 2026
+            </div>
+        </header>
+
+        <!-- Main Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <!-- PDB -->
+            <div class="glass-card p-6 rounded-2xl animate-fade-in" style="animation-delay: 0.1s;">
+                <p class="text-slate-400 text-sm font-semibold mb-1">Pertumbuhan Ekonomi (PDB)</p>
+                <div class="flex items-end gap-2">
+                    <h2 class="text-3xl font-bold">5,39%</h2>
+                    <span class="text-emerald-400 text-sm font-bold mb-1">↑ Y-on-Y</span>
+                </div>
+                <div class="mt-4 h-1 w-full bg-slate-700 rounded-full overflow-hidden">
+                    <div class="h-full bg-blue-500" style="width: 75%"></div>
+                </div>
+                <p class="mt-2 text-xs text-slate-500 italic">Triwulan IV-2025</p>
+            </div>
+
+            <!-- Inflasi -->
+            <div class="glass-card p-6 rounded-2xl animate-fade-in" style="animation-delay: 0.2s;">
+                <p class="text-slate-400 text-sm font-semibold mb-1">Inflasi Tahunan</p>
+                <div class="flex items-end gap-2">
+                    <h2 class="text-3xl font-bold">3,55%</h2>
+                    <span class="text-blue-400 text-sm font-bold mb-1">Januari 2026</span>
+                </div>
+                <div class="mt-4 h-1 w-full bg-slate-700 rounded-full overflow-hidden">
+                    <div class="h-full bg-emerald-500" style="width: 45%"></div>
+                </div>
+                <p class="mt-2 text-xs text-slate-500 italic">Target: 2.5% ± 1%</p>
+            </div>
+
+            <!-- Pengangguran -->
+            <div class="glass-card p-6 rounded-2xl animate-fade-in" style="animation-delay: 0.3s;">
+                <p class="text-slate-400 text-sm font-semibold mb-1">Pengangguran (TPT)</p>
+                <div class="flex items-end gap-2">
+                    <h2 class="text-3xl font-bold">4,74%</h2>
+                    <span class="text-emerald-400 text-sm font-bold mb-1">↓ Menurun</span>
+                </div>
+                <div class="mt-4 h-1 w-full bg-slate-700 rounded-full overflow-hidden">
+                    <div class="h-full bg-purple-500" style="width: 60%"></div>
+                </div>
+                <p class="mt-2 text-xs text-slate-500 italic">Data November 2025</p>
+            </div>
+
+            <!-- Kemiskinan -->
+            <div class="glass-card p-6 rounded-2xl animate-fade-in" style="animation-delay: 0.4s;">
+                <p class="text-slate-400 text-sm font-semibold mb-1">Angka Kemiskinan</p>
+                <div class="flex items-end gap-2">
+                    <h2 class="text-3xl font-bold">8,25%</h2>
+                    <span class="text-emerald-400 text-sm font-bold mb-1">↓ Positif</span>
+                </div>
+                <div class="mt-4 h-1 w-full bg-slate-700 rounded-full overflow-hidden">
+                    <div class="h-full bg-rose-500" style="width: 30%"></div>
+                </div>
+                <p class="mt-2 text-xs text-slate-500 italic">Sep 2025: 23,36 Juta Orang</p>
+            </div>
+        </div>
+
+        <!-- Detailed Visuals -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+            <!-- Chart: Neraca Perdagangan -->
+            <div class="lg:col-span-2 glass-card p-6 rounded-2xl animate-fade-in" style="animation-delay: 0.5s;">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Kinerja Neraca Perdagangan (Miliar US$)</h3>
+                    <div class="flex gap-4">
+                        <div class="flex items-center text-xs text-slate-400"><span class="indicator-dot bg-blue-500"></span> Ekspor</div>
+                        <div class="flex items-center text-xs text-slate-400"><span class="indicator-dot bg-rose-500"></span> Impor</div>
+                    </div>
+                </div>
+                <div class="h-64">
+                    <canvas id="tradeChart"></canvas>
+                </div>
+                <div class="mt-6 p-4 bg-slate-800/50 rounded-xl border border-white/5">
+                    <p class="text-sm text-slate-300">Total Surplus 2025: <span class="text-emerald-400 font-bold">US$ 41,05 Miliar</span></p>
+                </div>
+            </div>
+
+            <!-- IPM Section -->
+            <div class="glass-card p-6 rounded-2xl flex flex-col justify-between animate-fade-in" style="animation-delay: 0.6s;">
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Indeks Pembangunan Manusia</h3>
+                    <div class="flex flex-col items-center py-4">
+                        <div class="relative flex items-center justify-center">
+                            <svg class="w-32 h-32 transform -rotate-90">
+                                <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" class="text-slate-800" />
+                                <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" class="text-blue-500" stroke-dasharray="364.4" stroke-dashoffset="87.5" />
+                            </svg>
+                            <span class="absolute text-2xl font-bold">75,90</span>
+                        </div>
+                        <p class="mt-4 text-center text-slate-400 text-sm">Status: <span class="text-blue-400 font-bold uppercase tracking-wider">Tinggi</span></p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-400">Harapan Hidup</span>
+                        <span class="font-semibold">74,47 Tahun</span>
+                    </div>
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-400">PDB Per Kapita</span>
+                        <span class="font-semibold">Rp83,7 Juta</span>
+                    </div>
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-400">Rasio Gini</span>
+                        <span class="font-semibold">0,363</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer / Action Area -->
+        <footer class="glass-card p-8 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6 animate-fade-in" style="animation-delay: 0.7s;">
+            <div class="text-center md:text-left">
+                <h4 class="font-bold text-lg mb-1">Ingin akses data lebih dalam?</h4>
+                <p class="text-slate-400 text-sm">Download laporan lengkap dalam format PDF atau akses API BPS.</p>
+            </div>
+            <div class="flex gap-4">
+                <button class="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 transition-colors rounded-xl font-bold text-sm">Unduh PDF</button>
+                <button class="px-6 py-2.5 bg-slate-700 hover:bg-slate-600 transition-colors rounded-xl font-bold text-sm">Situs Resmi BPS</button>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart Initialization
+        const ctx = document.getElementById('tradeChart').getContext('2d');
+        const tradeChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025'],
+                datasets: [
+                    {
+                        label: 'Ekspor',
+                        data: [68.5, 71.2, 70.8, 72.41],
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                        borderRadius: 6,
+                    },
+                    {
+                        label: 'Impor',
+                        data: [58.2, 60.1, 61.5, 62.06],
+                        backgroundColor: 'rgba(244, 63, 94, 0.8)',
+                        borderRadius: 6,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8' }
+                    }
+                }
+            }
+        });
+
+        // Simple interactive message
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('click', () => {
+                console.log('Detail indicator selected');
+            });
+        });
+    </script>
+</body>
+</html>
