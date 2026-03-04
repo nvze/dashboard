@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NvZE Dashboard</title>
+  <style>
+    /* Reset & Base Style */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: "Segoe UI Variable Display", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      
+      /* --- BACKGROUND UTAMA --- */
+      background-color: #2855c9; 
+      /* Gradasi Pink Kiri Atas -> Biru -> Pink Kanan Bawah */
+      background-image: linear-gradient(135deg, #ff9aeb 0%, #2855c9 40%, #2855c9 60%, #ff9aeb 100%);
+      
+      color: #ffffff;
+      
+      /* --- PERBAIKAN TINGGI LAYAR --- */
+      min-height: 100dvh; 
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-y: auto; 
+    }
+
+    /* Wrapper untuk menengahkan Logo (di luar) dan Card */
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 420px;
+      gap: 1.5rem; 
+      
+      /* --- PERBAIKAN POSISI (SEIMBANG) --- */
+      margin-top: -3vh; /* Tarikan halus agar pas di tengah, tidak menabrak atas */
+      padding: 2rem 0; 
+    }
+
+    /* --- LOGO (DI LUAR CARD) --- */
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .profile-logo {
+      width: 150px; 
+      height: auto;
+      display: block;
+      filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+    }
+
+    /* --- DASHBOARD CARD (EFEK KACA/GLASSMORPHISM) --- */
+    .dashboard-card {
+      width: 85%;
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-radius: 24px;
+      
+      /* EFEK KACA TRANSPARAN */
+      background: rgba(255, 255, 255, 0.1); 
+      backdrop-filter: blur(20px);           
+      -webkit-backdrop-filter: blur(20px);
+      
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    p.subtitle {
+      color: #dbeafe; 
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    /* --- WIDGET JAM --- */
+    .clock-widget {
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .time-display {
+      font-size: 3.5rem;
+      font-weight: 600; 
+      color: #ffffff; 
+      line-height: 1;
+      margin-bottom: 0.25rem;
+      letter-spacing: -1px;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .date-display {
+      font-size: 1rem;
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+    
+    /* --- LIST MENU --- */
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      width: 100%;
+    }
+
+    a.menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.15); 
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    a.menu-item:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .item-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .item-title {
+      font-weight: 600;
+      color: #ffffff; 
+      font-size: 0.95rem;
+    }
+    
+    .item-desc {
+      font-size: 0.75rem;
+      color: #f1f5f9;
+      margin-top: 2px;
+      opacity: 0.8;
+    }
+
+    .item-icon {
+      font-size: 1.2rem;
+      color: #ffffff;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="main-wrapper">
+    
+    <div class="logo-container">
+      <img src="logo.png" alt="NVZE SYSTEM" class="profile-logo">
+    </div>
+
+    <div class="dashboard-card">
+      
+      <h1>Dashboard</h1>
+      <p class="subtitle">Refleksi visual Knowledge & Knowhow</p>
+
+      <div class="clock-widget">
+        <div class="time-display" id="clock-time">00:00</div>
+        <div class="date-display" id="clock-date">Memuat...</div>
+      </div>
+      
+      <div class="menu-list">
+        <a href="blog.html" class="menu-item">
+          <div class="item-content">
+            <div class="item-title">Arsip Tulisan</div>
+            <div class="item-desc">Pemikiran & Catatan</div>
+          </div>
+          <div class="item-icon">📝</div>
+        </a>
+        
+        <a href="https://nvze.pythonanywhere.com/bookmark" class="menu-item">
+          <div class="item-content">
+            <div class="item-title">Bookmarks</div>
+            <div class="item-desc">Akses Link Cepat</div>
+          </div>
+          <div class="item-icon">🔖</div>
+        </a>
+
+        <a href="https://nasx.pythonanywhere.com/" class="menu-item">
+          <div class="item-content">
+            <div class="item-title">NASX Portal</div>
+            <div class="item-desc">Akses Sistem NASX</div>
+          </div>
+          <div class="item-icon">🚀</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const timeOptions = { hour: '2-digit', minute: '2-digit' };
+      const timeString = now.toLocaleTimeString('id-ID', timeOptions).replace('.', ':');
+      const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }; 
+      const dateString = now.toLocaleDateString('id-ID', dateOptions);
+
+      document.getElementById('clock-time').textContent = timeString;
+      document.getElementById('clock-date').textContent = dateString;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+
+</body>
+</html>
