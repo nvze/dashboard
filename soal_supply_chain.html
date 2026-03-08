@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matematika Algoritma — Supply Chain</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06080f;
+    --surface: #0d1117;
+    --surface2: #161b22;
+    --border: #21262d;
+    --accent1: #00e5ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6a;
+    --accent4: #c084fc;
+    --text: #e6edf3;
+    --text-muted: #7d8590;
+    --red: #ff4444;
+    --gold: #ffd700;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .noise {
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  main { position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 40px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent1);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--accent1);
+    box-shadow: 0 0 8px var(--accent1);
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+  }
+
+  .hero h1 .line1 { color: var(--text); }
+  .hero h1 .line2 {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent1);
+    display: block;
+  }
+  .hero h1 .line3 {
+    color: var(--accent2);
+    display: block;
+    font-style: italic;
+  }
+
+  .hero-sub {
+    margin-top: 24px;
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .difficulty-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 32px;
+    background: rgba(255,215,0,0.08);
+    border: 1px solid rgba(255,215,0,0.25);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+  }
+
+  /* ── NAV PILLS ── */
+  .nav-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 40px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .nav-pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    padding: 7px 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text-muted);
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+  .nav-pill:hover, .nav-pill.active {
+    border-color: var(--accent1);
+    color: var(--accent1);
+    background: rgba(0,229,255,0.05);
+    box-shadow: 0 0 12px rgba(0,229,255,0.15);
+  }
+  .nav-pill[data-color="2"]:hover, .nav-pill[data-color="2"].active { border-color: var(--accent2); color: var(--accent2); background: rgba(255,107,53,0.05); box-shadow: 0 0 12px rgba(255,107,53,0.15); }
+  .nav-pill[data-color="3"]:hover, .nav-pill[data-color="3"].active { border-color: var(--accent3); color: var(--accent3); background: rgba(127,255,106,0.05); box-shadow: 0 0 12px rgba(127,255,106,0.15); }
+  .nav-pill[data-color="4"]:hover, .nav-pill[data-color="4"].active { border-color: var(--accent4); color: var(--accent4); background: rgba(192,132,252,0.05); box-shadow: 0 0 12px rgba(192,132,252,0.15); }
+
+  /* ── SOAL CARD ── */
+  .cards-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .soal-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    position: relative;
+  }
+  .soal-card.visible { opacity: 1; transform: translateY(0); }
+  .soal-card:hover { border-color: rgba(255,255,255,0.1); }
+
+  .card-accent-bar {
+    height: 3px;
+    width: 100%;
+  }
+  .c1 .card-accent-bar { background: linear-gradient(90deg, var(--accent1), transparent); }
+  .c2 .card-accent-bar { background: linear-gradient(90deg, var(--accent2), transparent); }
+  .c3 .card-accent-bar { background: linear-gradient(90deg, var(--accent3), transparent); }
+  .c4 .card-accent-bar { background: linear-gradient(90deg, var(--accent4), transparent); }
+
+  .card-header {
+    padding: 28px 32px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+
+  .soal-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 6px 12px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .c1 .soal-num { background: rgba(0,229,255,0.1); color: var(--accent1); border: 1px solid rgba(0,229,255,0.2); }
+  .c2 .soal-num { background: rgba(255,107,53,0.1); color: var(--accent2); border: 1px solid rgba(255,107,53,0.2); }
+  .c3 .soal-num { background: rgba(127,255,106,0.1); color: var(--accent3); border: 1px solid rgba(127,255,106,0.2); }
+  .c4 .soal-num { background: rgba(192,132,252,0.1); color: var(--accent4); border: 1px solid rgba(192,132,252,0.2); }
+
+  .card-title-block h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .card-title-block p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .algo-tag {
+    margin-left: auto;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: center;
+  }
+  .c1 .algo-tag { background: rgba(0,229,255,0.06); color: var(--accent1); border: 1px solid rgba(0,229,255,0.15); }
+  .c2 .algo-tag { background: rgba(255,107,53,0.06); color: var(--accent2); border: 1px solid rgba(255,107,53,0.15); }
+  .c3 .algo-tag { background: rgba(127,255,106,0.06); color: var(--accent3); border: 1px solid rgba(127,255,106,0.15); }
+  .c4 .algo-tag { background: rgba(192,132,252,0.06); color: var(--accent4); border: 1px solid rgba(192,132,252,0.15); }
+
+  /* ── CARD BODY ── */
+  .card-body { padding: 28px 32px; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .c1 .section-label { color: var(--accent1); }
+  .c2 .section-label { color: var(--accent2); }
+  .c3 .section-label { color: var(--accent3); }
+  .c4 .section-label { color: var(--accent4); }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .soal-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #cdd9e5;
+    margin-bottom: 20px;
+  }
+
+  /* Tables */
+  .tbl-wrap { overflow-x: auto; margin: 16px 0; border-radius: 6px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    background: var(--surface2);
+    padding: 10px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-align: center;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 9px 14px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+
+  .td-highlight { font-weight: 700; }
+  .c1 .td-highlight { color: var(--accent1); }
+  .c2 .td-highlight { color: var(--accent2); }
+  .c3 .td-highlight { color: var(--accent3); }
+  .c4 .td-highlight { color: var(--accent4); }
+
+  /* Formula block */
+  .formula {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    background: #0a0e17;
+    border: 1px solid var(--border);
+    border-left: 3px solid;
+    padding: 14px 18px;
+    border-radius: 0 6px 6px 0;
+    margin: 12px 0;
+    line-height: 1.9;
+    color: #e6edf3;
+    white-space: pre-wrap;
+  }
+  .c1 .formula { border-left-color: var(--accent1); }
+  .c2 .formula { border-left-color: var(--accent2); }
+  .c3 .formula { border-left-color: var(--accent3); }
+  .c4 .formula { border-left-color: var(--accent4); }
+
+  .formula .var { color: #ffd700; }
+  .formula .result { color: #7fff6a; font-weight: 700; }
+  .formula .op { color: #ff6b35; }
+
+  /* Answer section toggle */
+  .answer-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 16px 32px;
+    background: var(--surface2);
+    border-top: 1px solid var(--border);
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .answer-toggle:hover { background: rgba(255,255,255,0.04); }
+
+  .toggle-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .c1 .toggle-icon { background: rgba(0,229,255,0.1); color: var(--accent1); border: 1px solid rgba(0,229,255,0.2); }
+  .c2 .toggle-icon { background: rgba(255,107,53,0.1); color: var(--accent2); border: 1px solid rgba(255,107,53,0.2); }
+  .c3 .toggle-icon { background: rgba(127,255,106,0.1); color: var(--accent3); border: 1px solid rgba(127,255,106,0.2); }
+  .c4 .toggle-icon { background: rgba(192,132,252,0.1); color: var(--accent4); border: 1px solid rgba(192,132,252,0.2); }
+
+  .answer-toggle span {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .c1 .answer-toggle span { color: var(--accent1); }
+  .c2 .answer-toggle span { color: var(--accent2); }
+  .c3 .answer-toggle span { color: var(--accent3); }
+  .c4 .answer-toggle span { color: var(--accent4); }
+
+  .answer-body {
+    display: none;
+    padding: 28px 32px;
+    border-top: 1px solid var(--border);
+    animation: fadeIn 0.3s ease;
+  }
+  .answer-body.open { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Result box */
+  .result-box {
+    margin-top: 20px;
+    padding: 16px 20px;
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .c1 .result-box { background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.15); }
+  .c2 .result-box { background: rgba(255,107,53,0.04); border: 1px solid rgba(255,107,53,0.15); }
+  .c3 .result-box { background: rgba(127,255,106,0.04); border: 1px solid rgba(127,255,106,0.15); }
+  .c4 .result-box { background: rgba(192,132,252,0.04); border: 1px solid rgba(192,132,252,0.15); }
+
+  .result-item { text-align: center; }
+  .result-item .label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .result-item .value {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .c1 .result-item .value { color: var(--accent1); }
+  .c2 .result-item .value { color: var(--accent2); }
+  .c3 .result-item .value { color: var(--accent3); }
+  .c4 .result-item .value { color: var(--accent4); }
+  .result-item .sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Step list */
+  .step-list { list-style: none; }
+  .step-list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 13px;
+    line-height: 1.7;
+    color: #cdd9e5;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-n {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    padding: 3px 7px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .c1 .step-n { background: rgba(0,229,255,0.1); color: var(--accent1); }
+  .c2 .step-n { background: rgba(255,107,53,0.1); color: var(--accent2); }
+  .c3 .step-n { background: rgba(127,255,106,0.1); color: var(--accent3); }
+  .c4 .step-n { background: rgba(192,132,252,0.1); color: var(--accent4); }
+
+  b { color: white; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .stars { color: var(--gold); letter-spacing: 2px; }
+
+  /* Scroll indicator */
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    z-index: 100;
+    box-shadow: 0 0 8px var(--accent1);
+    transition: width 0.1s;
+  }
+
+  @media (max-width: 600px) {
+    .hero, .nav-wrap, .cards-wrap { padding-left: 20px; padding-right: 20px; }
+    .card-header { flex-wrap: wrap; }
+    .algo-tag { display: none; }
+    .card-body, .answer-body, .answer-toggle { padding-left: 20px; padding-right: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+<div class="scroll-progress" id="scrollBar"></div>
+
+<main>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Matematika Algoritma</div>
+    <h1>
+      <span class="line1">SUPPLY CHAIN</span>
+      <span class="line2">OPTIMIZATION</span>
+      <span class="line3">Problems & Solutions</span>
+    </h1>
+    <p class="hero-sub">4 soal tingkat lanjut mencakup Shortest Path, Transportation Problem, EOQ, dan Dynamic Programming dalam konteks rantai pasok.</p>
+    <div class="difficulty-badge">
+      <span class="stars">★★★★★</span>
+      TINGKAT KESULITAN MAKSIMAL
+    </div>
+  </div>
+
+  <!-- NAV PILLS -->
+  <div class="nav-wrap">
+    <button class="nav-pill active" data-color="1" onclick="scrollToCard(0)">01 — Dijkstra</button>
+    <button class="nav-pill" data-color="2" onclick="scrollToCard(1)">02 — VAM + MODI</button>
+    <button class="nav-pill" data-color="3" onclick="scrollToCard(2)">03 — EOQ + ROP</button>
+    <button class="nav-pill" data-color="4" onclick="scrollToCard(3)">04 — Wagner-Whitin</button>
+    <button class="nav-pill" style="margin-left:auto" onclick="expandAll()">Buka Semua Jawaban</button>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards-wrap">
+
+    <!-- ═══ SOAL 1 ═══ -->
+    <div class="soal-card c1" id="card-0">
+      <div class="card-accent-bar"></div>
+      <div class="card-header">
+        <div class="soal-num">SOAL 01</div>
+        <div class="card-title-block">
+          <h2>Shortest Path — Jaringan Distribusi</h2>
+          <p>Temukan jalur distribusi paling murah dari pabrik ke setiap toko</p>
+        </div>
+        <div class="algo-tag">DIJKSTRA</div>
+      </div>
+      <div class="card-body">
+        <div class="section-label">Deskripsi Masalah</div>
+        <p class="soal-text">Sebuah perusahaan memiliki <b>1 pabrik (F)</b>, <b>3 gudang (W1, W2, W3)</b>, dan <b>4 toko (S1–S4)</b>. Temukan jalur distribusi paling murah dari F ke setiap toko menggunakan Algoritma Dijkstra!</p>
+        <div class="section-label">Matriks Biaya (juta Rp/ton)</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>DARI</th><th>KE</th><th>BIAYA (Rp juta/ton)</th></tr></thead>
+            <tbody>
+              <tr><td>F</td><td>W1</td><td>4</td></tr>
+              <tr><td>F</td><td>W2</td><td>6</td></tr>
+              <tr><td>F</td><td>W3</td><td>8</td></tr>
+              <tr><td>W1</td><td>S1</td><td>3</td></tr>
+              <tr><td>W1</td><td>S2</td><td>5</td></tr>
+              <tr><td>W2</td><td>S2</td><td>2</td></tr>
+              <tr><td>W2</td><td>S3</td><td>4</td></tr>
+              <tr><td>W2</td><td>S4</td><td>6</td></tr>
+              <tr><td>W3</td><td>S3</td><td>1</td></tr>
+              <tr><td>W3</td><td>S4</td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▶</div>
+        <span>LIHAT JAWABAN</span>
+      </div>
+      <div class="answer-body">
+        <div class="section-label">Inisialisasi</div>
+        <div class="formula"><span class="var">dist</span> = {<span class="var">F</span>:0, <span class="var">W1</span>:∞, <span class="var">W2</span>:∞, <span class="var">W3</span>:∞, <span class="var">S1</span>:∞, <span class="var">S2</span>:∞, <span class="var">S3</span>:∞, <span class="var">S4</span>:∞}</div>
+        <div class="section-label">Iterasi Dijkstra</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>ITERASI</th><th>NODE DIPROSES</th><th>UPDATE JARAK</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>F (dist=0)</td><td>W1=4, W2=6, W3=8</td></tr>
+              <tr><td>2</td><td>W1 (dist=4)</td><td>S1=7, S2=9</td></tr>
+              <tr><td>3</td><td>W2 (dist=6)</td><td>S2=min(9,8)=<b>8</b>, S3=10, S4=12</td></tr>
+              <tr><td>4</td><td>W3 (dist=8)</td><td>S3=min(10,9)=<b>9</b>, S4=min(12,11)=<b>11</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section-label">Hasil Optimal</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>TOKO</th><th>BIAYA MINIMUM</th><th>JALUR TERPENDEK</th></tr></thead>
+            <tbody>
+              <tr><td>S1</td><td class="td-highlight">Rp 7 juta/ton</td><td>F → W1 → S1</td></tr>
+              <tr><td>S2</td><td class="td-highlight">Rp 8 juta/ton</td><td>F → W2 → S2</td></tr>
+              <tr><td>S3</td><td class="td-highlight">Rp 9 juta/ton</td><td>F → W3 → S3</td></tr>
+              <tr><td>S4</td><td class="td-highlight">Rp 11 juta/ton</td><td>F → W3 → S4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="result-box">
+          <div class="result-item"><div class="label">Kompleksitas</div><div class="value">O(V²)</div><div class="sub">atau O(E log V) dgn heap</div></div>
+          <div class="result-item"><div class="label">Total Jalur Optimal</div><div class="value">4</div><div class="sub">jalur ke S1, S2, S3, S4</div></div>
+          <div class="result-item"><div class="label">Node Diproses</div><div class="value">7</div><div class="sub">F + 3 gudang + 3 toko</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SOAL 2 ═══ -->
+    <div class="soal-card c2" id="card-1">
+      <div class="card-accent-bar"></div>
+      <div class="card-header">
+        <div class="soal-num">SOAL 02</div>
+        <div class="card-title-block">
+          <h2>Transportation Problem — VAM + MODI</h2>
+          <p>Cari alokasi pabrik ke gudang dengan biaya distribusi minimum</p>
+        </div>
+        <div class="algo-tag">VAM + MODI</div>
+      </div>
+      <div class="card-body">
+        <div class="section-label">Data Supply & Demand</div>
+        <p class="soal-text"><b>Supply:</b> P1 = 300 ton, P2 = 400 ton &nbsp;|&nbsp; <b>Demand:</b> G1 = 250 ton, G2 = 200 ton, G3 = 250 ton</p>
+        <div class="section-label">Matriks Biaya (Rp/ton)</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th></th><th>G1</th><th>G2</th><th>G3</th><th>SUPPLY</th></tr></thead>
+            <tbody>
+              <tr><td><b>P1</b></td><td>2</td><td>3</td><td>1</td><td><b>300</b></td></tr>
+              <tr><td><b>P2</b></td><td>5</td><td>4</td><td>8</td><td><b>400</b></td></tr>
+              <tr><td><b>Demand</b></td><td>250</td><td>200</td><td>250</td><td><b>700</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▶</div>
+        <span>LIHAT JAWABAN</span>
+      </div>
+      <div class="answer-body">
+        <div class="section-label">Step 1 — VAM: Alokasi Awal</div>
+        <ul class="step-list">
+          <li><span class="step-n">01</span>Hitung penalty tiap baris/kolom. Penalty kolom G3 terbesar (7) → alokasi ke biaya terkecil: <b>P1→G3 = 250 ton</b></li>
+          <li><span class="step-n">02</span>Sisa supply P1 = 50. Penalty G1 terbesar (3) → <b>P1→G1 = 50 ton</b></li>
+          <li><span class="step-n">03</span>Sisa P2 = 400: <b>P2→G1 = 200</b> (sisa demand G1), <b>P2→G2 = 200</b></li>
+        </ul>
+        <div class="section-label">Step 2 — Perhitungan Biaya</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>ALOKASI</th><th>TON</th><th>BIAYA/TON</th><th>TOTAL</th></tr></thead>
+            <tbody>
+              <tr><td>P1 → G3</td><td>250</td><td>Rp 1</td><td>Rp 250</td></tr>
+              <tr><td>P1 → G1</td><td>50</td><td>Rp 2</td><td>Rp 100</td></tr>
+              <tr><td>P2 → G1</td><td>200</td><td>Rp 5</td><td>Rp 1.000</td></tr>
+              <tr><td>P2 → G2</td><td>200</td><td>Rp 4</td><td>Rp 800</td></tr>
+              <tr><td><b>TOTAL</b></td><td><b>700</b></td><td>—</td><td class="td-highlight"><b>Rp 2.150</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section-label">Step 3 — MODI Optimality Check</div>
+        <div class="formula"><span class="var">u1</span>=0 → <span class="var">v1</span>=2, <span class="var">v3</span>=1, <span class="var">u2</span>=3, <span class="var">v2</span>=1
+
+P1→G2: d = 3 − (0+1) = <span class="result">+2 ✅</span>
+P2→G3: d = 8 − (3+1) = <span class="result">+4 ✅</span>
+<span class="result">Semua d > 0 → SOLUSI OPTIMAL</span></div>
+        <div class="result-box">
+          <div class="result-item"><div class="label">Biaya Minimum</div><div class="value">Rp 2.150</div><div class="sub">per ton</div></div>
+          <div class="result-item"><div class="label">Total Ton</div><div class="value">700</div><div class="sub">Supply = Demand ✓</div></div>
+          <div class="result-item"><div class="label">Status</div><div class="value">OPTIMAL</div><div class="sub">MODI confirmed</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SOAL 3 ═══ -->
+    <div class="soal-card c3" id="card-2">
+      <div class="card-accent-bar"></div>
+      <div class="card-header">
+        <div class="soal-num">SOAL 03</div>
+        <div class="card-title-block">
+          <h2>Economic Order Quantity + Reorder Point</h2>
+          <p>Tentukan kuantitas order optimal dan titik pemesanan ulang</p>
+        </div>
+        <div class="algo-tag">EOQ + ROP</div>
+      </div>
+      <div class="card-body">
+        <div class="section-label">Parameter Distributor</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>PARAMETER</th><th>SIMBOL</th><th>NILAI</th></tr></thead>
+            <tbody>
+              <tr><td>Permintaan tahunan</td><td>D</td><td>12.000 unit</td></tr>
+              <tr><td>Biaya pesan per order</td><td>S</td><td>Rp 500.000</td></tr>
+              <tr><td>Biaya simpan per unit/tahun</td><td>H</td><td>Rp 200</td></tr>
+              <tr><td>Lead time</td><td>L</td><td>7 hari</td></tr>
+              <tr><td>Safety stock</td><td>SS</td><td>100 unit</td></tr>
+              <tr><td>Hari kerja/tahun</td><td>—</td><td>300 hari</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▶</div>
+        <span>LIHAT JAWABAN</span>
+      </div>
+      <div class="answer-body">
+        <div class="section-label">1. EOQ Formula</div>
+        <div class="formula">EOQ = √(2DS / H)
+    = √(2 × <span class="var">12.000</span> × <span class="var">500.000</span> / <span class="var">200</span>)
+    = √60.000.000
+    = <span class="result">7.746 unit</span></div>
+        <div class="section-label">2. Frekuensi Pemesanan</div>
+        <div class="formula">N = D / EOQ = 12.000 / 7.746 ≈ <span class="result">±2 kali/tahun</span></div>
+        <div class="section-label">3. Total Inventory Cost</div>
+        <div class="formula">TC = (D/Q × S) + (Q/2 × H)
+   = (12.000/7.746 × 500.000) + (7.746/2 × 200)
+   = 774.600 + 774.600
+   = <span class="result">Rp 1.549.200 / tahun</span></div>
+        <div class="section-label">4. Reorder Point (ROP)</div>
+        <div class="formula">d   = D / hari = 12.000 / 300 = <span class="var">40 unit/hari</span>
+ROP = (d × L) + SS
+    = (40 × 7) + 100
+    = 280 + 100
+    = <span class="result">380 unit</span></div>
+        <div class="result-box">
+          <div class="result-item"><div class="label">EOQ</div><div class="value">7.746</div><div class="sub">unit per order</div></div>
+          <div class="result-item"><div class="label">Total Cost</div><div class="value">1,54 jt</div><div class="sub">Rp/tahun</div></div>
+          <div class="result-item"><div class="label">Reorder Point</div><div class="value">380</div><div class="sub">unit (stok minimum)</div></div>
+          <div class="result-item"><div class="label">Frekuensi</div><div class="value">±2×</div><div class="sub">per tahun</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SOAL 4 ═══ -->
+    <div class="soal-card c4" id="card-3">
+      <div class="card-accent-bar"></div>
+      <div class="card-header">
+        <div class="soal-num">SOAL 04</div>
+        <div class="card-title-block">
+          <h2>Multi-Period Inventory — Wagner-Whitin DP</h2>
+          <p>Jadwal pemesanan optimal menggunakan dynamic programming</p>
+        </div>
+        <div class="algo-tag">WAGNER-WHITIN</div>
+      </div>
+      <div class="card-body">
+        <div class="section-label">Parameter</div>
+        <p class="soal-text">Permintaan 4 periode: <b>D = [40, 30, 50, 20]</b> unit. Biaya pesan: <b>Rp 300</b> (flat). Biaya simpan: <b>Rp 10/unit/periode</b>. Stok awal = 0.</p>
+        <div class="section-label">Demand per Periode</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>PERIODE</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+            <tbody>
+              <tr><td><b>Demand (unit)</b></td><td>40</td><td>30</td><td>50</td><td>20</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▶</div>
+        <span>LIHAT JAWABAN</span>
+      </div>
+      <div class="answer-body">
+        <div class="section-label">Step 1 — Matriks C(i,j)</div>
+        <div class="formula">C(i,j) = S + H × Σ (k−i) × D[k]   untuk k = i..j</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>C(i,j)</th><th>j=1</th><th>j=2</th><th>j=3</th><th>j=4</th></tr></thead>
+            <tbody>
+              <tr><td>i=1</td><td>300</td><td>600</td><td>1.600</td><td>2.200</td></tr>
+              <tr><td>i=2</td><td>—</td><td>300</td><td>800</td><td>1.200</td></tr>
+              <tr><td>i=3</td><td>—</td><td>—</td><td>300</td><td>500</td></tr>
+              <tr><td>i=4</td><td>—</td><td>—</td><td>—</td><td>300</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section-label">Step 2 — DP: f(j) = biaya minimum s/d periode j</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>f(j)</th><th>PERHITUNGAN</th><th>HASIL</th></tr></thead>
+            <tbody>
+              <tr><td>f(0)</td><td>Inisialisasi</td><td>0</td></tr>
+              <tr><td>f(1)</td><td>f(0) + C(1,1) = 0 + 300</td><td>300</td></tr>
+              <tr><td>f(2)</td><td>min[600, 600]</td><td>600</td></tr>
+              <tr><td>f(3)</td><td>min[1600, 1100, 900]</td><td>900</td></tr>
+              <tr><td>f(4)</td><td>min[2200, 1500, <b>1100</b>, 1200]</td><td class="td-highlight">1.100</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section-label">Step 3 — Jadwal Optimal</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>PERIODE</th><th>KEPUTUSAN</th><th>QTY ORDER</th><th>KETERANGAN</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td class="td-highlight">✅ PESAN</td><td>70 unit</td><td>Untuk periode 1 (40) + 2 (30)</td></tr>
+              <tr><td>2</td><td style="color:var(--text-muted)">❌ SKIP</td><td>—</td><td>Stok dari periode 1</td></tr>
+              <tr><td>3</td><td class="td-highlight">✅ PESAN</td><td>70 unit</td><td>Untuk periode 3 (50) + 4 (20)</td></tr>
+              <tr><td>4</td><td style="color:var(--text-muted)">❌ SKIP</td><td>—</td><td>Stok dari periode 3</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="result-box">
+          <div class="result-item"><div class="label">Total Biaya Min</div><div class="value">Rp 1.100</div><div class="sub">optimal cost</div></div>
+          <div class="result-item"><div class="label">Jumlah Order</div><div class="value">2×</div><div class="sub">periode 1 & 3</div></div>
+          <div class="result-item"><div class="label">Qty per Order</div><div class="value">70 unit</div><div class="sub">masing-masing</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cards-wrap -->
+
+  <footer>
+    <p>MATEMATIKA ALGORITMA — SUPPLY CHAIN OPTIMIZATION</p>
+    <p><span class="stars">★★★★★</span> TINGKAT KESULITAN MAKSIMAL</p>
+  </footer>
+
+</main>
+
+<script>
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    document.getElementById('scrollBar').style.width = pct + '%';
+  });
+
+  // Intersection Observer for card animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.soal-card').forEach(c => observer.observe(c));
+
+  // Toggle answer
+  function toggleAnswer(toggle) {
+    const body = toggle.nextElementSibling;
+    const icon = toggle.querySelector('.toggle-icon');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open');
+    icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+    toggle.querySelector('span').textContent = isOpen ? 'LIHAT JAWABAN' : 'SEMBUNYIKAN';
+  }
+
+  // Expand all
+  function expandAll() {
+    document.querySelectorAll('.answer-body').forEach(b => b.classList.add('open'));
+    document.querySelectorAll('.toggle-icon').forEach(i => i.style.transform = 'rotate(90deg)');
+    document.querySelectorAll('.answer-toggle span').forEach(s => s.textContent = 'SEMBUNYIKAN');
+  }
+
+  // Scroll to card
+  function scrollToCard(idx) {
+    document.getElementById('card-' + idx).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.nav-pill').forEach((p,i) => p.classList.toggle('active', i === idx));
+  }
+
+  // Active nav pill on scroll
+  window.addEventListener('scroll', () => {
+    document.querySelectorAll('.soal-card').forEach((card, i) => {
+      const rect = card.getBoundingClientRect();
+      if (rect.top <= 200 && rect.bottom >= 200) {
+        document.querySelectorAll('.nav-pill').forEach((p,j) => p.classList.toggle('active', j === i));
+      }
+    });
+  });
+</script>
+</body>
+</html>
