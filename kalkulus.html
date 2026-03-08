@@ -1,504 +1,624 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulus Cerdas: Dari Intuisi ke Penguasaan</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- KaTeX for Professional Math Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" xintegrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" xintegrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" xintegrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
-
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F9FAFB;
-            color: #1F2937;
+            background-color: #f8fafc;
         }
-
-        .font-mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #CBD5E1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94A3B8;
-        }
-
-        /* Chart Container */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-
-        .tab-btn.active {
-            background-color: #EEF2FF;
-            color: #4F46E5;
-            border-left: 4px solid #4F46E5;
-        }
-        
-        .math-block {
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .math-box {
             overflow-x: auto;
-            margin-bottom: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-
-        .interactive-card {
-            transition: all 0.3s ease;
+        .prose-custom p {
+            margin-bottom: 1.25rem;
+            line-height: 1.8;
+            color: #334155;
+            text-align: justify;
         }
-        .interactive-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        .prose-custom blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            font-style: italic;
+            color: #475569;
+            background-color: #f0fdf4;
+            padding: 1rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin-bottom: 1.25rem;
         }
-        
-        /* KaTeX Font Fix */
-        .katex { font-size: 1.1em; }
     </style>
 </head>
-<body class="flex flex-col h-screen overflow-hidden">
+<body class="text-slate-800 antialiased">
 
-    <!-- Mobile Header -->
-    <header class="md:hidden bg-white border-b border-gray-200 p-4 flex justify-between items-center z-20">
-        <h1 class="text-lg font-bold text-indigo-600">Kalkulus Cerdas</h1>
-        <button id="mobile-menu-btn" class="text-gray-600 focus:outline-none text-2xl">
-            &#9776;
-        </button>
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="font-bold text-2xl text-blue-600">Kalkulus Cerdas</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#apa-itu" class="text-slate-600 hover:text-blue-600 font-medium transition">Filosofi</a>
+                    <a href="#limit" class="text-slate-600 hover:text-blue-600 font-medium transition">Limit</a>
+                    <a href="#turunan" class="text-slate-600 hover:text-blue-600 font-medium transition">Turunan</a>
+                    <a href="#integral" class="text-slate-600 hover:text-blue-600 font-medium transition">Integral</a>
+                    <a href="#teorema" class="text-slate-600 hover:text-blue-600 font-medium transition">Teorema Dasar</a>
+                    <a href="#rumus-pengembangan" class="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium transition">Rumus Lengkap</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-500 hover:text-slate-700 text-2xl">
+                        ☰
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
+            <div class="px-4 pt-2 pb-4 space-y-2 flex flex-col">
+                <a href="#apa-itu" class="block text-slate-600 hover:text-blue-600 py-2 font-medium border-b border-slate-100">Filosofi</a>
+                <a href="#limit" class="block text-slate-600 hover:text-blue-600 py-2 font-medium border-b border-slate-100">Limit</a>
+                <a href="#turunan" class="block text-slate-600 hover:text-blue-600 py-2 font-medium border-b border-slate-100">Turunan</a>
+                <a href="#integral" class="block text-slate-600 hover:text-blue-600 py-2 font-medium border-b border-slate-100">Integral</a>
+                <a href="#rumus-pengembangan" class="block text-blue-600 hover:text-blue-800 py-2 font-bold">Rumus Lengkap</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-slate-900 text-white py-16 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Kalkulus Cerdas</h1>
+        <p class="text-xl text-slate-300">Dari Intuisi ke Penguasaan</p>
     </header>
 
-    <div class="flex flex-1 overflow-hidden relative">
+    <main class="max-w-6xl mx-auto px-4 py-12">
         
-        <!-- Sidebar -->
-        <aside id="sidebar" class="bg-white w-64 border-r border-gray-200 flex-shrink-0 flex flex-col absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out z-10 shadow-lg md:shadow-none">
-            <div class="p-6 border-b border-gray-100 hidden md:block">
-                <h1 class="text-2xl font-bold text-indigo-600 tracking-tight">Kalkulus Cerdas</h1>
-                <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Peta Pembelajaran</p>
+        <!-- PETA PEMBELAJARAN (Original Content Retained) -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-6 text-slate-800">Peta Pembelajaran</h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <a href="#apa-itu" class="bg-white p-4 rounded-xl shadow-sm text-center border-t-4 border-slate-400 hover:shadow-md transition">
+                    <div class="text-3xl mb-2">💡</div>
+                    <div class="font-bold text-sm">Filosofi Inti</div>
+                </a>
+                <a href="#limit" class="bg-white p-4 rounded-xl shadow-sm text-center border-t-4 border-blue-400 hover:shadow-md transition">
+                    <div class="text-3xl mb-2">🚧</div>
+                    <div class="font-bold text-sm">Limit (Fondasi)</div>
+                </a>
+                <a href="#turunan" class="bg-white p-4 rounded-xl shadow-sm text-center border-t-4 border-red-400 hover:shadow-md transition">
+                    <div class="text-3xl mb-2">📉</div>
+                    <div class="font-bold text-sm">Turunan</div>
+                </a>
+                <a href="#integral" class="bg-white p-4 rounded-xl shadow-sm text-center border-t-4 border-green-400 hover:shadow-md transition">
+                    <div class="text-3xl mb-2 font-serif font-bold text-green-500">∫</div>
+                    <div class="font-bold text-sm">Integral</div>
+                </a>
+                <a href="#teorema" class="bg-white p-4 rounded-xl shadow-sm text-center border-t-4 border-purple-400 hover:shadow-md transition">
+                    <div class="text-3xl mb-2">👑</div>
+                    <div class="font-bold text-sm">Teorema Dasar</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- APA ITU KALKULUS? -->
+        <section id="apa-itu" class="mb-16 scroll-mt-20">
+            <!-- Original Content -->
+            <h2 class="text-3xl font-bold mb-6 text-slate-900">Apa Itu Kalkulus?</h2>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8 text-lg text-slate-700">
+                <p>Banyak orang gagal belajar kalkulus karena kehilangan <strong>peta besar (big picture)</strong>. Ini adalah matematika tentang <strong>perubahan (dinamis)</strong>, bukan benda diam (statis).</p>
             </div>
             
-            <nav class="flex-1 overflow-y-auto py-4 space-y-1">
-                <button onclick="switchTab('intro')" id="btn-intro" class="tab-btn w-full text-left px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors duration-200 flex items-center group active">
-                    <span class="w-6 text-center mr-3 text-lg group-hover:scale-110 transition-transform">💡</span>
-                    <span class="font-medium">Filosofi Inti</span>
-                </button>
-                <button onclick="switchTab('limit')" id="btn-limit" class="tab-btn w-full text-left px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors duration-200 flex items-center group">
-                    <span class="w-6 text-center mr-3 text-lg group-hover:scale-110 transition-transform">🚧</span>
-                    <span class="font-medium">Limit (Fondasi)</span>
-                </button>
-                <button onclick="switchTab('turunan')" id="btn-turunan" class="tab-btn w-full text-left px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors duration-200 flex items-center group">
-                    <span class="w-6 text-center mr-3 text-lg group-hover:scale-110 transition-transform">📉</span>
-                    <span class="font-medium">Turunan</span>
-                </button>
-                <button onclick="switchTab('integral')" id="btn-integral" class="tab-btn w-full text-left px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors duration-200 flex items-center group">
-                    <span class="w-6 text-center mr-3 text-lg group-hover:scale-110 transition-transform">∫</span>
-                    <span class="font-medium">Integral</span>
-                </button>
-                <button onclick="switchTab('theorem')" id="btn-theorem" class="tab-btn w-full text-left px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors duration-200 flex items-center group">
-                    <span class="w-6 text-center mr-3 text-lg group-hover:scale-110 transition-transform">👑</span>
-                    <span class="font-medium">Teorema Dasar</span>
-                </button>
-            </nav>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="flex-1 overflow-y-auto bg-slate-50 relative w-full" id="main-scroll">
-            
-            <!-- SECTION 1: INTRO / PHILOSOPHY -->
-            <section id="intro" class="p-6 md:p-10 max-w-5xl mx-auto space-y-8 animate-fade-in">
-                <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-indigo-500">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Apa Itu Kalkulus?</h2>
-                    <p class="text-gray-600 leading-relaxed">
-                        Banyak orang gagal belajar kalkulus karena kehilangan <strong>peta besar (big picture)</strong>. Ini adalah matematika tentang <strong>perubahan (dinamis)</strong>, bukan benda diam (statis).
-                    </p>
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 shadow-sm">
+                    <h3 class="font-bold text-blue-900 text-xl mb-4">🟦 Pra-Kalkulus (Diam)</h3>
+                    <ul class="space-y-3 text-blue-800 text-lg">
+                        <li class="flex items-center">▪ Gradien garis lurus ($y=mx+c$)</li>
+                        <li class="flex items-center">▪ Luas persegi panjang ($A = P \times L$)</li>
+                    </ul>
                 </div>
+                <div class="bg-purple-50 p-6 rounded-xl border border-purple-100 shadow-sm">
+                    <h3 class="font-bold text-purple-900 text-xl mb-4">🌀 Kalkulus (Berubah)</h3>
+                    <ul class="space-y-3 text-purple-800 text-lg">
+                        <li class="flex items-center">▪ Gradien garis melengkung?</li>
+                        <li class="flex items-center">▪ Luas area tak beraturan?</li>
+                    </ul>
+                </div>
+            </div>
 
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 interactive-card">
-                        <h3 class="text-xl font-bold text-gray-700 mb-4 flex items-center"><span class="mr-2">🟦</span> Pra-Kalkulus (Diam)</h3>
-                        <ul class="space-y-3 text-gray-600 text-sm">
-                            <li class="flex items-start"><span class="mr-2 text-indigo-500">▪</span> Gradien garis lurus ($y=mx+c$)</li>
-                            <li class="flex items-start"><span class="mr-2 text-indigo-500">▪</span> Luas persegi panjang ($A = P \times L$)</li>
-                        </ul>
+            <!-- Extended Explanation (1500 words distribution part 1) -->
+            <div class="prose-custom mt-8">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">Pemaparan Mendalam: Memahami Bahasa Alam Semesta</h3>
+                <p>Kalkulus sering kali dianggap sebagai rintangan akademis yang menakutkan, dipenuhi dengan simbol-simbol aneh dan aturan hafalan yang tak ada habisnya. Namun, jika kita menyingkirkan sejenak simbol-simbol tersebut dan melihat dari sudut pandang sejarah serta filosofi, Kalkulus adalah salah satu pencapaian intelektual tertinggi umat manusia. Ini adalah jembatan penghubung antara matematika yang selama ribuan tahun hanya bisa menangani "hal-hal yang diam" menjadi matematika yang mampu mengukur "hal-hal yang sedang bergerak".</p>
+                <p>Sebelum abad ke-17, matematika klasik (Aljabar dan Geometri) sudah sangat maju. Kita bisa menghitung luas tanah berbentuk kotak atau segitiga, kita bisa memprediksi di mana dua garis lurus akan berpotongan. Namun, alam semesta tidak bekerja dalam garis lurus. Planet mengorbit dalam lintasan elips yang melengkung. Benda yang jatuh ke bumi tidak melesat dengan kecepatan konstan, melainkan semakin cepat setiap detiknya akibat gravitasi. Bagaimana cara menghitung kecepatan sebuah apel pada detik ke-1,2 jika kecepatannya terus berubah? Aljabar tradisional lumpuh menghadapi masalah yang melibatkan dinamika yang kontinu ini.</p>
+                <p>Sir Isaac Newton di Inggris dan Gottfried Wilhelm Leibniz di Jerman, secara independen pada abad ke-17, memecahkan kebuntuan ini dengan menciptakan paradigma baru yang kita sebut sebagai Kalkulus. Newton, didorong oleh kebutuhan untuk menjelaskan hukum gerak fisikanya dan gravitasi universal, menciptakan apa yang ia sebut "metode fluksion". Sementara itu, Leibniz mendekatinya dari perspektif geometri murni—bagaimana menemukan luas di bawah kurva yang sangat tidak beraturan. Inti dari terobosan mereka adalah keberanian untuk menelusuri ranah yang dihindari oleh matematikawan Yunani kuno: <strong>konsep ketakterhinggaan (infinity) dan yang sangat kecil mendekati nol (infinitesimal)</strong>.</p>
+                <blockquote>"Kalkulus adalah seni memecah sebuah masalah besar menjadi potongan-potongan kecil tak terhingga, menyelesaikannya di tingkat mikroskopis, dan kemudian menjumlahkan kembali potongan-potongan tersebut untuk memahami keseluruhan gambar."</blockquote>
+                <p>Bayangkan Anda ingin menghitung luas sebuah lingkaran. Pra-kalkulus tidak memiliki rumus alami untuk itu sebelum Pi ($\pi$) ditemukan. Pendekatan kalkulus adalah: potong lingkaran tersebut menjadi segitiga-segitiga kecil. Semakin kecil potongannya, alas segitiga itu akan semakin mendekati garis lurus. Jika Anda memotongnya menjadi jumlah yang tak terhingga ($\infty$) kecilnya, Anda akan mendapatkan luas lingkaran yang akurat dan sempurna. Pola pikir "memecah hingga batas ekstrem lalu menyatukannya kembali" inilah esensi dari kalkulus.</p>
+            </div>
+        </section>
+
+        <hr class="my-16 border-slate-200">
+
+        <!-- LIMIT -->
+        <section id="limit" class="mb-16 scroll-mt-20">
+            <!-- Original Content -->
+            <h2 class="text-3xl font-bold mb-4 text-slate-900">Limit ($\lim$)</h2>
+            <p class="text-xl text-slate-600 mb-6 font-medium">Konsep "mendekati tapi tak pernah sampai".</p>
+
+            <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold mb-4 text-slate-800">Simulasi: Berjalan Menuju Dinding</h3>
+                <p class="text-slate-600 mb-6">Setiap langkah, Anda menempuh setengah ($\frac{1}{2}$) dari jarak tersisa.</p>
+                
+                <div class="relative h-24 bg-slate-100 rounded-lg mb-6 overflow-hidden flex items-center px-4 border border-slate-300">
+                    <div id="wall-person" class="absolute text-4xl transition-all duration-500 ease-out z-10" style="left: 0%;">🚶</div>
+                    <div class="absolute right-0 h-full w-6 bg-slate-800 border-l-4 border-slate-600"></div>
+                    <div class="absolute right-10 top-2 text-sm font-bold text-slate-500 tracking-widest">DINDING</div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row justify-between items-center bg-blue-50/50 p-4 rounded-lg border border-blue-100 gap-4">
+                    <div>
+                        <p class="text-sm text-blue-800 font-bold mb-1">Jarak Tersisa ($d$)</p>
+                        <p id="limit-dist" class="text-3xl font-mono font-bold text-blue-600">1000.00 m</p>
                     </div>
-
-                    <div class="bg-indigo-50 p-6 rounded-xl shadow-sm border border-indigo-100 interactive-card">
-                        <h3 class="text-xl font-bold text-indigo-700 mb-4 flex items-center"><span class="mr-2">🌀</span> Kalkulus (Berubah)</h3>
-                        <ul class="space-y-3 text-gray-700 text-sm">
-                            <li class="flex items-start"><span class="mr-2 text-indigo-500">▪</span> Gradien garis melengkung?</li>
-                            <li class="flex items-start"><span class="mr-2 text-indigo-500">▪</span> Luas area tak beraturan?</li>
-                        </ul>
+                    <div class="flex gap-2 w-full md:w-auto">
+                        <button onclick="stepLimit()" class="flex-1 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-sm hover:bg-blue-700 transition">Ambil Langkah ($\frac{1}{2}$)</button>
+                        <button onclick="resetLimit()" class="flex-1 px-6 py-3 bg-white text-slate-700 font-semibold rounded-lg shadow-sm border border-slate-300 hover:bg-slate-50 transition">Reset</button>
                     </div>
                 </div>
-            </section>
-
-            <!-- SECTION 2: LIMIT -->
-            <section id="limit" class="hidden p-6 md:p-10 max-w-5xl mx-auto space-y-8 animate-fade-in">
-                <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-teal-500">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Limit ($\lim$)</h2>
-                    <p class="text-gray-600">Konsep "mendekati tapi tak pernah sampai".</p>
+                
+                <div class="math-box text-center mt-6">
+                    $$ \lim_{x \to \text{dinding}} \text{jarak}(x) = 0 $$
                 </div>
+            </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-lg mb-4">Simulasi: Berjalan Menuju Dinding</h3>
-                    <p class="text-sm text-gray-500 mb-6">Setiap langkah, Anda menempuh setengah ($\frac{1}{2}$) dari jarak tersisa.</p>
+            <!-- Extended Explanation (1500 words distribution part 2) -->
+            <div class="prose-custom">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">Pemaparan Mendalam: Berdansa dengan Ketakterhinggaan</h3>
+                <p>Konsep limit diciptakan karena sebuah alasan praktis yang krusial: matematika klasik membenci pembagian dengan nol. Dalam aritmatika biasa, membagi 5 dengan 0 adalah operasi yang ilegal atau "tidak terdefinisi" (undefined). Komputer akan menghasilkan pesan error, dan alam semesta kalkulator seolah runtuh. Namun, untuk menganalisis suatu fenomena pada satu momen instan waktu yang sangat spesifik (di mana selang waktu atau $\Delta t = 0$), kita terpaksa harus membagi dengan angka nol.</p>
+                <p>Di sinilah kejeniusan konsep <strong>Limit</strong> muncul. Limit menawarkan jalan belakang. Kita tidak bertanya, "Apa yang terjadi tepat ketika $x$ sama dengan $0$?", melainkan kita bertanya, "Apa tren yang terjadi saat $x$ bergerak perlahan-lahan <em>mendekati</em> $0$, tanpa benar-benar menyentuhnya?"</p>
+                <p>Simulasi berjalan ke dinding di atas adalah visualisasi modern dari paradoks kuno filsuf Yunani, Zeno dari Elea (dikenal sebagai Paradoks Dikotomi). Jika Anda harus berjalan 1000 meter, Anda harus melewati titik 500 meter dulu. Lalu dari 500, Anda harus ke 250 meter dulu, lalu 125 meter, lalu 62.5 meter, dan seterusnya. Secara logika kasar, karena Anda bisa terus membagi jarak yang tersisa sebanyak tak terhingga kali ($1000 \times \frac{1}{2} \times \frac{1}{2} \times \frac{1}{2} \dots$), Anda butuh waktu tak terhingga untuk sampai, yang artinya Anda "tidak akan pernah" menyentuh dinding tersebut.</p>
+                <p>Tetapi secara realita, kita berjalan dan sampai ke dinding dengan mudah. Bagaimana matematika menjelaskan ini? Jawabannya: deret tak terhingga dari angka-angka yang semakin mengecil ini memiliki sebuah "Limit". Batas mutlak dari total semua pergerakan itu, ketika langkah yang diambil mendekati tak terhingga banyaknya, secara presisi mengerucut pada angka 0 untuk sisa jaraknya. Secara formal pada abad ke-19, Augustin-Louis Cauchy dan Karl Weierstrass memberikan landasan absolut pada konsep ini melalui definisi <strong>Epsilon-Delta ($\epsilon - \delta$)</strong>. Singkatnya, definisi ini menyatakan: "Beri tahu saya seberapa presisi atau seberapa dekat Anda ingin mencapai dinding (itu Epsilon), dan saya bisa memberikan jumlah langkah spesifik (itu Delta) yang menjamin Anda akan berada di dalam batas toleransi kepresisian tersebut." Limit memformalkan gagasan pendekatan ini ke dalam hukum matematika yang tak tertembus.</p>
+            </div>
+        </section>
+
+        <hr class="my-16 border-slate-200">
+
+        <!-- TURUNAN -->
+        <section id="turunan" class="mb-16 scroll-mt-20">
+            <!-- Original Content -->
+            <h2 class="text-3xl font-bold mb-4 text-slate-900">Turunan (Diferensial)</h2>
+            <p class="text-xl text-slate-600 mb-6 font-medium">Tentang <strong>sensitivitas</strong>: seberapa cepat output berubah jika input berubah sedikit.</p>
+
+            <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold mb-6 text-slate-800">Visualisasi Garis Singgung ($y=x^2$)</h3>
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="flex-1 relative">
+                        <canvas id="deriv-canvas" width="400" height="300" class="w-full bg-slate-50 border border-slate-200 rounded-lg shadow-inner"></canvas>
+                        <div class="mt-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <label class="block text-sm font-bold text-slate-700 mb-3 flex justify-between">
+                                <span>Geser Nilai $x$:</span>
+                                <span id="deriv-x-val" class="text-blue-600 bg-blue-100 px-2 py-1 rounded text-base">1.0</span>
+                            </label>
+                            <input type="range" id="deriv-slider" min="-2.2" max="2.2" step="0.1" value="1" class="w-full h-3 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-blue-600 hover:accent-blue-700">
+                        </div>
+                    </div>
                     
-                    <div class="relative w-full h-24 bg-gray-100 rounded-lg border border-gray-300 mb-6 flex items-center overflow-hidden">
-                        <div id="walker" class="absolute left-0 top-2 bottom-2 w-8 bg-indigo-500 rounded-full shadow-lg transition-all duration-700 ease-out flex items-center justify-center text-white text-xs">🚶</div>
-                        <div class="absolute right-0 top-0 bottom-0 w-4 bg-red-400 border-l-2 border-red-600 flex items-center justify-center">
-                            <span class="transform -rotate-90 text-xs font-bold text-white whitespace-nowrap">DINDING</span>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
-                        <div>
-                            <p class="text-xs text-gray-400 font-mono uppercase">Jarak Tersisa ($d$)</p>
-                            <p id="limit-distance" class="text-2xl font-mono font-bold text-gray-800">1.000 m</p>
-                        </div>
-                        <button id="btn-step-limit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-medium shadow-md">Ambil Langkah ($\frac{1}{2}$)</button>
-                        <button id="btn-reset-limit" class="text-gray-500 hover:text-red-500 text-sm underline ml-4">Reset</button>
-                    </div>
-
-                    <div class="mt-6 pt-4 border-t border-gray-100">
-                         <div class="math-block text-lg">
-                            $$ \lim_{x \to \text{dinding}} \text{jarak}(x) = 0 $$
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 3: TURUNAN -->
-            <section id="turunan" class="hidden p-6 md:p-10 max-w-5xl mx-auto space-y-8 animate-fade-in">
-                <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-indigo-500">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Turunan (Diferensial)</h2>
-                    <p class="text-gray-600">Tentang <strong>sensitivitas</strong>: seberapa cepat output berubah jika input berubah sedikit.</p>
-                </div>
-
-                <div class="grid lg:grid-cols-3 gap-8">
-                    <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm">
-                        <h3 class="font-bold text-lg mb-2">Visualisasi Garis Singgung ($y=x^2$)</h3>
-                        <div class="chart-container">
-                            <canvas id="derivativeChart"></canvas>
-                        </div>
-                        <div class="mt-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Nilai $x$: <span id="x-val-display" class="font-mono font-bold text-indigo-600">1.0</span></label>
-                            <input type="range" id="x-slider" min="-3" max="3" step="0.1" value="1" class="w-full h-2 bg-gray-200 rounded-lg cursor-pointer accent-indigo-600">
-                        </div>
-                    </div>
-
-                    <div class="space-y-6">
-                        <div class="bg-gray-900 text-white p-6 rounded-xl shadow-lg">
-                            <h4 class="text-gray-400 text-xs uppercase tracking-wider mb-2">Analisis Sesaat</h4>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div><p class="text-xs text-gray-400">Posisi $f(x)$</p><p id="fx-display" class="text-xl font-mono text-green-400">1.00</p></div>
-                                <div><p class="text-xs text-gray-400">Kemiringan $f'(x)$</p><p id="fprime-display" class="text-xl font-mono text-yellow-400">2.00</p></div>
+                    <div class="w-full md:w-72 space-y-6">
+                        <div class="bg-blue-50 p-5 rounded-xl border border-blue-100 shadow-sm">
+                            <h4 class="font-bold text-blue-900 border-b border-blue-200 pb-2 mb-4">Analisis Sesaat</h4>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-blue-800 text-sm font-medium">Posisi fungsi $f(x)$</span>
+                                <span id="deriv-fx" class="font-mono font-bold text-xl text-blue-900 bg-white px-2 py-1 rounded shadow-sm">1.00</span>
                             </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-blue-800 text-sm font-medium">Kemiringan $f'(x)$</span>
+                                <span id="deriv-fpx" class="font-mono font-bold text-xl text-red-600 bg-white px-2 py-1 rounded shadow-sm">2.00</span>
+                            </div>
+                            <p class="text-xs text-blue-700 mt-4 leading-tight">*Perhatikan bagaimana kemiringan garis merah (turunan) bereaksi sangat sensitif terhadap perubahan $x$.</p>
                         </div>
-                        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
-                            <h4 class="font-bold text-gray-700 mb-2">Aturan "Power Rule"</h4>
-                            <div class="math-block text-sm">
+                        
+                        <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h4 class="font-bold text-slate-800 mb-3">Aturan "Power Rule"</h4>
+                            <div class="math-box text-center text-lg">
                                 $$ \frac{d}{dx} x^n = n \cdot x^{n-1} $$
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- SECTION 4: INTEGRAL -->
-            <section id="integral" class="hidden p-6 md:p-10 max-w-5xl mx-auto space-y-8 animate-fade-in">
-                <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-purple-500">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Integral (Akumulasi)</h2>
-                    <p class="text-gray-600">Menjumlahkan irisan-irisan tipis untuk mencari total (luas area).</p>
-                </div>
+            <!-- Extended Explanation (1500 words distribution part 3) -->
+            <div class="prose-custom">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">Pemaparan Mendalam: Anatomi Laju Perubahan</h3>
+                <p>Bagian turunan (diferensial) adalah inti dari Kalkulus Diferensial. Mari kita bayangkan Anda mengendarai mobil dari Jakarta ke Bandung sejauh 150 km dalam waktu 3 jam. Secara matematika dasar, kecepatan rata-rata Anda adalah 50 km/jam. Namun, apakah Anda benar-benar melaju konstan 50 km/jam sepanjang waktu? Tentu saja tidak. Anda mengerem saat macet (0 km/jam) dan mengebut di jalan tol kosong (100 km/jam). Jika seorang polisi menembakkan radar kecepatan (speed gun) tepat pada jam 1:15 siang, radar tersebut mengukur kecepatan Anda pada <em>momen instan</em> tersebut, bukan rata-ratanya. Itulah tepatnya yang dilakukan oleh turunan!</p>
+                <p>Turunan, disimbolkan dengan $f'(x)$ atau $\frac{dy}{dx}$, secara harfiah adalah mesin yang mendeteksi "tingkat sensitivitas" atau kecepatan laju perubahan seketika. Pada kurva melengkung seperti $y = x^2$ (visualisasi di atas), kemiringannya (gradien) tidaklah konstan. Ia terus menanjak dan semakin curam. Bagaimana mencari kemiringan pada titik tunggal spesifik tersebut? Di sinilah "Limit" datang menyelamatkan. Kita mengambil dua titik pada kurva, menarik garis potong lurus (secant line) di antara mereka, dan kemudian menggunakan Limit untuk mendekatkan titik kedua ke titik pertama hingga jarak antar titiknya ($\Delta x$) mendekati 0. Garis potong tersebut bertransformasi menjadi garis singgung sempurna (tangent line). Kemiringan dari garis singgung merah itulah yang disebut sebagai Turunan.</p>
+                <p>Penemuan luar biasa dari kalkulus adalah bahwa kita tidak perlu menggunakan perhitungan limit yang panjang dan rumit setiap kali ingin mencari turunan. Para matematikawan menemukan pola. Misalnya, <strong>Power Rule (Aturan Pangkat)</strong>. Jika fungsi Anda adalah $x^n$, maka kecepatan perubahannya secara instan selalu $n \cdot x^{n-1}$. Fungsi $x^2$ (sebuah persegi) memiliki turunan $2x$. Jika Anda berpikir secara visual, ketika Anda memperbesar sebuah persegi panjang $x$ kali $x$ sebesar $\Delta x$ sedikit saja, area tambahan yang Anda dapatkan di tepinya membentang sekitar panjang $x$ di bagian atas dan panjang $x$ di bagian samping, menjadikannya $2x$. Luar biasa, bukan? Aljabar secara mekanis selaras dengan kenyataan geometri geometris.</p>
+                <p>Aplikasi turunan menggerakkan dunia modern. Di ekonomi, ini dinamakan biaya marjinal (marginal cost)—biaya memproduksi satu unit tambahan pada saat pabrik sudah beroperasi. Di dunia AI (Kecerdasan Buatan), mesin belajar (Machine Learning) menggunakan algoritma <em>Gradient Descent</em> yang sepenuhnya bergantung pada kalkulasi turunan dari jutaan parameter untuk mencari titik eror paling minim, memungkinkan AI untuk mengenali wajah Anda atau menerjemahkan bahasa secara akurat.</p>
+            </div>
+        </section>
 
-                <div class="grid lg:grid-cols-3 gap-8">
-                     <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm">
-                        <h3 class="font-bold text-lg mb-2">Visualisasi Luas Area (Riemann Sum)</h3>
-                        <div class="chart-container">
-                            <canvas id="integralChart"></canvas>
-                        </div>
-                        <div class="mt-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Jumlah Potongan ($n$): <span id="n-val-display" class="font-mono font-bold text-purple-600">4</span></label>
-                            <input type="range" id="n-slider" min="2" max="50" step="1" value="4" class="w-full h-2 bg-gray-200 rounded-lg cursor-pointer accent-purple-600">
+        <hr class="my-16 border-slate-200">
+
+        <!-- INTEGRAL -->
+        <section id="integral" class="mb-16 scroll-mt-20">
+            <!-- Original Content -->
+            <h2 class="text-3xl font-bold mb-4 text-slate-900">Integral ($\int$)</h2>
+            <p class="text-xl text-slate-600 mb-6 font-medium">Menjumlahkan irisan-irisan tipis untuk mencari total (luas area / akumulasi).</p>
+
+            <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold mb-6 text-slate-800">Visualisasi Luas Area (Riemann Sum)</h3>
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="flex-1 relative">
+                        <canvas id="int-canvas" width="400" height="300" class="w-full bg-slate-50 border border-slate-200 rounded-lg shadow-inner"></canvas>
+                        <div class="mt-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                            <label class="block text-sm font-bold text-slate-700 mb-3 flex justify-between">
+                                <span>Jumlah Potongan Persegi ($n$):</span>
+                                <span id="int-n-val" class="text-green-700 bg-green-100 px-2 py-1 rounded text-base">4</span>
+                            </label>
+                            <input type="range" id="int-slider" min="1" max="100" step="1" value="4" class="w-full h-3 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-green-600 hover:accent-green-700">
                         </div>
                     </div>
-
-                    <div class="space-y-6">
-                         <div class="bg-purple-50 p-6 rounded-xl border border-purple-100">
-                            <h4 class="font-bold text-purple-800 mb-2">Hasil Perhitungan</h4>
-                            <p class="text-xs text-gray-500 uppercase">Luas Aproksimasi ($\sum$)</p>
-                            <p id="area-approx" class="text-2xl font-mono font-bold text-purple-600">--</p>
-                         </div>
-                         <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
-                            <h4 class="font-bold text-gray-700 mb-2">Notasi Integral</h4>
-                            <div class="math-block text-sm">
-                                $$ \int_{a}^{b} f(x) \, dx $$
+                    
+                    <div class="w-full md:w-72 space-y-6">
+                        <div class="bg-green-50 p-5 rounded-xl border border-green-200 shadow-sm">
+                            <h4 class="font-bold text-green-900 border-b border-green-200 pb-2 mb-4">Hasil Perhitungan</h4>
+                            <div class="flex flex-col mb-4 bg-white p-3 rounded shadow-sm border border-green-100">
+                                <span class="text-green-800 text-xs font-bold uppercase tracking-wide mb-1">Luas Aproksimasi Kotak ($\sum$)</span>
+                                <span id="int-area" class="text-3xl font-mono font-bold text-green-600">--</span>
+                            </div>
+                            <div class="flex flex-col pt-2">
+                                <span class="text-slate-600 text-xs font-bold uppercase tracking-wide mb-1">Luas Kurva Eksak Sempurna ($\int$)</span>
+                                <span class="text-2xl font-mono font-bold text-slate-800">2.6666...</span>
+                                <span class="text-xs text-slate-500 mt-1">($\approx \frac{8}{3}$)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h4 class="font-bold text-slate-800 mb-3">Notasi Integral</h4>
+                            <div class="math-box text-center bg-white border border-slate-100">
+                                $$ \int_{0}^{2} x^2 \, dx = \frac{8}{3} $$
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- SECTION 5: THEOREM -->
-            <section id="theorem" class="hidden p-6 md:p-10 max-w-5xl mx-auto space-y-8 animate-fade-in">
-                <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-yellow-500">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Teorema Dasar Kalkulus</h2>
-                    <p class="text-gray-600">Turunan dan Integral adalah invers (kebalikan).</p>
+            <!-- Extended Explanation (1500 words distribution part 4) -->
+            <div class="prose-custom">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">Pemaparan Mendalam: Seni Menjahit Kepingan Tak Terhingga</h3>
+                <p>Jika turunan adalah pisau bedah yang memotong sistem yang bergerak menjadi momen-momen instan (mencari kecepatan dari jarak yang ditempuh), maka Integral adalah mesin tenun yang mengumpulkan elemen-elemen instan tersebut dan merangkainya kembali menjadi bentuk utuh (mencari jarak total dari riwayat data kecepatan). Integral berurusan dengan konsep <em>akumulasi</em> atau penumpukan progresif.</p>
+                <p>Masalah klasik yang melahirkan integral adalah "The Area Problem" (Masalah Luas Area). Mencari luas persegi panjang itu mudah, rumusnya hanya panjang dikali lebar ($P \times L$). Tapi bagaimana mencari luas tanah yang salah satu perbatasannya adalah sungai yang berkelok-kelok? Berapa luas di bawah kurva parabola seperti $y = x^2$ dari titik $0$ sampai $2$? Kurva ini selalu melengkung, tidak ada garis lurus di bagian atasnya, sehingga rumus geometri klasik gagal total.</p>
+                <p>Pendekatan kalkulus sekali lagi mendemonstrasikan keindahannya melalui taktik "pecah belah lalu taklukkan". Konsep <strong>Riemann Sum</strong> (Dinamakan dari matematikawan Bernhard Riemann) menawarkan solusi logis: mari isi ruang di bawah lengkungan tersebut dengan persegi panjang tegak. Jika kita membaginya menjadi 4 persegi panjang (seperti posisi awal slider di atas), ada banyak ruang sisa (atau kelebihan) di pojok-pojoknya, hasilnya sangat tidak akurat. Luas kasar didapat hanya dengan menjumlahkan luas 4 kotak tersebut ($\sum$). Tetapi, apa yang terjadi jika Anda menggeser slider ke 100? Persegi panjang menjadi setipis lidi. Garis atas tumpukan batang-batang tipis tersebut akan membentuk kontur yang hampir identik dengan kurva melengkung yang asli.</p>
+                <p>Secara matematis, ketika jumlah persegi panjang ($n$) mendekati tak terhingga ($\lim_{n \to \infty}$), maka lebar tiap persegi ($\Delta x$) akan menjadi infinitesimal yang disebut $dx$. Simbol $\Sigma$ (Sigma, huruf Yunani untuk jumlah) melar menjadi huruf "S" yang panjang memanjang, yaitu simbol integral $\int$. Luas kasar akan berubah menjadi Luas Eksak Mutlak tanpa kesalahan sedikitpun. Di sinilah letak kedalaman filosofi matematika: kebenaran absolut dan kurva presisi tinggi dapat dicapai dengan menoleransi ketidaksempurnaan bentuk kotak-kotak yang dibuat dalam jumlah yang tak terbatas.</p>
+            </div>
+        </section>
+
+        <hr class="my-16 border-slate-200">
+
+        <!-- TEOREMA DASAR -->
+        <section id="teorema" class="mb-16 scroll-mt-20">
+            <!-- Original Content -->
+            <h2 class="text-3xl font-bold mb-4 text-slate-900">Teorema Dasar Kalkulus</h2>
+            <p class="text-xl text-slate-600 mb-6 font-medium">Turunan dan Integral adalah invers (kebalikan) dari satu sama lain.</p>
+
+            <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-2xl border border-indigo-100 shadow-sm mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-indigo-900">Hubungan Fundamental</h3>
+                <div class="math-box bg-white/80 backdrop-blur-sm text-center py-6 mb-6 rounded-xl border border-white shadow-sm">
+                    $$ \int_{a}^{b} f'(x) \, dx = f(b) - f(a) $$
                 </div>
+                <blockquote class="text-lg text-indigo-800 font-medium italic border-l-4 border-indigo-500 pl-4 py-2 my-4 bg-indigo-100/50 rounded-r-lg">
+                    "Jika Anda menjumlahkan (integral) riwayat data kecepatan pada speedometer mobil secara terus menerus, Anda akan mendapatkan jarak persis total yang telah ditempuh oleh mobil tersebut."
+                </blockquote>
+            </div>
 
-                <div class="bg-white p-8 rounded-xl shadow-sm overflow-x-auto text-center">
-                    <h3 class="font-bold text-gray-700 mb-6">Hubungan Fundamental</h3>
-                    <div class="math-block text-lg">
-                        $$ \int_{a}^{b} f'(x) \, dx = f(b) - f(a) $$
+            <!-- Extended Explanation (1500 words distribution part 5) -->
+            <div class="prose-custom">
+                <p>Selama beberapa abad sebelum kemunculan Newton dan Leibniz, masalah menemukan kecepatan benda (garis singgung) dipandang sama sekali tidak ada kaitannya dengan masalah menemukan luas tanah atau volume (luas di bawah kurva). Dua ranah ini seolah hidup di dunia paralel. Penyatuan kedua konsep ini menjadi satu kesatuan organik utuh dikenal sebagai <strong>Teorema Dasar Kalkulus (Fundamental Theorem of Calculus)</strong>. Penemuan ini sering disetarakan bobotnya dengan penyatuan listrik dan magnetisme di dunia fisika mekanika kuantum.</p>
+                <p>Teorema ini mendeklarasikan bahwa proses menemukan turunan (mencari kecepatan/laju sesaat) dan proses menemukan integral (mengakumulasi total luasan area) membatalkan satu sama lain. Ibarat penjumlahan adalah kebalikan dari pengurangan, atau perkalian kebalikan dari pembagian. Jika Anda memiliki fungsi jarak tempuh perjalanan Anda, lalu Anda 'menurunkannya', Anda akan mendapatkan data fungsi kecepatan. Secara magis, jika Anda mengumpulkan kembali atau 'mengintegralkan' data kecepatan tersebut dari awal hingga akhir, Anda akan tiba kembali pada total jarak yang Anda tempuh ($f(b) - f(a)$).</p>
+                <p>Konsekuensi dari teorema ini sangat masif. Untuk menghitung luas area di bawah kurva (yang mana perhitungannya menggunakan proses limit dengan persegi panjang tak terhingga yang menyiksa dan sangat panjang), kita sama sekali tidak perlu membuat jajaran kotak-kotak lagi! Kita cukup mencari rumus anti-turunan dari kurva tersebut, dan melakukan perhitungan aljabar sederhana. Batas antara geometri dan aljabar murni hancur dilebur oleh kejeniusan Teorema Dasar ini. Lewat Teorema Dasar Kalkulus, rekayasa sipil modern bisa berdiri, gedung-gedung pencakar langit dapat menahan tekanan angin ekstrem, ilmu aktuaria dan perbankan dapat memprediksi bunga secara kontinu, hingga penerbangan roket ke Mars dapat dihitung dengan presisi deviasi milimeter. Semuanya terjadi karena kita kini tahu bagaimana cara menghitung laju perubahan alam semesta dengan menggunakan integral dan turunan.</p>
+            </div>
+        </section>
+
+        <!-- SEPARATOR TO ADVANCED FORMULAS -->
+        <div class="py-8">
+            <div class="h-1 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 rounded-full opacity-50"></div>
+        </div>
+
+        <!-- RUMUS PENGEMBANGAN (New Requirement) -->
+        <section id="rumus-pengembangan" class="mb-16 scroll-mt-20">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Kumpulan Rumus Pengembangan Kalkulus</h2>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto">Setelah menguasai filosofi inti, berikut adalah repertoar matematis lengkap untuk menyelesaikan persoalan kalkulus analitik, mencakup Limit Lanjutan, Turunan Fungsi Khusus, Teknik Integrasi Mahir, hingga Deret Taylor.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Limit Formulas -->
+                <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden">
+                    <div class="bg-blue-600 px-6 py-4">
+                        <h3 class="font-bold text-white text-xl flex items-center">🚧 1. Aturan Limit & L'Hôpital</h3>
                     </div>
-                    <p class="text-sm text-gray-600 mt-4 max-w-2xl mx-auto">
-                        "Jika Anda menjumlahkan (integral) riwayat kecepatan speedometer, Anda mendapatkan jarak total yang ditempuh."
-                    </p>
+                    <div class="p-6 space-y-4 text-sm md:text-base">
+                        <div class="math-box bg-slate-50 border border-slate-100">
+                            <strong>Limit Trigonometri Dasar:</strong>
+                            $$ \lim_{x \to 0} \frac{\sin x}{x} = 1 \quad ; \quad \lim_{x \to 0} \frac{1 - \cos x}{x} = 0 $$
+                        </div>
+                        <div class="math-box bg-slate-50 border border-slate-100">
+                            <strong>Limit Eksponensial (Definisi Angka Euler '$e$'):</strong>
+                            $$ \lim_{x \to \infty} \left(1 + \frac{1}{x}\right)^x = e \approx 2.718 $$
+                        </div>
+                        <div class="math-box bg-slate-50 border border-slate-100">
+                            <strong>Aturan L'Hôpital (Untuk bentuk tak tentu $\frac{0}{0}$ atau $\frac{\infty}{\infty}$):</strong>
+                            $$ \lim_{x \to c} \frac{f(x)}{g(x)} = \lim_{x \to c} \frac{f'(x)}{g'(x)} $$
+                        </div>
+                    </div>
                 </div>
-            </section>
 
-        </main>
-    </div>
+                <!-- Derivative Formulas -->
+                <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden">
+                    <div class="bg-red-600 px-6 py-4">
+                        <h3 class="font-bold text-white text-xl flex items-center">📉 2. Aturan Diferensiasi Lanjutan</h3>
+                    </div>
+                    <div class="p-6 space-y-4 text-sm md:text-base">
+                        <div class="math-box bg-slate-50 border border-slate-100">
+                            <strong>Aturan Perkalian (Product Rule):</strong>
+                            $$ [f(x)g(x)]' = f'(x)g(x) + f(x)g'(x) $$
+                        </div>
+                        <div class="math-box bg-slate-50 border border-slate-100">
+                            <strong>Aturan Pembagian (Quotient Rule):</strong>
+                            $$ \left[ \frac{f(x)}{g(x)} \right]' = \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2} $$
+                        </div>
+                        <div class="math-box bg-slate-50 border border-slate-100">
+                            <strong>Aturan Rantai (Chain Rule):</strong>
+                            $$ \frac{d}{dx} f(g(x)) = f'(g(x)) \cdot g'(x) $$
+                        </div>
+                        <div class="math-box bg-slate-50 border border-slate-100">
+                            <strong>Turunan Trigonometri & Eksponen:</strong>
+                            $$ \frac{d}{dx}(\sin x) = \cos x \quad ; \quad \frac{d}{dx}(\cos x) = -\sin x $$
+                            $$ \frac{d}{dx}(e^x) = e^x \quad ; \quad \frac{d}{dx}(\ln x) = \frac{1}{x} $$
+                        </div>
+                    </div>
+                </div>
 
-    <!-- JavaScript Logic -->
-    <script>
-        // --- State Management ---
-        const state = {
-            currentTab: 'intro',
-            limit: { totalDistance: 1000, currentDistance: 1000 },
-            derivative: { chart: null, xVal: 1.0 },
-            integral: { chart: null, nVal: 4 }
-        };
+                <!-- Integral Formulas -->
+                <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden">
+                    <div class="bg-green-600 px-6 py-4">
+                        <h3 class="font-bold text-white text-xl flex items-center text-left">
+                            <span class="mr-2 font-serif font-bold text-2xl">∫</span> 3. Teknik Integrasi Lanjut
+                        </h3>
+                    </div>
+                    <div class="p-6 space-y-4 text-sm md:text-base">
+                        <div class="math-box bg-slate-50 border border-slate-100">
+                            <strong>Integral Parsial (Integration by Parts):</strong>
+                            <br><span class="text-slate-500 text-sm">Berasal dari kebalikan Product Rule.</span>
+                            $$ \int u \, dv = u \cdot v - \int v \, du $$
+                        </div>
+                        <div class="math-box bg-slate-50 border border-slate-100">
+                            <strong>Integral Substitusi-U:</strong>
+                            <br><span class="text-slate-500 text-sm">Berasal dari kebalikan Chain Rule.</span>
+                            $$ \int f(g(x)) \cdot g'(x) \, dx = \int f(u) \, du $$
+                        </div>
+                        <div class="math-box bg-slate-50 border border-slate-100">
+                            <strong>Integral Logaritmik:</strong>
+                            $$ \int \frac{1}{x} \, dx = \ln|x| + C $$
+                            $$ \int \frac{f'(x)}{f(x)} \, dx = \ln|f(x)| + C $$
+                        </div>
+                    </div>
+                </div>
 
-        // --- Navigation ---
-        function switchTab(tabId) {
-            document.querySelectorAll('section').forEach(el => el.classList.add('hidden'));
-            document.getElementById(tabId).classList.remove('hidden');
-            
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(`btn-${tabId}`).classList.add('active');
+                <!-- Taylor Series Formulas -->
+                <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden">
+                    <div class="bg-purple-700 px-6 py-4">
+                        <h3 class="font-bold text-white text-xl flex items-center">✨ 4. Kalkulus Deret Tak Terhingga</h3>
+                    </div>
+                    <div class="p-6 space-y-4 text-sm md:text-base">
+                        <div class="bg-purple-50 p-3 rounded text-slate-700 text-sm border border-purple-100">
+                            Deret Taylor merepresentasikan fungsi apa pun sebagai polinomial panjang tak terhingga dengan menggunakan turunan. Ini adalah cara kalkulator Anda menghitung nilai $\sin(30^\circ)$ atau eksponensial.
+                        </div>
+                        <div class="math-box bg-slate-50 border border-slate-100">
+                            <strong>Deret Taylor pada titik $x = a$:</strong>
+                            $$ f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x-a)^n $$
+                            <br>
+                            $$ = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \dots $$
+                        </div>
+                        <div class="math-box bg-slate-50 border border-slate-100">
+                            <strong>Deret Maclaurin (Jika $a=0$) untuk Eksponensial:</strong>
+                            $$ e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \dots $$
+                        </div>
+                    </div>
+                </div>
 
-            state.currentTab = tabId;
-
-            if (tabId === 'turunan') updateDerivativeChart();
-            if (tabId === 'integral') updateIntegralChart();
-            
-            // Mobile menu logic
-            const sidebar = document.getElementById('sidebar');
-            if (!sidebar.classList.contains('-translate-x-full') && window.innerWidth < 768) {
-                sidebar.classList.add('-translate-x-full');
-            }
-        }
-
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-            document.getElementById('sidebar').classList.toggle('-translate-x-full');
-        });
-
-        // --- Limit Simulation ---
-        const walker = document.getElementById('walker');
-        const distDisplay = document.getElementById('limit-distance');
+            </div>
+        </section>
         
-        document.getElementById('btn-step-limit').addEventListener('click', () => {
-            state.limit.currentDistance /= 2;
-            updateLimitVisuals();
-        });
-        document.getElementById('btn-reset-limit').addEventListener('click', () => {
-            state.limit.currentDistance = 1000;
-            updateLimitVisuals();
-        });
+    </main>
 
-        function updateLimitVisuals() {
-            let displayDist = state.limit.currentDistance;
-            displayDist = displayDist < 0.1 ? displayDist.toExponential(2) : displayDist.toFixed(3);
-            distDisplay.innerText = `${displayDist} m`;
-            const percentageMoved = ((1000 - state.limit.currentDistance) / 1000) * 90; 
-            walker.style.left = `${percentageMoved}%`;
-        }
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="mb-2"><strong>Kalkulus Cerdas</strong> &copy; 2026</p>
+            <p class="text-sm">Menyajikan intisari matematika perubahan dalam bentuk yang paling esensial dan interaktif.</p>
+        </div>
+    </footer>
 
-        // --- Derivative Chart ---
-        function initDerivativeChart() {
-            const ctx = document.getElementById('derivativeChart').getContext('2d');
-            state.derivative.chart = new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [
-                        {
-                            label: 'f(x) = x²',
-                            data: [],
-                            showLine: true,
-                            borderColor: '#4F46E5',
-                            backgroundColor: 'rgba(79, 70, 229, 0.1)',
-                            borderWidth: 3,
-                            pointRadius: 0,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Garis Singgung',
-                            data: [],
-                            showLine: true,
-                            borderColor: '#F59E0B',
-                            borderWidth: 2,
-                            borderDash: [5, 5],
-                            pointRadius: 0
-                        },
-                        {
-                            label: 'Titik',
-                            data: [],
-                            pointBackgroundColor: '#F59E0B',
-                            pointRadius: 6
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { min: -3, max: 3, grid: { color: '#e5e7eb'} },
-                        y: { min: -2, max: 10, grid: { color: '#e5e7eb'} }
-                    },
-                    plugins: { legend: { position: 'bottom' } },
-                    animation: { duration: 0 }
-                }
-            });
-            updateDerivativeChart();
-        }
-
-        document.getElementById('x-slider').addEventListener('input', (e) => {
-            state.derivative.xVal = parseFloat(e.target.value);
-            document.getElementById('x-val-display').innerText = state.derivative.xVal.toFixed(1);
-            updateDerivativeChart();
+    <!-- Interactive Scripts Engine -->
+    <script>
+        // --- MOBILE MENU ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
         });
 
-        function updateDerivativeChart() {
-            if(!state.derivative.chart) { initDerivativeChart(); return; }
-            const x = state.derivative.xVal;
-            const y = x * x; 
-            const slope = 2 * x;
-
-            const curveData = [];
-            for(let i = -3; i <= 3; i+=0.1) curveData.push({x: i, y: i*i});
-
-            const startX = x - 1.5, endX = x + 1.5;
-            const tangentData = [
-                {x: startX, y: slope*(startX - x) + y},
-                {x: endX, y: slope*(endX - x) + y}
-            ];
-
-            state.derivative.chart.data.datasets[0].data = curveData;
-            state.derivative.chart.data.datasets[1].data = tangentData;
-            state.derivative.chart.data.datasets[2].data = [{x: x, y: y}];
-            state.derivative.chart.update();
-
-            document.getElementById('fx-display').innerText = y.toFixed(2);
-            document.getElementById('fprime-display').innerText = slope.toFixed(2);
+        // --- LIMIT SIMULATION ---
+        let limitDist = 1000;
+        let personPos = 0; // percentage to wall (90% visually is touching the wall)
+        function stepLimit() {
+            limitDist /= 2;
+            personPos += (88 - personPos) / 2; // Move halfway towards 88% visual boundary
+            document.getElementById('limit-dist').innerText = limitDist.toFixed(5) + ' m';
+            document.getElementById('wall-person').style.left = personPos + '%';
+        }
+        function resetLimit() {
+            limitDist = 1000;
+            personPos = 0;
+            document.getElementById('limit-dist').innerText = '1000.00 m';
+            document.getElementById('wall-person').style.left = '0%';
         }
 
-        // --- Integral Chart ---
-        function initIntegralChart() {
-            const ctx = document.getElementById('integralChart').getContext('2d');
-            state.integral.chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [],
-                    datasets: [{
-                        label: 'Riemann Sum',
-                        data: [],
-                        backgroundColor: 'rgba(147, 51, 234, 0.5)',
-                        borderColor: 'rgba(147, 51, 234, 1)',
-                        borderWidth: 1,
-                        barPercentage: 1.0, 
-                        categoryPercentage: 1.0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: { beginAtZero: true, max: 4.5 },
-                        x: { display: false }
-                    },
-                    plugins: { legend: { display: false } }
-                }
-            });
-            updateIntegralChart();
-        }
+        // --- DERIVATIVE VISUALIZATION ---
+        const dCanvas = document.getElementById('deriv-canvas');
+        const dCtx = dCanvas.getContext('2d');
+        const dSlider = document.getElementById('deriv-slider');
+        const dXVal = document.getElementById('deriv-x-val');
+        const dFx = document.getElementById('deriv-fx');
+        const dFpx = document.getElementById('deriv-fpx');
 
-        document.getElementById('n-slider').addEventListener('input', (e) => {
-            state.integral.nVal = parseInt(e.target.value);
-            document.getElementById('n-val-display').innerText = state.integral.nVal;
-            updateIntegralChart();
-        });
-
-        function updateIntegralChart() {
-            if(!state.integral.chart) { initIntegralChart(); return; }
-            const n = state.integral.nVal;
-            const a = 0, b = 2;
-            const dx = (b - a) / n;
-            const data = [], labels = [];
-            let totalArea = 0;
-
-            for(let i = 1; i <= n; i++) {
-                const x = a + i * dx;
-                const height = x * x; 
-                data.push(height);
-                labels.push(x.toFixed(2));
-                totalArea += height * dx;
+        function drawDeriv() {
+            if(!dCtx) return;
+            let x = parseFloat(dSlider.value);
+            let fx = x * x;
+            let fpx = 2 * x; // Derivative of x^2
+            
+            dXVal.innerText = x.toFixed(1);
+            dFx.innerText = fx.toFixed(2);
+            dFpx.innerText = fpx.toFixed(2);
+            
+            dCtx.clearRect(0, 0, dCanvas.width, dCanvas.height);
+            
+            // Draw Grid/Axes
+            dCtx.strokeStyle = '#e2e8f0';
+            dCtx.lineWidth = 1.5;
+            dCtx.beginPath();
+            dCtx.moveTo(0, 260); dCtx.lineTo(400, 260); // x-axis at bottom
+            dCtx.moveTo(200, 0); dCtx.lineTo(200, 300); // y-axis at center
+            dCtx.stroke();
+            
+            // Coordinate mapping functions
+            const mapX = (val) => 200 + val * 70; // Map logical x to canvas px
+            const mapY = (val) => 260 - val * 45; // Map logical y to canvas px (inverted Y)
+            
+            // Draw Curve y = x^2
+            dCtx.strokeStyle = '#3b82f6'; // Blue for original function
+            dCtx.lineWidth = 3;
+            dCtx.beginPath();
+            for(let i = -2.5; i <= 2.5; i += 0.05) {
+                if(i === -2.5) dCtx.moveTo(mapX(i), mapY(i*i));
+                else dCtx.lineTo(mapX(i), mapY(i*i));
             }
-
-            state.integral.chart.data.labels = labels;
-            state.integral.chart.data.datasets[0].data = data;
-            state.integral.chart.update();
-            document.getElementById('area-approx').innerText = totalArea.toFixed(4);
+            dCtx.stroke();
+            
+            // Draw Tangent Line
+            dCtx.strokeStyle = '#ef4444'; // Red for tangent
+            dCtx.lineWidth = 2.5;
+            dCtx.beginPath();
+            // Equation: y - fx = fpx * (x_line - x)
+            let x1 = x - 1.5, x2 = x + 1.5;
+            let y1 = fpx * (x1 - x) + fx;
+            let y2 = fpx * (x2 - x) + fx;
+            
+            dCtx.moveTo(mapX(x1), mapY(y1));
+            dCtx.lineTo(mapX(x2), mapY(y2));
+            dCtx.stroke();
+            
+            // Draw Target Point
+            dCtx.fillStyle = '#ef4444';
+            dCtx.beginPath();
+            dCtx.arc(mapX(x), mapY(fx), 6, 0, Math.PI * 2);
+            dCtx.fill();
+            dCtx.strokeStyle = 'white';
+            dCtx.lineWidth = 2;
+            dCtx.stroke();
+        }
+        dSlider.addEventListener('input', drawDeriv);
+        // Initial render
+        window.onload = function() {
+            drawDeriv();
+            drawInt();
         }
 
-        // --- Initialization & Fix for KaTeX ---
-        // We wait for DOMContentLoaded to ensure elements exist before rendering math.
-        document.addEventListener("DOMContentLoaded", function() {
-            // 1. Initialize Default Tab
-            switchTab('intro');
+        // --- INTEGRAL VISUALIZATION (Riemann Sum) ---
+        const iCanvas = document.getElementById('int-canvas');
+        const iCtx = iCanvas.getContext('2d');
+        const iSlider = document.getElementById('int-slider');
+        const iNVal = document.getElementById('int-n-val');
+        const iArea = document.getElementById('int-area');
 
-            // 2. Safely Render Math using KaTeX Auto-Render
-            if (typeof renderMathInElement === 'function') {
-                renderMathInElement(document.body, {
-                    delimiters: [
-                        {left: '$$', right: '$$', display: true},
-                        {left: '$', right: '$', display: false}
-                    ],
-                    throwOnError: false
-                });
-            } else {
-                console.warn("KaTeX scripts failed to load properly.");
+        function drawInt() {
+            if(!iCtx) return;
+            let n = parseInt(iSlider.value);
+            iNVal.innerText = n;
+            
+            iCtx.clearRect(0, 0, iCanvas.width, iCanvas.height);
+            
+            // Mapping for [0, 2] on x-axis and [0, 4] on y-axis
+            const mapX = (val) => 40 + val * 150; 
+            const mapY = (val) => 270 - val * 55; 
+            
+            // Axes
+            iCtx.strokeStyle = '#94a3b8';
+            iCtx.lineWidth = 2;
+            iCtx.beginPath();
+            iCtx.moveTo(20, 270); iCtx.lineTo(380, 270); // x axis
+            iCtx.moveTo(40, 20); iCtx.lineTo(40, 290);   // y axis
+            iCtx.stroke();
+            
+            // Draw Riemann Rectangles (Right endpoints)
+            let dx = 2 / n; // Range is 0 to 2
+            let sumArea = 0;
+            
+            iCtx.fillStyle = 'rgba(34, 197, 94, 0.4)'; // Transparent green
+            iCtx.strokeStyle = '#16a34a'; // Solid Green stroke
+            iCtx.lineWidth = 1;
+            
+            for(let i = 0; i < n; i++) {
+                let x_left = i * dx;
+                let x_right = (i + 1) * dx;
+                let h = x_right * x_right; // Height at right endpoint
+                
+                let px = mapX(x_left);
+                let py = mapY(h);
+                let pWidth = mapX(x_right) - mapX(x_left);
+                let pHeight = mapY(0) - mapY(h); // Y is inverted visually
+                
+                iCtx.fillRect(px, py, pWidth, pHeight);
+                iCtx.strokeRect(px, py, pWidth, pHeight);
+                
+                sumArea += h * dx;
             }
-        });
+            
+            iArea.innerText = sumArea.toFixed(4);
+            
+            // Draw the exact Curve y=x^2 on top
+            iCtx.strokeStyle = '#1e293b'; // Dark blue/slate
+            iCtx.lineWidth = 2.5;
+            iCtx.beginPath();
+            for(let x = 0; x <= 2.1; x += 0.05) {
+                if(x === 0) iCtx.moveTo(mapX(x), mapY(x*x));
+                else iCtx.lineTo(mapX(x), mapY(x*x));
+            }
+            iCtx.stroke();
+        }
+        iSlider.addEventListener('input', drawInt);
 
     </script>
 </body>
