@@ -3,150 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repricing Ulang: Sebuah Distopia Finansial</title>
+    <title>Repricing Ulang: Sebuah Distopia Finansial - Versi Mewah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --accent-color: #cf6679;
-            --secondary-bg: #1e1e1e;
+            --bg-deep: #0a0a0a; /* Hitam pekat */
+            --bg-card: #141414; /* Sedikit lebih terang untuk container */
+            --text-main: #d9d9d9; /* Off-white yang lembut */
+            --text-muted: #888888;
+            --accent-gold: #c3a05f; /* Emas champagne yang disikat */
+            --accent-bronze: #8e7351; /* Perunggu untuk nama mahasiswa */
+            --border-subtle: rgba(195, 160, 95, 0.15); /* Border emas sangat tipis */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Crimson Text', serif;
+            --font-data: 'Inter', sans-serif;
         }
+
         body {
-            font-family: 'Georgia', serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.8;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 1.15rem;
+            line-height: 1.9;
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
             display: flex;
             justify-content: center;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+                url('https://images.unsplash.com/photo-1599672722880-6b68673a3036?q=80&w=2000'); /* Tekstur marmer hitam samar */
+            background-size: cover;
+            background-attachment: fixed;
         }
+
         .container {
             max-width: 800px;
-            background-color: var(--secondary-bg);
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            margin: 80px 20px;
+            background-color: var(--bg-card);
+            padding: 60px 50px;
+            border-radius: 4px;
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            position: relative;
         }
+
+        /* Aksen dekoratif emas minimalis */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 30px;
+            height: 1px;
+            background-color: var(--accent-gold);
+        }
+
         h1 {
             text-align: center;
-            color: var(--accent-color);
-            font-size: 2em;
+            font-family: var(--font-heading);
+            color: var(--accent-gold);
+            font-size: 2.8rem;
+            font-weight: 700;
             margin-bottom: 10px;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            letter-spacing: 1px;
+            letter-spacing: -0.5px;
         }
+
         .author {
             text-align: center;
+            font-family: var(--font-heading);
             font-style: italic;
-            color: #aaaaaa;
-            margin-bottom: 40px;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 20px;
         }
+
         p {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-align: justify;
         }
-        .dialogue {
-            margin-left: 20px;
+
+        /* Gaya percakapan */
+        .dialogue-line {
+            margin-bottom: 15px;
+            border-left: 2px solid transparent;
+            padding-left: 15px;
+        }
+
+        .speaker-jasen {
+            color: var(--accent-gold);
+            font-weight: 600;
+            border-left-color: var(--accent-gold);
+        }
+
+        .speaker-tessa, .speaker-susilo {
+            color: var(--accent-bronze);
+            font-weight: 600;
+            border-left-color: var(--accent-bronze);
+        }
+
+        .dialogue-text {
             font-style: italic;
             color: #d4d4d4;
         }
+
+        /* Gaya kotak data */
         .data-box {
-            background-color: #2a2a2a;
-            border-left: 4px solid var(--accent-color);
-            padding: 15px;
-            margin: 20px 0;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9em;
+            background: linear-gradient(135deg, #181818 0%, #0d0d0d 100%);
+            border: 1px solid var(--border-subtle);
+            padding: 25px;
+            margin: 30px 0;
+            font-family: var(--font-data);
+            font-size: 0.95rem;
+            color: #e0e0e0;
+            border-radius: 2px;
+            position: relative;
         }
+
+        .data-header {
+            color: var(--accent-gold);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 5px;
+        }
+
+        /* Referensi di bagian bawah */
         .citation {
-            font-size: 0.85em;
-            color: #888;
-            border-top: 1px solid #444;
-            padding-top: 10px;
-            margin-top: 30px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 30px;
+            margin-top: 50px;
+            font-style: italic;
         }
+
+        /* Footer minimalis */
+        footer {
+            text-align: center;
+            font-family: var(--font-data);
+            font-size: 0.8rem;
+            color: #444;
+            margin-top: 50px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Repricing Ulang: Titik Kritis Penyesuaian Harga</h1>
-    <div class="author">Sebuah Analisis Naratif oleh Dr. Iman Santoso</div>
+    <div class="author">Sebuah Analisis Naratif oleh Doktor Jasen</div>
 
-    <p>Lampu di <em>lounge</em> itu redup. Jakarta malam terlihat tenang dari balik kaca besar di lantai atas. Saya duduk di sofa kulit, tablet di tangan. Grafik merah memenuhi layar. Dona datang tanpa suara, seperti biasa. Ia duduk di sebelah saya, menaruh tasnya pelan.</p>
+    <p>Lampu di <em>lounge</em> itu redup, menyisakan keremangan yang intim. Jakarta malam terlihat tenang dari balik kaca besar di lantai atas. Saya duduk di sofa kulit, tablet di tangan. Grafik merah memenuhi layar, sebuah representasi visual dari kehancuran kapital.</p>
+    
+    <p>Tessa datang tanpa suara, seperti biasa, membawa keanggunan yang tenang ke tengah ketegangan. Ia duduk di sebelah saya, menaruh tasnya pelan.</p>
 
-    <p class="dialogue">“Masih turun?”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Masih turun?”</span></div>
     
     <p>Tanyanya singkat. Saya tidak langsung menjawab. Hanya memutar layar ke arahnya.</p>
 
     <div class="data-box">
-        MARKET SUMMARY - CLOSING BELL<br>
+        <div class="data-header">MARKET SUMMARY - CLOSING BELL</div>
         S&P 500: -1.7% (YTD: -8.4%)<br>
         Nasdaq Composite: -2.4% (YTD: -12.1%)<br>
         VIX Index: 28.5 (+15%)<br>
         Status: Week 5 Downtrend
     </div>
 
-    <p>Dona menghela napas pelan.</p>
+    <p>Tessa menghela napas pelan.</p>
 
-    <p class="dialogue">“Lima minggu…”</p>
-    
-    <p>Katanya.</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Lima minggu…”</span></div>
     
     <p>Saya mengangguk.</p>
 
-    <p class="dialogue">“Ini bukan koreksi lagi.”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Ini bukan koreksi lagi.”</span></div>
 
-    <p>Dona mengambil gelasnya. Saya lirik ketiaknya putih mulus sekali. Dia pakai blus tanpa lengan. Mungkin sengaja menggoda saya. Namun, pikiran saya dengan cepat kembali pada anomali volatilitas di layar. Ada deviasi standar yang terlalu lebar dari rata-rata historis, sebuah <em>fat-tail event</em> yang sedang berlangsung di depan mata.</p>
+    <p>Tessa mengambil gelasnya, gerakannya terkontrol. Pikiran saya dengan cepat kembali pada anomali volatilitas di layar. Ada deviasi standar yang terlalu lebar dari rata-rata historis, sebuah <em>fat-tail event</em> yang sedang berlangsung.</p>
 
-    <p class="dialogue">“Bukannya kemarin sempat naik? Gara-gara isu ceasefire?”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Bukannya kemarin sempat naik? Gara-gara isu ceasefire?”</span></div>
     
-    <p>Katanya mengerutkan dahi.</p>
+    <p>Saya tersenyum tipis. <span class="dialogue-line speaker-jasen"><span class="dialogue-text">“Pasar sempat berharap. Efek *mean-reversion* jangka pendek. Algoritma *High-Frequency Trading* (HFT) merespons sentimen *headline*.”</span></span></p>
 
-    <p>Saya tersenyum tipis. <span class="dialogue">“Pasar sempat berharap. Efek <em>mean-reversion</em> jangka pendek. Algoritma <em>High-Frequency Trading</em> (HFT) merespons sentimen <em>headline</em>.”</span></p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Dan sekarang?”</span></div>
 
-    <p class="dialogue">“Dan sekarang?”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Iran menolak.”</span></div>
 
-    <p class="dialogue">“Iran menolak.”</p>
+    <p>Tessa diam sejenak.</p>
 
-    <p>Dona diam sejenak.</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Jadi…?”</span></div>
 
-    <p class="dialogue">“Jadi…?”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Semua *repricing* ulang.”</span></div>
 
-    <p>Saya menatap layar.</p>
+    <p>Saya membuka <em>chart</em> lain. Minyak mentah Brent naik menembus resistensi $92 per barel. *Yield* US Treasury 10-tahun merangkak naik ke 4.75%.</p>
 
-    <p class="dialogue">“Semua <em>repricing</em> ulang.”</p>
+    <p>Tessa mendekat sedikit.</p>
 
-    <p>Saya membuka <em>chart</em> lain. Minyak mentah Brent naik menembus resistensi $92 per barel. <em>Yield</em> US Treasury 10-tahun merangkak naik ke 4.75%.</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Kenapa *yield* ikut naik?”</span></div>
 
-    <p>Dona mendekat sedikit.</p>
+    <p>Saya menjawab pelan, nada suara saya datar, seperti mengajar seseorang yang sudah mengerti setengahnya. <span class="dialogue-line speaker-jasen"><span class="dialogue-text">“Karena uang keluar dari risiko ekstrem… tapi bukan beralih ke *safety* penuh. Biasanya dalam krisis geopolitik, ada *flight to quality*. Orang beli obligasi pemerintah, harga obligasi naik, *yield* turun. Tapi sekarang *yield* malah naik. Ini bukan *panic selling* biasa. Ini *repositioning* likuiditas.”</span></span></p>
 
-    <p class="dialogue">“Kenapa <em>yield</em> ikut naik?”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Artinya?”</span></div>
 
-    <p>Saya menjawab pelan, seperti mengajar seseorang yang sudah mengerti setengahnya. <span class="dialogue">“Karena uang keluar dari risiko ekstrem… tapi bukan beralih ke <em>safety</em> penuh. Biasanya dalam krisis geopolitik, ada <em>flight to quality</em>. Orang beli obligasi pemerintah, harga obligasi naik, <em>yield</em> turun. Tapi sekarang <em>yield</em> malah naik. Ini bukan <em>panic selling</em> biasa. Ini <em>repositioning</em> likuiditas.”</span></p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“*Market* belum takut. Tapi sudah tidak percaya pada instrumen utang jangka panjang. Ada ekspektasi inflasi yang tertanam kembali.”</span></div>
 
-    <p class="dialogue">“Artinya?”</p>
+    <p>Pintu *lounge* bergeser pelan. Susilo masuk. Mahasiswa doktoral saya yang satu ini selalu terlihat seperti memikul beban dunia di pundaknya. Ia meletakkan laptopnya di meja kaca, mengangguk pada Tessa, lalu menatap saya.</p>
 
-    <p class="dialogue">“<em>Market</em> belum takut. Tapi sudah tidak percaya pada instrumen utang jangka panjang. Ada ekspektasi inflasi yang tertanam kembali.”</p>
-
-    <p>Pintu <em>lounge</em> bergeser pelan. Bima masuk. Mahasiswa doktoral saya yang satu ini selalu terlihat seperti belum tidur dua hari. Ia meletakkan laptop tebalnya di meja kaca, mengangguk pada Dona, lalu menatap saya.</p>
-
-    <p class="dialogue">“Profesor Iman, saya baru saja menarik data <em>real-time</em> dari Bloomberg Terminal dan menyilangkannya dengan <em>database</em> WRDS,”</p> 
+    <div class="dialogue-line speaker-susilo">Susilo: <span class="dialogue-text">“Doktor Jasen, saya baru saja menarik data *real-time* dari Bloomberg Terminal dan menyilangkannya dengan *database* WRDS,”</span></div> 
     
-    <p>Kata Bima tanpa basa-basi, langsung membuka layarnya. Deretan matriks korelasi muncul.</p>
+    <p>Kata Susilo tanpa basa-basi, langsung membuka layarnya. Deretan matriks korelasi muncul.</p>
 
-    <p class="dialogue">“Fenomena <em>yield</em> naik bersamaan dengan ekuitas turun ini persis dengan <em>working paper</em> dari NBER bulan lalu tentang <em>Liquidity Shocks in Geopolitical Crises</em>. Pasar tidak sedang memindahkan uang. Mereka sedang menghancurkannya.”</p>
+    <div class="dialogue-line speaker-susilo">Susilo: <span class="dialogue-text">“Fenomena *yield* naik bersamaan dengan ekuitas turun ini persis dengan *working paper* dari NBER bulan lalu tentang *Liquidity Shocks in Geopolitical Crises*. Pasar tidak sedang memindahkan uang. Mereka sedang menghancurkannya.”</span></div>
 
-    <p>Dona bersandar.</p>
+    <p>Tessa bersandar.</p>
 
-    <p class="dialogue">“Lima minggu turun… itu berarti apa sebenarnya, Bim?”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Lima minggu turun… itu berarti apa sebenarnya, Sil?”</span></div>
 
-    <p>Bima menatap Dona, lalu memutar laptopnya agar kami bertiga bisa melihat.</p>
+    <p>Susilo menatap Tessa, lalu memutar laptopnya agar kami bertiga bisa melihat.</p>
 
     <div class="data-box">
-        PRIMARY DATA EXTRACTION: INSTITUTIONAL FLOWS<br>
+        <div class="data-header">PRIMARY DATA EXTRACTION: INSTITUTIONAL FLOWS</div>
         Net Outflow Global Equities (5-Week Moving Average): $142 Billion<br>
         Money Market Fund Inflows: $210 Billion<br>
         Source: EPFR Global / Refinitiv Data (Simulated March 2026)
@@ -154,131 +235,128 @@
 
     <p>Saya menutup tablet sebentar.</p>
 
-    <p class="dialogue">“Artinya sistem sudah lemah sebelum perang, Dona. Likuiditas global sudah mengering karena kebijakan kuantitatif <em>tightening</em> (QT) dari Federal Reserve yang persisten. Margin utang korporasi sudah di ambang batas.”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Artinya sistem sudah lemah sebelum perang, Tessa. Likuiditas global sudah mengering karena kebijakan kuantitatif *tightening* (QT) dari Federal Reserve yang persisten. Margin utang korporasi sudah di ambang batas.”</span></div>
 
-    <p>Dona menoleh.</p>
+    <p>Tessa menoleh.</p>
 
-    <p class="dialogue">“Jadi ini bukan karena Iran?”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Jadi ini bukan karena Iran?”</span></div>
 
-    <p>Saya menggeleng.</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Bukan. Iran cuma *trigger*. Katalisator yang memaksa pasar mengakui realitas bahwa valuasi sudah terlalu mahal.”</span></div>
 
-    <p class="dialogue">“Bukan. Iran cuma <em>trigger</em>. Katalisator yang memaksa pasar mengakui realitas bahwa valuasi sudah terlalu mahal.”</p>
+    <p>Saya buka grafik indeks Nasdaq. Merah lebih dalam. Saham-saham *Magnificent Seven* memimpin kejatuhan, tergerus hingga belasan persen dari titik tertingginya.</p>
 
-    <p>Saya buka grafik indeks Nasdaq. Merah lebih dalam. Saham-saham <em>Magnificent Seven</em> memimpin kejatuhan, tergerus hingga belasan persen dari titik tertingginya.</p>
+    <p>Tessa mengernyit.</p>
 
-    <p>Dona mengernyit.</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Kenapa sektor teknologi yang paling jatuh dalam?”</span></div>
 
-    <p class="dialogue">“Kenapa sektor teknologi yang paling jatuh dalam?”</p>
+    <p>Saya tersenyum. Sebuah pertanyaan klasik mengenai *duration risk* dalam ekuisitas.</p>
 
-    <p>Saya tersenyum. Sebuah pertanyaan klasik mengenai <em>duration risk</em> dalam ekuisitas.</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Karena mereka menjual masa depan.”</span></div>
 
-    <p class="dialogue">“Karena mereka menjual masa depan.”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Dan?”</span></div>
 
-    <p class="dialogue">“Dan?”</p>
-
-    <p class="dialogue">“Perang, dan inflasi yang menyertainya, bikin masa depan jadi sangat mahal,”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Perang, dan inflasi yang menyertainya, bikin masa depan jadi sangat mahal,”</span></div>
     
-    <p>Jawab saya. Bima segera menambahkan landasan teoretisnya.</p>
+    <p>Jawab saya. Susilo segera menambahkan landasan teoretisnya.</p>
 
-    <p class="dialogue">“Model <em>Discounted Cash Flow</em> (DCF), Don. Valuasi perusahaan teknologi sangat bergantung pada arus kas di masa depan yang jauh. Ketika <em>discount rate</em>—yang diproksikan oleh <em>yield</em> obligasi bertenor panjang—naik tajam akibat ekspektasi inflasi energi dan ketidakpastian geopolitik, nilai sekarang (<em>present value</em>) dari arus kas masa depan itu hancur berantakan. Ini konsep dasar dari Profesor Aswath Damodaran di NYU Stern mengenai ekuitas bertenor panjang.”</p>
+    <div class="dialogue-line speaker-susilo">Susilo: <span class="dialogue-text">“Model *Discounted Cash Flow* (DCF), Tes. Valuasi perusahaan teknologi sangat bergantung pada arus kas di masa depan yang jauh. Ketika *discount rate*—yang diproksikan oleh *yield* obligasi bertenor panjang—naik tajam akibat ekspektasi inflasi energi dan ketidakpastian geopolitik, nilai sekarang (*present value*) dari arus kas masa depan itu hancur berantakan. Ini konsep dasar dari Profesor Aswath Damodaran di NYU Stern mengenai ekuitas bertenor panjang.”</span></div>
 
-    <p>Dona menatap saya lama.</p>
+    <p>Tessa menatap saya lama.</p>
 
-    <p class="dialogue">“Ini semua karena Trump?”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Ini semua karena Trump?”</span></div>
 
     <p>Saya diam sebentar. Bukan karena tidak tahu jawabannya. Tapi karena tahu jawabannya tidak sederhana. Arsitektur geopolitik global tidak pernah bergantung pada satu variabel tunggal.</p>
 
-    <p class="dialogue">“Bukan karena satu orang,”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Bukan karena satu orang,”</span></div>
     
     <p>Saya akhirnya berkata.</p>
 
-    <p class="dialogue">“Lalu?”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Lalu?”</span></div>
 
-    <p class="dialogue">“Karena keputusan.”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Karena keputusan.”</span></div>
 
-    <p class="dialogue">“Keputusan apa?”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Keputusan apa?”</span></div>
 
-    <p class="dialogue">“Mengganti diplomasi dengan eskalasi. Tarif perdagangan yang agresif, isolasionisme, dan pengingkaran terhadap aliansi tradisional menciptakan apa yang disebut oleh <em>Harvard Kennedy School</em> sebagai 'Vakum Hegemoni'. Ketika vakum itu terjadi, aktor regional seperti Iran merasa memiliki ruang untuk bermanuver mengamankan kepentingan proksinya.”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Mengganti diplomasi dengan eskalasi. Tarif perdagangan yang agresif, isolasionisme, dan pengingkaran terhadap aliansi tradisional menciptakan apa yang disebut oleh *Harvard Kennedy School* sebagai 'Vakum Hegemoni'. Ketika vakum itu terjadi, aktor regional seperti Iran merasa memiliki ruang untuk bermanuver mengamankan kepentingan proksinya.”</span></div>
 
-    <p>Bima mengetuk mejanya perlahan.</p>
+    <p>Susilo mengetuk mejanya perlahan.</p>
 
-    <p class="dialogue">“Data sekunder dari <em>Geopolitical Risk (GPR) Index</em> yang dikembangkan oleh Dario Caldara dan Matteo Iacoviello dari Federal Reserve Board menunjukkan lonjakan ke level 210 bulan ini. Secara historis, setiap kali GPR Index menyentuh angka di atas 200, pasar negara berkembang (<em>emerging markets</em>) akan mengalami <em>capital flight</em> yang masif. Dan kita ada di episentrum kerentanan itu.”</p>
+    <div class="dialogue-line speaker-susilo">Susilo: <span class="dialogue-text">“Data sekunder dari *Geopolitical Risk (GPR) Index* yang dikembangkan oleh Dario Caldara dan Matteo Iacoviello dari Federal Reserve Board menunjukkan lonjakan ke level 210 bulan ini. Secara historis, setiap kali GPR Index menyentuh angka di atas 200, pasar negara berkembang (*emerging markets*) akan mengalami *capital flight* yang masif. Dan kita ada di episentrum kerentanan itu.”</span></div>
 
-    <p>Lounge itu semakin sepi. Musik pelan berupa iringan jazz kontemporer terdengar jauh. Dona berkata lirih sambil memutar pelan gelasnya.</p>
+    <p>Lounge itu semakin sepi. Musik pelan berupa iringan jazz kontemporer terdengar jauh. Tessa berkata lirih sambil memutar pelan gelasnya.</p>
 
-    <p class="dialogue">“Orang-orang di luar sana mungkin tidak peduli. Mereka sibuk dengan urusan sehari-hari. Mereka tidak melihat layar merah ini.”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Orang-orang di luar sana mungkin tidak peduli. Mereka sibuk dengan urusan sehari-hari. Mereka tidak melihat layar merah ini.”</span></div>
 
     <p>Saya tertawa kecil. Tawa yang kering dan tanpa humor.</p>
 
-    <p class="dialogue">“Mereka akan peduli saat buka rekening.”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Mereka akan peduli saat buka rekening.”</span></div>
 
-    <p class="dialogue">“Kenapa?”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Kenapa?”</span></div>
 
-    <p class="dialogue">“Karena yang turun bukan cuma indeks saham di Wall Street.”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Karena yang turun bukan cuma indeks saham di Wall Street.”</span></div>
 
     <p>Saya menatapnya lekat.</p>
 
-    <p class="dialogue">“Yang turun itu dana pensiun mereka. Asuransi jiwa mereka. Nilai riil tabungan mereka yang tergerus inflasi tersembunyi.”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Yang turun itu dana pensiun mereka. Asuransi jiwa mereka. Nilai riil tabungan mereka yang tergerus inflasi tersembunyi.”</span></div>
 
-    <p>Bima membuka sebuah dokumen analisis makroekonomi domestik.</p>
+    <p>Susilo membuka sebuah dokumen analisis makroekonomi domestik.</p>
 
     <div class="data-box">
-        MACRO UPDATE: INDONESIA (Q1 2026)<br>
+        <div class="data-header">MACRO UPDATE: INDONESIA (Q1 2026)</div>
         GDP Growth: 4.85% (Revised Downward, Latest Release)<br>
         IDR/USD: 16,150<br>
         10Y SBN Yield: 7.2%<br>
         Foreign Ownership in SBN: Dropped to 13.8%
     </div>
 
-    <p class="dialogue">“Bapak benar,”</p>
+    <div class="dialogue-line speaker-susilo">Susilo: <span class="dialogue-text">“Doktor benar,”</span></div>
     
-    <p>Bima menyambung, memvalidasi data yang baru saja ia perbarui. Ia tahu betul saya sangat ketat soal data terbaru. Saya tidak mentolerir angka PDB yang <em>outdated</em> dalam analisis fundamental.</p>
+    <p>Susilo menyambung, memvalidasi data yang baru saja ia perbarui. Ia tahu betul saya sangat ketat soal data terbaru. Saya tidak mentolerir angka PDB yang *outdated* dalam analisis fundamental.</p>
 
-    <p class="dialogue">“Angka PDB terbaru kita tertahan di 4.85%. Tekanan eksternal mulai merembes ke sektor riil. <em>Cost of fund</em> untuk korporasi domestik meroket. Untung saja PPN 12% dibatalkan secara resmi pada Januari 2025 lalu. Jika kebijakan regresif itu diteruskan di tengah kontraksi global ini, daya beli masyarakat menengah ke bawah pasti sudah kolaps, dan <em>multiplier effect</em> negatifnya akan menyeret pertumbuhan konsumsi rumah tangga ke teritori stagnasi.”</p>
+    <div class="dialogue-line speaker-susilo">Susilo: <span class="dialogue-text">“Angka PDB terbaru kita tertahan di 4.85%. Tekanan eksternal mulai merembes ke sektor riil. *Cost of fund* untuk korporasi domestik meroket. Untung saja PPN 12% dibatalkan secara resmi pada Januari 2025 lalu. Jika kebijakan regresif itu diteruskan di tengah kontraksi global ini, daya beli masyarakat menengah ke bawah pasti sudah kolaps, dan *multiplier effect* negatifnya akan menyeret pertumbuhan konsumsi rumah tangga ke teritori stagnasi.”</span></div>
 
-    <p>Dona mengangguk paham. Kebijakan fiskal domestik memberikan sedikit bantalan, namun gelombang kejut dari luar terlalu besar untuk diabaikan.</p>
+    <p>Tessa mengangguk paham. Kebijakan fiskal domestik memberikan sedikit bantalan, namun gelombang kejut dari luar terlalu besar untuk diabaikan.</p>
 
-    <p class="dialogue">“Masih bisa turun, Prof?”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Masih bisa turun, Dok?”</span></div>
     
-    <p>Tanya Dona lagi, matanya terpaku pada grafik <em>candlestick</em> di layar Bima.</p>
+    <p>Tanya Tessa lagi, matanya terpaku pada grafik *candlestick* di layar Susilo.</p>
 
-    <p>Saya tidak langsung jawab. Saya buka <em>chart</em> mingguan S&P 500. Lima <em>candle</em> merah berurutan, menembus <em>Moving Average</em> 200-hari dengan volume yang terdistribusi secara masif.</p>
+    <p>Saya tidak langsung jawab. Saya buka *chart* mingguan S&P 500. Lima *candle* merah berurutan, menembus *Moving Average* 200-hari dengan volume yang terdistribusi secara masif.</p>
 
-    <p class="dialogue">“Pasar tidak pernah salah,”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Pasar tidak pernah salah,”</span></div>
     
-    <p>Saya akhirnya berkata, mengutip kredo lama para <em>quant trader</em>.</p>
-    
-    <p class="dialogue">“Dia hanya lebih cepat. Pasar adalah mekanisme diskonto yang mencerna semua informasi—baik geopolitik, makroekonomi, maupun irasionalitas manusia—menjadi satu harga mutlak pada hari ini. Teori Pasar Efisien (<em>Efficient Market Hypothesis</em>) dari Fama di Universitas Chicago mungkin berpendapat bahwa harga mencerminkan nilai wajar, tapi dalam kondisi krisis kognitif, harga mencerminkan ketakutan institusional.”</p>
+    <p>Saya akhirnya berkata, mengutip kredo lama para *quant trader*.</    >
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Dia hanya lebih cepat. Pasar adalah mekanisme diskonto yang mencerna semua informasi—baik geopolitik, makroekonomi, maupun irasionalitas manusia—menjadi satu harga mutlak pada hari ini. Teori Pasar Efisien (*Efficient Market Hypothesis*) dari Fama di Universitas Chicago mungkin berpendapat bahwa harga mencerminkan nilai wajar, tapi dalam kondisi krisis kognitif, harga mencerminkan ketakutan institusional.”</span></div>
 
-    <p>Dona berdiri pelan, berjalan menuju jendela kaca raksasa yang menampilkan <em>skyline</em> Sudirman. Lampu-lampu kendaraan bergerak lambat, membentuk garis cahaya merah dan putih.</p>
+    <p>Tessa berdiri pelan, berjalan menuju jendela kaca raksasa yang menampilkan *skyline* Sudirman. Lampu-lampu kendaraan bergerak lambat, membentuk garis cahaya merah dan putih.</p>
 
-    <p class="dialogue">“Kalau ini terus berlanjut?”</p>
+    <div class="dialogue-line speaker-tessa">Tessa: <span class="dialogue-text">“Kalau ini terus berlanjut?”</span></div>
 
     <p>Saya menatap keluar jendela bersamanya. Jakarta tetap tenang. Mobil tetap berjalan. Lampu gedung perkantoran tetap menyala. Di permukaan, seperti tidak ada yang terjadi. Fasad normalitas ini selalu menjadi ironi terbesar dalam setiap awal krisis finansial.</p>
 
     <p>Saya menjawab tanpa menoleh.</p>
 
-    <p class="dialogue">“Kalau ini berlanjut…”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Kalau ini berlanjut…”</span></div>
 
-    <p>Saya berhenti sejenak. Ingatan tentang krisis masa lalu berkelebat. Bima juga terdiam, mungkin memikirkan paper sejarah ekonomi yang sedang ia susun.</p>
+    <p>Saya berhenti sejenak. Ingatan tentang krisis masa lalu berkelebat. Susilo juga terdiam, mungkin memikirkan paper sejarah ekonomi yang sedang ia susun.</p>
 
-    <p class="dialogue">“Yang jatuh bukan hanya <em>market</em>.”</p>
+    <div class="dialogue-line speaker-jasen">Jasen: <span class="dialogue-text">“Yang jatuh bukan hanya *market*.”</span></div>
 
-    <p>Dona menoleh ke arah saya. Ia tidak bertanya lagi. Ia sudah mengerti.</p>
+    <p>Tessa menoleh ke arah saya. Ia tidak bertanya lagi. Ia sudah mengerti.</p>
 
     <p>Dalam teori siklus bisnis dan analisis ekonomi politik institusional dari MIT, seperti yang dipaparkan Daron Acemoglu, krisis finansial yang dalam selalu berujung pada krisis institusi. Uang adalah darah dari kekuasaan. Ketika uang berhenti mengalir atau nilainya menyusut drastis, arsitektur kekuasaan mulai goyah.</p>
 
     <p>Saya kembali melihat layar. Merah. Sunyi. Teratur.</p>
 
-    <p>Dan seperti biasa, pasar tidak panik di permukaan. Tidak berteriak. Tidak memberi peringatan alarm di jalanan. Penghancuran kapital senilai triliunan dolar terjadi dalam diam di server-server raksasa di New Jersey dan Chicago. Orang baru benar-benar merasakan dampaknya ketika <em>margin call</em> menghancurkan akun <em>trading</em> mereka, ketika manajer investasi mengumumkan suspensi pencairan reksa dana, dan ketika dana pensiun BUMN tiba-tiba menyurati para pensiunan bahwa ada restrukturisasi pembayaran.</p>
+    <p>Dan seperti biasa, pasar tidak panik di permukaan. Tidak berteriak. Tidak memberi peringatan alarm di jalanan. Penghancuran kapital senilai triliunan dolar terjadi dalam diam di server-server raksasa di New Jersey dan Chicago. Orang baru benar-benar merasakan dampaknya ketika *margin call* menghancurkan akun *trading* mereka, ketika manajer investasi mengumumkan suspensi pencairan reksa dana, dan ketika dana pensiun BUMN tiba-tiba menyurati para pensiunan bahwa ada restrukturisasi pembayaran.</p>
 
-    <p>Bima menutup laptopnya dengan bunyi klik pelan.</p>
+    <p>Susilo menutup laptopnya dengan bunyi klik pelan.</p>
 
-    <p class="dialogue">“Konglo lari keluar negeri seperti tahun 98,”</p>
+    <div class="dialogue-line speaker-susilo">Susilo: <span class="dialogue-text">“Konglo lari keluar negeri seperti tahun 98,”</span></div>
     
-    <p>Gumam Bima pelan. <span class="dialogue">“Mereka yang punya akses pada informasi asimetris dan likuiditas dolar sudah memindahkan asetnya lewat <em>family office</em> di Singapura atau Dubai berbulan-bulan yang lalu. <em>Capital flight</em> ini tersembunyi di balik transaksi <em>trade misinvoicing</em>.”</span></p>
+    <p>Gumam Susilo pelan. <span class="dialogue-line speaker-susilo"><span class="dialogue-text">“Mereka yang punya akses pada informasi asimetris dan likuiditas dolar sudah memindahkan asetnya lewat *family office* di Singapura atau Dubai berbulan-bulan yang lalu. *Capital flight* ini tersembunyi di balik transaksi *trade misinvoicing*.”</span></span></p>
 
-    <p>Saya mengangguk membenarkan hipotesis Bima. Ini adalah pola klasik <em>wealth destruction</em>. Elit ganti peta dan pemain. Mereka mencetak ulang (<em>cak ulang</em>) struktur kepemilikan aset dengan membeli kembali aset-aset yang terdistres di harga dasar ketika darah sudah menggenang di jalanan—sebuah strategi yang secara sinis sering disebut <em>vulture capitalism</em>.</p>
+    <p>Saya mengangguk membenarkan hipotesis Susilo. Ini adalah pola klasik *wealth destruction*. Elit ganti peta dan pemain. Mereka mencetak ulang (*cak ulang*) struktur kepemilikan aset dengan membeli kembali aset-aset yang terdistres di harga dasar ketika darah sudah menggenang di jalanan—sebuah strategi yang secara sinis sering disebut *vulture capitalism*.</p>
 
     <p>Malam semakin larut. Kami bertiga terjebak dalam keheningan yang dihasilkan oleh angka-angka makroekonomi. Di luar sana, jutaan orang sedang tidur, bermimpi tentang masa depan yang besok pagi akan dinilai lebih murah oleh pasar global. Karena pada akhirnya, uang tidak pernah benar-benar lenyap; ia hanya berpindah tangan di tengah kepanikan yang terstruktur.</p>
 
@@ -290,6 +368,10 @@
         4. Data Makroekonomi Domestik: Diperbarui Q1 2026, Penyesuaian Kebijakan Fiskal PPN 12% (Januari 2025).</p>
     </div>
 </div>
+
+<footer>
+    GLOBAL STRATEGY INSTITUTE | CONFIDENTIAL
+</footer>
 
 </body>
 </html>
