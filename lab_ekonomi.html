@@ -2,475 +2,608 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simfoni Keruntuhan di Lab Ekonomi 2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Makroskop — Narasi & Realitas Ekonomi 2026</title>
+    <!-- Preconnect to Google Fonts for speed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Modern font pairing: elegant serif for editorial, clean sans for data -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap');
-
-        :root {
-            --primary-bg: #FCF9F9; /* Very soft cream/pink */
-            --secondary-bg: #FFFFFF;
-            --accent-gold: #D4AF37;
-            --accent-rose: #E6D0DE;
-            --text-main: #333333;
-            --text-light: #777777;
-            --danger-red: #C0392B;
-            --success-green: #27AE60;
-            --font-heading: 'Playfair Display', serif;
-            --font-body: 'Montserrat', sans-serif;
-        }
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: var(--primary-bg);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            line-height: 1.8;
-            background-image: radial-gradient(circle at top right, #FFF0F5, transparent);
+            background-color: #F6F5F2;   /* warm, intellectual off-white */
+            font-family: 'Inter', sans-serif;
+            color: #1E1E2A;
+            line-height: 1.5;
+            scroll-behavior: smooth;
         }
 
-        /* Layout Container */
-        .wrapper {
-            max-width: 1400px;
-            margin: 40px auto;
+        /* refined container – max width with generous margins */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        /* grid: classic editorial 2/3 + 1/3 sidebar with breathing */
+        .grid {
             display: flex;
-            gap: 30px;
-            padding: 0 20px;
+            flex-wrap: wrap;
+            gap: 2.5rem;
         }
 
-        /* Main Story Column */
-        .story-column {
-            flex: 7;
-            background-color: var(--secondary-bg);
-            padding: 60px 80px;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.08);
-            border: 1px solid rgba(230, 208, 222, 0.5);
-            position: relative;
+        .main-article {
+            flex: 2;
+            min-width: 280px;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 50px;
+        .insight-sidebar {
+            flex: 1;
+            min-width: 260px;
         }
 
-        header h1 {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            color: var(--accent-gold);
-            margin-bottom: 15px;
+        /* --- typography refined, terpelajar --- */
+        .eyebrow {
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #9B7B4C;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .eyebrow i {
+            font-size: 0.7rem;
         }
 
-        header p.subtitle {
-            font-family: var(--font-heading);
-            font-style: italic;
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 3.8rem;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            color: #23232F;
+            margin-bottom: 1rem;
+        }
+
+        .article-subhead {
             font-size: 1.2rem;
-            color: var(--text-light);
+            font-weight: 400;
+            color: #5E5E6E;
+            border-left: 3px solid #D4AF37;
+            padding-left: 1.2rem;
+            margin: 1.2rem 0 2rem 0;
+            font-family: 'Inter', serif;
         }
 
-        header::after {
-            content: '✧ ✦ ✧';
-            display: block;
-            color: var(--accent-rose);
-            font-size: 1.5rem;
-            margin-top: 20px;
-            letter-spacing: 10px;
-        }
-
-        article p {
-            margin-bottom: 20px;
-            font-size: 1.05rem;
-            text-align: justify;
-        }
-
-        .dialogue {
-            background: linear-gradient(145deg, #FFFFFF, #FFF5F8);
-            padding: 25px 35px;
-            border-left: 4px solid var(--accent-gold);
-            margin: 30px 0;
-            border-radius: 0 10px 10px 0;
-            font-style: italic;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-        }
-
-        .char-name {
-            font-family: var(--font-body);
+        .dropcap {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
             font-weight: 600;
-            font-style: normal;
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
+            float: left;
+            line-height: 0.8;
+            padding-right: 0.6rem;
+            color: #9B7B4C;
         }
 
-        /* Sidebar Data Column */
-        .data-column {
-            flex: 3;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .article-text p {
+            margin-bottom: 1.4rem;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #2C2C3A;
+            line-height: 1.65;
         }
 
-        .data-widget {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 30px;
+        /* dialogue boxes – clean but distinguished */
+        .dialogue-card {
+            background: #FFFFFF;
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            position: sticky;
-            top: 40px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.02);
+            border-left: 4px solid #D4AF37;
+            transition: all 0.2s ease;
         }
-
-        .widget-header {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            color: var(--text-main);
-            border-bottom: 2px solid var(--accent-rose);
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-            text-align: center;
+        .dialogue-card:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
         }
-
-        .data-item {
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 12px;
-            background-color: #FAFAFA;
-            border: 1px solid #F0F0F0;
-            transition: all 0.3s ease;
-        }
-
-        .data-item:hover {
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .data-label {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .data-value {
-            font-family: var(--font-heading);
-            font-size: 1.6rem;
+        .char-name {
             font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #9B7B4C;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .char-name i {
+            font-size: 0.8rem;
+        }
+        .dialogue-card p {
+            margin-bottom: 0;
+            font-style: normal;
+            font-size: 1rem;
+            font-weight: 450;
+            color: #2C2C3A;
+        }
+
+        /* sidebar widgets – rapi, keren, terukur */
+        .widget {
+            background: #FFFFFF;
+            border-radius: 28px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #EFEBE4;
+        }
+        .widget:hover {
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+        }
+        .widget-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: baseline;
+            border-bottom: 1px solid #E9E4DB;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
         }
-
-        .up { color: var(--success-green); }
-        .down { color: var(--danger-red); }
-
-        .pulse {
-            animation: blink 2s infinite;
+        .widget-header h3 {
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: -0.2px;
+            color: #1E1E2A;
         }
-
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        .indicator {
-            font-size: 1rem;
-        }
-
         .live-badge {
-            display: inline-block;
-            background-color: rgba(212, 175, 55, 0.1);
-            color: var(--accent-gold);
-            padding: 4px 10px;
-            border-radius: 20px;
+            background: #F3EFE8;
+            padding: 0.2rem 0.7rem;
+            border-radius: 40px;
             font-size: 0.7rem;
             font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            border: 1px solid var(--accent-gold);
+            color: #9B7B4C;
+        }
+        .live-badge i {
+            font-size: 0.6rem;
+            margin-right: 4px;
+            color: #D4AF37;
+        }
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #F0ECE5;
+        }
+        .data-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #6F6F80;
+            letter-spacing: -0.2px;
+        }
+        .data-value {
+            font-weight: 700;
+            font-size: 1.15rem;
+            font-family: 'Inter', monospace;
+            letter-spacing: -0.2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .trend-up { color: #2C6E49; }
+        .trend-down { color: #B33B2C; }
+        .trend-neutral { color: #8F8F9E; }
+        .mini-chart {
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        .footnote {
+            font-size: 0.7rem;
+            color: #9A9AAC;
+            text-align: center;
+            margin-top: 1rem;
+            border-top: 1px solid #F0ECE5;
+            padding-top: 1rem;
         }
 
-        @media (max-width: 1024px) {
-            .wrapper { flex-direction: column; }
-            .data-widget { position: relative; top: 0; }
-            .story-column { padding: 40px 30px; }
+        /* quote / highlight */
+        .insight-quote {
+            background: #F9F7F3;
+            padding: 1.2rem;
+            border-radius: 20px;
+            margin: 1.8rem 0;
+            font-style: italic;
+            font-weight: 450;
+            border-left: 2px solid #D4AF37;
         }
+
+        /* responsive */
+        @media (max-width: 1000px) {
+            .container { padding: 1.5rem; }
+            h1 { font-size: 2.5rem; }
+            .grid { flex-direction: column; }
+        }
+
+        @media (max-width: 680px) {
+            .dialogue-card { padding: 1.2rem; }
+            .widget { padding: 1.2rem; }
+        }
+
+        /* separator elegance */
+        .ornament {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 0.7rem;
+            letter-spacing: 6px;
+            color: #D4AF37;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, #E9E4DB, transparent);
+            margin: 1.8rem 0;
+        }
+        .button-reset {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.7rem;
+            color: #9B7B4C;
+            transition: color 0.2s;
+        }
+        .button-reset:hover { color: #C49A2F; }
     </style>
 </head>
 <body>
-
-<div class="wrapper">
-    <main class="story-column">
-        <header>
+<div class="container">
+    <div class="grid">
+        <!-- KOLOM UTAMA: narasi sastra dan dialog -->
+        <div class="main-article">
+            <div class="eyebrow">
+                <i class="fas fa-feather-alt"></i> <span>ESAI EKONOMI POLITIK</span>
+                <span style="margin-left: auto; font-size:0.7rem;">EDISI MAKROSKOP • 2026</span>
+            </div>
             <h1>Simfoni Keterpurukan</h1>
-            <p class="subtitle">Sebuah Fragmen Retorika dan Realita di Lab Ekonomi 2026</p>
-        </header>
-
-        <article>
-            <p>Laboratorium Ekonomi Makro Terpadu itu tampak seperti istana kaca modern yang terapung di atas awan kekhawatiran bangsa. Dinding-dindingnya adalah panel monitor LED beresolusi tinggi yang memancarkan grafik <i>real-time</i>, bagaikan karya seni abstrak yang dinamis. Cahaya yang memancar dari layar-layar itu cerah, mewah, dan menipu. Mereka menampilkan warna-warni hijau yang menenangkan dan biru pastel yang elegan—representasi visual dari "narasi optimisme fundamental" yang selama ini didengungkan pemerintah.</p>
-
-            <p>Di tengah ruangan, berdiri sebuah meja kaca oval yang berkilau, memantulkan cahaya dari langit-langit berdesain romantis dengan ornamen kristal minimalis. Tidak ada kertas berserakan. Semuanya digital, bersih, berkelas. Namun, keindahan visual ini gagal menyembunyikan kebusukan udara yang terasa kaku, dingin, dan mencekam. Tiga orang duduk mengelilingi meja itu, tidak saling menatap, fokus pada panel kontrol masing-masing yang menampilkan proyeksi data ekonomi Indonesia semester pertama tahun 2026.</p>
-
-            <p><strong>Dr. Adrian</strong>, sang Kepala Pusat Studi, adalah pria paruh baya yang selalu tampil necis. Jas <i>bespoke</i> berwarna krem lembut dengan pin emas kecil di kerah melambangkan posisi nyamannya dalam lingkaran kekuasaan. Dia adalah arsitek narasi; pria yang tugasnya mengemas keruntuhan menjadi peluang. Wajahnya berusaha tenang, namun getaran halus di jarinya saat menyentuh layar tablet mengkhianati kecemasan yang membakar lambungnya.</p>
-
-            <p>Di seberangnya duduk <strong>Saras</strong>, ekonom senior yang dikenal tajam, analitis, dan tanpa kompromi. Rambutnya diikat rapi ke belakang, mencerminkan kepribadiannya yang efisien dan keras. Dia mengenakan blus sutra berwarna merah muda pudar—satu-satunya elemen 'romantis' pada dirinya hari ini, yang kontras dengan tatapan matanya yang sedingin es, menembus tumpukan data yang dia analisis. Baginya, angka tidak pernah berbohong, hanya manusia yang membengkokkannya.</p>
-
-            <p>Orang ketiga adalah <strong>Bima</strong>, perwakilan dari konsorsium <i>hedge fund</i> dan investor asing terbesar di negeri ini. Penampilannya dingin, kalkulatif. Setelan jas abu-abu arang miliknya tampak terlalu mahal untuk disentuh. Dia tidak berbicara banyak, tetapi kehadirannya seperti pedang Damocles yang tergantung di atas leher perekonomian nasional. Bima adalah perwujudan dari "kepercayaan pasar" yang kini sedang bocor deras.</p>
-
-            <p>Adrian akhirnya memecah keheningan, suaranya diatur agar terdengar menenangkan, bagaikan musik klasik yang mengalun pelan di lobi hotel bintang lima.</p>
-
-            <div class="dialogue">
-                <span class="char-name">Adrian</span>
-                "Bapak Bima, Ibu Saras. Saya kira kita bisa mulai. Proyeksi LPEM untuk semester ini sudah keluar. Meskipun ada sedikit dinamika yang... menantang, fundamental ekonomi kita—sebagaimana yang selalu Bapak Presiden tekankan—masih sangat kuat. Cadangan devisa kita stabil, dan kita melihat pertumbuhan konsumsi domestik yang resilien."
+            <div class="article-subhead">
+                Sebuah fragmen retorika dan realita di laboratorium ekonomi — ketika narasi bubar di hadapan angka.
             </div>
 
-            <p>Saras mendengus, sebuah suara yang sangat tidak elegan di ruangan yang begitu mewah. Dia menekan sebuah tombol virtual di mejanya. Seketika, panel monitor besar di belakangnya berubah warna. Warna hijau pastel yang menenangkan lenyap, digantikan oleh warna merah marun yang brutal dan mendesak. Grafik IHSG terjun bebas, menampilkan jurang menganga <i>capital outflow</i> yang mengerikan.</p>
-
-            <div class="dialogue">
-                <span class="char-name">Saras</span>
-                "Dr. Adrian, tolong, demi Tuhan, berhenti mengulang dongeng itu di ruangan ini. Fundamental kuat? Di dunia mana Anda hidup? Lihat data <i>real-time</i> ini! Sejak Januari 2026, kita mengalami *capital flight* paling brutal dalam satu dekade. Asing keluar triliunan setiap minggu. Investor asing 'lebih paham keadaan kita' daripada pejabat yang berpura-pura buta di istana!"
-            </div>
-
-            <p>Adrian mencoba tersenyum, senyum profesional yang mulai retak di sudut-sudutnya. Keringat dingin mulai merembes di kerah jas mahalnya.</p>
-
-            <div class="dialogue">
-                <span class="char-name">Adrian</span>
-                "Saras, Anda terlalu dramatis. Kita harus melihat konteks global. Dinamika jangka pendek di bursa saham tidak mencerminkan daya tahan riil ekonomi kita. BI sudah melakukan intervensi terukur. Pelemahan Rupiah ini murni sentimen teknikal dan <i>global risk premium</i> karena ketegangan di Timur Tengah."
-            </div>
-
-            <p>Saras mengebrak meja kaca. Suaranya bergema tajam.</p>
-
-            <div class="dialogue">
-                <span class="char-name">Saras</span>
-                "Teknikal? Anda menyebut kurs yang hampir menembus Rp 17.000 per Dolar ini teknikal?! Intervensi BI itu sia-sia, Adrian! Anda membakar cadangan devisa hanya untuk menunda kejatuhan yang tak terelakkan. Anda menyebut ini stabilitas? Ini adalah 'ilusi optimisme fundamental'. Pertumbuhan 5 persen yang Anda banggakan itu semu, digerakkan oleh utang dan konsumsi kelas menengah yang tabungannya sedang sekarat!"
-            </div>
-
-            <p>Bima akhirnya bergerak. Dia meletakkan cangkir teh porselennya dengan gerakan lambat yang mematikan. Dia tidak meninggikan suara, namun setiap katanya jatuh seperti tetesan asam di atas luka terbuka.</p>
-
-            <div class="dialogue">
-                <span class="char-name">Bima</span>
-                "Dr. Adrian, interupsi sebentar. Klien saya di Wall Street dan Singapura tidak peduli dengan pidato menteri. Kami peduli dengan angka riil dan kepastian struktural. Laporan dari intelijen pasar kami sangat berbeda dengan <i>slide</i> presentasi Anda. Masalah Anda bukan pada sentimen global, masalah Anda ada pada kebohongan narasi domestik. Tata kelola APBN Anda ngawur."
-            </div>
-
-            <p>Wajah Adrian memucat. Matanya berkedip cepat mencari jawaban dari <i>teleprompter</i> imajiner di kepalanya.</p>
-
-            <div class="dialogue">
-                <span class="char-name">Adrian</span>
-                "Pak Bima, terminologi 'ngawur' itu sangat tidak berdasar. APBN 2026 dirancang untuk pertumbuhan inklusif. Program Makan Bergizi Gratis..."
-            </div>
-
-            <div class="dialogue">
-                <span class="char-name">Saras</span>
-                "Oh, jangan bawa-bawa program populis berkedok gizi itu di depanku!" potong Saras brutal. "Inklusif untuk siapa? Anggaran pendidikan dihancurkan, dimasukkan ke keranjang 'functional budgeting' demi membiayai makan siang! Sementara itu, apa yang terjadi di bawah? 11 Juta PBI-JKN inaktif! Orang-orang gagal ginjal ditolak di rumah sakit karena negara kehabisan uang untuk menutupi kebohongan fiskal!"
-            </div>
-
-            <p>Napas Saras memburu. Dia menunjuk rentetan data yang berkedip merah di layar. Di sana, angka <i>Yield</i> SBN 10 tahun merangkak naik secara mengerikan, mencerminkan ketidakpercayaan pasar untuk meminjamkan uang kepada negara.</p>
-
-            <div class="dialogue">
-                <span class="char-name">Saras</span>
-                "Kita ini negara *net debtor*! Kita terjebak beban utang masa lalu, dan sekarang rezim ini menambah utang baru hanya untuk mempertahankan ilusi kekuasaan. Mengalihkan 58% Dana Desa untuk Koperasi Merah Putih? Itu perampokan legal APBN! Anda tahu itu, Adrian. Anda menyusun draf naskah pidatonya!"
-            </div>
-
-            <p>Adrian berdiri, memukul meja kaca hingga cangkir Bima bergetar. Simfoni mewah ruangan itu hancur oleh amarahnya.</p>
-
-            <div class="dialogue">
-                <span class="char-name">Adrian</span>
-                "Cukup, Saras! Anda melebihi kewenangan Anda! Presiden dipilih oleh rakyat! Ada *shadow power*, ya, ada kompromi politik, itu realitas mengelola negara berpenduduk ratusan juta! Tugas kita sebagai teknokrat adalah mencari jalan keluar, bukan menjadi pengkhianat yang merongrong dari dalam dengan menyebarkan kepanikan!"
-            </div>
-
-            <p>Bima tersenyum tipis. Senyum seorang predator yang melihat mangsanya kehabisan tenaga.</p>
-
-            <div class="dialogue">
-                <span class="char-name">Bima</span>
-                "Kepastian, Adrian. Itu yang hilang. Ketika otoritas pasar modal membiarkan *free float* palsu, ketika afiliasi mengatur harga saham, indeks IHSG hanyalah angka kosmetik. Kebingungan narasi pemerintah membuat aset Anda tak bisa dinilai (<i>uninvestable</i>). Kalau *outlook* Moody's negatif, itu bukan konspirasi asing. Itu karena kalian culas mengelola negara."
-            </div>
-
-            <p>Bima merapikan jasnya, bersiap berdiri.</p>
-
-            <div class="dialogue">
-                <span class="char-name">Bima</span>
-                "Jika dalam 48 jam tidak ada reformasi fiskal yang transparan, konsorsium kami akan mengeksekusi *short selling* pada SBN dan menarik sisa modal di ekuitas. Indonesia berisiko jadi negara gagal, dan kami tidak akan ikut tenggelam bersamanya. Selamat sore."
-            </div>
-
-            <p>Langkah kaki Bima menjauh, meninggalkan keheningan yang mencekik. Cahaya dari monitor LED kini terasa menelanjangi. Adrian jatuh terduduk di kursinya, matanya kosong menatap layar <i>Yield</i> SBN yang terus mendaki. Saras menatapnya dengan campuran antara kasihan dan muak.</p>
-
-            <div class="dialogue">
-                <span class="char-name">Saras</span>
-                "Pemerintah harus jujur, Adrian. Stop omong kosong. Atau kali ini, kita tidak akan selamat."
-            </div>
-
-            <p>Di luar istana kaca itu, langit Jakarta mulai menggelap, seakan bersiap menyambut badai krisis yang akan menyapu ilusi kemewahan hingga ke akar-akarnya.</p>
-        </article>
-    </main>
-
-    <aside class="data-column">
-        <div class="data-widget">
-            <div class="live-badge"><span class="pulse">●</span> LIVE MARKET DATA</div>
-            <h2 class="widget-header">Indikator Makro</h2>
-            
-            <div class="data-item">
-                <div class="data-label">USD / IDR</div>
-                <div class="data-value" id="val-usd">
-                    <span id="text-usd">Memuat...</span>
-                    <span class="indicator" id="ind-usd"></span>
+            <article class="article-text">
+                <p><span class="dropcap">L</span>aboratorium Ekonomi Makro Terpadu itu tampak seperti istana kaca modern yang terapung di atas awan kekhawatiran bangsa. Dinding-dindingnya adalah panel monitor LED beresolusi tinggi yang memancarkan grafik <i>real-time</i>, bagaikan karya seni abstrak yang dinamis. Cahaya yang memancar dari layar-layar itu cerah, mewah, dan menipu. Mereka menampilkan warna-warni hijau yang menenangkan dan biru pastel yang elegan—representasi visual dari "narasi optimisme fundamental" yang selama ini didengungkan pemerintah.</p>
+                
+                <p>Di tengah ruangan, berdiri sebuah meja kaca oval yang berkilau, memantulkan cahaya dari langit-langit berdesain romantis dengan ornamen kristal minimalis. Tidak ada kertas berserakan. Semuanya digital, bersih, berkelas. Namun, keindahan visual ini gagal menyembunyikan kebusukan udara yang terasa kaku, dingin, dan mencekam. Tiga orang duduk mengelilingi meja itu, tidak saling menatap, fokus pada panel kontrol masing-masing yang menampilkan proyeksi data ekonomi Indonesia semester pertama tahun 2026.</p>
+                
+                <p><strong>Dr. Adrian</strong>, sang Kepala Pusat Studi, adalah pria paruh baya yang selalu tampil necis. Jas <i>bespoke</i> berwarna krem lembut dengan pin emas kecil di kerah melambangkan posisi nyamannya dalam lingkaran kekuasaan. Dia adalah arsitek narasi; pria yang tugasnya mengemas keruntuhan menjadi peluang. Wajahnya berusaha tenang, namun getaran halus di jarinya saat menyentuh layar tablet mengkhianati kecemasan yang membakar lambungnya.</p>
+                
+                <p>Di seberangnya duduk <strong>Saras</strong>, ekonom senior yang dikenal tajam, analitis, dan tanpa kompromi. Rambutnya diikat rapi ke belakang, mencerminkan kepribadiannya yang efisien dan keras. Dia mengenakan blus sutra berwarna merah muda pudar—satu-satunya elemen 'romantis' pada dirinya hari ini, yang kontras dengan tatapan matanya yang sedingin es, menembus tumpukan data yang dia analisis. Baginya, angka tidak pernah berbohong, hanya manusia yang membengkokkannya.</p>
+                
+                <p>Orang ketiga adalah <strong>Bima</strong>, perwakilan dari konsorsium <i>hedge fund</i> dan investor asing terbesar di negeri ini. Penampilannya dingin, kalkulatif. Setelan jas abu-abu arang miliknya tampak terlalu mahal untuk disentuh. Dia tidak berbicara banyak, tetapi kehadirannya seperti pedang Damocles yang tergantung di atas leher perekonomian nasional. Bima adalah perwujudan dari "kepercayaan pasar" yang kini sedang bocor deras.</p>
+                
+                <p>Adrian akhirnya memecah keheningan, suaranya diatur agar terdengar menenangkan, bagaikan musik klasik yang mengalun pelan di lobi hotel bintang lima.</p>
+                
+                <div class="dialogue-card">
+                    <div class="char-name"><i class="fas fa-microphone-alt"></i> ADRIAN</div>
+                    <p>"Bapak Bima, Ibu Saras. Saya kira kita bisa mulai. Proyeksi LPEM untuk semester ini sudah keluar. Meskipun ada sedikit dinamika yang... menantang, fundamental ekonomi kita—sebagaimana yang selalu Bapak Presiden tekankan—masih sangat kuat. Cadangan devisa kita stabil, dan kita melihat pertumbuhan konsumsi domestik yang resilien."</p>
                 </div>
-            </div>
-
-            <div class="data-item">
-                <div class="data-label">IHSG (Jakarta Composite)</div>
-                <div class="data-value down" id="val-ihsg">
-                    <span id="text-ihsg">Memuat...</span>
-                    <span class="indicator" id="ind-ihsg"></span>
+                
+                <p>Saras mendengus, sebuah suara yang sangat tidak elegan di ruangan yang begitu mewah. Dia menekan sebuah tombol virtual di mejanya. Seketika, panel monitor besar di belakangnya berubah warna. Warna hijau pastel yang menenangkan lenyap, digantikan oleh warna merah marun yang brutal dan mendesak. Grafik IHSG terjun bebas, menampilkan jurang menganga <i>capital outflow</i> yang mengerikan.</p>
+                
+                <div class="dialogue-card">
+                    <div class="char-name"><i class="fas fa-chart-line"></i> SARAS</div>
+                    <p>"Dr. Adrian, tolong, demi Tuhan, berhenti mengulang dongeng itu di ruangan ini. Fundamental kuat? Di dunia mana Anda hidup? Lihat data <i>real-time</i> ini! Sejak Januari 2026, kita mengalami capital flight paling brutal dalam satu dekade. Asing keluar triliunan setiap minggu. Investor asing 'lebih paham keadaan kita' daripada pejabat yang berpura-pura buta di istana!"</p>
                 </div>
-            </div>
-
-            <div class="data-item">
-                <div class="data-label">Yield SBN 10 Tahun</div>
-                <div class="data-value up" id="val-sbn">
-                    <span id="text-sbn">Memuat...</span>
-                    <span class="indicator" id="ind-sbn"></span>
+                
+                <p>Adrian mencoba tersenyum, senyum profesional yang mulai retak di sudut-sudutnya. Keringat dingin mulai merembes di kerah jas mahalnya.</p>
+                
+                <div class="dialogue-card">
+                    <div class="char-name"><i class="fas fa-chart-simple"></i> ADRIAN</div>
+                    <p>"Saras, Anda terlalu dramatis. Kita harus melihat konteks global. Dinamika jangka pendek di bursa saham tidak mencerminkan daya tahan riil ekonomi kita. BI sudah melakukan intervensi terukur. Pelemahan Rupiah ini murni sentimen teknikal dan global risk premium karena ketegangan di Timur Tengah."</p>
                 </div>
-            </div>
-
-            <div class="data-item">
-                <div class="data-label">Harga Minyak Dunia (WTI)</div>
-                <div class="data-value down" id="val-oil">
-                    <span id="text-oil">Memuat...</span>
-                    <span class="indicator" id="ind-oil"></span>
+                
+                <p>Saras mengebrak meja kaca. Suaranya bergema tajam.</p>
+                
+                <div class="dialogue-card">
+                    <div class="char-name"><i class="fas fa-chart-column"></i> SARAS</div>
+                    <p>"Teknikal? Anda menyebut kurs yang hampir menembus Rp 17.000 per Dolar ini teknikal?! Intervensi BI itu sia-sia, Adrian! Anda membakar cadangan devisa hanya untuk menunda kejatuhan yang tak terelakkan. Anda menyebut ini stabilitas? Ini adalah 'ilusi optimisme fundamental'. Pertumbuhan 5 persen yang Anda banggakan itu semu, digerakkan oleh utang dan konsumsi kelas menengah yang tabungannya sedang sekarat!"</p>
                 </div>
-            </div>
-
-            <div class="data-item">
-                <div class="data-label">Emas Dunia / Gram (IDR)</div>
-                <div class="data-value up" id="val-gold">
-                    <span id="text-gold">Memuat...</span>
-                    <span class="indicator" id="ind-gold"></span>
+                
+                <p>Bima akhirnya bergerak. Dia meletakkan cangkir teh porselennya dengan gerakan lambat yang mematikan. Dia tidak meninggikan suara, namun setiap katanya jatuh seperti tetesan asam di atas luka terbuka.</p>
+                
+                <div class="dialogue-card">
+                    <div class="char-name"><i class="fas fa-dollar-sign"></i> BIMA</div>
+                    <p>"Dr. Adrian, interupsi sebentar. Klien saya di Wall Street dan Singapura tidak peduli dengan pidato menteri. Kami peduli dengan angka riil dan kepastian struktural. Laporan dari intelijen pasar kami sangat berbeda dengan slide presentasi Anda. Masalah Anda bukan pada sentimen global, masalah Anda ada pada kebohongan narasi domestik. Tata kelola APBN Anda ngawur."</p>
                 </div>
-            </div>
-            
-            <p style="font-size: 0.75rem; color: #999; margin-top: 20px; text-align: center; line-height: 1.4;">
-                *Data ditarik melalui API Publik & Simulasi Fluktuasi Pasar untuk demonstrasi UI.
-            </p>
+                
+                <p>Wajah Adrian memucat. Matanya berkedip cepat mencari jawaban dari teleprompter imajiner di kepalanya.</p>
+                
+                <div class="dialogue-card">
+                    <div class="char-name"><i class="fas fa-landmark"></i> ADRIAN</div>
+                    <p>"Pak Bima, terminologi 'ngawur' itu sangat tidak berdasar. APBN 2026 dirancang untuk pertumbuhan inklusif. Program Makan Bergizi Gratis..."</p>
+                </div>
+                
+                <div class="dialogue-card">
+                    <div class="char-name"><i class="fas fa-calculator"></i> SARAS</div>
+                    <p>"Oh, jangan bawa-bawa program populis berkedok gizi itu di depanku!" potong Saras brutal. "Inklusif untuk siapa? Anggaran pendidikan dihancurkan, dimasukkan ke keranjang functional budgeting demi membiayai makan siang! Sementara itu, apa yang terjadi di bawah? 11 Juta PBI-JKN inaktif! Orang-orang gagal ginjal ditolak di rumah sakit karena negara kehabisan uang untuk menutupi kebohongan fiskal!"</p>
+                </div>
+                
+                <p>Napas Saras memburu. Dia menunjuk rentetan data yang berkedip merah di layar. Di sana, angka Yield SBN 10 tahun merangkak naik secara mengerikan, mencerminkan ketidakpercayaan pasar untuk meminjamkan uang kepada negara.</p>
+                
+                <div class="dialogue-card">
+                    <div class="char-name"><i class="fas fa-chart-pie"></i> SARAS</div>
+                    <p>"Kita ini negara net debtor! Kita terjebak beban utang masa lalu, dan sekarang rezim ini menambah utang baru hanya untuk mempertahankan ilusi kekuasaan. Mengalihkan 58% Dana Desa untuk Koperasi Merah Putih? Itu perampokan legal APBN! Anda tahu itu, Adrian. Anda menyusun draf naskah pidatonya!"</p>
+                </div>
+                
+                <p>Adrian berdiri, memukul meja kaca hingga cangkir Bima bergetar. Simfoni mewah ruangan itu hancur oleh amarahnya.</p>
+                
+                <div class="dialogue-card">
+                    <div class="char-name"><i class="fas fa-gavel"></i> ADRIAN</div>
+                    <p>"Cukup, Saras! Anda melebihi kewenangan Anda! Presiden dipilih oleh rakyat! Ada shadow power, ya, ada kompromi politik, itu realitas mengelola negara berpenduduk ratusan juta! Tugas kita sebagai teknokrat adalah mencari jalan keluar, bukan menjadi pengkhianat yang merongrong dari dalam dengan menyebarkan kepanikan!"</p>
+                </div>
+                
+                <p>Bima tersenyum tipis. Senyum seorang predator yang melihat mangsanya kehabisan tenaga.</p>
+                
+                <div class="dialogue-card">
+                    <div class="char-name"><i class="fas fa-building"></i> BIMA</div>
+                    <p>"Kepastian, Adrian. Itu yang hilang. Ketika otoritas pasar modal membiarkan free float palsu, ketika afiliasi mengatur harga saham, indeks IHSG hanyalah angka kosmetik. Kebingungan narasi pemerintah membuat aset Anda tak bisa dinilai (uninvestable). Kalau outlook Moody's negatif, itu bukan konspirasi asing. Itu karena kalian culas mengelola negara."</p>
+                </div>
+                
+                <p>Bima merapikan jasnya, bersiap berdiri.</p>
+                
+                <div class="dialogue-card">
+                    <div class="char-name"><i class="fas fa-handshake"></i> BIMA</div>
+                    <p>"Jika dalam 48 jam tidak ada reformasi fiskal yang transparan, konsorsium kami akan mengeksekusi short selling pada SBN dan menarik sisa modal di ekuitas. Indonesia berisiko jadi negara gagal, dan kami tidak akan ikut tenggelam bersamanya. Selamat sore."</p>
+                </div>
+                
+                <p>Langkah kaki Bima menjauh, meninggalkan keheningan yang mencekik. Cahaya dari monitor LED kini terasa menelanjangi. Adrian jatuh terduduk di kursinya, matanya kosong menatap layar Yield SBN yang terus mendaki. Saras menatapnya dengan campuran antara kasihan dan muak.</p>
+                
+                <div class="dialogue-card">
+                    <div class="char-name"><i class="fas fa-eye"></i> SARAS</div>
+                    <p>"Pemerintah harus jujur, Adrian. Stop omong kosong. Atau kali ini, kita tidak akan selamat."</p>
+                </div>
+                
+                <p>Di luar istana kaca itu, langit Jakarta mulai menggelap, seakan bersiap menyambut badai krisis yang akan menyapu ilusi kemewahan hingga ke akar-akarnya.</p>
+                
+                <div class="ornament">✧ ✦ ✧</div>
+                <hr />
+            </article>
         </div>
-    </aside>
+
+        <!-- SIDEBAR: data widget paling keren & rapi dengan live market + simulasi dinamis -->
+        <div class="insight-sidebar">
+            <div class="widget">
+                <div class="widget-header">
+                    <h3><i class="fas fa-chart-line" style="margin-right: 8px;"></i> Makro Dashboard</h3>
+                    <div class="live-badge"><i class="fas fa-circle" style="font-size: 0.5rem;"></i> LIVE FEED</div>
+                </div>
+                <div id="market-data-container">
+                    <!-- Data rows akan diisi JS dengan animasi subtle -->
+                    <div class="data-row">
+                        <span class="data-label"><i class="fas fa-dollar-sign"></i> USD/IDR</span>
+                        <span class="data-value" id="usd-value">—</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label"><i class="fas fa-chart-simple"></i> IHSG (Jakarta Comp)</span>
+                        <span class="data-value" id="ihsg-value">—</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label"><i class="fas fa-percent"></i> SBN 10Y Yield</span>
+                        <span class="data-value" id="sbn-value">—</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label"><i class="fas fa-oil-can"></i> WTI Crude (USD)</span>
+                        <span class="data-value" id="oil-value">—</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label"><i class="fas fa-coins"></i> Emas (IDR/gram)</span>
+                        <span class="data-value" id="gold-value">—</span>
+                    </div>
+                </div>
+                <div class="footnote">
+                    <i class="fas fa-sync-alt"></i> Update real-time &nbsp;•&nbsp; <button id="refreshBtn" class="button-reset"><i class="fas fa-arrows-rotate"></i> refresh pasar</button>
+                </div>
+            </div>
+
+            <!-- insight tambahan yang terpelajar -->
+            <div class="widget">
+                <div class="widget-header">
+                    <h3><i class="fas fa-brain"></i> Esensi Risiko</h3>
+                </div>
+                <div class="insight-quote">
+                    <i class="fas fa-chart-line" style="color:#9B7B4C; margin-right: 8px;"></i> Capital outflow Q2 2026 diperkirakan mencapai <strong>Rp 78 triliun</strong>, tertinggi sejak krisis 2008. Sentimen negatif diperparah oleh inkoherensi fiskal.
+                </div>
+                <div class="insight-quote">
+                    <i class="fas fa-newspaper"></i> <strong>Kata Kunci Risiko:</strong> Kenaikan yield SBN, tekanan eksternal, & defisit transparansi. Pasar mencari <em>"kepastian struktural"</em>.
+                </div>
+                <div style="margin-top: 1rem; font-size: 0.75rem; color:#9B7B4C;">
+                    <i class="fas fa-chart-pie"></i> Sumber: simulasi dinamika pasar berdasar narasi.
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-    // Konfigurasi Nilai Awal (Base Values berdasarkan narasi Q1 2026)
-    let currentData = {
-        usd: 16840.50, // Hampir 17.000
-        ihsg: 6842.30, // Terjun dari narasi 10.000
-        sbn: 7.15,     // Yield naik karena risiko (di atas 7%)
-        oil: 82.40,    // Harga minyak per barrel USD
-        goldUSD_oz: 2150.00 // Harga emas per troy ounce USD
+    // ========================
+    // DATA MAKRO INTELLIGENT : live + simulasi realistis dengan drift acak halus (clean, rapi)
+    // ========================
+    let marketState = {
+        usd: 16840.50,      // IDR per USD
+        ihsg: 6842.30,
+        sbn: 7.15,          // yield persen
+        oil: 82.40,
+        goldUSD: 2150.00    // per troy ounce
     };
 
-    // Fungsi Format Mata Uang IDR
-    function formatIDR(num) {
-        return "Rp " + Math.round(num).toLocaleString('id-ID');
+    // Helper format angka
+    function formatIDR(value) {
+        return 'Rp ' + Math.round(value).toLocaleString('id-ID');
+    }
+    function formatNumber(value, decimals=2) {
+        return value.toLocaleString('en-US', {minimumFractionDigits: decimals, maximumFractionDigits: decimals});
+    }
+    function formatPercent(value) {
+        return value.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '%';
     }
 
-    // Fungsi Format Angka Desimal
-    function formatDec(num, decimals = 2) {
-        return num.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    // Hitung harga emas per gram dalam rupiah
+    function computeGoldPerGramRupiah() {
+        const ozToGram = 31.1034768;
+        const goldUsdPerGram = marketState.goldUSD / ozToGram;
+        return goldUsdPerGram * marketState.usd;
     }
 
-    // Hitung Harga Emas per Gram dalam Rupiah
-    function calcGoldIDR(goldOzUsd, usdRate) {
-        const troyOzInGrams = 31.1034768;
-        const goldPerGramUsd = goldOzUsd / troyOzInGrams;
-        return goldPerGramUsd * usdRate;
+    // render ke UI dengan arah panah (trend diupdate dari nilai sebelumnya)
+    let prevState = {...marketState};
+
+    function renderData() {
+        // USD/IDR
+        const usdEl = document.getElementById('usd-value');
+        const usdDiff = marketState.usd - prevState.usd;
+        let usdHtml = formatIDR(marketState.usd);
+        if (usdDiff > 0) usdHtml += ` <span class="trend-up"><i class="fas fa-arrow-up"></i></span>`;
+        else if (usdDiff < 0) usdHtml += ` <span class="trend-down"><i class="fas fa-arrow-down"></i></span>`;
+        else usdHtml += ` <span class="trend-neutral"><i class="fas fa-minus"></i></span>`;
+        usdEl.innerHTML = usdHtml;
+
+        // IHSG
+        const ihsgEl = document.getElementById('ihsg-value');
+        const ihsgDiff = marketState.ihsg - prevState.ihsg;
+        let ihsgHtml = formatNumber(marketState.ihsg, 2);
+        if (ihsgDiff > 0) ihsgHtml += ` <span class="trend-up"><i class="fas fa-arrow-up"></i></span>`;
+        else if (ihsgDiff < 0) ihsgHtml += ` <span class="trend-down"><i class="fas fa-arrow-down"></i></span>`;
+        else ihsgHtml += ` <span class="trend-neutral"><i class="fas fa-minus"></i></span>`;
+        ihsgEl.innerHTML = ihsgHtml;
+
+        // SBN Yield
+        const sbnEl = document.getElementById('sbn-value');
+        const sbnDiff = marketState.sbn - prevState.sbn;
+        let sbnHtml = formatPercent(marketState.sbn);
+        if (sbnDiff > 0) sbnHtml += ` <span class="trend-up"><i class="fas fa-arrow-up"></i></span>`;
+        else if (sbnDiff < 0) sbnHtml += ` <span class="trend-down"><i class="fas fa-arrow-down"></i></span>`;
+        else sbnHtml += ` <span class="trend-neutral"><i class="fas fa-minus"></i></span>`;
+        sbnEl.innerHTML = sbnHtml;
+
+        // Oil
+        const oilEl = document.getElementById('oil-value');
+        const oilDiff = marketState.oil - prevState.oil;
+        let oilHtml = '$ ' + formatNumber(marketState.oil, 2);
+        if (oilDiff > 0) oilHtml += ` <span class="trend-up"><i class="fas fa-arrow-up"></i></span>`;
+        else if (oilDiff < 0) oilHtml += ` <span class="trend-down"><i class="fas fa-arrow-down"></i></span>`;
+        else oilHtml += ` <span class="trend-neutral"><i class="fas fa-minus"></i></span>`;
+        oilEl.innerHTML = oilHtml;
+
+        // Emas IDR/gram
+        const goldPriceIDR = computeGoldPerGramRupiah();
+        const prevGold = prevState.goldUSD ? computeGoldPerGramRupiah() : goldPriceIDR;
+        const goldDiff = goldPriceIDR - prevGold;
+        const goldEl = document.getElementById('gold-value');
+        let goldHtml = formatIDR(goldPriceIDR) + '/gr';
+        if (goldDiff > 0) goldHtml += ` <span class="trend-up"><i class="fas fa-arrow-up"></i></span>`;
+        else if (goldDiff < 0) goldHtml += ` <span class="trend-down"><i class="fas fa-arrow-down"></i></span>`;
+        else goldHtml += ` <span class="trend-neutral"><i class="fas fa-minus"></i></span>`;
+        goldEl.innerHTML = goldHtml;
+
+        // simpan state untuk iterasi berikutnya
+        prevState = {...marketState};
     }
 
-    // Fungsi Update DOM dengan Warna Merah/Hijau
-    function updateDOM(id, newValue, oldValue, formatFunc, suffix = "") {
-        const textEl = document.getElementById(`text-${id}`);
-        const valEl = document.getElementById(`val-${id}`);
-        const indEl = document.getElementById(`ind-${id}`);
-        
-        textEl.innerText = formatFunc(newValue) + suffix;
-        
-        if (newValue > oldValue) {
-            valEl.className = "data-value up";
-            indEl.innerText = "▲";
-        } else if (newValue < oldValue) {
-            valEl.className = "data-value down";
-            indEl.innerText = "▼";
-        } else {
-            valEl.className = "data-value";
-            indEl.innerText = "—";
-        }
-    }
-
-    // Fetch API Asli untuk USD (ExchangeRate-API)
-    async function fetchRealUSD() {
+    // fungsi pembaruan data simulasi + fetch usd dari api (opsional untuk sentuhan dunia nyata)
+    async function updateMarketData() {
         try {
+            // Fetch USD rate dari API publik (ExchangeRate-API demo, fallback ke simulasi jika gagal)
             const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-            const data = await response.json();
-            if(data && data.rates && data.rates.IDR) {
-                // Modifikasi sedikit agar sesuai konteks cerita (menambah premium risiko)
-                let realIDR = data.rates.IDR;
-                // Kita gunakan rate asli jika ada, jika terlalu rendah (misal 15000), 
-                // kita adjust ke setting cerita tahun 2026 (sekitar 16800+)
-                if(realIDR < 16000) realIDR = realIDR + 1500; 
-                currentData.usd = realIDR;
+            if (response.ok) {
+                const data = await response.json();
+                if (data.rates && data.rates.IDR) {
+                    const newUsd = data.rates.IDR;
+                    // batasi perubahan drastis agar narasi tetap masuk akal (fluktuasi ±0.3%)
+                    const maxChange = marketState.usd * 0.003;
+                    let finalUsd = newUsd;
+                    if (Math.abs(newUsd - marketState.usd) > maxChange) {
+                        finalUsd = marketState.usd + (newUsd - marketState.usd) * 0.2;
+                    }
+                    marketState.usd = finalUsd;
+                }
             }
-        } catch (e) {
-            console.log("Fallback ke data simulasi USD karena limit API");
+        } catch(e) {
+            console.log("using simulated USD drift");
         }
-    }
-
-    // Fungsi Simulasi Fluktuasi Pasar Real-time (Tick)
-    function simulateMarketTick() {
-        // Simpan nilai lama
-        let old = { ...currentData };
-
-        // Fluktuasi Random (Volatilitas)
-        currentData.usd += (Math.random() - 0.45) * 15; // Kecenderungan Rupiah melemah (USD naik)
-        currentData.ihsg += (Math.random() - 0.55) * 10; // Kecenderungan IHSG turun
-        currentData.sbn += (Math.random() - 0.4) * 0.02; // Kecenderungan Yield naik
-        currentData.oil += (Math.random() - 0.5) * 0.5;
-        currentData.goldUSD_oz += (Math.random() - 0.4) * 2; // Emas perlahan naik sbg safe haven
-
-        // Update UI
-        updateDOM('usd', currentData.usd, old.usd, formatIDR);
-        updateDOM('ihsg', currentData.ihsg, old.ihsg, formatDec);
-        updateDOM('sbn', currentData.sbn, old.sbn, formatDec, "%");
-        updateDOM('oil', currentData.oil, old.oil, (val) => "$ " + formatDec(val));
+        // Simulasi fluktuasi halus untuk semua indikator (random walk yang terdidik)
+        // Mengikuti narasi tekanan ekonomi (kecenderungan IHSG melemah, yield naik, dll)
+        marketState.usd += (Math.random() - 0.48) * 18;   // drift naik tipis
+        marketState.usd = Math.max(16500, Math.min(17250, marketState.usd));
         
-        let oldGoldIDR = calcGoldIDR(old.goldUSD_oz, old.usd);
-        let newGoldIDR = calcGoldIDR(currentData.goldUSD_oz, currentData.usd);
-        updateDOM('gold', newGoldIDR, oldGoldIDR, formatIDR);
-    }
-
-    // Inisialisasi
-    async function init() {
-        // Ambil data asli sekali di awal
-        await fetchRealUSD();
+        marketState.ihsg += (Math.random() - 0.55) * 12;   // cenderung turun tipis
+        marketState.ihsg = Math.max(6600, Math.min(7000, marketState.ihsg));
         
-        // Render pertama kali
-        simulateMarketTick();
-
-        // Jalankan interval setiap 3 detik layaknya terminal Bloomberg
-        setInterval(simulateMarketTick, 3000);
+        marketState.sbn += (Math.random() - 0.45) * 0.035;
+        marketState.sbn = Math.max(6.85, Math.min(7.55, marketState.sbn));
+        
+        marketState.oil += (Math.random() - 0.5) * 0.35;
+        marketState.oil = Math.max(79.5, Math.min(85.0, marketState.oil));
+        
+        marketState.goldUSD += (Math.random() - 0.5) * 2.2;
+        marketState.goldUSD = Math.max(2120, Math.min(2190, marketState.goldUSD));
+        
+        renderData();
     }
 
-    // Jalankan skrip saat halaman dimuat
-    window.onload = init;
+    // fungsi reset ke kondisi awal narasi (tanpa reload)
+    function resetToBaseline() {
+        marketState = {
+            usd: 16840.50,
+            ihsg: 6842.30,
+            sbn: 7.15,
+            oil: 82.40,
+            goldUSD: 2150.00
+        };
+        prevState = {...marketState};
+        renderData();
+    }
 
+    // interval update setiap 6 detik (rapi, tidak terlalu cepat)
+    let intervalId;
+    function startAutoUpdate() {
+        if (intervalId) clearInterval(intervalId);
+        intervalId = setInterval(() => {
+            updateMarketData();
+        }, 6000);
+    }
+    
+    // inisialisasi + tombol manual refresh & reset
+    document.addEventListener('DOMContentLoaded', () => {
+        renderData();
+        startAutoUpdate();
+        const refreshBtn = document.getElementById('refreshBtn');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                updateMarketData();
+            });
+        }
+        // optional hidden reset: double tap refresh? tapi tambah tombol elegan di footer? sudah ada di footnote (reset tersembunyi)
+        // membuat tombol reset yang rapi: tambahkan event click pada badge "refresh pasar" sebenarnya kita bisa beri reset, tapi lebih baik ada reset elegan.
+        // Saya tambahkan tombol reset kecil di widget (hidden tapi sopan) 
+        const resetButton = document.createElement('button');
+        resetButton.textContent = 'reset baseline';
+        resetButton.className = 'button-reset';
+        resetButton.style.marginLeft = '8px';
+        resetButton.style.fontSize = '0.65rem';
+        resetButton.addEventListener('click', () => resetToBaseline());
+        const footDiv = document.querySelector('.footnote');
+        if (footDiv) footDiv.appendChild(resetButton);
+    });
 </script>
-
 </body>
 </html>
