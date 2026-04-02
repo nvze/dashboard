@@ -2,384 +2,380 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studi Teknik dan Manajemen Industri</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Industri 4.0 | Teknik & Manajemen Sistem Canggih</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
+        * {
             margin: 0;
-            padding: 40px;
-            background-color: #f0f2f5;
-            color: #2c3e50;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            background: #fff;
-            padding: 50px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+        body {
+            background: radial-gradient(circle at 20% 30%, #0a0f1c, #03060c);
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #eef4ff;
+            line-height: 1.55;
+            scroll-behavior: smooth;
         }
-        h1 {
-            color: #003366;
-            text-align: center;
-            font-size: 2.4em;
-            margin-bottom: 10px;
-            font-weight: 700;
+
+        /* custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
         }
-        .subtitle {
-            text-align: center;
-            color: #666;
-            font-size: 1.2em;
-            margin-bottom: 50px;
-            border-bottom: 4px solid #003366;
-            padding-bottom: 20px;
-            display: inline-block;
+        ::-webkit-scrollbar-track {
+            background: #10161f;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2c6e9e;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3e8fc9;
+        }
+
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(18, 156, 220, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(18, 156, 220, 0.04) 1px, transparent 1px);
+            background-size: 45px 45px;
+            pointer-events: none;
+            z-index: 0;
         }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* header tech-glass */
+        .hero {
+            margin-bottom: 3rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.25);
+            padding-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFFFFF 20%, #7bc5ff 50%, #2c9cd4 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 5px rgba(0,160,255,0.2);
+        }
+        .hero .subtitle {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #9ab3cf;
+            border-left: 4px solid #0cc;
+            padding-left: 1.2rem;
+            margin-top: 0.8rem;
+            background: linear-gradient(90deg, rgba(0,180,216,0.08), transparent);
+        }
+
+        /* cards & glass panels */
+        .glass-panel {
+            background: rgba(12, 20, 30, 0.55);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            border: 1px solid rgba(0, 200, 230, 0.2);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.2s ease, border-color 0.2s;
+        }
+        .glass-panel:hover {
+            border-color: rgba(0, 220, 250, 0.5);
+            box-shadow: 0 25px 40px -14px rgba(0,150,200,0.2);
+        }
+
         h2 {
-            background-color: #003366;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 6px;
-            margin-top: 50px;
-            font-size: 1.4em;
-            letter-spacing: 0.5px;
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-top: 0.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 6px solid #0cc;
+            padding-left: 1rem;
+            background: linear-gradient(90deg, rgba(0,204,204,0.1), transparent);
         }
+        h2 i {
+            font-size: 1.7rem;
+            color: #0cc;
+        }
+
         h3 {
-            color: #0056b3;
-            margin-top: 35px;
-            font-size: 1.2em;
-            border-left: 5px solid #0056b3;
-            padding-left: 15px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem 0;
+            color: #c6e9ff;
+            display: inline-block;
+            background: linear-gradient(120deg, rgba(0,180,216,0.2), transparent);
+            padding: 0 0.5rem 0 0;
         }
+
         p {
-            margin-bottom: 20px;
+            font-weight: 400;
+            color: #e2edff;
+            margin-bottom: 1.2rem;
             text-align: justify;
-            font-size: 1.05em;
+            font-size: 1.02rem;
         }
+
+        .tech-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            background: rgba(0, 180, 200, 0.2);
+            border-radius: 30px;
+            padding: 0.2rem 0.7rem;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.3px;
+            color: #8dd0ff;
+            border: 0.5px solid rgba(0,255,255,0.3);
+        }
+
         ul, ol {
-            margin-bottom: 20px;
-            padding-left: 30px;
+            margin: 1rem 0 1.5rem 1.8rem;
         }
         li {
-            margin-bottom: 10px;
+            margin: 0.6rem 0;
+            color: #d4e4fc;
+        }
+
+        /* tabel modern industrial */
+        .tech-table-wrapper {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 1.2rem;
+            background: rgba(0, 10, 20, 0.5);
+            border: 1px solid rgba(0, 200, 230, 0.3);
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 30px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        th, td {
-            border: 1px solid #e0e0e0;
-            padding: 15px;
-            text-align: left;
-            vertical-align: top;
+            font-size: 0.9rem;
         }
         th {
-            background-color: #f8f9fa;
-            color: #003366;
-            font-weight: bold;
-            border-bottom: 2px solid #003366;
+            text-align: left;
+            padding: 1rem 1.2rem;
+            background: rgba(0, 160, 200, 0.2);
+            font-weight: 600;
+            color: #b9f3ff;
+            border-bottom: 2px solid #0cc;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.3px;
         }
-        tr:nth-child(even) {
-            background-color: #fcfcfc;
+        td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid rgba(0, 200, 230, 0.2);
+            vertical-align: top;
+            color: #d9eaff;
         }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover td {
+            background: rgba(0, 180, 220, 0.05);
+        }
+
+        /* footnote link */
         .footer-link {
-            margin-top: 60px;
+            margin-top: 3rem;
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
+            padding: 1.5rem;
+            border-top: 1px solid rgba(0, 180, 200, 0.4);
         }
-        a {
-            color: #0056b3;
+        .footer-link a {
+            color: #3ecfff;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: color 0.3s;
+            font-weight: 600;
+            font-size: 1rem;
+            background: rgba(0, 130, 180, 0.2);
+            padding: 0.6rem 1.8rem;
+            border-radius: 40px;
+            transition: all 0.2s;
+            border: 1px solid #0cc;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        a:hover {
-            color: #003366;
-            text-decoration: underline;
+        .footer-link a i {
+            font-size: 1rem;
+        }
+        .footer-link a:hover {
+            background: #0cc;
+            color: #03060c;
+            border-color: #0cc;
+            box-shadow: 0 0 12px #0cc;
+        }
+
+        /* highlight */
+        b, strong {
+            color: #7bd2ff;
+            font-weight: 600;
+        }
+        i {
+            color: #b5e4ff;
+        }
+        .accent-text {
+            color: #0ff;
+            font-weight: 500;
+        }
+
+        @media (max-width: 780px) {
+            .container {
+                padding: 1.2rem;
+            }
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            h2 {
+                font-size: 1.6rem;
+            }
+            .glass-panel {
+                padding: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Studi Teknik dan Manajemen Industri</h1>
-        <div class="subtitle">Evolusi Disiplin, Fondasi Teoretis, dan Lanskap Akademik Global</div>
-
-        <h2>BAGIAN 1: PENDAHULUAN - EVOLUSI DAN DEFINISI TEKNIK INDUSTRI</h2>
-
-        <p>Teknik Industri (TI) bukanlah disiplin yang statis; ia adalah bidang yang dinamis, yang lahir dan berevolusi sebagai respons langsung terhadap revolusi industri yang telah membentuk dunia modern. Untuk memahami esensi Teknik Industri dan Manajemen, seseorang harus terlebih dahulu menelusuri evolusinya—dari fokus sempit pada efisiensi tugas individu hingga perannya saat ini sebagai integrator sistem sosio-teknikal yang kompleks.</p>
-
-        <h3>1.1 Akar Sejarah: Dari Efisiensi Tugas ke Manajemen Ilmiah</h3>
-
-        <p>Akar disiplin ini dapat ditelusuri kembali ke Revolusi Industri, di mana kebutuhan akan efisiensi produksi massal menjadi sangat penting. Pada akhir abad ke-19 dan awal abad ke-20, para pionir mulai menerapkan metode ilmiah pada pekerjaan. Di antara mereka, yang paling menonjol adalah <i>Frederick Winslow Taylor</i>, yang secara luas diakui sebagai "Bapak Manajemen Ilmiah". Taylor, seorang insinyur mekanik, memformalkan praktik TI modern. Dalam bukunya yang fundamental, <i>The Principles of Scientific Management</i> (1911), ia meletakkan dasar untuk peningkatan efisiensi industri melalui <i>studi waktu</i> (<i>time studies</i>) dan <i>metode kerja standar</i>. Fokusnya adalah mengoptimalkan tugas-tugas fisik untuk mengurangi pemborosan.</p>
-
-        <p>Hampir bersamaan, <i>Frank dan Lillian Gilbreth</i> memperluas pekerjaan ini. Frank Gilbreth memelopori <i>studi gerak</i> (<i>motion studies</i>), menganalisis secara rinci gerakan yang dilakukan oleh pekerja untuk menghilangkan langkah-langkah yang tidak perlu. Namun, kontribusi Lillian Gilbreth—seorang doktor di bidang psikologi—seringkali merupakan aspek yang paling bertahan lama. Dia "memperkuat peranan faktor manusia," menanamkan benih awal untuk apa yang kemudian akan menjadi disiplin ergonomi dan faktor manusia. Istilah "<i>Industrial Engineering</i>" itu sendiri mulai muncul dalam literatur sekitar tahun 1901, dan program gelar formal pertama didirikan di Penn State University sekitar tahun 1908. Pada tahap awal ini, fokusnya jelas: optimalisasi tugas-tugas fisik di lantai pabrik.</p>
-
-        <h3>1.2 Pergeseran Paradigma: Perluasan Ruang Lingkup Menuju Sistem Total</h3>
-
-        <p>Disiplin ini tidak berhenti pada studi gerak dan waktu. Sebuah pergeseran paradigma besar terjadi selama dan setelah Perang Dunia II. Konflik global ini menjadi katalisator, mempercepat pengembangan teknik-teknik baru seperti <i>Operations Research</i> (Riset Operasi) untuk memecahkan masalah logistik dan strategis militer yang sangat kompleks.</p>
-
-        <p>Setelah perang, metode kuantitatif yang kuat ini—yang mengandalkan pemodelan matematika, statistik, dan algoritma—mulai diterapkan pada masalah industri dan komersial. Hal ini secara fundamental mengubah ruang lingkup Teknik Industri. Fokusnya bergeser dari optimalisasi <i>tugas</i> individu ke optimalisasi <i>sistem total</i>.</p>
-
-        <p>Definisi disiplin ini diperluas melampaui manufaktur untuk mencakup desain, peningkatan, dan instalasi "sistem terintegrasi". Sistem terintegrasi ini secara eksplisit didefinisikan sebagai kombinasi holistik dari <i>manusia</i>, <i>material</i>, <i>mesin/peralatan</i>, <i>informasi</i>, dan <i>energi</i>. Akibatnya, TI modern melepaskan diri dari batas-batas pabrik. Aplikasinya meluas ke berbagai "operasi layanan" (<i>service operations</i>), termasuk rumah sakit, maskapai penerbangan, lembaga keuangan, dan institusi pendidikan. Pergeseran ini menandai evolusi TI dari disiplin yang berfokus pada optimalisasi 'fisik' menjadi disiplin yang berfokus pada optimalisasi 'abstrak'—memodelkan dan merancang sistem yang kompleks dan seringkali tidak terlihat.</p>
-
-        <h3>1.3 Definisi Kontemporer: Jembatan Antara Teknik dan Manajemen</h3>
-
-        <p>Berdasarkan evolusi ini, definisi kontemporer Teknik Industri adalah definisi yang berfokus pada integrasi. TI secara unik berfungsi sebagai "jembatan antara teknik dan manajemen," memastikan bahwa sistem yang kompleks berfungsi secara kohesif, efektif, dan efisien.</p>
-
-        <p>Di Indonesia, lingkup keilmuan Teknik Industri sering dikategorikan ke dalam tiga bidang keahlian utama, yang mencerminkan kedalaman dan keluasan disiplin ini:</p>
-        <ul>
-            <li><b>Sistem Manufaktur:</b> Berfokus pada pendekatan TI klasik untuk meningkatkan kualitas, produktivitas, dan efisiensi dalam sistem integral di lantai produksi (manusia, mesin, material).</li>
-            <li><b>Manajemen Industri:</b> Cenderung bergerak ke arah persoalan yang bersifat makro dan strategis, seringkali melampaui isu-isu teknis murni.</li>
-            <li><b>Sistem Industri dan Tekno-Ekonomi:</b> Memanfaatkan pendekatan TI untuk meningkatkan daya saing sistem integral yang lebih besar, dengan mempertimbangkan interaksi dengan komunitas bisnis, masyarakat, dan pemerintah.</li>
-        </ul>
-
-        <p>Pada intinya, peran seorang insinyur industri adalah merancang, menganalisis, dan mengelola sistem yang menghasilkan nilai tambah, baik itu barang maupun jasa.</p>
-
-        <h2>BAGIAN 2: PILAR-PILAR FUNDAMENTAL KEILMUAN TEKNIK INDUSTRI</h2>
-
-        <p>Teknik Industri modern ditopang oleh serangkaian pilar keilmuan yang fundamental. Pilar-pilar ini menyediakan kerangka kerja teoretis dan alat analitis yang diperlukan untuk merancang dan mengoptimalkan sistem yang kompleks.</p>
-
-        <h3>2.1 Riset Operasi (Operations Research - OR): Ilmu Pengambilan Keputusan</h3>
-
-        <p>Riset Operasi (OR) adalah inti metodologis dari Teknik Industri. Secara formal, OR didefinisikan sebagai "disiplin untuk menerapkan metode analitis tingkat lanjut untuk membantu membuat keputusan yang lebih baik". Bidang ini, yang dikelola oleh organisasi profesional seperti INFORMS (<i>Institute for Operations Research and the Management Sciences</i>), berfokus pada penggunaan model matematika, statistik, dan algoritma untuk memecahkan masalah optimisasi dan alokasi sumber daya.</p>
-
-        <p>Sebagai contoh fundamental dari kekuatan OR, kita dapat meninjau <i>Teori Antrian (Queueing Theory)</i>. Ini adalah studi matematis tentang <i>garis tunggu</i> atau <i>antrian</i>. Teori ini berawal dari karya <i>Agner Krarup Erlang</i> pada tahun 1909, yang memodelkan jumlah sirkuit telepon yang diperlukan untuk menangani panggilan di Copenhagen Telephone Company. Karyanya memungkinkan para insinyur untuk memprediksi metrik kunci seperti waktu tunggu rata-rata dan panjang antrian. Model antrian sering diklasifikasikan menggunakan <i>Notasi Kendall</i>, seperti model M/M/1 yang umum.</p>
-
-        <p>Pentingnya OR tidak dapat dilebih-lebihkan. Ia menandai lompatan konseptual yang sangat besar bagi TI. Jika Taylorisme adalah disiplin <i>observasi</i> dan <i>deskriptif</i> (mengukur <i>apa yang ada</i> dan menstandarkannya), OR adalah disiplin <i>prediktif</i> dan <i>preskriptif</i>. Dengan menggunakan model matematika, seorang insinyur industri dapat <i>memprediksi</i> apa yang akan terjadi jika sumber daya diubah (misalnya, menambahkan satu server lagi ke antrian) dan dengan demikian <i>merancang</i> sistem untuk kinerja optimal, bukan hanya mengoptimalkan apa yang sudah ada.</p>
-
-        <h3>2.2 Manajemen Rantai Pasok (SCM) dan Manajemen Operasi (OM)</h3>
-
-        <p>Manajemen Rantai Pasok (SCM) adalah pilar TI yang berfokus pada jaringan perusahaan yang saling bekerja sama untuk membuat dan mengirimkan produk kepada konsumen akhir. Ini adalah bidang yang sangat luas, mencakup segala hal mulai dari pengembangan produk, peramalan permintaan, perencanaan kapasitas, eksekusi produksi, hingga logistik, distribusi, dan manajemen transportasi.</p>
-
-        <p>Secara teoretis, SCM berakar kuat pada <i>Teori Inventori (Inventory Theory)</i>. Karya seminal di bidang ini, seperti <i>Studies in the Mathematical Theory of Inventory and Production</i> (1958), meletakkan dasar matematis untuk mengelola persediaan. Dua model dasar yang diajarkan dalam TI berasal dari sini:</p>
-        <ul>
-            <li><b>Model Economic Order Quantity (EOQ):</b> Menangani "<i>cycle stocks</i>" dengan menyeimbangkan biaya pemesanan dengan biaya penyimpanan.</li>
-            <li><b>Model Newsvendor:</b> Menangani "<i>safety stocks</i>" dalam menghadapi permintaan yang tidak pasti (stokastik).</li>
-        </ul>
-
-        <p>Namun, sebuah tinjauan yang lebih dalam terhadap literatur akademik SCM mengungkapkan gambaran yang lebih kompleks. Sebuah studi tentang fondasi teoretis penelitian SCM menunjukkan bahwa "teori inventori umum" hanya menyumbang sebagian kecil dari kerangka kerja yang digunakan. Faktanya, penelitian SCM modern sangat bergantung pada teori-teori dari ilmu sosial dan strategi, seperti <i>Contingency Theory</i>, <i>Resource Dependence Theory</i>, <i>Agency Theory</i>, dan <i>Game Theory</i>.</p>
-
-        <p>Ini menunjukkan bahwa SCM, sebagai pilar TI, bukanlah murni masalah optimisasi matematis. Ini adalah disiplin <i>sosial-strategis</i>. Ini adalah tentang mengelola <i>kekuasaan</i>, <i>insentif</i>, <i>risiko</i>, dan <i>informasi</i> di antara perusahaan-perusahaan independen yang harus berkolaborasi dalam lingkungan yang kompetitif.</p>
-
-        <h3>2.3 Perencanaan dan Pengendalian Produksi (PPC)</h3>
-
-        <p>Perencanaan dan Pengendalian Produksi (PPC) adalah fungsi TI klasik yang menjawab pertanyaan: <i>apa</i>, <i>kapan</i>, dan <i>berapa banyak</i> yang harus diproduksi. Penjadwalan adalah salah satu tugas utamanya yang paling sulit. Dalam sejarah TI, dua filosofi dominan telah muncul untuk mengatasi PPC:</p>
-        <ul>
-            <li><b>Material Requirements Planning (MRP):</b> Ini adalah pendekatan <i>push</i> yang terstruktur dan intensif data. Berdasarkan tiga input utama—<i>Master Production Schedule</i> (MPS), <i>Bill of Material</i> (BOM), dan data <i>lead time</i> serta ketersediaan persediaan—sistem MRP menghitung secara tepat kapan pesanan material harus dilakukan dan kapan produksi harus dimulai.</li>
-            <li><b>Just-in-Time (JIT):</b> Berasal dari teknik manufaktur Jepang (khususnya Toyota), JIT adalah filosofi <i>pull</i> yang ramping (<i>lean</i>). Fokus utamanya adalah mengurangi persediaan (yang dianggap sebagai pemborosan) dan hanya memproduksi apa yang dibutuhkan, saat dibutuhkan.</li>
-        </ul>
-
-        <p>Pada pandangan pertama, MRP (perencanaan terpusat yang besar) dan JIT (eksekusi yang ramping dan fleksibel) tampak bertentangan. Namun, praktik TI modern telah menemukan "sinergi" dan "integrasi" di antara keduanya. Sistem perencanaan modern, seperti <i>Enterprise Resource Planning</i> (ERP), memungkinkan perusahaan untuk menggunakan <i>kedua</i> filosofi tersebut secara bersamaan. MRP digunakan untuk <i>perencanaan tingkat makro</i> (misalnya, memesan bahan baku jangka panjang), sementara sinyal JIT (seperti Kanban) digunakan untuk <i>eksekusi lantai pabrik</i> (misalnya, mengotorisasi produksi harian). Ini adalah contoh sempurna dari peran TI sebagai <i>integrator</i> dari filosofi yang tampaknya berbeda.</p>
-
-        <h3>2.4 Manajemen Kualitas Total (TQM) dan Keandalan</h3>
-
-        <p>TQM adalah pilar TI yang didefinisikan sebagai upaya organisasi terintegrasi untuk meningkatkan kualitas di <i>setiap</i> tingkatan, dengan tujuan akhir adalah kepuasan pelanggan. Bidang ini dibentuk oleh filosofi "guru kualitas" yang karyanya mendefinisikan manajemen kualitas modern:</p>
-        <ul>
-            <li><b>W. Edwards Deming:</b> Sangat berpengaruh dalam rekonstruksi Jepang pasca-PDII. Filosofi Deming berpusat pada <i>metode statistik</i> untuk mengendalikan proses, <i>mengurangi variasi</i>, dan siklus <i>Plan-Do-Check-Act</i> (PDCA) yang terkenal untuk perbaikan berkelanjutan. Deming secara terkenal berargumen bahwa manajemen, bukan pekerja, bertanggung jawab atas sebagian besar masalah kualitas.</li>
-            <li><b>Joseph M. Juran:</b> Juga berpengaruh besar di Jepang, Juran memandang kualitas sebagai <i>fungsi bisnis</i> yang dapat dikelola. Ia terkenal dengan <i>Juran Trilogy</i>: (1) Perencanaan Kualitas, (2) Pengendalian Kualitas, dan (3) Peningkatan Kualitas. Ia juga mempopulerkan Prinsip Pareto (aturan 80/20) dalam manajemen kualitas.</li>
-            <li><b>Philip Crosby:</b> Dikenal dengan filosofi absolutnya tentang "<i>Zero Defects</i>" (Nol Cacat).</li>
-        </ul>
-
-        <p>Evolusi modern dari TQM adalah <i>Six Sigma</i>, sebuah metodologi yang sangat disiplin dan terstruktur yang menggunakan alat statistik untuk mengidentifikasi dan menghilangkan cacat, bertujuan untuk mencapai tingkat kualitas yang sangat tinggi. Kontras antara pendekatan Deming (fokus pada statistik proses) dan pendekatan Juran (fokus pada manajemen bisnis) bukanlah sebuah kontradiksi. Sebaliknya, ini menyoroti <i>DNA ganda</i> dari Teknik Industri: disiplin ini secara unik menuntut kefasihan yang sama dalam <i>analisis statistik</i> yang ketat dan <i>strategi manajemen</i> yang lebih luas.</p>
-
-        <h3>2.5 Ergonomi dan Faktor Manusia (Human Factors & Ergonomics - HF&E)</h3>
-
-        <p>Pilar ini berfokus pada komponen <i>manusia</i> dalam sistem. Jika pilar-pilar lain berfokus pada mesin, material, dan proses, HF&E berfokus pada <i>interaksi</i> antara manusia dan elemen-elemen tersebut. Definisi formal yang diadopsi oleh <i>Human Factors and Ergonomics Society</i> (HFES) dan <i>International Ergonomics Association</i> (IEA) menyatakan bahwa HF&E adalah "disiplin ilmiah yang berkaitan dengan pemahaman tentang <i>interaksi antara manusia dan elemen lain dari suatu sistem</i>".</p>
-
-        <p>Tujuan dari HF&E adalah ganda: untuk mengoptimalkan (1) <i>kesejahteraan manusia</i> (misalnya, meningkatkan keamanan, mengurangi kelelahan, meningkatkan kenyamanan) dan (2) <i>kinerja sistem secara keseluruhan</i> (misalnya, meningkatkan produktivitas, mengurangi kesalahan manusia). Ini adalah bidang yang sangat interdisipliner, mengambil dari psikologi, teknik, biomekanik, desain industri, dan fisiologi.</p>
-
-        <p>Pilar ini dapat dilihat sebagai pematangan dan formalisasi ilmiah dari wawasan awal Lillian Gilbreth. Ini adalah pengakuan formal bahwa "manusia" dalam sistem "manusia, mesin, material" adalah komponen yang paling kompleks dan seringkali paling penting. Ini memastikan bahwa TI tidak pernah terdegradasi menjadi sekadar optimalisasi mesin yang murni Tayloristik.</p>
-
-        <h3>2.6 Rekayasa Sistem (Systems Engineering - SE)</h3>
-
-        <p>Banyak program Teknik Industri terkemuka di dunia kini secara eksplisit memasukkan "Sistem" dalam nama mereka (misalnya, "<i>Industrial and Systems Engineering</i>" di Georgia Tech dan NUS). Pilar ini berfokus pada gambaran besar. Menurut <i>International Council on Systems Engineering</i> (INCOSE), SE adalah "aplikasi formal pemodelan" untuk mendukung <i>seluruh siklus hidup</i> sistem—mulai dari desain konseptual, analisis kebutuhan, desain, verifikasi, hingga validasi.</p>
-
-        <p>Ini sangat bergantung pada pendekatan seperti <i>Model-Based Systems Engineering</i> (MBSE) dan <i>Systems Modeling & Simulation</i> (SMS) untuk mengelola kompleksitas yang luar biasa dari sistem modern. Penambahan "Sistem" ke "Teknik Industri" menandakan pergeseran peran yang penting. Jika banyak pilar TI lainnya secara historis berfokus pada <i>peningkatan</i> proses yang <i>sudah ada</i>, Rekayasa Sistem secara eksplisit berfokus pada <i>desain</i> sistem baru dari "fase desain konseptual". Ini memindahkan peran insinyur industri dari peran taktis (membuat pabrik berjalan lebih baik) ke peran strategis (merancang sistem sosio-teknikal yang kompleks—seperti jaringan energi, sistem perawatan kesehatan, atau platform logistik global—dari awal).</p>
-
-        <h2>BAGIAN 3: TRANSFORMASI DIGITAL DAN TEKNIK INDUSTRI 4.0</h2>
-
-        <p>Revolusi Industri Keempat (I4.0) saat ini sedang mentransformasi lanskap industri melalui integrasi teknologi digital, fisik, dan biologis. Teknologi-teknologi ini—terutama <i>Artificial Intelligence</i> (AI), <i>Internet of Things</i> (IoT), <i>Big Data Analytics</i>, dan robot otonom—menciptakan lingkungan manufaktur yang lebih cerdas dan responsif.</p>
-
-        <h3>3.1 Peran Sentral TI dalam Industri 4.0</h3>
-
-        <p>Teknik Industri diposisikan secara unik untuk <i>memimpin</i> transformasi I4.0. Alasannya sederhana: I4.0 pada intinya adalah masalah <i>integrasi</i> dan <i>optimalisasi</i> sistem. AI dan Analitika Data bukanlah tujuan itu sendiri; mereka adalah <i>alat baru</i> yang sangat kuat untuk memecahkan <i>masalah-masalah klasik TI</i>. Pemanfaatan teknologi baru ini secara efektif untuk meningkatkan kinerja dan efisiensi adalah inti dari keahlian Teknik Industri.</p>
-
-        <h3>3.2 Aplikasi: Dari Manufaktur Cerdas ke Keberlanjutan</h3>
-
-        <p>Kurikulum dan penelitian TI di seluruh dunia kini secara agresif mengintegrasikan alat-alat I4.0. AI dan Analitika Data digunakan untuk <i>optimasi sistem</i> di hampir setiap pilar TI. Contoh spesifik meliputi:</p>
-        <ul>
-            <li><b>Produksi dan Manufaktur Cerdas:</b> Menggunakan model AI untuk meningkatkan efisiensi produksi, alokasi sumber daya, dan analisis data berbasis data (<i>Data Driven Analytics</i>).</li>
-            <li><b>Pemeliharaan:</b> Beralih dari pemeliharaan preventif ke <i>Predictive Maintenance</i> (Pemeliharaan Prediktif) menggunakan analitika data.</li>
-            <li><b>Keberlanjutan:</b> Memanfaatkan AI dan <i>Big Data</i> untuk mengurangi limbah, melacak emisi, dan mendorong praktik berkelanjutan dalam rantai pasok.</li>
-            <li><b>Faktor Manusia:</b> Menggunakan sensor modern (misalnya, <i>Heart Rate Monitor</i>) untuk menganalisis secara kuantitatif efisiensi gerakan kerja dan keselamatan pekerja.</li>
-        </ul>
-
-        <p>Jauh dari menjadi ancaman, I4.0 berfungsi sebagai <i>force multiplier</i> untuk Teknik Industri. Ada narasi umum bahwa AI akan menggantikan pekerjaan, tetapi data menunjukkan bahwa untuk memanfaatkan AI secara efektif di lingkungan industri, diperlukan pemahaman yang mendalam tentang "manajemen operasi, logistik, faktor manusia, ekonomi, dan metode optimisasi". Ini, secara harfiah, adalah daftar pilar keilmuan TI. Akibatnya, ada "kekurangan talenta" yang signifikan untuk insinyur yang dapat menjembatani kesenjangan antara algoritma <i>machine learning</i> yang kompleks dan <i>Return on Investment</i> (ROI) yang nyata di lantai pabrik. Insinyur Industri adalah jembatan tersebut.</p>
-
-        <h2>BAGIAN 4: LANSKAP AKADEMIK GLOBAL: STUDI KURIKULUM UNIVERSITAS TERNAMA</h2>
-
-        <p>Analisis terhadap kurikulum di universitas-universitas teknik terkemuka di dunia mengungkapkan bagaimana pilar-pilar teoretis dan tren I4.0 ini diterjemahkan ke dalam pedagogi. Empat institusi berikut mencontohkan empat filosofi yang berbeda namun sama-sama terdepan dalam pendidikan Teknik Industri.</p>
-
-        <h3>4.1 Studi Kasus 1: Georgia Institute of Technology (AS) - Model Spesialisasi 'T-Shaped'</h3>
-
-        <p>Program H. Milton Stewart School of Industrial and Systems Engineering (ISyE) di Georgia Tech secara konsisten diperingkat sebagai program #1 di Amerika Serikat. Filosofi kurikulum mereka dapat digambarkan sebagai model 'T-Shaped'. <i>Palang horizontal</i> dari "T" adalah landasan metodologi yang kuat dan wajib yang dimiliki oleh <i>semua</i> mahasiswa ISyE. Landasan ini dibangun di atas probabilitas, optimisasi, statistik, komputasi, dan ekonomi. <i>Batang vertikal</i> dari "T" adalah <i>sistem konsentrasi</i> unik mereka.</p>
-
-        <p>Mahasiswa diharuskan memilih satu area spesialisasi yang mendalam, seperti <i>Analytics and Data Science</i>, <i>Supply Chain Engineering</i>, atau <i>Economic and Financial Systems</i>. Pendekatan ini secara sadar merancang lulusan yang <i>dua-bisa</i>: mereka adalah <i>generalis</i> dalam metode TI dan <i>spesialis</i> dalam domain aplikasi, membuat mereka sangat mudah beradaptasi dan bernilai tinggi.</p>
-
-        <p><b>Tabel 1: Struktur Kurikulum BS IE di Georgia Tech (Model "T-Shaped")</b></p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Landasan Metodologi (Wajib untuk Semua)</th>
-                    <th>Contoh Pilihan Konsentrasi (Spesialisasi)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Probabilitas</td>
-                    <td>Advanced Studies in Operations Research and Statistics</td>
-                </tr>
-                <tr>
-                    <td>Optimisasi</td>
-                    <td>Analytics and Data Science</td>
-                </tr>
-                <tr>
-                    <td>Statistik</td>
-                    <td>Economic and Financial Systems</td>
-                </tr>
-                <tr>
-                    <td>Komputasi</td>
-                    <td>Operations Research</td>
-                </tr>
-                <tr>
-                    <td>Ekonomi</td>
-                    <td>Quality and Statistics</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>Supply Chain Engineering</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>4.2 Studi Kasus 2: Massachusetts Institute of Technology (AS) - Model 'Interdisipliner' Tingkat Pascasarjana</h3>
-
-        <p>Di MIT, kekuatan TI terkonsentrasi di tingkat pascasarjana di <i>Operations Research Center</i> (ORC). Filosofi MIT adalah bahwa TI/OR modern adalah <i>sains gabungan</i> (<i>joint science</i>) yang pada dasarnya bersifat interdisipliner. Kurikulum PhD mereka, misalnya, <i>mengharuskan</i> mahasiswa untuk lulus ujian kualifikasi dalam tiga serangkai metodologi modern: (1) Optimisasi, (2) Probabilitas, dan (3) Pembelajaran Mesin/Statistik. Banyak mata kuliah inti mereka memiliki kode <i>gabungan</i> (ditandai dengan 'J').</p>
-
-        <p>Sebagai contoh, mata kuliah <i>6.7210J / 15.081J (Introduction to Mathematical Programming)</i> adalah mata kuliah tunggal yang diajarkan bersama oleh <i>Course 6</i> (Teknik Elektro dan Ilmu Komputer) dan <i>Course 15</i> (Manajemen). Ini mencerminkan keyakinan pedagogis bahwa seorang ahli TI/OR modern tidak dapat eksis tanpa penguasaan yang sama dalam <i>algoritma</i> (Ilmu Komputer), <i>strategi bisnis</i> (Manajemen), dan <i>model matematis</i> (OR).</p>
-
-        <p><b>Tabel 2: Contoh Mata Kuliah Inti di MIT Operations Research Center</b></p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Kategori Kualifikasi PhD</th>
-                    <th>Contoh Mata Kuliah (Kode Gabungan Menunjukkan Sifat Interdisipliner)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Optimisasi</td>
-                    <td>6.7210J/15.081J (Introduction to Mathematical Programming)<br>15.083 (Integer Optimization)<br>6.7220J/15.084J (Nonlinear Optimization)</td>
-                </tr>
-                <tr>
-                    <td>Pemodelan Probabilistik</td>
-                    <td>6.7700J/15.085J (Fundamentals of Probability)<br>6.7710 (Discrete Stochastic Processes)<br>18.445 (Introduction to Stochastic Processes)</td>
-                </tr>
-                <tr>
-                    <td>Statistik & Pembelajaran Mesin</td>
-                    <td>6.7900 (Machine Learning)<br>15.077 (Statistical Theory and Data Mining)<br>15.095 (Machine Learning Under a Modern Optimization Lens)</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>4.3 Studi Kasus 3: National University of Singapore (Singapura) - Model 'Literasi Fundamental'</h3>
-
-        <p>Kurikulum Bachelor of Engineering (Industrial & Systems Engineering) di NUS adalah salah satu yang paling progresif dalam merangkul I4.0. Kurikulum mereka memiliki <i>Common Curriculum</i> yang wajib untuk semua mahasiswa teknik, selain dari <i>Major Requirements</i> khusus ISE. Yang paling menonjol adalah filosofi mereka dalam memperlakukan AI/ML sebagai <i>literasi fundamental</i>, bukan <i>spesialisasi</i>.</p>
-
-        <p>Berbeda dengan Georgia Tech di mana "Analytics" adalah konsentrasi <i>pilihan</i>, atau MIT di mana ML adalah fokus <i>pascasarjana</i>, di NUS, mata kuliah seperti <i>EE2211 Introduction to Machine Learning</i> dan <i>CS2040 Data Structures and Algorithms</i> adalah bagian dari persyaratan <i>wajib</i> di tingkat sarjana. Ini adalah pernyataan pedagogis yang mendalam. NUS secara efektif telah memutuskan bahwa AI/ML bukan lagi topik lanjutan, melainkan literasi dasar yang sama pentingnya bagi seorang insinyur industri modern seperti halnya Kalkulus atau Fisika.</p>
-
-        <p><b>Tabel 3: Integrasi Analitika & ML dalam Kurikulum Wajib BS ISE di NUS (Cohort AY2021-22)</b></p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Kategori Persyaratan</th>
-                    <th>Contoh Mata Kuliah Wajib</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Common Courses</td>
-                    <td>EE2211 (Introduction to Machine Learning)<br>PF1101 (Fundamentals of Project Management)<br>DTK1234 (Design Thinking)</td>
-                </tr>
-                <tr>
-                    <td>ISE Major Core</td>
-                    <td>IE2100 (Probability Models with Applications)<br>IE2110 (Operations Research I)<br>IE3101 (Statistics for Engineering Applications)<br>CS2040 (Data Structures and Algorithms)<br>ST2334 (Probability and Statistics)</td>
-                </tr>
-                <tr>
-                    <td>ISE Technical Electives</td>
-                    <td>(Pilihan mencakup spesialisasi mendalam)<br>IE4213 (Learning from Data)<br>IE4215 (Machine Learning for Industrial Engineering)<br>IE5205 (Healthcare Systems and Analytics)</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>4.4 Studi Kasus 4: TU Delft (Belanda) - Model 'Sosio-Teknikal'</h3>
-
-        <p>Di Eropa, Teknik Industri sering kali tertanam dalam konteks kebijakan dan manajemen yang lebih luas. Di TU Delft, banyak konsep inti TI (seperti logistik, optimisasi, dan pengambilan keputusan) ditemukan di dalam Fakultas <i>Technology, Policy and Management</i> (TPM). Filosofi mereka adalah model <i>sosio-teknikal</i> yang eksplisit. Kurikulum TPM secara unik <i>menggabungkan</i> alat teknis TI dengan <i>konteks</i> sosial, etika, dan kebijakan.</p>
-
-        <p>Mereka tidak hanya menawarkan mata kuliah "Machine Learning"; mereka menawarkan "TPM034A: <i>Machine learning for socio-technical systems</i>". Mereka tidak hanya menawarkan "AI"; mereka menawarkan "TPM014B: <i>Ethics of AI</i>". Pendekatan ini mengambil pilar HF&E (Bagian 2.5) dan Rekayasa Sistem (Bagian 2.6) dan menjadikannya filosofi sentral dari <i>seluruh</i> fakultas. Model TU Delft berargumen bahwa kegagalan rekayasa terbesar di abad ke-21 bukanlah kegagalan <i>teknis</i> murni, melainkan kegagalan <i>sosio-teknis</i>—kegagalan untuk memahami bagaimana teknologi berinteraksi dengan manusia, kebijakan, dan masyarakat.</p>
-
-        <p><b>Tabel 4: Contoh Mata Kuliah Sosio-Teknikal dan Analitika di TU Delft (Fakultas TPM)</b></p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Kategori</th>
-                    <th>Contoh Mata Kuliah</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Alat Teknis & Analitis</td>
-                    <td>TPM034A (Machine learning for socio-technical systems)<br>TPM039A (Statistical Methods for Causal Inference and Prediction)<br>SEN1511 (Engineering Optimization...)<br>SEN9720 (Logistics and Supply Chain Innovations)</td>
-                </tr>
-                <tr>
-                    <td>Konteks & Pengambilan Keputusan</td>
-                    <td>TPM014B (Ethics of AI)<br>EPA141a (Model-based Decision-making)<br>TPM032A (Multi-criteria Decision Analysis)<br>EPA121a (Actor and Strategy Models)</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2>BAGIAN 5: SINTESIS DAN ARAH MASA DEPAN</h2>
-
-        <h3>5.1 Sintesis: Peran Teknik Industri sebagai 'Meta-Disiplin'</h3>
-
-        <p>Studi ini telah menelusuri evolusi Teknik Industri dari serangkaian <i>alat</i> yang berfokus pada efisiensi pabrik (studi waktu Taylor, teori antrian Erlang) menjadi <i>meta-disiplin</i> atau <i>disiplin integrator</i> yang canggih. Peran modern TI bukanlah untuk bersaing dengan disiplin teknik lain, tetapi untuk mengoptimalkan <i>sistem</i> tempat mereka beroperasi, membuat disiplin teknik mesin, elektro, dan sipil menjadi lebih efektif.</p>
-
-        <p>Perjalanan dari <i>stopwatch</i> Taylor ke model <i>sosio-teknis</i> TU Delft dan kurikulum <i>AI-sentris</i> NUS bukanlah perubahan fundamental dalam disiplin, melainkan <i>pematangan</i> alami dari disiplin tersebut. Fokusnya selalu pada efisiensi, kualitas, dan produktivitas; yang berubah hanyalah <i>kompleksitas</i> sistem yang dioptimalkan dan <i>kecanggihan</i> alat yang digunakan.</p>
-
-        <h3>5.2 Arah Masa Depan: Insinyur sebagai Arsitek Sistem</h3>
-
-        <p>Ke depan, kompleksitas hanya akan meningkat. Tantangan global terbesar—disrupsi rantai pasok, transisi ke energi berkelanjutan, dan integrasi etis dari kecerdasan buatan—pada dasarnya adalah masalah Teknik Industri dan Sistem.</p>
-
-        <p>Peran masa depan Insinyur Industri, seperti yang ditunjukkan oleh kurikulum terdepan di dunia, adalah sebagai <i>arsitek sistem</i>. Mereka adalah para profesional yang dilatih secara unik di persimpangan teknologi dan manajemen untuk:</p>
-        <ul>
-            <li>Memahami <i>sistem yang kompleks</i> (menggunakan Rekayasa Sistem & Faktor Manusia).</li>
-            <li>Memodelkan <i>sistem tersebut</i> (menggunakan Riset Operasi & Simulasi).</li>
-            <li>Mengoptimalkan <i>sistem tersebut</i> (menggunakan AI, Pembelajaran Mesin, dan Optimisasi).</li>
-            <li>Mengelola <i>sistem tersebut</i> (menggunakan SCM, PPC, dan TQM).</li>
-        </ul>
-
-        <p>Di dunia yang didorong oleh teknologi yang semakin terspesialisasi, nilai dari seorang <i>generalis</i> yang terlatih secara teknis dan berpikir secara sistemik—Insinyur Industri dan Sistem—menjadi lebih penting daripada sebelumnya.</p>
-
-        <div class="footer-link">
-            <p><a href="blog.html">Kembali ke daftar blog</a></p>
+<div class="grid-bg"></div>
+<div class="container">
+    <div class="hero">
+        <h1><i class="fas fa-microchip" style="color: #0cc; margin-right: 12px;"></i> Studi Teknik & Manajemen Industri</h1>
+        <div class="subtitle">Evolusi Disiplin · Fondasi Teoretis · Lanskap Akademik Global 4.0</div>
+        <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap;">
+            <span class="tech-badge"><i class="fas fa-chart-line"></i> Operations Research</span>
+            <span class="tech-badge"><i class="fas fa-robot"></i> AI & Industrial Systems</span>
+            <span class="tech-badge"><i class="fas fa-industry"></i> Smart Manufacturing</span>
         </div>
     </div>
+
+    <!-- BAGIAN 1 -->
+    <div class="glass-panel">
+        <h2><i class="fas fa-history"></i> BAGIAN 1: Evolusi & Definisi Teknik Industri</h2>
+        <p>Teknik Industri (TI) lahir dari rahim Revolusi Industri — bukan sekadar efisiensi, melainkan perekayasaan sistem sosio-teknikal. <strong>Frederick Winslow Taylor</strong> memformalkan manajemen ilmiah dengan <i>time studies</i>, sementara <strong>Frank & Lillian Gilbreth</strong> mengintegrasikan faktor manusia melalui motion studies. Lillian Gilbreth, doktor psikologi, menjadi fondasi awal <i>ergonomi</i>. Perang Dunia II memicu <strong>Operations Research</strong> (Riset Operasi) yang mengubah paradigma: dari optimalisasi tugas ke optimalisasi sistem total: manusia, mesin, material, informasi, energi.</p>
+        <p>Di Indonesia, lingkup keilmuan TI terbagi menjadi <strong>Sistem Manufaktur</strong>, <strong>Manajemen Industri</strong>, dan <strong>Sistem Industri & Tekno-Ekonomi</strong>. Peran kontemporer insinyur industri adalah jembatan strategis antara teknik dan manajemen — menciptakan nilai tambah berkelanjutan.</p>
+    </div>
+
+    <!-- BAGIAN 2 - PILAR FUNDAMENTAL -->
+    <div class="glass-panel">
+        <h2><i class="fas fa-cubes"></i> BAGIAN 2: Pilar Fundamental Keilmuan TI</h2>
+        <h3>2.1 Riset Operasi (OR) · Ilmu Keputusan</h3>
+        <p>OR, didorong oleh <i>INFORMS</i>, menggunakan model matematis & algoritma. <strong>Teori Antrian</strong> (A.K. Erlang, 1909) memprediksi waktu tunggu & panjang antrian (notasi Kendall M/M/1). OR melompat dari observasi Tayloristik ke analisis <i>prediktif-preskriptif</i> — merancang sistem masa depan.</p>
+        
+        <h3>2.2 Manajemen Rantai Pasok (SCM) & OM</h3>
+        <p>Model EOQ (Economic Order Quantity) dan Newsvendor mengelola cycle/safety stocks. Literatur modern SCM mengadopsi <i>Contingency Theory, Agency Theory, Game Theory</i> — menunjukkan bahwa SCM adalah disiplin sosial-strategis sekaligus kuantitatif.</p>
+        
+        <h3>2.3 Perencanaan & Pengendalian Produksi (PPC)</h3>
+        <p><strong>MRP (push)</strong> vs <strong>JIT/Kanban (pull)</strong> — sinergi modern melalui sistem ERP. TI bertindak sebagai integrator, memadukan perencanaan makro dan eksekusi ramping di lantai pabrik.</p>
+        
+        <h3>2.4 Manajemen Kualitas Total (TQM) & Keandalan</h3>
+        <p><strong>Deming</strong> (PDCA, statistik), <strong>Juran</strong> (trilogi kualitas, Pareto), dan <strong>Crosby</strong> (Zero Defects) meletakkan dasar Six Sigma. DNA ganda TI: analisis statistik ketat dan strategi manajemen holistik.</p>
+        
+        <h3>2.5 Ergonomi & Faktor Manusia (HF&E)</h3>
+        <p>HF&E (HFES/IEA) mengoptimalkan kesejahteraan manusia & kinerja sistem. Pematangan wawasan Lillian Gilbreth, memastikan manusia tetap pusat dari sistem sosio-teknikal.</p>
+        
+        <h3>2.6 Rekayasa Sistem (Systems Engineering)</h3>
+        <p>INCOSE mendefinisikan SE sebagai pemodelan formal seluruh siklus hidup sistem. MBSE & simulasi sistem memungkinkan desain konseptual — insinyur industri sebagai arsitek sistem kompleks (jaringan energi, logistik global).</p>
+    </div>
+
+    <!-- BAGIAN 3: TRANSFORMASI DIGITAL & INDUSTRI 4.0 -->
+    <div class="glass-panel">
+        <h2><i class="fas fa-microchip"></i> BAGIAN 3: Transformasi Digital & Teknik Industri 4.0</h2>
+        <p>Revolusi Industri 4.0 mengintegrasikan AI, IoT, Big Data, robot otonom. TI berada di pusat integrasi: <strong>alat canggih untuk masalah klasik TI</strong>. AI digunakan untuk <i>Predictive Maintenance</i>, manufaktur cerdas, optimalisasi rantai pasok, dan keberlanjutan. Sensor modern (heart rate, motion capture) memperkaya analisis ergonomi. Kekurangan talenta justru terjadi pada insinyur yang mampu menjembatani <i>machine learning</i> dan <i>ROI di lantai produksi</i> — insinyur industrilah jembatan emas tersebut.</p>
+    </div>
+
+    <!-- BAGIAN 4: LANSKAP AKADEMIK GLOBAL -->
+    <div class="glass-panel">
+        <h2><i class="fas fa-globe-americas"></i> BAGIAN 4: Lanskap Akademik Global · Studi Kurikulum Ternama</h2>
+        
+        <h3><i class="fas fa-chalkboard-user"></i> 4.1 Georgia Tech (AS) — Model 'T-Shaped'</h3>
+        <p>Program ISyE #1 di AS. Semua mahasiswa menguasai <strong>landasan metodologi</strong> (probabilitas, optimasi, statistik, komputasi, ekonomi) lalu memilih konsentrasi vertikal seperti <i>Analytics & Data Science, Supply Chain Engineering, Economic & Financial Systems</i>. Lulusan generalis-spesialis bernilai tinggi.</p>
+        <div class="tech-table-wrapper">
+            <table>
+                <thead><tr><th>Landasan Metodologi (Wajib)</th><th>Contoh Pilihan Konsentrasi</th></tr></thead>
+                <tbody>
+                    <tr><td>Probabilitas</td><td>Advanced Studies in Operations Research & Statistics</td></tr>
+                    <tr><td>Optimisasi</td><td>Analytics and Data Science</td></tr>
+                    <tr><td>Statistik</td><td>Economic and Financial Systems</td></tr>
+                    <tr><td>Komputasi & Ekonomi</td><td>Supply Chain Engineering, Quality & Statistics</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <h3><i class="fas fa-brain"></i> 4.2 MIT (AS) — Model Interdisipliner Pascasarjana</h3>
+        <p>Operations Research Center (ORC) mewajibkan tiga serangkai: Optimisasi, Probabilitas, Pembelajaran Mesin/Statistik. Mata kuliah gabungan lintas departemen (Course 6 & 15) mencerminkan integrasi algoritma, manajemen, dan model matematis.</p>
+        <div class="tech-table-wrapper">
+            <table>
+                <thead><tr><th>Kualifikasi PhD</th><th>Contoh Mata Kuliah (Joint)</th></tr></thead>
+                <tbody>
+                    <tr><td>Optimisasi</td><td>6.7210J/15.081J (Intro to Math Programming)<br>15.083 (Integer Optimization)</td></tr>
+                    <tr><td>Pemodelan Probabilistik</td><td>6.7700J/15.085J (Fundamentals of Probability)<br>18.445 (Stochastic Processes)</td></tr>
+                    <tr><td>Statistik & ML</td><td>6.7900 (Machine Learning)<br>15.095 (Machine Learning Under Optimization Lens)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <h3><i class="fas fa-chart-simple"></i> 4.3 National University of Singapore — Literasi Fundamental AI/ML</h3>
+        <p>Kurikulum BS ISE di NUS mewajibkan <strong>EE2211 Introduction to Machine Learning</strong> dan <strong>CS2040 Data Structures & Algorithms</strong> sebagai core. AI/ML bukan spesialisasi lanjutan, melainkan literasi dasar setara kalkulus. Filosofi progresif menghadapi Industri 4.0.</p>
+        <div class="tech-table-wrapper">
+            <table>
+                <thead><tr><th>Kategori</th><th>Contoh Mata Kuliah Wajib</th></tr></thead>
+                <tbody>
+                    <tr><td>Common Courses</td><td>EE2211 (Intro to ML), PF1101 (Project Management), DTK1234 (Design Thinking)</td></tr>
+                    <tr><td>ISE Major Core</td><td>IE2100 (Probability Models), IE2110 (OR I), CS2040 (DSA), ST2334 (Prob & Stat)</td></tr>
+                    <tr><td>ISE Tech Electives</td><td>IE4213 (Learning from Data), IE4215 (ML for IE), IE5205 (Healthcare Analytics)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <h3><i class="fas fa-balance-scale"></i> 4.4 TU Delft (Belanda) — Model Sosio-Teknikal</h3>
+        <p>Fakultas <i>Technology, Policy and Management</i> menggabungkan alat teknis TI dengan konteks kebijakan & etika. Mata kuliah seperti <i>Machine learning for socio-technical systems</i> dan <i>Ethics of AI</i> mencerminkan bahwa kegagalan rekayasa modern adalah kegagalan sosio-teknis, bukan teknis semata.</p>
+        <div class="tech-table-wrapper">
+            <table>
+                <thead><tr><th>Kategori</th><th>Contoh Mata Kuliah</th></tr></thead>
+                <tbody>
+                    <tr><td>Alat Teknis & Analitis</td><td>TPM034A (ML for socio-technical systems), SEN1511 (Engineering Optimization), SEN9720 (Logistics & Supply Chain)</td></tr>
+                    <tr><td>Konteks & Keputusan</td><td>TPM014B (Ethics of AI), EPA141a (Model-based Decision-making), TPM032A (Multi-criteria Decision Analysis)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- BAGIAN 5: SINTESIS & MASA DEPAN -->
+    <div class="glass-panel">
+        <h2><i class="fas fa-chart-gantt"></i> BAGIAN 5: Sintesis & Arah Masa Depan</h2>
+        <p>Teknik Industri telah berevolusi dari <i>stopwatch</i> Taylor menjadi <strong>meta-disiplin integrator</strong>. TI modern tidak bersaing dengan disiplin teknik lain, melainkan mengoptimalkan sistem tempat mereka beroperasi. Perjalanan dari efisiensi pabrik ke model sosio-teknis & kurikulum AI-sentris adalah pematangan alami.</p>
+        <p><strong class="accent-text">Peran masa depan: Insinyur sebagai Arsitek Sistem</strong> — para profesional di persimpangan teknologi dan manajemen yang mampu: memahami sistem kompleks (Rekayasa Sistem & Faktor Manusia), memodelkan (OR & Simulasi), mengoptimalkan (AI/ML & optimisasi), dan mengelola (SCM, PPC, TQM). Di dunia yang hiper-spesialis, nilai generalis terlatih secara teknis dan berpikir sistemik—Insinyur Industri dan Sistem—menjadi lebih penting dari sebelumnya.</p>
+        <div class="tech-badge" style="margin-top: 1rem;"><i class="fas fa-lightbulb"></i> Industri 4.0 · Human-Centric · Cyber-Physical Integration</div>
+    </div>
+
+    <div class="footer-link">
+        <a href="#"><i class="fas fa-arrow-left"></i> Kembali ke daftar blog</a>
+        <span style="margin-left: 1rem; opacity:0.6;"><i class="fas fa-cogs"></i> Teknik Industri Canggih | © 2025</span>
+    </div>
+</div>
 </body>
 </html>
