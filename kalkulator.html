@@ -2,142 +2,110 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scientific Calculator with LaTeX</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>nase Scientific Calculator</title>
     
-    <!-- Tailwind CSS -->
+    <meta name="theme-color" content="#111827">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="nase Calc">
+    <link rel="manifest" href="manifest.json">
+
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- KaTeX CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" xintegrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 
-    <!-- MathJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.0/math.js"></script>
 
     <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1f2937; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #4b5563; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6b7280; 
-        }
-
-        .btn-anim {
-            transition: all 0.1s ease;
-        }
-        .btn-anim:active {
-            transform: scale(0.95);
-        }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #1f2937; }
+        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
         
-        /* Math container adjustments */
-        .katex-display {
-            margin: 0.5em 0;
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
+        .btn-anim { transition: all 0.1s ease; touch-action: manipulation; }
+        .btn-anim:active { transform: scale(0.95); background-color: rgba(255,255,255,0.1); }
+        
+        .katex-display { margin: 0.5em 0; overflow-x: auto; overflow-y: hidden; }
+        
+        /* Menghindari zoom otomatis saat klik input di iOS */
+        input { font-size: 16px !important; }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-100 font-sans h-screen flex items-center justify-center p-4 overflow-hidden selection:bg-blue-500 selection:text-white">
+<body class="bg-gray-950 text-gray-100 font-sans h-screen flex items-center justify-center p-0 sm:p-4 overflow-hidden selection:bg-blue-500 selection:text-white">
 
-    <div class="w-full max-w-md bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-800 flex flex-col h-full max-h-[900px]">
+    <div class="w-full max-w-md bg-gray-900 sm:rounded-2xl shadow-2xl overflow-hidden border border-gray-800 flex flex-col h-full max-h-screen sm:max-h-[900px]">
         
-        <!-- Header -->
         <div class="bg-gray-800 px-4 py-3 border-b border-gray-700 flex justify-between items-center">
-            <h1 class="text-sm font-semibold tracking-wider text-gray-400 uppercase">Esan - Scientific Calc</h1>
-            <div class="flex gap-2">
-                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+            <div class="flex items-center gap-2">
+                <span class="bg-blue-600 text-[10px] font-black px-1.5 py-0.5 rounded text-white tracking-tighter">NASE</span>
+                <h1 class="text-xs font-bold tracking-widest text-gray-400 uppercase">Scientific Calc <span class="font-light opacity-50">by Esan</span></h1>
+            </div>
+            <div class="flex gap-1.5">
+                <div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
             </div>
         </div>
 
-        <!-- Display Area -->
         <div class="flex-1 bg-gray-950 p-6 flex flex-col justify-end space-y-4 relative overflow-hidden">
-            <!-- History / Previous Calc -->
             <div id="history-display" class="text-gray-500 text-right text-sm h-16 overflow-y-auto flex flex-col justify-end">
                 <div class="opacity-50">History is empty</div>
             </div>
 
-            <!-- Current Input (hidden real input, shown via formatted) -->
             <div class="relative group">
                 <input type="text" id="calc-input" class="w-full bg-transparent text-right text-3xl font-light focus:outline-none text-transparent caret-blue-500 absolute inset-0 z-10" autocomplete="off" autofocus>
-                <!-- Visual formatting of input -->
                 <div id="formatted-input" class="w-full text-right text-3xl font-light min-h-[3rem] text-gray-100 break-words">0</div>
             </div>
 
-            <!-- Result Preview (KaTeX) -->
-            <div id="result-preview" class="text-right text-xl text-blue-400 min-h-[2rem] font-medium border-t border-gray-800 pt-2 opacity-0 transition-opacity duration-200">
-                <!-- Result renders here -->
+            <div id="result-preview" class="text-right text-xl text-blue-400 min-h-[2.5rem] font-medium border-t border-gray-800/50 pt-2 opacity-0 transition-opacity duration-200">
             </div>
         </div>
 
-        <!-- Keyboard Actions -->
-        <div class="bg-gray-800/50 p-2 grid grid-cols-5 gap-px border-t border-gray-800">
-             <!-- Row 1: Scientific functions -->
-            <button onclick="append('(')" class="btn-anim p-3 hover:bg-gray-700 text-sm text-blue-300 font-medium rounded text-center">(</button>
-            <button onclick="append(')')" class="btn-anim p-3 hover:bg-gray-700 text-sm text-blue-300 font-medium rounded text-center">)</button>
-            <button onclick="append('sqrt(')" class="btn-anim p-3 hover:bg-gray-700 text-sm text-blue-300 font-medium rounded text-center">√</button>
-            <button onclick="append('^')" class="btn-anim p-3 hover:bg-gray-700 text-sm text-blue-300 font-medium rounded text-center">xⁿ</button>
-            <button onclick="clearAll()" class="btn-anim p-3 hover:bg-red-900/50 text-sm text-red-400 font-bold rounded text-center">AC</button>
+        <div class="bg-gray-900/80 p-2 grid grid-cols-5 gap-1 border-t border-gray-800">
+            <button onclick="append('(')" class="btn-anim p-3 hover:bg-gray-800 text-sm text-blue-300 font-medium rounded-lg text-center bg-gray-800/40">(</button>
+            <button onclick="append(')')" class="btn-anim p-3 hover:bg-gray-800 text-sm text-blue-300 font-medium rounded-lg text-center bg-gray-800/40">)</button>
+            <button onclick="append('sqrt(')" class="btn-anim p-3 hover:bg-gray-800 text-sm text-blue-300 font-medium rounded-lg text-center bg-gray-800/40">√</button>
+            <button onclick="append('^')" class="btn-anim p-3 hover:bg-gray-800 text-sm text-blue-300 font-medium rounded-lg text-center bg-gray-800/40">xⁿ</button>
+            <button onclick="clearAll()" class="btn-anim p-3 bg-red-950/30 hover:bg-red-900/50 text-sm text-red-400 font-bold rounded-lg text-center">AC</button>
 
-            <!-- Row 2 -->
-            <button onclick="append('sin(')" class="btn-anim p-3 hover:bg-gray-700 text-sm text-blue-300 font-medium rounded text-center">sin</button>
-            <button onclick="append('cos(')" class="btn-anim p-3 hover:bg-gray-700 text-sm text-blue-300 font-medium rounded text-center">cos</button>
-            <button onclick="append('tan(')" class="btn-anim p-3 hover:bg-gray-700 text-sm text-blue-300 font-medium rounded text-center">tan</button>
-            <button onclick="append('log(')" class="btn-anim p-3 hover:bg-gray-700 text-sm text-blue-300 font-medium rounded text-center">log</button>
-            <button onclick="backspace()" class="btn-anim p-3 hover:bg-gray-700 text-sm text-orange-300 font-medium rounded text-center">⌫</button>
+            <button onclick="append('sin(')" class="btn-anim p-3 hover:bg-gray-800 text-sm text-blue-300 font-medium rounded-lg text-center bg-gray-800/40">sin</button>
+            <button onclick="append('cos(')" class="btn-anim p-3 hover:bg-gray-800 text-sm text-blue-300 font-medium rounded-lg text-center bg-gray-800/40">cos</button>
+            <button onclick="append('tan(')" class="btn-anim p-3 hover:bg-gray-800 text-sm text-blue-300 font-medium rounded-lg text-center bg-gray-800/40">tan</button>
+            <button onclick="append('log(')" class="btn-anim p-3 hover:bg-gray-800 text-sm text-blue-300 font-medium rounded-lg text-center bg-gray-800/40">log</button>
+            <button onclick="backspace()" class="btn-anim p-3 bg-orange-950/20 hover:bg-orange-900/30 text-sm text-orange-400 font-medium rounded-lg text-center">⌫</button>
 
-            <!-- Row 3 -->
-            <button onclick="append('pi')" class="btn-anim p-3 hover:bg-gray-700 text-sm text-blue-300 font-medium rounded text-center">π</button>
-            <button onclick="append('7')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl font-medium rounded text-center">7</button>
-            <button onclick="append('8')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl font-medium rounded text-center">8</button>
-            <button onclick="append('9')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl font-medium rounded text-center">9</button>
-            <button onclick="append('/')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl text-blue-400 font-medium rounded text-center">÷</button>
+            <button onclick="append('pi')" class="btn-anim p-3 hover:bg-gray-800 text-sm text-blue-300 font-medium rounded-lg text-center bg-gray-800/40">π</button>
+            <button onclick="append('7')" class="btn-anim p-4 bg-gray-800/60 hover:bg-gray-700 text-xl font-medium rounded-lg text-center">7</button>
+            <button onclick="append('8')" class="btn-anim p-4 bg-gray-800/60 hover:bg-gray-700 text-xl font-medium rounded-lg text-center">8</button>
+            <button onclick="append('9')" class="btn-anim p-4 bg-gray-800/60 hover:bg-gray-700 text-xl font-medium rounded-lg text-center">9</button>
+            <button onclick="append('/')" class="btn-anim p-4 text-xl text-blue-400 font-medium rounded-lg text-center">÷</button>
 
-            <!-- Row 4 -->
-            <button onclick="append('e')" class="btn-anim p-3 hover:bg-gray-700 text-sm text-blue-300 font-medium rounded text-center">e</button>
-            <button onclick="append('4')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl font-medium rounded text-center">4</button>
-            <button onclick="append('5')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl font-medium rounded text-center">5</button>
-            <button onclick="append('6')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl font-medium rounded text-center">6</button>
-            <button onclick="append('*')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl text-blue-400 font-medium rounded text-center">×</button>
+            <button onclick="append('e')" class="btn-anim p-3 hover:bg-gray-800 text-sm text-blue-300 font-medium rounded-lg text-center bg-gray-800/40">e</button>
+            <button onclick="append('4')" class="btn-anim p-4 bg-gray-800/60 hover:bg-gray-700 text-xl font-medium rounded-lg text-center">4</button>
+            <button onclick="append('5')" class="btn-anim p-4 bg-gray-800/60 hover:bg-gray-700 text-xl font-medium rounded-lg text-center">5</button>
+            <button onclick="append('6')" class="btn-anim p-4 bg-gray-800/60 hover:bg-gray-700 text-xl font-medium rounded-lg text-center">6</button>
+            <button onclick="append('*')" class="btn-anim p-4 text-xl text-blue-400 font-medium rounded-lg text-center">×</button>
 
-            <!-- Row 5 -->
-            <button onclick="append('abs(')" class="btn-anim p-3 hover:bg-gray-700 text-sm text-blue-300 font-medium rounded text-center">|x|</button>
-            <button onclick="append('1')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl font-medium rounded text-center">1</button>
-            <button onclick="append('2')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl font-medium rounded text-center">2</button>
-            <button onclick="append('3')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl font-medium rounded text-center">3</button>
-            <button onclick="append('-')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl text-blue-400 font-medium rounded text-center">−</button>
+            <button onclick="append('abs(')" class="btn-anim p-3 hover:bg-gray-800 text-sm text-blue-300 font-medium rounded-lg text-center bg-gray-800/40">|x|</button>
+            <button onclick="append('1')" class="btn-anim p-4 bg-gray-800/60 hover:bg-gray-700 text-xl font-medium rounded-lg text-center">1</button>
+            <button onclick="append('2')" class="btn-anim p-4 bg-gray-800/60 hover:bg-gray-700 text-xl font-medium rounded-lg text-center">2</button>
+            <button onclick="append('3')" class="btn-anim p-4 bg-gray-800/60 hover:bg-gray-700 text-xl font-medium rounded-lg text-center">3</button>
+            <button onclick="append('-')" class="btn-anim p-4 text-xl text-blue-400 font-medium rounded-lg text-center">−</button>
 
-            <!-- Row 6 -->
-            <button onclick="append('deg')" class="btn-anim p-3 hover:bg-gray-700 text-xs text-blue-300 font-medium rounded text-center">deg/rad</button>
-            <button onclick="append('0')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl font-medium rounded text-center">0</button>
-            <button onclick="append('.')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl font-medium rounded text-center">.</button>
-            <button onclick="calculate()" class="btn-anim p-4 bg-blue-600 hover:bg-blue-500 text-white text-xl font-medium rounded text-center shadow-lg shadow-blue-900/50">=</button>
-            <button onclick="append('+')" class="btn-anim p-4 bg-gray-800 hover:bg-gray-700 text-xl text-blue-400 font-medium rounded text-center">+</button>
+            <button onclick="append('deg')" class="btn-anim p-3 hover:bg-gray-800 text-[10px] text-blue-300 font-medium rounded-lg text-center bg-gray-800/40 tracking-tighter uppercase">Deg/Rad</button>
+            <button onclick="append('0')" class="btn-anim p-4 bg-gray-800/60 hover:bg-gray-700 text-xl font-medium rounded-lg text-center">0</button>
+            <button onclick="append('.')" class="btn-anim p-4 bg-gray-800/60 hover:bg-gray-700 text-xl font-medium rounded-lg text-center">.</button>
+            <button onclick="calculate()" class="btn-anim p-4 bg-blue-600 hover:bg-blue-500 text-white text-xl font-bold rounded-lg text-center shadow-lg shadow-blue-900/40">=</button>
+            <button onclick="append('+')" class="btn-anim p-4 text-xl text-blue-400 font-medium rounded-lg text-center">+</button>
         </div>
     </div>
 
-    <!-- KaTeX JS -->
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" xintegrity="sha384-XjKyOOdXjDuDHcvnskyjy9QSrfyJBVaOp5OW+1stP8mQhGWjw2tI97Lexq7oG72o" crossorigin="anonymous"></script>
-    
-    <!-- Auto Render Extension -->
-    <!-- REMOVED onload="initKaTeX()" to prevent ReferenceError. Logic moved to DOMContentLoaded below. -->
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" xintegrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 
     <script>
-        // --- SAFE INITIALIZATION ---
         document.addEventListener("DOMContentLoaded", function() {
-            // Check if library is loaded, just in case
-            if (typeof renderMathInElement !== 'undefined' && document.body) {
+            if (typeof renderMathInElement !== 'undefined') {
                 renderMathInElement(document.body, {
                     delimiters: [
                         {left: '$$', right: '$$', display: true},
@@ -148,8 +116,6 @@
             }
         });
         
-        // --- Calculator Logic ---
-        
         const inputField = document.getElementById('calc-input');
         const formattedDisplay = document.getElementById('formatted-input');
         const resultPreview = document.getElementById('result-preview');
@@ -157,45 +123,33 @@
         let currentExp = '';
         let history = [];
 
-        // Focus input on load
-        window.onload = () => {
-            if(inputField) inputField.focus();
-        };
-
-        // Keep input focused
+        window.onload = () => inputField?.focus();
         document.addEventListener('click', (e) => {
-            if(!e.target.closest('button') && inputField) {
-                inputField.focus();
-            }
+            if(!e.target.closest('button')) inputField?.focus();
         });
 
-        if (inputField) {
-            inputField.addEventListener('input', (e) => {
-                currentExp = e.target.value;
-                updateDisplay();
-            });
+        inputField?.addEventListener('input', (e) => {
+            currentExp = e.target.value;
+            updateDisplay();
+        });
 
-            // Map keyboard keys to logic
-            inputField.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    calculate();
-                }
-            });
-        }
+        inputField?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                calculate();
+            }
+        });
 
         function append(val) {
             currentExp += val;
             if(inputField) inputField.value = currentExp;
             updateDisplay();
-            if(inputField) inputField.focus();
         }
 
         function backspace() {
             currentExp = currentExp.slice(0, -1);
             if(inputField) inputField.value = currentExp;
             updateDisplay();
-            if(inputField) inputField.focus();
         }
 
         function clearAll() {
@@ -206,37 +160,24 @@
                 resultPreview.innerHTML = '';
             }
             updateDisplay();
-            if(inputField) inputField.focus();
         }
 
         function updateDisplay() {
-            // Update the visible formatted text
             if(formattedDisplay) formattedDisplay.textContent = currentExp || '0';
-            
-            // Try to preview result
             if (!currentExp) {
                 if(resultPreview) resultPreview.style.opacity = '0';
                 return;
             }
-
             try {
                 const result = math.evaluate(currentExp);
                 if (result !== undefined && !isNaN(result)) {
-                    // Render preview using KaTeX
-                    const tex = math.parse(currentExp).toTex();
-                    // We render ' = result'
                     const resultStr = formatResult(result);
-                    
                     if(resultPreview && typeof katex !== 'undefined') {
-                        katex.render(`= ${resultStr}`, resultPreview, {
-                            throwOnError: false,
-                            displayMode: false
-                        });
-                        resultPreview.style.opacity = '0.7';
+                        katex.render(`= ${resultStr}`, resultPreview, { displayMode: false });
+                        resultPreview.style.opacity = '1';
                     }
                 }
             } catch (err) {
-                // Incomplete expression, hide preview
                 if(resultPreview) resultPreview.style.opacity = '0';
             }
         }
@@ -246,73 +187,45 @@
             try {
                 const result = math.evaluate(currentExp);
                 const resultStr = formatResult(result);
-                
-                // Add to history
                 addToHistory(currentExp, resultStr);
-                
-                // Set result as new input
                 currentExp = resultStr;
                 if(inputField) inputField.value = currentExp;
                 updateDisplay();
-                
-                // Flash effect
-                if(formattedDisplay) {
-                    formattedDisplay.classList.add('text-blue-400');
-                    setTimeout(() => formattedDisplay.classList.remove('text-blue-400'), 200);
-                }
-
+                formattedDisplay.classList.add('text-blue-400');
+                setTimeout(() => formattedDisplay.classList.remove('text-blue-400'), 200);
             } catch (err) {
-                if(formattedDisplay) {
-                    formattedDisplay.classList.add('text-red-400');
-                    setTimeout(() => formattedDisplay.classList.remove('text-red-400'), 200);
-                }
+                formattedDisplay.classList.add('text-red-400');
+                setTimeout(() => formattedDisplay.classList.remove('text-red-400'), 200);
             }
         }
 
         function formatResult(val) {
-            // Limit decimals for cleaner display
             return parseFloat(val.toFixed(8)).toString();
         }
 
         function addToHistory(exp, res) {
-            // Remove placeholder
-            if (history.length === 0 && historyDisplay) {
-                historyDisplay.innerHTML = '';
-            }
-            
+            if (history.length === 0 && historyDisplay) historyDisplay.innerHTML = '';
             history.push({ exp, res });
-            if (history.length > 10) history.shift(); // Keep last 10
+            if (history.length > 10) history.shift();
 
             const item = document.createElement('div');
-            item.className = "mb-2 pb-2 border-b border-gray-800 last:border-0 hover:bg-gray-800/30 p-1 rounded cursor-pointer transition-colors";
+            item.className = "mb-2 pb-2 border-b border-gray-800 last:border-0 hover:bg-gray-800/30 p-1 rounded cursor-pointer transition-colors text-right";
             item.onclick = () => {
                 currentExp = exp;
                 if(inputField) inputField.value = currentExp;
                 updateDisplay();
             };
 
-            // Render LaTeX for history
             try {
-                const node = math.parse(exp);
-                const latex = node.toTex();
-                
-                // Create span for render
+                const latex = math.parse(exp).toTex();
                 const span = document.createElement('span');
-                if (typeof katex !== 'undefined') {
-                    katex.render(`${latex} = ${res}`, span, {
-                        throwOnError: false
-                    });
-                } else {
-                    span.textContent = `${exp} = ${res}`;
-                }
+                katex.render(`${latex} = ${res}`, span);
                 item.appendChild(span);
             } catch(e) {
                 item.textContent = `${exp} = ${res}`;
             }
-
             if(historyDisplay) historyDisplay.prepend(item);
         }
-
     </script>
 </body>
 </html>
