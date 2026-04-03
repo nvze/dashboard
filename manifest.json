@@ -1,0 +1,17 @@
+{
+  "name": "nase Scientific Calculator",
+  "short_name": "nase Calc",
+  "description": "Kalkulator Scientific Minimalis by Esan",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#030712",
+  "theme_color": "#111827",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2344/2344132.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
