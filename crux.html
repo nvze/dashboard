@@ -3,269 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analisis Strategi: The Crux oleh Richard Rumelt</title>
+    <title>Analisis Mendalam: The Crux oleh Richard Rumelt</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Public+Sans:wght@300;400;600;700&display=swap');
 
         :root {
             --bg-color: #ffffff;
             --text-color: #1a1a1a;
-            --accent-color: #003366;
-            --secondary-color: #4a4a4a;
-            --border-color: #ededed;
-            --max-width: 850px;
+            --accent-color: #002b5c;
+            --muted-color: #595959;
+            --border-color: #e5e5e5;
+            --max-width: 800px;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            font-family: 'Lora', serif;
+            font-family: 'Crimson Pro', serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.9;
+            line-height: 1.85;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
         header {
-            width: 100%;
-            max-width: var(--max-width);
-            padding: 80px 25px 40px;
+            padding: 100px 0 60px;
             text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 60px;
         }
 
-        .meta-info {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-            letter-spacing: 1px;
+        .pre-title {
+            font-family: 'Public Sans', sans-serif;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            color: var(--muted-color);
             margin-bottom: 20px;
+            display: block;
         }
 
         h1 {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Public Sans', sans-serif;
             font-size: 3rem;
-            font-weight: 600;
-            line-height: 1.2;
+            font-weight: 700;
+            line-height: 1.1;
             margin: 0 0 30px;
             color: var(--accent-color);
         }
 
-        .download-box {
+        .download-section {
             margin: 40px 0;
         }
 
         .btn-download {
             display: inline-block;
-            padding: 15px 35px;
+            padding: 16px 32px;
             background-color: var(--accent-color);
             color: #ffffff;
             text-decoration: none;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Public Sans', sans-serif;
             font-weight: 600;
-            border-radius: 2px;
-            transition: all 0.3s ease;
+            border-radius: 4px;
+            transition: background 0.2s ease;
         }
 
         .btn-download:hover {
-            background-color: #002244;
-            transform: translateY(-2px);
+            background-color: #004080;
         }
 
-        main {
-            width: 100%;
-            max-width: var(--max-width);
-            padding: 40px 25px;
-            box-sizing: border-box;
-        }
-
-        section {
-            margin-bottom: 70px;
+        article {
+            padding-bottom: 100px;
         }
 
         h2 {
-            font-family: 'Inter', sans-serif;
-            font-size: 2rem;
-            font-weight: 600;
-            margin: 50px 0 25px;
+            font-family: 'Public Sans', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 60px 0 30px;
             color: var(--accent-color);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
         }
 
         h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.4rem;
+            font-family: 'Public Sans', sans-serif;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin: 35px 0 15px;
-            color: var(--secondary-color);
+            margin: 40px 0 20px;
+            color: #333;
         }
 
         p {
-            margin-bottom: 25px;
+            margin-bottom: 28px;
             text-align: justify;
-            font-size: 1.15rem;
+            font-size: 1.25rem;
         }
 
-        .lead {
+        .intro-text {
             font-size: 1.4rem;
-            color: var(--secondary-color);
+            color: var(--muted-color);
             line-height: 1.6;
-            font-style: italic;
             margin-bottom: 50px;
-        }
-
-        .block-quote {
-            border-left: 4px solid var(--accent-color);
-            padding: 20px 40px;
-            margin: 40px 0;
-            background-color: #f9fbfd;
             font-style: italic;
-            font-size: 1.2rem;
         }
 
-        ul {
-            margin-bottom: 30px;
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+        .pull-quote {
+            font-family: 'Public Sans', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: var(--accent-color);
+            border-left: 5px solid var(--accent-color);
+            padding: 20px 40px;
+            margin: 50px 0;
+            background-color: #f8faff;
         }
 
         footer {
-            width: 100%;
-            max-width: var(--max-width);
-            padding: 60px 25px;
+            background-color: #f9f9f9;
+            padding: 80px 0;
             border-top: 1px solid var(--border-color);
             text-align: center;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Public Sans', sans-serif;
             font-size: 0.9rem;
-            color: var(--secondary-color);
+            color: var(--muted-color);
         }
 
-        @media (max-width: 768px) {
+        .footer-logo {
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
             h1 { font-size: 2.2rem; }
-            h2 { font-size: 1.6rem; }
-            p { font-size: 1.05rem; }
+            .container { padding: 0 20px; }
+            p { font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="meta-info">Esai Strategi Bisnis Modern</div>
-    <h1>The Crux: Menemukan Inti dari Tantangan Strategis</h1>
-    <p class="lead">Sebuah dekonstruksi komprehensif atas metodologi Richard Rumelt dalam menghadapi kompleksitas manajerial.</p>
-    
-    <div class="download-box">
-        <a href="The Crux -- Richard Rumelt -- ( WeLib.org ).epub" class="btn-download">Unduh File Sumber (.epub)</a>
-    </div>
-</header>
-
-<main>
-    <section>
-        <h2>Esensi Strategi: Melampaui Penetapan Tujuan</h2>
-        <p>
-            Dalam diskursus manajemen kontemporer, istilah strategi sering kali mengalami degradasi makna. Banyak pemimpin organisasi menyamakan strategi dengan aspirasi, visi, atau sekadar target finansial. Richard Rumelt, dalam karyanya yang provokatif, menegaskan bahwa strategi bukanlah tentang apa yang ingin Anda capai, melainkan tentang bagaimana Anda akan mengatasi rintangan yang menghalangi pencapaian tersebut.
+<div class="container">
+    <header>
+        <span class="pre-title">Tinjauan Literatur Strategis</span>
+        <h1>The Crux: Kepemimpinan sebagai Strategi Pemecahan Masalah</h1>
+        <p class="intro-text">
+            Sebuah eksplorasi mendalam terhadap metodologi Richard Rumelt dalam mendiagnosis tantangan kritis dan merumuskan tindakan yang koheren bagi organisasi modern.
         </p>
-        <p>
-            Rumelt memperkenalkan konsep Crux sebagai elemen fundamental dalam proses berpikir strategis. Crux didefinisikan sebagai titik paling kritis dalam sebuah tantangan yang berada dalam jangkauan kemampuan organisasi untuk diselesaikan. Tanpa kemampuan untuk mengidentifikasi Crux, sebuah organisasi akan terjebak dalam upaya yang tersebar, menghabiskan sumber daya pada masalah-masalah kecil tanpa pernah benar-benar membuat kemajuan yang signifikan.
-        </p>
-    </section>
-
-    <section>
-        <h2>Diagnosis sebagai Landasan Utama</h2>
-        <p>
-            Langkah pertama yang paling sering diabaikan oleh para pemimpin adalah diagnosis. Diagnosis yang efektif bukan sekadar pengumpulan data statistik, melainkan upaya intelektual untuk menyederhanakan realitas yang kompleks. Ini adalah proses mengidentifikasi sifat dasar dari situasi yang dihadapi.
-        </p>
-        <div class="block-quote">
-            Diagnosis yang tajam sering kali mampu mengubah masalah yang tampak mustahil menjadi rangkaian tantangan yang dapat dikelola.
+        <div class="download-section">
+            <a href="crux.epub" class="btn-download" download>Unduh File EPUB (Crux)</a>
         </div>
-        <p>
-            Diagnosis memberikan kerangka kerja bagi seluruh tindakan selanjutnya. Tanpa pemahaman yang jelas tentang mengapa organisasi menghadapi hambatan tertentu, kebijakan apa pun yang diambil hanya akan bersifat superfisial. Rumelt menekankan bahwa diagnosis yang baik sering kali menggunakan analogi untuk membantu tim memahami dinamika persaingan atau hambatan internal secara lebih intuitif.
-        </p>
-    </section>
+    </header>
 
-    <section>
-        <h2>Kebijakan Pemandu: Menetapkan Arah Strategis</h2>
-        <p>
-            Setelah tantangan berhasil didiagnosis, langkah berikutnya adalah merumuskan kebijakan pemandu. Ini bukan rencana operasional yang detail, melainkan pendekatan menyeluruh yang dipilih untuk mengatasi rintangan yang telah diidentifikasi dalam tahap diagnosis.
-        </p>
-        <p>
-            Kebijakan pemandu berfungsi sebagai pagar pembatas. Ia mengarahkan fokus organisasi dan membatasi pilihan tindakan agar energi tidak terbuang sia-sia. Dalam situasi di mana terdapat banyak peluang menarik namun sumber daya terbatas, kebijakan pemandu memberikan kriteria yang jelas tentang apa yang harus dilakukan dan, yang lebih penting, apa yang tidak boleh dilakukan.
-        </p>
-    </section>
+    <article>
+        <section>
+            <h2>I. Redefinisi Strategi di Era Kompleksitas</h2>
+            <p>
+                Dalam dunia bisnis yang sering kali terobsesi dengan jargon dan visi yang melambung tinggi, Richard Rumelt hadir dengan proposisi yang mengejutkan dalam kesederhanaannya: strategi bukanlah tentang menetapkan tujuan, melainkan tentang cara mengatasi tantangan. Penekanan ini sangat krusial karena di banyak ruang rapat direksi, strategi sering kali disalahpahami sebagai sekadar daftar target finansial atau pernyataan aspirasional seperti menjadi pemimpin pasar atau mencapai pertumbuhan dua digit.
+            </p>
+            <p>
+                Rumelt berpendapat bahwa strategi yang efektif dimulai dengan pengakuan terhadap realitas yang keras. Tanpa adanya rintangan, sebenarnya tidak diperlukan strategi. Jika jalannya sudah mulus, yang Anda butuhkan hanyalah manajemen yang baik dan efisiensi operasional. Strategi muncul ketika organisasi menghadapi hambatan serius yang tidak dapat diatasi dengan rutinitas biasa.
+            </p>
+        </section>
 
-    <section>
-        <h2>Tindakan Koheren: Kekuatan dalam Keselarasan</h2>
-        <p>
-            Strategi mencapai puncaknya pada tindakan koheren. Rumelt berpendapat bahwa kelemahan utama dari banyak strategi adalah kurangnya koordinasi antar tindakan. Sebuah strategi yang efektif mengharuskan setiap bagian dari organisasi bertindak secara sinkron.
-        </p>
-        <ul>
-            <li>Koordinasi Lintas Fungsi: Memastikan departemen pemasaran, produksi, dan keuangan bergerak menuju solusi yang sama.</li>
-            <li>Alokasi Sumber Daya: Mencurahkan modal dan talenta pada area yang memberikan dampak terbesar pada Crux.</li>
-            <li>Eliminasi Kontradiksi: Menghilangkan kebijakan internal yang saling bertentangan yang sering kali muncul di organisasi besar.</li>
-        </ul>
-        <p>
-            Koherensi menciptakan kekuatan tambahan melalui sinergi. Ketika semua elemen organisasi bekerja untuk memecahkan masalah yang sama dengan cara yang saling mendukung, hasilnya akan jauh lebih besar daripada jumlah dari bagian-bagiannya.
-        </p>
-    </section>
+        <section>
+            <h2>II. Konsep Crux: Memilih Pertempuran yang Tepat</h2>
+            <p>
+                Inti dari buku ini adalah konsep Crux. Kata Crux berasal dari titik balik atau inti dari sebuah masalah. Bagi Rumelt, Crux adalah bagian tersulit dari sebuah tantangan yang sebenarnya memiliki peluang nyata untuk diselesaikan. Seorang pemimpin strategis harus mampu memilah tumpukan masalah yang dihadapi organisasi dan mengidentifikasi satu atau dua titik di mana konsentrasi upaya akan memberikan hasil yang paling signifikan.
+            </p>
+            <div class="pull-quote">
+                Strategi sejati mengharuskan kita untuk mengabaikan banyak masalah penting demi memecahkan masalah yang paling krusial.
+            </div>
+            <p>
+                Proses menemukan Crux melibatkan dua penilaian utama. Pertama, penilaian tentang kepentingan: seberapa besar dampak masalah ini terhadap masa depan organisasi? Kedua, penilaian tentang kemampuan untuk menyelesaikannya: apakah kita memiliki sumber daya, kecerdasan, dan posisi untuk memecahkan masalah ini sekarang? Jika sebuah masalah sangat penting tetapi tidak mungkin diselesaikan, maka itu bukanlah Crux, melainkan fakta kehidupan yang harus diterima.
+            </p>
+        </section>
 
-    <section>
-        <h2>Strategi sebagai Masalah Desain</h2>
-        <p>
-            Salah satu kontribusi paling unik dari Rumelt adalah pandangannya bahwa strategi lebih mirip dengan masalah desain daripada masalah pilihan. Dalam pilihan, Anda memilih satu dari beberapa opsi yang sudah ada. Dalam desain, Anda harus membangun solusi dari berbagai komponen yang saling bergantung.
-        </p>
-        <p>
-            Pemimpin sebagai desainer strategis harus mempertimbangkan trade-off. Meningkatkan kualitas di satu area mungkin akan menambah biaya di area lain. Keunggulan strategis muncul ketika desainer mampu mengatur komponen-komponen ini sedemikian rupa sehingga menciptakan sistem yang unik, sulit ditiru, dan sangat efektif dalam mengatasi tantangan pasar.
-        </p>
-    </section>
+        <section>
+            <h2>III. Diagnosis: Seni Menyederhanakan Realitas</h2>
+            <p>
+                Langkah pertama dalam kerangka kerja Rumelt adalah Diagnosis. Diagnosis adalah upaya intelektual untuk menjawab pertanyaan: apa yang sebenarnya terjadi di sini? Banyak kegagalan strategi berakar pada diagnosis yang salah atau tidak ada diagnosis sama sekali. Diagnosis yang baik menyederhanakan situasi yang sangat kompleks dengan mengidentifikasi pola-pola kritis di dalamnya.
+            </p>
+            <p>
+                Sebagai contoh, ketika sebuah perusahaan teknologi mengalami penurunan pangsa pasar, diagnosis yang buruk mungkin hanya menyalahkan tim penjualan. Namun, diagnosis yang strategis mungkin menemukan bahwa Crux sebenarnya adalah pergeseran dalam preferensi pengguna yang membuat arsitektur produk lama menjadi usang. Diagnosis ini mengubah arah tindakan dari sekadar melatih tenaga penjual menjadi melakukan re-engineering produk secara fundamental.
+            </p>
+        </section>
 
-    <section>
-        <h2>Daya Ungkit Strategis</h2>
-        <p>
-            Konsep leverage atau daya ungkit adalah jantung dari efisiensi strategi. Strategi yang hebat tidak memerlukan kekuatan besar di setiap lini; ia memerlukan fokus kekuatan pada titik lemah lawan atau pada peluang yang paling menjanjikan.
-        </p>
-        <p>
-            Daya ungkit muncul dari antisipasi terhadap perubahan, wawasan mendalam tentang perilaku pelanggan, dan pemahaman tentang dinamika industri. Dengan mengidentifikasi titik ungkit, sebuah organisasi kecil bahkan dapat mengalahkan raksasa industri yang mapan namun lamban.
-        </p>
-    </section>
+        <section>
+            <h2>IV. Kebijakan Pemandu: Menetapkan Logika Solusi</h2>
+            <p>
+                Setelah tantangan didiagnosis, organisasi memerlukan Kebijakan Pemandu. Ini bukanlah rencana operasional yang terperinci, melainkan pendekatan menyeluruh yang dipilih untuk mengatasi rintangan yang diidentifikasi. Kebijakan ini bertindak sebagai kompas yang memastikan semua orang dalam organisasi bergerak ke arah yang sama tanpa terjebak dalam perincian mikro di awal proses.
+            </p>
+            <p>
+                Kebijakan pemandu memberikan keunggulan melalui fokus. Ia menciptakan arah tindakan tanpa menentukan langkah spesifik, sehingga memberikan ruang bagi manajer di tingkat bawah untuk berinovasi dalam pelaksanaan. Kebijakan ini haruslah masuk akal secara logika dan selaras dengan kapabilitas unik yang dimiliki perusahaan.
+            </p>
+        </section>
 
-    <section>
-        <h2>Menghindari Jebakan Pertumbuhan</h2>
-        <p>
-            Banyak organisasi jatuh ke dalam jebakan dengan menetapkan pertumbuhan sebagai strategi. Rumelt memperingatkan bahwa pertumbuhan adalah hasil dari nilai yang diciptakan, bukan titik awal strategi. Pertumbuhan yang dipaksakan melalui akuisisi yang tidak selaras atau ekspansi yang membabi buta sering kali berakhir pada kehancuran nilai perusahaan.
-        </p>
-        <p>
-            Strategi yang sehat berfokus pada penguatan posisi kompetitif dan pemecahan masalah krusial pelanggan. Pertumbuhan akan mengikuti secara alami sebagai imbalan atas keberhasilan organisasi dalam memberikan solusi yang lebih baik daripada kompetitornya.
-        </p>
-    </section>
+        <section>
+            <h2>V. Tindakan Koheren: Kekuatan Koordinasi</h2>
+            <p>
+                Elemen terakhir dari inti strategi adalah Tindakan Koheren. Rumelt menekankan bahwa strategi hanya akan sekuat pelaksanaannya yang terkoordinasi. Tindakan koheren berarti bahwa langkah-langkah yang diambil oleh departemen pemasaran, produksi, keuangan, dan sumber daya manusia harus saling memperkuat satu sama lain menuju pemecahan Crux.
+            </p>
+            <p>
+                Kurangnya koherensi adalah penyakit umum di organisasi besar. Sering kali, satu departemen mengejar target yang secara tidak sengaja menghambat departemen lain. Strategi yang hebat menghilangkan kontradiksi ini dan menciptakan sinergi di mana setiap tindakan kecil berkontribusi pada momentum yang lebih besar.
+            </p>
+        </section>
 
-    <section>
-        <h2>Implementasi melalui Strategy Foundry</h2>
-        <p>
-            Untuk menerapkan konsep-konsep ini, Rumelt menyarankan penggunaan Strategy Foundry. Ini adalah proses kerja intensif di mana para pemimpin duduk bersama untuk mendebat realitas, menantang asumsi satu sama lain, dan bekerja keras untuk menemukan Crux.
-        </p>
-        <p>
-            Proses ini menuntut kejujuran intelektual. Pemimpin harus berani membuang proyek-proyek yang tidak berkontribusi pada solusi tantangan utama. Strategy Foundry mengubah proses perencanaan tahunan yang biasanya bersifat administratif menjadi latihan kepemimpinan yang transformatif.
-        </p>
-    </section>
+        <section>
+            <h2>VI. Strategi sebagai Desain Teknik</h2>
+            <p>
+                Rumelt menawarkan perspektif menarik dengan menyamakan strategi dengan masalah desain arsitektur atau teknik. Dalam desain, Anda tidak hanya memilih opsi dari menu; Anda harus mengintegrasikan berbagai elemen yang saling bergantung untuk menciptakan solusi yang unik. Hal ini memerlukan pemahaman mendalam tentang bagaimana perubahan di satu bagian sistem akan memengaruhi bagian lainnya.
+            </p>
+            <p>
+                Pemikiran desain ini memungkinkan pemimpin untuk mencari leverage atau daya ungkit. Daya ungkit muncul ketika organisasi menggunakan wawasan untuk mengidentifikasi titik di mana investasi kecil energi dapat menghasilkan pergeseran besar dalam hasil. Hal ini sering kali melibatkan antisipasi terhadap perubahan teknologi atau pergeseran dalam perilaku kompetitor sebelum hal tersebut menjadi jelas bagi semua orang.
+            </p>
+        </section>
 
-    <section>
-        <h2>Kesimpulan</h2>
-        <p>
-            Memimpin secara strategis berarti memiliki disiplin untuk fokus. Di dunia yang penuh dengan distraksi dan tekanan jangka pendek, kemampuan untuk mengidentifikasi Crux adalah keunggulan kompetitif yang paling langka. Richard Rumelt mengingatkan kita bahwa strategi bukanlah tentang keajaiban atau slogan-slogan kosong, melainkan tentang kerja keras dalam mendiagnosis masalah dan keberanian untuk mengambil tindakan yang terfokus.
-        </p>
-    </section>
-</main>
+        <section>
+            <h2>VII. Jebakan Pertumbuhan dan Target Ambisius</h2>
+            <p>
+                Salah satu bagian paling tajam dari buku ini adalah kritik terhadap obsesi pertumbuhan yang tidak didasari oleh strategi. Rumelt berpendapat bahwa pertumbuhan adalah hasil dari penciptaan nilai, bukan strategi itu sendiri. Perusahaan yang memaksakan pertumbuhan melalui akuisisi yang mahal atau ekspansi pasar yang sembrono sering kali berakhir dengan menghancurkan nilai bagi pemegang saham karena mereka mengabaikan koherensi operasional.
+            </p>
+            <p>
+                Demikian pula, Rumelt memperingatkan terhadap penggunaan target jangka panjang (goals) sebagai pengganti strategi. Menetapkan target untuk mencapai pendapatan satu triliun dolar tanpa menjelaskan bagaimana rintangan pasar akan diatasi hanyalah sebuah mimpi, bukan strategi. Pemimpin strategis berfokus pada pekerjaan sulit dalam memecahkan masalah, dengan keyakinan bahwa kesuksesan finansial adalah konsekuensi alami dari solusi yang brilian.
+            </p>
+        </section>
+
+        <section>
+            <h2>VIII. Strategy Foundry: Praktik di Lapangan</h2>
+            <p>
+                Bagaimana seorang pemimpin dapat mulai menerapkan prinsip-prinsip ini? Rumelt menyarankan proses yang disebut Strategy Foundry. Ini adalah bengkel kerja intensif di mana para pemimpin kunci duduk bersama untuk mendebat tantangan organisasi dengan kejujuran intelektual yang tinggi. Proses ini bukan tentang membuat presentasi slide yang indah, melainkan tentang kerja keras dalam mendefinisikan Crux.
+            </p>
+            <p>
+                Dalam Foundry, daftar tantangan harus disusun sebelum daftar tujuan. Tim harus secara kritis mengevaluasi rintangan mana yang paling mendesak dan mana yang paling mungkin untuk dipecahkan. Hasil akhir dari proses ini bukanlah dokumen tebal yang terlupakan di rak, melainkan pemahaman yang tajam dan komitmen bersama terhadap tindakan yang akan diambil.
+            </p>
+        </section>
+
+        <section>
+            <h2>Kesimpulan: Keberanian untuk Fokus</h2>
+            <p>
+                Kesimpulan dari karya Richard Rumelt adalah bahwa strategi yang hebat menuntut pengorbanan. Anda tidak dapat melakukan segalanya. Anda harus memilih. Menemukan Crux berarti berani mengatakan tidak pada banyak inisiatif yang mungkin tampak bagus agar organisasi dapat mengerahkan kekuatan penuh pada satu hal yang benar-benar akan mengubah keadaan.
+            </p>
+            <p>
+                Strategi adalah disiplin kepemimpinan yang paling sulit karena ia memaksa kita untuk menghadapi ketidakpastian dan membuat pilihan yang memiliki konsekuensi nyata. Namun, bagi organisasi yang berhasil menemukan Crux mereka, jalannya menjadi jelas, energinya menjadi terfokus, dan kesuksesan menjadi jauh lebih mungkin untuk dicapai.
+            </p>
+        </section>
+    </article>
+</div>
 
 <footer>
-    <p>Analisis Teoretis Berdasarkan Pemikiran Richard Rumelt</p>
-    <p>Disusun untuk Profesional Strategis &mdash; 2026</p>
+    <div class="container">
+        <span class="footer-logo">Analisis Strategi Richard Rumelt</span>
+        <p>Berdasarkan buku "The Crux: How Leaders Become Strategists"</p>
+        <p>&copy; 2026. Disusun untuk kepentingan edukasi dan manajerial profesional.</p>
+    </div>
 </footer>
 
 </body>
