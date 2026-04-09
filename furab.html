@@ -3,236 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elegi Labirin Ganesha | Opus 3000 Kata</title>
+    <title>Elegi Labirin Ganesha - Narasi FURAB</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Fira+Code:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #050505;
-            --accent-blue: #3b82f6;
-            --glass: rgba(15, 15, 15, 0.8);
+            --bg-color: #0d0d0f;
+            --accent: #3b82f6;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
         }
+
         body {
-            background-color: var(--bg-dark);
-            color: #d1d5db;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
             font-family: 'Inter', sans-serif;
+            line-height: 1.8;
             scroll-behavior: smooth;
         }
+
         .serif { font-family: 'Playfair Display', serif; }
         .mono { font-family: 'Fira Code', monospace; }
-        .content-container { max-width: 850px; margin: 0 auto; }
+
         .dropcap::first-letter {
             float: left;
-            font-size: 5rem;
+            font-size: 4.5rem;
             line-height: 1;
-            padding-right: 1rem;
-            color: #60a5fa;
+            padding-right: 0.75rem;
+            color: var(--accent);
             font-family: 'Playfair Display', serif;
+            font-weight: 700;
         }
+
         .section-marker {
-            position: sticky;
-            top: 50%;
-            left: -100px;
-            transform: translateY(-50%) rotate(-90deg);
-            color: rgba(255, 255, 255, 0.05);
+            position: absolute;
+            left: -2rem;
+            top: 0;
             font-size: 8rem;
             font-weight: 900;
+            color: rgba(59, 130, 246, 0.03);
             z-index: -1;
-            pointer-events: none;
+            user-select: none;
         }
-        .glass-nav {
-            background: rgba(10, 10, 10, 0.9);
+
+        .glass-card {
+            background: rgba(20, 20, 25, 0.6);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1.5rem;
         }
-        p { margin-bottom: 2rem; font-size: 1.125rem; line-height: 2; text-align: justify; }
-        h2 { margin-top: 4rem; margin-bottom: 2rem; color: white; }
+
+        p { margin-bottom: 2rem; text-align: justify; }
+
+        .nav-link {
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+        .nav-link:hover { opacity: 1; color: var(--accent); }
+
+        .sidebar {
+            position: sticky;
+            top: 5rem;
+            height: fit-content;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-entry { animation: fadeIn 1s ease-out forwards; }
     </style>
 </head>
 <body class="selection:bg-blue-500/30">
 
-    <nav class="glass-nav fixed top-0 w-full z-50 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <span class="mono text-xs tracking-widest text-blue-500">PROJECT: FURAB_MANIFESTO</span>
-            <div class="hidden md:flex gap-8 mono text-[10px] tracking-tighter">
-                <a href="#prolog" class="hover:text-blue-400 transition">PROLOG</a>
-                <a href="#fondasi" class="hover:text-blue-400 transition">F-FONDASI</a>
-                <a href="#uji" class="hover:text-blue-400 transition">U-UJI</a>
-                <a href="#retensi" class="hover:text-blue-400 transition">R-RETENSI</a>
-                <a href="#analisis" class="hover:text-blue-400 transition">A-ANALISIS</a>
-                <a href="#bidik" class="hover:text-blue-400 transition">B-BIDIK</a>
-            </div>
+    <!-- Dekorasi Latar Belakang -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-900/10 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-900/10 rounded-full blur-[120px]"></div>
+    </div>
+
+    <!-- Navigasi -->
+    <nav class="fixed top-0 w-full z-50 py-6 px-10 flex justify-between items-center bg-black/50 backdrop-blur-md border-b border-white/5">
+        <div class="mono text-sm tracking-widest font-bold text-blue-500 uppercase">Ganesha.Labirin.v2</div>
+        <div class="hidden md:flex gap-8 mono text-[10px] tracking-widest uppercase">
+            <a href="#prolog" class="nav-link">Prolog</a>
+            <a href="#fondasi" class="nav-link">F-Fondasi</a>
+            <a href="#uji" class="nav-link">U-Uji</a>
+            <a href="#retensi" class="nav-link">R-Retensi</a>
+            <a href="#analisis" class="nav-link">A-Analisis</a>
+            <a href="#bidik" class="nav-link">B-Bidik</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="prolog" class="min-h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-transparent to-transparent"></div>
-        <h1 class="serif text-5xl md:text-8xl text-white text-center mb-6 leading-tight">Elegi Labirin Ganesha</h1>
-        <p class="mono text-blue-400 text-sm tracking-widest uppercase mb-12">Manifestasi Konflik Intelektual dalam Lima Babak</p>
-        <div class="w-px h-24 bg-gradient-to-b from-blue-500 to-transparent"></div>
-    </section>
+    <!-- Judul -->
+    <header id="prolog" class="min-h-screen flex flex-col justify-center items-center px-6 pt-20">
+        <div class="text-center max-w-4xl animate-entry">
+            <h1 class="serif text-6xl md:text-8xl font-bold mb-8 leading-tight text-white tracking-tight">Elegi Labirin Ganesha</h1>
+            <p class="mono text-blue-400 text-xs tracking-[0.3em] uppercase mb-12">Manifestasi Konflik Tiga Intelektual Bandung</p>
+            <div class="h-24 w-px bg-gradient-to-b from-blue-500 to-transparent mx-auto"></div>
+        </div>
+    </header>
 
-    <!-- Story Content -->
-    <main class="px-6 py-20 relative">
-        <div class="content-container">
+    <!-- Konten Utama -->
+    <main class="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-12 gap-16">
+        
+        <!-- Kolom Cerita -->
+        <div class="lg:col-span-8 space-y-32">
             
-            <div class="prose-custom">
-                <p class="dropcap">
-                    Hujan di Bandung Utara tidak pernah jatuh sebagai sekadar air; ia jatuh sebagai partikel ingatan yang menyesakkan sumsum tulang. Malam itu, di sebuah vila tua di daerah Ciumbuleuit yang arsitekturnya masih memegang teguh garis-garis tegas *art deco* tahun 1930-an, tiga sosok duduk mengelilingi sebuah meja jati yang sudah mulai lapuk dimakan usia. Kabut merayap pelan dari lembah, menyelimuti taman pinus di luar, dan menyisakan kesunyian yang tajam di dalam ruangan yang hanya diterangi lampu gantung temaram. 
+            <section class="prose-container">
+                <p class="dropcap text-xl text-slate-300 leading-relaxed italic mb-12">
+                    Gerimis di Ciumbuleuit malam itu tidak sekadar membasahi aspal; ia seolah membawa aroma sejarah yang luruh dari dinding-dinding vila tua. Di dalam sebuah ruangan berlantai parket kayu jati yang sudah mengusam, tiga orang duduk dalam lingkaran keheningan yang menyesakkan. Cahaya lampu gantung bergaya art deco berayun pelan ditiup angin yang menyusup lewat celah jendela, melemparkan bayangan panjang yang tampak seperti raksasa yang sedang bertikai di dinding.
                 </p>
                 <p>
-                    Mereka adalah tiga sahabat yang pernah bersumpah di bawah pohon damar Jalan Ganesha dua puluh tahun silam. **Aris**, sang puritan arsitektur yang menghabiskan hidupnya mempelajari setiap inci fasad bangunan kolonial; **Baskara**, sang birokrat pragmatis yang memegang kunci kebijakan pembangunan kota; dan **Maya**, sosiolog tajam yang analisisnya seringkali menjadi momok bagi para pengembang. Malam ini, reuni mereka bukan untuk mengenang masa lalu, melainkan untuk menentukan siapa yang akan bertahan dalam pertarungan memperebutkan "Jiwa Bandung".
+                    Mereka adalah Aris, Baskara, dan Maya. Tiga nama yang pernah menjadi legenda di koridor Jalan Ganesha dua dekade silam. Aris, sang puritan yang mendedikasikan hidupnya pada restorasi gedung-gedung kolonial; Baskara, sang teknokrat yang kini memegang kendali kebijakan pembangunan kota; dan Maya, sosiolog kritis yang analisisnya mampu meruntuhkan narasi paling kokoh sekalipun. Namun, malam ini mereka bukan sahabat. Mereka adalah tiga kutub yang sedang saling tolak-menolak.
                 </p>
+            </section>
 
-                <!-- SECTION F -->
-                <section id="fondasi" class="relative">
-                    <div class="section-marker">FONDASI</div>
-                    <div class="flex items-baseline gap-4 mb-10">
-                        <span class="mono text-5xl text-blue-600 font-bold">F.</span>
-                        <h2 class="serif text-4xl font-bold text-white italic">Fondasi Dasar: Perang Ideologi</h2>
-                    </div>
+            <!-- F - FONDASI -->
+            <section id="fondasi" class="relative">
+                <span class="section-marker">FONDASI</span>
+                <div class="flex items-center gap-4 mb-10">
+                    <span class="text-blue-500 mono text-2xl font-bold">01.</span>
+                    <h2 class="serif text-4xl font-bold text-white tracking-wide">Fondasi Dasar: Perbenturan Prinsip</h2>
+                </div>
+                <div class="space-y-6 text-slate-300">
                     <p>
-                        "Kau telah melupakan fondasi dasar kita, Bas," Aris membuka suara, suaranya parau namun stabil. Ia menyesap kopi hitamnya yang sudah dingin. Matanya menatap tajam ke arah Baskara yang sedang sibuk dengan tablet layarnya yang bersinar biru. "Kita belajar bahwa kota adalah sebuah organisme yang bernapas, sebuah akumulasi dari sejarah yang tidak boleh diputus begitu saja. Namun, apa yang kau lakukan dengan proyek 'Bandung Baru' itu? Kau mencabut jantung kota demi beberapa meter persegi beton yang kau sebut kemajuan."
+                        "Kau telah melupakan fondasi dasar kita, Baskara," Aris memulai, suaranya parau namun penuh tekanan. Ia meletakkan cangkir kopinya dengan denting yang tajam. "Kita belajar bahwa arsitektur adalah tentang memanusiakan ruang, tentang menghormati tapak sejarah di mana kita berpijak. Tapi proyek Bandung Sentralmu itu? Itu adalah penghinaan terhadap setiap inci tanah yang kita cintai. Kau membangun monster beton di atas pemakaman ingatan kita."
                     </p>
                     <p>
-                        Baskara menghela napas panjang, meletakkan tabletnya. Ia menyesuaikan letak kacamatanya yang berbingkai emas. "Aris, fondasi yang kau bicarakan itu adalah romantisme masa lalu yang sudah tidak punya tempat di era ekonomi vertikal. Fondasi dasarku adalah kebutuhan. Enam juta orang butuh ruang. Kau ingin mempertahankan satu rumah tua yang bahkan gentengnya sudah bocor, sementara ribuan orang harus tinggal di gang-gang sempit yang tidak manusiawi? Fondasi adalah tentang bagaimana manusia bertahan hidup, bukan tentang bagaimana batu bata dipajang."
+                        Baskara tidak segera menjawab. Ia menyesuaikan letak kacamatanya, matanya tetap tertuju pada tablet yang menampilkan render 3D kompleks apartemen mewah. "Aris, fondasiku adalah realitas. Bandung bukan lagi kota kecil untuk tiga ratus ribu jiwa. Kita sudah melampaui batas. Fondasi yang kau bicarakan itu adalah romantisme yang sudah kedaluwarsa. Kau ingin mempertahankan satu gedung tua yang rapuh sementara ribuan keluarga tidak punya akses hunian layak? Fondasiku adalah kebutuhan, bukan sekadar fasad yang terlihat cantik di foto hitam putih."
                     </p>
                     <p>
-                        Perdebatan mereka adalah tentang definisi paling mendasar dari keberadaan. Aris percaya bahwa tanpa sejarah, manusia adalah amnesia yang berjalan. Baskara percaya bahwa tanpa ruang, manusia adalah semut yang saling menginjak. Maya hanya mendengarkan, mencatat setiap detak emosi yang tertangkap di udara. Ia tahu, di balik kata-kata intelektual itu, ada ego yang sedang mengeras menjadi dinding pemisah.
+                        Perdebatan mereka adalah tentang akar. Aris melihat fondasi sebagai etika dan sejarah yang tak boleh diganggu gugat. Bagi Baskara, fondasi adalah fungsi dan daya tampung. Maya mengamati mereka berdua, menyadari bahwa kedua laki-laki ini sedang membangun dinding ego menggunakan bahasa intelektual yang mereka pelajari di almamater yang sama. Fondasi dasar persahabatan mereka telah retak, digantikan oleh fondasi kepentingan yang kini berseberangan secara diametral.
                     </p>
-                    <p>
-                        "Fondasi kita di Ganesha dulu adalah etika," sela Aris lagi. "Bukan sekadar statistik. Kau menggunakan data untuk menjustifikasi keserakahan. Kau membangun superblok tepat di jalur resapan air. Kau tahu itu, Bas. Secara teknis, fondasi bangunanmu berdiri di atas potensi bencana yang kau abaikan demi tenggat waktu politik."
-                    </p>
-                    <p>
-                        Suasana semakin memanas. Baskara merasa fondasi integritasnya diserang. Ia adalah orang yang bangga dengan "hasil nyata". Baginya, Aris hanya tukang kritik yang tidak pernah berkeringat di lapangan. "Setidaknya aku melakukan sesuatu, Ris! Aku mengubah cetak biru menjadi kenyataan. Kau? Kau hanya menjaga abu dari api yang sudah lama padam."
-                    </p>
-                </section>
+                </div>
+            </section>
 
-                <!-- SECTION U -->
-                <section id="uji" class="relative">
-                    <div class="section-marker">UJI</div>
-                    <div class="flex items-baseline gap-4 mb-10">
-                        <span class="mono text-5xl text-blue-600 font-bold">U.</span>
-                        <h2 class="serif text-4xl font-bold text-white italic">Uji Mandiri: Cermin yang Retak</h2>
-                    </div>
+            <!-- U - UJI MANDIRI -->
+            <section id="uji" class="relative">
+                <span class="section-marker">UJI</span>
+                <div class="flex items-center gap-4 mb-10">
+                    <span class="text-blue-500 mono text-2xl font-bold">02.</span>
+                    <h2 class="serif text-4xl font-bold text-white tracking-wide">Uji Mandiri: Pengkhianatan Data</h2>
+                </div>
+                <div class="glass-card p-10 space-y-6 text-slate-300 border-l-4 border-blue-500">
                     <p>
-                        Maya akhirnya memajukan kursinya. Ia membuka sebuah map kulit berwarna cokelat tua. Isinya adalah tumpukan kertas hasil penelitian lapangan selama enam bulan terakhir. "Kalian berdua terlalu sibuk berdebat tentang fondasi langit, hingga lupa melakukan uji mandiri di atas tanah yang becek," Maya memulai dengan nada dingin.
+                        Maya akhirnya memajukan kursinya, memecah ketegangan antara kedua laki-laki itu. "Kalian berdua terlalu sibuk berteori tentang apa yang seharusnya, sampai lupa melakukan uji mandiri terhadap apa yang sebenarnya terjadi," katanya dengan nada datar namun mematikan. Ia membuka sebuah map berisi data primer hasil penelitian lapangannya.
                     </p>
                     <p>
-                        Ia melempar sebuah foto ke tengah meja. Foto itu menunjukkan sebuah perkampungan padat di belakang salah satu proyek Baskara. "Bas, ini adalah hasil uji mandiri datamu. Kau bilang tingkat kebahagiaan warga meningkat pasca relokasi. Faktanya? Angka putus sekolah di kawasan relokasi naik dua belas persen karena akses transportasi yang mahal. Kau menguji keberhasilanmu dengan saldo rekening bank, bukan dengan perut warga."
+                        "Baskara, aku melakukan uji mandiri terhadap klaimmu tentang 'hunian inklusif'. Hasilnya? 85 persen unit di proyekmu sudah dipesan oleh spekulan properti. Kau tidak sedang membangun rumah untuk warga, kau sedang membangun brankas investasi untuk para elite. Uji mandiri ini membuktikan bahwa narasimu hanyalah selubung untuk keserakahan," Maya melemparkan tumpukan tabel data ke meja.
                     </p>
                     <p>
-                        Baskara terdiam. Ia mencoba membantah, namun Maya lebih cepat. "Dan kau, Aris. Kau bicara soal pelestarian cagar budaya. Aku melakukan uji mandiri terhadap yayasan konservasi yang kau pimpin. Kau tahu siapa penyumbang terbesarnya? Perusahaan properti saingan Baskara. Kau bukan sedang menyelamatkan bangunan, Ris. Kau sedang menyelamatkan kepentingan bisnis lawan Bas dengan kedok sejarah."
+                        Ia beralih ke Aris yang tampak merasa menang. "Dan kau, Aris. Jangan merasa suci. Aku melakukan uji mandiri terhadap pendanaan yayasan konservasimu. Kenapa kau begitu gigih mempertahankan gedung di Jalan Braga itu? Karena di belakangnya ada investor yang ingin menjadikannya butik hotel eksklusif yang tidak bisa diakses publik. Kau menjual sejarah sebagai komoditas mewah. Uji mandiriku menunjukkan bahwa idealisme kalian hanyalah topeng dari ambisi yang sama kotornya."
                     </p>
-                    <p>
-                        Kedua laki-laki itu kini membeku. Maya adalah cermin yang retak bagi mereka. Ia menunjukkan bahwa intelektualitas mereka telah ternoda oleh realitas yang lebih kotor dari sekadar teori. Uji mandiri yang dilakukan Maya membongkar bahwa "idealisme" Aris dan "pragmatisme" Baskara hanyalah dua sisi dari koin kekuasaan yang sama.
-                    </p>
-                    <p>
-                        "Kita seringkali menguji orang lain, namun kita gagal menguji diri sendiri," lanjut Maya, suaranya hampir menyerupai bisikan yang mematikan. "Bandung malam ini tidak butuh teori baru. Bandung butuh pengakuan bahwa orang-orang paling terpelajarnya adalah orang-orang yang paling mahir berbohong demi ambisi pribadinya."
-                    </p>
-                </section>
+                </div>
+            </section>
 
-                <!-- SECTION R -->
-                <section id="retensi" class="relative">
-                    <div class="section-marker">RETENSI</div>
-                    <div class="flex items-baseline gap-4 mb-10">
-                        <span class="mono text-5xl text-blue-600 font-bold">R.</span>
-                        <h2 class="serif text-4xl font-bold text-white italic">Retensi Berjenjang: Daur Ulang Kesalahan</h2>
-                    </div>
+            <!-- R - RETENSI BERJENJANG -->
+            <section id="retensi" class="relative">
+                <span class="section-marker">RETENSI</span>
+                <div class="flex items-center gap-4 mb-10">
+                    <span class="text-blue-500 mono text-2xl font-bold">03.</span>
+                    <h2 class="serif text-4xl font-bold text-white tracking-wide">Retensi Berjenjang: Warisan Kegagalan</h2>
+                </div>
+                <div class="space-y-6 text-slate-300">
                     <p>
-                        Hujan di luar semakin lebat, menciptakan simfoni berisik di atap seng vila tersebut. Aris menyandarkan punggungnya, tampak lebih tua sepuluh tahun dari usianya yang sebenarnya. "Mungkin Maya benar. Kita terjebak dalam retensi berjenjang yang salah. Kita menyimpan ingatan hanya pada apa yang ingin kita ingat."
+                        Hujan di luar semakin lebat, menciptakan suara statis yang seolah mencoba menenggelamkan perdebatan di dalam. Aris menghela napas panjang. "Mungkin kita memang gagal dalam hal retensi berjenjang, Maya. Kita menyimpan pengetahuan, tapi kita tidak menyimpan kebijaksanaan. Kita hanya mendaur ulang kesalahan perencanaan yang sama dari dekade ke dekade."
                     </p>
                     <p>
-                        Aris mulai bercerita tentang sejarah perencanaan kota Bandung sejak zaman Thomas Karsten. Ia menjelaskan bagaimana setiap dekade, para perencana kota selalu mengulang pola yang sama: pembangunan yang berpusat pada elite, pengabaian pada sistem air, dan pemujaan pada visual. "Kita memiliki retensi informasi yang luar biasa, tapi kita memiliki retensi moral yang rendah. Kita belajar cara membangun drainase yang canggih, tapi kita tidak pernah belajar untuk tidak membuang limbah ke dalamnya."
+                        Aris menjelaskan bagaimana pola pembangunan Bandung selalu gagal belajar dari masa lalu secara berjenjang. Setiap kepemimpinan baru menghapus rencana lama tanpa evaluasi mendalam, hanya untuk menciptakan masalah baru yang lebih masif. "Retensi kita hanya pada visual, bukan pada sistem. Kita ingat bentuk jembatannya, tapi kita lupa bagaimana mengelola aliran air di bawahnya. Retensi berjenjang kita adalah tentang akumulasi kesalahan, bukan akumulasi solusi."
                     </p>
                     <p>
-                        Baskara menunduk. Ia teringat pada memo-memo internal di kantornya yang seringkali ia abaikan. Memo tentang penurunan muka tanah, tentang hilangnya mata air, tentang kemacetan yang permanen. "Aku pikir jika kita melakukannya terus menerus, retensi itu akan menjadi sebuah sistem yang sempurna secara otomatis," gumam Baskara.
+                        Baskara terdiam, tampak terpukul oleh analisis Maya tadi. Ia menyadari bahwa selama ini ia hanya melakukan retensi terhadap angka-angka pertumbuhan ekonomi makro, tanpa pernah melakukan retensi terhadap dampak sosial mikro yang ditinggalkannya. "Aku pikir kemajuan adalah proses linear," gumamnya. "Ternyata kemajuan tanpa retensi moral hanyalah gerak melingkar menuju jurang yang sama."
                     </p>
-                    <p>
-                        "Sistem tidak akan menjadi sempurna jika ia dibangun di atas retensi kesalahan yang berjenjang, Bas," Maya menanggapi. "Kau tidak bisa mengharapkan hasil yang berbeda jika kau menggunakan metode yang sama yang telah gagal selama lima puluh tahun. Kita hanya mendaur ulang kegagalan dengan kemasan yang lebih modern. Dulu beton, sekarang beton hijau (green building). Esensinya tetap sama: penguasaan ruang oleh segelintir orang."
-                    </p>
-                    <p>
-                        Keheningan kembali merayap. Mereka mulai menyadari bahwa kecerdasan mereka selama ini hanyalah alat untuk memperhalus kegagalan. Retensi berjenjang yang mereka pelajari di kampus—tentang bagaimana ilmu pengetahuan harus diakumulasi—ternyata di lapangan hanya menjadi akumulasi dari kompromi-kompromi yang busuk.
-                    </p>
-                </section>
+                </div>
+            </section>
 
-                <!-- SECTION A -->
-                <section id="analisis" class="relative">
-                    <div class="section-marker">ANALISIS</div>
-                    <div class="flex items-baseline gap-4 mb-10">
-                        <span class="mono text-5xl text-blue-600 font-bold">A.</span>
-                        <h2 class="serif text-4xl font-bold text-white italic">Analisis Celah: Lubang di Jantung Kota</h2>
-                    </div>
+            <!-- A - ANALISIS CELAH -->
+            <section id="analisis" class="relative">
+                <span class="section-marker">ANALISIS</span>
+                <div class="flex items-center gap-4 mb-10">
+                    <span class="text-blue-500 mono text-2xl font-bold">04.</span>
+                    <h2 class="serif text-4xl font-bold text-white tracking-wide">Analisis Celah: Lubang Integritas</h2>
+                </div>
+                <div class="prose-container text-slate-300">
                     <p>
-                        Maya menarik sebuah dokumen lain. Kali ini dokumen digital yang ia tampilkan lewat proyektor portabel kecil. Cahaya proyektor itu menembus kabut di dalam ruangan, membentuk gambar-gambar skematik tanah Bandung. "Sekarang, mari kita masuk ke bagian favoritku: Analisis Celah. Kita akan melihat di mana letak lubang yang akan menelan kita semua."
+                        Maya kini berdiri, berjalan menuju jendela yang berembun. Ia menggambar sebuah garis abstrak di kaca yang basah itu. "Inilah analisis celah yang paling krusial. Celah antara siapa kita saat di kampus dulu, dan siapa kita di hadapan kekuasaan saat ini. Celah itu begitu lebar, sampai-sampai suara hati nurani kita pun tak mampu terdengar menyeberanginya."
                     </p>
                     <p>
-                        Ia menunjukkan celah antara rencana tata ruang resmi dengan izin mendirikan bangunan yang dikeluarkan Baskara. Ada selisih ratusan hektar lahan yang secara ajaib berubah fungsi dari zona hijau menjadi zona komersial. "Bas, ini bukan sekadar celah administratif. Ini adalah celah moral yang sangat lebar. Kau menandatangani izin ini di sebuah hotel mewah di Singapura, bukan?"
+                        Ia membalikkan badan, menatap kedua sahabatnya. "Baskara, celah dalam amdalmu adalah bencana yang tinggal menunggu waktu. Kau menyembunyikan data tentang kerawanan sesar Lembang demi izin proyek. Aris, celah dalam kampanye konservasimu adalah kemunafikanmu yang diam saat hutan di utara dibabat demi vila pribadi klienmu. Kalian berdua adalah personifikasi dari celah integritas yang sedang menghancurkan Bandung."
                     </p>
                     <p>
-                        Baskara mencoba berdiri, namun kakinya terasa lemas. Rahasianya yang paling gelap baru saja diletakkan di atas meja. Maya kemudian beralih ke Aris. "Dan Aris, celah dalam argumen konservasimu adalah ini: kau menolak pembangunan di Jalan Asia Afrika, tapi kau diam saja ketika pengembang yang sama menghancurkan hutan di Lembang. Mengapa? Karena mereka adalah penyewa jasamu sebagai konsultan lanskap pribadi mereka. Analisis celah ini menunjukkan bahwa kalian berdua adalah munafik yang saling melengkapi."
+                        Analisis celah Maya tidak lagi bicara soal teknis perencanaan, melainkan soal kejatuhan martabat. Ia membongkar bagaimana kepintaran mereka telah digunakan untuk membenarkan tindakan yang salah. Celah itu tidak bisa ditutup dengan semen, juga tidak bisa diperbaiki dengan narasi sejarah. Ia adalah lubang hitam yang sedang menghisap masa depan kota ini.
                     </p>
-                    <p>
-                        Konflik tajam ini bukan lagi tentang Bandung. Ini tentang kehancuran total martabat tiga orang terpelajar. Maya telah membongkar celah-celah terkecil dalam kehidupan mereka, celah di mana idealisme mereka bocor dan digantikan oleh kepentingan materi. Aris menatap tangannya yang gemetar. Ia menyadari bahwa setiap baris tulisan di koran tentang pentingnya sejarah adalah cara untuk menaikkan nilai tawarnya di mata pengembang.
-                    </p>
-                    <p>
-                        "Celah ini tidak akan bisa ditutup dengan semen, Bas. Tidak juga dengan seminar-seminar arsitektur, Ris," kata Maya dengan nada yang hampir terdengar seperti vonis hakim. "Celah ini adalah akhir dari karir kalian. Dan mungkin, akhir dari persahabatan kita."
-                    </p>
-                </section>
+                </div>
+            </section>
 
-                <!-- SECTION B -->
-                <section id="bidik" class="relative">
-                    <div class="section-marker">BIDIK</div>
-                    <div class="flex items-baseline gap-4 mb-10">
-                        <span class="mono text-5xl text-blue-600 font-bold">B.</span>
-                        <h2 class="serif text-4xl font-bold text-white italic">Bidik Strategi: Langkah Terakhir</h2>
-                    </div>
-                    <p>
-                        Jam di dinding vila berdentang dua belas kali. Tengah malam telah tiba. Maya menutup mapnya. "Sekarang, kita sampai pada tahap terakhir dari metode FURAB kita: Bidik Strategi. Kalian pasti bertanya-tanya, untuk apa aku mengumpulkan kalian di sini?"
+            <!-- B - BIDIK STRATEGI -->
+            <section id="bidik" class="relative pb-32">
+                <span class="section-marker">BIDIK</span>
+                <div class="flex items-center gap-4 mb-10">
+                    <span class="text-blue-500 mono text-2xl font-bold">05.</span>
+                    <h2 class="serif text-4xl font-bold text-white tracking-wide">Bidik Strategi: Titik Nol</h2>
+                </div>
+                <div class="bg-gradient-to-br from-blue-900/20 to-transparent p-12 rounded-3xl border border-blue-500/20">
+                    <p class="mb-8 font-light italic text-xl text-white">
+                        "Maka, aku telah menentukan bidik strategiku malam ini. Dan ini adalah langkah terakhir yang akan mengakhiri semua sandiwara intelektual ini."
                     </p>
                     <p>
-                        Baskara menatap Maya dengan ketakutan. "Apa maumu, Maya? Uang? Jabatan? Aku bisa mengaturnya."
+                        Maya mengeluarkan sebuah ponsel. Layarnya menyala, menunjukkan proses pengunggahan data yang sedang berjalan. "Aku tidak sedang mengancam. Aku sedang melakukan bidik strategi untuk pemulihan kota. Seluruh rekaman pembicaraan kita, data amdal yang kalian sembunyikan, dan bukti aliran dana yayasan Aris... semuanya sudah kusebarkan ke publik lewat jaringan jurnalis investigasi nasional tepat saat aku berdiri tadi."
                     </p>
                     <p>
-                        Maya tersenyum tipis, sebuah senyuman yang tidak sampai ke mata. "Itu strategi kuno, Bas. Bidik strategiku jauh lebih modern. Seluruh percakapan kita malam ini, semua dokumen yang kubentangkan, dan pengakuan-pengakuan implisit kalian, sudah dikirimkan secara otomatis ke server KPK dan konsorsium jurnalis investigasi nasional sejak lima menit yang lalu."
+                        Baskara terperanjat, sementara Aris tertunduk lesu. Mereka menyadari bahwa Maya tidak sedang bermain-main. Strategi Maya adalah strategi pemusnahan total terhadap narasi palsu. Ia membidik tepat ke jantung masalah: kepercayaan publik yang telah mereka khianati.
                     </p>
                     <p>
-                        Aris tersentak. "Kau menghancurkan kami, Maya? Kami adalah temanmu!"
+                        "Ini bukan strategi untuk menghancurkan kalian sebagai pribadi," lanjut Maya pelan sambil melangkah menuju pintu. "Ini strategi untuk memaksa Bandung kembali ke titik nol. Biarkan rakyat yang memutuskan apakah mereka masih butuh arsitek tanpa jiwa dan birokrat tanpa nurani seperti kalian. Selamat malam, sahabat-sahabatku. Labirin ini akhirnya runtuh."
                     </p>
                     <p>
-                        "Aku tidak menghancurkan kalian. Kalian sudah hancur sejak kalian memutuskan untuk menjual ilmu kalian demi kenyamanan pribadi. Aku hanya membidik strategi untuk memastikan kehancuran ini berguna bagi kota ini. Bandung tidak butuh tiga intelektual yang saling melindungi kejahatan masing-masing. Bandung butuh satu pelajaran pahit tentang apa yang terjadi jika kecerdasan dikhianati."
+                        Maya melangkah keluar ke tengah hujan deras. Aris dan Baskara duduk dalam kehancuran yang mutlak. Bandung tetap dingin, sementara di kejauhan, lampu-lampu kota berkedip seperti kode Morse yang sedang mengirimkan sinyal bahaya bagi mereka yang pernah merasa paling cerdas namun lupa menjadi manusia.
                     </p>
-                    <p>
-                        Maya berdiri, mengenakan mantelnya. Ia tidak menunggu jawaban. Ia berjalan menuju pintu kayu besar vila tersebut. Sebelum melangkah keluar ke tengah hujan, ia menoleh sekali lagi. "Fondasi kalian palsu, Uji kalian cacat, Retensi kalian bias, Analisis kalian buta. Maka, Strategiku adalah melenyapkan kalian dari masa depan kota ini."
-                    </p>
-                    <p>
-                        Maya menghilang ke dalam kegelapan dan deru hujan. Di dalam vila, Aris dan Baskara duduk terdiam. Cahaya tablet Baskara mati. Kopi Aris sudah benar-benar dingin. Bandung Utara tetap dingin, dan di bawah sana, lampu-lampu kota tampak seperti sisa-sisa peradaban yang sedang menunggu untuk tenggelam oleh keserakahannya sendiri.
-                    </p>
-                    <p>
-                        Malam itu, metode FURAB bukan lagi sekadar cara belajar bagi mahasiswa di Jalan Ganesha. Ia menjadi sebuah manifesto tentang keadilan yang datang terlambat, tentang bagaimana ilmu pengetahuan harus dibersihkan dengan cara yang menyakitkan. Di pagi hari, Bandung akan bangun dengan berita besar, dan tiga nama besar akan terkubur dalam puing-puing sejarah yang mereka khianati.
-                    </p>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Sidebar (Hanya Desktop) -->
+        <aside class="hidden lg:block lg:col-span-4">
+            <div class="sidebar space-y-10">
+                <div class="glass-card p-8">
+                    <h4 class="mono text-xs font-bold text-blue-500 uppercase tracking-widest mb-6">Metode FURAB</h4>
+                    <ul class="space-y-4 text-sm text-slate-400">
+                        <li class="flex gap-3"><span class="text-blue-500 font-bold">F</span> Fondasi Dasar</li>
+                        <li class="flex gap-3"><span class="text-blue-500 font-bold">U</span> Uji Mandiri</li>
+                        <li class="flex gap-3"><span class="text-blue-500 font-bold">R</span> Retensi Berjenjang</li>
+                        <li class="flex gap-3"><span class="text-blue-500 font-bold">A</span> Analisis Celah</li>
+                        <li class="flex gap-3"><span class="text-blue-500 font-bold">B</span> Bidik Strategi</li>
+                    </ul>
+                </div>
+                <div class="p-8 italic text-slate-500 text-sm leading-relaxed border-l border-slate-800">
+                    "Konflik ini mencerminkan dilema kaum terpelajar di tengah himpitan kapitalisme urban dan romantisme sejarah."
                 </div>
             </div>
+        </aside>
 
-            <!-- Author & Inspiration -->
-            <footer class="mt-32 pt-20 border-t border-slate-900 text-center">
-                <p class="serif text-xl text-slate-500 italic mb-8">
-                    "Kecerdasan tanpa integritas adalah arsitektur megah yang dibangun di atas pasir hisap."
-                </p>
-                <div class="inline-block px-8 py-4 glass-panel rounded-full border border-blue-500/20">
-                    <p class="mono text-[10px] tracking-widest text-slate-400 mb-0">
-                        terinspirasi dari: <a href="https://www.instagram.com/p/DWjQabaEijz/?img_index=6&igsh=OTRta204OXdranFr" class="text-blue-500 hover:underline">https://www.instagram.com/p/DWjQabaEijz/?img_index=6&igsh=OTRta204OXdranFr</a>
-                    </p>
-                </div>
-            </footer>
-        </div>
     </main>
 
-    <!-- Background Rain Effect Placeholder -->
-    <div class="fixed inset-0 pointer-events-none opacity-20 z-[-1]">
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
-    </div>
+    <!-- Footer -->
+    <footer class="py-20 border-t border-slate-900 bg-black/50">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="mono text-[10px] text-slate-600 mb-8 tracking-[0.5em] uppercase">Akhir dari Elegi</div>
+            <p class="serif text-xl text-slate-400 mb-12 italic">
+                "Kecerdasan tanpa integritas adalah arsitektur megah yang dibangun di atas pasir hisap."
+            </p>
+            <p class="text-slate-700 text-xs mono">
+                terinspirasi dari : <a href="https://www.instagram.com/p/DWjQabaEijz/?img_index=6&igsh=OTRta204OXdranFr" class="text-blue-900 hover:text-blue-500 transition-colors">https://www.instagram.com/p/DWjQabaEijz/?img_index=6&igsh=OTRta204OXdranFr</a>
+            </p>
+        </div>
+    </footer>
 
+    <script>
+        // Animasi scroll sederhana untuk navigasi
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
