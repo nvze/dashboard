@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>NvZE Dashboard</title>
   <style>
     /* Reset & Base Style */
@@ -18,13 +18,14 @@
       
       color: #ffffff;
       
-      /* --- PERBAIKAN TINGGI LAYAR --- */
-      min-height: 100dvh; 
+      /* --- PERBAIKAN TINGGI LAYAR (Satu Layar Penuh) --- */
+      height: 100vh;
+      height: 100dvh; 
       
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow-y: auto; 
+      overflow: hidden; /* Mencegah scroll */
     }
 
     /* Wrapper untuk menengahkan Logo (di luar) dan Card */
@@ -33,12 +34,9 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      max-width: 420px;
-      gap: 1.5rem; 
-      
-      /* --- PERBAIKAN POSISI (SEIMBANG) --- */
-      margin-top: -3vh; /* Tarikan halus agar pas di tengah, tidak menabrak atas */
-      padding: 2rem 0; 
+      max-width: 400px;
+      gap: 1rem; 
+      padding: 1rem;
     }
 
     /* --- LOGO (DI LUAR CARD) --- */
@@ -49,7 +47,7 @@
     }
 
     .profile-logo {
-      width: 150px; 
+      width: 110px; /* Ukuran diperkecil sedikit untuk efisiensi ruang */
       height: auto;
       display: block;
       filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.2));
@@ -57,9 +55,9 @@
 
     /* --- DASHBOARD CARD (EFEK KACA/GLASSMORPHISM) --- */
     .dashboard-card {
-      width: 85%;
+      width: 100%;
       text-align: center;
-      padding: 2.5rem 2rem;
+      padding: 1.5rem 1.2rem;
       border-radius: 24px;
       
       /* EFEK KACA TRANSPARAN */
@@ -76,40 +74,39 @@
     }
 
     h1 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: #ffffff;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.1rem;
       letter-spacing: 0.5px;
       text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     p.subtitle {
       color: #dbeafe; 
-      margin-bottom: 2rem;
-      font-size: 0.85rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.8rem;
       font-weight: 400;
       opacity: 0.9;
     }
 
     /* --- WIDGET JAM --- */
     .clock-widget {
-      margin-top: 0.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
     
     .time-display {
-      font-size: 3.5rem;
+      font-size: 3rem; /* Sedikit lebih kecil agar proporsional */
       font-weight: 600; 
       color: #ffffff; 
       line-height: 1;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
       letter-spacing: -1px;
       text-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
 
     .date-display {
-      font-size: 1rem;
+      font-size: 0.9rem;
       color: #e2e8f0;
       font-weight: 500;
     }
@@ -118,7 +115,7 @@
     .menu-list {
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 0.6rem; /* Jarak antar menu dipersempit */
       width: 100%;
     }
 
@@ -127,18 +124,17 @@
       align-items: center;
       justify-content: space-between;
       text-decoration: none;
-      background: rgba(255, 255, 255, 0.15); 
-      padding: 1rem 1.2rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.12); 
+      padding: 0.85rem 1.1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.2s ease;
     }
 
     a.menu-item:hover {
-      background: rgba(255, 255, 255, 0.3);
-      border-color: rgba(255, 255, 255, 0.5);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: scale(1.02);
     }
     
     .item-content {
@@ -150,24 +146,32 @@
     .item-title {
       font-weight: 600;
       color: #ffffff; 
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
     
     .item-desc {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: #f1f5f9;
-      margin-top: 2px;
+      margin-top: 1px;
       opacity: 0.8;
     }
 
     .item-icon {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: #ffffff;
     }
 
     @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
+      from { opacity: 0; transform: translateY(-15px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Penyesuaian untuk layar sangat kecil */
+    @media (max-height: 650px) {
+      .profile-logo { width: 80px; }
+      .time-display { font-size: 2.5rem; }
+      .clock-widget { margin-bottom: 1rem; }
+      .dashboard-card { padding: 1rem; }
     }
     
   </style>
@@ -183,7 +187,7 @@
     <div class="dashboard-card">
       
       <h1>Dashboard</h1>
-      <p class="subtitle">Refleksi visual Knowledge & Knowhow</p>
+      <p class="subtitle">Visualisasi Knowledge & Knowhow</p>
 
       <div class="clock-widget">
         <div class="time-display" id="clock-time">00:00</div>
@@ -198,6 +202,14 @@
           </div>
           <div class="item-icon">📝</div>
         </a>
+
+        <a href="https://nzebook.vercel.app" class="menu-item">
+          <div class="item-content">
+            <div class="item-title">nzeBook</div>
+            <div class="item-desc">Digital Library & Knowledge</div>
+          </div>
+          <div class="item-icon">📚</div>
+        </a>
         
         <a href="https://nvze.pythonanywhere.com/bookmark" class="menu-item">
           <div class="item-content">
@@ -210,7 +222,7 @@
         <a href="https://nasx.pythonanywhere.com/" class="menu-item">
           <div class="item-content">
             <div class="item-title">NASX Portal</div>
-            <div class="item-desc">Akses Sistem NASX</div>
+            <div class="item-desc">Akses Sistem Internal</div>
           </div>
           <div class="item-icon">🚀</div>
         </a>
@@ -223,6 +235,7 @@
     function updateClock() {
       const now = new Date();
       const timeOptions = { hour: '2-digit', minute: '2-digit' };
+      // Format jam Indonesia dengan pemisah titik dua
       const timeString = now.toLocaleTimeString('id-ID', timeOptions).replace('.', ':');
       const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }; 
       const dateString = now.toLocaleDateString('id-ID', dateOptions);
