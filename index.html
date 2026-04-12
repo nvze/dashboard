@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>NvZE Dashboard</title>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2855c9">
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="NvZE">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    /* Reset & Base Style */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: "Segoe UI Variable Display", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      
+      /* --- BACKGROUND UTAMA --- */
+      background-color: #2855c9; 
+      /* Gradasi Pink Kiri Atas -> Biru -> Pink Kanan Bawah */
+      background-image: linear-gradient(135deg, #ff9aeb 0%, #2855c9 40%, #2855c9 60%, #ff9aeb 100%);
+      
+      color: #ffffff;
+      
+      /* --- PERBAIKAN TINGGI LAYAR (Satu Layar Penuh) --- */
+      height: 100vh;
+      height: 100dvh; 
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden; /* Mencegah scroll */
+    }
+
+    /* Wrapper untuk menengahkan Logo (di luar) dan Card */
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+      gap: 1rem; 
+      padding: 1rem;
+    }
+
+    /* --- LOGO (DI LUAR CARD) --- */
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .profile-logo {
+      width: 110px; /* Ukuran diperkecil sedikit untuk efisiensi ruang */
+      height: auto;
+      display: block;
+      filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+    }
+
+    /* --- DASHBOARD CARD (EFEK KACA/GLASSMORPHISM) --- */
+    .dashboard-card {
+      width: 100%;
+      text-align: center;
+      padding: 1.5rem 1.2rem;
+      border-radius: 24px;
+      
+      /* EFEK KACA TRANSPARAN */
+      background: rgba(255, 255, 255, 0.1); 
+      backdrop-filter: blur(20px);           
+      -webkit-backdrop-filter: blur(20px);
+      
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.1rem;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    p.subtitle {
+      color: #dbeafe; 
+      margin-bottom: 1.2rem;
+      font-size: 0.8rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    /* --- WIDGET JAM --- */
+    .clock-widget {
+      margin-bottom: 1.5rem;
+    }
+    
+    .time-display {
+      font-size: 3rem; /* Sedikit lebih kecil agar proporsional */
+      font-weight: 600; 
+      color: #ffffff; 
+      line-height: 1;
+      margin-bottom: 0.2rem;
+      letter-spacing: -1px;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .date-display {
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+    
+    /* --- LIST MENU --- */
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem; /* Jarak antar menu dipersempit */
+      width: 100%;
+    }
+
+    a.menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.12); 
+      padding: 0.85rem 1.1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.2s ease;
+    }
+
+    a.menu-item:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: scale(1.02);
+    }
+    
+    .item-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .item-title {
+      font-weight: 600;
+      color: #ffffff; 
+      font-size: 0.9rem;
+    }
+    
+    .item-desc {
+      font-size: 0.7rem;
+      color: #f1f5f9;
+      margin-top: 1px;
+      opacity: 0.8;
+    }
+
+    .item-icon {
+      font-size: 1.1rem;
+      color: #ffffff;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Penyesuaian untuk layar sangat kecil */
+    @media (max-height: 650px) {
+      .profile-logo { width: 80px; }
+      .time-display { font-size: 2.5rem; }
+      .clock-widget { margin-bottom: 1rem; }
+      .dashboard-card { padding: 1rem; }
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="main-wrapper">
+    
+    <div class="logo-container">
+      <img src="logo.png" alt="NVZE SYSTEM" class="profile-logo">
+    </div>
+
+    <div class="dashboard-card">
+      
+      <h1>Dashboard</h1>
+      <p class="subtitle">Visualisasi Knowledge & Knowhow</p>
+
+      <div class="clock-widget">
+        <div class="time-display" id="clock-time">00:00</div>
+        <div class="date-display" id="clock-date">Memuat...</div>
+      </div>
+      
+      <div class="menu-list">
+        <a href="blog.html" class="menu-item">
+          <div class="item-content">
+            <div class="item-title">Arsip Tulisan</div>
+            <div class="item-desc">Pemikiran & Catatan</div>
+          </div>
+          <div class="item-icon">📝</div>
+        </a>
+
+        <a href="https://nsebook.vercel.app" class="menu-item">
+          <div class="item-content">
+            <div class="item-title">nzeBook</div>
+            <div class="item-desc">Digital Library & Knowledge</div>
+          </div>
+          <div class="item-icon">📚</div>
+        </a>
+        
+        <a href="https://nvze.pythonanywhere.com/bookmark" class="menu-item">
+          <div class="item-content">
+            <div class="item-title">Bookmarks</div>
+            <div class="item-desc">Akses Link Cepat</div>
+          </div>
+          <div class="item-icon">🔖</div>
+        </a>
+
+        <a href="https://nsenotes.vercel.app/" class="menu-item">
+          <div class="item-content">
+            <div class="item-title">nseNotes</div>
+            <div class="item-desc">Akses Sistem Internal</div>
+          </div>
+          <div class="item-icon">🚀</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const timeOptions = { hour: '2-digit', minute: '2-digit' };
+      // Format jam Indonesia dengan pemisah titik dua
+      const timeString = now.toLocaleTimeString('id-ID', timeOptions).replace('.', ':');
+      const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }; 
+      const dateString = now.toLocaleDateString('id-ID', dateOptions);
+
+      document.getElementById('clock-time').textContent = timeString;
+      document.getElementById('clock-date').textContent = dateString;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(registration => {
+            console.log('ServiceWorker terdaftar sukses dengan scope: ', registration.scope);
+          })
+          .catch(err => {
+            console.log('ServiceWorker gagal terdaftar: ', err);
+          });
+      });
+    }
+  </script>
+  </body>
+</html>
