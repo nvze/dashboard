@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Di Balik Angka Dalam Tabungan Kita — nseBook</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ink: #1a1410;
+      --ink-muted: #4a3f35;
+      --ink-faint: #8a7a6e;
+      --paper: #f7f3ec;
+      --paper-warm: #ede7db;
+      --accent: #b5441a;
+      --accent-light: #e8c4b0;
+      --gold: #c89a3c;
+      --rule: #c8bfb0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 18px; scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      line-height: 1.8;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Subtle grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    /* ── NAV BAR ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 2.5rem;
+      box-shadow: 0 2px 18px rgba(26,20,16,0.22);
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      letter-spacing: 0.02em;
+      color: var(--paper);
+      line-height: 1;
+    }
+
+    .logo-text span {
+      color: var(--gold);
+    }
+
+    /* Back button */
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.45rem 1rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+    }
+
+    .btn-back:hover {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .btn-back svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+
+    /* ── HEADER ── */
+    .article-header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .kicker {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .kicker::after {
+      content: '';
+      display: inline-block;
+      width: 36px;
+      height: 1.5px;
+      background: var(--accent);
+    }
+
+    .article-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+    }
+
+    .article-subtitle {
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      font-style: italic;
+      font-weight: 300;
+      max-width: 580px;
+    }
+
+    /* ── DECORATIVE RULE ── */
+    .ornament {
+      text-align: center;
+      margin: 2.5rem 0;
+      color: var(--rule);
+      font-size: 1.2rem;
+      letter-spacing: 0.6em;
+      user-select: none;
+    }
+
+    /* ── SECTION HEADINGS ── */
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.55rem;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-top: 3.5rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+
+    h2::before {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 48px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    /* ── BODY TEXT ── */
+    p {
+      margin-bottom: 1.25rem;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+
+    /* Emphasized inline terms */
+    strong, b {
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+    }
+
+    /* ── PULL QUOTE / DIALOG ── */
+    .dialog-box {
+      border-left: 4px solid var(--accent);
+      background: var(--paper-warm);
+      margin: 2rem 0;
+      padding: 1.2rem 1.5rem;
+      border-radius: 0 4px 4px 0;
+      font-style: italic;
+      color: var(--ink-muted);
+      font-size: 1.02rem;
+      position: relative;
+    }
+
+    .dialog-box::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      color: var(--accent-light);
+      position: absolute;
+      top: -0.3rem;
+      left: 0.5rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* ── BULLET / LIST ITEMS ── */
+    .custom-list {
+      list-style: none;
+      margin: 1.5rem 0 1.5rem 0;
+      padding: 0;
+    }
+
+    .custom-list li {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr;
+      gap: 0 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .custom-list li .bullet {
+      margin-top: 0.42rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      justify-self: center;
+    }
+
+    /* Numbered/labeled list for key terms */
+    .term {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      font-style: normal;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ── CALLOUT CARD ── */
+    .callout {
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 4px;
+      padding: 1.6rem 1.8rem;
+      margin: 2.5rem 0;
+    }
+
+    .callout p {
+      color: var(--paper-warm);
+      margin-bottom: 0.8rem;
+      font-size: 0.96rem;
+    }
+
+    .callout p:last-child { margin-bottom: 0; }
+
+    .callout strong {
+      color: var(--gold);
+    }
+
+    /* ── HORIZONTAL RULE ── */
+    hr.section-rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 3rem 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      background: var(--paper-warm);
+      border-top: 1px solid var(--rule);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--ink-faint);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .article-header { animation: fadeUp 0.6s ease both; }
+    .page > *:not(.article-header) { animation: fadeUp 0.7s ease 0.15s both; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0.65rem 1.2rem; }
+      .page { padding: 2.5rem 1.2rem 4rem; }
+      .logo-text { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVIGATION ══ -->
+<nav>
+  <!-- Logo -->
+  <a class="logo" href="#">
+    <svg class="logo-mark" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Book base -->
+      <rect x="4" y="8" width="30" height="24" rx="2" fill="#c89a3c" opacity="0.15"/>
+      <!-- Spine -->
+      <rect x="4" y="8" width="5" height="24" rx="1" fill="#c89a3c"/>
+      <!-- Pages -->
+      <rect x="9" y="10" width="23" height="20" rx="1" fill="#f7f3ec"/>
+      <!-- Lines on pages -->
+      <line x1="13" y1="15" x2="28" y2="15" stroke="#c8bfb0" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="13" y1="19" x2="28" y2="19" stroke="#c8bfb0" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="13" y1="23" x2="23" y2="23" stroke="#c8bfb0" stroke-width="1.2" stroke-linecap="round"/>
+      <!-- "n" mark accent -->
+      <text x="5.5" y="23" font-family="serif" font-weight="900" font-size="10" fill="#1a1410">n</text>
+    </svg>
+    <span class="logo-text">nse<span>Book</span>.</span>
+  </a>
+
+  <!-- Back button -->
+  <a class="btn-back" href="https://imnxx.vercel.app/blog.html">
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Kembali ke Dashboard
+  </a>
+</nav>
+
+<!-- ══ ARTICLE ══ -->
+<main class="page">
+
+  <!-- Header -->
+  <header class="article-header">
+    <div class="kicker">Literasi Keuangan &nbsp;·&nbsp; Ekonomi</div>
+    <h1 class="article-title">Di Balik Angka Dalam&nbsp;Tabungan&nbsp;Kita</h1>
+    <p class="article-subtitle">Memahami asal-usul uang digital, cara bank menciptakan uang, dan dampaknya terhadap masa depan ekonomi dan lingkungan.</p>
+  </header>
+
+  <!-- ─── PENDAHULUAN ─── -->
+  <h2>Pendahuluan: Uang yang Bukan Sekadar Kertas</h2>
+
+  <p>Saat kalian melihat deretan angka di aplikasi ponsel atau buku tabungan, apakah kalian membayangkan tumpukan uang kertas yang tersimpan rapi di dalam lemari besi bank? Kenyataannya, uang dalam sistem ekonomi modern kita bekerja dengan cara yang sangat berbeda. Memahami asal-usul angka tersebut bukan sekadar pelajaran matematika, melainkan strategi penting bagi kalian untuk menavigasi masa depan finansial. Sebagian besar uang yang kita gunakan hari ini tidak lagi berbentuk fisik seperti koin atau uang kertas yang disebut uang tunai. Uang tunai adalah alat pembayaran sah yang diciptakan oleh negara melalui bank sentral, namun jumlahnya jauh lebih sedikit dibandingkan uang digital yang berputar di akun-akun kita.</p>
+
+  <div class="callout">
+    <p><strong>Uang Digital adalah Sebuah Janji.</strong> Ketika bank mencantumkan angka di saldo akun kalian, itu adalah pernyataan bahwa bank berjanji untuk memberikan uang tunai jika kalian memintanya. Lebih dari sembilan puluh persen uang yang beredar di dunia saat ini diciptakan oleh bank swasta dalam bentuk digital ini.</p>
+    <p>Perbedaan utama antara uang fisik dan digital terletak pada kepercayaannya; sistem ini hanya dapat berjalan karena masyarakat percaya bahwa orang lain akan menerima angka-angka digital tersebut sebagai alat pembayaran. Memahami bahwa uang digital adalah sebuah janji akan membantu kalian melihat gambaran besar tentang bagaimana ekonomi kita sebenarnya digerakkan oleh sebuah cerita kesepakatan yang unik, seperti yang digambarkan dalam kisah berikut ini.</p>
+  </div>
+
+  <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+  <!-- ─── KISAH DESA ─── -->
+  <h2>Kisah Desa Lingkaran Kulit: Memahami Bunga dan Utang</h2>
+
+  <p>Untuk memahami sistem ekonomi yang terlihat sangat rumit, kita sering kali perlu menggunakan analogi atau cerita sederhana agar polanya terlihat jelas. Bayangkan sebuah desa terpencil di masa lalu di mana warganya hidup damai tanpa mengenal uang. Mereka saling berbagi hasil bumi dan membantu tetangga berdasarkan rasa percaya. Semuanya berubah ketika seorang asing yang mengenakan topi putih dan sepatu mengkilap datang membawa potongan-potongan kulit kecil berbentuk lingkaran yang telah diberi tanda khusus.</p>
+
+  <p>Si pria asing memberikan sepuluh keping kulit kepada setiap keluarga. Ia menjelaskan bahwa satu keping kulit setara nilainya dengan satu ekor ayam. Namun, sebelum ia pergi, ia menambahkan sebuah syarat: tahun depan, setiap keluarga harus mengembalikan sebelas keping kulit sebagai biayanya.</p>
+
+  <div class="dialog-box">
+    &ldquo;Tapi Anda hanya memberikan sepuluh keping. Bagaimana mungkin kami bisa mengembalikan sebelas?&rdquo;
+    <br/><br/>
+    <em>Pria itu hanya tersenyum dan menjawab bahwa mereka akan menemukan caranya sendiri.</em>
+  </div>
+
+  <p>Cerita yang dikenal sebagai <strong>Putaran Kesebelas</strong> ini mengungkap kenyataan pahit:</p>
+
+  <ul class="custom-list">
+    <li><span class="bullet"></span><span>Karena kepingan kesebelas tersebut sebenarnya <strong>tidak pernah diciptakan</strong>, maka mustahil bagi semua orang untuk melunasi utangnya.</span></li>
+    <li><span class="bullet"></span><span>Hal ini menciptakan persaingan yang kejam; agar satu keluarga bisa selamat, keluarga lain harus kehilangan kepingan kulitnya.</span></li>
+    <li><span class="bullet"></span><span>Kepercayaan dan kerja sama antarwarga mulai luntur karena mereka dipaksa saling berebut kepingan yang jumlahnya tidak cukup.</span></li>
+    <li><span class="bullet"></span><span>Sistem utang dengan bunga ini memaksa semua orang untuk bekerja lebih keras hanya untuk bertahan, karena kepingan ekstra untuk membayar bunga tersebut tidak ada di dalam sistem sejak awal.</span></li>
+  </ul>
+
+  <p>Kisah desa ini mencerminkan bagaimana perbankan modern kita sering kali memberikan tekanan besar bagi masyarakat untuk terus bersaing dalam sistem yang didasari oleh utang.</p>
+
+  <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+  <!-- ─── CARA BANK MENCIPTAKAN UANG ─── -->
+  <h2>Cara Bank Menciptakan Uang: Bukan dari Tabungan Orang Lain</h2>
+
+  <p>Sering kali terdapat anggapan keliru bahwa bank hanyalah perantara yang meminjamkan uang dari tabungan orang lain. Banyak yang mengira jika mereka menabung seribu rupiah, maka bank akan memberikan uang fisik yang sama kepada orang lain. Namun, sistem perbankan modern tidak bekerja seperti itu. Memahami proses sebenarnya sangat penting agar kita tahu dari mana asal kekuatan ekonomi ini berasal. Kenyataannya, bank komersial swasta menciptakan uang baru setiap kali mereka memberikan pinjaman kepada nasabah.</p>
+
+  <p>Proses ini disebut sebagai penciptaan <strong>Uang Kredit</strong>. Saat seseorang meminjam uang, bank tidak mengambil simpanan orang lain, melainkan cukup dengan mengetikkan angka di komputer ke dalam akun peminjam tersebut. Pada detik itulah uang baru tercipta. Namun, ada aturan penting: ketika pinjaman itu dibayar kembali, angka pokok pinjamannya <strong>akan dihancurkan</strong> atau dihapus dari peredaran. Sebaliknya, <strong>bunga</strong> yang dibayar oleh peminjam tidak ikut dihancurkan, melainkan tetap tersisa sebagai keuntungan bagi bank.</p>
+
+  <div class="callout">
+    <p>Uang kita hari ini adalah <strong>Uang Fiat</strong>, yang berarti uang tersebut tidak didukung oleh emas atau benda fisik berharga lainnya. Uang ini hanya memiliki nilai karena didukung oleh <strong>kata-kata pemerintah dan kepercayaan masyarakat</strong>.</p>
+    <p>Fakta bahwa bank swasta menciptakan sembilan puluh persen uang di dunia memberikan mereka kekuasaan besar untuk menentukan arah ekonomi, sehingga diperlukan lembaga kuat yang mengawasi jalannya permainan angka ini.</p>
+  </div>
+
+  <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+  <!-- ─── BANK INDONESIA ─── -->
+  <h2>Bank Indonesia: Sang Wasit dalam Permainan Ekonomi</h2>
+
+  <p>Dalam permainan angka yang besar ini, diperlukan seorang wasit untuk menjaga kestabilan ekonomi negara. Di Indonesia, peran ini dijalankan oleh <strong>Bank Indonesia (BI)</strong>. Tanpa pengawasan BI, penciptaan uang oleh bank-bank lain bisa menjadi tidak terkendali dan membahayakan stabilitas nasional.</p>
+
+  <p>Pada pertemuan November 2025, Bank Indonesia telah menetapkan kebijakan penting untuk menjaga keseimbangan ekonomi kita:</p>
+
+  <ul class="custom-list">
+    <li>
+      <span class="bullet"></span>
+      <span><span class="term">Menetapkan BI-Rate:</span> BI mempertahankan suku bunga acuan pada tingkat <strong>4,75 persen</strong>. Dengan mengatur angka ini, BI mengendalikan seberapa besar biaya yang harus dibayar saat meminjam uang, yang tujuannya adalah mengatur jumlah uang yang diciptakan agar tidak berlebihan.</span>
+    </li>
+    <li>
+      <span class="bullet"></span>
+      <span><span class="term">Menjaga Nilai Rupiah:</span> BI bekerja keras agar harga barang-barang tidak naik terlalu cepat, atau yang kita kenal sebagai <strong>inflasi</strong>, agar nilai uang yang kalian miliki tetap stabil.</span>
+    </li>
+    <li>
+      <span class="bullet"></span>
+      <span><span class="term">Digitalisasi Pembayaran:</span> BI memperluas penggunaan <strong>QRIS</strong>, termasuk inovasi <strong>QRIS TAP</strong> dan kerja sama antarnegara dengan Tiongkok serta Korea Selatan. Meski teknologi mempermudah kita berbelanja, BI tetap mengawasi setiap transaksi agar sistem pembayaran kita tetap aman dan tangguh.</span>
+    </li>
+  </ul>
+
+  <p>Peran BI sangat krusial dalam memastikan bahwa janji-janji digital yang kita gunakan setiap hari tetap memiliki nilai yang dapat dipercaya oleh semua orang.</p>
+
+  <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+  <!-- ─── RISIKO DAN MASA DEPAN ─── -->
+  <h2>Risiko dan Masa Depan: Menjaga Dunia Tetap Hijau</h2>
+
+  <p>Sistem uang yang kita gunakan saat ini memiliki hubungan yang sangat erat dengan kondisi alam kita. Karena sebagian besar uang tercipta melalui utang yang harus dibayar dengan bunga, muncul tekanan terus-menerus bagi perusahaan dan negara untuk tumbuh lebih cepat setiap tahunnya. Inilah yang disebut sebagai <strong>Perangkap Sistem</strong>.</p>
+
+  <p>Tekanan ini menciptakan sebuah <strong>Lingkaran Umpan Balik Penguat</strong>: kebutuhan untuk membayar bunga memaksa bisnis menjual lebih banyak barang, yang membutuhkan lebih banyak bahan baku dari alam, yang kemudian memicu pengambilan pinjaman baru. Lingkaran ini memaksa ekonomi untuk mengembang tanpa henti, yang sering kali merusak bumi hanya untuk memenuhi target angka finansial.</p>
+
+  <p>Beberapa hal penting yang harus kalian pahami untuk masa depan adalah:</p>
+
+  <ul class="custom-list">
+    <li>
+      <span class="bullet"></span>
+      <span><span class="term">Inflasi:</span> Risiko ketika terlalu banyak uang diciptakan tetapi jumlah barang yang tersedia tidak bertambah, sehingga harga-harga melonjak naik.</span>
+    </li>
+    <li>
+      <span class="bullet"></span>
+      <span><span class="term">Perangkap Pertumbuhan:</span> Sistem yang memaksa ekonomi terus membesar dapat menyebabkan krisis besar jika pertumbuhan tersebut melambat atau berhenti secara tiba-tiba.</span>
+    </li>
+    <li>
+      <span class="bullet"></span>
+      <span><span class="term">Ekonomi Regeneratif:</span> Sebuah konsep masa depan di mana uang tidak lagi sekadar alat mencari keuntungan, melainkan alat untuk mendukung kegiatan yang membantu pemulihan bumi dan kesejahteraan sesama manusia.</span>
+    </li>
+  </ul>
+
+  <div class="callout">
+    <p>Laporan ini mengajak kalian, sebagai generasi penerus, untuk melihat uang bukan sekadar angka untuk kekayaan pribadi. Jadilah generasi yang bijak yang memahami bahwa setiap angka digital dalam tabungan kita memiliki dampak nyata terhadap lingkungan.</p>
+    <p>Dengan memahami rahasia ini, kalian bisa membantu mengubah cara dunia menggunakan uang agar menjadi alat untuk kebaikan bersama dan menjaga agar bumi kita tetap <strong>hijau</strong>.</p>
+  </div>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p>© 2026 nseBook. &nbsp;·&nbsp; Dibaca di mana saja, dipahami sepenuh hati.</p>
+</footer>
+
+</body>
+</html>
