@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rupiah dan Hamburger — Kajian Big Mac Index</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0f1f3d;
+    --navy-mid:   #1a2e52;
+    --gold:       #c9973a;
+    --gold-light: #e8b95a;
+    --gold-pale:  #fdf6e8;
+    --cream:      #faf8f3;
+    --ink:        #1c1c1c;
+    --ink-soft:   #3a3a3a;
+    --muted:      #7a7a7a;
+    --rule:       #d6c89a;
+    --white:      #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.8;
+    font-size: 17px;
+    font-weight: 300;
+  }
+
+  /* ── HERO ─────────────────────────────────── */
+  .hero {
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+    padding: 80px 24px 72px;
+    text-align: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 0%, rgba(201,151,58,.18) 0%, transparent 70%),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 39px,
+        rgba(201,151,58,.04) 40px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 39px,
+        rgba(201,151,58,.04) 40px
+      );
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp .7s .1s forwards;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 6vw, 58px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp .7s .25s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-size: clamp(15px, 2.2vw, 19px);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,.65);
+    max-width: 680px;
+    margin: 0 auto 40px;
+    opacity: 0;
+    animation: fadeUp .7s .4s forwards;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp .7s .55s forwards;
+  }
+  .hero-meta span {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(201,151,58,.8);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .hero-meta span::before {
+    content: '◆';
+    font-size: 7px;
+  }
+
+  /* ── STAT STRIP ───────────────────────────── */
+  .stat-strip {
+    background: var(--gold);
+    padding: 20px 24px;
+    display: flex;
+    justify-content: center;
+    gap: clamp(24px, 5vw, 80px);
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp .6s forwards;
+  }
+  .stat-item:nth-child(1) { animation-delay: .6s; }
+  .stat-item:nth-child(2) { animation-delay: .75s; }
+  .stat-item:nth-child(3) { animation-delay: .9s; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    display: block;
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--navy-mid);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ── LAYOUT ───────────────────────────────── */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+  }
+
+  /* ── ABSTRACT ─────────────────────────────── */
+  .abstract {
+    border-left: 3px solid var(--gold);
+    padding: 24px 28px;
+    background: var(--gold-pale);
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 60px;
+    font-style: italic;
+    font-size: 15.5px;
+    color: var(--navy-mid);
+    line-height: 1.75;
+    opacity: 0;
+    animation: fadeUp .7s .9s forwards;
+  }
+  .abstract strong { font-style: normal; color: var(--navy); }
+
+  /* ── SECTION ──────────────────────────────── */
+  .section {
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .65s ease, transform .65s ease;
+  }
+  .section.visible { opacity: 1; transform: translateY(0); }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .section-rule {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .sub-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--navy-mid);
+    margin: 28px 0 10px;
+  }
+
+  p {
+    margin-bottom: 18px;
+    color: var(--ink-soft);
+    text-align: justify;
+    hyphens: auto;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  strong { color: var(--ink); font-weight: 600; }
+  em { font-style: italic; }
+
+  /* ── PULLQUOTE ────────────────────────────── */
+  .pullquote {
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    padding: 24px 0;
+    margin: 36px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(17px, 2.5vw, 21px);
+    font-style: italic;
+    color: var(--navy);
+    text-align: center;
+    line-height: 1.55;
+  }
+
+  /* ── BLOCKQUOTE (academic cite) ───────────── */
+  blockquote {
+    background: var(--gold-pale);
+    border-left: 3px solid var(--gold);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--navy-mid);
+    font-style: italic;
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-style: normal;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .1em;
+    color: var(--gold);
+  }
+
+  /* ── SUMMARY BOX ──────────────────────────── */
+  .summary-box {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin: 48px 0;
+  }
+  .summary-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    letter-spacing: .02em;
+  }
+  .summary-box ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .summary-box li {
+    display: flex;
+    gap: 14px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: rgba(255,255,255,.85);
+  }
+  .summary-box li::before {
+    content: '▸';
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 12px;
+  }
+
+  /* ── DIVIDER ──────────────────────────────── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0;
+    color: var(--rule);
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .divider-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--gold);
+  }
+
+  /* ── FOOTER NOTE ──────────────────────────── */
+  .footer-note {
+    background: #f0ece0;
+    border-top: 1px solid var(--rule);
+    padding: 28px 32px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 48px;
+  }
+  .footer-note strong { color: var(--ink-soft); font-style: normal; }
+
+  /* ── DOWNLOAD SECTION ─────────────────────── */
+  .download-section {
+    background: linear-gradient(135deg, var(--navy) 0%, #0a1628 100%);
+    border-radius: 16px;
+    padding: 52px 40px;
+    text-align: center;
+    margin-top: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .download-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,151,58,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .download-section::after {
+    content: '◆';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 140px;
+    color: rgba(201,151,58,.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .download-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .download-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .download-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,.55);
+    max-width: 440px;
+    margin: 0 auto 36px;
+    line-height: 1.65;
+    font-style: italic;
+  }
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--gold);
+    color: var(--navy);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 4px;
+    transition: background .25s, transform .2s, box-shadow .25s;
+    box-shadow: 0 4px 24px rgba(201,151,58,.25);
+    position: relative;
+    z-index: 1;
+  }
+  .download-btn:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(201,151,58,.35);
+  }
+  .download-btn:active { transform: translateY(0); }
+  .download-btn svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  .download-meta {
+    margin-top: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    color: rgba(255,255,255,.28);
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ───────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLLBAR ────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--cream); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+  /* ── RESPONSIVE ───────────────────────────── */
+  @media (max-width: 600px) {
+    .summary-box { padding: 28px 24px; }
+    .download-section { padding: 40px 24px; }
+    .hero-meta { gap: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">Kajian Ekonomi Akademis · April 2026</p>
+  <h1 class="hero-title">Rupiah dan Hamburger:<br><em>Sebuah Cerita tentang Uang yang "Terlalu Murah"</em><br>dan Janji Ekonomi yang Belum Tentu Terbukti</h1>
+  <p class="hero-subtitle">Kajian mendalam berbasis literatur akademis global atas Big Mac Index, Purchasing Power Parity, dan nilai tukar Rupiah</p>
+  <div class="hero-meta">
+    <span>Big Mac Index</span>
+    <span>Purchasing Power Parity</span>
+    <span>Nilai Tukar Rupiah</span>
+    <span>Literatur Akademis Global</span>
+  </div>
+</header>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat-item">
+    <span class="stat-num">&minus;59,3%</span>
+    <span class="stat-label">Undervaluation Rupiah</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">Rp 20.500</span>
+    <span class="stat-label">Nilai Riil Rp 50.000</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">$2,54</span>
+    <span class="stat-label">Harga Big Mac Indonesia 2025</span>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="container">
+
+  <!-- ABSTRACT -->
+  <div class="abstract">
+    <strong>Ringkasan Kajian:</strong> Menurut Big Mac Index, Rupiah Indonesia tercatat <em>undervalued</em> sekitar 58,9–59,3% terhadap Dolar AS — artinya uang Rp50.000 di tangan Anda "hanya bernilai" sekitar Rp20.500 dalam paritas daya beli sejati. Kajian ini mengulas secara mendalam implikasi ekonomi dari kondisi tersebut: mulai dari teori Purchasing Power Parity, potensi keuntungan ekspor, hingga sisi gelap berupa inflasi impor, daya beli yang tergerus, dan keterbatasan indeks itu sendiri — berdasarkan literatur akademis dari berbagai penjuru dunia.
+  </div>
+
+  <!-- SECTION I -->
+  <section class="section">
+    <p class="section-num">Bagian I</p>
+    <h2 class="section-title">Saat Sebuah Burger Berbicara tentang Ekonomi</h2>
+    <div class="section-rule"></div>
+
+    <p>Bayangkan sejenak: Anda memegang selembar uang Rp50.000. Di tangan Anda, angka itu terasa cukup untuk membeli sebungkus nasi dengan lauk, atau mungkin secangkir kopi dan sepotong gorengan. Tapi bagaimana jika ada yang bilang bahwa nilai "sesungguhnya" dari uang itu hanya sekitar Rp20.500?</p>
+
+    <p>Inilah inti dari sebuah indeks yang lahir bukan dari ruang sidang bank sentral, melainkan dari meja redaksi majalah <em>The Economist</em> pada tahun 1986 — <strong>Big Mac Index</strong>. Idenya sederhana, bahkan terkesan jenaka: karena McDonald's menjual burger Big Mac yang hampir identik di seluruh penjuru dunia, perbedaan harganya seharusnya bisa mencerminkan apakah mata uang suatu negara terlalu mahal atau terlalu murah dibanding Dolar Amerika Serikat.</p>
+
+    <blockquote>
+      Dua kali setahun, <em>The Economist</em> mengonversi harga rata-rata Big Mac di berbagai negara ke dalam Dolar AS menggunakan kurs yang berlaku. Karena Big Mac adalah produk yang terstandarisasi, argumennya adalah bahwa harganya seharusnya relatif sama di setiap negara — dan perbedaannya mencerminkan perbedaan daya beli mata uang masing-masing.
+      <cite>The Economist / Statista, Big Mac Index 2025</cite>
+    </blockquote>
+
+    <p>Dan hasilnya untuk Indonesia? Pada Januari 2026, Indonesia mencatat angka <em>undervaluation</em> sekitar −58,9%, menempatkan Rupiah di antara mata uang paling <em>undervalued</em> di Asia, bersama Taiwan (−59,6%) dan India (−58,9%). Dengan harga Big Mac di Indonesia sekitar $2,54 dibanding $5,79 di Amerika Serikat, kesenjangan ini sudah berlangsung selama bertahun-tahun dan bukan sekadar fluktuasi sesaat.</p>
+
+    <p>Maka, pernyataan bahwa Rupiah <em>undervalued</em> sekitar 59,3% dibanding dolar — yang berarti Rp50.000 di tangan Anda "hanya bernilai" sekitar Rp20.500 secara riil terhadap USD — memiliki akar yang kuat secara data. Namun seperti semua cerita ekonomi, kebenaran sesungguhnya jauh lebih rumit dari sekadar sepotong burger.</p>
+  </section>
+
+  <div class="divider"><span class="divider-icon">◆</span></div>
+
+  <!-- SECTION II -->
+  <section class="section">
+    <p class="section-num">Bagian II</p>
+    <h2 class="section-title">Apa Artinya "Undervalued"? Sebuah Kiasan Sederhana</h2>
+    <div class="section-rule"></div>
+
+    <p>Mari kita bayangkan sebuah kisah. Pak Budi tinggal di Bandung dan menjual tahu goreng seharga Rp5.000 per bungkus. Di San Francisco, camilan serupa dijual seharga $5. Kalau kurs yang "wajar" seharusnya mencerminkan daya beli yang setara, maka Rp5.000 seharusnya sama dengan $5 — artinya $1 = Rp1.000. Tapi kenyataannya, di pasar forex, $1 bernilai sekitar Rp16.000. Inilah esensi <strong>Purchasing Power Parity (PPP)</strong> — teori yang menjadi fondasi Big Mac Index.</p>
+
+    <p><strong>PPP</strong> adalah nilai tukar di mana mata uang satu negara harus dikonversi ke mata uang negara lain agar bisa membeli jumlah barang dan jasa yang sama. Secara sederhana: jika Rupiah <em>undervalued</em>, artinya dalam mata uang dolar, harga-harga di Indonesia terlihat sangat murah — terlalu murah, bahkan, dibanding apa yang seharusnya terjadi dalam kondisi keseimbangan pasar yang sempurna.</p>
+
+    <blockquote>
+      Riset akademis Nababan (2016) dalam <em>Jurnal Ekonomi Pembangunan</em> menunjukkan bahwa berdasarkan Big Mac Index selama periode April 1998 hingga Januari 2015, kurs Rupiah cenderung <em>undervalued</em> terhadap Dolar AS. Salah satu penyebab utamanya adalah komponen <em>non-tradable</em> — seperti sewa lahan dan upah buruh — yang tidak ikut diperhitungkan dalam indeks tersebut.
+      <cite>Nababan, Jurnal Ekonomi Pembangunan UMS, 2016</cite>
+    </blockquote>
+  </section>
+
+  <div class="divider"><span class="divider-icon">◆</span></div>
+
+  <!-- SECTION III -->
+  <section class="section">
+    <p class="section-num">Bagian III</p>
+    <h2 class="section-title">"Rupiah Murah = Ekspor Bagus": Mimpi yang Masuk Akal</h2>
+    <div class="section-rule"></div>
+
+    <p>Ketika suatu mata uang dinilai murah, ada narasi ekonomi yang sangat menarik dan masuk akal secara logika: barang ekspor Indonesia menjadi murah di mata pembeli asing, sehingga permintaan meningkat. Pabrik berjalan lebih kencang, buruh diserap lebih banyak, dan industri dalam negeri bangkit. Narasi ini bukan sekadar dongeng — ia memiliki landasan kuat dalam literatur akademis global.</p>
+
+    <blockquote>
+      Secara umum, mata uang yang <em>undervalued</em> menurunkan harga barang domestik, yang mendorong ekspor dan menghambat impor karena meningkatnya daya saing di pasar internasional. Hasil penelitian panel data dari negara-negara Asia selama 1981–2016 menunjukkan bahwa mata uang yang <em>undervalued</em> meningkatkan ekspor dan berdampak signifikan terhadap pertumbuhan ekonomi.
+      <cite>Tandfonline, Journal of Economics, 2022</cite>
+    </blockquote>
+
+    <p>Contoh paling sering dikutip dalam literatur akademis adalah <strong>Tiongkok</strong>. Mata uang yang diduga sengaja direndahkan nilainya oleh People's Bank of China sejak awal 1990-an memberikan dorongan bagi para eksportir: dolar yang mereka hasilkan bisa dikonversi ke lebih banyak yuan. Ekspektasi <em>undervaluation</em> yang konsisten menyebabkan arus investasi dan lapangan kerja membanjiri sektor ekspor Tiongkok, menjadikannya "Pabrik Dunia" selama beberapa dekade.</p>
+
+    <div class="pullquote">
+      "Jadi, secara teoritis, Rupiah yang murah adalah keuntungan struktural bagi ekspor Indonesia. Logikanya jernih dan meyakinkan. Tapi inilah titik di mana cerita mulai berliku."
+    </div>
+  </section>
+
+  <div class="divider"><span class="divider-icon">◆</span></div>
+
+  <!-- SECTION IV -->
+  <section class="section">
+    <p class="section-num">Bagian IV</p>
+    <h2 class="section-title">Tapi Tunggu — Ceritanya Lebih Berliku dari Itu</h2>
+    <div class="section-rule"></div>
+
+    <h3 class="sub-title">4a. Ekspor Indonesia Bukan Manufaktur — Melainkan Komoditas</h3>
+    <p>Penelitian yang diterbitkan di jurnal internasional menemukan fakta yang mengejutkan untuk kasus Indonesia secara spesifik: mata uang yang lemah tidak serta-merta akan meningkatkan ekspor. Setengah dari ekspor Indonesia adalah makanan, produk pertanian, mineral, energi, dan produk primer lainnya. Barang-barang ini sering didenominasikan dalam Dolar AS.</p>
+
+    <blockquote>
+      Ketika dolar menguat (Rupiah melemah), harga produk primer dalam mata uang negara importir justru meningkat, sehingga mereka mengimpor lebih sedikit. Ini mengimbangi — bahkan meniadakan — keunggulan harga yang diperoleh produk manufaktur dari pelemahan nilai tukar. Tiga kategori ekspor utama Indonesia adalah minyak nabati, batu bara, dan minyak mentah.
+      <cite>Riadh Drine, PMC/PubMed, 2020</cite>
+    </blockquote>
+
+    <p>Ini adalah ironi yang menyakitkan: komoditas andalan Indonesia dihargai dalam dolar, bukan Rupiah. Ketika Rupiah melemah dan dolar menguat, pembeli asing justru membayar lebih mahal dalam mata uang mereka sendiri — dan mereka pun mengurangi pembelian.</p>
+
+    <h3 class="sub-title">4b. Volatilitas Kurs Merugikan, Bukan Membantu</h3>
+    <p>Penelitian menggunakan model GARCH dan ARDL dengan data bulanan dari 2006 hingga 2018 menemukan bahwa volatilitas nilai tukar berdampak signifikan terhadap ekspor komoditas Indonesia ke India, Jepang, Korea Selatan, dan Amerika Serikat — dan dampak tersebut bersifat negatif bagi sejumlah komoditas dalam jangka pendek maupun panjang. Mata uang yang murah memang bisa membantu, tapi <strong>mata uang yang tidak stabil dan terus melemah</strong> adalah bencana tersendiri.</p>
+
+    <h3 class="sub-title">4c. Harga Impor Naik — dan Itu Memukul Daya Beli Rakyat</h3>
+    <p>Ketika Rupiah melemah terhadap Dolar AS, produk ekspor memang menjadi lebih kompetitif. Namun pelemahan Rupiah juga berdampak pada kenaikan biaya impor barang, termasuk bahan baku, barang modal, dan barang konsumsi yang dibutuhkan untuk mendukung kegiatan ekonomi domestik. Akibatnya, kondisi ini dapat memicu inflasi dan meningkatkan beban biaya produksi.</p>
+
+    <blockquote>
+      Penelitian dengan sampel 62 negara selama 1980–2015 menunjukkan bahwa <em>undervaluation</em> mata uang memperkuat efek negatif inflasi terhadap pertumbuhan, terutama pada negara-negara berkembang. Mekanismenya bekerja melalui <em>imported inflation</em> — inflasi yang diimpor dari luar negeri akibat naiknya harga barang impor. Kesimpulannya tajam: <em>kebijakan berbasis undervaluation sebaiknya dihindari oleh negara berkembang.</em>
+      <cite>Morvillier, ScienceDirect, 2019</cite>
+    </blockquote>
+  </section>
+
+  <div class="divider"><span class="divider-icon">◆</span></div>
+
+  <!-- SECTION V -->
+  <section class="section">
+    <p class="section-num">Bagian V</p>
+    <h2 class="section-title">Mimpi Industri Dalam Negeri: Antara Harapan dan Kenyataan</h2>
+    <div class="section-rule"></div>
+
+    <p>Pernyataan bahwa Rupiah yang murah akan "memicu bangkitnya industri dalam negeri" adalah harapan yang sangat legitim — dan di atas kertas, secara ekonomi, memang ada landasannya. Pandangan yang dipopulerkan oleh ekonom Dani Rodrik (2008) menyatakan bahwa overvaluasi nilai tukar merugikan pertumbuhan, sementara <em>undervaluation</em> mendorongnya. Pandangan ini sebagian didorong oleh kisah sukses pertumbuhan berbasis ekspor di negara-negara Asia Timur.</p>
+
+    <p>Namun ada batas. Nilai tukar riil yang <em>terlalu</em> kompetitif tidaklah ideal karena dapat memicu inflasi dan memangkas sumber daya yang tersedia untuk investasi. Ada nilai tukar riil keseimbangan yang memenuhi keseimbangan eksternal dan internal — dan setiap penyimpangan ekstrem dari keseimbangan itu justru akan menghambat pertumbuhan ekonomi.</p>
+
+    <blockquote>
+      Peringkat daya saing Indonesia menurut World Economic Forum adalah ke-36 dari 137 negara, namun peringkat dalam hal kualitas listrik berada di posisi ke-86. Dua faktor yang paling menghambat bisnis adalah korupsi dan birokrasi pemerintah yang tidak efisien. Dalam hal biaya produksi, Indonesia menempati peringkat ke-133 dari 137 negara dalam hal biaya pesangon di pasar tenaga kerja.
+      <cite>PMC / World Economic Forum, 2020</cite>
+    </blockquote>
+
+    <p>Rupiah yang murah tidak bisa memperbaiki jalan yang rusak, birokrasi yang berbelit, atau pendidikan yang belum memadai. <strong>Daya saing adalah sebuah ekosistem — bukan hanya soal kurs.</strong> Vietnam, misalnya, berhasil melampaui Indonesia dalam ekspor padat karya bukan karena mata uangnya lebih murah, melainkan karena investasi pendidikan dan infrastruktur yang lebih konsisten.</p>
+  </section>
+
+  <div class="divider"><span class="divider-icon">◆</span></div>
+
+  <!-- SECTION VI -->
+  <section class="section">
+    <p class="section-num">Bagian VI</p>
+    <h2 class="section-title">Keterbatasan Big Mac Index: Burger Bukan Barometer Sempurna</h2>
+    <div class="section-rule"></div>
+
+    <p>Sebelum kita terlalu jauh mempercayai angka −59,3%, ada baiknya kita juga membaca komentar para ekonom tentang keterbatasan indeks ini.</p>
+
+    <p><strong>Pertama</strong>, Big Mac bukanlah produk yang benar-benar terstandarisasi di semua negara. Selera lokal, bahan baku, dan metode produksi dapat bervariasi, memengaruhi harga akhir. Di beberapa negara McDonald's diposisikan sebagai merek premium, sementara di negara lain dianggap pilihan murah.</p>
+
+    <p><strong>Kedua</strong>, dan ini yang paling krusial: indeks ini tidak memperhitungkan input <em>non-tradable</em> seperti sewa dan tenaga kerja. Barang dan jasa non-tradable cenderung lebih murah di negara berpenghasilan rendah. Potong rambut di New York lebih mahal dari di Lima; naik taksi dengan jarak yang sama lebih mahal di Paris dari di Tunis — karena upah di negara miskin cenderung lebih rendah.</p>
+
+    <blockquote>
+      Karena upah di negara miskin cenderung lebih rendah, dan jasa seringkali padat karya, harga layanan jasa di Indonesia akan selalu lebih murah dari di AS — bukan semata karena Rupiah "salah harga."
+      <cite>IMF, Finance &amp; Development — Purchasing Power Parity</cite>
+    </blockquote>
+
+    <p><strong>Ketiga</strong>, angka <em>undervaluation</em> Rupiah yang besar sebagian besar mencerminkan <strong>rendahnya upah buruh dan murahnya biaya hidup di Indonesia</strong>, bukan semata-mata misalignment nilai tukar murni. Itulah mengapa <em>The Economist</em> sendiri telah merilis versi Big Mac Index yang disesuaikan dengan GDP per kapita untuk mengoreksi bias ini.</p>
+
+    <p>Sebuah evaluasi akademis terhadap Big Mac Index menyimpulkan bahwa indeks ini memiliki bias yang substansial, namun setelah bias diperhitungkan, indeks ini cukup baik dalam melacak nilai tukar dalam jangka menengah hingga panjang. <em>Jadi ia berguna sebagai kompas, bukan GPS.</em></p>
+  </section>
+
+  <div class="divider"><span class="divider-icon">◆</span></div>
+
+  <!-- SECTION VII -->
+  <section class="section">
+    <p class="section-num">Bagian VII</p>
+    <h2 class="section-title">Lalu, Apa Maknanya bagi Kita?</h2>
+    <div class="section-rule"></div>
+
+    <p>Kembali ke uang Rp50.000 di tangan Anda. Benar bahwa dalam perhitungan Big Mac Index, nilai tukar "wajar" Rupiah seharusnya lebih kuat dari posisi saat ini. Benar pula bahwa secara teoritis, Rupiah yang murah seharusnya menguntungkan ekspor. Tapi literatur akademis dari berbagai penjuru dunia mengajarkan kita bahwa cerita ini tidak semudah itu.</p>
+
+    <!-- SUMMARY BOX -->
+    <div class="summary-box">
+      <h3>Ringkasan Temuan Kajian Literatur Akademis</h3>
+      <ul>
+        <li>Rupiah memang <em>undervalued</em> secara konsisten menurut Big Mac Index sejak 1998.</li>
+        <li>Teori PPP mendukung bahwa mata uang murah bisa mendorong ekspor — terbukti untuk ekonomi manufaktur seperti Tiongkok.</li>
+        <li>Namun untuk Indonesia, ekspor berbasis komoditas yang didenominasikan USD tidak otomatis meningkat ketika Rupiah melemah.</li>
+        <li><em>Undervaluation</em> memicu <em>imported inflation</em> yang menggerus daya beli masyarakat dan menaikkan biaya produksi industri.</li>
+        <li>Big Mac Index memiliki bias struktural karena tidak memperhitungkan perbedaan upah dan biaya non-tradable antar negara.</li>
+        <li>Bangkitnya industri dalam negeri membutuhkan lebih dari sekadar kurs yang lemah — ia membutuhkan infrastruktur, SDM, dan tata kelola yang baik.</li>
+      </ul>
+    </div>
+
+    <p>Singkatnya, <strong>Rupiah yang murah adalah pedang bermata dua</strong>: di satu sisi menguntungkan eksportir manufaktur dan menarik wisatawan asing, di sisi lain memukul daya beli masyarakat melalui inflasi impor, menaikkan biaya produksi, dan mempersulit industri yang bergantung pada bahan baku luar negeri.</p>
+  </section>
+
+  <div class="divider"><span class="divider-icon">◆</span></div>
+
+  <!-- PENUTUP -->
+  <section class="section">
+    <p class="section-num">Penutup</p>
+    <h2 class="section-title">Burger, Rupiah, dan Pelajaran dari Literatur Dunia</h2>
+    <div class="section-rule"></div>
+
+    <p>Big Mac Index adalah alat yang cerdas dan menghibur untuk memahami konsep besar seperti <em>Purchasing Power Parity</em>. Angka −59,3% adalah cermin yang berharga. Tapi ia bukanlah satu-satunya cermin, dan ia tentu bukan resep kebijakan.</p>
+
+    <p>Literatur akademis global secara konsisten mengingatkan: <strong>nilai tukar yang murah bisa menjadi berkat, tapi hanya jika disertai kapasitas industri yang memadai, kebijakan fiskal yang sehat, dan daya saing struktural yang kuat.</strong> Tanpa itu, Rupiah yang murah hanya akan menjadi berita buruk bagi masyarakat yang setiap hari merasakan harga kebutuhan pokok naik — sementara janji ekspor meningkat dan industri bangkit masih menunggu di ujung jalan yang panjang.</p>
+
+    <div class="pullquote">
+      "Ekonomi bukan soal burger. Ekonomi adalah soal manusia — dan manusia hidup tidak hanya dari harga yang kompetitif di pasar internasional, tetapi dari kemampuan nyata untuk memenuhi kebutuhan sehari-hari dengan martabat."
+    </div>
+
+    <div class="footer-note">
+      <strong>Sumber &amp; Referensi Akademis:</strong> Kajian ini bersandar pada data Big Mac Index terbaru (2025–2026) dari <em>The Economist</em>, Statbase, World Population Review, serta literatur akademis peer-reviewed dari ScienceDirect, PMC/PubMed, Cambridge Core, Jurnal Ekonomi Pembangunan UMS, IMF Finance &amp; Development, Tandfonline, Rutgers Business School, dan berbagai publikasi ilmiah internasional tentang nilai tukar, daya saing ekspor, dan pembangunan ekonomi negara berkembang.
+    </div>
+  </section>
+
+  <!-- DOWNLOAD SECTION -->
+  <div class="download-section section">
+    <p class="download-eyebrow">Dokumen Lengkap</p>
+    <h2 class="download-title">Unduh Versi PDF</h2>
+    <p class="download-desc">Dapatkan versi dokumen PDF yang telah diformat secara profesional untuk keperluan referensi, cetak, atau berbagi.</p>
+    <a class="download-btn"
+       href="https://drive.google.com/file/d/1pA1NuVYoX1Ciof8_FtFxhgKHdkHoVrlb/view?usp=drivesdk"
+       target="_blank" rel="noopener noreferrer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Unduh PDF via Google Drive
+    </a>
+    <p class="download-meta">Format PDF · Google Drive · Gratis</p>
+  </div>
+
+</main>
+
+<script>
+  // Intersection Observer untuk animasi scroll
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
