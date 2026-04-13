@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal Pemikiran | NVZE</title>
+    
+    <style>
+        /* --- VIBRANT BLUE & PINK GRADIENT THEME --- */
+        :root {
+            /* Warna Utama */
+            --blue-dominant: #2855c9;
+            --pink-accent: #ff4da6; /* Pink magenta terang untuk gradasi dan aksen */
+            
+            /* Background Gradient Variables */
+            --bg-grad-start: var(--pink-accent);
+            --bg-grad-mid: var(--blue-dominant);
+            --bg-grad-end: var(--pink-accent);
+            
+            /* Glassmorphism Cards (Disesuaikan untuk background biru terang) */
+            /* Menggunakan basis biru tua transparan agar teks putih terbaca jelas */
+            --card-bg: rgba(10, 30, 80, 0.3); 
+            --card-border: rgba(255, 77, 166, 0.3); /* Garis tepi pink transparan */
+            --card-hover-bg: rgba(10, 30, 80, 0.5);
+            
+            /* Typography */
+            --text-primary: #FFFFFF;
+            --text-secondary: #dceaff; /* Biru muda keputihan agar serasi */
+            
+            /* Accents (Menggunakan Pink sebagai aksen utama) */
+            --accent-default: var(--pink-accent); 
+            --accent-hover: #ff99cc; /* Pink lebih muda saat hover */
+            
+            /* Components */
+            --nav-glass: rgba(20, 40, 100, 0.5); /* Navigasi biru tua transparan */
+            --acrylic-blur: blur(24px) saturate(120%);
+            /* Shadow menggunakan warna biru tua/ungu */
+            --shadow-card: 0 4px 20px rgba(40, 85, 201, 0.4);
+            
+            /* Font */
+            --font-stack: 'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            /* Setup Background Baru: Gradasi Linear 135 derajat */
+            /* Pink kiri atas (0%) -> Dominasi Biru di tengah (25%-75%) -> Pink kanan bawah (100%) */
+            background: linear-gradient(
+                135deg, 
+                var(--bg-grad-start) 0%, 
+                var(--bg-grad-mid) 25%, 
+                var(--bg-grad-mid) 75%, 
+                var(--bg-grad-end) 100%
+            );
+            background-color: var(--blue-dominant); /* Fallback color */
+            background-attachment: fixed; 
+            color: var(--text-primary);
+            font-family: var(--font-stack);
+            font-size: 15px;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- TOP BAR --- */
+        .top-bar {
+            padding: 24px 32px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 20, 60, 0.2); /* Background tombol lebih gelap */
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-back:hover {
+            background-color: var(--accent-default);
+            color: white;
+            border-color: var(--accent-hover);
+            box-shadow: 0 0 10px rgba(255, 77, 166, 0.4);
+        }
+
+        /* --- HEADER & LOGO --- */
+        header {
+            padding: 40px 20px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* CSS LOGO (Dipertahankan) */
+        /* Filter ini sudah efektif mengubah logo hitam menjadi putih */
+        .site-logo {
+            max-width: 140px; 
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            /* Grayscale+Contrast+Invert = Mengubah hitam jadi putih, putih jadi hitam.
+               Screen mode = Menghilangkan bagian hitam (hasil invert dari background putih asli) */
+            filter: grayscale(100%) contrast(200%) invert(1);
+            mix-blend-mode: screen; 
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-top: 5px;
+        }
+
+        /* --- SEARCH BAR --- */
+        .search-wrapper {
+            max-width: 500px;
+            margin: 10px auto 30px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px 12px 48px;
+            background: var(--nav-glass);
+            border: 1px solid var(--card-border);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-family: var(--font-stack);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: var(--acrylic-blur);
+            -webkit-backdrop-filter: var(--acrylic-blur);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-default);
+            background: rgba(20, 40, 100, 0.6);
+            /* Glow diubah menjadi pink */
+            box-shadow: 0 0 15px rgba(255, 77, 166, 0.3); 
+        }
+        
+        .search-input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 36px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            pointer-events: none;
+            opacity: 0.8;
+            transition: color 0.3s;
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--accent-default);
+        }
+
+        /* --- STICKY NAV --- */
+        .sticky-nav {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            background: var(--nav-glass);
+            backdrop-filter: var(--acrylic-blur);
+            -webkit-backdrop-filter: var(--acrylic-blur);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            /* Shadow disesuaikan dengan tema biru */
+            box-shadow: 0 8px 32px rgba(20, 40, 100, 0.4);
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: none;
+            font-family: var(--font-stack);
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            color: var(--text-primary);
+            background-color: rgba(255, 77, 166, 0.15); /* Hover pink tipis */
+        }
+
+        /* Active State: Menggunakan Aksen Pink */
+        .filter-btn.active {
+            background-color: var(--accent-default);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 0 10px rgba(255, 77, 166, 0.3);
+        }
+
+        /* --- POST LIST --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            flex: 1;
+        }
+
+        #posts-container {
+            display: grid;
+            gap: 16px;
+        }
+
+        .article-card {
+            display: block;
+            text-decoration: none;
+            background: var(--card-bg);
+            padding: 28px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-card);
+            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-card:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(40, 85, 201, 0.6);
+        }
+        
+        /* Aksen garis kiri saat hover (Sekarang Pink) */
+        .article-card:hover::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent-default);
+            /* Glow effect pink */
+            box-shadow: 0 0 15px var(--accent-default); 
+        }
+
+        .meta-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-default); /* Teks kategori jadi pink */
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        
+        .meta-date {
+            color: var(--text-secondary);
+            font-weight: 400;
+            text-transform: none;
+            opacity: 0.8;
+        }
+
+        .post-title {
+            font-family: var(--font-stack);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .post-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* Highlighting Text in Search (Disesuaikan jadi pink) */
+        .highlight {
+            background-color: rgba(255, 77, 166, 0.3);
+            color: white;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        /* --- BUTTONS & FOOTER --- */
+        .load-more-container {
+            text-align: center;
+            padding: 50px 0 80px;
+        }
+
+        .btn-load {
+            background-color: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-primary);
+            padding: 10px 30px;
+            border-radius: 6px;
+            font-family: var(--font-stack);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(20, 40, 100, 0.3);
+        }
+
+        .btn-load:hover {
+            background-color: var(--accent-default);
+            color: white; 
+            border-color: var(--accent-default);
+            /* Glow effect pink */
+            box-shadow: 0 0 20px rgba(255, 77, 166, 0.5); 
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            opacity: 0.8; 
+            margin-top: auto;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .article-card {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .nav-container { width: 100%; border-radius: 12px; }
+            .filter-btn { flex: 1 1 auto; font-size: 13px; padding: 8px 12px; }
+            .container { padding: 0 16px; }
+            .article-card { padding: 20px; }
+            .search-wrapper { margin-bottom: 20px; padding: 0 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="https://imnxx.vercel.app" class="btn-back">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.21967 12.0303L2.46967 8.28033C2.17678 7.98744 2.17678 7.51256 2.46967 7.21967L6.21967 3.46967C6.51256 3.17678 6.98744 3.17678 7.28033 3.46967C7.57322 3.76256 7.57322 4.23744 7.28033 4.53033L4.81066 7H13.5C13.9142 7 14.25 7.33579 14.25 7.75C14.25 8.16421 13.9142 8.5 13.5 8.5H4.81066L7.28033 10.9697C7.57322 11.2626 7.57322 11.7374 7.28033 12.0303C6.98744 12.3232 6.51256 12.3232 6.21967 12.0303Z"/>
+            </svg>
+            Kembali ke Dashboard
+        </a>
+    </div>
+
+    <header>
+        <img src="logo.png" alt="NvZE Logo" class="site-logo">
+        
+        <p class="subtitle">Jurnal Ekonomi, Teknologi, Humaniora & Artikel Bebas</p>
+    </header>
+
+    <div class="search-wrapper">
+        <input type="text" id="searchInput" class="search-input" placeholder="Cari judul, topik, atau kata kunci...">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+    </div>
+
+    <nav class="sticky-nav">
+        <div class="nav-container">
+            <button class="filter-btn active" onclick="setCategory('all', this)">Indeks</button>
+            <button class="filter-btn" onclick="setCategory('ekonomi', this)">Ekonomi</button>
+            <button class="filter-btn" onclick="setCategory('teknologi', this)">Teknologi</button>
+            <button class="filter-btn" onclick="setCategory('humaniora', this)">Humaniora</button>
+            <button class="filter-btn" onclick="setCategory('bebas', this)">Bebas</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="posts-container"></div>
+
+        <div class="load-more-container">
+            <button id="loadMoreBtn" class="btn-load" onclick="loadMore()">Muat Lebih Banyak</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy;2025 nvze dashboard system
+    </footer>
+
+    <script>
+        /* DATABASE POST */
+        const allPosts = [
+            { 
+                title: "Elegi Labirin Ganesha ", 
+                cat: "humaniora", 
+                date: "09 Apr 2026", 
+                desc: "Terinspirasi dari metode belajar furab", 
+                link: "furab.html" 
+            },
+            { 
+                title: "The Crux: Menavigasi Kompleksitas Strategi", 
+                cat: "ekonomi", 
+                date: "08 Apr 2026", 
+                desc: "Ringkasan strategis", 
+                link: "crux.html" 
+            },
+            { 
+                title: "Anatomi Ilusi Keuntungan Komoditas 2026 ", 
+                cat: "ekonomi", 
+                date: "05 Apr 2026", 
+                desc: "Analisis Mikroekonomi dan Makroekonomi atas Syok Rantai Pasokan Global dan Paradoks Fiskal", 
+                link: "ilusi_keuntungan_komoditas_2026.html" 
+            },
+            { 
+                title: "Ilusi Angka di Lantai Tiga", 
+                cat: "ekonomi", 
+                date: "05 Apr 2026", 
+                desc: "Cerpen return ratio", 
+                link: "return_ratio.html" 
+            },
+            { 
+                title: "Kaizen", 
+                cat: "ekonomi", 
+                date: "05 Apr 2026", 
+                desc: "Cerpen", 
+                link: "kaizen.html" 
+            },
+            { 
+                title: "Dua Belas Kurva Di Dago Utara", 
+                cat: "teknologi", 
+                date: "05 Apr 2026", 
+                desc: "Cerpen", 
+                link: "kurva.html" 
+            },
+            { 
+                title: "Kabut di Atas Ciumbuleuit", 
+                cat: "humaniora", 
+                date: "03 Apr 2026", 
+                desc: "Kesuksesan bermula di dalam pikiran, jauh sebelum ia mewujud dalam kehidupan.", 
+                link: "hf_sukses.html" 
+            },
+            { 
+                title: "Akar di Braga, Daun di Dago", 
+                cat: "humaniora", 
+                date: "02 Apr 2026", 
+                desc: "Simfoni Ontologi dan Epistemologi dalam Hujan Kota Bandung", 
+                link: "ontologi.html" 
+            },
+            { 
+                title: "Simfoni Keterpurukan Ekonomi ", 
+                cat: "ekonomi", 
+                date: "27 Mar 2026", 
+                desc: "Sebuah Fragmen Retorika dan Realita di Lab Ekonomi 2026", 
+                link: "lab_ekonomi.html" 
+            },
+            { 
+                title: "Repricing ulang: sebuah distopia finansial", 
+                cat: "ekonomi", 
+                date: "27 Mar 2026", 
+                desc: "Pasca lebaran. Maret 2026. Ditengah perang iran dan israel ", 
+                link: "repricing.html" 
+            },
+            { 
+                title: "Harga emas dunia", 
+                cat: "bebas", 
+                date: "25 Mar 2026", 
+                desc: "Buyer", 
+                link: "buyer.html" 
+            },
+            { 
+                title: "Selamat lebaran 1447H", 
+                cat: "humaniora", 
+                date: "19 Mar 2026", 
+                desc: "Maaf lahir dan batin ", 
+                link: "if1447.html" 
+            },
+            { 
+                title: "Soal supply chain ", 
+                cat: "teknologi", 
+                date: "08 Mar 2026", 
+                desc: "Dan jawaban ", 
+                link: "soal_supply_chain.html" 
+            },
+            { 
+                title: "Mengembangkan Keterampilan Berpikir Kritis melalui Pendekatan Evolusioner", 
+                cat: "humaniora", 
+                date: "08 Mar 2026", 
+                desc: "Laporan Singkat", 
+                link: "berpikir_kritis.html" 
+            },
+            { 
+                title: "Bukan Malas, Cuma Salah Strategi: 7 Cara Jenius Biar Kamu Suka Baca Buku", 
+                cat: "humaniora", 
+                date: "08 Mar 2026", 
+                desc: "Kenapa Sih, Baca Buku Kadang Bikin Ngantuk?", 
+                link: "strategi_baca.html" 
+            },
+            { 
+                title: "Hegemoni Kuartet Finansial Global: Ekskavasi Mendalam Peran MSCI, S&P, Moody's, dan Fitch Terhadap Anatomi Ekonomi Indonesia", 
+                cat: "ekonomi", 
+                date: "05 Mar 2026", 
+                desc: "Sebuah tinjauan analitis tanpa peringkasan mengenai sejarah panjang, struktur operasional, ekosistem pengaruh, serta dampak absolut dari lembaga penilai standar finansial dunia terhadap perekonomian mikro dan makro Republik Indonesia, diakhiri dengan pemodelan ekonometrika mutakhir. ", 
+                link: "kepercayaan_global.html" 
+            },
+            { 
+                title: "Arsitektur Keuangan Global Membuat Negara Lemah", 
+                cat: "ekonomi", 
+                date: "05 Mar 2026", 
+                desc: "Analisis Makroekonomi", 
+                link: "keuangan_global.html" 
+            },
+            { 
+                title: "Peran Hedge Fund di Balik Gejolak Geopolitik Dunia", 
+                cat: "ekonomi", 
+                date: "04 Mar 2026", 
+                desc: "Catatan Analisis", 
+                link: "bayang_hedge_fund.html" 
+            },
+            
+            { 
+                title: "Ekonomi Indonesia 2026", 
+                cat: "ekonomi", 
+                date: "23 Feb 2026", 
+                desc: "Laporan Indikator Makro Terkini.  Sumber Data: BPS RI", 
+                link: "ekonomi_indonesia_2026.html" 
+            },
+            { 
+                title: "Doa keselamatan ", 
+                cat: "bebas", 
+                date: "21 Feb 2026", 
+                desc: "Aamiin ", 
+                link: "doa_selamat.html" 
+            },
+            { 
+                title: "Visualisasi: Area Persegi dalam Setengah Lingkaran", 
+                cat: "teknologi", 
+                date: "21 Feb 2026", 
+                desc: "Pilih langkah di bawah ini untuk melihat ilustrasi dari setiap perhitungan.", 
+                link: "luas_persegi.html" 
+            },
+            { 
+                title: "KISAH ADAM DAN MALAIKAT & KEUTAMAAN ILMU", 
+                cat: "humaniora", 
+                date: "18 Feb 2026", 
+                desc: "Penulis: Ibn al-Qayyim Sumber: Miftah Dar as-Sa'aadah Dar PDFs", 
+                link: "adam.html" 
+            },
+            { 
+                title: "Jadwal Imsakiyah", 
+                cat: "bebas", 
+                date: "17 Feb 2026", 
+                desc: "Kota Bandung - Ramadhan 1447 H", 
+                link: "jadwal_imsak_2026.html" 
+            },
+            { 
+                title: "Jalan bisnis udin ", 
+                cat: "ekonomi", 
+                date: "17 Feb 2026", 
+                desc: "Cara kerjasama dengan investor ", 
+                link: "jalan_udin.html" 
+            },
+            { 
+                title: "Titik didih nol mutlak", 
+                cat: "humaniora", 
+                date: "07 Feb 2026", 
+                desc: "Cerpen tegang", 
+                link: "titik_didih.html" 
+            },
+            { 
+                title: "Stabilitas Semu di Tepi Jurang", 
+                cat: "ekonomi", 
+                date: "22 Jan 2026", 
+                desc: "Analisis Ekonomi Politik Struktural atas \"Tujuh Desakan Darurat Ekonomi\" dan Proyeksi Kegagalan Reformasi 2026-2030", 
+                link: "stabilitas_semu.html" 
+            },
+            { 
+                title: "Skema Investasi infrastruktur ", 
+                cat: "ekonomi", 
+                date: "17 Jan 2026", 
+                desc: "CONTOH SKEMA INVESTASI INFRASTRUKTUR DAN CARA MENGHITUNGNYA", 
+                link: "skema_investasi.html" 
+            },
+            { 
+                title: "Luas lingkaran ", 
+                cat: "teknologi", 
+                date: "17 Jan 2026", 
+                desc: "Dalam matematika dasar, kita menghafal rumus luas lingkaran A = πR². Tetapi dari mana rumus ini berasal? Kalkulus memberi kita alat untuk \"membedah\" bentuk lengkung seperti lingkaran menjadi bagian-bagian kecil yang mudah dihitung, lalu menyatukannya kembali.", 
+                link: "luas_lingkaran.html" 
+            },
+            { 
+                title: "Menguasai mata air", 
+                cat: "humaniora", 
+                date: "10 Jan 2026", 
+                desc: "Esan nase", 
+                link: "menguasai_mata_air.html" 
+            },
+            { 
+                title: "Navigasi di Tengah Turbulensi Struktural: Analisis Komprehensif Tantangan Ekonomi Indonesia 2026 dan Strategi Jalan Keluar", 
+                cat: "ekonomi", 
+                date: "05 Jan 2026", 
+                desc: "Tahun 2026 menandai persimpangan kritis dalam sejarah ekonomi modern Indonesia. Di permukaan, indikator makroekonomi memproyeksikan stabilitas dengan pertumbuhan Produk Domestik Batubara yang diperkirakan berada pada kisaran 5%. Namun, analisis mendalam terhadap fundamental mikroekonomi menyingkap kerapuhan struktural yang mendalam.", 
+                link: "stagnasi.html" 
+            },
+            { 
+                title: "Akuisisi dalam senyap", 
+                cat: "humaniora", 
+                date: "29 Dec 2025", 
+                desc: "Cerpen finansial fiksi ", 
+                link: "akuisisi.html" 
+            },
+            { 
+                title: "Note", 
+                cat: "bebas", 
+                date: "28 Dec 2025", 
+                desc: "Tulis aja", 
+                link: "note.txt" 
+            },
+            { 
+                title: "Akuntan Sebagai Mitra Strategis Operasional", 
+                cat: "ekonomi", 
+                date: "21 Dec 2025", 
+                desc: "Mengintegrasikan Kecerdasan Finansial ke dalam Jantung Operasi Bisnis untuk Pertumbuhan Berkelanjutan.", 
+                link: "akuntan.html" 
+            },
+            { 
+                title: "Makro dan mikro ekonomi ", 
+                cat: "ekonomi", 
+                date: "20 Dec 2025", 
+                desc: "Ekonomi Indonesia ", 
+                link: "makro-mikro.html" 
+            },
+            { 
+                title: "Transportasi dan penugasan ", 
+                cat: "teknologi", 
+                date: "19 Dec 2025", 
+                desc: "Operation research ", 
+                link: "transportasi-penugasan-vocabulary.html" 
+            },
+            { 
+                title: "THE ULTIMATE INDUSTRIAL ENGINEERING SKILL MATRIX", 
+                cat: "teknologi", 
+                date: "18 Dec 2025", 
+                desc: "Sebuah panduan komprehensif yang menggabungkan fondasi klasik TI dengan teknologi modern STEM untuk menciptakan engineer masa depan", 
+                link: "ti-matrix-skill.html" 
+            },
+            { 
+                title: "The ultimate skill set", 
+                cat: "teknologi", 
+                date: "18 Dec 2025", 
+                desc: "Industrial engineering Mastery", 
+                link: "ultimate-ie-skills.html" 
+            },
+            { 
+                title: "Evolusi Teknik Industri: Hardcore STEM & Engineering", 
+                cat: "teknologi", 
+                date: "18 Dec 2025", 
+                desc: "Transformasi dari sekadar \"Manajemen Operasional\" menuju integrasi mendalam Matematika, Komputasi, dan Fisika Sistem untuk merekayasa masa depan.", 
+                link: "skill-ti.html" 
+            },
+            { 
+                title: "Keajaiban dan kecermatan ", 
+                cat: "humaniora", 
+                date: "17 Dec 2025", 
+                desc: "Cerpen inspirasi ", 
+                link: "Keajaiban_dan_kecermatan.html" 
+            },
+            { 
+                title: "Aritmatika ", 
+                cat: "teknologi", 
+                date: "11 Dec 2025", 
+                desc: "1234567890", 
+                link: "aritmatika.html" 
+            },
+            { 
+                title: "Kalkulator ", 
+                cat: "bebas", 
+                date: "11 Dec 2025", 
+                desc: "1234567890", 
+                link: "kalkulator.html" 
+            },
+            { 
+                title: "Rumus Aljabar", 
+                cat: "ekonomi", 
+                date: "11 Dec 2025", 
+                desc: "..", 
+                link: "aljabar.html" 
+            },
+            { 
+                title: "The Sunset Consensus", 
+                cat: "ekonomi", 
+                date: "11 Dec 2025", 
+                desc: "Debat Brutal di Ujung Dago Pakar Tentang Nasib Ekonomi 2025-2026", 
+                link: "sunset-consensus.html" 
+            },
+            { 
+                title: "Economic Outlook: Senopati Sunset Session", 
+                cat: "ekonomi", 
+                date: "11 Dec 2025", 
+                desc: "based on Recent Economic Development Report", 
+                link: "cerpen-kemenkeu.html" 
+            },
+            { 
+                title: "Gelombang Pasang Utang Global & Risiko Fiskal Indonesia - 2025", 
+                cat: "ekonomi", 
+                date: "11 Dec 2025", 
+                desc: "Sebuah analisis mendalam tentang gravitasi ekonomi baru di era \"Higher-for-Longer\" dan dampaknya terhadap stabilitas makroekonomi domestik.", 
+                link: "resiko-utang-pemerintah.html" 
+            },
+            { 
+                title: "Dewan Wali Songo dalam Pembentukan Peradaban Islam Jawa", 
+                cat: "humaniora", 
+                date: "10 Dec 2025", 
+                desc: "Transformasi Teologis & Sosiopolitik Nusantara", 
+                link: "wali-songo.html" 
+            },
+            { 
+                title: "teknikal", 
+                cat: "bebas", 
+                date: "06 Dec 2025", 
+                desc: "..", 
+                link: "teknikal.html" 
+            },
+            { 
+                title: "simulasi ekonometrika desember 2025", 
+                cat: "ekonomi", 
+                date: "06 Dec 2025", 
+                desc: "..", 
+                link: "simulasi-ekonometrika.html" 
+            },
+            { 
+                title: "The Kinetic Success Model", 
+                cat: "bebas", 
+                date: "04 Dec 2025", 
+                desc: "Sebuah Konfigurasi Sinergis Antara Kecerdasan, Keberanian, Trust, dan Peluang", 
+                link: "sukses.html" 
+            },
+            { 
+                title: "Bayang-Bayang Empati di Kota Kembang", 
+                cat: "humaniora", 
+                date: "03 Dec 2025", 
+                desc: "Sebuah cerita tentang empat warga Bandung yang masing-masing menemukan teknologi dengan \"empati tak terbatas\", dan bagaimana pertemuan itu mengubah perspektif mereka tentang koneksi manusia di era digital.  Sebuah cerpen tentang teknologi, kemanusiaan, dan identitas urban di Bandung", 
+                link: "empati-dikotabandung.html" 
+            },
+            { 
+                title: "Echoes of Dago", 
+                cat: "teknologi", 
+                date: "03 Dec 2025", 
+                desc: "Sebuah Cerita tentang Hujan, Kopi, dan Empati Buatan", 
+                link: "dago-echoes.html" 
+            },
+            { 
+                title: "Anatomi Ekonomi Eksternal", 
+                cat: "ekonomi", 
+                date: "03 Dec 2025", 
+                desc: "Bedah Tuntas Balance of Trade, Current Account, dan Neraca Pembayaran Indonesia (2015–2025)", 
+                link: "anatomi-ekonomi.html" 
+            },
+            { 
+                title: "Edge Computing ", 
+                cat: "teknologi", 
+                date: "03 Dec 2025", 
+                desc: "Pemrosesan data semakin bergeser dari cloud ke perangkat tepi (edge) seperti sensor IoT, kendaraan otonom, dan perangkat mobile. Ini memungkinkan analisis real-time dengan latensi rendah dan mengurangi beban bandwidth.", 
+                link: "edge-computing.html" 
+            },
+            { 
+                title: "Big Data: Elaborasi Komprehensif", 
+                cat: "teknologi", 
+                date: "03 Dec 2025", 
+                desc: "Dari Fondasi Filosofis hingga Implementasi Teknologi Mutakhir - Sebuah Pandangan Holistik tentang Revolusi Data", 
+                link: "big-data.html" 
+            },
+            { 
+                title: "Cerdas Financial: Hikmah dari Jepara", 
+                cat: "humaniora", 
+                date: "03 Dec 2025", 
+                desc: "Sebuah cerita tentang tiga sahabat yang menemukan arti kebebasan finansial", 
+                link: "cerdas-finansial.html" 
+            },
+            { 
+                title: "Tiga Jejak di Tanah Kebumen", 
+                cat: "humaniora", 
+                date: "02 Dec 2025", 
+                desc: "“Kayu itu seperti manusia, Nak,” begitu ia selalu berkata kepada siapapun yang mau mendengarkan. “Ada yang keras kepala seperti jati, ada yang lentur seperti bambu, ada yang harum seperti cendana. Tugas kita bukan melawan sifatnya, tapi menemukan bentuk yang paling cocok untuk jiwanya.”", 
+                link: "tiga-jejak.html" 
+            },
+            { 
+                title: "kondisi ekonomi mikro indonesia 2025", 
+                cat: "ekonomi", 
+                date: "03 Dec 2025", 
+                desc: "kondisi ekonomi mikro Indonesia 2025 melalui percakapan empat tokoh fiksi di Warung Pak Joko", 
+                link: "ekonomi mikro indonesia.html" 
+            },
+            { 
+                title: "Apa itu kalkulus?", 
+                cat: "teknologi", 
+                date: "02 Dec 2025", 
+                desc: "Banyak orang gagal belajar kalkulus karena kehilangan peta besar (big picture). Ini adalah matematika tentang perubahan (dinamis), bukan benda diam (statis).", 
+                link: "kalkulus.html" 
+            },
+            { 
+                title: "Kabut Likuiditas di Kaki Cikuray", 
+                cat: "ekonomi", 
+                date: "02 Dec 2025", 
+                desc: "Sebuah Diskursus Ekonomi dalam Sunyi", 
+                link: "kabut-likuiditas.html" 
+            },
+            { 
+                title: "Ditipu Hilirisasi", 
+                cat: "humaniora", 
+                date: "01 Dec 2025", 
+                desc: "Sebuah Diskusi Senja Tentang Nikel, LFP, dan Fatamorgana Ekonomi", 
+                link: "hilirisasi.html" 
+            },
+            { 
+                title: "Bayang-Bayang Leviathan", 
+                cat: "ekonomi", 
+                date: "01 Dec 2025", 
+                desc: "Laporan Investigatif & Naratif - Desember 2025", 
+                link: "bayang-bayang.html" 
+            },
+            { 
+                title: "Hegemoni Senyap", 
+                cat: "ekonomi", 
+                date: "01 Dec 2025", 
+                desc: "Sebuah Studi Kasus Naratif Tentang Alokasi Sumber Daya Absolut", 
+                link: "hegemoni-senyap.html" 
+            },
+            { 
+                title: "The Alpha Equilibrium", 
+                cat: "humaniora", 
+                date: "01 Dec 2025", 
+                desc: "Sebuah Otopsi Ambisi & Arsitektur Kapital", 
+                link: "the-alpha.html" 
+            },
+            { 
+                title: "Protokol Antartika ", 
+                cat: "humaniora", 
+                date: "01 Dec 2025", 
+                desc: "Di mana kepercayaan dibekukan, dan nilai hanyalah sebuah konsensus", 
+                link: "antartika.html" 
+            },
+            { 
+                title: "Arsitektur Ketidakberdayaan ", 
+                cat: "humaniora", 
+                date: "01 Dec 2025", 
+                desc: "Sebuah Dialog Tentang Kemiskinan by Design", 
+                link: "ketidakberdayaan.html" 
+            },
+            { 
+                title: "Anatomi Kebijakan Publik", 
+                cat: "ekonomi", 
+                date: "01 Dec 2025", 
+                desc: "Realitas tidak dibentuk oleh niat baik, melainkan oleh insentif, ketertiban, dan kompromi elit yang menyakitkan", 
+                link: "tirai-kebijakan.html" 
+            },
+            { 
+                title: "The Nexus Protokol ", 
+                cat: "humaniora", 
+                date: "01 Dec 2025", 
+                desc: "Sebuah narasi tentang melampaui batas kognitif manusia.", 
+                link: "belajar-cepat.html" 
+            },
+            { 
+                title: "Neuro-Reading: Hacking Otakmu untuk Jatuh Cinta pada Buku", 
+                cat: "humaniora", 
+                date: "30 Nov 2025", 
+                desc: "Bukan salah niatmu, tapi salah strategimu.", 
+                link: "neuro-reading.html" 
+            },
+            { 
+                title: "Roadmap Teknik Industri ", 
+                cat: "teknologi", 
+                date: "30 Nov 2025", 
+                desc: "Panduan Komprehensif & Peta Jalan Penguasaan Teknik Industri ", 
+                link: "ti-roadmap-ti.html" 
+            },
+            { 
+                title: "Perencanaan dan pengendalian produksi ", 
+                cat: "teknologi", 
+                date: "29 Nov 2025", 
+                desc: "Studi Akademik Perencanaan dan Pengendalian Produksi: Sebuah Tinjauan Komprehensif dari Prinsip Fondasi, Khasanah Akademik Global, hingga Transformasi Digital", 
+                link: "ti-ppc.html" 
+            },
+            { 
+                title: "Rekayasa Sistem ", 
+                cat: "teknologi", 
+                date: "29 Nov 2025", 
+                desc: "Rekayasa Sistem dan Teknik Industri Komprehensif", 
+                link: "ti-rekayasa_sistem.html" 
+            },
+            { 
+                title: "Postingan Tayangkan", 
+                cat: "bebas", 
+                date: "29 Nov 2025", 
+                desc: "Silahkan coba...", 
+                link: "postingan-tayangkan.html" 
+            },
+            { 
+                title: "Ergonomi ", 
+                cat: "teknologi", 
+                date: "29 Nov 2025", 
+                desc: "Laporan Komprehensif Human Factors dan Ergonomi (HF&E) dalam Disiplin Teknik Industri", 
+                link: "ti-ergonomi.html" 
+            },
+            { 
+                title: "Science, Technology, Engineering, and Mathematics (STEM)", 
+                cat: "teknologi", 
+                date: "29 Nov 2025", 
+                desc: "Fondasi Teknik Industri: Elaborasi Komprehensif 5W1H Keterkaitan Erat dengan Science, Technology, Engineering, and Mathematics (STEM)", 
+                link: "ti-stem.html" 
+            },
+             { 
+                title: "Negeri Di Ujung Tanduk ", 
+                cat: "humaniora", 
+                date: "29 Nov 2025", 
+                desc: "Kisah tentang paradoks pembangunan, di mana negara hidup dari mengeruk tanahnya sendiri, namun tetap miskin, sementara rakyatnya menjadi tumbal statistik.", 
+                link: "negeri-diujung-tanduk.html" 
+            },
+            { 
+                title: "Neraca yang tidak seimbang ", 
+                cat: "ekonomi", 
+                date: "29 Nov 2025", 
+                desc: "Sebuah potret kelas menengah, elit birokrasi, dan generasi cemas di penghujung 2025.", 
+                link: "Cerpen-neraca.html" 
+            },
+            { 
+                title: "Riset Operasi ", 
+                cat: "teknologi", 
+                date: "29 Nov 2025", 
+                desc: "Silahkan dibaca aja", 
+                link: "or.html" 
+            },
+            { 
+                title: "Update Catatan ", 
+                cat: "bebas", 
+                date: "28 Nov 2025", 
+                desc: "Dimulai dari sini..", 
+                link: "wkwk.txt" 
+            },
+            { 
+                title: "TQM", 
+                cat: "teknologi", 
+                date: "28 Nov 2025", 
+                desc: "Manajemen Kualitas Total (TQM) dan Rekayasa Keandalan: Sebuah Tinjauan Komprehensif dalam Konteks Teknik Industri", 
+                link: "tqm.html" 
+            },
+            // --- KELOMPOK EKONOMI ---
+            { 
+                title: "rekayasa finansial global", 
+                cat: "ekonomi", 
+                date: "01 Nov 2025", 
+                desc: "Kajian Analisis Strategis: Validasi dan Dekonstruksi Arsitektur Penguasaan Negara Melalui Finansialisasi Global", 
+                link: "post-2.html" 
+            },
+            { 
+                title: "ANALISIS DAMPAK YEN CARRY TRADE TERHADAP PASAR KEUANGAN INDONESIA", 
+                cat: "ekonomi", 
+                date: "05 Jan 2025", 
+                desc: "Yen Carry Trade adalah strategi arbitrase finansial di mana investor global meminjam dana dalam mata uang Yen Jepang (JPY) karena tingkat suku bunga yang sangat rendah", 
+                link: "post-5.html" 
+            },
+            { 
+                title: "teater modal", 
+                cat: "ekonomi", 
+                date: "10 Jan 2025", 
+                desc: "Sebuah Drama tentang Geopolitik & Keuangan Global", 
+                link: "post-6.html" 
+            },
+            { 
+                title: "Catatan Bagi Pemula Bisnis Forex", 
+                cat: "ekonomi", 
+                date: "12 Jan 2025", 
+                desc: "pasar valas adalah pasar keuangan nomor 1 terbesar di dunia. Kalau bisnis ini lebih banyak ruginya tentu tidak mungkin pasar valas menjadi terbesar di dunia", 
+                link: "post-7.html" 
+            },
+            { 
+                title: "analisis cadangan devisa dan rupiah", 
+                cat: "ekonomi", 
+                date: "10 Jan 2025", 
+                desc: "Paradoks Rupiah: Menganalisis Dominasi Faktor Permintaan Valas di Tengah Melimpahnya Cadangan Devisa", 
+                link: "post-10.html" 
+            },
+
+            // --- KELOMPOK TEKNOLOGI ---
+            { 
+                title: "Studi Teknik dan Manajemen Industri", 
+                cat: "teknologi", 
+                date: "26 Nov 2025", 
+                desc: "Evolusi Disiplin, Fondasi Teoretis, dan Lanskap Akademik Global", 
+                link: "post-1.html" 
+            },
+            { 
+                title: "teknik industri dan SCM", 
+                cat: "teknologi", 
+                date: "18 Jan 2025", 
+                desc: "Arsitektur Aliran: Sebuah Kajian Mendalam Keterkaitan Teknik Industri dan Supply Chain Management", 
+                link: "post-11.html" 
+            },
+             { 
+                title: "Berpikir Komputasional", 
+                cat: "teknologi", 
+                date: "28 Nov 2025", 
+                desc: "Dari Konsep Fundamental Menuju Paradigma Keempat Ilmu Pengetahuan", 
+                link: "post-15.html" 
+            },
+
+            // --- KELOMPOK HUMANIORA ---
+            { 
+                title: "Amerika Itu Memang Perkasa", 
+                cat: "humaniora", 
+                date: "25 Jan 2025", 
+                desc: "Di Amerika di beberapa kota akan sering terlihat homeless alias gembel. Padahal AS dikenal sebagai negara kaya nomor 1 di dunia.", 
+                link: "post-8.html" 
+            },
+            { 
+                title: "Belajar Melawan Gelombang", 
+                cat: "humaniora", 
+                date: "28 Jan 2025", 
+                desc: "Saya engga mau kerja di perusahaan anda. Saya mohon dilibatkan sebagai team dalam proses private equity. Itu aja” kata Karen suatu waktu.", 
+                link: "post-9.html" 
+            },
+            { 
+                title: "pengendali arus uang", 
+                cat: "humaniora", 
+                date: "01 Feb 2025", 
+                desc: "Total aset perusahaan kamu tumbuh agresif tiga tahun berturut-turut. Tapi hanya 10% yang berasal dari paid-up capital. Artinya, kamu hebat dalam leverage. Tapi leverage kamu bukan dari profitabilitas. Tapi dari… cerita.", 
+                link: "post-12.html" 
+            },
+            { 
+                title: "Al-A'immah Al-Arba'ah", 
+                cat: "humaniora", 
+                date: "29 Nov 2025", 
+                desc: "Analisis Komprehensif Biografi, Metodologi, dan Warisan Intelektual Empat Imam Mazhab Sunni", 
+                link: "post-16.html" 
+            },
+            { 
+                title: "dunia persepsi", 
+                cat: "humaniora", 
+                date: "01 Feb 2025", 
+                desc: "Apa pandangan Anda tentang sektor IT di China?", 
+                link: "post-13.html" 
+            },
+            { 
+                title: "dilema dua raksasa", 
+                cat: "humaniora", 
+                date: "27 Nov 2025", 
+                desc: 'Selama puluhan tahun, "Bebas Aktif" menjadi mantra suci diplomasi Indonesia. Namun, di tengah persaingan memanas antara Amerika Serikat dan Tiongkok, apakah posisi netral masih menjadi tameng yang aman, atau justru jebakan yang berbahaya?', 
+                link: "post-14.html" 
+            },
+
+            // --- KELOMPOK BEBAS ---
+            { 
+                title: "TAYANGKAN", 
+                cat: "bebas", 
+                date: "28 Nov 2025", 
+                desc: "pastikan artikelnya sudah ada di repo", 
+                link: "post-3.html" 
+            },
+            { 
+                title: "posting", 
+                cat: "bebas", 
+                date: "29 Nov 2025", 
+                desc: "bikin baru dan edit", 
+                link: "post-19.html" 
+            },
+        ];
+
+        // --- LOGIC SYSTEM ---
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let displayLimit = 15;
+        let filteredList = [];
+
+        const container = document.getElementById('posts-container');
+        const loadBtn = document.getElementById('loadMoreBtn');
+        const searchInput = document.getElementById('searchInput');
+
+        function init() {
+            // Setup listener untuk search
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase();
+                applyFilters();
+            });
+
+            setCategory('all', document.querySelector('.filter-btn.active'));
+        }
+
+        function setCategory(cat, element) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            if(element) element.classList.add('active');
+
+            currentCategory = cat;
+            applyFilters();
+        }
+
+        // Fungsi Filter Utama (Gabungan Kategori + Search)
+        function applyFilters() {
+            // 1. Filter by Category
+            let temp = (currentCategory === 'all')
+                ? allPosts
+                : allPosts.filter(post => post.cat === currentCategory);
+
+            // 2. Filter by Search Query
+            if (searchQuery.trim() !== '') {
+                temp = temp.filter(post => 
+                    post.title.toLowerCase().includes(searchQuery) || 
+                    post.desc.toLowerCase().includes(searchQuery)
+                );
+            }
+
+            filteredList = temp;
+            displayLimit = 15; // Reset limit saat filter berubah
+            renderList();
+        }
+
+        function renderList() {
+            container.innerHTML = '';
+            
+            if(filteredList.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align:center; padding: 60px 20px;">
+                        <p style="color:var(--text-secondary); font-size:1.1rem; margin-bottom:10px;">
+                            Tidak ada artikel yang ditemukan.
+                        </p>
+                        <p style="font-size:0.9rem; color: rgba(255,255,255,0.5);">
+                            Coba kata kunci lain atau ubah kategori.
+                        </p>
+                    </div>
+                `;
+                loadBtn.style.display = 'none';
+                return;
+            }
+
+            const listToShow = filteredList.slice(0, displayLimit);
+
+            listToShow.forEach(post => {
+                const article = document.createElement('a');
+                article.href = post.link;
+                article.className = 'article-card';
+                
+                // Highlight search term logic (optional visual improvement)
+                let displayTitle = post.title;
+                let displayDesc = post.desc;
+
+                article.innerHTML = `
+                    <div class="meta-group">
+                        <span>${post.cat}</span>
+                        <span class="meta-date">&bull; ${post.date}</span>
+                    </div>
+                    <h2 class="post-title">${displayTitle}</h2>
+                    <p class="post-excerpt">${displayDesc}</p>
+                `;
+                container.appendChild(article);
+            });
+
+            // Tampilkan tombol Load More jika masih ada sisa
+            if (displayLimit >= filteredList.length) {
+                loadBtn.style.display = 'none';
+            } else {
+                loadBtn.style.display = 'inline-block';
+            }
+        }
+
+        function loadMore() {
+            displayLimit += 10;
+            renderList();
+        }
+
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
