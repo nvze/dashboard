@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ilusi Burger dan Realitas Rupiah - nseBook</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Georgia", serif;
+      font-size: 16px;
+      line-height: 1.85;
+      color: #1a1a2e;
+      background: #f7f5f0;
+    }
+
+    .page-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+      background: #ffffff;
+      box-shadow: 0 2px 40px rgba(0,0,0,0.08);
+    }
+
+    /* ── NAVBAR & NAVIGATION ── */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .logo-nsebook {
+      font-family: "Georgia", serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #1a1a2e;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-nsebook span {
+      color: #8b1a1a;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ffffff;
+      background-color: #1a1a2e;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #8b1a1a;
+      transform: translateY(-1px);
+    }
+
+    /* ── HEADER ── */
+    .doc-header {
+      border-bottom: 3px solid #8b1a1a;
+      padding-bottom: 28px;
+      margin-bottom: 40px;
+    }
+
+    .category-badge {
+      display: inline-block;
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #8b1a1a;
+      background: #fdf5f5;
+      padding: 6px 12px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      border: 1px solid #ffe8e8;
+    }
+
+    h1.doc-title {
+      font-family: "Georgia", serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: #8b1a1a;
+      margin-bottom: 0;
+    }
+
+    /* ── SECTION HEADINGS ── */
+    h2 {
+      font-family: "Georgia", serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #8b1a1a;
+      margin-top: 52px;
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 4px solid #8b1a1a;
+    }
+
+    h3, h4 {
+      font-family: "Georgia", serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #333;
+      margin-top: 32px;
+      margin-bottom: 10px;
+    }
+
+    /* ── PARAGRAPHS ── */
+    p {
+      margin-bottom: 1.1em;
+      text-align: justify;
+    }
+
+    /* ── TABLES ── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 28px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      font-family: Arial, sans-serif;
+    }
+
+    thead tr {
+      background: #8b1a1a;
+      color: #ffffff;
+    }
+
+    thead th {
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+      border: 1px solid #6a1212;
+    }
+
+    tbody tr:nth-child(even) { background: #fdf5f5; }
+    tbody tr:nth-child(odd)  { background: #ffffff; }
+
+    tbody tr.highlight {
+      background: #ffe8e8;
+      font-weight: 700;
+    }
+
+    tbody td {
+      padding: 9px 12px;
+      border: 1px solid #ddd;
+      vertical-align: top;
+    }
+
+    .table-note {
+      font-size: 0.82rem;
+      color: #555;
+      margin-top: -16px;
+      margin-bottom: 24px;
+      font-style: italic;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ── ORDERED LIST ── */
+    ol {
+      padding-left: 28px;
+      margin-bottom: 1.2em;
+    }
+
+    ol li {
+      margin-bottom: 0.9em;
+    }
+
+    /* ── REFERENCES ── */
+    .references {
+      margin-top: 60px;
+      border-top: 2px solid #8b1a1a;
+      padding-top: 28px;
+    }
+
+    .references h4 {
+      font-size: 1.1rem;
+      color: #8b1a1a;
+      margin-bottom: 18px;
+    }
+
+    .ref-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .ref-list li {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .ref-num {
+      flex-shrink: 0;
+      font-weight: 700;
+      color: #8b1a1a;
+      width: 28px;
+      text-align: right;
+    }
+
+    .ref-text a {
+      color: #1a56b0;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .ref-text a:hover {
+      text-decoration: underline;
+    }
+
+    sup {
+      font-size: 0.7em;
+      color: #8b1a1a;
+      font-weight: bold;
+    }
+
+    strong { font-weight: 700; }
+    em { font-style: italic; }
+
+    @media (max-width: 640px) {
+      .page-wrapper { padding: 30px 18px 50px; }
+      .navbar { flex-direction: column; gap: 16px; align-items: flex-start; }
+      h1.doc-title { font-size: 1.35rem; }
+      h2 { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <div class="navbar">
+    <a href="#" class="logo-nsebook">nse<span>Book</span></a>
+    <a href="https://imnxx.vercel.app/blog.html" class="back-btn">← Kembali ke Dashboard</a>
+  </div>
+
+  <div class="doc-header">
+    <span class="category-badge">Business Review</span>
+    <h1 class="doc-title">Ilusi Burger dan Realitas Rupiah: Mengurai Mitos Devaluasi, Daya Saing Ekspor, dan Ketahanan Industri Nasional</h1>
+  </div>
+
+  <p>Kisah tentang bagaimana sebuah burger daging lapis ganda dapat bertransformasi menjadi salah satu instrumen paling populer untuk mengukur kesehatan ekonomi global bermula pada tahun 1967, ketika seorang pewaralaba bernama Jim Delligatti menciptakan menu "Big Mac" untuk jaringan restoran McDonald's di Pennsylvania.<sup>1</sup> Namun, baru hampir dua dekade kemudian, tepatnya pada bulan September 1986, Pamela Woodall dari majalah <em>The Economist</em> memperkenalkan sebuah konsep analitis yang setengah bercanda namun sangat tajam, yang kemudian dikenal luas di seluruh dunia sebagai Indeks Big Mac atau <em>Big Mac Index</em>.<sup>2</sup> Konsep ini lahir dari rahim sebuah teori ekonomi moneter klasik yang usianya berabad-abad, peninggalan para pemikir "Salamanca School" di abad ke-16, yang disebut sebagai teori Paritas Daya Beli (Purchasing Power Parity atau PPP).<sup>3</sup> Indeks ini berupaya membuat teori nilai tukar mata uang yang rumit menjadi lebih "mudah dicerna" oleh publik dengan membandingkan harga sebuah burger Big Mac di berbagai negara terhadap harga patokan di Amerika Serikat.<sup>3</sup></p>
+
+  <p>Dalam diskursus publik dan narasi ekonomi populer, termasuk pernyataan yang menjadi landasan utama dari analisis komprehensif ini, sering kali disebutkan bahwa berdasarkan panduan Indeks Big Mac, nilai tukar mata uang Rupiah terhadap Dolar Amerika Serikat (USD) berada pada posisi yang sangat <em>undervalued</em> atau berada jauh di bawah batas nilai wajarnya. Angka depresiasi struktural ini diklaim mencapai kisaran (-)59,3%.<sup>2</sup> Narasi ini kemudian disederhanakan melalui sebuah ilustrasi daya beli yang memikat: apabila seseorang memegang uang kertas pecahan Rp 50.000, maka nilai riil atau daya beli sesungguhnya dari uang yang ada di tangannya tersebut, jika dikonversikan dan dihadapkan pada standar daya beli USD, hanyalah setara dengan Rp 20.500. Uang tersebut telah kehilangan lebih dari separuh tenaga belinya di pasar internasional akibat kelemahan kurs.</p>
+
+  <p>Lebih jauh, pernyataan tersebut menarik sebuah kesimpulan berdasarkan interpretasi buku teks ekonomi makro tradisional. Diklaim bahwa dalam teori ekonomi, kondisi mata uang yang <em>undervalue</em> sebenarnya merupakan sebuah berkah tersembunyi yang sangat bagus untuk memacu mesin ekspor nasional. Logika yang ditawarkan tampak sangat linier dan koheren: mata uang yang murah akan membuat barang-barang yang kita produksi dan kita jual ke luar negeri menjadi sangat murah di mata pembeli asing. Harga yang murah ini tentu saja menciptakan daya saing absolut di pasar global. Di sisi koin yang lain, kelemahan mata uang ini akan membuat harga barang-barang impor yang masuk ke dalam negeri menjadi sangat mahal. Konsumen yang rasional pada akhirnya akan menghindari produk impor yang harganya meroket, dan kondisi ini secara otomatis akan memicu bangkitnya industri dalam negeri karena masyarakat terpaksa beralih mengonsumsi produk substitusi lokal.</p>
+
+  <p>Narasi ini adalah sebuah epos ekonomi yang terdengar sangat indah, sangat masuk akal di atas kertas, dan memang diajarkan di berbagai ruang kuliah pengantar ilmu ekonomi sebagai mekanisme penyeimbang otomatis (<em>automatic stabilizer</em>) dalam sistem nilai tukar mengambang bebas. Namun, apakah arsitektur ekonomi dunia nyata bekerja dengan cara yang sesederhana itu? Apakah pelemahan mata uang yang terus-menerus merupakan resep rahasia yang mujarab untuk membangkitkan raksasa industri manufaktur Indonesia yang tertidur? Ataukah sebaliknya, narasi ini justru menyembunyikan ancaman struktural yang dapat melumpuhkan fundamental ekonomi suatu negara berkembang?</p>
+
+  <p>Laporan penelitian komprehensif ini akan membedah secara radikal anatomi dari klaim tersebut. Melalui penelusuran dan sintesis atas data literatur akademis dari seluruh dunia, model ekonometrika mutakhir, analisis neraca perdagangan bilateral, serta realitas empiris dari rantai pasok global (Global Value Chains), analisis ini akan membuktikan bahwa apa yang tampak sebagai keuntungan daya saing di permukaan, pada kenyataannya, sering kali merupakan pedang bermata dua yang merobek ketahanan industri domestik dari dalam. Kita akan menelusuri bagaimana teori Paritas Daya Beli berbenturan dengan realitas pasar, mengapa efek pelemahan nilai tukar gagal mendongkrak ekspor komoditas, bagaimana tingginya kandungan impor (<em>import content</em>) dalam struktur manufaktur Indonesia mengubah devaluasi menjadi inflasi yang mematikan, dan pada akhirnya, bagaimana kestabilan finansial dan utang luar negeri menjadi variabel penentu yang meruntuhkan utopia dari mata uang yang <em>undervalued</em>.</p>
+
+  <h2>Burgernomics: Anatomi Paritas Daya Beli dan Misteri Undervaluation</h2>
+
+  <p>Untuk dapat mengevaluasi klaim bahwa Rupiah berada di bawah batas wajar sebesar 59,3% dan dampaknya terhadap perekonomian, kita harus terlebih dahulu menyelami fondasi epistemologis dari "Burgernomics". Teori Paritas Daya Beli (PPP) yang menjadi roh utama dari Indeks Big Mac berangkat dari sebuah premis sederhana yang disebut Hukum Satu Harga (<em>Law of One Price</em>). PPP menyatakan bahwa dalam jangka panjang, nilai tukar antara dua mata uang yang berbeda seharusnya bergerak dan beradaptasi menuju suatu titik keseimbangan yang menyamakan harga sekeranjang barang dan jasa yang identik di kedua negara tersebut.<sup>3</sup> Jika sebuah keranjang barang berharga $100 di Amerika Serikat dan Rp 1.500.000 di Indonesia, maka nilai tukar yang mencerminkan paritas daya beli yang adil adalah Rp 15.000 per Dolar AS.</p>
+
+  <p>Dalam praktiknya, mengumpulkan, menyamakan kualitas, dan membandingkan ribuan keranjang barang konsumen antarnegara adalah tugas statistik yang sangat kolosal dan kompleks. Organisasi untuk Kerja Sama dan Pembangunan Ekonomi (OECD) bahkan harus memantau lebih dari 3.000 barang dan jasa konsumen, 30 jenis pekerjaan, serta ratusan jenis barang modal untuk menghitung PPP yang akurat.<sup>3</sup> Sebagai jalan pintas untuk menyederhanakan konsep makroekonomi yang berat ini, <em>The Economist</em> mengusulkan bahwa sebuah burger Big Mac dari McDonald's dapat digunakan sebagai representasi proksi dari "keranjang barang" tersebut.<sup>3</sup></p>
+
+  <p>Pemilihan Big Mac bukanlah sesuatu yang kebetulan atau tanpa landasan logis. Big Mac mewakili produk konsumen yang memiliki standar resep dan komposisi yang nyaris identik secara universal di seluruh dunia.<sup>1</sup> Komposisinya mencakup berbagai bahan baku fundamental yang diperdagangkan secara luas di pasar komoditas internasional, seperti daging sapi kualitas tertentu, selada, keju, asinan mentimun (pickles), bawang bombay, dan roti bertabur wijen.<sup>1</sup> Oleh karena itu, harga satu buah Big Mac pada dasarnya adalah akumulasi dari biaya bahan baku pertanian, biaya sewa properti komersial, tenaga kerja, hingga utilitas dasar di negara tersebut.</p>
+
+  <p>Mekanisme perhitungan indeks ini cukup lugas. Apabila di Amerika Serikat harga rata-rata sebuah Big Mac pada awal tahun 2025 adalah sekitar $5,79, sementara di Indonesia harga burger yang sama dijual di gerai lokal dengan harga yang jika dikonversi setara dengan $2,54 (atau sekitar Rp 40.000-an menggunakan kurs pasar yang berlaku), maka rasio dari kedua harga tersebut akan menghasilkan apa yang disebut sebagai <em>implied exchange rate</em> atau nilai tukar yang diisyaratkan.<sup>1</sup> Selisih persentase antara nilai tukar yang diisyaratkan oleh harga burger dengan nilai tukar aktual di pasar valuta asing (valas) adalah ukuran yang menentukan apakah sebuah mata uang sedang mengalami <em>overvaluation</em> (terlalu mahal) atau <em>undervaluation</em> (terlalu murah).<sup>1</sup></p>
+
+  <p>Data historis selama beberapa dekade terakhir menunjukkan fenomena yang konsisten: nilai tukar Rupiah memang selalu terjebak dalam teritori <em>undervalued</em> yang sangat dalam. Sejak bulan April tahun 2000, setelah ekonomi Indonesia luluh lantak oleh krisis finansial Asia, hingga data terbaru di tahun 2025 dan proyeksi 2026, Rupiah tidak pernah sekalipun menyentuh titik keseimbangan paritasnya terhadap Dolar AS.<sup>1</sup></p>
+
+  <p>Tabel berikut menyajikan lanskap valuasi mata uang global berdasarkan Indeks Big Mac yang dirilis untuk periode observasi awal 2025 hingga estimasi 2026, yang memperlihatkan posisi ekstrem mata uang negara-negara berkembang Asia dan Afrika dibandingkan dengan negara-negara maju di Eropa.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Negara</th>
+          <th>Harga Big Mac (USD)</th>
+          <th>Valuasi Relatif thd USD (%)</th>
+          <th>Kategori Valuasi Berdasarkan PPP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Swiss</td><td>$7,99 – $9,12</td><td>+38,0% s.d +48,4%</td><td>Overvalued Kuat</td></tr>
+        <tr><td>Uruguay</td><td>$8,75</td><td>+43,1%</td><td>Overvalued Kuat</td></tr>
+        <tr><td>Norwegia</td><td>$7,51</td><td>+22,8%</td><td>Overvalued</td></tr>
+        <tr><td>Amerika Serikat</td><td>$5,79 – $6,12</td><td>0,0%</td><td>Nilai Dasar (Base)</td></tr>
+        <tr><td>Filipina</td><td>$2,89</td><td>-50,05%</td><td>Undervalued</td></tr>
+        <tr><td>Afrika Selatan</td><td>$2,78</td><td>-45,1% s.d -52,04%</td><td>Undervalued</td></tr>
+        <tr><td>Mesir</td><td>$2,69</td><td>-53,6% s.d -56,8%</td><td>Undervalued Dalam</td></tr>
+        <tr><td>India</td><td>$2,62</td><td>-54,79% s.d -58,9%</td><td>Undervalued Ekstrem</td></tr>
+        <tr class="highlight"><td><strong>Indonesia</strong></td><td><strong>$2,51 – $2,54</strong></td><td><strong>-56,22% s.d -59,3%</strong></td><td><strong>Undervalued Ekstrem</strong></td></tr>
+        <tr><td>Taiwan</td><td>$2,38</td><td>-58,84% s.d -59,6%</td><td>Undervalued Ekstrem</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-note">(Catatan: Rentang data dikompilasi dari pembaruan historis The Economist, Statbase, dan World Population Review untuk periode 2025–2026, yang merefleksikan dinamika harga lokal dan pergerakan kurs valuta asing.<sup>2</sup>)</p>
+
+  <p>Angka depresiasi struktural di kisaran -59,3% untuk Indonesia bukanlah fiksi, melainkan realitas matematis yang terekam dengan baik.<sup>2</sup> Namun, sebelum kita melompat pada kesimpulan makroekonomi yang prematur, kita harus menelaah validitas akademis dari indeks ini. Apakah Indeks Big Mac cukup sahih untuk dijadikan dasar analisis kebijakan perdagangan internasional?</p>
+
+  <p>Jawabannya cukup mengejutkan. Secara akademis, Indeks Big Mac telah bertransformasi dari sekadar ilustrasi jurnalistik menjadi standar global yang disitasi dalam puluhan studi ekonometrika serius.<sup>4</sup> Penelitian mendalam yang dipublikasikan oleh ekonom Federal Reserve Bank of St. Louis, Michael Pakko dan Patricia Pollard, membuktikan bahwa perbandingan harga Big Mac melintasi batas-batas negara secara menakjubkan mengandung elemen-elemen statistik yang mumpuni untuk mendemonstrasikan prinsip fundamental PPP.<sup>5</sup> Mereka menemukan bahwa dalam cakrawala waktu menengah hingga panjang, Indeks Big Mac melacak pergerakan nilai tukar dengan cukup baik dan setidaknya sama akuratnya dengan instrumen penilai nilai tukar standar industri seperti model <em>Random Walk</em>.<sup>12</sup> Bahkan, riset yang memanfaatkan metodologi <em>panel cointegration</em> mengungkapkan bahwa PPP berulang kali ditolak secara statistik ketika diuji menggunakan rasio Indeks Harga Konsumen (CPI) yang konvensional, namun teori PPP justru tidak bisa ditolak atau terbukti valid ketika diuji menggunakan variabel harga Big Mac.<sup>13</sup></p>
+
+  <p>Kendati demikian, literatur ekonometrika tingkat lanjut juga memberikan <em>caveat</em> atau peringatan keras terkait limitasi bawaan dari indeks ini. Pelemahan sebesar nyaris 60% tidak boleh ditafsirkan mentah-mentah sebagai bukti kegagalan moneter. Analisis akademik menunjukkan bahwa Indeks Big Mac standar (Raw Big Mac Index) menderita apa yang disebut sebagai <em>bias produksi</em> dan berpijak pada asumsi PPP absolut yang mengabaikan tembok pembatas pemerataan harga internasional.<sup>12</sup></p>
+
+  <p>Harga sebuah burger yang disajikan di restoran Jakarta tidak hanya direpresentasikan oleh harga patty sapi global (barang <em>tradable</em>), tetapi juga sangat terdistorsi oleh harga komponen lokal yang tidak bisa diperdagangkan secara lintas negara (<em>non-tradable inputs</em>). Upah minimum pegawai pramusaji, biaya sewa lahan properti komersial, tarif listrik, dan beban pajak di Indonesia jauh lebih murah dibandingkan dengan biaya struktur yang membebani gerai di New York, Zurich, atau Oslo.<sup>2</sup> Oleh karena itu, para ahli ekonomi dan <em>The Economist</em> sendiri kemudian mengembangkan <em>GDP-adjusted Big Mac Index</em>, sebuah varian metode yang memperhitungkan perbedaan Produk Domestik Bruto (PDB) per kapita lintas ekonomi untuk mencari valuasi multilateral yang eksak.<sup>8</sup> Dengan kata lain, mata uang di negara berkembang yang memiliki PDB per kapita rendah seperti Indonesia memang sewajarnya akan selalu tampak <em>undervalued</em> jika dikomparasi secara langsung dengan negara maju berpendapatan tinggi, semata-mata karena biaya hidup dan jasa lokalnya yang murah. Menyamakan pelemahan kurs struktural ini dengan sengaja memanipulasi kurs untuk "mendiskon barang ekspor" adalah sebuah kekeliruan logika yang mendasar.</p>
+
+  <h2>Janji Manis Teori Ekonomi: Kondisi Marshall-Lerner dan Ujian Kurva-J</h2>
+
+  <p>Setelah memahami landasan matematis di balik angka -59,3%, kita dapat beralih untuk membedah turunan argumentasi makroekonomi dari pernyataan awal: jika secara riil mata uang kita <em>undervalued</em>, maka ekspor akan mengalami lonjakan drastis karena produk kita menjadi sangat murah di luar negeri, dan impor akan tercekik karena harganya meroket, yang pada akhirnya memantik renaisans industri dalam negeri.</p>
+
+  <p>Dalam kanon literatur ekonomi internasional, kerangka pemikiran ini bukanlah hal baru. Ia diwadahi dan diuji melalui dua konsep monumental yang mendominasi teori nilai tukar: Kondisi Marshall-Lerner (<em>Marshall-Lerner Condition</em>) dan Efek Kurva-J (<em>J-Curve Effect</em>).<sup>17</sup> Dinamai dari dua raksasa ekonomi, Alfred Marshall dari Inggris dan Abba Lerner, kondisi ini menyediakan struktur formal untuk memahami kapan dan bagaimana perubahan nilai tukar mata uang benar-benar mampu memperbaiki atau menyembuhkan defisit neraca perdagangan.<sup>17</sup></p>
+
+  <p>Kondisi Marshall-Lerner bertumpu pada hukum dasar elastisitas harga permintaan. Teori ini mempostulatkan bahwa devaluasi atau depresiasi mata uang domestik—seperti tren <em>undervalue</em> yang menjerat Rupiah—hanya akan sukses mentransformasi pelemahan kurs menjadi surplus neraca perdagangan apabila jumlah absolut dari nilai elastisitas permintaan ekspor ditambah dengan elastisitas permintaan impor dalam jangka panjang angkanya lebih besar dari satu.<sup>18</sup> Makna sederhananya adalah, para importir di negara mitra harus sangat responsif dan rakus membeli barang-barang kita ketika harganya terdiskon akibat kurs. Secara serempak, masyarakat dan industri di dalam negeri kita sendiri juga harus sangat reaktif memutus keran impor ketika barang-barang luar negeri mendadak berubah menjadi barang mewah yang tak terjangkau. Hanya jika kedua syarat elastisitas ini terpenuhi secara bersamaan, pelemahan mata uang akan mendatangkan berkah surplus perdagangan.<sup>17</sup></p>
+
+  <p>Namun, hukum fisika ekonomi menyatakan bahwa reaksi pasar tidak terjadi dalam sekejap mata. Diperkenalkan oleh ekonom Stephen Magee pada tahun 1973, konsep Efek Kurva-J menjelaskan bahwa dalam jangka pendek, sebuah pelemahan nilai tukar hampir pasti akan memperburuk pendarahan neraca perdagangan sebelum akhirnya menyembuhkannya di masa depan.<sup>18</sup> Fenomena keterlambatan penyesuaian (adjustment lags) ini terjadi karena adanya kelambanan dalam merespons kontrak perdagangan.<sup>20</sup> Kebanyakan kontrak impor dan ekspor lintas benua telah ditandatangani, dikunci harganya dalam valuta asing, dan dijadwalkan pengirimannya beberapa bulan sebelumnya.<sup>22</sup> Ketika Rupiah mendadak anjlok, eksportir Indonesia tidak bisa serta-merta menambah kapasitas pabriknya untuk menjual lebih banyak barang esok harinya (<em>volume effect</em> yang lambat). Sebaliknya, tagihan impor barang modal dan bahan baku yang sudah telanjur dipesan dalam denominasi Dolar AS seketika meledak angkanya jika dibukukan dalam Rupiah (<em>value effect</em> yang instan).<sup>19</sup> Akibatnya, nilai pengeluaran impor meroket melampaui pendapatan ekspor, menyeret grafik neraca perdagangan terjun bebas ke bawah membentuk lembah, sebelum akhirnya perlahan-lahan mendaki naik dan membentuk visualisasi huruf "J" seiring dengan penyesuaian kontrak dan volume produksi di masa mendatang.<sup>17</sup></p>
+
+  <p>Pertanyaan krusialnya: apakah keajaiban ekuilibrium dari Kondisi Marshall-Lerner ini terbukti bekerja di Indonesia? Apakah status Rupiah yang <em>undervalued</em> secara otomatis mendatangkan badai pesanan ekspor seperti yang dijanjikan oleh literatur akademis?</p>
+
+  <p>Berbagai riset ekonometrika kontemporer yang menganalisis lautan data perdagangan bilateral Indonesia memberikan jawaban yang paradoksal dan bervariasi. Berdasarkan studi yang menggunakan model regresi canggih seperti <em>Vector Error Correction Model</em> (VECM) dan <em>Autoregressive Distributed Lag</em> (ARDL) dengan rentang pengamatan panjang dari dekade 1990-an hingga era pasca-pandemi (2022), terungkap fakta bahwa Kondisi Marshall-Lerner <strong>tidak selalu terpenuhi</strong> untuk aktivitas perdagangan Indonesia.<sup>17</sup> Khasiat dari devaluasi mata uang rupanya sangat bias dan diskriminatif, bergantung sepenuhnya pada struktur ekonomi negara mitra dagang mana yang sedang dihadapi.</p>
+
+  <p>Berikut adalah dekonstruksi dari efektivitas teori devaluasi mata uang terhadap performa perdagangan bilateral Indonesia di pasar global:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Negara Mitra Dagang Utama</th>
+          <th>Validitas Kondisi Marshall-Lerner (Jangka Panjang)</th>
+          <th>Bukti Keberadaan Efek Kurva-J (Jangka Pendek)</th>
+          <th>Catatan Struktural Perdagangan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Republik Rakyat Tiongkok</strong></td>
+          <td><strong>Terpenuhi</strong><sup>17</sup></td>
+          <td><strong>Ditemukan</strong><sup>17</sup></td>
+          <td>Depresiasi sukses menurunkan defisit; ekspor komoditas terserap kuat.</td>
+        </tr>
+        <tr>
+          <td><strong>Jepang</strong></td>
+          <td><strong>Bervariasi / Tidak Pasti</strong><sup>17</sup></td>
+          <td><strong>Ditemukan (Kuat)</strong><sup>24</sup></td>
+          <td>Reaksi awal sangat negatif akibat tingginya impor komponen modal mesin.</td>
+        </tr>
+        <tr>
+          <td><strong>Amerika Serikat</strong></td>
+          <td><strong>Terpenuhi Penuh</strong><sup>17</sup></td>
+          <td><strong>Ditemukan Parsial</strong><sup>25</sup></td>
+          <td>Perdagangan merespons elastisitas harga dalam kerangka ARDL periode panjang.</td>
+        </tr>
+        <tr>
+          <td><strong>Singapura</strong></td>
+          <td><strong>Tidak Terpenuhi (Gagal)</strong><sup>17</sup></td>
+          <td><strong>Ditemukan</strong><sup>25</sup></td>
+          <td>Gagal akibat inelastisitas absolut; ekspor didominasi barang konsumsi &amp; energi mentah.</td>
+        </tr>
+        <tr>
+          <td><strong>Jerman &amp; Uni Eropa</strong></td>
+          <td><strong>Tidak Terpenuhi (Gagal)</strong><sup>17</sup></td>
+          <td><strong>Ditemukan Parsial</strong><sup>24</sup></td>
+          <td>Ketergantungan absolut Indonesia pada teknologi tinggi Eropa mengebiri manfaat kurs.</td>
+        </tr>
+        <tr>
+          <td><strong>Inggris Raya</strong></td>
+          <td><strong>Tidak Terpenuhi (Gagal)</strong><sup>17</sup></td>
+          <td><strong>Tidak Ditemukan</strong></td>
+          <td>Permintaan ekspor yang kaku (inelastis); tidak merespons diskon harga dari devaluasi.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-note">(Catatan: Matriks ini disintesis dari berbagai hasil publikasi jurnal akademis makroekonomi yang membedah neraca perdagangan bilateral Indonesia menggunakan pendekatan kointegrasi dan OLS.<sup>17</sup>)</p>
+
+  <p>Analisis terhadap tabel di atas menyingkap borok dari asumsi bahwa pelemahan kurs selalu menguntungkan. Mengapa kondisi ideal ekonomi ini gagal secara masif ketika diterapkan pada perdagangan dengan negara seperti Singapura, Inggris, dan blok Eropa? Mengapa saat Rupiah mengalami pelemahan tajam, keran pesanan ekspor dari benua biru tidak mendadak meledak?</p>
+
+  <p>Akar permasalahannya bermuara pada penyakit inelastisitas permintaan. Ekspor Indonesia ke negara-negara seperti Singapura dan Inggris sebagian besar tersusun atas barang konsumsi (<em>consumption goods</em>) dan energi yang pola permintaannya kaku.<sup>17</sup> Konsumen di London tidak akan tiba-tiba melipatgandakan konsumsi teh, karet, atau garmen Indonesia secara eksponensial hanya karena produk tersebut mendapat diskon beberapa sen Dolar akibat pelemahan Rupiah.<sup>17</sup> Di pihak lain, Indonesia memiliki ketergantungan kronis (import reliance) terhadap barang modal, bahan baku mentah, dan permesinan spesifik dari Singapura, Jepang, dan Jerman.<sup>17</sup> Saat Rupiah terjerembap, pabrik-pabrik di Cikarang atau Karawang tidak memiliki opsi untuk menyetop impor suku cadang mesin dari Jerman karena barang substitusi di dalam negeri tidak eksis. Mereka terpaksa tetap mengimpor dengan harga yang telah membengkak dalam Rupiah. Hasilnya? Syarat Marshall-Lerner gagal dipenuhi secara absolut.<sup>24</sup></p>
+
+  <p>Lebih menghentak lagi, estimasi elastisitas gabungan dari keseluruhan sampel perdagangan mendemonstrasikan bahwa pelemahan nilai tukar Rupiah sebesar 1% ternyata hanya mampu memompa rasio nilai ekspor-impor Indonesia sebesar angka yang sangat kecil, yaitu 0,37%.<sup>24</sup> Angka yang sangat kerdil ini mengubur mitos devaluasi, membuktikan bahwa betapapun <em>undervalued</em>-nya uang kita menurut takaran Indeks Big Mac, nilai tukar riil pada praktiknya hanya memainkan peranan yang teramat minor, hampir tidak signifikan, dalam menentukan nasib performa ekspor Indonesia di panggung komersial dunia.<sup>24</sup></p>
+
+  <h2>Paradoks Komoditas vs Manufaktur: Mengapa "Barang Ekspor Murah" Hanyalah Fatamorgana</h2>
+
+  <p>Jika penurunan harga relatif barang ekspor gagal merangsang gelombang permintaan global, pasti ada yang salah secara fundamental dengan struktur barang yang kita jual. Untuk mengungkap misteri mengapa pelemahan kurs tidak memicu gairah ekspor seperti dikte teori klasik, kita harus membedah tulang punggung dari arsitektur ekspor nasional Indonesia.</p>
+
+  <p>Teori yang menggemakan narasi bahwa pelemahan mata uang membuat "barang yang kita jual jadi murah dan punya daya saing" akan bekerja dengan sangat baik dan akurat apabila struktur ekspor sebuah negara didominasi oleh produk manufaktur padat karya yang bersaing ketat soal elastisitas harga di rak-rak etalase supermarket dunia.<sup>26</sup> Sepatu, mainan anak-anak, sirkuit terpadu (IC), komputer rakitan, hingga komponen telepon seluler adalah produk di mana selisih harga sepuluh sen Dolar dapat memengaruhi keputusan perusahaan ritel untuk memindahkan pesanan dari pabrik di Guangzhou ke pabrik di Tangerang.<sup>26</sup> Bagi barang-barang manufaktur ini, nilai tukar yang <em>undervalue</em> memang benar-benar dapat menstimulasi lonjakan ekspor, seperti yang dibuktikan secara historis oleh daya saing ekspor kawasan Asia Timur.<sup>26</sup></p>
+
+  <p>Tragisnya, potret ekspor Indonesia menceritakan kisah yang sama sekali berbeda. Ekspor utama Indonesia bukanlah komputer rakitan atau pakaian jadi kelas menengah yang sensitif terhadap kurs, melainkan komoditas ekstraktif dari perut bumi dan perkebunan: bahan bakar fosil (batu bara), gas alam, minyak mentah, bijih tembaga, dan tentu saja minyak kelapa sawit mentah (Crude Palm Oil/CPO) beserta produk turunannya.<sup>27</sup> Sekitar separuh dari devisa ekspor Indonesia berasal dari aliran produk-produk primer tersebut.<sup>26</sup> Ironi besar dari ketergantungan pada sumber daya alam ini sering kali dikaitkan dengan sindrom penyakit ekonomi yang dikenal sebagai <em>Dutch Disease</em>, di mana masa kejayaan komoditas (<em>commodity boom</em>) justru memicu deindustrialisasi prematur karena menggeser investasi dan tenaga kerja menjauh dari sektor manufaktur yang inovatif.<sup>32</sup></p>
+
+  <p>Bagaimana struktur komoditas ini membunuh khasiat dari Rupiah yang <em>undervalued</em>? Jawabannya terletak pada mekanisme pembentukan harga global. Komoditas primer seperti batu bara, nikel, aluminium, dan CPO diperdagangkan secara masif di lantai bursa komoditas internasional (seperti Rotterdam atau Chicago), dan harga kesepakatannya <strong>dipatok mutlak dalam denominasi Dolar Amerika Serikat (USD)</strong>.<sup>26</sup></p>
+
+  <p>Ketika Rupiah mengalami pendarahan depresiasi, harga satu ton batu bara dari Kalimantan yang diekspor ke pelabuhan Shanghai atau Mumbai tidak serta-merta berubah menjadi "diskon" dalam USD.<sup>26</sup> Pembeli global akan tetap menawar dan membayar dengan harga ekuilibrium pasar komoditas internasional yang berlaku hari itu. Satu-satunya efek instan yang terjadi adalah perusahaan eksportir tambang domestik akan meraup keuntungan ganda (<em>windfall profit</em>) ketika mereka menukarkan aliran Dolar dari pendapatan ekspornya ke dalam pecahan Rupiah yang sedang jatuh nilainya.<sup>26</sup> Akan tetapi, secara struktural, volume tonase pesanan batu bara dari India atau Tiongkok tidak akan mengalami peningkatan tiba-tiba akibat pelemahan Rupiah; permintaan mereka sepenuhnya didikte secara inelastis oleh kondisi iklim, ketegangan geopolitik, siklus manufaktur domestik mereka, dan kebijakan transisi energi.<sup>31</sup> Dengan demikian, keunggulan kompetitif harga yang diangankan dari devaluasi hanyalah sebuah fatamorgana semata bagi negara pengekspor komoditas.</p>
+
+  <p>Sebuah riset makroekonomi komprehensif yang dirilis melalui <em>National Bureau of Economic Research</em> (NBER) merinci korelasi antara indeks harga ekspor dan nilai tukar, dengan temuan empiris yang memperlihatkan kerentanan struktural Indonesia.<sup>26</sup></p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Kategori Produk Ekspor</th>
+          <th>Korelasi dengan Indeks Harga Ekspor Indonesia</th>
+          <th>Karakteristik Harga &amp; Respons Kurs</th>
+          <th>Dampak Pelemahan Rupiah terhadap Volume Ekspor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Komoditas Primer (Besi, Baja, Aluminium, Gas Alam, Tembaga, Karet)</strong></td>
+          <td><strong>Korelasi Positif Kuat</strong><sup>26</sup></td>
+          <td>Harga berfluktuasi tajam (volatile), ditentukan dalam USD oleh bursa global.</td>
+          <td><strong>Nihil / Sangat Terbatas.</strong> Harga USD tidak diskon; pelemahan Rupiah sering kali bertepatan dengan apresiasi USD global yang membuat komoditas mahal bagi mata uang lain, memangkas permintaan.<sup>26</sup></td>
+        </tr>
+        <tr>
+          <td><strong>Barang Manufaktur (Komputer, Komponen Ponsel, Kamera, Televisi, Garmen, Sepatu)</strong></td>
+          <td><strong>Korelasi Negatif</strong><sup>26</sup></td>
+          <td>Sensitif terhadap biaya buruh &amp; margin; harga dapat ditekan di pasar tujuan jika mata uang asal melemah.</td>
+          <td><strong>Sangat Potensial.</strong> Barang menjadi lebih kompetitif secara global; berpeluang besar meningkatkan kuantitas pesanan jika Rantai Pasok Global (GVC) merespons fleksibel.<sup>26</sup></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Analisis tabel di atas menelanjangi satu realitas keras: pelemahan mata uang sering kali berkorelasi erat dengan penguatan nilai Dolar di pasar global. Saat USD menguat, harga komoditas primer jika dikonversi ke mata uang importir lokal (misalnya Rupee India atau Yuan Tiongkok) menjadi luar biasa mahal, sehingga mereka secara naluriah akan memangkas pesanan impor mereka.<sup>26</sup> Mekanisme penyesuaian harga inilah yang menggerus habis segala keuntungan teoretis yang didapat dari melemahnya Rupiah.<sup>26</sup> Kesimpulannya sederhana, pilar fundamental ekonomi makro menyarankan bahwa pelemahan Rupiah tidak akan menstimulasi ekspor secara agregat kecuali jika Indonesia secara agresif mampu mendiversifikasi tulang punggung ekspornya, bergeser dari raksasa tambang menjadi eksportir tangguh untuk barang-barang manufaktur padat karya dan elektronika.<sup>26</sup> Tanpa transformasi struktural ini, <em>undervaluation</em> hanya akan menjadi ornamen statistik.</p>
+
+  <h2>Jerat Kandungan Impor dan Matinya Substitusi Lokal: Mengapa Impor Mahal Menikam Industri Sendiri</h2>
+
+  <p>Kita memasuki bagian kedua dari dogma ekonomi dalam pernyataan awal: asumsi bahwa ketika nilai Rupiah merosot, harga barang-barang impor yang membanjiri pasar akan meroket mahal. Logika lanjutannya adalah, konsumen yang berhadapan dengan inflasi produk asing akan secara alamiah berbelok mengonsumsi barang substitusi domestik, yang secara magis akan memicu kebangkitan mesin-mesin industri dalam negeri yang selama ini kalah bersaing. Seolah-olah, pelemahan mata uang adalah bentuk kebijakan proteksionisme alami yang tanpa cacat.</p>
+
+  <p>Namun, menelusuri lorong-lorong data rantai pasok industri dan membedah struktur neraca impor yang dirilis oleh institusi kredibel seperti Badan Pusat Statistik (BPS) akan menyingkap sebuah ironi yang gelap dan kontradiktif. Fakta yang membisu adalah: industri manufaktur dalam negeri yang digadang-ngadang akan bangkit itu justru memiliki ketergantungan kronis layaknya pecandu terhadap pasokan bahan baku mentah (<em>raw materials</em>), bahan penolong, dan mesin barang modal (<em>capital goods</em>) dari luar negeri untuk sekadar bisa mempertahankan operasional produksinya.<sup>27</sup></p>
+
+  <p>Mari kita menarik napas dan melihat cermin sejarah. Saat krisis moneter Asia berkecamuk hebat di periode 1997–1998, nilai tukar Rupiah terjun bebas, terdevaluasi secara ekstrem dari kisaran 2.400 menjadi nyaris menyentuh 15.000 per Dolar AS.<sup>26</sup> Secara teori yang dipegang teguh, momen hancurnya kurs tersebut seharusnya menjadi surga bagi industri manufaktur Indonesia untuk melibas pesaingnya di pasar global dan mendominasi pasar lokal akibat matinya produk impor. Realitasnya sungguh pahit. Ekspor tekstil dan garmen memang menorehkan kenaikan volume secara fisik, tetapi penerimaan devisa ekspor dalam hitungan Dolar justru nyaris tidak bergerak naik seiring jatuhnya harga tekstil dunia, sementara industri secara keseluruhan terguncang.<sup>35</sup></p>
+
+  <p>Akar malapetaka ini terletak pada satu istilah krusial dalam ekonomi perdagangan: <em>Kandungan Impor</em> (Import Content) dalam input produksi. Industri Indonesia sebagian besar diisi oleh perusahaan yang sekadar menjalankan fungsi sebagai pabrik perakitan berskala besar (<em>simple blending and assembly operations</em>), mengimpor komponen dari luar, merakitnya dengan tenaga kerja murah, dan mengemasnya kembali.<sup>35</sup></p>
+
+  <p>Berdasarkan analisis statistik industri menengah dan besar dari BPS, tingginya angka <em>import content</em> pada berbagai subsektor manufaktur sangatlah mengkhawatirkan dan persisten melintasi waktu:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Subsektor Industri Manufaktur</th>
+          <th>Kandungan Impor pada Bahan Baku / Komponen (%)</th>
+          <th>Implikasi Ekonomi Struktural</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Elektronika &amp; Perangkat Listrik</strong></td>
+          <td><strong>~70%</strong><sup>35</sup></td>
+          <td>Ketergantungan pasokan absolut; pelemahan Rupiah menghancurkan margin perakitan lokal.</td>
+        </tr>
+        <tr>
+          <td><strong>Mesin &amp; Alat Transportasi</strong></td>
+          <td><strong>53% – 56%</strong><sup>35</sup></td>
+          <td>Bahan baku baja khusus, blok mesin, dan komponen elektronik mutlak bersumber dari GVC global.</td>
+        </tr>
+        <tr>
+          <td><strong>Kimia &amp; Farmasi</strong></td>
+          <td><strong>~45%</strong><sup>35</sup></td>
+          <td>Bahan Baku Obat (BBO) nyaris sepenuhnya diimpor; depresiasi memicu meroketnya harga obat domestik.</td>
+        </tr>
+        <tr>
+          <td><strong>Tekstil, Garmen, Kulit, &amp; Alas Kaki</strong></td>
+          <td><strong>40% – 56%</strong><sup>35</sup></td>
+          <td>Ironisnya, industri padat karya ini pun terjebak impor benang, bahan pewarna, hingga polimer sintesis akibat rapuhnya rantai pasok hulu lokal (<em>backward linkages</em>).</td>
+        </tr>
+        <tr>
+          <td><strong>Industri Makanan &amp; Minuman</strong></td>
+          <td><strong>~38,1%</strong> (Target rasio impor 2025)<sup>38</sup></td>
+          <td>Sektor riil tertawan oleh pasokan impor gandum, gula industri, hingga susu mentah.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-note">(Catatan: Dirangkum dari data Sensus Industri Manufaktur Menengah dan Besar BPS serta dokumen perencanaan sektor industri nasional terkait analisis intensitas kandungan impor.<sup>35</sup>)</p>
+
+  <p>Realitas pahit ini bukanlah relik masa lalu, melainkan patologi yang terus bertahan mendikte ekonomi hingga saat ini (2024–2025). Mengamati <em>dashboard</em> impor bulanan Indonesia yang secara stabil meraup devisa senilai USD 19 miliar hingga USD 21 miliar, postur yang mendominasi grafik selalu sama: pasokan bahan baku industri dan barang modal.<sup>27</sup> Sementara itu, impor barang konsumsi yang dikonsumsi langsung oleh rakyat rasionya jauh lebih kerdil.<sup>27</sup></p>
+
+  <p>Guna memahami dampak destruktif dari fenomena ini, mari kita beralih ke denyut nadi sektor riil yang paling membumi: industri pengrajin tempe berskala Usaha Mikro, Kecil, dan Menengah (UMKM). Tempe adalah mahkota kuliner nusantara, simbol kemandirian substitusi lokal yang sempurna di benak awam. Namun, nyawa dari industri ini, yaitu kacang kedelai, sebagian raksasanya diimpor dari Amerika Serikat dan Amerika Selatan.<sup>29</sup> Begitu Indeks Big Mac meneriakkan bahwa Rupiah masuk ke palung yang sangat <em>undervalued</em>, imbasnya langsung dirasakan di pelabuhan Tanjung Priok. Harga tebusan kedelai impor meledak dengan brutal. Para perajin tahu dan tempe dari sentra industri Maju Jaya di Serang hingga pelosok Jawa seketika mengeluhkan dan menderita lonjakan beban bahan baku dasar dari Rp 10.850 melesat menjadi Rp 11.750 per kilogram hanya dalam hitungan hari, dipicu murni oleh pelemahan nilai tukar Rupiah.<sup>39</sup></p>
+
+  <p>Bagi produsen manufaktur konglomerasi, efeknya lebih sistemik. Depresiasi mata uang secara tak terelakkan menaikkan harga energi secara sporadis, mempermahal tarif dasar listrik dan gas industri yang sebagian biaya operasionalnya terkait dengan struktur komoditas global, menyundul naik ongkos logistik, dan mencekik margin pabrik melalui pembelian bahan mentah impor.<sup>34</sup> Karena daya beli konsumen di pasar domestik juga remuk terhimpit inflasi dari berbagai sektor lainnya, pabrikan tidak bisa begitu saja melakukan penyesuaian (<em>pass-through</em>) dengan menaikkan harga jual produk akhir sesuka hati.<sup>34</sup> Konsekuensinya fatal: profitabilitas perusahaan menyusut tajam, rekrutmen dibekukan, rencana ekspansi modal dibatalkan, dan alih-alih merayakan "kebangkitan industri," banyak perusahaan di dalam negeri yang limbung atau bahkan kolaps dihantam badai inflasi yang diselundupkan dari luar negeri melalui jalur nilai tukar (<em>imported inflation</em>).<sup>34</sup></p>
+
+  <p>Pemerintah sering kali mencoba menyiasati penyakit ini melalui pemaksaan instrumen kebijakan seperti Tingkat Komponen Dalam Negeri (TKDN) atau <em>Local Content Requirements</em> (LCR) yang dikampanyekan untuk mewajibkan industri menyerap produk lokal demi membendung laju impor bahan baku.<sup>37</sup> Sayangnya, kajian akademik ekstensif yang memanfaatkan data sensus manufaktur Indonesia selama 23 tahun memberikan temuan empiris yang menyesakkan dada: LCR sering kali terbukti tidak efisien dan gagal melepaskan ketergantungan absolut perusahaan dari <em>input</em> impor, lantaran substitusi bahan baku lokal sering kali cacat dari segi skala keekonomian, kuantitas presisi, maupun kualitas inovasi teknologi.<sup>37</sup> Pemaksaan restriksi lokalisasi (LCR) di tengah situasi nilai tukar yang morat-marit justru menjadi peluru nyasar yang mereduksi produktivitas teknis, memangkas nilai tambah perusahaan, dan pada akhirnya melemahkan struktur penyerapan tenaga kerja di pabrik-pabrik manufaktur.<sup>37</sup></p>
+
+  <h2>Kegagalan Manipulasi Kurs: Bukti Ekonometrika pada Kinerja Ekspor Manufaktur</h2>
+
+  <p>Jika pelemahan kurs justru menghantam industri yang berorientasi domestik karena tingginya kandungan impor, lalu bagaimana dengan performa sektor industri yang didedikasikan sepenuhnya untuk ekspor? Mungkinkah argumen "<em>undervalued</em> baik untuk ekspor" masih memiliki landasan empiris jika kita mengisolasi hanya pabrik-pabrik yang berorientasi pasar asing?</p>
+
+  <p>Penelitian mutakhir yang sangat ketat secara metodologis telah dilakukan untuk menginvestigasi hipotesis ini, dipublikasikan dalam berbagai literatur ekonomi internasional ternama dengan fokus pada sektor manufaktur berkembang seperti Indonesia.<sup>43</sup> Studi-studi ini memanfaatkan pendekatan ekonometrika kontemporer yang disebut <em>Augmented Mean Group</em> (AMG), sebuah metode canggih yang kebal terhadap bias silang-sektoral, ketergantungan data, dan syok perubahan struktural ekstrem seperti krisis finansial global, untuk menyingkap efek laten dari <em>misalignment</em> mata uang selama rentang waktu lebih dari dua dekade.<sup>43</sup></p>
+
+  <p>Hasil temuan empiris dari permodelan ini menohok jantung penganut paham merkantilis ortodoks. Hasilnya menegaskan bahwa: <strong>Ketidakselarasan nilai tukar (misalignment)—baik itu dalam bentuk pelemahan drastis (undervaluation) yang dikonfirmasi oleh PPP maupun apresiasi—terbukti secara statistik sangat tidak signifikan dan tidak memiliki dampak kausalitas apa pun dalam mengatrol pertumbuhan volume maupun nilai ekspor sektor manufaktur Indonesia.</strong><sup>43</sup></p>
+
+  <p>Ekonometrika menguraikan beberapa mekanisme krusial yang menjelaskan mengapa fenomena kekebalan terhadap kurs (<em>responsiveness failure</em>) ini bisa mengakar dalam bioma ekspor Indonesia:</p>
+
+  <ol>
+    <li><strong>Deindustrialisasi dan Kelambatan Pangsa Global:</strong> Di awal era reformasi (1999), pangsa agregat perdagangan internasional memakan porsi dominan hingga 71% dari PDB Indonesia, namun persentase raksasa ini menciut dramatis hingga stagnan di kisaran 37–40% di era kontemporer.<sup>43</sup> Proporsi barang manufaktur yang dikirim dari pelabuhan nasional terhadap total keranjang ekspor juga tergelincir dari angka perkasa 51% (periode krisis) anjlok menjadi hanya 37% satu dekade kemudian.<sup>43</sup> Ini adalah gejala klasik <em>premature deindustrialization</em>, di mana kapasitas produksi manufaktur yang menyusut membuat elastisitas suplai barang terhadap insentif pelemahan nilai tukar menjadi kaku dan tak berdaya.<sup>33</sup></li>
+    <li><strong>Proteksionisme Global yang Menetralisir:</strong> Dalam tatanan geopolitik modern yang sinis, tidak ada negara yang akan membiarkan produsen asing memorak-porandakan pasar domestiknya melalui strategi dumping mata uang. Ketika Rupiah sengaja dibiarkan tergelincir atau melemah karena faktor fundamental untuk mengambil alih <em>market share</em>, negara-negara pesaing dagang dengan cepat bereaksi dengan menegakkan tameng restriksi non-tarif (Non-Tariff Measures/NTMs), bea masuk anti-dumping, hingga kuota proteksionis.<sup>43</sup> Penelitian Bank Dunia mengungkap bahwa eksportir Indonesia yang bergantung pada rantai pasokan bahan mentah terhambat dengan keras ketika mencoba mengambil margin atas pelemahan mata uang pesaing seperti Yuan Tiongkok, karena restriksi non-tarif yang kaku menghalangi manuver pabrikan untuk beralih sumber komponen.<sup>44</sup></li>
+    <li><strong>Hukum Rantai Pasok Global (GVC Paradox):</strong> Fakta bahwa eksportir Indonesia harus harus mengimpor mesin dan semikonduktor dari Tiongkok dan Jepang untuk merakit produk jadi bermakna bahwa devaluasi ibarat lingkaran setan.<sup>43</sup> Kurs yang anjlok memang memurahkan biaya akhir saat dilabeli USD, tetapi sekaligus melambungkan harga perakitan di dalam pabrik karena nilai <em>import content</em>-nya menjadi mahal gila-gilaan, secara otomatis menguras habis segala keunggulan penetapan harga (<em>pricing advantage</em>) di pasar ujung pelabuhan.<sup>43</sup></li>
+    <li><strong>Inferioritas Institusi dan Tirani "Non-Price Maker":</strong> Tidak seperti Tiongkok yang memonopoli status sebagai "pabrik peradaban" dunia, posisi strategis Indonesia di pasar komoditas perakitan hanyalah sebagai pengikut harga atau <em>non-price maker</em>.<sup>43</sup> Belum lagi tantangan infrastruktur yang tidak mulus, korupsi birokrasi, dan kualitas institusi kelembagaan (<em>institutional quality</em>) di negara berkembang yang justru menambah biaya tersembunyi yang jauh lebih korosif menutupi efek positif pelonggaran nilai tukar.<sup>43</sup> Ditambah lagi, pesaing dominan seperti Tiongkok dan Vietnam dengan sigap menahan nilai mata uang mereka (Renminbi dan Dong) agar tetap pada level yang kompetitif (undervalued), ditunjang dengan rel kereta api dan pelabuhan canggih, yang meluluhlantakkan relevansi depresiasi Rupiah dari sisi persaingan.<sup>43</sup></li>
+  </ol>
+
+  <p>Jika instrumen devaluasi terbukti impoten dalam sejarah ekspor manufaktur nasional, faktor apakah yang sesungguhnya menjadi penghela mesin ekspor? Permodelan akademis dengan jelas menyatakan bahwa daya saing sejati eksportir Indonesia ditopang oleh determinan struktural di luar arena valuta asing: pertumbuhan historis perusahaan manufaktur, kemampuan mencetak suku bunga riil domestik yang memurahkan biaya ekspansi modal, deregulasi sistem pesangon perburuhan, modernisasi dukungan intermediasi perbankan, dan yang terpenting, peningkatan kurva produktivitas keterampilan pekerja dari hulu hingga hilir (<em>labor productivity</em>).<sup>43</sup> Menyandarkan nasib industri pada kemurahan hati manipulasi atau volatilitas nilai tukar tak ubahnya membangun istana pasir makroekonomi.</p>
+
+  <h2>Ancaman Sistemik: Utang Korporasi, Modal Perbankan, dan Stabilitas Finansial</h2>
+
+  <p>Lebih jauh lagi, meyakini dogma usang bahwa "mata uang undervalue itu berkah" sesungguhnya membutakan mata pengambil kebijakan dari kerentanan seismik yang luar biasa destruktif bagi kerangka ekonomi modern Indonesia, yakni badai eksposur utang luar negeri korporat dan krisis likuiditas finansial.</p>
+
+  <p>Di dunia di mana uang mengalir tanpa sekat lintas perbatasan digital, para ekonom kaliber dunia seperti Blanchard dkk. (2015) telah membunyikan alarm peringatan. Mereka memaparkan bahwa arus keluar modal secara masif (<em>capital outflows</em>) dari pasar negara-negara sedang berkembang (<em>emerging markets</em>)—yang secara natural menekan jatuh nilai tukar mata uang hingga ke level <em>undervalued</em>—dapat memicu kontraksi <em>output</em> ekonomi secara sistemik alih-alih melebarkan ekspansi ekspor. Alasannya sangat mekanis: guncangan nilai tukar melipatgandakan biaya intermediasi finansial hingga ke tingkat yang tidak sanggup ditanggung dunia usaha.<sup>26</sup></p>
+
+  <p>Bukti empiris di sektor perbankan dan emiten pasar modal Indonesia menyingkap realitas yang menakutkan tentang betapa rentannya struktur modal mereka terhadap hembusan nilai tukar. Ketika Rupiah jatuh terperosok ke zona undervaluation kronis di bawah batas wajarnya, fundamental nilai saham (Indonesian stock market) terpukul telak.<sup>26</sup> Regresi model finansial mengkuantifikasi dengan presisi bahwa setiap kali nilai tukar Rupiah terdepresiasi satu persen (1%) saja terhadap Dolar AS, maka tingkat pengembalian agresif agregat (<em>return</em>) dari emiten bursa saham secara otomatis tersapu bersih sebesar 0,91%.<sup>26</sup> Pukulan finansial yang menyakitkan ini memvalidasi fakta bahwa guncangan devaluasi memberikan daya hancur yang melemahkan aktivitas mesin ekonomi Indonesia, bukan menyuburkannya.<sup>26</sup></p>
+
+  <p>Anatomi dari kehancuran ini bernaung pada struktur neraca utang luar negeri. Bank-bank berlabel Badan Usaha Milik Negara (BUMN) yang menanggung beban proyek infrastruktur masif, serta berbagai korporasi konglomerasi swasta, terperangkap dalam jebakan likuiditas valuta asing yang menggunung. Menginjak awal periode pemulihan ekonomi menuju 2025, catatan agregat statistik mengungkapkan bahwa saldo utang luar negeri Indonesia membeludak, menembus tonggak angka sebesar USD 430,4 miliar.<sup>48</sup> Ketika pasar perbankan domestik mengalami pengetatan suplai likuiditas—di mana laju ekspansi pencairan kredit di tanah air melampaui kemampuan mengumpulkan dana tabungan deposito masyarakat selama bertahun-tahun berturut-turut—korporasi perbankan pelat merah secara agresif dipaksa melongok ke luar negeri, mencetak pinjaman berdenominasi utang luar negeri dan mencatatkan percepatan akselerasi pertumbuhan pinjaman eksternal dari 7,0% terbang hingga ke 21,9% (YoY).<sup>48</sup></p>
+
+  <p>Di titik inilah, devaluasi mata uang menjelma menjadi algojo. Berbagai bank dan korporasi domestik ini mengeruk uang dengan menerbitkan instrumen obligasi atau fasilitas utang dalam mata uang Dolar AS demi mendanai ekspansi atau infrastruktur, namun sumber pendapatan inti perusahaan tersebut—seperti cicilan KPR, cicilan kendaraan bermotor konsumen ritel, hingga modal ventura bagi korporasi yang menyuplai produk lokal—seluruhnya mengalir masuk dan tertagih dalam pecahan Rupiah.<sup>26</sup> Gejala mengerikan yang disebut ketidaksesuaian aset dan kewajiban secara kurs (<em>currency mismatch</em>) ini adalah bom waktu.<sup>26</sup></p>
+
+  <p>Bayangkan sebuah perusahaan telekomunikasi raksasa atau perusahaan farmasi di Indonesia yang memiliki kewajiban jatuh tempo utang USD satu miliar Dolar AS. Begitu Rupiah melemah tak terkendali sejalan dengan rasio ekstrem <em>undervaluation</em> versi Indeks Big Mac, rasio biaya pembayaran pelayanan utang mereka (<em>debt service to revenue ratio</em>) mendadak membengkak dua kali lipat dalam pembukuan pembagian Rupiah meskipun mereka belum melakukan ekspansi apa pun secara fisik.<sup>50</sup> Ini mengakibatkan laba perusahaan anjlok. Ketakutan massal akan kerugian derivatif ini membuat perbankan nasional berlomba mengerem aliran darah pencairan kredit produktif ke sektor riil demi mengamankan cadangan penyangga modal (<em>buffer capital</em>) mereka. Perusahaan lokal seketika kesulitan mencari kredit bank untuk menutupi membengkaknya tagihan impor bahan baku. Akibatnya, mereka memutus hubungan kerja secara radikal alih-alih meledakkan kapasitas produksi.<sup>26</sup> Jangankan untuk merajai podium ekspor global, sekadar memastikan tidak terjadi gagal bayar obligasi (<em>default</em>) saja menjadi pergulatan berdarah-darah di jajaran direksi.</p>
+
+  <p>Lanskap makro inilah yang mendasari dan menerjemahkan mengapa Bank Indonesia (BI) bertindak secara konservatif dengan instrumen-instrumen kebijakan pengetatan yang masif demi melindungi pertahanan Rupiah, ketimbang mengamini euforia sesat membiarkan Rupiah membusuk di dasar lautan undervaluation. Strategi yang dicanangkan BI meliputi kebijakan bauran instrumen intervensi valuta asing secara absolut di pasar tunai (<em>spot market</em>), pasar <em>Domestic Non-Deliverable Forward</em> (DNDF), serta aksi borong di pasar obligasi sekunder yang dikenal sebagai Intervensi Ganda (Dual atau Triple Intervention).<sup>54</sup> Motivasi taktis bank sentral bukanlah menciptakan nilai mata uang buatan untuk mendiskon pelabelan ekspor barang manufaktur, tetapi memastikan bahwa efek perambatan (<em>pass-through effects</em>) mematikan dari depresiasi—berupa lonjakan inflasi impor di keranjang ritel domestik, ledakan <em>non-performing loan</em> akibat pembengkakan utang luar negeri di neraca perusahaan swasta, dan guncangan aliran defisit transaksi berjalan (<em>current account deficit</em>)—tidak memicu krisis sistemik yang dapat menghanguskan kepercayaan pilar-pilar pemodal global.<sup>54</sup></p>
+
+  <h2>Jalan Keluar Sejati: Meretas Proteksionisme melalui Hilirisasi dan Asimilasi GVC</h2>
+
+  <p>Memperhatikan serpihan fakta, bukti ekonometrika, struktur komoditas, dan badai likuiditas yang tak terbantahkan di atas, menanti kelahiran kembali kejayaan industri manufaktur Indonesia yang dipantik hanya dari jatuhnya nilai tukar Rupiah sebagaimana perhitungan Indeks Big Mac adalah sebuah kenaifan fatal. Mentalitas bahwa devaluasi adalah stimulus magis ibarat membakar habis seluruh sawah pertanian milik desa agar kita bisa memungut dan menjual sedikit sisa-sisa sekam dengan margin yang tinggi. Sektor riil tidak akan selamat. Apa yang sesungguhnya esensial untuk mendobrak inelastisitas ekspor kita bukanlah nilai tukar yang terkulai lemah di kawah <em>undervalued</em>, melainkan perombakan arsitektur ekonomi struktural besar-besaran dari hulu hingga ke hilir.</p>
+
+  <p>Fase inisiasi menuju transformasi struktural mensyaratkan adopsi agresif asimilasi teknologi mutakhir serta pembasmian penghalang berbisnis (improving Ease of Doing Business).<sup>26</sup> Rekomendasi akademik bagi pemangku kebijakan mendesak Indonesia untuk bertindak agresif seperti model pembangunan yang diadopsi Thailand, Malaysia, dan Vietnam, di mana fokus dialihkan sepenuhnya untuk menarik arus Penanaman Modal Asing murni (Foreign Direct Investment/FDI) berskala raksasa dari Korporasi Multinasional (MNCs).<sup>26</sup> Korporasi canggih ini sedang secara histeris merelokasi jaring-jaring pabrik mereka demi menghindari friksi perang dagang tarif dan mencari landasan ekspor atau <em>export platform</em> yang lincah untuk menyasar benua lain setelah jenuhnya operasi produksi mereka di Tiongkok.<sup>47</sup> Triliunan dana FDI ini tidak tergiur untuk masuk hanya karena mata uang Rupiah diklaim "terdiskon" dan <em>undervalued</em>. Mereka menanamkan jangkar modalnya jika—dan hanya jika—pemerintah sanggup menjanjikan stabilitas politik, kapasitas kontinuitas pasokan energi dan utilitas kelas wahid, eliminasi absolut dari pusaran korupsi perizinan birokrasi berjenjang di tingkat pemerintah daerah, penghapusan kewajiban hukum pesangon tenaga kerja yang dipandang drastis menekan efisiensi komparatif (<em>onerous severance pay requirements</em>), serta penolakan atas tirani tameng proteksionisme berlebihan yang pada dasarnya justru memupuk pungutan biaya ekstra atas bahan baku impor mereka sendiri.<sup>47</sup> Menjaga suplai <em>human capital</em> melalui kualitas institusi edukasi dan inkubasi wirausaha jauh lebih ampuh mendatangkan ekspor ketimbang melebarkan jarak devaluasi.</p>
+
+  <p>Langkah taktis kedua menuntut kecerdasan dalam bermanuver di ombak <em>Global Value Chains</em> (GVC). Fakta menunjukkan bahwa korporasi manufaktur di tanah air yang berani melakukan lompatan membenamkan produksi mereka pada ekosistem rantai pasok raksasa produsen global (GVC-related networks) justru berhasil mencetak pertumbuhan performa ekspor secara eksponensial (mencapai angka akselerasi 7,6% net) dan merekrut populasi lapangan kerja jauh melampaui kemampuan industri tradisional purba yang sekadar berselimut ego memenuhi kuota domestik dan anti-impor (hanya 2,6%).<sup>57</sup> Melakukan impor komponen transmisi perangkat rumit dan mesin <em>chip</em> dari luar negeri sama sekali bukanlah pengkhianatan terhadap devisa, sepanjang rekayasa akhir nilai tambah dari fase modifikasi industri (<em>upgrading capabilities</em>) dipanen mutlak dan dikuasai oleh anak-anak bangsa di dalam kawasan negeri sendiri.<sup>59</sup></p>
+
+  <p>Fondasi akhir, yang sekaligus merepresentasikan pergeseran ortodoksi ekonomi terbesar yang dikemudikan negara saat ini, adalah orkestrasi masif bernama <em>hilirisasi</em> atau reindustrialisasi rantai sumber daya alam terintegrasi (Downstreaming).<sup>30</sup> Momentum di mana Indonesia tak lagi tunduk di bawah belas kasihan volatilitas dolar komoditas dimulai sejak negara memutus absolut keran pelarangan keruk ekspor bahan mentah mineral nikel dan memaksa pemodal antre membangun mesin raksasa pemurnian bijih (Smelter) padat modal di belantara tanah air.<sup>30</sup> Hasil gemilang dari operasi ini tercatat jelas dalam pembukuan sejarah: kebijakan ini sukses bermetamorfosis meningkatkan lompatan devisa ekspor dari endapan kotor bijih nikel yang receh senilai Rp 17 triliun, dilipatgandakan menjadi komoditas logam esensial transisi energi yang terbanderol Rp 510 triliun.<sup>30</sup> Alih-alih merelakan isi perut buminya dikeruk secara primitif lalu dipertaruhkan nasib harganya oleh gonjang-ganjing <em>commodity price shocks</em>, Indonesia mengamankan supremasinya secara geopolitik untuk menancapkan kuku pada rantai komponen baterai masa depan Kendaraan Listrik (EV battery industrial boom) yang sangat krusial bagi transisi ekologi peradaban dunia.<sup>29</sup> Manuver raksasa dan berani merombak rantai pasok industri pertambangan strategis inilah yang menganugerahi imunitas pertahanan bagi struktur defisit eksternal dan mencetak panen surplus neraca perdagangan fantastis selama berpuluh-puluh bulan beruntun dengan rekor pencapaian hingga USD 41 miliar akumulatif.<sup>27</sup> Semua pilar prestasi masif ini murni didorong dari perombakan komparatif daya saing nilai material, suatu mahakarya rekayasa arsitektural negara yang mustahil sekadar dimenangi lewat pasrahnya manipulasi pelemahan kurs <em>undervaluation</em>.</p>
+
+  <h2>Kesimpulan: Realitas Pahit di Balik Narasi Semu Harga Burger</h2>
+
+  <p>Pernyataan bahwa kedudukan mata uang Rupiah sedang menderita secara drastis dalam posisi terperosok <em>undervalued</em>, bahkan menukik curam hingga defisit melampaui angka 59,3% jika diukur melalui pandangan indikator paritas global seperti Indeks Big Mac gagasan <em>The Economist</em>, adalah sebuah kebenaran statistik matematis yang sah dan telah diamini oleh metode ekonometrika akademis terkemuka. Kondisi di mana indeks perbandingan Paritas Daya Beli mengonfirmasi secara absolut bahwa konversi rata-rata spektrum harga kebutuhan ritel lokal pokok, properti komersial, maupun struktur kompensasi jasa pramusaji restoran di kota-kota Indonesia masih dipatok sangat murah melintasi batas samudera dalam takaran kurs mata uang Dolar Amerika Serikat, memang merupakan kenyataan objektif yang menyertai status negara dengan kapita pendapatan menengah.</p>
+
+  <p>Namun, mencoba menambal jembatan analisis secara semberono dari pondasi indikator teori tersebut menuju sebuah asumsi bahwa kemurahan kurs buatan ini akan lantas meledakkan daya ungkit komparatif ekspor komoditas, menutup mati kran impor domestik, dan serta-merta berakibat pada mukjizat instan kebangkitan raksasa industri di dalam negeri adalah sebuah epos fatal dan pembenaran empiris yang halusinatif.</p>
+
+  <p>Fakta telanjang perekonomian Indonesia menolak dikompresi dalam batas parameter buku diktat ekonomi teoretis usang. Pembuktian demi pembuktian empiris, lautan data statistik dari neraca perdagangan BPS, serta regresi model makroekonomi yang kompleks telah memberikan ketukan palu terakhir dengan kepastian tak terbantahkan:</p>
+
+  <p><strong>Pertama</strong>, efektivitas peluru daya saing eksportir sama sekali tidak bersenandung diiringi simfoni nilai tukar. Selama Indonesia masih menghamba secara eksesif untuk menambang, memeras, dan mengirimkan energi komoditas primer ekstraktif seperti CPO, mineral mentah, dan batu bara, pelemahan depresiasi Rupiah secara persisten tidak akan menambah volume tonase pesanan global.<sup>26</sup> Karena parameter ekuilibrium pasarnya dipatok kaku dalam USD di pusaran lantai bursa London atau Rotterdam, volume serapan pesanan murni dikendalikan selera raksasa manufaktur luar negeri tanpa peduli diskon uang kita.<sup>26</sup> Pada subsektor eksportir industri manufaktur yang sensitif harga pun, jurus kemurahan devaluasi mata uang telah dilucuti oleh kebijakan kejam pembatas tarif masuk proteksionisme (Non-Tariff Measures) negara sasaran ekspor serta matinya integrasi global akibat penyakit peluruhan laju proporsi deindustrialisasi absolut di wilayah perakitan kita.<sup>33</sup></p>
+
+  <p><strong>Kedua</strong>, hipotesis keliru mengenai impor mahal sebagai pendorong manufaktur lokal. Narasi "kebangkitan industri domestik" akan tetap menjadi pepesan kosong retorik selama organ esensial, kerangka penggerak alat, serta pembuluh darah yang memompa pasokan bahan mentah pabrikasi kita dari hulu farmasi BBO, bijih polimer sintesis garmen, sirkuit elektronika esensial, hingga butiran kacang kedelai pembuat tempe tahu asupan rakyat jelata—merupakan barang pasokan impor dari pelabuhan luar negeri dengan persentase fatal mencapai puncak di atas 70 persen.<sup>27</sup> Merendahkan nilai Rupiah mendatangkan mimpi buruk yang langsung menusuk leher: meledaknya inflasi siluman impor (<em>imported inflation</em>) yang mencekik brutal laju pemulihan usaha, melambungkan horor biaya margin produksi komersial, mereduksi upah pekerja, dan mencabut perlahan-lahan daya imunitas persaingan komersial.<sup>34</sup> Alih-alih membangun benteng dari barang asing yang mahal, kita mengorbankan nafas jutaan manufaktur lokal dan UMKM yang sedang kelimpungan mencari alat keselamatan untuk menambal kebangkrutan operasional harian.</p>
+
+  <p><strong>Ketiga</strong>, keberadaan hantu defisit transaksi finansial yang tak kasat mata. Percaya pada berhala bahwa mata uang <em>undervalued</em> senantiasa mengantarkan faedah keunggulan memutarbalikkan nalar pengambil kebijakan dari laju kejatuhan aset bank. Dalam iklim instrumen permodalan internasional yang rentan bergejolak, mempertahankan nilai tukar tak semestinya menjadi tameng, melainkan urat nadi kestabilan bagi puluhan emiten bursa serta bank sentral dan korporasi pembangun rel infrastruktur pelat merah.<sup>26</sup> Devaluasi tanpa henti memperkecil rasio <em>return</em> agregat permodalan dan menggelembungkan gunung liabilitas kewajiban jatuh tempo utang eksternal ke skala masif (mencapai lebih dari USD 430 miliar), memaksa seluruh dana cair masyarakat tersedot panik bukan untuk berekspansi produktif membuka pabrik, melainkan diparkir ketakutan demi pelunasan pinjaman obligasi Dolar esok hari yang kian mengamuk secara artifisial nilainya.<sup>26</sup></p>
+
+  <p>Mata uang yang terdepresiasi atau <em>undervalued</em> parah pada kenyataannya menutupi selubung kebusukan: ia bukanlah instrumen kemenangan taktis untuk merajai supremasi niaga, melainkan semata-mata sirene yang melengking kencang sebagai alarm tanda bahaya dari tumpulnya pisau inovasi asimilasi kemajuan teknologi, rusaknya fasilitas pelabuhan penghubung urat nadi logistik, suramnya ketangkasan kualitas pendidikan perburuhan kita dibandingkan raksasa Asia Timur di utara, serta tingginya penalti biaya korupsi birokrasi institusi berkembang. Seandainya kita serius memiliki determinasi historis dalam membesarkan kemerdekaan mesin kedaulatan pabrikan yang kebal krisis, kita wajib memutus adiksi meredupkan harapan pada manipulasi kurs. Jawaban monumental dari tantangan zaman hari ini mutlak hanya terangkai melalui kesabaran darah dan keringat mengamankan komoditas rantai pasok hilirisasi peleburan tambang bernilai tambah spektakuler, kepastian perlindungan hukum yang menarik deras FDI pabrikan masa depan, serta kecerdikan dalam bernegosiasi meleburkan manufaktur pekerja kita menembus lorong terdepan di ekosistem kemajuan <em>Global Value Chains</em>. Karena sesungguhnya, harga diri, ketangguhan fondasi neraca, dan kehormatan industri sebuah panggung negara berdaulat sekali-kali tidak bisa digadaikan dan tidak pernah pantas diukur mutlak dari teka-teki murahnya tumpukan irisan roti ganda hamburger di pusat perbelanjaan aspal ibu kota, melainkan ditentukan oleh lompatan ketahanan produktivitas dan mahakarya orkestrasi inovasi kecerdasan peradabannya.</p>
+
+  <div class="references">
+    <h4>Karya yang Dikutip</h4>
+    <ol class="ref-list">
+      <li><span class="ref-num">1.</span><span class="ref-text">Big Mac and rupiah valuation | by Dzulfiqar Fathur Rahman | Dec, 2020 - Medium, diakses April 13, 2026, <a href="https://medium.com/@dzul0936/big-mac-and-rupiah-valuation-689997185166" target="_blank">https://medium.com/@dzul0936/big-mac-and-rupiah-valuation-689997185166</a></span></li>
+      <li><span class="ref-num">2.</span><span class="ref-text">Big Mac Index by Country 2026 - World Population Review, diakses April 13, 2026, <a href="https://worldpopulationreview.com/country-rankings/big-mac-index-by-country" target="_blank">https://worldpopulationreview.com/country-rankings/big-mac-index-by-country</a></span></li>
+      <li><span class="ref-num">3.</span><span class="ref-text">Big Mac Index - Wikipedia, diakses April 13, 2026, <a href="https://en.wikipedia.org/wiki/Big_Mac_Index" target="_blank">https://en.wikipedia.org/wiki/Big_Mac_Index</a></span></li>
+      <li><span class="ref-num">4.</span><span class="ref-text">THE PURCHASING POWER PARITY: EVIDENCE FROM THE GREAT FINANCIAL CRISIS, diakses April 13, 2026, <a href="https://www.ucm.es/data/cont/docs/620-2014-04-02-518-2013-10-23-Guinea13.pdf" target="_blank">https://www.ucm.es/data/cont/docs/620-2014-04-02-518-2013-10-23-Guinea13.pdf</a></span></li>
+      <li><span class="ref-num">5.</span><span class="ref-text">Burgernomics: The Big Mac Guide to Purchasing Power Parity (ICPSR 1298), diakses April 13, 2026, <a href="https://www.icpsr.umich.edu/web/ICPSR/studies/1298" target="_blank">https://www.icpsr.umich.edu/web/ICPSR/studies/1298</a></span></li>
+      <li><span class="ref-num">6.</span><span class="ref-text">EU Industrial R&amp;D Investment Scoreboard - JRC Publications Repository, diakses April 13, 2026, <a href="https://publications.jrc.ec.europa.eu/repository/bitstream/JRC144638/JRC144638_01.pdf" target="_blank">https://publications.jrc.ec.europa.eu/repository/bitstream/JRC144638/JRC144638_01.pdf</a></span></li>
+      <li><span class="ref-num">7.</span><span class="ref-text">Big Mac Index. Data by Countries from 2000 to 2026, diakses April 13, 2026, <a href="https://statbase.org/datasets/indexes-and-ratings/bigmac-index/" target="_blank">https://statbase.org/datasets/indexes-and-ratings/bigmac-index/</a></span></li>
+      <li><span class="ref-num">8.</span><span class="ref-text">The Big Mac index: An exact multilateral clarification - CentAUR, diakses April 13, 2026, <a href="https://centaur.reading.ac.uk/121231/1/1-s2.0-S1062940825000385-main.pdf" target="_blank">https://centaur.reading.ac.uk/121231/1/1-s2.0-S1062940825000385-main.pdf</a></span></li>
+      <li><span class="ref-num">9.</span><span class="ref-text">Purchasing Power Parity and the Big Mac Index | Krisna 'imed' Gupta, diakses April 13, 2026, <a href="https://www.krisna.or.id/post/bigmacindex/" target="_blank">https://www.krisna.or.id/post/bigmacindex/</a></span></li>
+      <li><span class="ref-num">10.</span><span class="ref-text">Big Mac price | Indonesia – yearly data, chart and table, diakses April 13, 2026, <a href="https://statbase.org/data/idn-bigmac-price/" target="_blank">https://statbase.org/data/idn-bigmac-price/</a></span></li>
+      <li><span class="ref-num">11.</span><span class="ref-text">(PDF) Burgernomics: A Big Mac™ Guide to Purchasing Power Parity - ResearchGate, diakses April 13, 2026, <a href="https://www.researchgate.net/publication/5047313_Burgernomics_A_Big_Mac_Guide_to_Purchasing_Power_Parity" target="_blank">https://www.researchgate.net/publication/5047313_Burgernomics_A_Big_Mac_Guide_to_Purchasing_Power_Parity</a></span></li>
+      <li><span class="ref-num">12.</span><span class="ref-text">The Big Mac Index: Applications of Purchasing Power Parity | Request PDF - ResearchGate, diakses April 13, 2026, <a href="https://www.researchgate.net/publication/311436390_The_Big_Mac_Index_Applications_of_Purchasing_Power_Parity" target="_blank">https://www.researchgate.net/publication/311436390_The_Big_Mac_Index_Applications_of_Purchasing_Power_Parity</a></span></li>
+      <li><span class="ref-num">13.</span><span class="ref-text">The Big Mac Index Two Decades On An Evaluation Of Burgernomics - ResearchGate, diakses April 13, 2026, <a href="https://www.researchgate.net/publication/46456399_The_Big_Mac_Index_Two_Decades_On_An_Evaluation_Of_Burgernomics" target="_blank">https://www.researchgate.net/publication/46456399_The_Big_Mac_Index_Two_Decades_On_An_Evaluation_Of_Burgernomics</a></span></li>
+      <li><span class="ref-num">14.</span><span class="ref-text">Does PPP hold for Big Mac price or consumer price index? Evidence from panel cointegration - IDEAS/RePEc, diakses April 13, 2026, <a href="https://ideas.repec.org/a/ebl/ecbull/eb-07f30007.html" target="_blank">https://ideas.repec.org/a/ebl/ecbull/eb-07f30007.html</a></span></li>
+      <li><span class="ref-num">15.</span><span class="ref-text">Purchasing power parity and the Big Mac Index (Chapter 2) - Currencies, Commodities and Consumption - Cambridge University Press, diakses April 13, 2026, <a href="https://www.cambridge.org/core/books/currencies-commodities-and-consumption/purchasing-power-parity-and-the-big-mac-index/B3AA079A5C1321E49CF2047CC824F711" target="_blank">https://www.cambridge.org/core/books/currencies-commodities-and-consumption/purchasing-power-parity-and-the-big-mac-index/B3AA079A5C1321E49CF2047CC824F711</a></span></li>
+      <li><span class="ref-num">16.</span><span class="ref-text">CLARIFYING THE ADJUSTED BIG MAC INDEX - Global Business Programs, diakses April 13, 2026, <a href="https://global.business.uconn.edu/wp-content/uploads/sites/1931/2017/01/Thomas-OBrien-and-Santiago-Ruiz-Sep24BigMacPaper.pdf" target="_blank">https://global.business.uconn.edu/wp-content/uploads/sites/1931/2017/01/Thomas-OBrien-and-Santiago-Ruiz-Sep24BigMacPaper.pdf</a></span></li>
+      <li><span class="ref-num">17.</span><span class="ref-text">The Relationship Between Exchange Rate and Trade Balances: An Empirical Study on Indonesia - Atlantis Press, diakses April 13, 2026, <a href="https://www.atlantis-press.com/article/125941226.pdf" target="_blank">https://www.atlantis-press.com/article/125941226.pdf</a></span></li>
+      <li><span class="ref-num">18.</span><span class="ref-text">Investigating The Validity of The Marshall-Lerner Principle and J-Curve Theory in Relation to Real Exchange Rates and Trade Imbalances - sosyal bilimler dergisi, diakses April 13, 2026, <a href="https://www.sobider.net/FileUpload/ep842424/File/12.investigating_the_validity_of_the_marshall.pdf" target="_blank">https://www.sobider.net/FileUpload/ep842424/File/12.investigating_the_validity_of_the_marshall.pdf</a></span></li>
+      <li><span class="ref-num">19.</span><span class="ref-text">Testing The Marshall-Lerner Condition on Indonesia's Trade Balance with The Five Biggest Trading Partners | International Journal of Social Science, Education, Communication and Economics, diakses April 13, 2026, <a href="https://sinomicsjournal.com/index.php/sj/article/view/397" target="_blank">https://sinomicsjournal.com/index.php/sj/article/view/397</a></span></li>
+      <li><span class="ref-num">20.</span><span class="ref-text">The J-curve: Indonesia vs. Her Major Trading Partners - Journal of Economic Integration, diakses April 13, 2026, <a href="https://www.e-jei.org/upload/DQ3002262N107162.pdf" target="_blank">https://www.e-jei.org/upload/DQ3002262N107162.pdf</a></span></li>
+      <li><span class="ref-num">21.</span><span class="ref-text">Testing The Marshall-Lerner Condition on Indonesia's Trade Balance with The Five Biggest Trading Partners, diakses April 13, 2026, <a href="https://sinomicsjournal.com/index.php/sj/article/download/397/351" target="_blank">https://sinomicsjournal.com/index.php/sj/article/download/397/351</a></span></li>
+      <li><span class="ref-num">22.</span><span class="ref-text">The Volatility of Rupiah Exchange Rate Impact on Main Commodity Exports to the OIC Member States - MDPI, diakses April 13, 2026, <a href="https://www.mdpi.com/2227-7099/10/4/78" target="_blank">https://www.mdpi.com/2227-7099/10/4/78</a></span></li>
+      <li><span class="ref-num">23.</span><span class="ref-text">The Effects Of Fluctuation Real Exchange Rates On The Bilateral Trade Balance Between Indonesia – China: Observation condition - Widyatama Repository, diakses April 13, 2026, <a href="https://repository.widyatama.ac.id/bitstreams/77d4178a-b0ce-42a1-bc79-3b9c15f54795/download" target="_blank">https://repository.widyatama.ac.id/bitstreams/77d4178a-b0ce-42a1-bc79-3b9c15f54795/download</a></span></li>
+      <li><span class="ref-num">24.</span><span class="ref-text">PENGARUH NILAI TUKAR RIIL TERHADAP NERACA PERDAGANGAN BILATERAL INDONESIA: Kondisi Marshall-Lerner dan Fenomena J-curve - IDEAS/RePEc, diakses April 13, 2026, <a href="https://ideas.repec.org/a/idn/journl/v8y2005i3p1-26.html" target="_blank">https://ideas.repec.org/a/idn/journl/v8y2005i3p1-26.html</a></span></li>
+      <li><span class="ref-num">25.</span><span class="ref-text">The J-curve of Indonesia Trade Balance with His Trading Partners: Autoregressive Distributed Lag Method, diakses April 13, 2026, <a href="https://mnje.com/sites/mnje.com/files/v20n4/113-122%20-%20Nopeline%20et%20al..pdf" target="_blank">https://mnje.com/sites/mnje.com/files/v20n4/113-122%20-%20Nopeline%20et%20al..pdf</a></span></li>
+      <li><span class="ref-num">26.</span><span class="ref-text">The weak rupiah: catching the tailwinds and avoiding the shoals - PMC, diakses April 13, 2026, <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7471639/" target="_blank">https://pmc.ncbi.nlm.nih.gov/articles/PMC7471639/</a></span></li>
+      <li><span class="ref-num">27.</span><span class="ref-text">Indonesia's Goods Trade Balance Records Surplus for 66 Consecutive Months - CIMB Niaga, diakses April 13, 2026, <a href="https://www.cimbniaga.co.id/content/dam/cimb/treasury/Indonesia%20Trade%20Balance%20October%202025.pdf" target="_blank">https://www.cimbniaga.co.id/content/dam/cimb/treasury/Indonesia%20Trade%20Balance%20October%202025.pdf</a></span></li>
+      <li><span class="ref-num">28.</span><span class="ref-text">Indonesia's Exports Drop 6.6% in November 2025 - News En.tempo.co, diakses April 13, 2026, <a href="https://en.tempo.co/read/2078462/indonesias-exports-drop-6-6-in-november-2025" target="_blank">https://en.tempo.co/read/2078462/indonesias-exports-drop-6-6-in-november-2025</a></span></li>
+      <li><span class="ref-num">29.</span><span class="ref-text">Indonesia Import and Export Statistics – 50 Key Figures of 2025 - Procurement Tactics, diakses April 13, 2026, <a href="https://procurementtactics.com/indonesia-import-and-export-statistics/" target="_blank">https://procurementtactics.com/indonesia-import-and-export-statistics/</a></span></li>
+      <li><span class="ref-num">30.</span><span class="ref-text">Indonesian Industrialization: Downstreaming Up the Value Chain | Charting Geoeconomics | CSIS, diakses April 13, 2026, <a href="https://www.csis.org/blogs/charting-geoeconomics/indonesian-industrialization-downstreaming-value-chain" target="_blank">https://www.csis.org/blogs/charting-geoeconomics/indonesian-industrialization-downstreaming-value-chain</a></span></li>
+      <li><span class="ref-num">31.</span><span class="ref-text">Beyond Commodities: Cut reliance on resource exports for higher growth - OBSERVER, diakses April 13, 2026, <a href="https://observerid.com/beyond-commodities-cut-reliance-on-resource-exports-for-higher-growth/" target="_blank">https://observerid.com/beyond-commodities-cut-reliance-on-resource-exports-for-higher-growth/</a></span></li>
+      <li><span class="ref-num">32.</span><span class="ref-text">CHAPTER 4 Volatility in External Demand: Indonesia's Commodity Boom and Overall Competitiveness - IMF eLibrary, diakses April 13, 2026, <a href="https://www.elibrary.imf.org/display/book/9781616352028/ch004.xml" target="_blank">https://www.elibrary.imf.org/display/book/9781616352028/ch004.xml</a></span></li>
+      <li><span class="ref-num">33.</span><span class="ref-text">The effect of the Commodity boom on indonesia's macroeconomic Fundamentals and industrial development, diakses April 13, 2026, <a href="https://iorj.hse.ru/data/2016/11/15/1110407997/M.M.%20Wihardja.pdf" target="_blank">https://iorj.hse.ru/data/2016/11/15/1110407997/M.M.%20Wihardja.pdf</a></span></li>
+      <li><span class="ref-num">34.</span><span class="ref-text">Rupiah Weakens, Economy Shakes: Challenges and Opportunities for Business Administration Students - S3 Manajemen, diakses April 13, 2026, <a href="https://docmm.telkomuniversity.ac.id/en/rupiah-weakens-economy-shakes-challenges-and-opportunities-for-business-administration-students/" target="_blank">https://docmm.telkomuniversity.ac.id/en/rupiah-weakens-economy-shakes-challenges-and-opportunities-for-business-administration-students/</a></span></li>
+      <li><span class="ref-num">35.</span><span class="ref-text">Indonesia: Strategy for Manufacturing Competitiveness - UNIDO, diakses April 13, 2026, <a href="https://www.unido.org/sites/default/files/2006-10/indonesia2000_0.pdf" target="_blank">https://www.unido.org/sites/default/files/2006-10/indonesia2000_0.pdf</a></span></li>
+      <li><span class="ref-num">36.</span><span class="ref-text">The effect of a currency depreciation on importers: a firm-level analysis of Indonesian firms, diakses April 13, 2026, <a href="https://www.isid.ac.in/~epu/acegd2017/papers/AnishaSharma.pdf" target="_blank">https://www.isid.ac.in/~epu/acegd2017/papers/AnishaSharma.pdf</a></span></li>
+      <li><span class="ref-num">37.</span><span class="ref-text">The Impact of Local Content Requirements on the Indonesian Manufacturing Industry - ISEAS – Yusof Ishak Institute, diakses April 13, 2026, <a href="https://www.iseas.edu.sg/wp-content/uploads/pdfs/ISEASEWP2016-04Negara.pdf" target="_blank">https://www.iseas.edu.sg/wp-content/uploads/pdfs/ISEASEWP2016-04Negara.pdf</a></span></li>
+      <li><span class="ref-num">38.</span><span class="ref-text">Indonesia's F&amp;B Outlook 2025: Slowing Growth Ahead, diakses April 13, 2026, <a href="https://www.id.crifasia.com/resources/industry-insights/indonesia-s-fb-outlook-2025-slowing-growth-ahead/" target="_blank">https://www.id.crifasia.com/resources/industry-insights/indonesia-s-fb-outlook-2025-slowing-growth-ahead/</a></span></li>
+      <li><span class="ref-num">39.</span><span class="ref-text">Pelemahan Rupiah Berpotensi Dongkrak Harga Kedelai Impor, Akindo: Industri Masih Aman, diakses April 13, 2026, <a href="https://industri.kontan.co.id/news/pelemahan-rupiah-berpotensi-dongkrak-harga-kedelai-impor-akindo-industri-masih-aman" target="_blank">https://industri.kontan.co.id/news/pelemahan-rupiah-berpotensi-dongkrak-harga-kedelai-impor-akindo-industri-masih-aman</a></span></li>
+      <li><span class="ref-num">40.</span><span class="ref-text">Rupiah weakens further: an analysis of export challenges and opportunities | Proceeding Kilisuci International Conference on Economic &amp; Business, diakses April 13, 2026, <a href="https://proceeding.unpkediri.ac.id/index.php/kilisuci/article/view/7140" target="_blank">https://proceeding.unpkediri.ac.id/index.php/kilisuci/article/view/7140</a></span></li>
+      <li><span class="ref-num">41.</span><span class="ref-text">Inflation - Bank Indonesia, diakses April 13, 2026, <a href="https://www.bi.go.id/en/fungsi-utama/moneter/inflasi/default.aspx" target="_blank">https://www.bi.go.id/en/fungsi-utama/moneter/inflasi/default.aspx</a></span></li>
+      <li><span class="ref-num">42.</span><span class="ref-text">Inflation in ASEAN+3: Changing Dynamics and Policy Implications, diakses April 13, 2026, <a href="https://amro-asia.org/wp-content/uploads/2025/04/Chapter-2.pdf" target="_blank">https://amro-asia.org/wp-content/uploads/2025/04/Chapter-2.pdf</a></span></li>
+      <li><span class="ref-num">43.</span><span class="ref-text">Full article: Real exchange rate undervaluation and Indonesia's manufacturing exports, diakses April 13, 2026, <a href="https://www.tandfonline.com/doi/full/10.1080/23322039.2021.1930880" target="_blank">https://www.tandfonline.com/doi/full/10.1080/23322039.2021.1930880</a></span></li>
+      <li><span class="ref-num">44.</span><span class="ref-text">Trade Policy and Exporters' Resilience: Evidence from Indonesia - American Economic Association, diakses April 13, 2026, <a href="https://www.aeaweb.org/conference/2023/program/paper/rA26Srk4" target="_blank">https://www.aeaweb.org/conference/2023/program/paper/rA26Srk4</a></span></li>
+      <li><span class="ref-num">45.</span><span class="ref-text">Publication: Trade Policy and Exporters' Resilience: Evidence from Indonesia - Open Knowledge Repository, diakses April 13, 2026, <a href="https://openknowledge.worldbank.org/entities/publication/b6070007-637b-5de9-9a91-b89278c8b296" target="_blank">https://openknowledge.worldbank.org/entities/publication/b6070007-637b-5de9-9a91-b89278c8b296</a></span></li>
+      <li><span class="ref-num">46.</span><span class="ref-text">The Exchange Rate and Exporting: Evidence from the Indonesian Manufacturing Sector - Economic Research Institute for ASEAN and East Asia, diakses April 13, 2026, <a href="https://www.eria.org/uploads/media/ERIA-DP-2018-18.pdf" target="_blank">https://www.eria.org/uploads/media/ERIA-DP-2018-18.pdf</a></span></li>
+      <li><span class="ref-num">47.</span><span class="ref-text">The Weak Rupiah: Catching the tailwinds and avoiding the shoals - RIETI, diakses April 13, 2026, <a href="https://www.rieti.go.jp/en/publications/nts/19e006.html" target="_blank">https://www.rieti.go.jp/en/publications/nts/19e006.html</a></span></li>
+      <li><span class="ref-num">48.</span><span class="ref-text">External debt: Frontloaded and locked-in - BCA, diakses April 13, 2026, <a href="https://www.bca.co.id/-/media/Feature/Report/File/S8/Laporan-Riset-Ekonomi/2025/05/external-debt-frontloaded-and-locked-in-16-may-2025.pdf" target="_blank">https://www.bca.co.id/-/media/Feature/Report/File/S8/Laporan-Riset-Ekonomi/2025/05/external-debt-frontloaded-and-locked-in-16-may-2025.pdf</a></span></li>
+      <li><span class="ref-num">49.</span><span class="ref-text">Press Release: Financial System Stability Maintained, Supporting Economic Growth through Vigilance Against Global Risks - OJK, diakses April 13, 2026, <a href="https://ojk.go.id/en/berita-dan-kegiatan/siaran-pers/Pages/KSSK-Q3-2025.aspx" target="_blank">https://ojk.go.id/en/berita-dan-kegiatan/siaran-pers/Pages/KSSK-Q3-2025.aspx</a></span></li>
+      <li><span class="ref-num">50.</span><span class="ref-text">2025 Article IV Consultation-Press Release; Staff Report; and Statement by the Executive Director for Indonesia; IMF, diakses April 13, 2026, <a href="https://www.elibrary.imf.org/view/journals/002/2026/010/002.2026.issue-010-en.pdf" target="_blank">https://www.elibrary.imf.org/view/journals/002/2026/010/002.2026.issue-010-en.pdf</a></span></li>
+      <li><span class="ref-num">51.</span><span class="ref-text">Rupiah Depressed, IPB University Economics Expert Outlines Factors Causing It, diakses April 13, 2026, <a href="https://www.ipb.ac.id/news/index/2025/04/rupiah-depressed-ipb-university-economics-expert-outlines-factors-causing-it/" target="_blank">https://www.ipb.ac.id/news/index/2025/04/rupiah-depressed-ipb-university-economics-expert-outlines-factors-causing-it/</a></span></li>
+      <li><span class="ref-num">52.</span><span class="ref-text">Analysis Of The Influence Of Inflation, Exchange Rate And Current Transaction Deficit On Government's Foreign Debt - Semantic Scholar, diakses April 13, 2026, <a href="https://pdfs.semanticscholar.org/a39c/efde04b5da67c2a16d5e7b1403fa77d559a1.pdf" target="_blank">https://pdfs.semanticscholar.org/a39c/efde04b5da67c2a16d5e7b1403fa77d559a1.pdf</a></span></li>
+      <li><span class="ref-num">53.</span><span class="ref-text">The impact of Rupiah/USD exchange, on the Indonesian manufacturing sectors in 2005-2016 - Dialnet, diakses April 13, 2026, <a href="https://dialnet.unirioja.es/descarga/articulo/7667408.pdf" target="_blank">https://dialnet.unirioja.es/descarga/articulo/7667408.pdf</a></span></li>
+      <li><span class="ref-num">54.</span><span class="ref-text">BI-Rate Held at 4.75%: Strengthening Economic Growth, Maintaining Stability, diakses April 13, 2026, <a href="https://www.bi.go.id/en/publikasi/ruang-media/news-release/Pages/sp_281326.aspx" target="_blank">https://www.bi.go.id/en/publikasi/ruang-media/news-release/Pages/sp_281326.aspx</a></span></li>
+      <li><span class="ref-num">55.</span><span class="ref-text">Indonesia: stabilizing the exchange rate along its fundamental - Bank for International Settlements, diakses April 13, 2026, <a href="https://www.bis.org/publ/bppdf/bispap73m.pdf" target="_blank">https://www.bis.org/publ/bppdf/bispap73m.pdf</a></span></li>
+      <li><span class="ref-num">56.</span><span class="ref-text">Unpacking the Forces Behind Indonesia's Foreign Debt: What Drives Long-Term and Short-Term Borrowing?, diakses April 13, 2026, <a href="https://journal2.uinjkt.ac.id/index.php/signifikan/article/download/42464/15241" target="_blank">https://journal2.uinjkt.ac.id/index.php/signifikan/article/download/42464/15241</a></span></li>
+      <li><span class="ref-num">57.</span><span class="ref-text">Indonesian Manufacturing Industry Performance towards Global Trade: An Analytical Review of Professionalism In Islam, diakses April 13, 2026, <a href="https://ejournal.umm.ac.id/index.php/JES/article/download/26195/12610/92184" target="_blank">https://ejournal.umm.ac.id/index.php/JES/article/download/26195/12610/92184</a></span></li>
+      <li><span class="ref-num">58.</span><span class="ref-text">Domestic Value Added, Exports, and Employment: An Input–Output Analysis of Indonesian Manufacturing - Economic Research Institute for ASEAN and East Asia (ERIA), diakses April 13, 2026, <a href="https://www.eria.org/uploads/media/ERIA_DP_no.292.pdf" target="_blank">https://www.eria.org/uploads/media/ERIA_DP_no.292.pdf</a></span></li>
+      <li><span class="ref-num">59.</span><span class="ref-text">English Text (79.31 KB) - Open Knowledge Repository, diakses April 13, 2026, <a href="https://openknowledge.worldbank.org/bitstreams/0c0c5e9c-ea66-5b43-95aa-a63be2926fcf/download" target="_blank">https://openknowledge.worldbank.org/bitstreams/0c0c5e9c-ea66-5b43-95aa-a63be2926fcf/download</a></span></li>
+      <li><span class="ref-num">60.</span><span class="ref-text">Indonesia Ends 2025 With $41 Billion Trade Surplus: BPS - Jakarta Globe, diakses April 13, 2026, <a href="https://jakartaglobe.id/business/indonesia-ends-2025-with-41-billion-trade-surplus-bps" target="_blank">https://jakartaglobe.id/business/indonesia-ends-2025-with-41-billion-trade-surplus-bps</a></span></li>
+    </ol>
+  </div>
+
+</div>
+</body>
+</html>
