@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tesis, Antitesis, dan Bangsat — nseBook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #0f0f18;
+    --surface: #13131e;
+    --border: #1e1e2e;
+    --text: #d4d0cc;
+    --text-dim: #6b6880;
+    --text-muted: #3a3850;
+    --accent: #e05a5a;
+    --accent2: #c0825a;
+    --accent3: #5a8aba;
+    --gold: #c9a84c;
+    --green-dim: #4a7a60;
+    --raka: #e05a5a;
+    --bima: #5a8aba;
+    --dimas: #c0825a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.15rem;
+    line-height: 1.85;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* SCANLINES */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HEADER */
+  .header {
+    position: relative;
+    z-index: 10;
+    padding: 5rem 2rem 3rem;
+    max-width: 780px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+    animation: fadeDown 1.2s ease forwards;
+  }
+
+  .header-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .header-meta::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .genre-tag {
+    color: var(--accent);
+    letter-spacing: 0.2em;
+  }
+
+  .title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #e8e4de 0%, #a09898 60%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .title em {
+    font-style: italic;
+  }
+
+  .subtitle-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+    margin: 1.5rem 0;
+    border-radius: 2px;
+  }
+
+  /* LOCATION BADGES */
+  .locations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+  }
+
+  .loc-badge {
+    padding: 0.3rem 0.75rem;
+    border: 1px solid;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .loc-badge.raka { border-color: var(--raka); color: var(--raka); }
+  .loc-badge.bima { border-color: var(--bima); color: var(--bima); }
+  .loc-badge.dimas { border-color: var(--dimas); color: var(--dimas); }
+
+  .loc-badge .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* MAIN CONTENT */
+  .content {
+    position: relative;
+    z-index: 10;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    animation: fadeUp 1.4s ease forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+  }
+
+  p {
+    margin-bottom: 1.6rem;
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: #cdc9c5;
+  }
+
+  /* OPENING SETTING — atmospheric block */
+  .setting-block {
+    background: linear-gradient(135deg, rgba(20,18,30,0.8), rgba(15,12,22,0.9));
+    border-left: 3px solid var(--text-muted);
+    padding: 1.5rem 1.8rem;
+    margin: 2rem 0 2.5rem;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    position: relative;
+  }
+
+  .setting-block::before {
+    content: '◆';
+    position: absolute;
+    top: -0.6rem;
+    left: 1.5rem;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 0 0.3rem;
+  }
+
+  /* DIALOGUE — character colors */
+  .dialogue {
+    border-left: 3px solid;
+    padding: 0.8rem 1.4rem;
+    margin: 1.4rem 0;
+    font-size: 1.08rem;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .dialogue::before {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    position: absolute;
+    top: -0.55rem;
+    left: 1rem;
+    padding: 0 0.4rem;
+    background: var(--bg);
+  }
+
+  .dialogue.raka {
+    border-color: var(--raka);
+    background: rgba(224,90,90,0.04);
+  }
+  .dialogue.raka::before {
+    content: 'RAKA — Boston';
+    color: var(--raka);
+  }
+
+  .dialogue.bima {
+    border-color: var(--bima);
+    background: rgba(90,138,186,0.04);
+  }
+  .dialogue.bima::before {
+    content: 'BIMA — Beijing';
+    color: var(--bima);
+  }
+
+  .dialogue.dimas {
+    border-color: var(--dimas);
+    background: rgba(192,130,90,0.05);
+  }
+  .dialogue.dimas::before {
+    content: 'DIMAS — Paris';
+    color: var(--dimas);
+  }
+
+  /* SCREAMING moments */
+  .scream {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.1em;
+    letter-spacing: 0.02em;
+    color: #fff;
+    text-shadow: 0 0 20px currentColor;
+  }
+
+  /* Section divider */
+  .section-break {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+  }
+
+  .section-break::before, .section-break::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  /* CLIMAX BLOCK */
+  .climax-block {
+    background: radial-gradient(ellipse at center, rgba(224,90,90,0.07) 0%, transparent 70%);
+    border: 1px solid rgba(224,90,90,0.15);
+    padding: 2rem;
+    margin: 2.5rem 0;
+    position: relative;
+  }
+
+  .climax-block::before {
+    content: '— Puncak —';
+    position: absolute;
+    top: -0.65rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    background: var(--bg);
+    padding: 0 0.8rem;
+  }
+
+  /* SILENCE / DISCONNECT */
+  .silence {
+    text-align: center;
+    padding: 3rem 1rem;
+    position: relative;
+  }
+
+  .silence .disconnect-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.4rem;
+    letter-spacing: 0.4em;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .disconnect-icon {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    margin: 1.5rem auto;
+    opacity: 0.3;
+  }
+
+  /* CLOSING */
+  .closing-line {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--text-dim);
+    padding: 2rem 1rem 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  /* BOOK FACT SIDEBAR STYLE */
+  .book-sidebar {
+    float: right;
+    width: 220px;
+    margin: 0 0 1.5rem 2rem;
+    padding: 1.2rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .book-sidebar .book-title {
+    font-weight: 500;
+    color: var(--dimas);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+    font-size: 0.75rem;
+  }
+
+  .book-sidebar .poin-list {
+    list-style: none;
+    counter-reset: poin;
+  }
+
+  .book-sidebar .poin-list li {
+    counter-increment: poin;
+    margin-bottom: 0.4rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .book-sidebar .poin-list li::before {
+    content: counter(poin) '.';
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 600px) {
+    .book-sidebar { float: none; width: 100%; margin: 0 0 1.5rem 0; }
+  }
+
+  /* TIMESTAMP STRIP */
+  .timestamp-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin: 2.5rem 0;
+    border: 1px solid var(--border);
+  }
+
+  .ts-cell {
+    background: var(--surface);
+    padding: 1.2rem 1rem;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .ts-cell .ts-name {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+  }
+
+  .ts-cell .ts-time {
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+
+  .ts-cell .ts-city {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+  }
+
+  .ts-cell.raka .ts-name, .ts-cell.raka .ts-time { color: var(--raka); }
+  .ts-cell.bima .ts-name, .ts-cell.bima .ts-time { color: var(--bima); }
+  .ts-cell.dimas .ts-name, .ts-cell.dimas .ts-time { color: var(--dimas); }
+
+  /* PROGRESS BAR */
+  .read-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+    z-index: 100;
+    transition: width 0.1s;
+    width: 0%;
+  }
+
+  /* FOOTER / LOGO */
+  .footer {
+    position: relative;
+    z-index: 10;
+    border-top: 1px solid var(--border);
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  /* nseBook LOGO */
+  .nsebook-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+
+  .logo-icon svg {
+    width: 42px;
+    height: 42px;
+  }
+
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .logo-text .nse {
+    color: var(--accent);
+  }
+
+  .logo-text .book {
+    color: var(--text-dim);
+  }
+
+  .logo-text .dot {
+    color: var(--gold);
+    font-size: 1.8rem;
+    vertical-align: -0.1em;
+  }
+
+  .logo-tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.7rem 1.5rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .back-link::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.3s;
+    z-index: -1;
+  }
+
+  .back-link:hover {
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .back-link:hover::before {
+    width: 100%;
+  }
+
+  .back-link svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* DECORATIVE VERTICAL TEXT */
+  .vert-label {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--text-muted);
+    z-index: 20;
+    white-space: nowrap;
+    display: none;
+  }
+
+  @media (min-width: 1200px) {
+    .vert-label { display: block; }
+  }
+
+  /* CHAPTER MARKER */
+  .chapter-marker {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0 1.5rem;
+  }
+
+  .chapter-marker span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .chapter-marker::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  strong {
+    font-weight: 600;
+    color: #e0dbd5;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  /* Emotional poin quotes */
+  .poin-quote {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--dimas);
+    background: rgba(192,130,90,0.08);
+    border-left: 2px solid var(--dimas);
+    padding: 0.4rem 0.8rem;
+    margin: 0.5rem 0;
+    font-style: italic;
+  }
+
+  .final-silence {
+    background: linear-gradient(180deg, transparent, rgba(10,10,15,0.9));
+    padding: 4rem 2rem;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 2;
+  }
+
+  .copyright {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- Read Progress -->
+<div class="read-progress" id="readProgress"></div>
+
+<!-- Vertical Label -->
+<div class="vert-label">FIKSI — CERPEN — 2025</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-meta">
+    <span class="genre-tag">Fiksi / Cerpen</span>
+    <span>Prosa Kontemporer</span>
+    <span>Indonesia</span>
+  </div>
+
+  <h1 class="title">Tesis, Antitesis,<br>dan <em>Bangsat</em></h1>
+  <div class="subtitle-line"></div>
+
+  <div class="locations">
+    <div class="loc-badge raka">
+      <span class="dot"></span>
+      RAKA · Cambridge, MA · 08:15 EST
+    </div>
+    <div class="loc-badge bima">
+      <span class="dot"></span>
+      BIMA · Haidian, Beijing · 21:15 CST
+    </div>
+    <div class="loc-badge dimas">
+      <span class="dot"></span>
+      DIMAS · Paris XIII · 14:15 CET
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+
+  <!-- Opening scene -->
+  <div class="setting-block">
+    Layar laptop di kamar apartemen sempit di Cambridge, Massachusetts itu memancarkan cahaya kebiruan, menerangi wajah Raka yang berantakan. Kantung matanya hitam legam, setara dengan tebalnya tumpukan jurnal <em>Nature</em> dan <em>Science</em> di meja kerjanya. Di sudut layar, indikator waktu menunjukkan pukul 08:15 EST.
+    <br><br>
+    Discord berdenting tajam. Sebuah <em>group call</em> masuk.
+  </div>
+
+  <!-- Timestamp grid -->
+  <div class="timestamp-strip">
+    <div class="ts-cell raka">
+      <div class="ts-name">Raka</div>
+      <div class="ts-time">08:15</div>
+      <div class="ts-city">Boston · EST</div>
+    </div>
+    <div class="ts-cell bima">
+      <div class="ts-name">Bima</div>
+      <div class="ts-time">21:15</div>
+      <div class="ts-city">Beijing · CST</div>
+    </div>
+    <div class="ts-cell dimas">
+      <div class="ts-name">Dimas</div>
+      <div class="ts-time">14:15</div>
+      <div class="ts-city">Paris · CET</div>
+    </div>
+  </div>
+
+  <p>Di seberang dunia, di sebuah asrama mahasiswa asing di Haidian, Beijing, Bima duduk di depan layar dengan mata merah menyala. Jam menunjukkan pukul 21:15 CST. Di tangannya ada sekaleng Yanjing beer yang sudah hangat.</p>
+
+  <p>Kamera ketiga menyala. Dimas, dengan rambut gondrong berantakan, syal murahan melingkar di leher, dan sebatang rokok lintingan terselip di bibir, muncul dari sebuah <em>chambre de bonne</em>—kamar loteng seukuran kandang ayam—di arondisemen ke-13, Paris. Pukul 14:15 CET.</p>
+
+  <p>Tiga pemuda Bandung. Tiga lulusan terbaik dari kampus-kampus elit di Jalan Ganesha dan Dipatiukur. Tiga mahasiswa S3. Tiga manusia yang sedang berada di ambang kehancuran mental.</p>
+
+  <div class="section-break">PEMBUKAAN</div>
+
+  <div class="dialogue raka">
+    "Oi, anjing. Tumben lu pada nyala," Raka membuka percakapan, suaranya serak. Ia baru saja menenggak Adderall ketiganya minggu ini.
+  </div>
+
+  <div class="dialogue bima">
+    "Bacot sia, Ka," balas Bima dari Beijing. "Aing baru beres <em>lab meeting</em> empat jam sama <em>Laoban</em> goblog. Disuruh <em>running</em> data ulang padahal <em>sample</em>-nya udah bener. Emang rasis aja tuh babi satu sama mahasiswa Asia Tenggara."
+  </div>
+
+  <div class="dialogue dimas">
+    Dimas menghembuskan asap rokok ke arah kamera. "Itulah, Bim. Maneh tuh budak korporatisme berbalut <em>state-capitalism</em>. Di Cina maneh bukan manusia, maneh cuma sekrup di mesin raksasa CCP. <em>You don't exist as an individual</em>."
+  </div>
+
+  <div class="dialogue raka">
+    Raka mendengus keras, nyaris tertawa. "Gaya bahasa lu anjing, Dim. S3 Sosiologi di Sorbonne bukannya bikin lu makin pinter, malah makin kaya gembel Dago yang kebanyakan baca Karl Marx bajakan. Lu ngomongin <em>individual existence</em>, padahal bulan lalu lu minjem duit gue lima ratus dolar buat bayar sewa kan, bangsat?"
+  </div>
+
+  <div class="dialogue dimas">
+    Wajah Dimas sedikit memerah, tapi ia mempertahankan postur tenangnya. Senjata andalan Dimas adalah superioritas intelektual palsu. "Itu <em>loan</em>, Ka. Bukan donasi. Lagian, aing lebih milih miskin dan punya otonomi pikiran daripada kaya maneh, Ka. S3 <em>Biomedical Engineering</em> di MIT, dapet <em>funding</em> dari DARPA. Maneh sadar nggak sih riset maneh tuh ujung-ujungnya dipake buat bikin senjata biologis militer US? Maneh tuh pelacur imperialisme."
+  </div>
+
+  <div class="dialogue raka">
+    <span class="scream" style="color:var(--raka)">"Pelacur imperialis mata sia picek!"</span> Raka menggebrak mejanya. Kopi di gelas kertas Starbucks-nya tumpah. "Aing di sini ngerjain <em>targeted drug delivery</em> buat kanker, goblog! Kalau riset aing tembus, jutaan nyawa selamat! Maneh ngerjain apa di Paris? Disertasi tentang 'Dampak Fenomenologis dari Pengangguran Struktural'? Sia yang pengangguran, anjing! Sampah!"
+  </div>
+
+  <div class="section-break">SERANGAN</div>
+
+  <div class="dialogue bima">
+    Bima, yang dari tadi diam sambil meneguk birnya, tiba-tiba menyela dengan nada dingin. "Halah, dua-duanya sama aja bacotnya gede. Ka, lu ngaku ngerjain obat kanker, tapi <em>paper</em> lu di-<em>reject</em> tiga kali kan bulan ini? Gue liat di ResearchGate lu nggak ada <em>update</em> anjing. Jangan sok keras lu di US. Ujung-ujungnya lu cuma sapi perah <em>Principal Investigator</em> lu."
+  </div>
+
+  <p>Raka terdiam sejenak. Rahangnya mengeras. Serangan Bima telak mengenai ulu hatinya. Penolakan jurnal itu adalah rahasia yang membuatnya tidak bisa tidur empat hari terakhir. Sindrom imposter sedang menggerogoti kewarasannya.</p>
+
+  <div class="dialogue bima">
+    "Dan maneh, Dim," Bima kini mengarahkan moncong senjatanya ke Paris. "Maneh kira maneh keren idup miskin di Eropa? Aing di Tsinghua publikasi udah lima, Q1 semua. <em>Impact factor</em> aing udah tembus dua puluh. Pas kita balik ke Indo, aing yang bakal dapet posisi dosen atau <em>head of R&D</em>. Maneh? Paling jadi podcaster gembel yang kerjanya ngritik pemerintah di Twitter doang. Gak ada <em>skill</em> maneh tuh, tolol. Murni omong kosong."
+  </div>
+
+  <div class="dialogue dimas">
+    "Publikasi lima dari Cina?" Dimas tertawa meremehkan. Tawanya pelan, sinis, khas intelektual elitis yang merasa paling tahu segalanya. "Bim, sedunia juga tau <em>paper mill</em> di Cina tuh gila-gilaan. Maneh jadi <em>first author</em> atau cuma numpang nama di riset <em>post-doc</em> maneh? Lagian, ngapain aing mikirin <em>impact factor</em>? <em>Quantification of knowledge</em> itu cuma alat kapitalis buat menindas <em>pure science</em>. Aing nyari kebenaran, bukan nyari sitasi."
+  </div>
+
+  <div class="dialogue bima">
+    <span class="scream" style="color:var(--bima)">"Kebenaran tai kucing!"</span> Bima berteriak, suaranya sampai pecah di <em>mic</em> laptopnya. "Aing kerja 16 jam sehari, anjing! Tangan aing kena <em>chemical burn</em>, rambut aing rontok gara-gara stres! Aing <em>survive</em> di negara yang orang-orangnya ngeliat aing kayak kecoak! Maneh ngomong kebenaran sambil minum <em>wine</em> murah di Paris, idup dari duit LPDP hasil pajak tukang bakso di Indo! Jangan sok suci sia, bangsat!"
+  </div>
+
+  <p>Ruang virtual itu hening sejenak. Hanya terdengar suara napas yang memburu dari ketiga kota yang terpisah ribuan kilometer. Tiga sahabat sejak masa S1 di Bandung itu kini telah bermutasi menjadi monster ego yang dibentuk oleh tekanan akademik ekstrem dari tiga benua berbeda.</p>
+
+  <div class="section-break">SENJATA BUKU</div>
+
+  <!-- THE BOOK -->
+  <div class="book-sidebar">
+    <div class="book-title">How to Improve Emotional Awareness</div>
+    <div style="color:var(--text-muted);margin-bottom:0.6rem;">Buku <em>self-help</em> murahan stasiun metro Paris — digunakan Dimas sebagai senjata psikologi</div>
+    <ol class="poin-list">
+      <li>Name your emotions clearly instead of using vague labels</li>
+      <li>—</li>
+      <li>—</li>
+      <li>Practice daily reflection</li>
+      <li>Observe without judgment so emotions can be understood rather than resisted</li>
+      <li>—</li>
+      <li>Track emotional patterns to see recurring themes</li>
+      <li>—</li>
+      <li>Mindfulness practice</li>
+      <li>Take responsibility for your responses so you can choose actions that align with your values</li>
+    </ol>
+  </div>
+
+  <p>Dimas, yang merasa posisinya terdesak karena Bima membawa-bawa uang pajak, tiba-tiba mengubah taktik. Ia merogoh sebuah buku saku dari meja kerjanya—sebuah buku <em>self-help</em> murahan berbahasa Inggris yang ia temukan di stasiun metro. Judul babnya: <em>How to Improve Emotional Awareness</em>.</p>
+
+  <div class="dialogue dimas">
+    "Kalian tau nggak apa masalah kalian berdua?" suara Dimas merendah, meniru nada seorang psikiater. Ia mengangkat buku itu ke depan kamera. "Kalian tuh kurang <em>emotional awareness</em>. Aing kebetulan lagi baca ini. <em>You can't change what you don't understand</em>. Kalian berdua tuh numpuk trauma, tapi kalian <em>projecting</em> itu ke aing."
+  </div>
+
+  <div class="dialogue raka">
+    Raka menatap layar dengan mata membelalak. Urat di lehernya menonjol. "Maneh... maneh mau nyeramahin aing pake buku <em>self-help</em> abal-abal? Sia beneran udah gila, Dim."
+  </div>
+
+  <div class="dialogue dimas">
+    "Dengerin aing dulu, goblog," potong Dimas, matanya menelusuri halaman buku tersebut.
+    <br><br>
+    <span class="poin-quote">Poin 1: "Name your emotions clearly instead of using vague labels."</span>
+    <br>
+    "Raka, maneh tuh bukan 'marah'. Maneh tuh 'ketakutan'. Maneh takut gagal di MIT. Maneh takut pulang ke Bandung bawa tangan kosong dan bikin bokap maneh yang pensiunan jenderal itu malu. Bener kan?"
+  </div>
+
+  <p>Wajah Raka memucat. Mulutnya sedikit terbuka, tapi tak ada suara yang keluar. Dimas tepat sasaran. Terlalu tepat.</p>
+
+  <div class="dialogue dimas">
+    Dimas beralih ke Bima.
+    <br><br>
+    <span class="poin-quote">Poin 5: "Observe without judgment so emotions can be understood rather than resisted."</span>
+    <br>
+    "Maneh tuh <em>resisting</em> fakta bahwa maneh menderita di Cina. Maneh berlindung di balik <em>impact factor</em> dan <em>h-index</em> buat nutupin rasa kesepian maneh yang absolut. Kapan terakhir maneh ngobrol sama manusia di luar urusan lab? Enam bulan lalu? Setahun? Maneh tuh mesin, Bim. Bukan manusia lagi."
+  </div>
+
+  <div class="climax-block">
+    <div class="dialogue bima" style="border:none;padding-left:0;background:none;">
+      <span class="scream" style="color:var(--bima);font-size:1.3em">ANJING SIA DIMAS! BANGSAT! MANEH TAU APA SOAL IDUP AING?!</span>
+    </div>
+
+    <div class="dialogue dimas" style="border:none;padding-left:0;background:none;margin-top:1rem;">
+      "Aing tau karena aing pake <em>mindfulness practice</em>!"
+      <span class="poin-quote" style="margin-top:0.4rem">Poin 9: Mindfulness practice.</span>
+      Dimas berseru, senyum arogan mengembang di bibirnya. Ia merasa menang karena berhasil meruntuhkan pertahanan mental kedua temannya menggunakan senjata psikologi populer.
+    </div>
+  </div>
+
+  <div class="section-break">BOM ATOM</div>
+
+  <p>Tapi Raka, yang baru saja pulih dari syoknya, kini menatap layar dengan tatapan membunuh. Kepanikan di matanya berganti menjadi kebencian murni yang dingin.</p>
+
+  <div class="dialogue raka">
+    "Oke. Lu mau main psikologi-psikologian, Dim?" suara Raka bergetar, sangat pelan, sangat berbahaya.
+    <br><br>
+    <span class="poin-quote" style="border-color:var(--raka);color:var(--raka);background:rgba(224,90,90,0.08)">Poin 4: "Practice daily reflection." Mari kita <em>reflect</em> idup lu, Dimas.</span>
+    <br>
+    "Lu ngomongin kesepian Bima, lu ngomongin ketakutan gue. Lu pikir kita berdua nggak tau kenapa lu kabur ke Paris, hah? Lu pikir kita nggak tau soal Dinda?"
+  </div>
+
+  <p>Mendengar nama itu, wajah Dimas langsung pias. Rokok di bibirnya nyaris jatuh.</p>
+
+  <div class="dialogue bima">
+    "Dinda ninggalin lu dua bulan sebelum lu berangkat ke Prancis kan, anjing?" sambung Bima dari Beijing, menangkap umpan Raka. Matanya kini menyala-nyala karena dendam. "Dinda ninggalin lu gara-gara lu <em>abusive</em> secara verbal! Lu selalu ngerendahin dia, lu bilang dia goblok karena cuma kerja jadi HRD di Jakarta, sementara lu merasa jadi intelektual paling suci sedunia!"
+  </div>
+
+  <div class="dialogue dimas">
+    "Itu... itu urusan privat, bangsat! Gak ada hubungannya sama obrolan ini!"
+  </div>
+
+  <div class="dialogue raka">
+    <span class="poin-quote" style="border-color:var(--raka);color:var(--raka);background:rgba(224,90,90,0.08)">Poin 10: "Take responsibility for your responses so you can choose actions that align with your values."</span>
+    <br>
+    "Ada hubungannya, tolol! Lu lari dari tanggung jawab! Lu kabur ke Paris karena lu nggak sanggup nerima kenyataan kalau lu tuh cowok toksik, <em>narcissist</em> bangsat yang nggak bisa ngehargain perempuan! Lu sembunyi di balik teori-teori sosiologi lu karena di dunia nyata, lu tuh pecundang yang dijauhin semua orang!"
+  </div>
+
+  <div class="dialogue dimas">
+    <span class="scream" style="color:var(--dimas)">"Tutup mulut sia, Ka!"</span> Dimas berteriak histeris, wajahnya merah padam.
+  </div>
+
+  <div class="dialogue bima">
+    "Nggak, lu dengerin aing, anjing! Lu ngerasa superior? Riset lu nggak ada gunanya, Dim! Sosiologi lu nggak ngasih makan siapa-siapa! Lu tau apa yang lebih lucu? Bokap lu di Bandung kemarin masuk rumah sakit karena jantung, dan lu nggak pulang kan?! Karena apa? Karena lu nggak punya duit tiket anjing! Lu sok idealis nolak kerjaan korporat, tapi pas bapak lu sekarat, lu cuma bisa nangis di loteng busuk lu di Paris!"
+  </div>
+
+  <div class="section-break">KEHANCURAN</div>
+
+  <p>Hening seketika menyelimuti ruang <em>chat</em> itu. Dimas membeku. Air mata mulai menggenang di pelupuk matanya. Tangannya gemetar hebat. Buku <em>How to Improve Emotional Awareness</em> yang tadi ia pegang jatuh ke lantai kamarnya.</p>
+
+  <p>Raka dan Bima menatap layar dengan napas terengah-engah. Mereka baru saja menjatuhkan bom atom ke jantung pertahanan mental sahabat mereka sendiri.</p>
+
+  <p>Di Boston, Raka tiba-tiba merasakan dadanya sesak. Serangan paniknya kembali datang. Memaki Dimas tidak membuatnya merasa lebih baik; itu hanya memantulkan kekosongannya sendiri. Di Beijing, Bima menatap genangan bir di lantainya yang kotor, menyadari betapa menyedihkan dan hancurnya hidupnya.</p>
+
+  <p>Tiga cendekiawan. Tiga otak paling brilian dari kota kembang. Kini tak lebih dari tiga hewan buas yang saling mencabik harga diri karena mereka tidak sanggup menghadapi kegagalan hidup mereka sendiri.</p>
+
+  <div class="section-break">RUNTUH</div>
+
+  <div class="dialogue dimas" style="border-color: rgba(192,130,90,0.3);">
+    "Poin nomor... poin nomor tujuh," suara Dimas pecah, nyaris berbisik sambil menunduk menatap layar, air matanya akhirnya jatuh.
+    <br><br>
+    <span class="poin-quote">Poin 7: "Track emotional patterns to see recurring themes..."</span>
+    <br>
+    "<em>Pattern</em> kita, dari dulu... kita cuma saling menghancurkan buat ngerasa lebih baik."
+  </div>
+
+  <p>Dimas mengangkat kepalanya, menatap Raka dan Bima. Mata mereka bertiga kini sama-sama kosong, dipenuhi keputusasaan yang tidak bisa disembuhkan oleh gelar Ph.D. dari benua mana pun.</p>
+
+  <div class="dialogue dimas" style="background: rgba(192,130,90,0.06);">
+    "Aing capek, Ka. Bim. Aing capek banget idup kayak gini," isak Dimas, hidungnya berair. Fasad intelektualnya musnah tak tersisa.
+  </div>
+
+  <div class="dialogue bima" style="background: rgba(90,138,186,0.06);">
+    Bima mengusap wajahnya yang kasar dengan kedua tangan. "Aing juga, Dim. Aing pengen pulang ke Dago. Aing kangen makan bubur ayam PR... Aing... aing kayaknya nggak kuat nyelesaiin S3 ini, euy."
+  </div>
+
+  <div class="dialogue raka" style="background: rgba(224,90,90,0.06);">
+    Raka menatap dua sahabatnya dari balik layar. Tangannya bergetar menyentuh <em>mouse</em>. "Kita bertiga... kita udah mati di dalem, nying."
+  </div>
+
+  <p>Tidak ada makian lagi. Tidak ada <em>anjing, goblog,</em> atau <em>bangsat</em>. Yang tersisa hanya keheningan yang mencekik. Ribuan kilometer memisahkan mereka, mengunci mereka di dalam penjara ambisi dan ekspektasi yang mereka bangun sendiri. Buku soal kesadaran emosional itu tergeletak di lantai Paris, tidak berguna, tidak bisa menyelamatkan tiga jiwa yang sudah terlampau hancur oleh keangkuhan mereka.</p>
+
+  <!-- DISCONNECT -->
+  <div class="silence">
+    <p style="color:var(--text-muted);font-style:italic;margin-bottom:1.5rem;">Tanpa mengucapkan selamat tinggal, Raka mengklik tombol merah muda berlogo telepon.</p>
+
+    <span class="disconnect-text">— Disconnect. —</span>
+
+    <svg class="disconnect-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+      <line x1="14" y1="14" x2="34" y2="34" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+      <line x1="34" y1="14" x2="14" y2="34" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <div class="final-silence">
+    <p>Layar Discord kembali kosong.</p>
+    <p>Bima menutup laptopnya di asrama yang dingin di Beijing.</p>
+    <p>Dimas meringkuk di lantai lotengnya di Paris, menangis sejadi-jadinya.</p>
+    <p>Dan di Boston, Raka menelungkupkan wajahnya di atas <em>keyboard</em>,<br>membiarkan kesunyian pagi Amerika menelan sisa-sisa kewarasannya.</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <!-- nseBook Logo -->
+  <a href="https://imnxx.vercel.app/blog.html" class="nsebook-logo" style="text-decoration:none;">
+    <div class="logo-icon">
+      <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Book base -->
+        <rect x="6" y="8" width="30" height="28" rx="2" fill="none" stroke="#3a3850" stroke-width="1.2"/>
+        <!-- Spine -->
+        <line x1="15" y1="8" x2="15" y2="36" stroke="#3a3850" stroke-width="1.2"/>
+        <!-- Pages top -->
+        <line x1="19" y1="14" x2="31" y2="14" stroke="#c9a84c" stroke-width="1" opacity="0.7"/>
+        <line x1="19" y1="18" x2="31" y2="18" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+        <line x1="19" y1="22" x2="28" y2="22" stroke="#c9a84c" stroke-width="1" opacity="0.3"/>
+        <!-- 'n' glyph on spine -->
+        <text x="9.5" y="26" font-family="serif" font-size="9" fill="#e05a5a" font-weight="bold">n</text>
+        <!-- Signal/wifi dots — digital layer -->
+        <circle cx="34" cy="10" r="1.5" fill="#e05a5a" opacity="0.9"/>
+        <circle cx="34" cy="10" r="3.5" fill="none" stroke="#e05a5a" stroke-width="0.8" opacity="0.5"/>
+        <circle cx="34" cy="10" r="5.5" fill="none" stroke="#e05a5a" stroke-width="0.6" opacity="0.25"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-text">
+        <span class="nse">nse</span><span class="book">Book</span><span class="dot">.</span>
+      </div>
+      <div class="logo-tagline">Narasi · Sains · Ekspresi</div>
+    </div>
+  </a>
+
+  <div class="copyright">© nseBook — Bacaan Bebas, Pikiran Merdeka</div>
+
+  <!-- Back to Dashboard -->
+  <a href="https://imnxx.vercel.app/blog.html" class="back-link">
+    <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 1L3 6L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    Kembali ke Dashboard
+  </a>
+
+</footer>
+
+<script>
+  // Read progress bar
+  const progress = document.getElementById('readProgress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progress.style.width = pct + '%';
+  });
+</script>
+</body>
+</html>
