@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tesis, Antitesis, dan Bangsat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #0a0e17;
+      --bg-card: #111827;
+      --text-primary: #e5e7eb;
+      --text-secondary: #9ca3af;
+      --accent-blue: #3b82f6;
+      --accent-amber: #f59e0b;
+      --accent-crimson: #ef4444;
+      --accent-emerald: #10b981;
+      --glow-blue: rgba(59, 130, 246, 0.15);
+      --glow-amber: rgba(245, 158, 11, 0.12);
+      --border-subtle: rgba(148, 163, 184, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background: 
+        radial-gradient(ellipse at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(17, 24, 39, 0.95) 0%, var(--bg-deep) 100%);
+      color: var(--text-primary);
+      line-height: 1.8;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(17, 24, 39, 0.3) 1px, rgba(17, 24, 39, 0.3) 2px),
+        repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(17, 24, 39, 0.3) 1px, rgba(17, 24, 39, 0.3) 2px);
+      background-size: 4px 4px;
+      pointer-events: none;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    .particles {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px; height: 3px;
+      background: var(--accent-blue);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 15s infinite linear;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.3; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      position: relative;
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-amber), var(--accent-crimson));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 40px var(--glow-blue);
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      from { filter: drop-shadow(0 0 20px var(--glow-blue)); }
+      to { filter: drop-shadow(0 0 35px var(--glow-amber)); }
+    }
+
+    .subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .timezone-bar {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0 3rem;
+      padding: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    .tz-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tz-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      animation: pulse 2s infinite;
+    }
+    .tz-item:nth-child(2) .tz-dot { background: var(--accent-amber); animation-delay: 0.3s; }
+    .tz-item:nth-child(3) .tz-dot { background: var(--accent-crimson); animation-delay: 0.6s; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    .story {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(59, 130, 246, 0.1) inset;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-amber), var(--accent-crimson));
+    }
+
+    .story p {
+      margin-bottom: 1.25rem;
+      font-size: 1.15rem;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .story p:first-of-type::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      float: left;
+      line-height: 0.8;
+      padding-right: 0.15em;
+      color: var(--accent-amber);
+      font-weight: 700;
+    }
+
+    .dialogue {
+      border-left: 3px solid var(--accent-blue);
+      padding-left: 1.25rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      background: rgba(59, 130, 246, 0.03);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .dialogue.raka { border-left-color: var(--accent-blue); background: rgba(59, 130, 246, 0.05); }
+    .dialogue.bima { border-left-color: var(--accent-amber); background: rgba(245, 158, 11, 0.05); }
+    .dialogue.dimas { border-left-color: var(--accent-crimson); background: rgba(239, 68, 68, 0.05); }
+
+    .emphasis {
+      color: var(--accent-amber);
+      font-weight: 600;
+    }
+
+    .break {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+      margin: 2.5rem 0;
+      position: relative;
+    }
+
+    .break::after {
+      content: '✦';
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--bg-card);
+      padding: 0 1rem;
+      color: var(--accent-amber);
+      font-size: 0.9rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      padding: 0.85rem 1.75rem;
+      background: linear-gradient(135deg, var(--accent-blue), #2563eb);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .back-link::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .back-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+    }
+
+    .back-link:hover::before {
+      left: 100%;
+    }
+
+    .back-link:active {
+      transform: translateY(0);
+    }
+
+    .back-link svg {
+      width: 18px; height: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .back-link:hover svg {
+      transform: translateX(-3px);
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 1.5rem 1rem 3rem; }
+      .story { padding: 1.75rem; }
+      .story p { font-size: 1.05rem; }
+      .timezone-bar { flex-direction: column; gap: 0.75rem; }
+      .title { font-size: 2.2rem; }
+    }
+
+    /* Typewriter cursor effect for subtitle */
+    .subtitle::after {
+      content: '|';
+      animation: blink 1s infinite;
+      margin-left: 4px;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Subtle fade-in animation */
+    .story {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated particles background -->
+  <div class="particles" id="particles"></div>
+
+  <div class="container">
+    <header>
+      <h1 class="title">Tesis, Antitesis, dan Bangsat</h1>
+      <p class="subtitle">Tiga Benua • Tiga Jiwa • Satu Kehancuran</p>
+      
+      <div class="timezone-bar">
+        <div class="tz-item"><span class="tz-dot"></span> Boston • 08:15 EST</div>
+        <div class="tz-item"><span class="tz-dot"></span> Beijing • 21:15 CST</div>
+        <div class="tz-item"><span class="tz-dot"></span> Paris • 14:15 CET</div>
+      </div>
+    </header>
+
+    <article class="story">
+      <p>Layar laptop di kamar apartemen sempit di Cambridge, Massachusetts itu memancarkan cahaya kebiruan, menerangi wajah Raka yang berantakan. Kantung matanya hitam legam, setara dengan tebalnya tumpukan jurnal <em>Nature</em> dan <em>Science</em> di meja kerjanya. Di sudut layar, indikator waktu menunjukkan pukul 08:15 EST.</p>
+
+      <p>Discord berdenting tajam. Sebuah <em>group call</em> masuk.</p>
+
+      <p>Di seberang dunia, di sebuah asrama mahasiswa asing di Haidian, Beijing, Bima duduk di depan layar dengan mata merah menyala. Jam menunjukkan pukul 21:15 CST. Di tangannya ada sekaleng Yanjing beer yang sudah hangat.</p>
+
+      <p>Kamera ketiga menyala. Dimas, dengan rambut gondrong berantakan, syal murahan melingkar di leher, dan sebatang rokok lintingan terselip di bibir, muncul dari sebuah <em>chambre de bonne</em>—kamar loteng seukuran kandang ayam—di arondisemen ke-13, Paris. Pukul 14:15 CET.</p>
+
+      <p>Tiga pemuda Bandung. Tiga lulusan terbaik dari kampus-kampus elit di Jalan Ganesha dan Dipatiukur. Tiga mahasiswa S3. Tiga manusia yang sedang berada di ambang kehancuran mental.</p>
+
+      <div class="break"></div>
+
+      <p class="dialogue raka">"Oi, anjing. Tumben lu pada nyala," Raka membuka percakapan, suaranya serak. Ia baru saja menenggak Adderall ketiganya minggu ini.</p>
+
+      <p class="dialogue bima">"Bacot sia, Ka," balas Bima dari Beijing. "Aing baru beres <em>lab meeting</em> empat jam sama <em>Laoban</em> goblog. Disuruh <em>running</em> data ulang padahal <em>sample</em>-nya udah bener. Emang rasis aja tuh babi satu sama mahasiswa Asia Tenggara."</p>
+
+      <p class="dialogue dimas">Dimas menghembuskan asap rokok ke arah kamera. "Itulah, Bim. Maneh tuh budak korporatisme berbalut <em>state-capitalism</em>. Di Cina maneh bukan manusia, maneh cuma sekrup di mesin raksasa CCP. <em>You don't exist as an individual</em>."</p>
+
+      <p>Raka mendengus keras, nyaris tertawa. <span class="emphasis">"Gaya bahasa lu anjing, Dim. S3 Sosiologi di Sorbonne bukannya bikin lu makin pinter, malah makin kaya gembel Dago yang kebanyakan baca Karl Marx bajakan. Lu ngomongin <em>individual existence</em>, padahal bulan lalu lu minjem duit gue lima ratus dolar buat bayar sewa kan, bangsat?"</span></p>
+
+      <p>Wajah Dimas sedikit memerah, tapi ia mempertahankan postur tenangnya. Senjata andalan Dimas adalah superioritas intelektual palsu. <span class="emphasis">"Itu <em>loan</em>, Ka. Bukan donasi. Lagian, aing lebih milih miskin dan punya otonomi pikiran daripada kaya maneh, Ka. S3 <em>Biomedical Engineering</em> di MIT, dapet <em>funding</em> dari DARPA. Maneh sadar nggak sih riset maneh tuh ujung-ujungnya dipake buat bikin senjata biologis militer US? Maneh tuh pelacur imperialisme."</span></p>
+
+      <p class="dialogue raka">"Pelacur imperialis mata sia picek!" Raka menggebrak mejanya. Kopi di gelas kertas Starbucks-nya tumpah. "Aing di sini ngerjain <em>targeted drug delivery</em> buat kanker, goblog! Kalau riset aing tembus, jutaan nyawa selamat! Maneh ngerjain apa di Paris? Disertasi tentang 'Dampak Fenomenologis dari Pengangguran Struktural'? Sia yang pengangguran, anjing! Sampah!"</p>
+
+      <p>Bima, yang dari tadi diam sambil meneguk birnya, tiba-tiba menyela dengan nada dingin. <span class="emphasis">"Halah, dua-duanya sama aja bacotnya gede. Ka, lu ngaku ngerjain obat kanker, tapi <em>paper</em> lu di-<em>reject</em> tiga kali kan bulan ini? Gue liat di ResearchGate lu nggak ada <em>update</em> anjing. Jangan sok keras lu di US. Ujung-ujungnya lu cuma sapi perah <em>Principal Investigator</em> lu."</span></p>
+
+      <p>Raka terdiam sejenak. Rahangnya mengeras. Serangan Bima telak mengenai ulu hatinya. Penolakan jurnal itu adalah rahasia yang membuatnya tidak bisa tidur empat hari terakhir. Sindrom imposter sedang menggerogoti kewarasannya.</p>
+
+      <div class="break"></div>
+
+      <p><span class="emphasis">"Dan maneh, Dim,"</span> Bima kini mengarahkan moncong senjatanya ke Paris. <span class="emphasis">"Maneh kira maneh keren idup miskin di Eropa? Aing di Tsinghua publikasi udah lima, Q1 semua. <em>Impact factor</em> aing udah tembus dua puluh. Pas kita balik ke Indo, aing yang bakal dapet posisi dosen atau <em>head of R&D</em>. Maneh? Paling jadi podcaster gembel yang kerjanya ngritik pemerintah di Twitter doang. Gak ada <em>skill</em> maneh tuh, tolol. Murni omong kosong."</span></p>
+
+      <p class="dialogue dimas">"Publikasi lima dari Cina?" Dimas tertawa meremehkan. Tawanya pelan, sinis, khas intelektual elitis yang merasa paling tahu segalanya. "Bim, sedunia juga tau <em>paper mill</em> di Cina tuh gila-gilaan. Maneh jadi <em>first author</em> atau cuma numpang nama di riset <em>post-doc</em> maneh? Lagian, ngapain aing mikirin <em>impact factor</em>? <em>Quantification of knowledge</em> itu cuma alat kapitalis buat menindas <em>pure science</em>. Aing nyari kebenaran, bukan nyari sitasi."</p>
+
+      <p class="dialogue bima">"Kebenaran tai kucing!" Bima berteriak, suaranya sampai pecah di <em>mic</em> laptopnya. "Aing kerja 16 jam sehari, anjing! Tangan aing kena <em>chemical burn</em>, rambut aing rontok gara-gara stres! Aing <em>survive</em> di negara yang orang-orangnya ngeliat aing kayak kecoak! Maneh ngomong kebenaran sambil minum <em>wine</em> murah di Paris, idup dari duit LPDP hasil pajak tukang bakso di Indo! Jangan sok suci sia, bangsat!"</p>
+
+      <p>Ruang virtual itu hening sejenak. Hanya terdengar suara napas yang memburu dari ketiga kota yang terpisah ribuan kilometer. Tiga sahabat sejak masa S1 di Bandung itu kini telah bermutasi menjadi monster ego yang dibentuk oleh tekanan akademik ekstrem dari tiga benua berbeda.</p>
+
+      <div class="break"></div>
+
+      <p>Dimas, yang merasa posisinya terdesak karena Bima membawa-bawa uang pajak, tiba-tiba mengubah taktik. Ia merogoh sebuah buku saku dari meja kerjanya—sebuah buku <em>self-help</em> murahan berbahasa Inggris yang ia temukan di stasiun metro. Judul babnya: <em>How to Improve Emotional Awareness</em>.</p>
+
+      <p class="dialogue dimas">"Kalian tau nggak apa masalah kalian berdua?" suara Dimas merendah, meniru nada seorang psikiater. Ia mengangkat buku itu ke depan kamera. "Kalian tuh kurang <em>emotional awareness</em>. Aing kebetulan lagi baca ini. <em>You can't change what you don't understand</em>. Kalian berdua tuh numpuk trauma, tapi kalian <em>projecting</em> itu ke aing."</p>
+
+      <p>Raka menatap layar dengan mata membelalak. Urat di lehernya menonjol. <span class="emphasis">"Maneh... maneh mau nyeramahin aing pake buku <em>self-help</em> abal-abal? Sia beneran udah gila, Dim."</span></p>
+
+      <p class="dialogue dimas">"Dengerin aing dulu, goblog," potong Dimas, matanya menelusuri halaman buku tersebut. "Di sini ada 10 ide. Liat poin nomor satu: <em>Name your emotions clearly instead of using vague labels</em>. Raka, maneh tuh bukan 'marah'. Maneh tuh 'ketakutan'. Maneh takut gagal di MIT. Maneh takut pulang ke Bandung bawa tangan kosong dan bikin bokap maneh yang pensiunan jenderal itu malu. Bener kan?"</p>
+
+      <p>Wajah Raka memucat. Mulutnya sedikit terbuka, tapi tak ada suara yang keluar. Dimas tepat sasaran. Terlalu tepat.</p>
+
+      <p class="dialogue dimas">Dimas beralih ke Bima. "Dan maneh, Bim. Liat poin nomor lima: <em>Observe without judgment so emotions can be understood rather than resisted</em>. Maneh tuh <em>resisting</em> fakta bahwa maneh menderita di Cina. Maneh berlindung di balik <em>impact factor</em> dan <em>h-index</em> buat nutupin rasa kesepian maneh yang absolut. Kapan terakhir maneh ngobrol sama manusia di luar urusan lab? Enam bulan lalu? Setahun? Maneh tuh mesin, Bim. Bukan manusia lagi."</p>
+
+      <p>Bima menggebrak meja asramanya dengan sangat keras hingga kaleng birnya jatuh dan isinya tumpah ke lantai. <span class="emphasis">"ANJING SIA DIMAS! BANGSAT! MANEH TAU APA SOAL IDUP AING?!"</span></p>
+
+      <p class="dialogue dimas">"Aing tau karena aing pake <em>mindfulness practice</em>! Poin nomor sembilan!" Dimas berseru, senyum arogan mengembang di bibirnya. Ia merasa menang karena berhasil meruntuhkan pertahanan mental kedua temannya menggunakan senjata psikologi populer.</p>
+
+      <p>Tapi Raka, yang baru saja pulih dari syoknya, kini menatap layar dengan tatapan membunuh. Kepanikan di matanya berganti menjadi kebencian murni yang dingin.</p>
+
+      <p class="dialogue raka">"Oke. Lu mau main psikologi-psikologian, Dim?" suara Raka bergetar, sangat pelan, sangat berbahaya. "<em>Practice daily reflection</em>, poin nomor empat kan? Mari kita <em>reflect</em> idup lu, Dimas."</p>
+
+      <p>Dimas terdiam. Senyumnya sedikit pudar.</p>
+
+      <p class="dialogue raka">"Lu ngomongin kesepian Bima, lu ngomongin ketakutan gue," Raka mencondongkan wajahnya ke kamera. "Lu pikir kita berdua nggak tau kenapa lu kabur ke Paris, hah? Lu pikir kita nggak tau soal Dinda?"</p>
+
+      <p>Mendengar nama itu, wajah Dimas langsung pias. Rokok di bibirnya nyaris jatuh.</p>
+
+      <p class="dialogue bima">"Dinda ninggalin lu dua bulan sebelum lu berangkat ke Prancis kan, anjing?" sambung Bima dari Beijing, menangkap umpan Raka. Matanya kini menyala-nyala karena dendam. "Dinda ninggalin lu gara-gara lu <em>abusive</em> secara verbal! Lu selalu ngerendahin dia, lu bilang dia goblok karena cuma kerja jadi HRD di Jakarta, sementara lu merasa jadi intelektual paling suci sedunia!"</p>
+
+      <p class="dialogue dimas">"Itu... itu urusan privat, bangsat! Gak ada hubungannya sama obrolan ini!" Suara Dimas mulai meninggi dan panik. Kedok psikiater tenangnya hancur berantakan.</p>
+
+      <p class="dialogue raka">"Ada hubungannya, tolol!" teriak Raka. "Lu baca poin nomor sepuluh di buku sampah lu itu! <em>Take responsibility for your responses so you can choose actions that align with your values</em>. Lu lari dari tanggung jawab! Lu kabur ke Paris karena lu nggak sanggup nerima kenyataan kalau lu tuh cowok toksik, <em>narcissist</em> bangsat yang nggak bisa ngehargain perempuan! Lu sembunyi di balik teori-teori sosiologi lu karena di dunia nyata, lu tuh pecundang yang dijauhin semua orang!"</p>
+
+      <p class="dialogue dimas">"Tutup mulut sia, Ka!" Dimas berteriak histeris, wajahnya merah padam.</p>
+
+      <p class="dialogue bima">"Nggak, lu dengerin aing, anjing!" Bima ikut menghantam. "Lu ngerasa superior? Riset lu nggak ada gunanya, Dim! Sosiologi lu nggak ngasih makan siapa-siapa! Lu tau apa yang lebih lucu? Bokap lu di Bandung kemarin masuk rumah sakit karena jantung, dan lu nggak pulang kan?! Karena apa? Karena lu nggak punya duit tiket anjing! Lu sok idealis nolak kerjaan korporat, tapi pas bapak lu sekarat, lu cuma bisa nangis di loteng busuk lu di Paris!"</p>
+
+      <p>Hening seketika menyelimuti ruang <em>chat</em> itu. Dimas membeku. Air mata mulai menggenang di pelupuk matanya. Tangannya gemetar hebat. Buku <em>How to Improve Emotional Awareness</em> yang tadi ia pegang jatuh ke lantai kamarnya.</p>
+
+      <p>Raka dan Bima menatap layar dengan napas terengah-engah. Mereka baru saja menjatuhkan bom atom ke jantung pertahanan mental sahabat mereka sendiri.</p>
+
+      <div class="break"></div>
+
+      <p>Di Boston, Raka tiba-tiba merasakan dadanya sesak. Serangan paniknya kembali datang. Memaki Dimas tidak membuatnya merasa lebih baik; itu hanya memantulkan kekosongannya sendiri. Di Beijing, Bima menatap genangan bir di lantainya yang kotor, menyadari betapa menyedihkan dan hancurnya hidupnya.</p>
+
+      <p>Tiga cendekiawan. Tiga otak paling brilian dari kota kembang. Kini tak lebih dari tiga hewan buas yang saling mencabik harga diri karena mereka tidak sanggup menghadapi kegagalan hidup mereka sendiri.</p>
+
+      <p class="dialogue dimas">"Poin nomor... poin nomor tujuh," suara Dimas pecah, nyaris berbisik sambil menunduk menatap layar, air matanya akhirnya jatuh. "<em>Track emotional patterns to see recurring themes...</em> <em>Pattern</em> kita, dari dulu... kita cuma saling menghancurkan buat ngerasa lebih baik."</p>
+
+      <p>Dimas mengangkat kepalanya, menatap Raka dan Bima. Mata mereka bertiga kini sama-sama kosong, dipenuhi keputusasaan yang tidak bisa disembuhkan oleh gelar Ph.D. dari benua mana pun.</p>
+
+      <p class="dialogue dimas">"Aing capek, Ka. Bim. Aing capek banget idup kayak gini," isak Dimas, hidungnya berair. Fasad intelektualnya musnah tak tersisa.</p>
+
+      <p class="dialogue bima">Bima mengusap wajahnya yang kasar dengan kedua tangan. "Aing juga, Dim. Aing pengen pulang ke Dago. Aing kangen makan bubur ayam PR... Aing... aing kayaknya nggak kuat nyelesaiin S3 ini, euy."</p>
+
+      <p class="dialogue raka">Raka menatap dua sahabatnya dari balik layar. Tangannya bergetar menyentuh <em>mouse</em>. "Kita bertiga... kita udah mati di dalem, nying."</p>
+
+      <p>Tidak ada makian lagi. Tidak ada <em>anjing, goblog,</em> atau <em>bangsat</em>. Yang tersisa hanya keheningan yang mencekik. Ribuan kilometer memisahkan mereka, mengunci mereka di dalam penjara ambisi dan ekspektasi yang mereka bangun sendiri. Buku soal kesadaran emosional itu tergeletak di lantai Paris, tidak berguna, tidak bisa menyelamatkan tiga jiwa yang sudah terlampau hancur oleh keangkuhan mereka.</p>
+
+      <p>Tanpa mengucapkan selamat tinggal, Raka mengklik tombol merah muda berlogo telepon.</p>
+
+      <p style="text-align: center; font-family: 'JetBrains Mono', monospace; color: var(--accent-crimson); font-weight: 600; margin: 1.5rem 0;">✦ Disconnect ✦</p>
+
+      <p>Layar Discord kembali kosong. Bima menutup laptopnya di asrama yang dingin di Beijing. Dimas meringkuk di lantai lotengnya di Paris, menangis sejadi-jadinya. Dan di Boston, Raka menelungkupkan wajahnya di atas <em>keyboard</em>, membiarkan kesunyian pagi Amerika menelan sisa-sisa kewarasannya.</p>
+
+      <p class="footer-note">
+        Sebuah refleksi tentang ambisi, persahabatan, dan harga yang harus dibayar untuk menjadi "terbaik".<br>
+        Untuk mereka yang masih berjuang di antara tumpukan jurnal dan kerinduan akan rumah.
+      </p>
+    </article>
+
+    <!-- Link Kembali ke Dashboard -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="https://imnxx.vercel.app" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        kembali ke dashboard
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Generate floating particles
+    document.addEventListener('DOMContentLoaded', () => {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 25;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (15 + Math.random() * 20) + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particle.style.background = [
+          'var(--accent-blue)', 
+          'var(--accent-amber)', 
+          'var(--accent-crimson)'
+        ][Math.floor(Math.random() * 3)];
+        particlesContainer.appendChild(particle);
+      }
+
+      // Subtle scroll reveal for story paragraphs
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.story p').forEach((p, index) => {
+        p.style.opacity = '0';
+        p.style.transform = 'translateY(15px)';
+        p.style.transition = `opacity 0.5s ease, transform 0.5s ease ${index * 0.05}s`;
+        observer.observe(p);
+      });
+    });
+  </script>
+</body>
+</html>
