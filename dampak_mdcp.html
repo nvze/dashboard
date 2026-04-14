@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mengarungi Badai Sempurna — nseBook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --red: #c0392b;
+    --gold: #b8960c;
+    --muted: #6b5c4b;
+    --border: #c4b49a;
+    --highlight: #fff3cd;
+    --dark-bg: #1a1208;
+    --card-bg: #ede8dd;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.85;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* TOP BAR */
+  .top-bar {
+    background: var(--dark-bg);
+    color: var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #3a2e1a;
+  }
+  .top-bar span { opacity: 0.7; }
+  .top-bar .classified {
+    color: var(--red);
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    animation: blink 2s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0.3; } }
+
+  /* HERO */
+  .hero {
+    background: var(--dark-bg);
+    color: var(--paper);
+    padding: 80px 40px 60px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid var(--red);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(192,57,43,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: var(--red);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    max-width: 860px;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--border);
+  }
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-style: italic;
+    color: var(--border);
+    max-width: 680px;
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+  .hero-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #8a7a65;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* LAYOUT */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* INTRO SECTION */
+  .intro-section {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .intro-section p {
+    font-size: 1.15rem;
+    color: #2c2318;
+    margin-bottom: 1.4em;
+  }
+  .intro-section p:first-child {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  /* DROP CAP */
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    float: left;
+    line-height: 0.8;
+    margin: 8px 12px -4px 0;
+    color: var(--red);
+  }
+
+  /* CHAPTER HEADERS */
+  .chapter {
+    padding: 60px 0 0;
+  }
+  .chapter-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .chapter-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .chapter h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .chapter h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    font-style: italic;
+    margin-top: 48px;
+    margin-bottom: 20px;
+    color: var(--ink);
+    border-left: 3px solid var(--red);
+    padding-left: 16px;
+  }
+  .chapter p {
+    margin-bottom: 1.4em;
+    color: #2c2318;
+  }
+
+  /* PULL QUOTE */
+  .pull-quote {
+    margin: 48px -20px;
+    padding: 28px 36px;
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+  }
+  .pull-quote::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    font-size: 7rem;
+    color: var(--red);
+    opacity: 0.2;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    line-height: 1;
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.45rem;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--ink) !important;
+    margin-bottom: 0 !important;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* WARNING BOX */
+  .warning-box {
+    background: #fdf0ef;
+    border: 1px solid #e8a09a;
+    border-left: 4px solid var(--red);
+    padding: 20px 24px;
+    margin: 32px 0;
+    font-size: 0.95rem;
+  }
+  .warning-box strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* TABLE */
+  .table-wrapper {
+    overflow-x: auto;
+    margin: 40px 0;
+    border: 1px solid var(--border);
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    font-family: 'Crimson Pro', serif;
+  }
+  .data-table caption {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 10px 16px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table th {
+    background: var(--dark-bg);
+    color: var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 400;
+  }
+  .data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+    color: #2c2318;
+  }
+  .data-table tr:nth-child(even) td { background: rgba(196, 180, 154, 0.15); }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* BULLET LIST */
+  .chapter ul {
+    margin: 16px 0 24px 0;
+    padding: 0;
+    list-style: none;
+  }
+  .chapter ul li {
+    padding: 8px 0 8px 24px;
+    border-bottom: 1px dotted var(--border);
+    position: relative;
+    color: #2c2318;
+  }
+  .chapter ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--red);
+    font-size: 0.8em;
+    top: 10px;
+  }
+  .chapter ul li strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+  }
+
+  /* CONCLUSION */
+  .conclusion {
+    background: var(--dark-bg);
+    color: var(--paper);
+    margin: 60px -40px 0;
+    padding: 64px 40px;
+    border-top: 3px solid var(--gold);
+    border-bottom: 3px solid var(--gold);
+  }
+  .conclusion .chapter-eyebrow { color: var(--gold); }
+  .conclusion .chapter-eyebrow::after { background: #3a2e1a; }
+  .conclusion h2 { color: var(--paper); }
+  .conclusion h2 em { color: var(--border); }
+  .conclusion p { color: #c4b49a; }
+  .conclusion .pull-quote {
+    border-color: var(--gold);
+    margin: 40px 0;
+  }
+  .conclusion .pull-quote::before { color: var(--gold); opacity: 0.3; }
+  .conclusion .pull-quote p { color: var(--paper) !important; }
+
+  /* REFERENCES */
+  .references {
+    padding: 60px 0;
+    border-top: 2px solid var(--border);
+    margin-top: 60px;
+  }
+  .references-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .references-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .ref-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: ref-counter;
+  }
+  .ref-list li {
+    counter-increment: ref-counter;
+    display: flex;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--border);
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: #4a3e30;
+  }
+  .ref-list li::before {
+    content: counter(ref-counter) '.';
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--red);
+    min-width: 28px;
+    padding-top: 3px;
+    font-weight: 500;
+  }
+  .ref-list li a {
+    color: #7a5c3a;
+    text-decoration: none;
+    word-break: break-all;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .ref-list li a:hover {
+    color: var(--red);
+    border-bottom-color: var(--red);
+  }
+  .ref-source {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* FOOTER / LOGO */
+  .site-footer {
+    background: var(--dark-bg);
+    border-top: 1px solid #3a2e1a;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  /* nseBook LOGO */
+  .nsebook-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+  .logo-mark {
+    width: 64px;
+    height: 64px;
+  }
+  .logo-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--border);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .logo-text span { color: var(--red); }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--border);
+    text-decoration: none;
+    border: 1px solid #3a2e1a;
+    padding: 12px 28px;
+    transition: all 0.25s;
+  }
+  .back-link:hover {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--paper);
+  }
+  .back-link::before { content: '←'; }
+
+  .footer-copy {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #4a3e30;
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0 0;
+    color: var(--border);
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-divider span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* FADE-IN ANIMATION */
+  .chapter, .intro-section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+  .chapter:nth-child(1) { animation-delay: 0.1s; }
+  .chapter:nth-child(2) { animation-delay: 0.2s; }
+  .chapter:nth-child(3) { animation-delay: 0.3s; }
+  .chapter:nth-child(4) { animation-delay: 0.4s; }
+  .chapter:nth-child(5) { animation-delay: 0.5s; }
+  .intro-section { animation-delay: 0.1s; }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero { padding: 48px 20px 40px; }
+    .container { padding: 0 20px; }
+    .pull-quote { margin: 32px -10px; }
+    .conclusion { margin: 60px -20px 0; padding: 48px 20px; }
+    .top-bar { padding: 10px 20px; font-size: 9px; gap: 8px; flex-wrap: wrap; }
+    .hero-meta { flex-direction: column; gap: 8px; }
+    .site-footer { padding: 40px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span class="classified">● DOKUMEN ANALISIS STRATEGIS</span>
+  <span>nseBook · Edisi April 2026</span>
+  <span>Indo-Pasifik · Geopolitik · Pertahanan</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-label">Laporan Penelitian Mendalam</div>
+    <h1>Mengarungi Badai Sempurna:<br><em>Membedah Sisi Gelap</em> Kemitraan Strategis, Dominasi Teknologi, dan Jebakan Geopolitik Amerika Serikat di Indonesia</h1>
+    <div class="hero-sub">Sebuah analisis komprehensif tentang konsekuensi eksistensial Kemitraan Kerja Sama Pertahanan Utama AS-Indonesia (MDCP) April 2026 — dari empat dimensi kritis: sejarah, teknologi, geopolitik, dan geostrategis.</div>
+    <div class="hero-meta">
+      <span>📅 13 April 2026</span>
+      <span>📍 Jakarta · Indo-Pasifik</span>
+      <span>🔒 MDCP · ART 2026 · New Golden Age</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="intro-section">
+    <p class="drop-cap">Pada tanggal 13 April 2026, sebuah dokumen penting ditandatangani, menandai babak baru dalam sejarah hubungan militer dan diplomatik di kawasan Indo-Pasifik. Pernyataan Bersama tentang Pembentukan Kemitraan Kerja Sama Pertahanan Utama Amerika Serikat-Indonesia (Joint Statement on the Establishment of the U.S.-Indonesia Major Defense Cooperation Partnership / MDCP) diumumkan ke hadapan publik dengan narasi yang megah.</p>
+    <p>Di atas kertas, dokumen ini tampak seperti sebuah pencapaian diplomatik yang brilian. Dengan tiga pilar utamanya—modernisasi militer, pendidikan militer profesional, serta latihan dan operasi gabungan—kemitraan ini menjanjikan kemampuan asimetris mutakhir bagi militer Indonesia. Narasi yang dibangun adalah tentang dua negara berdaulat yang berdiri sejajar, saling menghormati, dan bekerja sama demi menjaga stabilitas kawasan yang bebas dan terbuka.</p>
+    <p>Namun, panggung diplomasi internasional jarang sekali menampilkan kebenaran yang utuh di balik sorot lampu kameranya. Bagi sebuah negara kepulauan raksasa seperti Indonesia, yang lahir dari rahim perjuangan antikolonialisme dan dibesarkan oleh doktrin politik luar negeri "Bebas Aktif", kemitraan yang tampak seperti pelukan hangat ini sering kali menyimpan cengkeraman yang melumpuhkan. Ketika kita menyibak tirai retorika diplomatik dan mengupas dokumen-dokumen turunan, perjanjian perdagangan, serta manuver geopolitik yang mengelilingi pakta pertahanan ini, terungkaplah sebuah arsitektur dominasi yang jauh lebih kompleks dan berisiko tinggi.</p>
+
+    <div class="pull-quote">
+      <p>Kemitraan MDCP ini tidak berdiri di ruang hampa. Ia adalah puncak dari serangkaian eskalasi kesepakatan yang sedang menggiring Indonesia masuk ke dalam sebuah labirin yang oleh para pakar disebut sebagai "Kekaisaran Informal" (Informal Empire).</p>
+    </div>
+
+    <p>Kemitraan MDCP ini tidak berdiri di ruang hampa. Ia adalah puncak dari serangkaian eskalasi kesepakatan—dimulai dari peningkatan status menjadi Comprehensive Strategic Partnership pada akhir 2023, hingga penandatanganan Agreement toward a New Golden Age for the US-Indonesia Alliance pada Februari 2026. Rangkaian kesepakatan ini, yang diklaim sebagai "Zaman Keemasan", pada hakikatnya sedang menggiring Indonesia masuk ke dalam sebuah labirin yang oleh para pakar disebut sebagai "Kekaisaran Informal" (Informal Empire). Dalam sistem ini, bendera merah putih tetap berkibar dan kedaulatan teritorial secara formal diakui, namun ruang gerak kebijakan ekonomi, otonomi militer, dan arah diplomasi negara secara perlahan didikte, dibatasi, dan dikendalikan oleh kepentingan strategis Washington.</p>
+    <p>Laporan penelitian ini akan membawa Anda menyusuri lorong-lorong gelap dari kemitraan ini. Menggunakan pendekatan bercerita (storytelling) yang menempatkan fakta keras dalam konteks naratif yang utuh, kita akan membedah dampak buruk eksistensial bagi Indonesia dari empat dimensi utama. Pertama, kita akan menggali kuburan sejarah untuk melihat bagaimana jebakan serupa di masa lalu pernah meruntuhkan pemerintahan dan melumpuhkan militer kita. Kedua, kita akan membongkar ilusi kemandirian teknologi, di mana senjata dan infrastruktur digital kita disandera oleh kendali jarak jauh asing. Ketiga, kita akan mengurai jaring laba-laba geopolitik dan ekonomi yang memaksa Indonesia menandatangani perjanjian perdagangan yang sangat tidak adil. Keempat, dan yang paling krusial, kita akan melihat bagaimana Indonesia sedang diseret ke dalam pusaran konflik geostrategis yang mengorbankan stabilitas kawasan, mengundang kemarahan Tiongkok, dan membunuh sentralitas ASEAN.</p>
+  </div>
+
+  <!-- CHAPTER 1: DIMENSI SEJARAH -->
+  <div class="chapter">
+    <div class="chapter-eyebrow">Dimensi Pertama</div>
+    <h2>Gema Peringatan dari Masa Lalu yang Terlupakan</h2>
+
+    <p>Sejarah bukanlah sekadar catatan tanggal dan peristiwa yang berdebu di perpustakaan; sejarah adalah kompas yang menunjukkan ke mana arah sebuah kebijakan akan bermuara. Dalam konteks hubungan asimetris antara Indonesia dan Amerika Serikat, sejarah diplomasi kita dipenuhi dengan rambu-rambu peringatan yang ditulis dengan tinta krisis politik dan kelumpuhan operasional. Niat baik untuk memodernisasi pertahanan dan ekonomi, jika tidak diiringi dengan otonomi yang tangguh, selalu berakhir pada tragedi hilangnya kedaulatan esensial. Ada dua preseden sejarah utama yang harus menjadi cermin bagi rentetan kesepakatan tahun 2023 hingga 2026 ini.</p>
+
+    <h3>Tragedi Kabinet Sukiman dan Ilusi Bantuan Gratis (1951–1952)</h3>
+
+    <p>Mari kita putar kembali waktu ke awal dekade 1950-an. Republik Indonesia baru saja memenangkan pengakuan kedaulatannya. Negara ini masih sangat muda, miskin, dan membutuhkan suntikan dana serta peralatan untuk menata kembali angkatan perangnya. Pada periode 1951-1952, pemerintahan Indonesia di bawah kepemimpinan Perdana Menteri Sukiman Wirjosandjojo menghadapi tekanan ekonomi yang luar biasa. Di belahan dunia lain, Perang Dingin sedang memanas. Amerika Serikat, yang dipenuhi ketakutan akan penyebaran komunisme, meluncurkan Mutual Security Act (MSA)—sebuah program bantuan ekonomi dan militer global yang dirancang untuk memperkuat sekutu-sekutu mereka.</p>
+
+    <p>Melihat peluang ini, Kabinet Sukiman tergiur. Pada tanggal 5 Januari 1952, Menteri Luar Negeri Indonesia saat itu, Achmad Subardjo, melakukan pertukaran nota diplomatik secara diam-diam dengan Duta Besar Amerika Serikat, Merle Cochran. Kesepakatan ini memungkinkan Indonesia menerima kucuran bantuan militer dan ekonomi yang sangat dibutuhkan di bawah Section 511(a) dari MSA. Pada pandangan pertama, ini adalah kemenangan diplomasi. Pertahanan akan diperkuat, dan ekonomi akan terselamatkan.</p>
+
+    <p>Namun, di dalam dunia geopolitik, tidak ada yang namanya makan siang gratis. Klausul tersembunyi dalam Section 511(a) MSA secara eksplisit mengharuskan negara penerima bantuan untuk memberikan kontribusi penuh bagi "keamanan dunia bebas" (free world)—sebuah eufemisme diplomatik yang berarti negara penerima harus memihak Blok Barat yang dipimpin Amerika Serikat dalam melawan Uni Soviet.</p>
+
+    <p>Ketika isi perjanjian rahasia ini akhirnya bocor ke telinga parlemen dan publik Indonesia, reaksi yang terjadi menyerupai ledakan gunung berapi. Publik dan para pendiri bangsa menyadari bahwa pemerintah telah menggadaikan ruh kemerdekaan bangsa. Perjanjian MSA dinilai sebagai pengkhianatan fatal dan pelanggaran telak terhadap prinsip politik luar negeri "Bebas Aktif" yang menolak keberpihakan pada blok mana pun dalam Perang Dingin. Mosi tidak percaya bergulir deras di parlemen. Dukungan politik runtuh seketika. Pada akhir Februari 1952, Kabinet Sukiman dipaksa mengembalikan mandatnya kepada Presiden Soekarno, jatuh secara tragis hanya karena selembar tanda tangan yang mengikatkan nasib pertahanan Indonesia pada agenda hegemonik Amerika Serikat.</p>
+
+    <div class="warning-box">
+      <strong>Monumen Peringatan Sejarah</strong>
+      Kisah Kabinet Sukiman adalah monumen peringatan yang abadi: ketika kedaulatan militer diikat dengan bantuan negara adidaya, kemerdekaan politik domestik adalah harga yang harus dibayar.
+    </div>
+
+    <h3>Mimpi Buruk Embargo dan Kelumpuhan Armada Pertahanan (1999–2005)</h3>
+
+    <p>Jika tragedi Kabinet Sukiman berbicara tentang biaya politik, maka sejarah di pergantian milenium menceritakan kisah horor tentang kelumpuhan militer secara fisik. Pada akhir dekade 1990-an, Indonesia bersandar sangat kuat pada Amerika Serikat untuk pasokan peralatan sistem persenjataan (alutsista), mulai dari pesawat tempur, radar, hingga komponen kapal perang.</p>
+
+    <p>Menyusul gejolak politik dan jajak pendapat di Timor Timur pada tahun 1999, situasi berbalik drastis. Berdasarkan tuduhan pelanggaran hak asasi manusia berat yang dilakukan oleh militer Indonesia, Kongres Amerika Serikat mengaktifkan Leahy Law (Amandemen Leahy). Hukum ini melarang keras pemberian bantuan militer, pelatihan, dan yang paling fatal, penjualan suku cadang persenjataan kepada angkatan bersenjata asing yang dianggap melanggar parameter Washington. Seketika itu juga, Amerika Serikat menjatuhkan embargo militer total terhadap Indonesia.</p>
+
+    <p>Dampak dari embargo ini bersifat segera dan melumpuhkan. Kesiapan tempur Tentara Nasional Indonesia (TNI), khususnya TNI Angkatan Laut (TNI AL) dan TNI Angkatan Udara (TNI AU), terjun bebas ke titik nadir. Jet-jet tempur F-16 mutakhir yang menjadi kebanggaan udara nusantara terpaksa dikanibal—suku cadangnya dicopot satu per satu dari pesawat yang satu untuk menghidupkan pesawat yang lain, hingga akhirnya sebagian besar dari mereka terdampar di hanggar layaknya monumen besi tua. Di laut, kapal-kapal perang atas air dan kapal selam menghadapi nasib serupa akibat ketiadaan mesin kapal, sistem radar, dan rudal yang dulunya disuplai oleh Barat. Armada laut yang ditugaskan menjaga perairan seluas benua Eropa terpaksa bersandar membusuk di pelabuhan karena ketidakmampuan melakukan pemeliharaan dasar.</p>
+
+    <div class="pull-quote">
+      <p>Peristiwa embargo militer 1999-2005 menelanjangi sebuah kerentanan strategis yang mengerikan: kedaulatan nasional hanyalah ilusi jika senjata yang digunakan untuk melindunginya bergantung pada kehendak negara asing.</p>
+    </div>
+
+    <p>Indonesia dipaksa belajar dengan cara yang paling menyakitkan bahwa diversifikasi alutsista dan kemandirian industri pertahanan bukanlah kemewahan, melainkan syarat mutlak untuk bertahan hidup.</p>
+
+    <div class="table-wrapper">
+      <table class="data-table">
+        <caption>Matriks Sejarah: Pola Ketergantungan vs. Kedaulatan</caption>
+        <thead>
+          <tr>
+            <th>Hubungan</th>
+            <th>Tragedi MSA / Kabinet Sukiman (1951–52)</th>
+            <th>Krisis Embargo Militer AS (1999–2005)</th>
+            <th>Relevansi dengan MDCP & Aliansi 2026</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Pemicu Utama</strong></td>
+            <td>Kebutuhan bantuan ekonomi dan modernisasi pertahanan di tengah Perang Dingin</td>
+            <td>Ketergantungan alutsista impor dari blok Barat pasca-Perang Dingin</td>
+            <td>Janji investasi dan modernisasi militer asimetris (F-16, IoMDT) di era persaingan AS-Tiongkok</td>
+          </tr>
+          <tr>
+            <td><strong>Instrumen Koersi</strong></td>
+            <td>Persyaratan Section 511(a) MSA untuk memihak "Keamanan Dunia Bebas"</td>
+            <td>Leahy Law (penghentian pasokan suku cadang dan pelatihan)</td>
+            <td>End-Use Monitoring (EUM), Section 301, dan klausul paksaan dalam ART 2026</td>
+          </tr>
+          <tr>
+            <td><strong>Dampak Domestik Terburuk</strong></td>
+            <td>Runtuhnya Kabinet, krisis kepercayaan publik terhadap pemerintah</td>
+            <td>Kelumpuhan total operasional armada TNI AL dan TNI AU, jatuhnya kesiapan tempur</td>
+            <td>Ancaman deindustrialisasi pertahanan nasional (penghapusan TKDN), kebocoran data siber</td>
+          </tr>
+          <tr>
+            <td><strong>Ancaman terhadap Kedaulatan</strong></td>
+            <td>Dianggap makar terhadap doktrin diplomasi "Bebas Aktif"</td>
+            <td>Menghilangkan kemampuan dasar negara untuk mempertahankan wilayah teritorialnya</td>
+            <td>Menyeret Indonesia ke dalam "Kekaisaran Informal" dan menjadikan RI proksi konflik kawasan</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Bercermin dari dua lembar sejarah yang kelam ini, kita harus membaca dokumen MDCP April 2026 dengan kacamata kecurigaan strategis tingkat tinggi. Memeluk kembali kemitraan pertahanan eksklusif dengan negara yang pernah menjatuhkan kabinet kita dan mematikan mesin-mesin perang kita adalah sebuah pertaruhan kedaulatan yang sangat berbahaya.</p>
+  </div>
+
+  <div class="section-divider"><span>Dimensi Teknologi</span></div>
+
+  <!-- CHAPTER 2: DIMENSI TEKNOLOGI -->
+  <div class="chapter">
+    <div class="chapter-eyebrow">Dimensi Kedua</div>
+    <h2>Kerangkeng Digital dan Kiamat Industri Pertahanan Nasional</h2>
+
+    <p>Di abad ke-21, peperangan tidak lagi hanya didefinisikan oleh artileri yang berdentum di perbatasan fisik, melainkan oleh pertempuran algoritma, penguasaan atas jaringan komunikasi, dan kemandirian ekosistem industri pertahanan (Defense Industrial Base). Ketika MDCP menjanjikan kolaborasi dalam "sistem otonom, domain bawah permukaan maritim, dan pengembangan teknologi pertahanan generasi berikutnya," hal tersebut terdengar seperti tiket emas menuju militer modern. Namun, realitas operasional dari perolehan teknologi militer Amerika Serikat adalah sebuah labirin pengawasan yang menghilangkan kedaulatan di tingkat kode biner dan rantai pasok.</p>
+
+    <h3>Tangan Tak Kasatmata: ITAR, End-Use Monitoring (EUM), dan Kill-Switch</h3>
+
+    <p>Ketika militer Indonesia mengakuisisi perangkat keras canggih dari Amerika Serikat, seperti helikopter serang AH-64E Apache atau program hibah regenerasi 24 unit pesawat tempur F-16 C/D Block 25 Excess Defense Articles (EDA), senjata-senjata pembunuh tersebut tidak pernah sepenuhnya menjadi "milik" Indonesia dalam arti kebebasan penggunaan.</p>
+
+    <p>Pemerintah Amerika Serikat menerapkan kerangka kontrol ekspor yang paling agresif di dunia melalui International Traffic in Arms Regulations (ITAR) dan sistem End-Use Monitoring (EUM). Melalui program pengawasan global seperti Blue Lantern (untuk transaksi komersial) dan Golden Sentry (untuk program pemerintah ke pemerintah), Amerika Serikat secara hukum berhak mendikte, mengawasi, dan membatasi bagaimana alutsista tersebut digunakan di lapangan.</p>
+
+    <p>Bayangkan sebuah skenario di mana negara merdeka tidak diizinkan menggunakan pesawat tempurnya sendiri. EUM menuntut agar aparat keamanan AS diberikan akses inspeksi fisik yang invasif ke dalam pangkalan-pangkalan militer Indonesia untuk memastikan perangkat tersebut tidak dimodifikasi, tidak dipelajari teknologinya (reverse engineering), dan tidak digunakan untuk tujuan operasi militer yang tidak direstui oleh pandangan geopolitik Washington. Jika militer Indonesia mengerahkan jet tempurnya untuk operasi pemulihan keamanan internal atau penegakan kedaulatan di perbatasan yang kebetulan bertentangan dengan kebijakan luar negeri AS (seperti yang ditakutkan dalam pengaktifan Leahy Law di masa lalu terkait isu Papua), Washington dapat seketika menekan tombol penghentian dukungan suku cadang, merubah alutsista canggih menjadi rongsokan dalam hitungan hari.</p>
+
+    <p>Lebih menakutkan lagi, modernisasi yang tertuang dalam MDCP ini diarahkan pada adopsi Internet of Military Defense Things (IoMDT), di mana perangkat, sensor, dan pasukan saling terhubung dalam jaringan komputasi awan. Mengintegrasikan sistem saraf militer Indonesia dengan teknologi otonom Amerika Serikat menciptakan kerentanan keamanan siber yang absolut. Tanpa kemandirian siber, teknologi back-door atau kill-switch yang tertanam secara rahasia di dalam arsitektur digital alutsista dapat dimatikan dari jarak jauh, melumpuhkan pertahanan Indonesia bahkan sebelum peluru pertama ditembakkan.</p>
+
+    <h3>Penindasan Kedaulatan Digital: Inisiatif Clean Network dan Perang 5G</h3>
+
+    <p>Dominasi teknologi tidak berhenti di pangkalan militer; ia merambat hingga ke telepon genggam di saku jutaan rakyat Indonesia. Di tengah eskalasi perang teknologi global, Amerika Serikat memandang kebangkitan raksasa teknologi Tiongkok, khususnya pengembangan infrastruktur jaringan internet 5G oleh Huawei, sebagai ancaman eksistensial terhadap hegemoni intelijen Barat. Melalui inisiatif diplomasi koersif yang dinamakan "Clean Network" (Jaringan Bersih), Washington secara agresif menekan negara-negara sekutu dan mitranya, termasuk Indonesia, untuk memboikot dan mencabut seluruh komponen Huawei dan ZTE dari infrastruktur telekomunikasi nasional mereka.</p>
+
+    <p>Dampak dari koersi ini sangat merusak kemandirian digital Indonesia. Selama bertahun-tahun, infrastruktur telekomunikasi Tiongkok telah menjadi tulang punggung digitalisasi di Indonesia karena biaya instalasinya yang sangat kompetitif dan teknologinya yang lebih maju. Washington melobi para pemimpin industri dan pembuat kebijakan kita dengan narasi bahwa perangkat Tiongkok akan digunakan untuk memata-matai negara. Namun, narasi ini adalah pedang bermata dua. Dengan memaksa Indonesia untuk hanya menggunakan infrastruktur komputasi awan (cloud computing) dan pusat data dari perusahaan-perusahaan Barat (seperti Amazon, Microsoft, dan Google), Amerika Serikat sebenarnya sedang memindahkan kunci brankas data nasional kita ke Silicon Valley.</p>
+
+    <p>Perusahaan-perusahaan teknologi raksasa Amerika ini berulang kali terbukti sering menghindari kepatuhan penuh terhadap undang-undang perlindungan data lokal, seperti Peraturan Pemerintah No. 71 Tahun 2019 tentang Penyelenggaraan Sistem dan Transaksi Elektronik. Menyerah pada tekanan Clean Network berarti Indonesia kehilangan kemampuan untuk menerapkan strategi "Non-Blok Digital". Kita dipaksa membuang miliaran Dolar untuk mengganti infrastruktur yang ada dengan teknologi Barat yang jauh lebih mahal, menghambat pertumbuhan ekonomi digital lokal, dan merelakan kedaulatan data warga negara berada di bawah bayang-bayang instrumen intelijen paman Sam.</p>
+
+    <h3>Kiamat Industri Pertahanan Dalam Negeri: Tragedi Penghapusan TKDN 2026</h3>
+
+    <p>Pukulan paling fatal terhadap mimpi kemandirian teknologi bangsa terjadi di atas meja perundingan perdagangan. Pada bulan Februari 2026, sebagai bagian dari pelengkap aliansi New Golden Age, pemerintah Indonesia menandatangani Agreement on Reciprocal Trade (ART). Di balik klaim pembukaan akses pasar, perjanjian ini menyimpan bom waktu bagi Badan Usaha Milik Negara (BUMN) strategis seperti PT Pindad, PT Dirgantara Indonesia (PTDI), dan PT PAL.</p>
+
+    <p>Selama bertahun-tahun, salah satu pelindung utama bagi kelangsungan hidup industri manufaktur dan pertahanan lokal adalah kebijakan Tingkat Komponen Dalam Negeri (TKDN). Aturan ini memaksa perusahaan asing yang ingin berjualan ke pemerintah Indonesia untuk menyertakan porsi bahan baku lokal dan melakukan transfer teknologi (seperti pembangunan pabrik perakitan di dalam negeri). Hal ini adalah instrumen mutlak bagi negara berkembang untuk belajar, menciptakan lapangan kerja, dan memastikan bahwa devisa negara berputar di dalam perekonomian domestik.</p>
+
+    <p>Namun, dokumen ART 2026 secara eksplisit mewajibkan Indonesia untuk membebaskan produk-produk industri dan teknologi Amerika Serikat dari persyaratan lokalisasi konten (TKDN). Dampak buruknya tidak dapat diremehkan. Dengan dihapuskannya tameng TKDN, pasar pengadaan barang pemerintah dan militer Indonesia akan dibanjiri oleh komponen suku cadang, kendaraan taktis, dan peralatan komunikasi militer impor dari Amerika Serikat yang diproduksi secara massal dan jauh lebih murah. Tanpa kewajiban investasi lokal, perusahaan multinasional AS akan menarik diri dari kewajiban mentransfer teknologi dan memilih menjadi sekadar importir langsung (direct importer).</p>
+
+    <p>Industri pertahanan domestik yang sedang tertatih-tatih membangun kapasitas inovasi risetnya akan kalah bersaing sebelum sempat bertarung. Visi untuk menciptakan ekosistem industri pertahanan yang berdaulat, yang mampu membangun kapal selam sendiri atau memproduksi roket lokal seperti R-Han 122 mm, akan mati di tengah jalan akibat hilangnya proteksi pasar. Lebih dari sekadar kehilangan devisa, penghapusan TKDN menjamin bahwa militer Indonesia di masa depan akan tetap bergantung secara parasitik pada manufaktur persenjataan asing, memastikan skenario kelumpuhan akibat embargo (seperti tahun 1999) dapat terulang kapan saja Amerika Serikat menginginkannya.</p>
+  </div>
+
+  <div class="section-divider"><span>Dimensi Geopolitik &amp; Ekonomi</span></div>
+
+  <!-- CHAPTER 3: DIMENSI GEOPOLITIK -->
+  <div class="chapter">
+    <div class="chapter-eyebrow">Dimensi Ketiga</div>
+    <h2>Terjebak dalam Jaring "Kekaisaran Informal"</h2>
+
+    <p>Kedaulatan sejati bagi sebuah negara bukanlah sekadar kemampuan untuk mengadakan pemilihan umum atau mencetak mata uang sendiri; kedaulatan adalah kebebasan ruang kebijakan untuk merumuskan hukum ekonomi nasional tanpa adanya paksaan dari luar. Dinamika geopolitik yang terukir dari tahun 2023 hingga April 2026 memperlihatkan secara gamblang bagaimana Washington menggunakan instrumen perdagangan internasional bukan untuk kemakmuran bersama, melainkan sebagai palu godam koersi ekonomi. Melalui taktik "mafia" diplomatik ini, Indonesia dikunci secara struktural ke dalam arsitektur Informal Empire.</p>
+
+    <h3>Bencana Tarif dan Pemerkosaan Keadilan Dagang (Februari 2026)</h3>
+
+    <p>Latar belakang penandatanganan Agreement on Reciprocal Trade (ART) pada tanggal 19 Februari 2026 adalah salah satu momen paling memalukan dan merugikan dalam sejarah negosiasi ekonomi Indonesia. Alih-alih dilandasi semangat persahabatan kemitraan strategis, negosiasi ini lahir di bawah bayang-bayang todongan senjata.</p>
+
+    <p>Sebelumnya, administrasi Donald Trump mengeluarkan Executive Order 14257, sebuah perintah eksekutif sepihak yang secara mengejutkan menetapkan tarif pembalasan yang mencekik sebesar 32% untuk barang-barang ekspor unggulan Indonesia yang masuk ke Amerika Serikat. Terjepit oleh ancaman hancurnya sektor tekstil, alas kaki, dan produk pertanian akibat tarif yang sangat tinggi tersebut, pemerintah Indonesia bergegas pergi ke meja perundingan di Washington. Setelah negosiasi yang berat sebelah, Indonesia akhirnya bersedia menelan pil pahit dan menyepakati perjanjian ART.</p>
+
+    <p>Sebagai kompensasi agar AS bersedia menurunkan tarif produk Indonesia menjadi 19%, Indonesia diwajibkan untuk membebaskan 1.819 pos tarif menjadi 0% (nol persen) untuk hampir seluruh barang industri, komponen kedirgantaraan, hasil pertanian (gandum, kedelai), serta bahan kimia asal Amerika Serikat yang membanjiri pasar lokal kita.</p>
+
+    <div class="warning-box">
+      <strong>Pukulan Ganda yang Memalukan</strong>
+      Kurang dari 24 jam setelah penandatanganan perjanjian ART (pada tanggal 20 Februari 2026), Mahkamah Agung Amerika Serikat menjatuhkan putusan monumental: membatalkan dasar hukum dari Executive Order 14257 dan menyatakan bahwa tarif 32% yang dikenakan Trump adalah ilegal dan inkonstitusional. Indonesia telah terikat pada tarif 19% sementara seluruh dunia menikmati tarif 15% tanpa syarat apapun.
+    </div>
+
+    <p>Namun, yang terjadi pada keesokan harinya adalah sebuah lelucon tragis yang mengkhianati kedaulatan Indonesia. Kurang dari 24 jam setelah penandatanganan perjanjian ART (pada tanggal 20 Februari 2026), Mahkamah Agung Amerika Serikat (US Supreme Court) menjatuhkan putusan monumental: mereka membatalkan dasar hukum dari Executive Order 14257 dan menyatakan bahwa tarif 32% yang dikenakan Trump adalah ilegal dan inkonstitusional.</p>
+
+    <p>Kehilangan senjata utamanya, Presiden Trump segera mengambil celah hukum lain (Trade Act of 1974 Section 122) dan menetapkan tarif global yang baru, yakni hanya sebesar 15% untuk seluruh negara mitra dagangnya di dunia secara otomatis. Bagi Indonesia, implikasinya sangat mengerikan. Karena Indonesia telah terikat secara hukum pada kesepakatan ART yang disahkan sehari sebelumnya, Indonesia terkunci pada kewajiban tarif sebesar 19%. Bayangkan penderitaan ekonomi ini: seluruh negara lain di dunia mendapatkan akses tarif 15% ke Amerika Serikat tanpa perlu menyerahkan kedaulatan apapun, sementara Indonesia—yang dipaksa membebaskan ribuan bea cukai dan menghancurkan industri lokalnya—justru harus membayar tarif ekspor yang lebih mahal (19%).</p>
+
+    <p>Ini bukan sekadar kerugian finansial; ini adalah pelanggaran terang-terangan terhadap prinsip dasar Organisasi Perdagangan Dunia (WTO), yaitu Most-Favored-Nation (MFN). Indonesia secara sukarela telah menempatkan dirinya sebagai negara kelas dua, menerima diskriminasi harga sekaligus dieksploitasi sumber dayanya akibat terburu-buru menandatangani perjanjian yang didasarkan pada landasan hukum AS yang pada akhirnya terbongkar sebagai sesuatu yang palsu dan ilegal.</p>
+
+    <h3>Anatomi Traktat yang Tidak Adil (Unequal Treaty)</h3>
+
+    <p>Membaca teks dari dokumen ART setebal 45 halaman tersebut bagaikan membaca surat penyerahan diri (unequal treaty) khas era kolonial abad ke-19, alih-alih perjanjian modern antar negara berdaulat. Para ahli hukum internasional secara tajam mengkritik ketimpangan asimetris yang luar biasa di dalam naskah tersebut.</p>
+
+    <p>Dalam sebuah perjanjian resiprokal (timbal balik), beban kewajiban seharusnya ditanggung secara berimbang. Namun, statistik linguistik dari dokumen tersebut tidak bisa berbohong. Frasa hukum yang bersifat memaksa terhadap Indonesia, yakni "Indonesia shall" (Indonesia wajib/harus), muncul lebih dari 200 kali di sepanjang dokumen. Sebaliknya, kewajiban yang mengikat Amerika Serikat, "the United States shall", muncul kurang dari 10 kali. Kesenjangan rasio 20:1 ini menegaskan bahwa ini adalah instrumen kepatuhan, bukan instrumen kemitraan.</p>
+
+    <p>Pasal-pasal di dalamnya dirancang dengan sistematis untuk melucuti tameng pertahanan ekonomi Indonesia, bahkan menyentuh jantung konstitusi kedaulatan sumber daya alam kita:</p>
+
+    <ul>
+      <li><strong>Kehilangan Kendali Volume Perdagangan (Pasal 1.2):</strong> Pasal ini melarang Indonesia untuk menerapkan atau mempertahankan segala bentuk pembatasan kuantitatif (kuota impor). Ini berarti pemerintah Republik Indonesia kehilangan instrumen kedaulatannya untuk melindungi petani, peternak, dan produsen pangan lokal dari banjir komoditas murah Amerika (seperti daging sapi, gandum, kedelai, dan susu) yang dapat menghancurkan swasembada pangan nasional.</li>
+      <li><strong>Penyerahan Mutlak Sektor Tambang (Pasal 2.28):</strong> Inilah pasal yang paling membahayakan amanat Pasal 33 UUD 1945. Pasal ini memaksa Indonesia untuk mengizinkan investasi asing di sektor pertambangan mineral kritis tanpa adanya batasan kepemilikan (without ownership restrictions) bagi pemodal dari Amerika Serikat. Ini secara langsung menganulir hukum nasional tentang kewajiban divestasi kepemilikan saham di sektor pertambangan (seperti UU Minerba dan PP 96/2021). Pasal ini membuka jalan tol bagi perusahaan multinasional AS untuk mengeruk kekayaan mineral di Papua dan pulau lainnya secara absolut, menciptakan apa yang oleh koalisi masyarakat sipil disebut sebagai "kolonialisme permanen" tanpa transfer kekayaan ke kas negara atau pelibatan masyarakat adat.</li>
+      <li><strong>Klausul Veto Kebijakan Luar Negeri:</strong> Tidak puas hanya merampas sumber daya, perjanjian ini memiliki jebakan geopolitik yang sangat mematikan. Terdapat klausul di mana AS berhak membatalkan perjanjian dan memberlakukan kembali sanksi tarif 32% (kembali ke Executive Order 14257) jika Indonesia nekat membuat perjanjian perdagangan bebas dengan "negara ketiga" yang dianggap membahayakan "kepentingan esensial AS". Tidak ada nama negara yang disebutkan secara spesifik, namun arahnya sangat jelas: Tiongkok. Pasal ini merampas kebebasan diplomatik Indonesia, menjadikan musuh perdagangan Amerika Serikat sebagai musuh otomatis Indonesia. Ini adalah pembunuhan terencana terhadap prinsip politik luar negeri "Bebas Aktif", menjadikan Jakarta tak ubahnya proksi yang tunduk di bawah telunjuk Washington.</li>
+    </ul>
+
+    <div class="table-wrapper">
+      <table class="data-table">
+        <caption>Anatomi Ketimpangan ART 2026: Unequal Treaty</caption>
+        <thead>
+          <tr>
+            <th>Dimensi</th>
+            <th>Kewajiban Absolut bagi Indonesia (Dipaksa)</th>
+            <th>Hak Istimewa / Kewajiban bagi Amerika Serikat</th>
+            <th>Dampak Kehancuran Kedaulatan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Frekuensi Paksaan Linguistik</strong></td>
+            <td>&gt; 200 perintah klausul "Indonesia shall"</td>
+            <td>&lt; 10 kewajiban "The United States shall"</td>
+            <td>Menempatkan RI sebagai wilayah sub-ordinat (jajahan ekonomi) secara hukum tata negara</td>
+          </tr>
+          <tr>
+            <td><strong>Proteksi Kuota Pasar Domestik</strong></td>
+            <td>Dilarang keras membatasi kuantitas volume impor AS (Pasal 1.2)</td>
+            <td>Bebas mendistorsi pasar agrikultur dan teknologi Indonesia dengan pasokan tak terbatas</td>
+            <td>Krisis swasembada pangan; kebangkrutan peternak lokal; defisit neraca berjalan membengkak</td>
+          </tr>
+          <tr>
+            <td><strong>Eksploitasi Mineral Kritis &amp; SDA</strong></td>
+            <td>Wajib buka 100% kepemilikan asing tanpa batas di sektor tambang (Pasal 2.28)</td>
+            <td>Mengamankan rantai pasok mineral kritis AS (nikel, dsb.) dengan biaya eksploitasi minim</td>
+            <td>Menganulir UU Minerba (kewajiban divestasi hilang); Kolonialisme permanen ekstraktif di Papua</td>
+          </tr>
+          <tr>
+            <td><strong>Otonomi Diplomasi Luar Negeri</strong></td>
+            <td>Dapat dihukum jika membuat perjanjian dengan "negara ketiga" yang tak disukai AS</td>
+            <td>Memegang hak veto sepihak untuk membatalkan seluruh isi perjanjian (Ancaman Sanksi)</td>
+            <td>Menghancurkan fondasi doktrin diplomasi "Bebas Aktif"; menjadikan RI sebagai martir perang dagang AS</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Penyelidikan Section 301: Todongan Pistol di Kepala Industri</h3>
+
+    <p>Bagaikan penagih utang mafia yang tidak pernah puas, Amerika Serikat terus melipatgandakan tekanan. Meskipun Indonesia telah berlutut menandatangani ART yang sangat memberatkan tersebut, administrasi Trump tetap meluncurkan investigasi baru pada bulan April 2026. Dengan menggunakan mekanisme Section 301 di bawah Undang-Undang Perdagangan AS, Washington mulai menyelidiki struktur perekonomian Indonesia dengan ancaman akan memberlakukan tarif pembalasan tambahan (di atas angka 19% yang sudah berjalan).</p>
+
+    <p>Tuduhan yang dilemparkan sungguh di luar nalar sehat diplomasi dagang. Investigasi ini fokus pada dua isu yang direkayasa:</p>
+
+    <ul>
+      <li><strong>Dugaan Kapasitas Berlebih (Structural Excess Capacity):</strong> Pemerintah AS dengan sewenang-wenang menuduh industri semen Indonesia mengalami kelebihan produksi massal yang mendistorsi pasar internasional. Hal ini sangat absurd karena seperti yang ditegaskan oleh Menteri Koordinator Bidang Perekonomian, Airlangga Hartarto, Indonesia pada faktanya sama sekali tidak pernah mengekspor semen ke Amerika Serikat. Washington hanya menggunakan data surplus perdagangan keseluruhan Indonesia yang mencapai $56,15 miliar sebagai dalih untuk menciptakan ketakutan.</li>
+      <li><strong>Tuduhan Kerja Paksa (Forced Labor):</strong> Industri tekstil dan pakaian jadi Indonesia yang merupakan urat nadi jutaan pekerja kecil ditargetkan karena diduga menggunakan bahan baku serat kapas yang diimpor dari Tiongkok, yang oleh AS distigma sebagai produk hasil kerja paksa.</li>
+    </ul>
+
+    <p>Tindakan ini menyiksa industri padat karya nasional. Di satu sisi, industri garmen lokal kita sudah setengah mati dihantam oleh gempuran impor tekstil murah dari Tiongkok ke dalam pasar domestik. Di sisi lain, sisa harapan untuk mengekspor produk jadi mereka ke Amerika Serikat justru ditutup oleh investigasi tuduhan kerja paksa ini. Penggunaan Section 301 bukanlah tentang penegakan keadilan; ia adalah instrumen koersi terang-terangan untuk memastikan bahwa Indonesia tetap patuh terhadap setiap tuntutan politik Washington, sebuah pengingat brutal akan posisi sub-ordinat kita dalam aliansi New Golden Age ini.</p>
+  </div>
+
+  <div class="section-divider"><span>Dimensi Geostrategis</span></div>
+
+  <!-- CHAPTER 4: DIMENSI GEOSTRATEGIS -->
+  <div class="chapter">
+    <div class="chapter-eyebrow">Dimensi Keempat</div>
+    <h2>Terseret Pusaran Konflik Bersenjata dan Runtuhnya Pilar Kawasan</h2>
+
+    <p>Kedaulatan ekonomi yang dirampok mungkin dapat dibangun kembali dalam beberapa dekade, namun keterlibatan buta ke dalam konflik geostrategis kekuatan besar akan mengorbankan darah, nyawa prajurit, dan keutuhan teritorial yang tidak dapat dikembalikan. Kemitraan strategis MDCP secara perlahan namun pasti telah menggeser pilar penyangga keamanan Indonesia, menyeret negara ini ke garis depan ambisi militer Amerika Serikat yang memancing reaksi destruktif, baik di Timur Tengah maupun di halaman belakang kita sendiri, Laut Natuna Utara dan ASEAN.</p>
+
+    <h3>Bencana Board of Peace dan Jebakan Berdarah di Timur Tengah (Februari 2026)</h3>
+
+    <p>Konsekuensi paling fatal dari kedekatan personal dan keselarasan strategis dengan administrasi Donald Trump meledak dalam tragedi inisiatif "Board of Peace" (BoP). Pasca-kehancuran yang ditinggalkan oleh konflik brutal selama dua tahun di Gaza, Amerika Serikat mengoordinasikan pembentukan organisasi keamanan dan rekonstruksi baru pada 19 Februari 2026 di Washington D.C., di luar kerangka resmi Perserikatan Bangsa-Bangsa (PBB). Organisasi ini dirancang agar Trump memiliki kendali mutlak tanpa batas waktu atas masa depan wilayah Palestina.</p>
+
+    <p>Mencari legitimasi global, Trump menekan negara-negara sekutunya. Indonesia, yang tersanjung oleh retorika kemitraan, membuat komitmen militer dan diplomasi yang sangat membahayakan: menjanjikan pengiriman 8.000 prajurit TNI—komponen terbesar dari total 20.000 pasukan dalam International Stabilization Force (ISF)—untuk diterjunkan langsung ke dalam titik terpanas konflik di Gaza di bawah bendera BoP, bukan bendera PBB.</p>
+
+    <p>Dampak mengerikan dari perjudian diplomasi ini segera menghantam kedaulatan kita dari tiga penjuru:</p>
+
+    <ul>
+      <li><strong>Pemerasan Finansial (Pay-to-Play):</strong> Segera setelah komitmen dibuat, karakter asli dewan tersebut terbongkar. Untuk mendapatkan status keanggotaan tetap yang memiliki pengaruh, setiap negara diwajibkan menyetor iuran sebesar US$ 1 Miliar (sekitar 16 Triliun Rupiah) kepada dana yang dikendalikan oleh AS. Para pengamat dan diplomat senior, seperti Dino Patti Djalal, mencerca kewajiban ini sebagai hal yang "omong kosong" (nonsense) dan sangat absurd, mengingat nilainya jauh melampaui sumbangsih operasional Indonesia untuk seluruh arsitektur kawasan ASEAN. Ini bukan dewan perdamaian; ini adalah kartel geopolitik berbayar.</li>
+      <li><strong>Legitimasi Hukum dan Kemarahan Domestik:</strong> Badan ini dikutuk oleh komunitas internasional (termasuk teguran dari Uni Eropa) karena beroperasi tanpa mandat hukum resolusi Dewan Keamanan PBB dan dirancang tanpa melibatkan suara rakyat Palestina. Di dalam negeri, keikutsertaan ini menyulut kemarahan publik yang luar biasa. Majelis Ulama Indonesia (MUI) merilis penolakan keras, menstigma BoP sebagai entitas "neokolonial" yang hanya melayani kepentingan Israel untuk mengontrol Gaza, bukan membebaskannya. Tokoh nasional Anies Baswedan mengecam langkah ini sebagai pelanggaran brutal terhadap marwah doktrin kebijakan luar negeri Indonesia yang anti-penjajahan.</li>
+      <li><strong>Jebakan Proksi Perang Terbuka:</strong> Puncak dari kegagalan strategis ini terjadi hanya beberapa minggu kemudian. Mengabaikan mandat stabilitas yang dijanjikannya sendiri, Amerika Serikat dan Israel meluncurkan serangan militer mendadak berskala besar terhadap Iran. Tiba-tiba, 8.000 prajurit TNI yang rencananya tergabung dalam ISF mendapati diri mereka terancam berada di pihak blok yang memicu perang regional baru di Timur Tengah. Gelombang protes yang membakar kedutaan dan tekanan domestik akhirnya memaksa pemerintah Indonesia menelan rasa malu diplomatik yang mendalam dengan secara resmi "menunda" (pause) keterlibatannya dalam dewan tersebut, sebuah kemunduran diplomasi yang menghancurkan wibawa Jakarta di mata dunia Islam.</li>
+    </ul>
+
+    <div class="pull-quote">
+      <p>Insiden BoP membuktikan secara mengerikan bahwa merapat ke Washington bukan berarti membawa perdamaian, melainkan menyewakan darah tentara Indonesia untuk menjadi pion pengaman bagi konflik yang diciptakan oleh ambisi imperialis Amerika Serikat.</p>
+    </div>
+
+    <h3>Kedaulatan Udara yang Dijual: Perjanjian Overflight Rahasia</h3>
+
+    <p>Jika di Timur Tengah kita mengirim pasukan ke zona maut, di halaman rumah sendiri kita mengundang mesin perang raksasa untuk lalu-lalang di atas atap kita. Di tengah hingar-bingar perundingan aliansi bulan Februari 2026, sebuah kesepakatan tingkat tinggi berstatus sangat rahasia (classified) bertajuk "Operationalizing U.S. Overflight" dilaporkan telah disetujui.</p>
+
+    <p>Dokumen ini merupakan penyerahan luar biasa atas kedaulatan ruang udara Republik Indonesia. Sebelumnya, setiap pesawat tempur asing yang melintasi langit kita harus mendapatkan izin ketat untuk setiap insiden penerbangan (persetujuan case-by-case). Dengan berlakunya dokumen ini, pesawat militer Amerika Serikat diberikan izin sapu jagat (blanket authorization) dan hak melintas tanpa persetujuan individu (hanya bermodalkan notifikasi via hotline ke markas komando pertahanan udara) untuk misi-misi kontingensi dan operasi darurat. Militer AS kini memiliki akses jalan tol mematikan yang menembus ruang angkasa di atas Selat Malaka, Samudra Hindia, hingga ke tepian Laut China Selatan.</p>
+
+    <p>Dampak geostrategisnya tidak dapat ditoleransi oleh nalar pertahanan manapun. Dengan membiarkan wilayah udaranya menjadi koridor peluncuran (launch pad) bagi aset udara Amerika Serikat, Indonesia secara de facto mengubah posisinya di mata hukum perang internasional. Jika sewaktu-waktu ketegangan antara Amerika Serikat dan Tiongkok meletus menjadi perang terbuka terkait perebutan pengaruh di Selat Taiwan atau Laut China Selatan, pesawat pengebom dan jet pemburu AS akan meluncur dengan kecepatan penuh melintasi langit nusantara. Akibatnya, stasiun radar militer dan bandara di Indonesia secara otomatis akan dikategorikan sebagai target sah (legitimate target) oleh rudal balistik jarak menengah Tiongkok. Kedaulatan yang ditukar dengan janji aliansi ini justru menempatkan jutaan nyawa warga sipil Indonesia di garis bidik rudal dalam peperangan yang bukan milik kita.</p>
+
+    <h3>Amukan Sang Naga: Pembalasan Tiongkok dan Bara di Laut Natuna Utara</h3>
+
+    <p>Reaksi agresif atas keberpihakan asimetris Indonesia terhadap Washington tidak butuh waktu lama untuk meledak. Tiongkok, sang raksasa Asia yang selama bertahun-tahun bertengger sebagai mitra dagang terbesar dan investor utama proyek hilirisasi di Indonesia, tidak duduk diam melihat halaman selatannya diubah menjadi basis kekuatan hegemonik musuhnya.</p>
+
+    <p>Kemarahan Beijing pertama kali bergema di ranah diplomatik dan ekonomi. Menanggapi klausul dalam perjanjian ART yang mengancam Indonesia jika berani bermitra dengan "negara ketiga" (klausul yang secara eksplisit menargetkan Beijing), Kementerian Perdagangan Tiongkok (MOFCOM) dan Juru Bicara Kementerian Luar Negeri Mao Ning melancarkan peringatan keras. Mereka mengecam langkah tersebut sebagai bentuk perundungan ekonomi yang merusak tatanan global dan tidak seharusnya merugikan pihak ketiga mana pun. Para analis ekonomi, seperti Bhima Yudhistira, membunyikan alarm bahaya: sangat mudah bagi Beijing untuk mencekik balik perekonomian kita, mulai dari menghentikan pembangunan infrastruktur strategis seperti kereta cepat dan jaringan AI, hingga menerapkan pembalasan barikade non-tarif berlapis yang akan melumpuhkan rantai ekspor Indonesia ke daratan Tiongkok.</p>
+
+    <p>Namun, peringatan yang paling mematikan tidak disampaikan melalui konferensi pers, melainkan melalui lambung baja kapal perang putih di tengah lautan. Pada bulan April 2026, segera setelah aliansi Washington-Jakarta menguat, situasi di Laut Natuna Utara memanas dengan cepat. Kapal Penjaga Pantai Tiongkok (China Coast Guard / CCG) bernomor lambung 5302 berukuran masif melakukan manuver provokatif dan mengintimidasi kapal survei seismik bernama Geo Coral yang tengah beroperasi secara sah di dalam Zona Ekonomi Eksklusif (ZEE) dan landas kontinen milik Indonesia.</p>
+
+    <p>Intimidasi maritim ini bukanlah insiden patroli yang kebetulan. Ini adalah teguran kinetik dari Tentara Pembebasan Rakyat (PLA) Tiongkok, menggemakan doktrin pertahanan baru mereka yang semakin agresif dalam menanggapi keberadaan Amerika Serikat di periferi mereka. Pesannya sangat jernih: kedekatan militer dengan Washington tidak akan menyurutkan klaim Sembilan Garis Putus (nine-dash line) Beijing, melainkan justru akan mengundang agresi fisik yang lebih asertif dan koersif terhadap aset dan teritorial kedaulatan Indonesia. Indonesia, yang berpikir mendapatkan perisai perlindungan dari AS, justru mengubah halaman depannya menjadi medan pertempuran (flashpoint) di perairan Natuna.</p>
+
+    <h3>Runtuhnya Jangkar Geopolitik Asia Tenggara: Kematian Sentralitas ASEAN</h3>
+
+    <p>Kerugian pamungkas yang menyempurnakan malapetaka strategis ini adalah runtuhnya wibawa diplomasi regional yang selama ini dibangun dengan susah payah oleh para diplomat kita. Sejak berakhirnya Perang Dingin, pelindung terkuat kedaulatan Indonesia di dunia bukanlah senjata berat, melainkan kekuatan pengaruhnya sebagai motor penggerak dan pemimpin tak tertulis di Perhimpunan Bangsa-Bangsa Asia Tenggara (ASEAN).</p>
+
+    <p>Konsep "Sentralitas ASEAN" dirancang untuk satu tujuan krusial: memastikan bahwa negara-negara Asia Tenggara secara kolektif menentukan nasib kawasannya sendiri, membentuk perisai penyeimbang (hedging) sehingga hegemoni besar seperti AS dan Tiongkok tidak bisa mendikte atau menjadikan kawasan ini sebagai proksi medan tempur mereka. Kekuatan kawasan ini bertumpu pada keyakinan bahwa seluruh anggota, khususnya Indonesia, tidak akan mengikatkan diri dalam aliansi militer sepihak yang membahayakan negara tetangga.</p>
+
+    <p>Kemitraan pertahanan (MDCP) dan pakta keamanan-perdagangan terselubung dengan Amerika Serikat (ART 2026) secara telak telah menghancurkan pilar kepercayaan institusional tersebut. Ketika Indonesia—sebagai negara terbesar yang seharusnya menjadi kompas penjaga netralitas—justru menyerahkan wilayah udaranya kepada militer AS, berjanji memusuhi "negara ketiga" demi tarif dagang, dan menyandarkan teknologi komunikasi dan militernya pada kehendak Washington, maka jangkar keseimbangan regional telah tercabut.</p>
+
+    <p>Negara-negara ASEAN lainnya, yang menyadari kemunafikan retorika Jakarta, akan didorong oleh rasa takut untuk mencari pelindung militer eksternal mereka sendiri. Langkah pragmatis Indonesia ini akan memicu polarisasi tajam, memecah belah blok regional yang kohesif menjadi faksi-faksi kecil: sebagian bersandar pada pelukan keamanan militer Washington, sementara yang lain terpaksa bersujud pada gravitasi ekonomi Beijing. Perlombaan senjata (arms race) akan meningkat tajam tanpa adanya arsitektur manajemen konflik yang dipimpin Jakarta.</p>
+
+    <p>Pada akhirnya, kehilangan kepemimpinan moral dan strategis di ASEAN berarti Indonesia akan menatap masa depan dengan berdiri sendirian. Tanpa perisai komunitas regional, kapal besar Republik Indonesia akan terus diombang-ambingkan oleh badai kepentingan para adidaya yang tak kenal ampun.</p>
+  </div>
+
+</div><!-- end .container -->
+
+<!-- CONCLUSION -->
+<div class="conclusion">
+  <div class="container">
+    <div class="chapter-eyebrow">Kesimpulan</div>
+    <h2>Merebut Kembali Kendali Atas <em>Takdir Kedaulatan</em></h2>
+
+    <p>Menyusuri lembar demi lembar anatomi Kemitraan Strategis Komprehensif dan perjanjian New Golden Age antara Indonesia dan Amerika Serikat mengantarkan kita pada sebuah kesimpulan obyektif yang sangat getir: ini bukanlah fajar dari sebuah zaman keemasan, melainkan malam panjang di mana elemen-elemen paling fundamental dari kedaulatan bangsa kita dikorbankan di atas altar ilusi kemakmuran dan keamanan instan.</p>
+
+    <p>Tinjauan sejarah dengan jelas memaparkan bahwa penderitaan yang sama akan selalu berulang jika kelemahan yang sama kembali dipeluk. Runtuhnya Kabinet Sukiman akibat jebakan Mutual Security Act pada tahun 1952 dan lumpuhnya pertahanan angkatan perang kita akibat Leahy Law (embargo senjata) dari tahun 1999 hingga 2005 adalah hukum alam diplomasi internasional yang tidak dapat ditawar: ketergantungan absolut pada satu kutub adidaya selalu menempatkan nyawa sebuah bangsa ke dalam sebuah tombol sakelar yang dipegang oleh tangan asing.</p>
+
+    <p>Di era peperangan kontemporer, penindasan beroperasi melalui dimensi teknologi dan kode komputer. Penerapan invasif inspektur pengawas End-Use Monitoring (EUM) atas peralatan seperti F-16 C/D Block 25, pemaksaan pembongkaran infrastruktur telekomunikasi Tiongkok melalui pemerasan inisiatif Clean Network, dan integrasi sistem pertahanan siber ke dalam jejaring komputasi IoMDT Barat, telah mendelegasikan ruang kemudi komando nasional kita ke perusahaan-perusahaan teknologi dan badan intelijen Paman Sam. Ditambah dengan klausul bunuh diri dalam perjanjian ART 2026 yang menghapuskan aturan pelindungan Tingkat Komponen Dalam Negeri (TKDN), lonceng kematian telah dibunyikan bagi industri manufaktur pertahanan lokal (PT Pindad, PTDI, dll.), memastikan keterbelakangan permanen bagi anak bangsa kita dalam membangun persenjataan berdaulat.</p>
+
+    <p>Rasa keadilan runtuh seketika saat membedah geografi ekonomi politik di balik penandatanganan Agreement on Reciprocal Trade (ART) pada Februari 2026. Alih-alih mendapatkan keringanan, Indonesia menjadi bahan tertawaan karena mengunci diri pada tarif ekspor 19% untuk Amerika Serikat. Sementara itu, negara-negara lain di dunia (berkat putusan Mahkamah Agung AS yang membatalkan ancaman sepihak Presiden Trump) secara otomatis menikmati tarif 15% tanpa perlu tunduk pada persyaratan apapun. Demi tarif diskriminatif yang cacat hukum ini, Indonesia harus menyerahkan perisai kuota impor pangannya (Pasal 1.2), menggadaikan penguasaan investasi mineral tambang di tanah Papua secara absolut 100% kepada raksasa asing (Pasal 2.28), dan membiarkan leher industri tekstilnya dicekik oleh tuduhan palsu kerja paksa melalui senjata peluru investigasi Section 301 yang rasis dan politis.</p>
+
+    <div class="pull-quote">
+      <p>Doktrin "Bebas Aktif" bukan sekadar jimat masa lalu; ia adalah satu-satunya pelampung kelangsungan hidup negara ini agar tidak karam tertelan gelombang ambisi imperialisme abad ke-21.</p>
+    </div>
+
+    <p>Bencana pamungkas dari seluruh petualangan ini adalah kematian pelan-pelan dari doktrin geopolitik "Bebas Aktif". Terseret masuk ke dalam proyek pemerasan Board of Peace (BoP) yang mengorbankan nyawa pasukan Indonesia di garis depan pembantaian Timur Tengah, dan menggadaikan kedaulatan langit Nusantara melalui perjanjian izin perlintasan (overflight) militer, telah membuat Indonesia kehilangan otonomi moral dan pertahanannya. Pembalasan agresif berupa gempuran maritim armada China Coast Guard di zona perairan kita di Laut Natuna Utara pada bulan April 2026 adalah alarm yang berdering kencang bahwa bersembunyi di ketiak satu hegemon tidak membawa perdamaian, melainkan mempercepat kedatangan perang ke halaman rumah kita. Kehilangan kepemimpinan di ASEAN menyegel nasib negara ini sebagai bidak rentan dalam permainan adidaya.</p>
+
+    <p>Untuk selamat dari jebakan badai sempurna ini, Pemerintah dan Dewan Perwakilan Rakyat Republik Indonesia tidak memiliki pilihan sejarah selain merebut kembali kemudi yang hampir tenggelam. Segala bentuk kelemahan institusional, pembisik kepentingan pribadi, dan ketundukan diplomatik harus disapu bersih. Perjanjian ART 2026 yang terbukti sebagai ketimpangan asimetris (unequal treaty) dan bertentangan dengan keadilan hakiki hukum perdagangan harus ditolak proses ratifikasinya dengan segala kekuatan diplomasi dan hukum perundang-undangan domestik.</p>
+
+    <p>Indonesia harus secepatnya merajut kembali diversifikasi persahabatan global, melindungi ketahanan industri pertahanan nasional, serta mengukuhkan posisinya sebagai arsitek perdamaian di pusaran ASEAN, bukan sebagai pembebek instruksi aliansi. Menjadi bangsa yang besar dan berdaulat tidak cukup dengan merayakan euforia di acara konferensi pers berskala internasional. Kedaulatan sejati adalah tentang memiliki kekuatan otot ekonomi dan keberanian baja untuk memandang wajah para penguasa dunia, dan ketika disodorkan sebuah lembar penyerahan diri berbalut kerja sama strategis, dengan tegas mengucapkan: <strong>"Tidak."</strong></p>
+  </div>
+</div>
+
+<!-- REFERENCES -->
+<div class="container">
+  <div class="references">
+    <div class="references-header">Daftar Pustaka (96 Sumber)</div>
+    <ol class="ref-list">
+      <li>Enhancement of the Indonesia-United States Partnership into a Comprehensive Strategic Partnership - General Environment - Legal Centric<br><a href="https://legalcentric.com/content/view/186676" target="_blank">https://legalcentric.com/content/view/186676</a></li>
+      <li>FACT SHEET: President Joseph R. Biden and President Joko Widodo Announce the U.S.-Indonesia Comprehensive Strategic Partnership - U.S. Embassy &amp; Consulates in Indonesia<br><a href="https://id.usembassy.gov/fact-sheet-president-joseph-r-biden-and-president-joko-widodo-announce-the-u-s-indonesia-comprehensive-strategic-partnership/" target="_blank">https://id.usembassy.gov/fact-sheet-...</a></li>
+      <li>LEMBAR INFORMASI: Presiden Joseph R. Biden dan Presiden Joko Widodo Mengumumkan Kemitraan Strategis Komprehensif AS-Indonesia - Kedutaan Besar dan Konsulat AS di Indonesia<br><a href="https://id.usembassy.gov/id/lembar-informasi-presiden-joseph-r-biden-dan-presiden-joko-widodo-mengumumkan-kemitraan-strategis-komprehensif-as-indonesia/" target="_blank">https://id.usembassy.gov/id/lembar-informasi-...</a></li>
+      <li>Amerika Serikat Sepakat Tingkatkan Kemitraan Kedua Negara Menjadi Comprehensive Strategic Partnership - Kementerian Koordinator Bidang Perekonomian Republik Indonesia<br><a href="https://ekon.go.id/publikasi/detail/5481/indonesia-amerika-serikat-sepakat-tingkatkan-kemitraan-kedua-negara-menjadi-comprehensive-strategic-partnership" target="_blank">https://ekon.go.id/publikasi/detail/5481/...</a></li>
+      <li>Kerja Sama Bilateral - Portal Kemlu<br><a href="https://kemlu.go.id/kebijakan/kerja-sama-bilateral" target="_blank">https://kemlu.go.id/kebijakan/kerja-sama-bilateral</a></li>
+      <li>Indonesia and United States Agree on Reciprocal Trade Agreement - Wantimpres<br><a href="https://wantimpres.go.id/en/2026/02/indonesia-and-united-states-agree-on-reciprocal-trade-agreement/" target="_blank">https://wantimpres.go.id/en/2026/02/...</a></li>
+      <li>Implementation of the Agreement Toward a NEW GOLDEN AGE for the U.S.-Indonesian Alliance - The White House<br><a href="https://www.whitehouse.gov/briefings-statements/2026/02/implementation-of-the-agreement-toward-a-new-golden-age-for-the-u-s-indonesian-alliance/" target="_blank">https://www.whitehouse.gov/briefings-statements/2026/02/...</a></li>
+      <li>Indonesia and US Sign Trade Deal for New Golden Age Alliance - Tempo.co<br><a href="https://en.tempo.co/read/2088185/indonesia-and-us-sign-trade-deal-for-new-golden-age-alliance" target="_blank">https://en.tempo.co/read/2088185/...</a></li>
+      <li>Informal Empire and the U.S.-Indonesia Trade Deal - LAB 45<br><a href="https://www.lab45.id/detail/445/informal-empire-and-the-u-s-indonesia-trade-deal" target="_blank">https://www.lab45.id/detail/445/informal-empire-...</a></li>
+      <li>Kabinet Sukiman XII IPA 2 | PDF | Politik | Sejarah - Scribd<br><a href="https://id.scribd.com/presentation/356495034/kabinet-sukiman-XII-IPA-2-pptx" target="_blank">https://id.scribd.com/presentation/356495034/...</a></li>
+      <li>Foreign Relations of the United States, 1952–1954, East Asia and the Pacific, Volume XII, Part 2 - Historical Documents - Office of the Historian<br><a href="https://history.state.gov/historicaldocuments/frus1952-54v12p2/d251" target="_blank">https://history.state.gov/historicaldocuments/frus1952-54v12p2/d251</a></li>
+      <li>Program dan Jatuhnya Kabinet Sukiman | PDF - Scribd<br><a href="https://id.scribd.com/document/373779818/KABINET-SUKIMAN" target="_blank">https://id.scribd.com/document/373779818/KABINET-SUKIMAN</a></li>
+      <li>Analisis Dampak Embargo Militer Tahun 1999 terhadap Upaya Kemandirian Pertahanan Maritim TNI AL - ResearchGate<br><a href="https://www.researchgate.net/publication/397376576_Analisis_Dampak_Embargo_Militer_Tahun_1999_terhadap_Upaya_Kemandirian_Pertahanan_Maritim_TNI_AL" target="_blank">https://www.researchgate.net/publication/397376576_...</a></li>
+      <li>Dampak kebijakan embargo senjata dalam hubungan kerjasama - UPH Repository<br><a href="https://repository.uph.edu/id/eprint/6433/" target="_blank">https://repository.uph.edu/id/eprint/6433/</a></li>
+      <li>Kebijakan Amerika Serikat meningkatkan kerjasama militer dengan Indonesia 2001-2005 - Repository UNAIR<br><a href="https://repository.unair.ac.id/15005/" target="_blank">https://repository.unair.ac.id/15005/</a></li>
+      <li>Leahy Conditions on Restrictions of Military Assistance for Indonesia Have Not Been Met<br><a href="https://etan.org/etanpdf/pdf2/leahy.pdf" target="_blank">https://etan.org/etanpdf/pdf2/leahy.pdf</a></li>
+      <li>Studi Kasus Embargo Militer AS 1999 dan Implikasinya terhadap Kesiapan Tempur TNI AL - Prezi<br><a href="https://prezi.com/p/oi1sudaozaf3/studi-kasus-embargo-militer-as-1999-dan-implikasinya-terhadap-kesiapan-tempur-tni-al/" target="_blank">https://prezi.com/p/oi1sudaozaf3/...</a></li>
+      <li>HOW EFFECTIVE IS INDONESIA'S STRATEGIC HEDGING APPROACH? - Jurnal Pertahanan dan Bela Negara<br><a href="https://jurnal.idu.ac.id/index.php/JPBH/article/view/19841" target="_blank">https://jurnal.idu.ac.id/index.php/JPBH/article/view/19841</a></li>
+      <li>Fact Sheet: Excess Defense Article (EDA) F-16 Refurbishment - U.S. Embassy &amp; Consulates in Indonesia<br><a href="https://id.usembassy.gov/fact-sheet-excess-defense-article-eda-f-16-refurbishment/" target="_blank">https://id.usembassy.gov/fact-sheet-excess-defense-article-eda-f-16-refurbishment/</a></li>
+      <li>Expanding the Scope of End-Use Monitoring Policies to Address Operational Use of U.S.-Origin Weapons - RAND<br><a href="https://www.rand.org/pubs/research_reports/RRA2961-2.html" target="_blank">https://www.rand.org/pubs/research_reports/RRA2961-2.html</a></li>
+      <li>End-Use and End-User Based Export Controls, Including U.S. Persons Activities Controls - Federal Register<br><a href="https://www.federalregister.gov/documents/2024/07/29/2024-16496/end-use-and-end-user-based-export-controls-including-us-persons-activities-controls-military-and" target="_blank">https://www.federalregister.gov/documents/2024/07/29/2024-16496/...</a></li>
+      <li>Chapter 8 - Security Assistance Management Manual - DSCA<br><a href="https://samm.dsca.mil/chapter/chapter-8" target="_blank">https://samm.dsca.mil/chapter/chapter-8</a></li>
+      <li>End-Use Monitoring of Defense Articles and Defense Services Commercial Exports - DDTC<br><a href="https://www.pmddtc.state.gov/sys_attachment.do?sys_id=6ce72c35dbb51340528c750e0f96195c" target="_blank">https://www.pmddtc.state.gov/sys_attachment.do?...</a></li>
+      <li>THE INTERNET OF MILITARY DEFENSE THINGS (IoMDT): TANTANGAN, PELUANG DAN ANCAMAN BAGI INDONESIA - Kemhan RI<br><a href="https://www.kemhan.go.id/pothan/2025/04/09/the-internet-of-military-defense-things-iomdt-tantangan-peluang-dan-ancaman-bagi-indonesia.html" target="_blank">https://www.kemhan.go.id/pothan/2025/04/09/...</a></li>
+      <li>The Impact of Advanced Technology on Indonesia's National Security Stability - Jurnal IDU<br><a href="https://jurnal.idu.ac.id/index.php/DefenseJournal/article/view/16858" target="_blank">https://jurnal.idu.ac.id/index.php/DefenseJournal/article/view/16858</a></li>
+      <li>Kebijakan Penolakan Teknologi 5G Huawei Tiongkok oleh Amerika Serikat - UNDIP E-Journal<br><a href="https://ejournal3.undip.ac.id/index.php/jihi/article/download/33412/26645" target="_blank">https://ejournal3.undip.ac.id/index.php/jihi/article/download/33412/26645</a></li>
+      <li>Geopolitical Pressures and Digital Sovereignity: Indonesia's Strategic Response to US-China Data Hegemony - Jurnal HI Unair<br><a href="https://e-journal.unair.ac.id/JHI/article/view/76019" target="_blank">https://e-journal.unair.ac.id/JHI/article/view/76019</a></li>
+      <li>Amerika Incar Bisnis Cloud Eropa untuk Beri Tekanan Huawei - Cloud Computing Indonesia<br><a href="https://event.cloudcomputing.id/berita/amerika-incar-eropa-untuk-tekan-huawei" target="_blank">https://event.cloudcomputing.id/berita/...</a></li>
+      <li>Understanding the New U.S.–Indonesia Trade Agreement and What It Means for Businesses - Assegaf Hamzah &amp; Partners<br><a href="https://www.ahp.id/understanding-the-new-u-s-indonesia-trade-agreement-and-what-it-means-for-businesses/" target="_blank">https://www.ahp.id/understanding-the-new-u-s-indonesia-trade-agreement-...</a></li>
+      <li>Apa yang Terjadi Jika Pemerintah Menghapus Aturan TKDN? - Radar Tuban<br><a href="https://radartuban.jawapos.com/nasional/2504100004/apa-yang-terjadi-jika-pemerintah-menghapus-aturan-tkdn-begini-penjelasan-lengkapnya" target="_blank">https://radartuban.jawapos.com/nasional/2504100004/...</a></li>
+      <li>Fact Sheet: Trump Administration Finalizes Trade Deal with Indonesia - US Embassy<br><a href="https://id.usembassy.gov/fact-sheet-trump-administration-finalizes-trade-deal-with-indonesia/" target="_blank">https://id.usembassy.gov/fact-sheet-trump-administration-finalizes-trade-deal-with-indonesia/</a></li>
+      <li>Berisiko bagi RI, Koalisi Gugat Perjanjian Dagang Indonesia-AS - Mongabay<br><a href="https://mongabay.co.id/2026/03/18/berisiko-bagi-ri-koalisi-gugat-perjanjian-dagang-indonesia-amerika-serikat/" target="_blank">https://mongabay.co.id/2026/03/18/...</a></li>
+      <li>Waswas TKDN Dihapus: Industri Dalam Negeri Nyeri, Investor Lari - Bloomberg Technoz<br><a href="https://www.bloombergtechnoz.com/detail-news/68060/waswas-tkdn-dihapus-industri-dalam-negeri-nyeri-investor-lari" target="_blank">https://www.bloombergtechnoz.com/detail-news/68060/...</a></li>
+      <li>Apa Dampak Pembebasan TKDN bagi Industri Domestik - Tempo.co<br><a href="https://www.tempo.co/ekonomi/apa-dampak-pembebasan-tkdn-bagi-industri-domestik-2051522" target="_blank">https://www.tempo.co/ekonomi/apa-dampak-pembebasan-tkdn-bagi-industri-domestik-2051522</a></li>
+      <li>Fact Sheet: Trump Administration Finalizes Trade Deal with Indonesia - The White House<br><a href="https://www.whitehouse.gov/fact-sheets/2026/02/fact-sheet-trump-administration-finalizes-trade-deal-with-indonesia/" target="_blank">https://www.whitehouse.gov/fact-sheets/2026/02/...</a></li>
+      <li>Kesepakatan Dagang RI-AS: Mobil dan Komponen dari Amerika Bisa Lebih Kompetitif - Kompas Otomotif<br><a href="https://otomotif.kompas.com/read/2026/02/21/182100715/kesepakatan-dagang-ri-as--mobil-dan-komponen-dari-amerika-bisa-lebih-kompetitif" target="_blank">https://otomotif.kompas.com/read/2026/02/21/...</a></li>
+      <li>Kerjasama Pertahanan Indonesia: Menavigasi Ancaman Geopolitik - Zona Terbang<br><a href="https://www.zonaterbang.id/read/2026/02/26/3547/kerjasama-pertahanan-indonesia:-menavigasi-ancaman-geopolitik" target="_blank">https://www.zonaterbang.id/read/2026/02/26/3547/...</a></li>
+      <li>Illegal and unfair: Indonesia should not ratify Donald Trump's tariff deals - Indonesia at Melbourne<br><a href="https://indonesiaatmelbourne.unimelb.edu.au/illegal-and-unfair-indonesia-should-not-ratify-donald-trumps-tariff-deals/" target="_blank">https://indonesiaatmelbourne.unimelb.edu.au/illegal-and-unfair-...</a></li>
+      <li>Perjanjian Dagang RI–AS 2026? Menguntungkan atau Merugikan? - SHAFIQ<br><a href="https://www.shafiq.id/berita/991/perjanjian-dagang-ri-as-2026-menguntungkanatau-merugikan/baca" target="_blank">https://www.shafiq.id/berita/991/...</a></li>
+      <li>Kupas Tuntas Isi Perjanjian Dagang RI-AS yang Diteken Prabowo &amp; Trump - CNBC Indonesia<br><a href="https://www.cnbcindonesia.com/news/20260222193908-4-712876/kupas-tuntas-isi-perjanjian-dagang-ri-as-yang-diteken-prabowo-trump" target="_blank">https://www.cnbcindonesia.com/news/20260222193908-4-712876/...</a></li>
+      <li>Indonesia Counters US Unfair Trade Probes, Won't Speculate on Tariff Hikes - Jakarta Globe<br><a href="https://jakartaglobe.id/business/indonesia-counters-us-unfair-trade-probes-wont-speculate-on-tariff-hikes" target="_blank">https://jakartaglobe.id/business/indonesia-counters-us-unfair-trade-probes-...</a></li>
+      <li>Is Indonesia's 19% Tariff Deal Still Valid After the US Supreme Court Ruling? - Jakarta Globe<br><a href="https://jakartaglobe.id/business/is-indonesias-19-tariff-deal-still-valid-after-the-us-supreme-court-ruling" target="_blank">https://jakartaglobe.id/business/is-indonesias-19-tariff-deal-...</a></li>
+      <li>Indonesia Says US Export Tariff Cut to 15% After Court Ruling - Jakarta Globe<br><a href="https://jakartaglobe.id/business/indonesia-says-us-export-tariff-cut-to-15-after-court-ruling" target="_blank">https://jakartaglobe.id/business/indonesia-says-us-export-tariff-cut-to-15-...</a></li>
+      <li>Indonesia's US Trade Tariff Cut To 15% After Court Ruling - Business Today<br><a href="https://www.businesstoday.com.my/2026/02/28/indonesias-us-trade-tariff-cut-to-15-after-court-ruling/" target="_blank">https://www.businesstoday.com.my/2026/02/28/...</a></li>
+      <li>New US tariffs take effect after Supreme Court ruling - The Jakarta Post<br><a href="https://www.thejakartapost.com/business/2026/02/24/new-us-tariffs-take-effect-after-supreme-court-ruling.html" target="_blank">https://www.thejakartapost.com/business/2026/02/24/...</a></li>
+      <li>Indonesia-United States Agreement Continues Despite U.S Supreme Court Ruling on Tariffs - Setkab<br><a href="https://setkab.go.id/en/indonesia-united-states-agreement-continues-despite-us-supreme-court-ruling-on-tariffs/" target="_blank">https://setkab.go.id/en/indonesia-united-states-agreement-continues-...</a></li>
+      <li>A 'Reciprocal' Trade Deal That Isn't – Analysis - Eurasia Review<br><a href="https://www.eurasiareview.com/02042026-a-reciprocal-trade-deal-that-isnt-analysis/" target="_blank">https://www.eurasiareview.com/02042026-a-reciprocal-trade-deal-that-isnt-analysis/</a></li>
+      <li>DPR Didesak Tolak Tindaklanjut ART Indonesia-AS - Investing.com<br><a href="https://id.investing.com/news/economy-news/dpr-didesak-tolak-tindaklanjut-artindonesiaas-2930642" target="_blank">https://id.investing.com/news/economy-news/dpr-didesak-tolak-...</a></li>
+      <li>US Deal: Indonesia Denies Picking Sides Amid China Concerns - Jakarta Globe<br><a href="https://jakartaglobe.id/news/us-deal-indonesia-denies-picking-sides-amid-china-concerns" target="_blank">https://jakartaglobe.id/news/us-deal-indonesia-denies-picking-sides-...</a></li>
+      <li>China Says Indonesia-US Deal Should Not Harm 'Any Third Party' - Jakarta Globe<br><a href="https://jakartaglobe.id/business/china-says-indonesiaus-deal-should-not-harm-any-third-party" target="_blank">https://jakartaglobe.id/business/china-says-indonesiaus-deal-should-not-harm-...</a></li>
+      <li>Agreement Between the United States of America and the Republic of Indonesia on Reciprocal Trade (Full Text) - USTR<br><a href="https://ustr.gov/sites/default/files/files/Press/Releases/2026/02.19.26%20US-IDN%20ART%20Full%20Agreement%20-%20US%20Final%20for%20Website%20sanitized.pdf" target="_blank">https://ustr.gov/sites/default/files/files/Press/Releases/2026/...</a></li>
+      <li>RI bakal serahkan respons soal investigasi dagang AS - ANTARA News<br><a href="https://m.antaranews.com/amp/berita/5524556/ri-bakal-serahkan-respons-soal-investigasi-dagang-as" target="_blank">https://m.antaranews.com/amp/berita/5524556/...</a></li>
+      <li>Pemerintah Indonesia Optimistis Hadapi Investigasi Section 301 oleh AS - Kompas<br><a href="https://nasional.kompas.com/read/2026/03/27/08000021/pemerintah-indonesia-optimistis-hadapi-investigasi-section-301-oleh-as" target="_blank">https://nasional.kompas.com/read/2026/03/27/...</a></li>
+      <li>RI Yakin Jawab Tuduhan Amerika Serikat soal Pekerja Paksa - Tempo.co<br><a href="https://www.tempo.co/ekonomi/ri-yakin-jawab-tuduhan-amerika-serikat-soal-pekerja-paksa-2124075" target="_blank">https://www.tempo.co/ekonomi/ri-yakin-jawab-tuduhan-...</a></li>
+      <li>Respons Investigasi Dagang AS, Pemerintah Libatkan Pelaku Usaha - Metro TV<br><a href="https://www.metrotvnews.com/read/NxGCPPyo-respons-investigasi-dagang-as-pemerintah-libatkan-pelaku-usaha" target="_blank">https://www.metrotvnews.com/read/NxGCPPyo-...</a></li>
+      <li>AS Bakal Selidiki Industri Indonesia, Pemerintah Klaim Sudah Siapkan Argumentasi - Kontan<br><a href="https://nasional.kontan.co.id/news/as-bakal-selidiki-industri-indonesia-pemerintah-sudah-siapkan-argumentasi" target="_blank">https://nasional.kontan.co.id/news/as-bakal-selidiki-industri-indonesia-...</a></li>
+      <li>Facing Section 301, ASEAN must reform systems - The Jakarta Post<br><a href="https://www.thejakartapost.com/opinion/2026/03/30/facing-section-301-asean-must-reform-systems.html" target="_blank">https://www.thejakartapost.com/opinion/2026/03/30/...</a></li>
+      <li>Board of Peace - Wikipedia<br><a href="https://en.wikipedia.org/wiki/Board_of_Peace" target="_blank">https://en.wikipedia.org/wiki/Board_of_Peace</a></li>
+      <li>Board of Peace Inaugural Meeting, 2026 - Center for Israel Education<br><a href="https://israeled.org/board-of-peace-inaugural-meeting/" target="_blank">https://israeled.org/board-of-peace-inaugural-meeting/</a></li>
+      <li>Trump Launches "Board of Peace": Outcomes and Challenges - Doha Institute<br><a href="https://www.dohainstitute.org/en/PoliticalStudies/Pages/the-board-of-peace-meeting-in-washington-outcomes-and-concerns.aspx" target="_blank">https://www.dohainstitute.org/en/PoliticalStudies/Pages/...</a></li>
+      <li>Turkey, Qatar, Egypt, Indonesia, Albania Leaders Speak at Trump's Board of Peace Summit - YouTube<br><a href="https://www.youtube.com/watch?v=TXuN1Og03z0" target="_blank">https://www.youtube.com/watch?v=TXuN1Og03z0</a></li>
+      <li>Indonesia's Board of Peace dilemma: Prabowo caught between domestic backlash and US ties - Channel News Asia<br><a href="https://www.channelnewsasia.com/asia/indonesia-board-peace-dilemma-gaza-iran-middle-east-conflict-6053136" target="_blank">https://www.channelnewsasia.com/asia/indonesia-board-peace-dilemma-...</a></li>
+      <li>Indonesia says no to $1 billion fee for Trump's 'Board of Peace' seat - Tribune Pakistan<br><a href="https://tribune.com.pk/story/2598961/indonesia-says-no-to-1-billion-fee-for-trumps-board-of-peace-seat" target="_blank">https://tribune.com.pk/story/2598961/...</a></li>
+      <li>Indonesia rejects $1 billion fee for Trump's 'Board of Peace', cites no financial commitment - Madhyamam Online<br><a href="https://madhyamamonline.com/world/indonesia-rejects-1-billion-fee-for-trumps-board-of-peace-1505291" target="_blank">https://madhyamamonline.com/world/indonesia-rejects-1-billion-fee-...</a></li>
+      <li>Indonesia Puts Gaza 'Board of Peace' Talks on Hold Amid Iran War - Modern Diplomacy<br><a href="https://moderndiplomacy.eu/2026/03/04/indonesia-puts-gaza-board-of-peace-talks-on-hold-amid-iran-war/" target="_blank">https://moderndiplomacy.eu/2026/03/04/...</a></li>
+      <li>U.S. Poised to Secure Blanket Access to Indonesian Airspace After Prabowo-Trump Deal - Defence Security Asia<br><a href="https://defencesecurityasia.com/en/us-indonesia-airspace-access-prabowo-trump-indo-pacific-strike-reach/" target="_blank">https://defencesecurityasia.com/en/us-indonesia-airspace-access-prabowo-trump-...</a></li>
+      <li>Indonesia's wary embrace of China - Merics<br><a href="https://merics.org/en/indonesias-wary-embrace-china" target="_blank">https://merics.org/en/indonesias-wary-embrace-china</a></li>
+      <li>China Outward Investment: Asia: Indonesia - CEIC<br><a href="https://www.ceicdata.com/en/china/outward-direct-investment-by-country/outward-investment-asia-indonesia" target="_blank">https://www.ceicdata.com/en/china/outward-direct-investment-by-country/...</a></li>
+      <li>China (CHN) and Indonesia (IDN) Trade - OEC<br><a href="https://oec.world/en/profile/bilateral-country/chn/partner/idn" target="_blank">https://oec.world/en/profile/bilateral-country/chn/partner/idn</a></li>
+      <li>Indonesia (IDN) and China (CHN) Trade - OEC<br><a href="https://oec.world/en/profile/bilateral-country/idn/partner/chn" target="_blank">https://oec.world/en/profile/bilateral-country/idn/partner/chn</a></li>
+      <li>Indonesia, China's economies complementary - China Daily<br><a href="http://epaper.chinadaily.com.cn/a/202504/14/WS67fc4467a3101d7a97b6b694.html" target="_blank">http://epaper.chinadaily.com.cn/a/202504/14/...</a></li>
+      <li>Seizing opportune time to elevate China-Indonesia ties to new heights - Global Times<br><a href="https://www.globaltimes.cn/page/202506/1335339.shtml" target="_blank">https://www.globaltimes.cn/page/202506/1335339.shtml</a></li>
+      <li>Menakar 76 Tahun Hubungan Diplomatik RI-Tiongkok - Universitas Gadjah Mada<br><a href="https://ugm.ac.id/id/berita/menakar-76-tahun-hubungan-diplomatik-ri-tiongkok/" target="_blank">https://ugm.ac.id/id/berita/menakar-76-tahun-hubungan-diplomatik-ri-tiongkok/</a></li>
+      <li>MOFCOM Spokesperson's Remarks on Recent U.S. Tariff Adjustment - China MOFCOM<br><a href="https://english.mofcom.gov.cn/News/SpokesmansRemarks/art/2026/art_0b3b19498a844cd0bdb4ca0deb281a9d.html" target="_blank">https://english.mofcom.gov.cn/News/SpokesmansRemarks/art/2026/...</a></li>
+      <li>MOFCOM Spokesperson's Remarks on the U.S. Supreme Court's Announcement of the Ruling in the Tariff Litigation Case - China MOFCOM<br><a href="https://english.mofcom.gov.cn/News/SpokesmansRemarks/art/2026/art_f481c93fa73e4beaa94febcbf8dac170.html" target="_blank">https://english.mofcom.gov.cn/News/SpokesmansRemarks/art/2026/...</a></li>
+      <li>China responds to RI-US pact, stresses equal dialogue - ANTARA News<br><a href="https://en.antaranews.com/news/367193/china-responds-to-ri-us-pact-stresses-equal-dialogue" target="_blank">https://en.antaranews.com/news/367193/...</a></li>
+      <li>Dampak Perjanjian Kerjasama Indonesia-China Terhadap Pembangunan Infrastruktur Proyek Kereta Cepat - ResearchGate<br><a href="https://www.researchgate.net/publication/348575194_Dampak_Perjanjian_Kerjasama_Indonesia_-China_Terhadap_Pembagunan_Infrastruktur_Proyek_Kereta_Cepat" target="_blank">https://www.researchgate.net/publication/348575194_...</a></li>
+      <li>Hubungan Bilateral Indonesia-Tiongkok dalam Mewujudkan Kereta Cepat Pertama di Asia Tenggara - Journal Unpas<br><a href="https://journal.unpas.ac.id/index.php/transborders/article/download/11667/7427/70948" target="_blank">https://journal.unpas.ac.id/index.php/transborders/...</a></li>
+      <li>PENILAIAN ANCAMAN TIONGKOK DI LAUT NATUNA UTARA MENGGUNAKAN ANALISIS PEST - Indonesian Maritime Journal<br><a href="https://maritimejournal.id/index.php/jmi/article/download/75/57/112" target="_blank">https://maritimejournal.id/index.php/jmi/article/download/75/57/112</a></li>
+      <li>Analisis Implikasi Konflik Laut Natuna Utara terhadap Kerjasama Ekonomi Indonesia - Unas Repository<br><a href="http://repository.unas.ac.id/id/eprint/7114/6/BAB%20V.pdf" target="_blank">http://repository.unas.ac.id/id/eprint/7114/6/BAB%20V.pdf</a></li>
+      <li>Why China won't hit back over Indonesia's US trade deal - Asia Times<br><a href="https://asiatimes.com/2026/03/why-china-wont-hit-back-over-indonesias-us-trade-deal/" target="_blank">https://asiatimes.com/2026/03/why-china-wont-hit-back-over-indonesias-us-trade-deal/</a></li>
+      <li>Seismic Strife: China and Indonesia clash over Natuna Survey - AMTI / CSIS<br><a href="https://amti.csis.org/seismic-strife-china-and-indonesia-clash-over-natuna-survey/" target="_blank">https://amti.csis.org/seismic-strife-china-and-indonesia-clash-over-natuna-survey/</a></li>
+      <li>2025 Annual Report to Congress: Military and Security Developments Involving the People's Republic of China - Department of War<br><a href="https://media.defense.gov/2025/Dec/23/2003849070/-1/-1/1/ANNUAL-REPORT-TO-CONGRESS-MILITARY-AND-SECURITY-DEVELOPMENTS-INVOLVING-THE-PEOPLES-REPUBLIC-OF-CHINA-2025.PDF" target="_blank">https://media.defense.gov/2025/Dec/23/2003849070/...</a></li>
+      <li>Indo-Pacific perspectives on the prospect of a US-China G2 - Brookings Institution<br><a href="https://www.brookings.edu/articles/indo-pacific-perspectives-on-the-prospect-of-a-us-china-g2/" target="_blank">https://www.brookings.edu/articles/indo-pacific-perspectives-...</a></li>
+      <li>Strategic Balancing and Sovereign Autonomy: Indonesia's Engagement with China in the Era of Regional Vulnerabilities - ResearchGate<br><a href="https://www.researchgate.net/publication/403301384_Strategic_Balancing_and_Sovereign_Autonomy_Indonesia's_Engagement_with_China_in_the_Era_of_Regional_Vulnerabilities" target="_blank">https://www.researchgate.net/publication/403301384_...</a></li>
+      <li>Expanded military cooperation strengthens Indonesia-U.S. security ties - IP Defense Forum<br><a href="https://ipdefenseforum.com/2025/04/expanded-military-cooperation-strengthens-indonesia-u-s-security-ties/" target="_blank">https://ipdefenseforum.com/2025/04/...</a></li>
+      <li>Indonesia and ASEAN Centrality - UNAM<br><a href="https://archivos.juridicas.unam.mx/www/bjv/libros/15/7049/13.pdf" target="_blank">https://archivos.juridicas.unam.mx/www/bjv/libros/15/7049/13.pdf</a></li>
+      <li>Steering Through Turbulent Waters: Indonesia's Leadership in Shaping ASEAN's Economic Resilience - ASEAN<br><a href="https://asean.org/wp-content/uploads/2024/11/Op-Ed-Steering-Through-Turbulent-Waters-Indonesias-Leadership-in-Shaping-ASEANs-Economic-Resilience_FINAL.pdf" target="_blank">https://asean.org/wp-content/uploads/2024/11/...</a></li>
+      <li>ASEAN Centrality: Comparative Case Study of Indonesia Leadership - Semantic Scholar<br><a href="https://pdfs.semanticscholar.org/ca4d/143bd588180a52b96f7ec6d8bb8ea08dcaf8.pdf" target="_blank">https://pdfs.semanticscholar.org/ca4d/143bd588180a52b96f7ec6d8bb8ea08dcaf8.pdf</a></li>
+      <li>Indonesia Tegaskan Pentingnya Persatuan dan Sentralitas ASEAN di Tengah Dinamika Kawasan - Portal Kemlu<br><a href="https://kemlu.go.id/berita/indonesia-tegaskan-pentingnya-persatuan-dan-sentralitas-asean-di-tengah-dinamika-kawasan?type=publication" target="_blank">https://kemlu.go.id/berita/indonesia-tegaskan-...</a></li>
+      <li>Perlu Penguatan Sentralitas ASEAN Hadapi Dinamika Geopolitik Global - DPR RI<br><a href="https://www.dpr.go.id/kegiatan-dpr/berita/Perlu-Penguatan-Sentralitas-ASEAN-Hadapi-Dinamika-Geopolitik-Global-62471" target="_blank">https://www.dpr.go.id/kegiatan-dpr/berita/...</a></li>
+      <li>Diplomasi Pertahanan Indonesia dalam Asean Outlook On The Indo-Pacific (AOIP) - Jurnal Transformasi Global<br><a href="https://transformasiglobal.ub.ac.id/index.php/trans/article/download/317/147" target="_blank">https://transformasiglobal.ub.ac.id/index.php/trans/article/download/317/147</a></li>
+      <li>ASEAN centrality stands in the way of an Indonesia-Australia alliance - Lowy Institute<br><a href="https://www.lowyinstitute.org/the-interpreter/asean-centrality-stands-way-indonesia-australia-alliance" target="_blank">https://www.lowyinstitute.org/the-interpreter/asean-centrality-stands-way-...</a></li>
+      <li>ASEAN, US intensify Comprehensive Strategic Partnership - ASEAN<br><a href="https://asean.org/asean-us-intensify-comprehensive-strategic-partnership/" target="_blank">https://asean.org/asean-us-intensify-comprehensive-strategic-partnership/</a></li>
+      <li>ASEAN-U.S. Leaders' Statement on the Establishment of the ASEAN-U.S. Comprehensive Strategic Partnership - U.S. Mission to ASEAN<br><a href="https://asean.usmission.gov/asean-u-s-leaders-statement-on-the-establishment-of-the-asean-u-s-comprehensive-strategic-partnership/" target="_blank">https://asean.usmission.gov/asean-u-s-leaders-statement-...</a></li>
+      <li>Southeast Asia Navigates Trump's Return: Quick Deals, Lasting Dread - CSIS<br><a href="https://www.csis.org/analysis/southeast-asia-navigates-trumps-return-quick-deals-lasting-dread" target="_blank">https://www.csis.org/analysis/southeast-asia-navigates-trumps-return-...</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+
+  <!-- nseBook LOGO -->
+  <a class="nsebook-logo" href="https://imnxx.vercel.app/blog.html">
+    <svg class="logo-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- Book base -->
+      <rect x="8" y="14" width="48" height="38" rx="3" fill="#2a1e0a" stroke="#c4b49a" stroke-width="1.2"/>
+      <!-- Spine -->
+      <rect x="8" y="14" width="8" height="38" rx="2" fill="#c0392b"/>
+      <!-- Pages lines -->
+      <line x1="22" y1="24" x2="50" y2="24" stroke="#c4b49a" stroke-width="1" opacity="0.5"/>
+      <line x1="22" y1="30" x2="50" y2="30" stroke="#c4b49a" stroke-width="1" opacity="0.5"/>
+      <line x1="22" y1="36" x2="42" y2="36" stroke="#c4b49a" stroke-width="1" opacity="0.5"/>
+      <!-- "n" glyph on spine -->
+      <text x="12" y="36" font-family="serif" font-size="10" fill="#f5f0e8" text-anchor="middle" font-weight="bold">n</text>
+      <!-- Star / compass rose -->
+      <circle cx="44" cy="44" r="6" fill="none" stroke="#b8960c" stroke-width="1"/>
+      <line x1="44" y1="38" x2="44" y2="50" stroke="#b8960c" stroke-width="1"/>
+      <line x1="38" y1="44" x2="50" y2="44" stroke="#b8960c" stroke-width="1"/>
+      <line x1="40" y1="40" x2="48" y2="48" stroke="#b8960c" stroke-width="0.6" opacity="0.6"/>
+      <line x1="48" y1="40" x2="40" y2="48" stroke="#b8960c" stroke-width="0.6" opacity="0.6"/>
+    </svg>
+    <span class="logo-text"><span>nse</span>Book</span>
+  </a>
+
+  <a class="back-link" href="https://imnxx.vercel.app/blog.html">Kembali ke Dashboard</a>
+
+  <p class="footer-copy">© 2026 nseBook · Analisis Geopolitik &amp; Pertahanan Indo-Pasifik<br>Dokumen ini merupakan karya penelitian dan analisis akademis. Seluruh hak cipta sumber asli dimiliki oleh masing-masing penerbit.</p>
+</footer>
+
+</body>
+</html>
