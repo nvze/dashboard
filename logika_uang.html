@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logika Uang — Erizeli Bandar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080a0f;
+    --bg2: #0d1018;
+    --surface: #111520;
+    --surface2: #161b28;
+    --border: #1e2535;
+    --gold: #c9a84c;
+    --gold2: #e8c97a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.08);
+    --text: #d8dce8;
+    --text-dim: #8590a8;
+    --text-muted: #4a5268;
+    --accent: #3d6bce;
+    --accent2: #5e8ae8;
+    --red: #c0392b;
+    --green: #27ae60;
+    --white: #f0f2f8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px;
+    line-height: 1.85;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── AMBIENT GLOW ─── */
+  .ambient {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ambient-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    top: -200px; right: -100px;
+    animation: drift1 18s ease-in-out infinite;
+  }
+  .ambient-2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(61,107,206,0.05) 0%, transparent 70%);
+    bottom: 10%; left: -150px;
+    animation: drift2 22s ease-in-out infinite;
+  }
+  @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,40px)} }
+  @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-30px)} }
+
+  /* ─── DASHBOARD BUTTON ─── */
+  .dashboard-btn {
+    position: fixed;
+    top: 24px; left: 24px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(13,16,24,0.85);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    border-radius: 4px;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .dashboard-btn:hover {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+    box-shadow: 0 4px 30px rgba(201,168,76,0.2);
+    transform: translateX(-2px);
+  }
+  .dashboard-btn svg { width:14px; height:14px; flex-shrink:0; }
+
+  /* ─── LOGO ─── */
+  .nsebook-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .logo-mark {
+    width: 38px; height: 38px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .logo-text-wrap {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+  .logo-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--gold2);
+  }
+  .logo-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 120px 0 80px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .header-eyebrow::before,
+  .header-eyebrow::after {
+    content: '';
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+  .header-eyebrow::after { background: linear-gradient(90deg, var(--gold), transparent); }
+
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 900;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.15s ease both;
+    background: linear-gradient(135deg, #f0f2f8 0%, var(--gold2) 50%, #c0a060 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 48px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .header-divider {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    margin: 0 auto;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  main {
+    position: relative;
+    z-index: 10;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 32px 120px;
+  }
+
+  /* ─── LOGO HEADER BAR ─── */
+  .logo-bar {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0 60px;
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+
+  /* ─── PROSE ─── */
+  p {
+    margin-bottom: 1.6em;
+    color: var(--text);
+    text-align: justify;
+    hyphens: auto;
+    animation: fadeIn 1s ease both;
+  }
+
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 5.5em;
+    font-weight: 900;
+    float: left;
+    line-height: 0.75;
+    padding-right: 12px;
+    padding-top: 8px;
+    color: var(--gold);
+    text-shadow: 0 0 40px rgba(201,168,76,0.4);
+  }
+
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+  /* ─── DIALOGUE ─── */
+  .dialogue {
+    background: var(--surface);
+    border-left: 3px solid var(--gold);
+    padding: 20px 28px;
+    margin: 2em 0;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--text);
+    position: relative;
+    box-shadow: inset 0 0 40px rgba(201,168,76,0.03), 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .dialogue::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    font-size: 4em;
+    color: var(--gold);
+    opacity: 0.3;
+    position: absolute;
+    top: -8px; left: 12px;
+    line-height: 1;
+  }
+
+  .dialogue .speaker {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-style: normal;
+    margin-top: 10px;
+    opacity: 0.8;
+  }
+
+  /* ─── SCENE BREAK ─── */
+  .scene-break {
+    text-align: center;
+    margin: 3.5em 0;
+    color: var(--gold);
+    font-size: 1.4em;
+    letter-spacing: 0.5em;
+    opacity: 0.6;
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section-head {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--gold2);
+    margin: 3em 0 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ─── DATA TABLES ─── */
+  .data-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 2.5em 0;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  }
+
+  .data-block-title {
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(201,168,76,0.08) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88em;
+  }
+  thead tr {
+    background: rgba(201,168,76,0.08);
+  }
+  th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-weight: 400;
+  }
+  td {
+    padding: 13px 20px;
+    border-bottom: 1px solid rgba(30,37,53,0.7);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1em;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(201,168,76,0.03); }
+
+  .td-up { color: #27ae60; }
+  .td-dn { color: #e74c3c; }
+  .td-stable { color: var(--gold); }
+
+  /* ─── METRIC CARDS ─── */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin: 2.5em 0;
+  }
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .metric-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px var(--gold-glow);
+    transform: translateY(-2px);
+  }
+  .metric-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.4em;
+    font-weight: 500;
+    color: var(--gold2);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .metric-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ─── RISK HIGHLIGHT ─── */
+  .risk-box {
+    background: linear-gradient(135deg, rgba(192,57,43,0.08) 0%, var(--surface2) 100%);
+    border: 1px solid rgba(192,57,43,0.3);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 2em 0;
+  }
+  .risk-box-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #e74c3c;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .risk-box-title::before {
+    content: '▲';
+    font-size: 0.8em;
+  }
+
+  /* ─── INLINE HIGHLIGHT ─── */
+  .hl {
+    color: var(--gold2);
+    font-style: italic;
+  }
+
+  strong {
+    color: var(--gold2);
+    font-weight: 600;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    z-index: 10;
+    border-top: 1px solid var(--border);
+    padding: 48px 32px;
+    text-align: center;
+    background: var(--bg2);
+  }
+  .footer-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    line-height: 2;
+  }
+
+  /* ─── PROGRESS INDICATOR ─── */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+    z-index: 9999;
+    width: 0%;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px var(--gold);
+  }
+
+  /* ─── PULLQUOTE ─── */
+  .pullquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-style: italic;
+    font-weight: 700;
+    color: var(--gold2);
+    text-align: center;
+    padding: 2.5em 2em;
+    margin: 3em 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    line-height: 1.4;
+    text-shadow: 0 0 60px rgba(201,168,76,0.15);
+  }
+
+  /* ─── AUTHOR TAG ─── */
+  .author-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 20px 8px 8px;
+    margin-bottom: 16px;
+  }
+  .author-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), #8b6914);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--bg);
+  }
+  .author-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--text);
+  }
+
+  /* ─── HIGHLIGHT BOX ─── */
+  .insight-box {
+    background: linear-gradient(135deg, rgba(61,107,206,0.08) 0%, var(--surface2) 100%);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 2em 0;
+    font-size: 0.95em;
+    color: var(--text);
+  }
+  .insight-box strong {
+    color: var(--accent2);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    body { font-size: 17px; }
+    main { padding: 0 20px 80px; }
+    .dashboard-btn { top:16px; left:16px; font-size:10px; padding:8px 14px; }
+    .metrics-row { grid-template-columns: 1fr 1fr; }
+    th, td { padding: 10px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Ambient Glows -->
+<div class="ambient ambient-1"></div>
+<div class="ambient ambient-2"></div>
+
+<!-- Dashboard Button -->
+<a href="https://imnxx.vercel.app/blog.html" class="dashboard-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="15 18 9 12 15 6"></polyline>
+  </svg>
+  Kembali ke Dashboard
+</a>
+
+<!-- Header -->
+<header>
+  <div class="header-inner">
+    <!-- nseBook Logo -->
+    <div class="logo-bar" style="padding-top:0; padding-bottom:48px;">
+      <a href="https://imnxx.vercel.app/blog.html" class="nsebook-logo">
+        <svg class="logo-mark" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="38" height="38" rx="7" fill="#0d1018" stroke="#c9a84c" stroke-width="1.2"/>
+          <!-- Book shape -->
+          <rect x="8" y="9" width="10" height="20" rx="1.5" fill="none" stroke="#c9a84c" stroke-width="1.2"/>
+          <rect x="20" y="9" width="10" height="20" rx="1.5" fill="none" stroke="#c9a84c" stroke-width="1.2"/>
+          <!-- Spine -->
+          <line x1="19" y1="10" x2="19" y2="28" stroke="#c9a84c" stroke-width="1.2"/>
+          <!-- Lines on left page -->
+          <line x1="11" y1="14" x2="16" y2="14" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+          <line x1="11" y1="17" x2="16" y2="17" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+          <line x1="11" y1="20" x2="16" y2="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+          <!-- Lines on right page -->
+          <line x1="22" y1="14" x2="27" y2="14" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+          <line x1="22" y1="17" x2="27" y2="17" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+          <line x1="22" y1="20" x2="27" y2="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+          <!-- Gold dot accent -->
+          <circle cx="29" cy="9" r="3" fill="#c9a84c"/>
+        </svg>
+        <div class="logo-text-wrap">
+          <span class="logo-name">nseBook.</span>
+          <span class="logo-tag">Digital Reading</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="header-eyebrow">Erizeli Bandar</div>
+    <h1 class="header-title">Logika Uang</h1>
+    <div class="header-subtitle">Percakapan di Jantung Dunia Keuangan Global</div>
+    <div class="header-divider"></div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main>
+
+  <!-- PART 1 -->
+  <p class="drop-cap">Teman saya seorang akademisi, Profesor di Tianjin kirim email, <span class="hl">"Nase, ada mahasiswi PhD saya ingin bertemu dengan kamu. Dia sedang melakukan penelitian tentang dunia hedge fund"</span> pesannya. Dia lampirkan juga CV dari mahasiswi itu. Namanya Tessa. Ayahnya dari AS tapi ibunya dari China. Dia sendiri warga negara AS. Usia 32 tahun. Saya reply cepat. <span class="hl">"Engga ada masalah. Sekretaris saya akan atur waktu ketemu. Jadwal minggu inilah."</span></p>
+
+  <p>Tiga hari kemudian, takdir duduk di hadapan saya dalam rupa seorang perempuan bernama Tessa. Restoran Jepang di Harbour Kowloon menjadi ruang perjumpaan antara rasa dan nalar. Laut Hong Kong di luar jendela seperti memantulkan wajah dunia keuangan global: tenang di permukaan, ganas di kedalaman.</p>
+
+  <div class="dialogue">
+    "Saya pemegang Certificate in Financial Engineering. Namun PhD saya fokus pada restrukturisasi utang..."
+    <span class="speaker">— Tessa, membuka percakapan</span>
+  </div>
+
+  <p>Ia memulai percakapan dengan nada akademik yang menyimpan percaya diri. Ia menjelaskan dengan rapi keterkaitan antara teori ekonomi, matematika, teknologi, dan seni mengukur risiko. Saya mendengarkan, sebab kecerdasannya bukan sekadar informasi — melainkan ancaman bagi kebodohan. Ia cantik dan cerdas. Dua atribut yang, bila bersatu, menjelma mata pisau — dapat menyelamatkan atau justru menyembelih.</p>
+
+  <div class="dialogue">
+    "Menurut Anda, mengapa sistem utang menjadi inti dari mata uang fiat? Bahkan 90% derivatif di dunia adalah utang. Apa pandangan Anda, sebagai pemain hedge fund?"
+    <span class="speaker">— Tessa, menatap lurus</span>
+  </div>
+
+  <p>Saya mengambil seiris daging Tuna dengan sumpit dan memakannya.</p>
+
+  <div class="dialogue">
+    "Ini tuna bluefin. Saya barusan makan seiris daging tuna seharga HKD 600. Beratnya mungkin 100 gram. Tahu mengapa mahal? Itu soal selera yang didasarkan kepada <em>secure</em> dan <em>limited</em>. Secure, katanya itu sehat. Limited, karena mahal. Ini jenis selera rakus, yang ingin secure food dan masuk dalam kalangan selera terbatas. Mereka tidak peduli kalau harga seiris sama dengan upah 1 minggu kerja orang Vietnam atau Indonesia atau sehari kerja orang China. Kalau mereka tidak punya sumber daya keuangan melimpah engga mungkin mereka mau telan seiris tuna seharga HKD 600 atau USD 80. Restoran ini sudah menerapkan bisnis hedge fund. Mereka menjual ilusi untuk rasa aman dan limited offer."
+    <span class="speaker">— Nase</span>
+  </div>
+
+  <p>Dia menyimak. Tanpa ikut makan.</p>
+
+  <div class="pullquote">"Dunia ini hanya ada dua jenis: Pecundang dan Pemangsa."</div>
+
+  <div class="dialogue">
+    "Dunia ini hanya ada dua jenis. Pencudang dan pemangsa. Masing-masing punya kelas berbeda sesuai dengan ruangnya. Sama seperti ikan di samudra. Hewan di rimba dan tentu juga manusia. Kalau orang punya uang berlebih karena pendapatan gaji atau upah. Biasanya setelah membayar tagihan dan biaya hidup, uang itu ditempatkan di bank. Menurut saya saat itu juga dia jadi pecundang. Bank sebagai pemangsa. Karena bunga yang diharapkan dari bank jauh lebih kecil daripada turunnya nilai uang akibat depreciasi dan inflasi."
+    <span class="speaker">— Nase</span>
+  </div>
+
+  <p>Ia mendengarkan. Diamnya seperti ruang kosong yang siap diisi hipotesis baru.</p>
+
+  <div class="dialogue">
+    "Perusahaan asuransi menawarkan produk rasa aman dari proteksi atas risiko masa depan. Lucunya produk asuransi itu berkembang luas dari hal yang rasional sampai yang irasional, seperti risiko kebakaran, kesehatan, pensiun, kerusakan, sampai kepada risiko transaksi keuangan dan risiko pencurian harta bernilai tinggi. Menurut saya pemegang polisi asuransi itu, bentuk lain dari pecundang. Karena dari 1000 risiko yang terproteksi yang kena claim hanya 1. Ya sama dengan judi mesin rolet. Lebih banyak yang kalah daripada yang menang.
+    <br><br>
+    Sedikit cerdas bila kelebihan uang itu ditempatkan pada saham di bursa. Tapi tetap saja dia pecundang. Karena saham itu adalah refleksi dari agenda yang di-create oleh fund manager yang kelola reksadana. Turun naik value saham, itu hanya ilusi. Bukan real asset. Jaminan likuiditasnya hanya ilusi market. Sebagian besar putaran pasar ditentukan oleh agenda yang tidak ada kaitannya dengan fundamental emiten.
+    <br><br>
+    Lebih jauh lagi adalah mereka yang percaya kepada uang, itu juga adalah pecundang di hadapan negara. Setiap surat utang negara diterbitkan, stimulus ekonomi. Sebenarnya negara berhutang kepada publik dan pada waktu bersamaan mereka merampok hasil kerja keras kita lewat inflasi dan depreciasi mata uang. Nyatanya harga barang tidak pernah turun. Terus bubble."
+    <span class="speaker">— Nase</span>
+  </div>
+
+  <div class="dialogue">
+    "Yang jadi masalah... mereka yang merasa pemangsa seperti banker, lembaga asuransi atau dana pensiun, pemerintah adalah pecundang di hadapan pemain hedge fund."
+    <span class="speaker">— Nase, tersenyum</span>
+  </div>
+
+  <p>Dia mengangguk dan tersenyum.</p>
+
+  <div class="dialogue">
+    "Saya punya akses ke sophisticated investor. Saya tidak tawarkan kepada mereka bunga atau yield tinggi. Karena mereka sudah sangat kaya. Saya juga tidak tawarkan too good to be true. Karena orang kaya pasti cerdas. Tapi saya tawarkan kerakusan di atas rasa aman dan privasi. Misal, saya perlu dana untuk program investasi. Saya struktur rekayasa keuangan, yang terdiri dari jenis bond, target investor dan exit. Tentu saya melibatkan perusahaan sekuritas, notaris, akuntan, fund manager.
+    <br><br>
+    Saya jual bond kepada investor A. Saya katakan kepada A, uang kamu aman. Karena kamu bisa terbitkan lagi surat utang dengan jaminan bond saya itu dan jual kepada C. Tentu sebelumnya sudah ada kepastian. Praktis A sudah keluar dari risiko kredit. Tapi A harus bayar selisih bunga antara yang dia terima dari saya dengan yang dia bayar ke C. Katakanlah, dia terima dari saya kupon pertahun 4% dan dia bayar ke C, 4,25. A hanya keluar uang 0,25% pertahun. 0,25% itu premium CDS, sebagai jaminan risiko gagal bayar. Wajar kalau selisih itu saya tanggung aja. Toh penikmat utang sebenarnya saya. Kalau terjadi gagal bayar, yang bayar bank sebagai agent CDS.
+    <br><br>
+    Apakah penjual CDS itu rugi? Tidak. Dia menghimpun dari banyak transaksi dan mendapat premi dari itu. Maklum hampir semua investor surat utang perlu perlindungan risiko gagal bayar. Ya sama dengan perusahaan asuransi. Dari 1000 transaksi yang butuh CDS, yang gagal hanya 1, itupun mereka hanya tanggung risiko default."
+    <span class="speaker">— Nase</span>
+  </div>
+
+  <div class="dialogue">
+    "OK saya paham itu. Itu credit link note namanya. Intinya adalah memastikan bahwa tidak ada peristiwa kredit yang terjadi pada anda yang berdampak pada investor A. Risiko telah diteruskan ke perusahaan C dengan biaya premium. Dan lagi C membayar bond A kan dari market duitnya. Bond yang diterbitkan C itu diburu investor. Karena benchmark-nya kan saham bluechip di bursa. Kalau akhirnya semua gagal, ya pemerintah bailout. Kalau engga, investor retail yang rugi. Itu akan sistemik. Smart! Tapi bagaimanapun itu normatif sekali."
+    <span class="speaker">— Tessa</span>
+  </div>
+
+  <div class="dialogue">
+    "Benar. Tapi apa peduli saya dengan hal normatif. Teknisnya itu urusan ahli keuangan dan hukum. Saya engga ada urusan kalau skema itu menghidupkan pasar CDS dan akhirnya merugikan investor retail dan memaksa negara bailout. Apalagi target investor saya adalah sophisticated fund, dimana 99% financial resource ada pada mereka.
+    <br><br>
+    Lewat struktur financial engineering berupa credit link note itu saya bukan hanya memberikan profit kepada investor tetapi juga secure layering dan underlying — dengan uang itu saya bisa bangun bisnis yang menampung angkatan kerja, mendatangkan pajak untuk negara."
+    <span class="speaker">— Nase, tersenyum</span>
+  </div>
+
+  <div class="dialogue">
+    "Tapi itu tidak bermoral."
+    <span class="speaker">— Tessa, cepat</span>
+  </div>
+
+  <p>Saya tersenyum menatap dia.</p>
+
+  <div class="dialogue">
+    "Dari awal saya sudah ceritakan kepada kamu tentang pecundang dan penakluk. Manusia itu bukan hewan. Hewan hanya andalkan tenaga untuk menghindari predator. Tapi manusia dibekali akal. Akal ini menyatu dengan iman kepada Tuhan. Tapi ingat, bukan iman dalam pengertian ritual atau ibadah tapi dalam dimensi hukum ketetapan Tuhan. Kalau kamu percaya kepada Tuhan, maka kamu harus percaya kepada hukum ketetapan Tuhan."
+    <span class="speaker">— Nase</span>
+  </div>
+
+  <div class="dialogue">
+    "Apa itu hukum ketetapan Tuhan?"
+    <span class="speaker">— Tessa</span>
+  </div>
+
+  <div class="dialogue">
+    "Misal, hukum gravitasi. Walau kamu rajin ibadah tapi kamu lompat dari gedung, itu pasti mati konyol. Mati sesat. Walau kamu jago financial engineering. Hebat dalam hal struktur instrumen pasar uang, tapi kamu patuh dengan standar moral. Tidak mau deal dengan sophisticated fund. Mana ada yang mau beli bond kamu tanpa rating tinggi. Apalagi atas nama perusahaan SPV. Jangankan kamu, Professor Harvard pun tidak akan bisa jual bond itu."
+    <span class="speaker">— Nase</span>
+  </div>
+
+  <div class="dialogue">
+    "Kenapa?"
+    <span class="speaker">— Tessa, mengerutkan kening</span>
+  </div>
+
+  <div class="dialogue">
+    "Ya karena dunia ini memang sudah brengsek dari sononya dan di-create Tuhan untuk mereka yang berakal saja. Bukan untuk yang pintar karena merasa idealis. Tapi untuk mereka yang cerdas, tahu menggunakan akalnya."
+    <span class="speaker">— Nase, tersenyum</span>
+  </div>
+
+  <div class="dialogue">
+    "Skema credit link note itu hanya salah satu dari beragam instrumen derivatif. So dari skema seperti itu kamu membangun investment holding international. Kamu sibuk berburu underlying lewat akuisisi dan merger berskala gigantik. Dari skema itu kamu berinteraksi dengan pemilik hidden fund dari kalangan pemburu rente di lima benua. Menjadi member club eksklusif di jantung financial center dunia."
+    <span class="speaker">— Tessa, tersenyum dan mengangguk</span>
+  </div>
+
+  <div class="dialogue">
+    "Menarik sekali cara berpikir kamu. Sangat sederhana tapi kamu sangat kuasai medan permainan, termasuk emosi setiap stakeholder yang terlibat."
+    <span class="speaker">— Tessa</span>
+  </div>
+
+  <p>Saya diam saja lanjut makan.</p>
+
+  <div class="dialogue">
+    "Apa nasehat anda untuk saya?"
+    <span class="speaker">— Tessa</span>
+  </div>
+
+  <p>Saya letakan sumpit dan minum sake seteguk.</p>
+
+  <div class="dialogue">
+    "Semua hal tentang financial engineering bisa dipelajari. Yang sulit adalah pengendalian emosi. Spiritual emotion. Hidup tetap humble di tengah sumber daya yang melimpah, itu tidak mudah... berat sekali. Dari 1 juta pemain yang sukses hanya 1. Mending jadi dosen aja. Ajarkan mahasiswa kamu jadi orang biasa aja. Focus berproduksi dan menjual jasa atas dasar skill. Itu lebih baik."
+    <span class="speaker">— Nase</span>
+  </div>
+
+  <p>Usai makan malam, saya minta sekretaris saya antar ke hotelnya. Saya terus ke Conrad cafe ketemu dengan teman-teman...</p>
+
+  <div class="scene-break">✦ ✦ ✦</div>
+
+  <p>Tahun 2015 atau 3 tahun setelah pertemuan dengan Tessa. Saya baca laporan tahunan dari Tom, CEO asset management company dari Unit business SIDC di New York. Ternyata nama Tessa ada dalam daftar staf direksi bidang analis ekonomi dan strategic. <span class="hl">"Nase, dia terobsesi dengan dunia financial engineering daripada jadi dosen,"</span> kata Tom.</p>
+
+  <div class="scene-break">✦ ✦ ✦</div>
+
+  <!-- PART 2 - Second Meeting -->
+  <h2 class="section-head">Pertemuan Kedua — 13 Tahun Kemudian</h2>
+
+  <p>Kemarin saya bertemu dengan Tessa. Dia datang bersama Mia. Sejak tahun 2012, ini kali bertemu lagi. Saya memang minta mereka datang dari NY untuk special job.</p>
+
+  <p>Saat ketemu saya di safehouse, Tessa terkejut.</p>
+
+  <div class="dialogue">
+    "Penampilan kamu tidak seperti 13 tahun lalu."
+    <span class="speaker">— Tessa</span>
+  </div>
+
+  <p>Saya senyum aja.</p>
+
+  <div class="dialogue">
+    "Emang bedanya apa?"
+    <span class="speaker">— Mia</span>
+  </div>
+
+  <div class="dialogue">
+    "Kali pertama ketemu Nase..." Tessa terdiam beberapa detik. "Tubuhnya atletis. Fresh dan ganteng banget namun terkesan dingin."
+    <span class="speaker">— Tessa</span>
+  </div>
+
+  <div class="dialogue">
+    "Artinya sekarang bapak engga lagi ganteng seperti 12 tahun lalu. Karena udah tua, ya kan."
+    <span class="speaker">— Mia</span>
+  </div>
+
+  <div class="dialogue">
+    "Bukan, bukan itu... Kini wajahnya lebih fresh dan murah senyum. Namun ya... gemuk."
+    <span class="speaker">— Tessa, cepat</span>
+  </div>
+
+  <div class="dialogue">
+    "Dulu penampilan bapak sebagai VVIP dan sekarang very very common people."
+    <span class="speaker">— Mia, tertawa</span>
+  </div>
+
+  <p>Saya senyum aja dan kibaskan tangan. Untuk berhenti bicara tentang saya sebagai personal. Di samping mereka bekerja secara formal di SIDC-AMG NY, mereka juga adalah team shadow saya. Kemudian saya briefing mereka untuk tugas khusus. Tidak ada pertanyaan. Kecuali sikap professional tanpa ragu menerima tugas itu.</p>
+
+  <p>Setelah suasana kembali santai. OB menyediakan minuman teh puer.</p>
+
+  <div class="dialogue">
+    "Bagaimana potensi investasi di Indonesia sekarang?"
+    <span class="speaker">— Nase</span>
+  </div>
+
+  <p>Saya ingin tahu perspektif mereka. Tessa langsung membuka laptopnya. Dia segera tampilkan slide ke layar presentasi.</p>
+
+  <!-- ANALISIS EKONOMI INDONESIA -->
+  <h2 class="section-head">Analisis Ekonomi Indonesia — Perspektif Investor Global</h2>
+
+  <div class="insight-box">
+    <strong>Uang Beredar (M2) Indonesia</strong> menembus <strong>Rp9.771,3 triliun</strong> pada September 2025, naik 8% (YoY). Itu level tertinggi sejak Februari 2023. Namun, sumbernya menimbulkan tanda tanya. Rp200 triliun SAL ditempatkan pemerintah di bank-bank BUMN. Rp234 triliun dana Pemda mengendap di bank. M0 tumbuh 18,58%. NFA naik 12,6%. Artinya, likuiditas meningkat bukan karena ekspansi kredit produktif, tetapi karena uang APBN dan APBD tidak bekerja untuk perekonomian. <strong>Dengan kata lain: uangnya banyak, tetapi tidak berputar.</strong>
+  </div>
+
+  <!-- Metrics Row -->
+  <div class="metrics-row">
+    <div class="metric-card">
+      <span class="metric-val">Rp9.771,3 T</span>
+      <span class="metric-label">M2 Sep 2025</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val td-up">+8%</span>
+      <span class="metric-label">Pertumbuhan YoY</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val">4,75%</span>
+      <span class="metric-label">BI-Rate</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val td-up">5,0–5,1%</span>
+      <span class="metric-label">Pertumbuhan GDP</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val">2,5±1%</span>
+      <span class="metric-label">Inflasi</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val td-dn">−8,87%</span>
+      <span class="metric-label">FDI Q3-2025</span>
+    </div>
+  </div>
+
+  <p><strong>Masalahnya? Lemahnya disiplin fiskal.</strong> Disiplin fiskal bukan sekadar mengendalikan defisit. Disiplin fiskal berarti: Belanja tepat waktu. Belanja tepat sasaran. Belanja menghasilkan output ekonomi yang nyata. Yang terjadi saat ini:</p>
+
+  <div class="data-block">
+    <div class="data-block-title">▸ Kebijakan vs Realita Lapangan</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Kebijakan Pemerintah</th>
+          <th>Implikasi di Lapangan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ekspansi fiskal</td>
+          <td>Realisasinya terlambat dan tersendat</td>
+        </tr>
+        <tr>
+          <td>Dana daerah disalurkan cepat</td>
+          <td>Tapi diserap lambat — <em>idle fund</em></td>
+        </tr>
+        <tr>
+          <td>APBN menopang ekonomi</td>
+          <td>Sektor riil kurang merespon</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Investor membaca pola ini sebagai ketidakpastian eksekusi kebijakan. Akibatnya investor menahan diri. Investor global tidak hanya melihat angka pertumbuhan ekonomi 5,0–5,1%. Mereka mengukur ekonomi yang benar-benar bergerak. Apa yang mereka lihat sekarang? Belanja pemerintah tidak efisien, multiplier effect lemah. Proyek strategis melambat, maka risiko pembengkakan utang meningkat. Kredit investasi mandek, produktivitas stagnan. Confidence Index sektor swasta turun.</p>
+
+  <p>Nah, ketika pemerintah menjadi satu-satunya "mesin ekonomi", investor justru curiga: <strong>Ada apa dengan sektor swasta?</strong> Investor tidak menempatkan uangnya bila rasa percaya terganggu, dan kepercayaan adalah mata uang paling sulit dibeli.</p>
+
+  <p>Walau inflasi terjaga 2,5±1%, namun Bank Indonesia menahan suku bunga BI-Rate 4,75%. Kenapa? Rupiah masih rentan capital outflow. Utang luar negeri korporasi tinggi. Pasar menunggu keputusan The Fed. Risk off sentiment jika fiskal goyah. Moneter menjaga rem, karena fiskal terlalu menekan gas tanpa arah jelas. Ini menciptakan <em>policy mix</em> yang kurang harmonis. <strong>Musik ekonominya terdengar sumbang.</strong></p>
+
+  <!-- FDI Table -->
+  <div class="data-block">
+    <div class="data-block-title">▸ FDI Anjlok: "Downtrend Confirmed" — Perbandingan Regional</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Negara</th>
+          <th>Tren FDI 2025</th>
+          <th>Kesimpulan Investor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Vietnam</td>
+          <td class="td-up">↑ Naik</td>
+          <td>Pasar kompetitif, kepastian hukum</td>
+        </tr>
+        <tr>
+          <td>Malaysia</td>
+          <td class="td-stable">→ Stabil</td>
+          <td>Rezim fiskal akuntabel</td>
+        </tr>
+        <tr>
+          <td>Thailand</td>
+          <td class="td-up">↑ Naik (sektor otomotif)</td>
+          <td>Insentif jelas</td>
+        </tr>
+        <tr>
+          <td>Filipina</td>
+          <td class="td-up">↑ Naik</td>
+          <td>Reformasi birokrasi</td>
+        </tr>
+        <tr>
+          <td><strong>Indonesia</strong></td>
+          <td class="td-dn">↓ Turun</td>
+          <td>Risiko regulasi &amp; governance tinggi</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Data terbaru mencatat FDI kuartal II-2025 turun 6,9%. FDI kuartal III-2025 turun 8,87%. Kalau ini grafik saham → analis bilang, <span class="hl">"Downtrend confirmed. Sell."</span> Tapi karena ini ekonomi Indonesia → pejabat bilang, <span class="hl">"Semua baik-baik saja."</span></p>
+
+  <!-- Risk Box -->
+  <div class="risk-box">
+    <div class="risk-box-title">Lima Penyebab Utama Investor Menahan Modal</div>
+    <p style="margin-bottom:0.8em;"><strong>1. Ketidakpastian Regulasi.</strong> Aturan berubah sesuai angin politik. Ini berpotensi meningkatkan risiko; investor tadinya wait and see, akhirnya memilih walk out.</p>
+    <p style="margin-bottom:0.8em;"><strong>2. Dominasi Oligarki &amp; Ekonomi Rente.</strong> Membuat pasar tidak efisien karena kartel semakin kuat. Pemain global enggan masuk.</p>
+    <p style="margin-bottom:0.8em;"><strong>3. Korupsi Sistemik &amp; Kepastian Hukum Lemah.</strong> Transparency International 2024: Skor korupsi Indonesia: 34. Peringkat: 110 dunia. Investor tidak mencari janji, mereka mencari perlindungan.</p>
+    <p style="margin-bottom:0.8em;"><strong>4. Infrastruktur Finansial Tidak Stabil.</strong> Kasus pembekuan rekening arbitrer, PPATK subjektif. Ya uang takut masuk.</p>
+    <p style="margin-bottom:0;"><strong>5. Ketidakpastian Fiskal &amp; Utang.</strong> Belanja tidak disiplin, crowding-out effect. Sektor swasta kalah bersaing dengan negara rebutan sumber pendanaan.</p>
+  </div>
+
+  <p><strong>Risiko terbesar Indonesia bukan global, tapi domestik:</strong> ketidakpastian akal sehat pemerintah sendiri. Pertumbuhan ekonomi 5,0–5,1% hanya ditopang konsumsi APBN dan proyek stimulus. Bukan karena investasi swasta dan ekspansi sektor riil.</p>
+
+  <div class="data-block">
+    <div class="data-block-title">▸ Proyeksi Risiko Jika Kondisi Berlanjut</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Risiko</th>
+          <th>Dampak</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>FDI makin turun</td>
+          <td>Industri kehilangan masa depan</td>
+        </tr>
+        <tr>
+          <td>Kredit produktif stagnan</td>
+          <td>Pengangguran meningkat</td>
+        </tr>
+        <tr>
+          <td>Biaya utang negara naik</td>
+          <td>Yield SBN melebar</td>
+        </tr>
+        <tr>
+          <td>Rupiah lebih rentan</td>
+          <td>BI makin terbatas ruang geraknya</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pullquote">"Ekonomi yang hanya ditopang negara, bukan pasar, adalah ekonomi yang rapuh."</div>
+
+  <div class="data-block">
+    <div class="data-block-title">▸ Konsekuensi ke Depan — Jika Tidak Segera Berbenah</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Risiko</th>
+          <th>Dampak</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Investasi swasta melambat</td>
+          <td>Lapangan kerja menyusut</td>
+        </tr>
+        <tr>
+          <td>Konsumsi hanya bergantung bantuan pemerintah</td>
+          <td>APBN semakin terbebani</td>
+        </tr>
+        <tr>
+          <td>Kredit produktif stagnan</td>
+          <td>Potensi resesi investasi</td>
+        </tr>
+        <tr>
+          <td>Kepercayaan asing turun</td>
+          <td>Cost of fund Indonesia naik</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="dialogue">
+    "Demikian jawaban saya."
+    <span class="speaker">— Tessa, menatap Nase</span>
+  </div>
+
+  <p>Saya mengangguk. Mia tersenyum.</p>
+
+  <div class="dialogue">
+    "Tadi malam Tessa kerja sampai tengah malam. Aku lirik, eh dia buat analisa singkat tentang ekonomi Indonesia. Katanya, khawatir kalau Nase tanya dan dia engga siap jawabnya."
+    <span class="speaker">— Mia, melirik kepada Tessa</span>
+  </div>
+
+  <p>Saya senyum aja.</p>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">
+    <a href="https://imnxx.vercel.app/blog.html" class="nsebook-logo">
+      <svg class="logo-mark" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="38" height="38" rx="7" fill="#0d1018" stroke="#c9a84c" stroke-width="1.2"/>
+        <rect x="8" y="9" width="10" height="20" rx="1.5" fill="none" stroke="#c9a84c" stroke-width="1.2"/>
+        <rect x="20" y="9" width="10" height="20" rx="1.5" fill="none" stroke="#c9a84c" stroke-width="1.2"/>
+        <line x1="19" y1="10" x2="19" y2="28" stroke="#c9a84c" stroke-width="1.2"/>
+        <line x1="11" y1="14" x2="16" y2="14" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+        <line x1="11" y1="17" x2="16" y2="17" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+        <line x1="11" y1="20" x2="16" y2="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+        <line x1="22" y1="14" x2="27" y2="14" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+        <line x1="22" y1="17" x2="27" y2="17" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+        <line x1="22" y1="20" x2="27" y2="20" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+        <circle cx="29" cy="9" r="3" fill="#c9a84c"/>
+      </svg>
+      <div class="logo-text-wrap">
+        <span class="logo-name">nseBook.</span>
+        <span class="logo-tag">Digital Reading</span>
+      </div>
+    </a>
+  </div>
+  <div class="footer-copy">
+    Logika Uang · Erizeli Bandar<br>
+    Dipublikasikan oleh <strong style="color:var(--gold)">nseBook.</strong> — Platform Baca Digital<br>
+    <a href="https://imnxx.vercel.app/blog.html" style="color:var(--text-muted); text-decoration:none; letter-spacing:0.1em; transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">↩ Kembali ke Dashboard</a>
+  </div>
+</footer>
+
+<script>
+  // Reading progress bar
+  const bar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const total = document.body.scrollHeight - window.innerHeight;
+    const pct = (window.scrollY / total) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  // Fade in elements on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.dialogue, .data-block, .metrics-row, .risk-box, .pullquote, .insight-box').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
