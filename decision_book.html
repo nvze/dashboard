@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Decision Book | nseBook</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #ec4899;
+      --dark: #0f172a;
+      --darker: #020617;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(99, 102, 241, 0.3);
+      --glow: 0 0 20px rgba(99, 102, 241, 0.4);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--darker), var(--dark), #1e1b4b);
+      color: var(--light);
+      line-height: 1.7;
+      overflow-x: hidden;
+      background-attachment: fixed;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.3;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: float 15s infinite ease-in-out;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.8; }
+      50% { transform: translateY(-20px) translateX(10px); opacity: 1; }
+    }
+    
+    /* Logo nseBook */
+    .logo-container {
+      text-align: center;
+      padding: 2rem 1rem;
+      position: relative;
+    }
+    
+    .nsebook-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 16px;
+      box-shadow: var(--glow), 0 10px 40px rgba(0,0,0,0.3);
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .nsebook-logo:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 40px rgba(99, 102, 241, 0.6), 0 15px 50px rgba(0,0,0,0.4);
+    }
+    
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      position: relative;
+    }
+    
+    .logo-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #fff, #e2e8f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    
+    .logo-subtitle {
+      display: block;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+      margin-top: 2px;
+      font-weight: 400;
+    }
+    
+    /* Header */
+    header {
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      position: relative;
+    }
+    
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    header .subtitle {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+    
+    header .authors {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.7);
+      font-style: italic;
+    }
+    
+    /* Section Divider */
+    .section-divider {
+      text-align: center;
+      padding: 2rem 1rem;
+      position: relative;
+    }
+    
+    .section-title {
+      display: inline-block;
+      font-size: 1.8rem;
+      font-weight: 600;
+      padding: 0.5rem 2rem;
+      background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(236,72,153,0.2));
+      border-radius: 50px;
+      border: 1px solid var(--card-border);
+      margin: 1rem 0;
+      backdrop-filter: blur(10px);
+    }
+    
+    /* Model Cards */
+    .models-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .model-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 1.8rem;
+      backdrop-filter: blur(12px);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    
+    .model-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      opacity: 0;
+      transition: var(--transition);
+    }
+    
+    .model-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--glow), 0 10px 40px rgba(0,0,0,0.3);
+      border-color: var(--primary);
+    }
+    
+    .model-card:hover::before {
+      opacity: 1;
+    }
+    
+    .model-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+    }
+    
+    .model-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    
+    .model-subtitle {
+      font-size: 0.95rem;
+      color: var(--secondary);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    
+    .model-content {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    
+    .model-content p {
+      margin-bottom: 0.8rem;
+    }
+    
+    .model-content p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .model-content strong {
+      color: #fff;
+      font-weight: 600;
+    }
+    
+    .model-content em {
+      color: var(--secondary);
+      font-style: italic;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 1rem 4rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 2rem;
+      position: relative;
+    }
+    
+    .footer-logo {
+      margin-bottom: 1.5rem;
+    }
+    
+    .dashboard-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.9rem 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: var(--transition);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3);
+    }
+    
+    .dashboard-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(79, 70, 229, 0.5);
+      background: linear-gradient(135deg, var(--primary-dark), #4338ca);
+    }
+    
+    .dashboard-link svg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .copyright {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--gray);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .copyright a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .copyright a:hover {
+      color: var(--secondary);
+      text-decoration: underline;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .models-container {
+        grid-template-columns: 1fr;
+        padding: 0 1rem 3rem;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+        padding: 0.4rem 1.5rem;
+      }
+      
+      .model-card {
+        padding: 1.5rem;
+      }
+      
+      .logo-text {
+        font-size: 1.3rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.7rem;
+      }
+      
+      .logo-text {
+        font-size: 1.1rem;
+      }
+      
+      .logo-subtitle {
+        font-size: 0.75rem;
+      }
+      
+      .model-title {
+        font-size: 1.15rem;
+      }
+      
+      .model-subtitle {
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .model-card {
+      animation: fadeInUp 0.5s ease forwards;
+      animation-delay: calc(var(--i) * 0.05s);
+      opacity: 0;
+    }
+    
+    .model-card:nth-child(1) { animation-delay: 0.1s; }
+    .model-card:nth-child(2) { animation-delay: 0.15s; }
+    .model-card:nth-child(3) { animation-delay: 0.2s; }
+    .model-card:nth-child(4) { animation-delay: 0.25s; }
+    .model-card:nth-child(5) { animation-delay: 0.3s; }
+    .model-card:nth-child(6) { animation-delay: 0.35s; }
+    .model-card:nth-child(7) { animation-delay: 0.4s; }
+    .model-card:nth-child(8) { animation-delay: 0.45s; }
+    .model-card:nth-child(9) { animation-delay: 0.5s; }
+    .model-card:nth-child(10) { animation-delay: 0.55s; }
+    
+    /* Scroll indicator */
+    .scroll-hint {
+      text-align: center;
+      padding: 1rem;
+      color: var(--gray);
+      font-size: 0.9rem;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+    
+    /* Reference links styling */
+    .reference-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      background: rgba(99, 102, 241, 0.1);
+    }
+    
+    .reference-link:hover {
+      background: rgba(99, 102, 241, 0.2);
+      color: #fff;
+    }
+    
+    .reference-link::before {
+      content: '🔗 ';
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Particles Background -->
+  <div class="particles" id="particles"></div>
+  
+  <!-- Logo nseBook -->
+  <div class="logo-container">
+    <a href="#" class="nsebook-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#6366f1"/>
+              <stop offset="100%" style="stop-color:#ec4899"/>
+            </linearGradient>
+          </defs>
+          <rect x="10" y="10" width="80" height="80" rx="16" fill="url(#logoGrad)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+          <path d="M30 35 L45 50 L70 25" stroke="white" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="70" cy="25" r="8" fill="white" opacity="0.9"/>
+          <text x="50" y="78" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">NS</text>
+        </svg>
+      </div>
+      <div>
+        <span class="logo-text">nseBook</span>
+        <span class="logo-subtitle">Digital Knowledge Hub</span>
+      </div>
+    </a>
+  </div>
+  
+  <!-- Header -->
+  <header>
+    <h1>THE DECISION BOOK</h1>
+    <p class="subtitle">Fifty Models for Strategic Thinking</p>
+    <p class="authors">Mikael Krogerus & Roman Tschäppeler</p>
+    <p style="color: var(--gray); font-size: 0.9rem; margin-top: 1rem;">Ringkasan 50 model pengambilan keputusan dalam Bahasa Indonesia</p>
+  </header>
+  
+  <div class="scroll-hint">↓ Scroll untuk menjelajahi semua model ↓</div>
+  
+  <!-- Section 1: HOW TO IMPROVE YOURSELF -->
+  <div class="section-divider">
+    <span class="section-title">HOW TO IMPROVE YOURSELF</span>
+  </div>
+  
+  <div class="models-container">
+    <!-- MODEL #01 -->
+    <div class="model-card" style="--i:1">
+      <div class="model-number">#01</div>
+      <h3 class="model-title">THE EISENHOWER MATRIX</h3>
+      <span class="model-subtitle">How to Work More Efficiently</span>
+      <div class="model-content">
+        <p>Membagi tugas menjadi empat kuadran berdasarkan urgensi dan kepentingan: (1) <strong>Penting & Mendesak</strong> → kerjakan sekarang, (2) <strong>Penting tapi Tidak Mendesak</strong> → jadwalkan kapan akan dikerjakan, (3) <strong>Tidak Penting tapi Mendesak</strong> → delegasikan ke orang lain, (4) <strong>Tidak Penting & Tidak Mendesak</strong> → tunda atau abaikan. Fokus pada kuadran 2 adalah kunci efisiensi jangka panjang.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #02 -->
+    <div class="model-card" style="--i:2">
+      <div class="model-number">#02</div>
+      <h3 class="model-title">THE SWOT ANALYSIS</h3>
+      <span class="model-subtitle">How to Find the Right Solution</span>
+      <div class="model-content">
+        <p>Mengevaluasi empat dimensi: <strong>Strengths</strong> (kekuatan internal), <strong>Weaknesses</strong> (kelemahan internal), <strong>Opportunities</strong> (peluang eksternal), dan <strong>Threats</strong> (ancaman eksternal). Dikembangkan dari riset Stanford 1960-an. Berguna untuk keputusan bisnis maupun pribadi. Kunci: bagaimana memaksimalkan kekuatan, menutupi kelemahan, memanfaatkan peluang, dan melindungi diri dari ancaman.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #03 -->
+    <div class="model-card" style="--i:3">
+      <div class="model-number">#03</div>
+      <h3 class="model-title">THE BCG BOX</h3>
+      <span class="model-subtitle">How to Evaluate Costs and Benefits</span>
+      <div class="model-content">
+        <p>Matrix Boston Consulting Group untuk menilai portofolio investasi: <strong>Cash Cows</strong> (pangsa pasar tinggi, pertumbuhan rendah → hasilkan uang), <strong>Stars</strong> (pangsa tinggi, pertumbuhan tinggi → investasikan), <strong>Question Marks</strong> (pertumbuhan tinggi, pangsa rendah → keputusan sulit), <strong>Dogs</strong> (pangsa rendah, pasar jenuh → likuidasi). Gunakan untuk mengelompokkan produk, proyek, atau investasi.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #04 -->
+    <div class="model-card" style="--i:4">
+      <div class="model-number">#04</div>
+      <h3 class="model-title">THE PROJECT PORTFOLIO MATRIX</h3>
+      <span class="model-subtitle">How to Maintain an Overview</span>
+      <div class="model-content">
+        <p>Untuk orang yang mengelola banyak proyek sekaligus ('<em>slasher</em>'). Tempatkan proyek pada matriks berdasarkan dua parameter relevan (misal: biaya vs. waktu, atau sesuai visi vs. pembelajaran). Tolak proyek yang tidak sesuai visi dan tidak ada yang dipelajari. Lanjutkan proyek yang sesuai visi dan mengajarkan hal baru — itulah jackpot!</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #05 -->
+    <div class="model-card" style="--i:5">
+      <div class="model-number">#05</div>
+      <h3 class="model-title">THE JOHN WHITMORE MODEL</h3>
+      <span class="model-subtitle">Am I Pursuing the Right Goal?</span>
+      <div class="model-content">
+        <p>Memeriksa apakah tujuan yang ditetapkan memenuhi 14 kriteria: <strong>Specific, Measurable, Attainable, Realistic, Time-phased</strong> (SMART) ditambah <strong>Challenging, Positively stated, Understood, Relevant, Ethical, Legal, Environmentally sound, Agreed, dan Recorded</strong> (SMARTER+). Bedakan antara <em>final goals</em> (tujuan akhir) dan <em>performance goals</em> (langkah pencapaian).</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #06 -->
+    <div class="model-card" style="--i:6">
+      <div class="model-number">#06</div>
+      <h3 class="model-title">THE RUBBER BAND MODEL</h3>
+      <span class="model-subtitle">How to Deal with a Dilemma</span>
+      <div class="model-content">
+        <p>Untuk membantu seseorang keluar dari dilema ketika dua pilihan sama-sama menarik. Alih-alih bertanya 'pro dan kontra', tanyakan: '<strong>Apa yang menahan saya?</strong>' dan '<strong>Apa yang menarik saya?</strong>' Pertanyaan positif ini membantu mengungkap motivasi sejati di balik setiap pilihan tanpa meremehkan salah satunya.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #07 -->
+    <div class="model-card" style="--i:7">
+      <div class="model-number">#07</div>
+      <h3 class="model-title">THE FEEDBACK MODEL</h3>
+      <span class="model-subtitle">Dealing with Compliments and Criticisms</span>
+      <div class="model-content">
+        <p>Feedback dikategorikan dalam matriks 2x2: <strong>Compliment</strong> (baik & bisa tetap), <strong>Advice</strong> (baik tapi perlu berubah), <strong>Suggestion</strong> (buruk tapi bisa ditoleransi), <strong>Criticism</strong> (buruk & harus berubah). Pertanyaan kunci: '<em>Apa yang bisa saya lakukan dengan kritik ini?</em>' Juga tanyakan: apakah keberhasilan atau kegagalan ini karena keberuntungan?</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #08 -->
+    <div class="model-card" style="--i:8">
+      <div class="model-number">#08</div>
+      <h3 class="model-title">THE FAMILY TREE MODEL</h3>
+      <span class="model-subtitle">The Contacts You Should Maintain</span>
+      <div class="model-content">
+        <p>Gambarlah struktur pelanggan atau jaringan pertemanan seperti pohon keluarga untuk melihat bagaimana seseorang menjadi klien atau teman. Rasio promotor vs. kritikus adalah barometer kesuksesan. Cabang dengan banyak ranting membutuhkan lebih banyak perhatian dan merepresentasikan risiko over-konsentrasi.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #09 -->
+    <div class="model-card" style="--i:9">
+      <div class="model-number">#09</div>
+      <h3 class="model-title">THE MORPHOLOGICAL BOX & SCAMPER</h3>
+      <span class="model-subtitle">Why You Have to Be Structured to Be Creative</span>
+      <div class="model-content">
+        <p>Inovasi = kombinasi baru dari hal yang sudah ada. <strong>Morphological Box</strong>: susun semua parameter dan atribut dalam tabel, lalu hubungkan kombinasi yang diinginkan. <strong>SCAMPER</strong>: 7 pertanyaan kreatif — <em>Substitute</em> (ganti), <em>Combine</em> (gabungkan), <em>Adapt</em> (adaptasi), <em>Modify</em> (modifikasi), <em>Put to other use</em> (guna lain), <em>Eliminate</em> (hapus), <em>Reverse</em> (balikkan).</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #10 -->
+    <div class="model-card" style="--i:10">
+      <div class="model-number">#10</div>
+      <h3 class="model-title">THE ESQUIRE GIFT MODEL</h3>
+      <span class="model-subtitle">How Much to Spend on Gifts</span>
+      <div class="model-content">
+        <p>Model dari majalah Esquire dengan dua sumbu: berapa lama Anda mengenal penerima hadiah, dan berapa nilai hadiah yang sesuai. Aturan praktis: murah hati lebih baik dari pelit, dan berikan sesuatu yang Anda sendiri senang menerimanya. Semakin lama hubungan dan semakin penting momen (pertunangan, kelahiran anak), semakin tinggi nilainya.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #11 -->
+    <div class="model-card" style="--i:11">
+      <div class="model-number">#11</div>
+      <h3 class="model-title">THE CONSEQUENCES MODEL</h3>
+      <span class="model-subtitle">Why It Is Important to Make Decisions Promptly</span>
+      <div class="model-content">
+        <p>Di awal proyek, informasi terbatas tapi konsekuensi keputusan sangat besar. Di akhir proyek, informasi melimpah tapi tidak ada lagi yang fundamental untuk diputuskan. Moral: berani membuat keputusan lebih awal meski informasi minim. Tidak membuat keputusan juga adalah sebuah keputusan — dan biasanya yang terburuk karena tidak dikomunikasikan.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #12 -->
+    <div class="model-card" style="--i:12">
+      <div class="model-number">#12</div>
+      <h3 class="model-title">THE CONFLICT RESOLUTION MODEL</h3>
+      <span class="model-subtitle">How to Resolve a Conflict Elegantly</span>
+      <div class="model-content">
+        <p>Enam cara menghadapi konflik: (1) <strong>Escape/Lari</strong> → lose-lose, (2) <strong>Fight/Bertarung</strong> → win-lose, (3) <strong>Give up/Menyerah</strong> → lose-win, (4) <strong>Evade responsibility/Lempar tanggung jawab</strong> → berisiko lose-lose, (5) <strong>Compromise/Kompromi</strong> → win-lose/win-lose, (6) <strong>Consensus/Konsensus</strong> → win-win (solusi baru bersama). Konsensus adalah yang terbaik karena tidak ada yang harus mundur.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #13 -->
+    <div class="model-card" style="--i:13">
+      <div class="model-number">#13</div>
+      <h3 class="model-title">THE CROSSROADS MODEL</h3>
+      <span class="model-subtitle">So What Next?</span>
+      <div class="model-content">
+        <p>Model untuk menemukan arah hidup di persimpangan. Renungkan: dari mana Anda berasal, apa yang penting bagi Anda, siapa orang-orang penting, apa yang menghambat, dan apa yang Anda takutkan. Lalu bayangkan enam jalan: (1) yang menggoda, (2) impian terliar, (3) yang paling masuk akal, (4) yang belum pernah dipertimbangkan, (5) yang pernah dilalui, (6) jalan pulang.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Section 2: HOW TO UNDERSTAND YOURSELF BETTER -->
+  <div class="section-divider">
+    <span class="section-title">HOW TO UNDERSTAND YOURSELF BETTER</span>
+  </div>
+  
+  <div class="models-container">
+    <!-- MODEL #14 -->
+    <div class="model-card" style="--i:14">
+      <div class="model-number">#14</div>
+      <h3 class="model-title">THE FLOW MODEL</h3>
+      <span class="model-subtitle">What Makes You Happy?</span>
+      <div class="model-content">
+        <p>Psikolog Mihaly Csikszentmihalyi menemukan bahwa kebahagiaan ('flow') terjadi saat kita: fokus intens pada aktivitas yang dipilih sendiri, tidak terlalu mudah (boreout) maupun terlalu sulit (burnout), punya tujuan jelas, dan mendapat umpan balik langsung. Saat flow, kita lupa waktu. Model menunjukkan sumbu tantangan vs. kemampuan.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #15 -->
+    <div class="model-card" style="--i:15">
+      <div class="model-number">#15</div>
+      <h3 class="model-title">THE JOHARI WINDOW</h3>
+      <span class="model-subtitle">What Others Know About You</span>
+      <div class="model-content">
+        <p>Empat kuadran kesadaran diri: (A) Diketahui diri sendiri & orang lain — area terbuka, (B) Diketahui diri tapi disembunyikan dari orang lain — area tersembunyi, (C) Tidak diketahui diri tapi diketahui orang lain — area blind spot, (D) Tidak diketahui siapapun — area tak sadar. Feedback dari orang lain membantu memperkecil blind spot.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #16 -->
+    <div class="model-card" style="--i:16">
+      <div class="model-number">#16</div>
+      <h3 class="model-title">THE COGNITIVE DISSONANCE MODEL</h3>
+      <span class="model-subtitle">Why People Smoke When They Know It's Unhealthy</span>
+      <div class="model-content">
+        <p>Disonansi kognitif terjadi saat tindakan tidak sesuai keyakinan (misal: tahu merokok berbahaya tapi tetap merokok). Alih-alih mengakui kesalahan, manusia cenderung melakukan self-justification — melihat hanya yang ingin dilihat. Solusi: ubah perilaku atau ubah sikap. Menyadari disonansi adalah langkah pertama menuju perubahan.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #17 -->
+    <div class="model-card" style="--i:17">
+      <div class="model-number">#17</div>
+      <h3 class="model-title">THE MUSIC MATRIX</h3>
+      <span class="model-subtitle">What Your Taste in Music Says About You</span>
+      <div class="model-content">
+        <p>Matriks dua sumbu — <strong>Designed vs. Authentic</strong> (vertikal) dan <strong>Mainstream vs. Avant-garde</strong> (horizontal) — untuk memetakan artis/band berdasarkan karakter musiknya. Posisi musik favorit Anda di matriks ini mencerminkan kepribadian dan selera estetika Anda. Ini adalah cermin yang menarik tentang identitas kultural seseorang.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #18 -->
+    <div class="model-card" style="--i:18">
+      <div class="model-number">#18</div>
+      <h3 class="model-title">THE UNIMAGINABLE MODEL</h3>
+      <span class="model-subtitle">What Do You Believe in That You Cannot Prove?</span>
+      <div class="model-content">
+        <p>Model berbentuk elips dengan dua sumbu: <strong>Imaginable vs. Unimaginable</strong>, dan <strong>Provable vs. Not Provable</strong>. Menantang kita untuk merefleksikan: apa yang kita yakini tanpa bukti? Model mengingatkan bahwa kita sering memperlakukan model sebagai realitas. Seperti kata Einstein: sistem 'logis' pun pada akhirnya adalah soal keyakinan.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #19 -->
+    <div class="model-card" style="--i:19">
+      <div class="model-number">#19</div>
+      <h3 class="model-title">THE UFFE ELBÆK MODEL</h3>
+      <span class="model-subtitle">How to Get to Know Yourself</span>
+      <div class="model-content">
+        <p>Barometer opini publik berbentuk spider chart dengan sumbu-sumbu berlawanan: <strong>Global-Local</strong>, <strong>Form-Content</strong>, <strong>Team-Individual</strong>, <strong>Body-Brain</strong>. Skala 1-10 untuk setiap dimensi. Isi dua kali: (1) bagaimana Anda melihat diri sendiri, (2) bagaimana Anda ingin dilihat. Minta orang lain mengisinya untuk Anda, lalu bandingkan hasilnya.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #20 -->
+    <div class="model-card" style="--i:20">
+      <div class="model-number">#20</div>
+      <h3 class="model-title">THE FASHION MODEL</h3>
+      <span class="model-subtitle">How We Dress</span>
+      <div class="model-content">
+        <p>Model oleh penulis Eric Sommier yang memetakan merek pakaian terkenal dalam matriks dua sumbu: <strong>Appearance vs. Reality</strong> (vertikal) dan <strong>Past vs. Future</strong> (horizontal). Posisi merek mencerminkan nilai dan identitas yang ingin disampaikan. Gunakan untuk memahami apa yang dikatakan pilihan pakaian Anda tentang diri Anda.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #21 -->
+    <div class="model-card" style="--i:21">
+      <div class="model-number">#21</div>
+      <h3 class="model-title">THE ENERGY MODEL</h3>
+      <span class="model-subtitle">Are You Living in the Here and Now?</span>
+      <div class="model-content">
+        <p>Mengukur distribusi energi mental: berapa persen waktu Anda dihabiskan untuk memikirkan masa lalu, masa kini, dan masa depan? Tiga pola kultural: <strong>Memory-driven</strong> (Eropa — 40% masa lalu), <strong>Dream-driven</strong> (AS — 65% masa depan), <strong>Reality-driven</strong> (Asia — 70% masa kini). Refleksi: apakah distribusi Anda mencerminkan nilai-nilai yang Anda inginkan?</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #22 -->
+    <div class="model-card" style="--i:22">
+      <div class="model-number">#22</div>
+      <h3 class="model-title">THE SUPERMEMO MODEL</h3>
+      <span class="model-subtitle">How to Remember Everything You Have Ever Learned</span>
+      <div class="model-content">
+        <p>Memori jangka panjang memiliki dua komponen: <strong>retrievability</strong> (kemudahan mengingat) dan <strong>stability</strong> (kedalaman ingatan). Dikembangkan oleh Piotr Woźniak: sesuatu harus diulang tepat saat mulai terlupakan. Jadwal optimal pengulangan: setelah 1, 10, 30, dan 60 hari. Prinsip: semakin sering diulang, semakin lama diingat.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #23 -->
+    <div class="model-card" style="--i:23">
+      <div class="model-number">#23</div>
+      <h3 class="model-title">THE POLITICAL COMPASS</h3>
+      <span class="model-subtitle">What Political Parties Stand For</span>
+      <div class="model-content">
+        <p>Melampaui dikotomi kiri-kanan tradisional dengan dua sumbu: (1) <strong>Ekonomi</strong>: Left (nasionalisasi) vs. Right (privatisasi), (2) <strong>Sosial</strong>: Liberal (hak individu penuh) vs. Authoritarian (kontrol negara tinggi). Memetakan posisi partai dan individu secara lebih akurat. Tanyakan: di mana posisi Anda sekarang? Di mana 10 tahun lalu?</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #24 -->
+    <div class="model-card" style="--i:24">
+      <div class="model-number">#24</div>
+      <h3 class="model-title">THE PERSONAL PERFORMANCE MODEL</h3>
+      <span class="model-subtitle">How to Recognise Whether You Should Change Your Job</span>
+      <div class="model-content">
+        <p>Setiap malam selama 3 minggu, nilai tiga pertanyaan dari 1-10: <strong>Have to</strong> (seberapa besar tugas dipaksakan), <strong>Able to</strong> (seberapa sesuai tugas dengan kemampuan), <strong>Want to</strong> (seberapa sesuai dengan keinginan). Analisis bentuk 'layar' yang terbentuk. Layar yang selalu sama = rutinitas tanpa pertumbuhan. Variasi = pekerjaan memberi beragam pengalaman.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #25 -->
+    <div class="model-card" style="--i:25">
+      <div class="model-number">#25</div>
+      <h3 class="model-title">THE MAKING-OF MODEL</h3>
+      <span class="model-subtitle">To Determine Your Future, First Understand Your Past</span>
+      <div class="model-content">
+        <p>Tentukan timeframe (setahun terakhir, masa sekolah, dll), lalu petakan pada timeline: orang-orang yang terlibat, tujuan saat itu, keberhasilan yang dicapai, hambatan yang diatasi, dan pelajaran yang dipetik. Model ini membangun jembatan antara masa lalu dan masa depan, membantu memilih apa yang dibawa dan apa yang ditinggalkan.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #26 -->
+    <div class="model-card" style="--i:26">
+      <div class="model-number">#26</div>
+      <h3 class="model-title">THE PERSONAL POTENTIAL TRAP</h3>
+      <span class="model-subtitle">Why It Is Better Not to Expect Anything</span>
+      <div class="model-content">
+        <p>Perangkap orang berbakat: ketika harapan orang lain dan harapan diri sendiri jauh melampaui prestasi nyata, terjadi krisis. Model menunjukkan tiga kurva: ekspektasi diri, ekspektasi orang lain, dan prestasi aktual. Solusi: '<em>promise 80, deliver 120</em>' — berjanji lebih sedikit dari kemampuan, lalu lampaui ekspektasi.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #27 -->
+    <div class="model-card" style="--i:27">
+      <div class="model-number">#27</div>
+      <h3 class="model-title">THE HYPE CYCLE</h3>
+      <span class="model-subtitle">How to Identify the Next Big Thing</span>
+      <div class="model-content">
+        <p>Model Gartner untuk teknologi baru melewati 5 fase: (1) <strong>Technology Trigger</strong> — kemunculan, (2) <strong>Peak of Inflated Expectations</strong> — hype puncak, (3) <strong>Trough of Disillusionment</strong> — kekecewaan, (4) <strong>Slope of Enlightenment</strong> — eksperimentasi ulang, (5) <strong>Plateau of Productivity</strong> — diterima luas. Versi 2.0 atau 3.0 sering yang akhirnya sukses.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #28 -->
+    <div class="model-card" style="--i:28">
+      <div class="model-number">#28</div>
+      <h3 class="model-title">THE SUBTLE SIGNALS MODEL</h3>
+      <span class="model-subtitle">Why Nuances Matter</span>
+      <div class="model-content">
+        <p>Komunikasi terjadi di dua level: apa yang dikatakan, dan bagaimana mengatakannya. Penelitian MIT menemukan bahwa karyawan yang banyak berinteraksi dan membaca email (pribadi maupun kerja) cenderung lebih bahagia dan produktif. Model matriks menampilkan frekuensi komunikasi vs. efeknya. Nuansa komunikasi menentukan kualitas kerja sama.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #29 -->
+    <div class="model-card" style="--i:29">
+      <div class="model-number">#29</div>
+      <h3 class="model-title">THE NETWORK TARGET MODEL</h3>
+      <span class="model-subtitle">What Your Friends Say About You</span>
+      <div class="model-content">
+        <p>Petakan kontak dalam target berbentuk lingkaran konsentris (harian, mingguan, bulanan, tahunan) dan empat kuadran (teman, keluarga, kolega, kenalan). Analisis juga: berapa yang lebih kaya/lebih miskin, lebih tua/lebih muda, lebih/kurang menarik dari Anda? Komposisi jaringan sosial Anda mencerminkan nilai-nilai dan identitas Anda.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #30 -->
+    <div class="model-card" style="--i:30">
+      <div class="model-number">#30</div>
+      <h3 class="model-title">THE SUPERFICIAL KNOWLEDGE MODEL</h3>
+      <span class="model-subtitle">Everything You Don't Need to Know</span>
+      <div class="model-content">
+        <p>Matriks dua sumbu: <strong>Embarrassing vs. Impressive</strong>, dan <strong>Easy vs. Difficult</strong>. Memetakan berbagai pengetahuan trivial (misal: nama kru Enterprise, resep Cosmopolitan, semua negara anggota EU). Mulai dari kuadran kanan atas (impressive & easy) untuk kesan terbaik. Mengingatkan bahwa pengetahuan yang tepat bisa mengesankan, yang salah bisa mempermalukan.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Section 3: HOW TO UNDERSTAND OTHERS BETTER -->
+  <div class="section-divider">
+    <span class="section-title">HOW TO UNDERSTAND OTHERS BETTER</span>
+  </div>
+  
+  <div class="models-container">
+    <!-- MODEL #31 -->
+    <div class="model-card" style="--i:31">
+      <div class="model-number">#31</div>
+      <h3 class="model-title">THE SWISS CHEESE MODEL</h3>
+      <span class="model-subtitle">How Mistakes Happen</span>
+      <div class="model-content">
+        <p>Model James Reason: sistem pertahanan kesalahan seperti irisan keju Emmental yang berlubang. Kesalahan terjadi saat lubang-lubang di berbagai lapisan pertahanan (manusia, teknis, organisasi, eksternal) sejajar dan membentuk jalur langsung menuju bencana. Digunakan di kedokteran dan penerbangan. Pelajaran: kesalahan jarang terjadi karena satu sebab.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #32 -->
+    <div class="model-card" style="--i:32">
+      <div class="model-number">#32</div>
+      <h3 class="model-title">THE MASLOW PYRAMIDS</h3>
+      <span class="model-subtitle">What You Actually Need, What You Actually Want</span>
+      <div class="model-content">
+        <p>Abraham Maslow (1943) menyusun kebutuhan manusia secara hierarki: <strong>Fisiologis → Keamanan → Hubungan Sosial → Pengakuan → Aktualisasi Diri</strong>. Tiga bawah adalah kebutuhan dasar (bila terpenuhi, tidak lagi dipikirkan). Dua atas adalah aspirasi yang tak pernah benar-benar terpuaskan. Model dihadapkan dua piramida: apa yang kita butuhkan vs. apa yang kita inginkan.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #33 -->
+    <div class="model-card" style="--i:33">
+      <div class="model-number">#33</div>
+      <h3 class="model-title">THINKING OUTSIDE THE BOX</h3>
+      <span class="model-subtitle">How to Come Up with Brilliant Ideas</span>
+      <div class="model-content">
+        <p>Ide inovatif muncul saat melampaui zona nyaman. Ilustrasi dengan '<em>nine-point problem</em>': hubungkan 9 titik dengan 4 garis tanpa mengangkat pena — kuncinya mengulurkan garis keluar dari kotak. Paradoksnya: Dr. Peter Suedfeld menemukan bahwa pembatasan stimulus justru meningkatkan kreativitas. Inovasi terjadi di area perpotongan antara yang baru, lama, teratur, dan kacau.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #34 -->
+    <div class="model-card" style="--i:34">
+      <div class="model-number">#34</div>
+      <h3 class="model-title">THE SINUS MILIEU & BOURDIEU MODELS</h3>
+      <span class="model-subtitle">Where You Belong</span>
+      <div class="model-content">
+        <p><strong>Sinus Milieu</strong>: metode psikografis untuk memetakan kelompok sosiokultural (tradisionalis, kelas menengah tipikal, post-materialist, dll) berdasarkan status sosial dan orientasi dasar. <strong>Model Bourdieu</strong>: matriks yang memetakan konsumsi kultural berdasarkan modal ekonomi vs. modal kultural. Berguna untuk memahami dan mempertanyakan preferensi kultural yang mengakar.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #35 -->
+    <div class="model-card" style="--i:35">
+      <div class="model-number">#35</div>
+      <h3 class="model-title">THE DOUBLE-LOOP LEARNING MODEL</h3>
+      <span class="model-subtitle">How to Learn from Your Mistakes</span>
+      <div class="model-content">
+        <p><strong>Single loop</strong>: mengulangi praktik terbaik atau kesalahan yang sama. <strong>Double loop</strong> (dikembangkan Argyris & Schön): mempertanyakan mengapa kita melakukan apa yang kita lakukan — mengidentifikasi nilai dan asumsi tersembunyi di balik tindakan. Beda antara '<em>espoused theory</em>' (apa yang kita katakan) vs. '<em>theory in use</em>' (apa yang benar-benar kita lakukan).</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #36 -->
+    <div class="model-card" style="--i:36">
+      <div class="model-number">#36</div>
+      <h3 class="model-title">THE AI MODEL</h3>
+      <span class="model-subtitle">What Kind of Discussion Type Are You?</span>
+      <div class="model-content">
+        <p><strong>AI (Appreciative Inquiry)</strong> oleh David Cooperrider: fokus pada kekuatan, bukan kelemahan. Empat tipe respons dalam diskusi: <strong>Fault-finder</strong> ('bagus tapi...'), <strong>Dictator</strong> ('Tidak!'), <strong>Schoolteacher</strong> ('Tidak, karena...'), <strong>AI Thinker</strong> ('Ya, dan bisa juga...'). Prinsip: lanjutkan mengembangkan ide yang belum sempurna daripada langsung membuangnya.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #37 -->
+    <div class="model-card" style="--i:37">
+      <div class="model-number">#37</div>
+      <h3 class="model-title">THE SMALL-WORLD MODEL</h3>
+      <span class="model-subtitle">How Small the World Really Is</span>
+      <div class="model-content">
+        <p>Stanley Milgram (1967): setiap orang di dunia terhubung ke orang lain melalui maksimal 6 derajat pemisahan. Relevan untuk viral marketing: siapa yang bisa menyebarkan ide Anda? Media sosial membuat rantai koneksi ini semakin terlihat. Pesan utama: bukan tentang apa yang bisa Anda lakukan, melainkan siapa yang Anda kenal.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #38 -->
+    <div class="model-card" style="--i:38">
+      <div class="model-number">#38</div>
+      <h3 class="model-title">THE PARETO PRINCIPLE</h3>
+      <span class="model-subtitle">Why 80% of Output Comes from 20% of Input</span>
+      <div class="model-content">
+        <p>Vilfredo Pareto menemukan: 80% kekayaan Italia dimiliki 20% populasi. Pola 80/20 muncul di mana-mana: 20% karyawan menghasilkan 80% pekerjaan, 20% waktu menghasilkan 80% keputusan, 80% omzet dari 20% klien. Implikasi praktis: identifikasi 20% usaha yang paling produktif dan fokuskan energi di sana.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #39 -->
+    <div class="model-card" style="--i:39">
+      <div class="model-number">#39</div>
+      <h3 class="model-title">THE LONG-TAIL MODEL</h3>
+      <span class="model-subtitle">How the Internet Is Transforming the Economy</span>
+      <div class="model-content">
+        <p>Chris Anderson (Wired, 2004): kurva permintaan punya '<em>ekor panjang</em>'. Di internet, hampir semua produk yang dijual juga terjual — sehowever niche-nya. Total pendapatan dari produk niche (ekor panjang, 80%) bisa melampaui pendapatan dari bestseller (kepala, 20%). Internet menggeser bisnis dari keseragaman menuju keragaman.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #40 -->
+    <div class="model-card" style="--i:40">
+      <div class="model-number">#40</div>
+      <h3 class="model-title">THE MONTE CARLO SIMULATION</h3>
+      <span class="model-subtitle">Why We Can Only Approximate a Definitive Outcome</span>
+      <div class="model-content">
+        <p>Metode komputasi yang menggunakan random sampling berulang untuk memperkirakan hasil dari fenomena yang mengandung ketidakpastian (cuaca, harga saham, dll). Seperti dadu: kita tahu kemungkinannya, tapi tidak bisa memastikan hasilnya. Pesan utama: model tidak merepresentasikan realitas, hanya pendekatan — selalu ada margin of error.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #41 -->
+    <div class="model-card" style="--i:41">
+      <div class="model-number">#41</div>
+      <h3 class="model-title">THE BLACK SWAN MODEL</h3>
+      <span class="model-subtitle">Why Your Experiences Don't Make You Any Wiser</span>
+      <div class="model-content">
+        <p>Nassim Nicholas Taleb: '<strong>Black Swan</strong>' adalah kejadian tak terduga yang berdampak besar — seperti 9/11. Sama seperti orang Barat yang selalu berasumsi angsa berwarna putih, sampai ditemukan angsa hitam. Pengalaman masa lalu tidak selalu membantu memprediksi masa depan. Moral: selalu pertanyakan hal-hal yang kita anggap pasti.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #42 -->
+    <div class="model-card" style="--i:42">
+      <div class="model-number">#42</div>
+      <h3 class="model-title">THE CHASM — THE DIFFUSION MODEL</h3>
+      <span class="model-subtitle">Why Everybody Has an iPod</span>
+      <div class="model-content">
+        <p>Geoffrey Moore: kurva difusi inovasi melewati segmen — <strong>Innovators → Early Adaptors → Early Majority → Late Majority → Sceptics (Stragglers)</strong>. '<strong>Chasm</strong>' (jurang) ada antara early adaptors dan sceptical masses — titik kritis di mana banyak produk gagal. Jika berhasil melewatinya, terjadi tipping point dan inovasi diadopsi massal.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #43 -->
+    <div class="model-card" style="--i:43">
+      <div class="model-number">#43</div>
+      <h3 class="model-title">THE BLACK BOX MODEL</h3>
+      <span class="model-subtitle">Why Faith Is Replacing Knowledge</span>
+      <div class="model-content">
+        <p>Dunia makin kompleks, sementara pemahaman kita semakin berkurang. Kita dikelilingi '<em>kotak hitam</em>' — sistem yang tidak kita pahami tapi kita andalkan (ponsel, DNA, algoritma). Akibatnya: kita semakin mempercayai orang yang bisa menjelaskan sesuatu, bukan penjelasannya sendiri. Di masa depan, meyakinkan dengan gambar dan emosi akan lebih efektif dari argumen.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #44 -->
+    <div class="model-card" style="--i:44">
+      <div class="model-number">#44</div>
+      <h3 class="model-title">THE STATUS MODEL</h3>
+      <span class="model-subtitle">How to Recognise a Winner</span>
+      <div class="model-content">
+        <p>Matriks berdasarkan cara mendapatkan uang (<strong>earned vs. inherited</strong>) dan cara menghabiskannya (<strong>egoistic vs. altruistic</strong>). Empat tipe: <strong>Old Money</strong> (warisan, konservatif), <strong>Children of Rich Parents</strong> (identitas tak jelas), <strong>Nouveau Riche</strong> (pamer kekayaan, SUV mewah), <strong>Green SUVers</strong> (karier kreatif, gaya hidup hijau — kemewahan yang berkelanjutan). Di sisi mana Anda?</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #45 -->
+    <div class="model-card" style="--i:45">
+      <div class="model-number">#45</div>
+      <h3 class="model-title">THE PRISONER'S DILEMMA</h3>
+      <span class="model-subtitle">When Is It Worth Trusting Someone?</span>
+      <div class="model-content">
+        <p>Dilema klasik teori permainan: dua tahanan yang tidak bisa berkomunikasi, masing-masing dihadapkan pilihan mengaku atau diam. Jika keduanya diam: 2 tahun. Jika keduanya mengaku: 5 tahun. Jika satu mengaku & satu diam: pengaku bebas, yang diam kena 10 tahun. Temuan Robert Axelrod: strategi terbaik adalah '<em>tit for tat</em>' — mulai dengan kooperasi, lalu tiru langkah lawan.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Section 4: HOW TO IMPROVE OTHERS -->
+  <div class="section-divider">
+    <span class="section-title">HOW TO IMPROVE OTHERS</span>
+  </div>
+  
+  <div class="models-container">
+    <!-- MODEL #46 -->
+    <div class="model-card" style="--i:46">
+      <div class="model-number">#46</div>
+      <h3 class="model-title">THE DREXLER–SIBBET TEAM PERFORMANCE MODEL</h3>
+      <span class="model-subtitle">How to Turn a Group into a Team</span>
+      <div class="model-content">
+        <p>Tujuh tahap yang dilalui setiap kelompok dalam proyek: (1) <strong>Orientation</strong> — 'Kenapa saya di sini?', (2) <strong>Trust Building</strong>, (3) <strong>Goal Clarification</strong>, (4) <strong>Commitment</strong>, (5) <strong>Implementation</strong>, (6) <strong>High Performance</strong>, (7) <strong>Renewal</strong> — 'Kenapa harus lanjut?' Setiap tahap memiliki pertanyaan khas dan kondisi resolved/unresolved. Jika satu tahap dilewati, harus kembali.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #47 -->
+    <div class="model-card" style="--i:47">
+      <div class="model-number">#47</div>
+      <h3 class="model-title">THE TEAM MODEL</h3>
+      <span class="model-subtitle">Is Your Team Up to the Job?</span>
+      <div class="model-content">
+        <p>Mengevaluasi tim menggunakan spider chart dengan kriteria yang relevan untuk proyek: <strong>soft skills</strong> (loyalitas, motivasi) dan <strong>hard skills</strong> (kemampuan teknis). Tentukan batas kritis (0-10) untuk setiap skill. Hubungkan penilaian setiap anggota. Lebih mengungkap: minta anggota tim menilai diri sendiri dan bandingkan. Tim yang kuat terletak pada perbedaan, bukan kesamaan.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #48 -->
+    <div class="model-card" style="--i:48">
+      <div class="model-number">#48</div>
+      <h3 class="model-title">THE GAP-IN-THE-MARKET MODEL</h3>
+      <span class="model-subtitle">How to Recognise a Bankable Idea</span>
+      <div class="model-content">
+        <p>Model 3D untuk memetakan pasar menggunakan tiga sumbu sesuai industri (misal: prestige, cost-effectiveness, awareness untuk majalah). Posisikan kompetitor di grafik. Area padat kompetitor → masuki hanya jika bisa jadi '<em>category killer</em>'. Cari area kosong yang belum terisi (niche). Peringatan: area yang benar-benar kosong mungkin tidak ada permintaannya.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #49 -->
+    <div class="model-card" style="--i:49">
+      <div class="model-number">#49</div>
+      <h3 class="model-title">THE HERSEY–BLANCHARD MODEL</h3>
+      <span class="model-subtitle">How to Successfully Manage Your Employees</span>
+      <div class="model-content">
+        <p><strong>Situational Leadership</strong>: gaya kepemimpinan disesuaikan dengan tahap perkembangan karyawan: (1) <strong>Instructing</strong> — karyawan baru, komitmen tinggi, keahlian rendah → beri instruksi, (2) <strong>Coaching</strong> — keahlian naik, motivasi turun → ajukan pertanyaan, (3) <strong>Supporting</strong> — keahlian tinggi, motivasi bervariasi → beri otonomi, (4) <strong>Delegating</strong> — keahlian penuh, motivasi tinggi → delegasikan proyek.</p>
+      </div>
+    </div>
+    
+    <!-- MODEL #50 -->
+    <div class="model-card" style="--i:50">
+      <div class="model-number">#50</div>
+      <h3 class="model-title">THE ROLE-PLAYING MODEL (BELBIN & DE BONO)</h3>
+      <span class="model-subtitle">How to Change Your Own Point of View</span>
+      <div class="model-content">
+        <p><strong>De Bono's Six Thinking Hats</strong>: semua anggota kelompok menggunakan 'topi' warna yang sama sekaligus — <strong>White</strong> (fakta), <strong>Red</strong> (emosi), <strong>Black</strong> (kritik), <strong>Yellow</strong> (optimisme), <strong>Green</strong> (kreativitas), <strong>Blue</strong> (struktur). <strong>Belbin</strong> menambahkan 9 peran tim: <em>action-oriented</em> (do-er, implementer, perfectionist), <em>communication-oriented</em> (coordinator, team player, trailblazer), <em>knowledge-oriented</em> (innovator, observer, specialist).</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">
+      <a href="#" class="nsebook-logo" style="padding: 0.8rem 1.5rem;">
+        <div class="logo-icon">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="logoGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#6366f1"/>
+                <stop offset="100%" style="stop-color:#ec4899"/>
+              </linearGradient>
+            </defs>
+            <rect x="10" y="10" width="80" height="80" rx="16" fill="url(#logoGrad2)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+            <path d="M30 35 L45 50 L70 25" stroke="white" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="70" cy="25" r="8" fill="white" opacity="0.9"/>
+            <text x="50" y="78" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">NS</text>
+          </svg>
+        </div>
+        <span class="logo-text">nseBook</span>
+      </a>
+    </div>
+    
+    <a href="https://imnxx.vercel.app/blog.html" class="dashboard-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Kembali ke Dashboard
+    </a>
+    
+    <p class="copyright">
+      © 2024 nseBook • Ringkasan dari <em>The Decision Book: Fifty Models for Strategic Thinking</em> oleh Mikael Krogerus & Roman Tschäppeler.<br>
+      "Each model is only as good as the person who uses it."<br><br>
+      Untuk pemahaman mendalam dan latihan interaktif, baca buku aslinya.<br>
+      <a href="https://www.penguinrandomhouse.com/books/" target="_blank" rel="noopener">Penguin Random House</a> • 
+      <a href="https://www.goodreads.com/book/show/13587111-the-decision-book" target="_blank" rel="noopener">Goodreads</a>
+    </p>
+  </footer>
+
+  <script>
+    // Create animated particles
+    document.addEventListener('DOMContentLoaded', function() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+        particle.style.opacity = 0.3 + Math.random() * 0.5;
+        particle.style.width = (2 + Math.random() * 4) + 'px';
+        particle.style.height = particle.style.width;
+        particlesContainer.appendChild(particle);
+      }
+      
+      // Fade in cards on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      document.querySelectorAll('.model-card').forEach(card => {
+        card.style.opacity = '0';
+        observer.observe(card);
+      });
+    });
+  </script>
+</body>
+</html>
