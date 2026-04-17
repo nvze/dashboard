@@ -19,43 +19,37 @@ def fetch_yahoo_data(ticker):
         print(f"Error fetching {ticker}: {e}")
         return 0.0
 
-def fetch_tradingview_sbn():
+def fetch_tradingview_data(ticker):
     """ 
-    Mengambil data SBN 10 Tahun (TVC:ID10Y) langsung dari API TradingView.
-    Sangat akurat, real-time, dan persis seperti di web TradingView.
+    Fungsi universal untuk mengambil data langsung dari API TradingView.
+    Bisa digunakan untuk Obligasi (TVC) maupun Forex (FX_IDC).
     """
     url = "https://scanner.tradingview.com/global/scan"
     payload = {
-        "symbols": {"tickers": ["TVC:ID10Y"]},
-        "columns": ["close"] # Kita hanya mengambil harga penutupan (yield terakhir)
+        "symbols": {"tickers": [ticker]},
+        "columns": ["close"] # Mengambil harga penutupan (current price)
     }
     try:
         res = requests.post(url, json=payload, timeout=5)
         data = res.json()
-        # Menelusuri struktur JSON balasan TradingView untuk mendapatkan angkanya
-        yield_value = data['data'][0]['d'][0]
-        return round(yield_value, 3)
+        value = data['data'][0]['d'][0]
+        return value
     except Exception as e:
-        print(f"Error fetching TVC:ID10Y: {e}")
+        print(f"Error fetching {ticker} dari TradingView: {e}")
         return 0.0
 
 def get_macro_data():
     results = {}
     
-    # 1. Ambil data Emas, DXY, dan IHSG
+    # 1. Ambil data Emas, DXY, dan IHSG dari Yahoo Finance
     results['gold'] = fetch_yahoo_data("GC=F")
     results['dxy'] = fetch_yahoo_data("DX-Y.NYB")
     results['ihsg'] = fetch_yahoo_data("^JKSE")
 
-    # 2. Ambil Kurs USD ke IDR
-    try:
-        ex_res = requests.get('https://open.er-api.com/v6/latest/USD', timeout=5).json()
-        results['usd_idr'] = ex_res['rates']['IDR']
-    except:
-        results['usd_idr'] = 0.0
-
-    # 3. Ambil Yield SBN 10 Tahun (Real-time TradingView)
-    results['sbn10y'] = fetch_tradingview_sbn()
+    # 2. Ambil Kurs USD/IDR dan Yield SBN 10 Tahun dari TradingView
+    # Menggunakan round untuk membatasi jumlah desimal
+    results['usd_idr'] = round(fetch_tradingview_data("FX_IDC:USDIDR"), 2)
+    results['sbn10y'] = round(fetch_tradingview_data("TVC:ID10Y"), 3)
 
     return results
 
