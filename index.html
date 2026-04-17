@@ -26,17 +26,16 @@
       
       color: #ffffff;
       
-      /* --- PERBAIKAN TINGGI LAYAR (Satu Layar Penuh) --- */
+      /* --- PERBAIKAN TINGGI LAYAR --- */
       height: 100vh;
       height: 100dvh; 
       
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden; /* Mencegah scroll */
+      overflow: hidden;
     }
 
-    /* Wrapper untuk menengahkan Logo (di luar) dan Card */
     .main-wrapper {
       display: flex;
       flex-direction: column;
@@ -47,7 +46,6 @@
       padding: 1rem;
     }
 
-    /* --- LOGO (DI LUAR CARD) --- */
     .logo-container {
       display: flex;
       justify-content: center;
@@ -55,20 +53,19 @@
     }
 
     .profile-logo {
-      width: 110px; /* Ukuran diperkecil sedikit untuk efisiensi ruang */
+      width: 110px;
       height: auto;
       display: block;
       filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.2));
     }
 
-    /* --- DASHBOARD CARD (EFEK KACA/GLASSMORPHISM) --- */
+    /* --- DASHBOARD CARD (EFEK KACA) --- */
     .dashboard-card {
       width: 100%;
       text-align: center;
       padding: 1.5rem 1.2rem;
       border-radius: 24px;
       
-      /* EFEK KACA TRANSPARAN */
       background: rgba(255, 255, 255, 0.1); 
       backdrop-filter: blur(20px);           
       -webkit-backdrop-filter: blur(20px);
@@ -104,7 +101,7 @@
     }
     
     .time-display {
-      font-size: 3rem; /* Sedikit lebih kecil agar proporsional */
+      font-size: 3rem;
       font-weight: 600; 
       color: #ffffff; 
       line-height: 1;
@@ -123,7 +120,7 @@
     .menu-list {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem; /* Jarak antar menu dipersempit */
+      gap: 0.6rem;
       width: 100%;
     }
 
@@ -165,7 +162,7 @@
     }
 
     .item-icon {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: #ffffff;
     }
 
@@ -174,7 +171,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Penyesuaian untuk layar sangat kecil */
     @media (max-height: 650px) {
       .profile-logo { width: 80px; }
       .time-display { font-size: 2.5rem; }
@@ -208,7 +204,7 @@
             <div class="item-title">Arsip Tulisan</div>
             <div class="item-desc">Pemikiran & Catatan</div>
           </div>
-          <div class="item-icon">統</div>
+          <div class="item-icon">📝</div>
         </a>
 
         <a href="https://nsebook.vercel.app" class="menu-item">
@@ -216,7 +212,7 @@
             <div class="item-title">nzeBook</div>
             <div class="item-desc">Digital Library & Knowledge</div>
           </div>
-          <div class="item-icon">答</div>
+          <div class="item-icon">📚</div>
         </a>
         
         <a href="https://nvze.pythonanywhere.com/bookmark" class="menu-item">
@@ -224,7 +220,7 @@
             <div class="item-title">Bookmarks</div>
             <div class="item-desc">Akses Link Cepat</div>
           </div>
-          <div class="item-icon">薄</div>
+          <div class="item-icon">🔖</div>
         </a>
 
         <a href="https://nsetxt.vercel.app/" class="menu-item">
@@ -232,7 +228,7 @@
             <div class="item-title">nseNotes</div>
             <div class="item-desc">Akses Sistem Internal</div>
           </div>
-          <div class="item-icon">噫</div>
+          <div class="item-icon">🗒️</div>
         </a>
 
         <a href="https://imnxx.vercel.app/update" class="menu-item">
@@ -251,7 +247,6 @@
     function updateClock() {
       const now = new Date();
       const timeOptions = { hour: '2-digit', minute: '2-digit' };
-      // Format jam Indonesia dengan pemisah titik dua
       const timeString = now.toLocaleTimeString('id-ID', timeOptions).replace('.', ':');
       const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }; 
       const dateString = now.toLocaleDateString('id-ID', dateOptions);
@@ -269,13 +264,13 @@
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js')
           .then(registration => {
-            console.log('ServiceWorker terdaftar sukses dengan scope: ', registration.scope);
+            console.log('ServiceWorker terdaftar!');
           })
           .catch(err => {
-            console.log('ServiceWorker gagal terdaftar: ', err);
+            console.log('ServiceWorker gagal!', err);
           });
       });
     }
   </script>
-  </body>
+</body>
 </html>
