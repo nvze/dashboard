@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Emas & Makroekonomi</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #f0f2f5; 
+            display: flex; 
+            justify-content: center; 
+            padding: 40px 20px; 
+            margin: 0;
+        }
+        /* Wrapper baru untuk menampung 2 kolom */
+        .layout-wrapper {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 900px;
+        }
+        .container { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            width: 100%; 
+            max-width: 400px; 
+            box-sizing: border-box;
+        }
+        h2 { text-align: center; color: #333; margin-top: 0; margin-bottom: 20px; font-size: 22px; }
+        .data-box { 
+            background: #f8f9fa; 
+            border: 1px solid #eee; 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-bottom: 15px; 
+        }
+        /* Style khusus untuk box widget agar rapi */
+        .widget-box {
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+        .label { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        .value { font-size: 18px; font-weight: bold; color: #2c3e50; display: block; margin-top: 5px; }
+        .result-box { background: #27ae60; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-top: 20px; }
+        .result-box small { opacity: 0.8; }
+        .result-box div { font-size: 24px; font-weight: bold; margin-top: 5px; }
+        .status { font-size: 11px; text-align: center; color: #999; margin-top: 15px; }
+        .loading { color: #3498db; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<div class="layout-wrapper">
+    <div class="container">
+        <h2>Emas & Kurs Hari Ini</h2>
+
+        <div class="data-box">
+            <span class="label">Harga Emas Dunia (XAU/USD)</span>
+            <span id="goldPrice" class="value loading">Memuat data...</span>
+        </div>
+
+        <div class="data-box">
+            <span class="label">Kurs USD ke IDR</span>
+            <span id="usdRate" class="value loading">Memuat data...</span>
+        </div>
+
+        <div class="result-box">
+            <small>Estimasi Harga Jual (Per Gram)</small>
+            <div id="finalPrice">Rp 0</div>
+        </div>
+
+        <p class="status">Data Emas diperbarui saat halaman dibuka.<br>Rumus: (Gold / 31.1035) × Kurs</p>
+    </div>
+
+    <div class="container">
+        <h2>Indikator Makro</h2>
+
+        <div class="widget-box">
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                {
+                "symbol": "TVC:DXY",
+                "width": "100%",
+                "colorTheme": "light",
+                "isTransparent": true,
+                "locale": "id"
+                }
+                </script>
+            </div>
+        </div>
+
+        <div class="widget-box">
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                {
+                "symbol": "IDX:COMPOSITE",
+                "width": "100%",
+                "colorTheme": "light",
+                "isTransparent": true,
+                "locale": "id"
+                }
+                </script>
+            </div>
+        </div>
+
+        <div class="widget-box">
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                {
+                "symbol": "TVC:ID10Y",
+                "width": "100%",
+                "colorTheme": "light",
+                "isTransparent": true,
+                "locale": "id"
+                }
+                </script>
+            </div>
+        </div>
+
+        <p class="status">Data makro disuplai secara real-time oleh TradingView.</p>
+    </div>
+</div>
+
+<script>
+    async function fetchData() {
+        try {
+            // 1. Ambil Harga Emas Dunia (XAU/USD)
+            const goldRes = await fetch('https://api.gold-api.com/price/XAU');
+            const goldData = await goldRes.json();
+            const goldPrice = goldData.price;
+
+            // 2. Ambil Kurs USD ke IDR
+            const exchangeRes = await fetch('https://open.er-api.com/v6/latest/USD');
+            const exchangeData = await exchangeRes.json();
+            const idrRate = exchangeData.rates.IDR;
+
+            // Tampilkan ke UI
+            document.getElementById('goldPrice').innerText = `$${goldPrice.toLocaleString('en-US')} /oz`;
+            document.getElementById('usdRate').innerText = `Rp ${idrRate.toLocaleString('id-ID')}`;
+
+            // 3. Hitung Rumus
+            const pricePerGram = (goldPrice / 31.1035) * idrRate;
+
+            // Tampilkan Hasil Akhir
+            document.getElementById('finalPrice').innerText = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(pricePerGram);
+
+            // Hapus class loading
+            document.getElementById('goldPrice').classList.remove('loading');
+            document.getElementById('usdRate').classList.remove('loading');
+
+        } catch (error) {
+            console.error("Gagal mengambil data emas/kurs:", error);
+            document.getElementById('finalPrice').innerText = "Gagal memuat data";
+        }
+    }
+
+    // Jalankan fungsi saat halaman dimuat
+    fetchData();
+</script>
+
+</body>
+</html>
