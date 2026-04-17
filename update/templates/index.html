@@ -2,29 +2,107 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Macro Dashboard | update</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Terminal Makroekonomi & Emas</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #121212; color: #e0e0e0; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 1000px; }
-        .card { background: #1e1e1e; padding: 20px; border-radius: 12px; border-bottom: 4px solid #3498db; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .card.gold { border-bottom-color: #f1c40f; }
-        .label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
-        .value { font-size: 28px; font-weight: bold; margin-top: 10px; display: block; color: #fff; }
-        .calc-box { background: #27ae60; color: white; padding: 20px; border-radius: 12px; width: 100%; max-width: 1000px; margin-top: 20px; text-align: center; box-sizing: border-box; }
-        .status { font-size: 12px; color: #666; margin-top: 20px; }
-        .loading { color: #f39c12; font-style: italic; }
+        /* Kunci utama: tinggi persis 1 layar (100vh) dan cegah scroll (overflow: hidden) */
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: #121212; 
+            color: #e0e0e0; 
+            margin: 0; 
+            padding: 15px; 
+            height: 100vh; 
+            box-sizing: border-box; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+        }
+        
+        h2 { 
+            text-align: center; 
+            color: #fff; 
+            font-size: 18px; 
+            margin: 0 0 15px 0; 
+        }
+
+        /* Menggunakan Grid 2 kolom yang rapat */
+        .grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            width: 100%; 
+        }
+
+        .card { 
+            background: #1e1e1e; 
+            padding: 12px; 
+            border-radius: 8px; 
+            border-bottom: 3px solid #3498db; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Emas dibuat lebar penuh (mengambil 2 kolom) di posisi paling atas */
+        .card.gold { 
+            grid-column: span 2; 
+            border-bottom-color: #f1c40f; 
+        }
+
+        .label { 
+            font-size: 10px; 
+            color: #888; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
+
+        .value { 
+            font-size: 18px; 
+            font-weight: bold; 
+            margin-top: 5px; 
+            color: #fff; 
+        }
+
+        /* Kotak hijau kalkulasi memanfaatkan sisa ruang yang ada di layar */
+        .calc-box { 
+            background: #27ae60; 
+            color: white; 
+            padding: 15px; 
+            border-radius: 8px; 
+            width: 100%; 
+            margin-top: 15px; 
+            text-align: center; 
+            box-sizing: border-box; 
+            flex-grow: 1; /* Membesar secara otomatis mengisi sisa layar */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .calc-title { font-size: 12px; opacity: 0.9; }
+        .calc-value { font-size: 32px; font-weight: bold; margin-top: 5px; }
+
+        .status { 
+            font-size: 9px; 
+            color: #666; 
+            text-align: center; 
+            margin: 10px 0 0 0; 
+        }
+
+        .loading { color: #f39c12; font-style: italic; font-size: 14px; }
     </style>
 </head>
 <body>
 
-    <h2 style="color: #fff;">Terminal Makroekonomi & Emas</h2>
+    <h2>Terminal Makroekonomi</h2>
 
     <div class="grid">
         <div class="card gold">
             <span class="label">Emas Dunia (XAU/USD)</span>
             <span id="gold" class="value loading">Memuat...</span>
         </div>
+        
         <div class="card">
             <span class="label">DXY (Dollar Index)</span>
             <span id="dxy" class="value loading">Memuat...</span>
@@ -33,6 +111,7 @@
             <span class="label">USD / IDR</span>
             <span id="usd_idr" class="value loading">Memuat...</span>
         </div>
+        
         <div class="card">
             <span class="label">IHSG (Jakarta Composite)</span>
             <span id="ihsg" class="value loading">Memuat...</span>
@@ -44,28 +123,27 @@
     </div>
 
     <div class="calc-box">
-        <div style="font-size: 14px; opacity: 0.9;">Estimasi Harga Emas Lokal (Per Gram)</div>
-        <div id="finalPrice" style="font-size: 36px; font-weight: bold; margin-top: 5px;">Rp 0</div>
+        <div class="calc-title">Estimasi Harga Emas Lokal (Per Gram)</div>
+        <div id="finalPrice" class="calc-value">Rp 0</div>
     </div>
 
-    <p class="status">Data diperbarui otomatis dari server Flask setiap 30 detik.</p>
+    <p class="status">Data diperbarui otomatis dari server setiap 30 detik.</p>
 
     <script>
         async function updateData() {
             try {
-                // Fetch data dari rute API /update
                 const res = await fetch('/update/api/data');
                 const data = await res.json();
                 
                 if (data.error) throw new Error(data.error);
 
-                document.getElementById('gold').innerText = `$${data.gold.toLocaleString()}`;
+                document.getElementById('gold').innerText = `$${data.gold.toLocaleString('en-US')}`;
                 document.getElementById('dxy').innerText = data.dxy;
                 document.getElementById('usd_idr').innerText = `Rp ${data.usd_idr.toLocaleString('id-ID')}`;
                 document.getElementById('ihsg').innerText = data.ihsg.toLocaleString('id-ID');
                 document.getElementById('sbn10y').innerText = `${data.sbn10y}%`;
 
-                // Hitung Emas Per Gram: (Harga Emas / 31.1035) * Kurs
+                // Kalkulasi (Harga Emas / 31.1035) * Kurs
                 const gramPrice = (data.gold / 31.1035) * data.usd_idr;
                 document.getElementById('finalPrice').innerText = new Intl.NumberFormat('id-ID', {
                     style: 'currency',
@@ -73,16 +151,15 @@
                     minimumFractionDigits: 0
                 }).format(gramPrice);
 
-                // Hapus status loading
                 document.querySelectorAll('.value').forEach(el => el.classList.remove('loading'));
 
             } catch (e) {
                 console.error("Gagal mengambil data:", e);
                 document.getElementById('finalPrice').innerText = "Koneksi Error";
+                document.getElementById('finalPrice').style.fontSize = "20px";
             }
         }
 
-        // Jalankan saat load dan setiap 30 detik
         updateData();
         setInterval(updateData, 30000);
     </script>
