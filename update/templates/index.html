@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Trader Real-Time</title>
+    <style>
+        body { font-family: sans-serif; background: #121212; color: white; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .card { background: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #d4af37; }
+        .label { font-size: 12px; color: #aaa; text-transform: uppercase; }
+        .value { font-size: 24px; font-weight: bold; margin-top: 10px; display: block; }
+        .up { color: #2ecc71; }
+        .gold-box { background: #2c3e50; border-color: #f1c40f; }
+    </style>
+</head>
+<body>
+    <h2>Macro & Gold Dashboard</h2>
+    <div class="grid">
+        <div class="card gold-box">
+            <span class="label">Emas (XAU/USD)</span>
+            <span id="gold" class="value">--</span>
+        </div>
+        <div class="card">
+            <span class="label">USD/IDR</span>
+            <span id="usd_idr" class="value">--</span>
+        </div>
+        <div class="card">
+            <span class="label">DXY (Dollar Index)</span>
+            <span id="dxy" class="value">--</span>
+        </div>
+        <div class="card">
+            <span class="label">IHSG</span>
+            <span id="ihsg" class="value">--</span>
+        </div>
+        <div class="card">
+            <span class="label">SBN 10Y Yield</span>
+            <span id="sbn10y" class="value">--</span>
+        </div>
+    </div>
+
+    <script>
+        async function updateDashboard() {
+            try {
+                const res = await fetch('/api/data');
+                const data = await res.json();
+                
+                document.getElementById('gold').innerText = `$${data.gold}`;
+                document.getElementById('usd_idr').innerText = `Rp ${data.usd_idr.toLocaleString('id-ID')}`;
+                document.getElementById('dxy').innerText = data.dxy;
+                document.getElementById('ihsg').innerText = data.ihsg.toLocaleString('id-ID');
+                document.getElementById('sbn10y').innerText = `${data.sbn10y}%`;
+            } catch (e) {
+                console.error("Update failed", e);
+            }
+        }
+
+        // Update setiap 30 detik
+        setInterval(updateDashboard, 30000);
+        updateDashboard();
+    </script>
+</body>
+</html>
