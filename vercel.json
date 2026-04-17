@@ -7,7 +7,7 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/update(.*)",
       "dest": "update/app.py"
     }
   ]
