@@ -3,31 +3,15 @@ import requests
 
 app = Flask(__name__)
 
-def fetch_yahoo_data(ticker):
-    """ Mengambil data Emas, DXY, dan IHSG dengan bypass blokir Yahoo """
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-    }
-    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1m&range=1d"
-    
-    try:
-        res = requests.get(url, headers=headers, timeout=5)
-        data = res.json()
-        price = data['chart']['result'][0]['meta']['regularMarketPrice']
-        return round(price, 2)
-    except Exception as e:
-        print(f"Error fetching {ticker}: {e}")
-        return 0.0
-
-def fetch_tradingview_data(ticker):
+def fetch_tradingview_data(ticker, market="global"):
     """ 
-    Fungsi universal untuk mengambil data langsung dari API TradingView.
-    Bisa digunakan untuk Obligasi (TVC) maupun Forex (FX_IDC).
+    Fungsi universal untuk mengambil data dari API Scanner TradingView.
+    Parameter 'market' ditambahkan agar bisa mengambil IHSG dari pasar Indonesia.
     """
-    url = "https://scanner.tradingview.com/global/scan"
+    url = f"https://scanner.tradingview.com/{market}/scan"
     payload = {
         "symbols": {"tickers": [ticker]},
-        "columns": ["close"] # Mengambil harga penutupan (current price)
+        "columns": ["close"] # Mengambil harga penutupan (current price/spot)
     }
     try:
         res = requests.post(url, json=payload, timeout=5)
@@ -41,15 +25,20 @@ def fetch_tradingview_data(ticker):
 def get_macro_data():
     results = {}
     
-    # 1. Ambil data Emas, DXY, dan IHSG dari Yahoo Finance
-    results['gold'] = fetch_yahoo_data("GC=F")
-    results['dxy'] = fetch_yahoo_data("DX-Y.NYB")
-    results['ihsg'] = fetch_yahoo_data("^JKSE")
+    # 1. Emas Dunia (XAU/USD Spot) - Menggunakan data OANDA yang sangat real-time
+    results['gold'] = round(fetch_tradingview_data("OANDA:XAUUSD", "forex"), 2)
 
-    # 2. Ambil Kurs USD/IDR dan Yield SBN 10 Tahun dari TradingView
-    # Menggunakan round untuk membatasi jumlah desimal
-    results['usd_idr'] = round(fetch_tradingview_data("FX_IDC:USDIDR"), 2)
-    results['sbn10y'] = round(fetch_tradingview_data("TVC:ID10Y"), 3)
+    # 2. DXY (US Dollar Index)
+    results['dxy'] = round(fetch_tradingview_data("TVC:DXY", "cfd"), 2)
+
+    # 3. IHSG (Jakarta Composite Index) - Harus diarahkan ke market 'indonesia'
+    results['ihsg'] = round(fetch_tradingview_data("IDX:COMPOSITE", "indonesia"), 2)
+
+    # 4. Kurs USD/IDR (Spot Rate)
+    results['usd_idr'] = round(fetch_tradingview_data("FX_IDC:USDIDR", "forex"), 2)
+
+    # 5. Yield SBN 10 Tahun (Indonesia 10Y Bond)
+    results['sbn10y'] = round(fetch_tradingview_data("TVC:ID10Y", "cfd"), 3)
 
     return results
 
