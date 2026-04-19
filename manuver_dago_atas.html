@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuver Dago Atas: Strategi Ekosistem Finansial</title>
+    <style>
+        :root {
+            --bg-color: #0b132b;
+            --surface-color: #1c2541;
+            --text-primary: #e0e1dd;
+            --text-secondary: #8d99ae;
+            --accent-green: #00f5d4;
+            --accent-blue: #4cc9f0;
+            --accent-red: #ef476f;
+            --border-color: #3a506b;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 1000px;
+            background-color: var(--surface-color);
+            margin: 20px auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #141f36;
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            margin: 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .ticker-bar {
+            background-color: #050a15;
+            color: var(--accent-green);
+            font-family: var(--font-mono);
+            padding: 10px 30px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            gap: 20px;
+            overflow-x: hidden;
+        }
+
+        .ticker-item.down {
+            color: var(--accent-red);
+        }
+
+        .content-area {
+            padding: 40px;
+        }
+
+        .story-title {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .story-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            margin-bottom: 40px;
+            font-size: 0.9rem;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .dialogue {
+            color: var(--accent-blue);
+            font-style: italic;
+        }
+
+        .data-point {
+            font-family: var(--font-mono);
+            background-color: rgba(76, 201, 240, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--accent-blue);
+        }
+
+        .footer {
+            background-color: #141f36;
+            padding: 20px 30px;
+            border-top: 1px solid var(--border-color);
+            text-align: right;
+        }
+
+        .btn-dashboard {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--accent-green);
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid var(--accent-green);
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .btn-dashboard:hover {
+            background-color: var(--accent-green);
+            color: var(--bg-color);
+        }
+
+        .concept-highlight {
+            border-left: 3px solid var(--accent-blue);
+            padding-left: 15px;
+            margin: 25px 0;
+            background: rgba(76, 201, 240, 0.05);
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .terminal-text {
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <div class="header">
+        <h1 class="header-title">Nexus Capital System // Terminal 04</h1>
+        <div style="color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.85rem;">
+            LOCATION: BANDUNG, ID | STATUS: ENCRYPTED
+        </div>
+    </div>
+    
+    <div class="ticker-bar">
+        <span class="ticker-item">IHSG 7,245.12 (+0.4%)</span>
+        <span class="ticker-item down">GOTO 64 (-2.1%)</span>
+        <span class="ticker-item">TLKM 3,850 (+1.2%)</span>
+        <span class="ticker-item down">ARTO 2,410 (-4.5%)</span>
+        <span class="ticker-item">BBCA 9,800 (+0.8%)</span>
+        <span class="ticker-item">USD/IDR 15,650</span>
+    </div>
+
+    <div class="content-area">
+        <h2 class="story-title">Tiga Serangkai Dago: Algoritma dan Intuisi</h2>
+        <div class="story-subtitle">LOG ENTRY: MINGGU KE-14 // PORTFOLIO REBALANCING CRISIS</div>
+
+        <p>Kabut tipis masih menyelimuti kawasan Dago Atas ketika jarum jam di layar terminal Bloomberg menunjukkan pukul 06.30 WIB. Di balik dinding kaca lantai lima belas sebuah gedung perkantoran premium di Bandung, markas besar Parahyangan Quantitative Fund atau biasa disebut Parahyangan Quant mulai memanas. Di ruangan yang didesain menyerupai dek kapal luar angkasa dengan nuansa gelap dan pendaran lampu LED kebiruan itu, tiga orang dengan latar belakang pendidikan terbaik di kota ini tengah berhadapan dengan badai finansial yang datang tanpa diundang.</p>
+
+        <p>Citra menatap layar sentuh berukuran enam puluh inci di hadapannya. Rambut hitamnya diikat rapi, kontras dengan raut wajahnya yang tegang. Sebagai Chief Investment Officer, ia bertanggung jawab atas setiap pergerakan dana triliunan rupiah yang dipercayakan kepada mereka. Di sebelahnya, Bima, seorang pemuda berkacamata tebal dengan gelar Ph.D. dalam bidang Fisika Kuantum dari ITB yang kini banting setir menjadi Quantitative Analyst, tengah mengetik dengan kecepatan tidak masuk akal. Barisan kode Python berlarian di layar monitornya, mencari anomali pasar. Di ujung meja, Arya, pendiri dan CEO fund tersebut, menyesap kopi perlahan. Pengalamannya selama dua dekade di Wall Street sebelum kembali ke tanah kelahirannya di Bandung membuatnya tampak paling tenang, meski kerutan di dahinya menceritakan hal yang berbeda.</p>
+
+        <p>Malam sebelumnya, rilis data inflasi Amerika Serikat menghancurkan ekspektasi pasar. Angkanya jauh di atas konsensus. Wall Street berdarah-darah, dan pagi ini, bursa saham Asia, termasuk Indonesia, bersiap menerima tsunami tersebut. Portfolio mereka, yang memiliki eksposur besar di sektor teknologi dan perbankan digital, berada di ujung tanduk.</p>
+
+        <div class="concept-highlight">
+            <span class="terminal-text">&gt; EXECUTING MODULE: BIG-PICTURE THINKING</span>
+            <p><span class="dialogue">"Kita tidak boleh panik dengan volatilitas harian ini,"</span> suara Arya memecah kesunyian yang hanya diisi oleh suara ketikan keyboard. Ia meletakkan cangkir kopinya. <span class="dialogue">"Ingat tujuan utama kita. Fokus pada gambaran besar. Kita merencanakan pertumbuhan dana ini untuk lima tahun ke depan, bukan sekadar mengejar target kuartalan. Penurunan drastis hari ini mungkin menyakitkan secara valuasi harian, tetapi ini juga berarti diskon besar untuk aset-aset berkualitas yang fundamentalnya tidak berubah."</span></p>
+        </div>
+
+        <p>Citra mengangguk pelan. Pemikiran gambaran besar atau big-picture thinking adalah fondasi dari setiap strategi mereka. Namun, teori selalu lebih mudah diucapkan daripada dipraktikkan saat melihat angka merah menyala di layar portofolio.</p>
+
+        <p><span class="dialogue">"Saya setuju, Pak Arya,"</span> jawab Citra. <span class="dialogue">"Namun, kita tetap harus mengamankan posisi likuiditas kita. Klien-klien institusional kita akan menelepon begitu pasar buka pukul sembilan nanti. Kita harus punya narasi dan langkah mitigasi yang jelas."</span></p>
+
+        <div class="concept-highlight">
+            <span class="terminal-text">&gt; EXECUTING MODULE: ANTICIPATION</span>
+            <p>Bima berhenti mengetik sejenak. Ia memutar kursinya menghadap Citra dan Arya. <span class="dialogue">"Bicara soal mitigasi, ini soal antisipasi. Model prediktif yang saya jalankan semalam menunjukkan probabilitas 85 persen bahwa Bank Indonesia akan melakukan intervensi dengan menaikkan BI Rate secara agresif dalam rapat dewan gubernur darurat jika rupiah menyentuh level kritis <span class="data-point">16.000</span>. Kita harus mendeteksi potensi tantangan ini lebih awal. Saya sudah menyiapkan rencana cadangan atau backup plan untuk melakukan lindung nilai menggunakan kontrak berjangka dolar."</span></p>
+        </div>
+
+        <p>Citra menatap data yang dikirimkan Bima ke layarnya. Kemampuan Bima dalam mengantisipasi skenario terburuk selalu menjadi aset berharga. Antisipasi bukan sekadar menebak, melainkan mempersiapkan jaring pengaman sebelum pemain sirkus jatuh dari tali.</p>
+
+        <p><span class="dialogue">"Bagus, Bima. Eksekusi kontrak lindung nilai itu begitu pasar instrumen derivatif dibuka,"</span> perintah Citra tegas. <span class="dialogue">"Sekarang, mari kita lihat isi perut portofolio kita. Kita punya seratus emiten. Kita tidak bisa menyelamatkan semuanya. Kita harus mempraktikkan prioritas."</span></p>
+
+        <div class="concept-highlight">
+            <span class="terminal-text">&gt; EXECUTING MODULE: PRIORITIZATION</span>
+            <p>Di layar utama, Citra membagi ratusan emiten tersebut ke dalam tiga kuadran. Kuadran merah, kuning, dan hijau. <span class="dialogue">"Prioritas. Kita identifikasi apa yang benar-benar penting dan bertindak berdasarkan hal itu lebih dulu. Kita akan melikuidasi posisi di kuadran merah—saham-saham dengan rasio utang tinggi yang akan hancur jika suku bunga naik. Ini adalah tugas berdampak tinggi. Menyelesaikan tugas berdampak tinggi sebelum mengurus yang minor akan menyelamatkan ekuitas inti kita."</span></p>
+        </div>
+
+        <p>Arya berdiri dan berjalan mendekati layar. Matanya meneliti daftar saham yang masuk dalam kuadran merah. Beberapa di antaranya adalah perusahaan startup teknologi kebanggaan yang dulunya menjanjikan pertumbuhan eksponensial. Melepasnya di harga bawah adalah sebuah keputusan yang berat.</p>
+
+        <div class="concept-highlight">
+            <span class="terminal-text">&gt; EXECUTING MODULE: DECISION-MAKING & ANALYTICAL THINKING</span>
+            <p><span class="dialogue">"Ini membawa kita pada proses pengambilan keputusan,"</span> gumam Arya. <span class="dialogue">"Kita harus memilih dengan bijak. Mengambil keputusan adalah seni menyeimbangkan data dan intuisi. Bima, apa kata data kuantitatifmu tentang emiten X dan Y di sektor e-commerce?"</span></p>
+            <p><span class="dialogue">"Pemikiran analitis saya menunjukkan bahwa cash burn rate mereka tidak bisa dipertahankan dalam lingkungan suku bunga tinggi,"</span> jawab Bima cepat, menampilkan grafik batang dan regresi linear di layarnya. <span class="dialogue">"Saya menggunakan data dan logika untuk memandu tindakan kita. Metrik kinerja mereka selama tiga kuartal terakhir menunjukkan perlambatan akuisisi pengguna baru. Secara logika, biaya modal yang lebih tinggi akan mencekik mereka."</span></p>
+        </div>
+
+        <p>Citra memadukan analisis Bima dengan insting tajamnya. <span class="dialogue">"Data Bima jelas. Analisis pro dan kontra menunjukkan bahwa menahan emiten X dan Y adalah bunuh diri. Intuisi saya sebagai orang yang tahu manajemen mereka mengatakan bahwa mereka akan melakukan rights issue yang mendilusi nilai pemegang saham eksisting. Keputusan final: jual habis emiten X dan Y pada sesi pembukaan."</span></p>
+
+        <p>Jam menunjukkan pukul 07.45 WIB. Waktu terus berjalan menuju pembukaan pasar. Ketegangan di ruangan itu terasa tebal, hampir bisa dipotong dengan pisau. Di luar jendela, pemandangan kota Bandung mulai disibukkan oleh kendaraan yang merayap di jalan raya, tidak menyadari pertarungan finansial yang sedang direncanakan di atas mereka.</p>
+
+        <div class="image-container">
+            <img src="-------" alt="10 Strategic Thinking Skills Chart">
+            <div style="color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; margin-top: 10px;">
+                FIG 1. STRATEGIC THINKING SKILLS MATRIX
+            </div>
+        </div>
+
+        <p>Tiba-tiba, terminal Bloomberg mengeluarkan suara notifikasi merah. Sebuah berita kilat (breaking news) muncul dari layar. Pemerintah baru saja mengumumkan revisi regulasi perpajakan untuk sektor komoditas ekspor. Pajak ekspor batu bara diturunkan secara drastis untuk mengimbangi pelemahan nilai tukar.</p>
+
+        <p><span class="dialogue">"Sial,"</span> umpat Bima pelan. <span class="dialogue">"Model saya tidak memasukkan variabel kebijakan fiskal mendadak ini. Sektor komoditas yang tadinya kita asumsikan akan stagnan, sekarang berpotensi reli kencang."</span></p>
+
+        <div class="concept-highlight">
+            <span class="terminal-text">&gt; EXECUTING MODULE: PROBLEM-SOLVING & ADAPTABILITY</span>
+            <p><span class="dialogue">"Jangan panik. Mari kita lakukan pemecahan masalah,"</span> sela Citra, pikirannya berpacu. <span class="dialogue">"Kita pecah masalah kompleks ini menjadi langkah-langkah yang bisa dikelola. Masalah utama: portofolio kita kurang eksposur di komoditas. Akar penyebab: kita terlalu berfokus pada dampak suku bunga dan mengabaikan manuver pemerintah."</span></p>
+            <p>Arya tersenyum tipis, bangga melihat bagaimana timnya berfungsi di bawah tekanan. <span class="dialogue">"Tepat. Dan ini membutuhkan kemampuan adaptabilitas. Kita harus tetap fleksibel saat situasi berubah. Skenario awal kita adalah bertahan, kini kita harus beralih strategi. Menggeser strategi saat tren pasar berevolusi adalah kunci bertahan hidup. Kita alihkan dana hasil penjualan emiten teknologi tadi langsung ke sektor energi."</span></p>
+        </div>
+
+        <p>Bima mengkalibrasi ulang algoritmanya. Jari-jarinya menari di atas keyboard mekanikalnya, mengubah parameter bobot sektor dalam portofolio rebalancing mereka. Ia memindahkan puluhan miliar rupiah alokasi secara virtual hanya dalam hitungan menit, mencari kombinasi portofolio optimal (efficient frontier) yang baru.</p>
+
+        <div class="concept-highlight">
+            <span class="terminal-text">&gt; EXECUTING MODULE: RISK ASSESSMENT</span>
+            <p><span class="dialogue">"Tunggu,"</span> ucap Citra, mengangkat tangan kanannya. <span class="dialogue">"Sebelum kita mengeksekusi manuver agresif ini, mari lakukan penilaian risiko. Kita mengevaluasi kemungkinan hasil sebelum bertindak. Menimbang risiko sebelum menginvestasikan waktu atau uang adalah mutlak."</span></p>
+            <p>Ia menekan beberapa tombol, memunculkan proyeksi skenario stres (stress test). <span class="dialogue">"Jika kita masuk ke komoditas sekarang, kita akan membeli di harga yang melonjak naik karena euforia berita. Risiko utamanya adalah jika berita ini ternyata hanya wacana dan direvisi kembali. Potensi penurunan maksimum (maximum drawdown) kita bisa mencapai lima belas persen dalam skenario terburuk."</span></p>
+        </div>
+
+        <p>Arya mendengarkan dengan saksama. Ia berjalan mengelilingi meja, memandang hiruk-pikuk virtual yang terpampang di berbagai monitor. Pandangannya kemudian beralih ke luar jendela, melihat Gunung Tangkuban Perahu yang berdiri kokoh di kejauhan, tidak tergoyahkan oleh cuaca apa pun.</p>
+
+        <div class="concept-highlight">
+            <span class="terminal-text">&gt; EXECUTING MODULE: VISION SETTING</span>
+            <p><span class="dialogue">"Penilaian risiko yang valid, Citra,"</span> kata Arya dengan nada berat namun penuh keyakinan. <span class="dialogue">"Tetapi kita harus kembali pada pengaturan visi kita. Kita harus menciptakan arah yang jelas untuk masa depan. Target kita adalah menutup semester ini dengan return absolut di atas inflasi."</span></p>
+            <p>Arya menunjuk ke sebuah kalender proyeksi di dinding layar. <span class="dialogue">"Menetapkan sasaran enam bulan ke depan dan memetakan langkah-langkah untuk mencapainya adalah tugas kita. Visi kita untuk enam bulan ke depan adalah rotasi sektoral ke value stocks yang menghasilkan dividen. Komoditas saat ini menawarkan hal itu. Kita tidak sekadar ikut-ikutan berita harian, tetapi langkah ini selaras dengan visi setengah tahun kita."</span></p>
+        </div>
+
+        <p>Penjelasan Arya menenangkan suasana. Analisis taktis dari Citra, model kuantitatif dari Bima, dan jangkar strategis dari Arya menciptakan sinergi yang sempurna. Mereka telah menganalisis, mengantisipasi, memprioritaskan, beradaptasi, menilai risiko, dan menyelaraskannya dengan visi besar.</p>
+
+        <p>Pukul 08.55 WIB. Lima menit sebelum lonceng bursa berbunyi. Pasar pra-pembukaan (pre-opening) menunjukkan IHSG anjlok tajam dua persen. Kepanikan melanda bursa, tergambar dari antrean jual yang menumpuk di hampir semua saham lapis pertama (blue chips).</p>
+
+        <div class="concept-highlight">
+            <span class="terminal-text">&gt; EXECUTING MODULE: EXECUTION FOCUS</span>
+            <p>Citra memperbaiki posisi duduknya. Matanya tajam, tangannya siap di atas tetikus. <span class="dialogue">"Waktunya berfokus pada eksekusi,"</span> katanya dingin. <span class="dialogue">"Ide terbaik tidak ada artinya tanpa eksekusi. Kita mengubah rencana menjadi hasil yang dapat ditindaklanjuti. Mengikuti garis waktu ketat untuk menyelesaikan proyek ini dengan sukses. Bima, aktifkan algoritma trading algoritmik kita. Pecah pesanan jual besar kita menjadi lot-lot kecil agar tidak memicu kepanikan lebih lanjut (iceberg orders)."</span></p>
+            <p><span class="dialogue">"Sistem siap,"</span> lapor Bima. <span class="dialogue">"Menunggu otorisasi ganda."</span></p>
+        </div>
+
+        <p>Pukul 09.00 WIB. Bel virtual berbunyi. Angka-angka di layar mulai berkedip dengan kecepatan luar biasa. Merah di mana-mana.</p>
+
+        <p><span class="dialogue">"Eksekusi!"</span> perintah Arya.</p>
+
+        <p>Citra dan Bima secara bersamaan memasukkan kode otorisasi dan menekan tombol enter. Dalam sepersekian detik, server Parahyangan Quant yang terhubung dengan pusat data bursa melepaskan ribuan instruksi transaksi. Mereka menjual saham-saham rapuh di detik-detik pertama sebelum harganya jatuh lebih dalam, dan secara simultan menyapu bersih antrean jual saham komoditas berkualitas yang harganya sedang tertekan secara tidak rasional akibat kepanikan pasar secara umum.</p>
+
+        <p>Sepuluh menit pertama adalah kekacauan. IHSG terjun bebas menembus batas psikologis. Ponsel Arya mulai berdering berturut-turut—klien-klien besar yang panik melihat portofolio mereka tergerus. Namun Arya tidak mengangkatnya. Ia membiarkan timnya bekerja tanpa gangguan.</p>
+
+        <p>Memasuki pukul 09.30 WIB, kepanikan awal mulai mereda. Pelaku pasar yang lebih rasional mulai mencerna berita revisi regulasi pajak ekspor. Perlahan, saham-saham sektor energi dan komoditas mulai merangkak naik, berubah dari merah menjadi hijau. Di saat manajer investasi lain baru mulai rapat untuk membahas strategi, Parahyangan Quant sudah memiliki posisi penuh di harga bawah.</p>
+
+        <p>Siang harinya, ketika sesi pertama perdagangan ditutup, layar terminal di ruangan itu menunjukkan pemandangan yang berbeda. Sementara IHSG secara keseluruhan masih minus 1,5 persen, portofolio Parahyangan Quant justru mencatatkan alfa positif, naik tipis 0,2 persen di tengah kehancuran pasar. Manuver kilat mereka berhasil menyelamatkan dana triliunan rupiah dari kerugian, bahkan membuka potensi keuntungan besar pada sesi-sesi mendatang.</p>
+
+        <p>Citra menyandarkan punggungnya ke kursi, menghela napas panjang yang sedari tadi seolah tertahan di dadanya. Ketegangan berjam-jam tergantikan oleh kelegaan. Bima melepaskan kacamatanya dan memijat pangkal hidungnya, layar komputernya kini menampilkan grafik profit and loss intraday yang melengkung indah ke atas.</p>
+
+        <p>Arya menyeduh secangkir teh panas dan membagikannya kepada Citra dan Bima. Aroma melati yang khas memenuhi ruangan, kontras dengan bau kopi pekat dan sisa-sisa adrenalin.</p>
+
+        <p><span class="dialogue">"Pekerjaan yang luar biasa,"</span> kata Arya, mengangkat cangkir tehnya sebagai gestur bersulang. <span class="dialogue">"Hari ini kita membuktikan bahwa berada di lingkungan bertekanan tinggi tidak membuat kita kehilangan rasionalitas. Kemampuan berpikir strategis bukan hanya tentang mengetahui teori, tetapi bagaimana mempraktikkan sepuluh elemen tersebut secara sinkron dan instingtif saat badai datang."</span></p>
+
+        <p>Citra tersenyum tipis. <span class="dialogue">"Dari memikirkan gambaran besar hingga berfokus pada eksekusi akhir. Semua rantai itu tidak boleh terputus."</span></p>
+
+        <p><span class="dialogue">"Dan algoritma yang bagus tentu saja sangat membantu,"</span> tambah Bima dengan senyum simpul, yang dibalas dengan tawa ringan oleh ketiganya.</p>
+
+        <p>Di luar, langit kota Bandung mulai cerah. Hujan telah reda, menyisakan udara segar dan sinar matahari yang memantul di kaca gedung-gedung tinggi. Pertarungan di dunia finansial tidak pernah benar-benar berakhir. Besok, pasar akan buka kembali, membawa misteri dan volatilitas baru. Namun bagi tiga serangkai dari Parahyangan Quant ini, selama mereka memegang teguh prinsip pemikiran analitis, kemampuan adaptasi, dan visi yang tajam, tidak ada badai yang tidak bisa mereka navigasi dari atas bukit Dago ini.</p>
+        
+        <br><br>
+        <p style="text-align: center; color: var(--text-secondary); font-style: italic; font-size: 0.9rem;">— Sistem Ekosistem Finansial, Catatan Terenkripsi —</p>
+
+    </div>
+
+    <div class="footer">
+        <a href="https://imnxx.vercel.app" class="btn-dashboard">kembali ke dashboard</a>
+    </div>
+</div>
+
+</body>
+</html>
