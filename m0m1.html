@@ -329,6 +329,99 @@
         .btn:hover svg {
             transform: translateX(-5px);
         }
+        
+        /* ===== STYLE UNTUK PEMUTAR SUARA ===== */
+        .audio-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 16px 24px;
+            margin: 20px 0 40px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            transition: all 0.2s ease;
+        }
+        
+        .audio-card-inner {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+        
+        .audio-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 2;
+            min-width: 180px;
+        }
+        
+        .audio-icon {
+            background: var(--accent-light);
+            width: 48px;
+            height: 48px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--accent);
+        }
+        
+        .audio-text {
+            font-weight: 600;
+            color: var(--text-bold);
+        }
+        
+        .audio-text small {
+            font-weight: normal;
+            font-size: 0.8rem;
+            color: #64748b;
+            display: block;
+            margin-top: 4px;
+        }
+        
+        .player-wrapper {
+            flex: 3;
+            min-width: 240px;
+        }
+        
+        audio {
+            width: 100%;
+            height: 48px;
+            border-radius: 40px;
+            outline: none;
+        }
+        
+        audio::-webkit-media-controls-panel {
+            background-color: #f1f5f9;
+        }
+        
+        .audio-badge {
+            background: #e6f0ff;
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 700px) {
+            .audio-card-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .player-wrapper {
+                width: 100%;
+            }
+            .audio-badge {
+                align-self: flex-start;
+            }
+        }
+        /* ===== AKHIR STYLE PEMUTAR SUARA ===== */
 
         @media (max-width: 768px) {
             h1 { font-size: 2.2rem; }
@@ -354,6 +447,29 @@
 
         <article>
             <h1>Denyut Nadi Likuiditas: Menelusuri Anatomi, Filosofi, dan Evolusi Sistem Moneter Global serta Indonesia</h1>
+            
+            <!-- ===== PEMUTAR SUARA DENGAN FILE m0m1.m4a ===== -->
+            <div class="audio-card">
+                <div class="audio-card-inner">
+                    <div class="audio-info">
+                        <div class="audio-icon">🎙️</div>
+                        <div class="audio-text">
+                            Dengarkan Narasi Ringkasan Kajian
+                            <small>Ringkasan eksekutif dari hasil kajian moneter (durasi ± 5 menit)</small>
+                        </div>
+                    </div>
+                    <div class="player-wrapper">
+                        <audio controls preload="metadata">
+                            <source src="m0m1.m4a" type="audio/x-m4a">
+                            Browser Anda tidak mendukung pemutar audio. Silakan unduh file <a href="m0m1.m4a">m0m1.m4a</a>.
+                        </audio>
+                    </div>
+                    <div class="audio-badge">
+                        🔊 Audio eksklusif
+                    </div>
+                </div>
+            </div>
+            <!-- ===== AKHIR PEMUTAR SUARA ===== -->
 
             <h2>Kisah Aliran Air dan Bendungan Besar: Memahami Sistem, Moneter, dan Fiskal</h2>
             <p>Untuk memahami bagaimana sebuah perekonomian modern bernapas, seseorang harus terlebih dahulu memahami konsep dasar tentang apa itu sistem. Berakar dari teori sistem umum yang digagas oleh Karl Ludwig von Bertalanffy, sebuah sistem didefinisikan sebagai kesatuan dari bagian-bagian yang saling berinteraksi secara dinamis dan tidak dapat dipisahkan guna mencapai tujuan tertentu. Di dalam sebuah ekosistem negara, sistem ini terbagi menjadi berbagai jaring laba-laba kebijakan, dengan dua pilar utamanya adalah sistem moneter dan sistem fiskal.</p>
