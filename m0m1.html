@@ -3,400 +3,674 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Hasil Kajian - nseReport</title>
+    <title>Laporan Hasil Kajian: Denyut Nadi Likuiditas | nseReport</title>
     <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #3b82f6;
+            --accent-light: #dbeafe;
+            --text-main: #334155;
+            --text-bold: #0f172a;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: 'Times New Roman', Times, serif;
-            line-height: 1.6;
-            color: #2c3e50;
-            max-width: 900px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+        }
+        .progress-bar {
+            height: 4px;
+            background: var(--accent);
+            width: 0%;
+        }
+
+        .container {
+            max-width: 850px;
             margin: 0 auto;
-            padding: 40px 20px;
-            background-color: #f9fbfd;
+            padding: 50px 20px;
         }
-        .report-container {
-            background-color: #ffffff;
-            padding: 50px 60px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            border-top: 5px solid #1a4a75;
-        }
-        .header {
+
+        /* Header & Logo */
+        header {
             text-align: center;
-            border-bottom: 2px solid #1a4a75;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 70px;
+            padding-top: 20px;
         }
+
         .logo {
-            font-family: 'Arial', sans-serif;
-            font-size: 32px;
-            font-weight: 900;
-            color: #1a4a75;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.02em;
         }
+
         .logo span {
-            color: #d32f2f;
+            color: var(--accent);
         }
-        .subtitle {
-            font-family: 'Arial', sans-serif;
-            font-size: 14px;
-            color: #7f8c8d;
+
+        .report-tag {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 15px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 0.05em;
         }
+
+        /* Typography */
         h1 {
-            font-size: 26px;
-            text-align: center;
-            color: #1a4a75;
+            font-size: 2.8rem;
+            line-height: 1.2;
+            color: var(--text-bold);
             margin-bottom: 30px;
-            line-height: 1.4;
+            letter-spacing: -0.03em;
+            font-weight: 800;
         }
+
         h2 {
-            font-size: 20px;
-            color: #1a4a75;
-            margin-top: 40px;
-            border-bottom: 1px solid #ecf0f1;
-            padding-bottom: 8px;
+            font-size: 1.7rem;
+            color: var(--text-bold);
+            margin: 60px 0 25px;
+            letter-spacing: -0.02em;
+            position: relative;
         }
+
+        h2::before {
+            content: "";
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
         h3 {
-            font-size: 18px;
-            color: #34495e;
-            margin-top: 25px;
+            font-size: 1.3rem;
+            color: var(--text-bold);
+            margin: 40px 0 15px;
         }
+
         p {
+            margin-bottom: 25px;
+            font-size: 1.125rem;
             text-align: justify;
-            margin-bottom: 15px;
-            font-size: 16px;
         }
+
         ul {
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            padding-left: 20px;
         }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Infografis CSS */
+        .infographic-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 35px;
+            margin: 45px 0;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .infographic-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-title {
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* 1. Diagram Sawah (Grid) */
+        .diagram-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            text-align: center;
+        }
+        .diagram-card {
+            background: var(--bg-body);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .diagram-card strong { display: block; font-size: 1.2rem; color: var(--text-bold); margin-bottom: 8px; }
+        .diagram-card span { font-size: 0.95rem; color: #64748b; }
+
+        /* 2. Piramida Likuiditas */
+        .pyramid-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .pyramid-level {
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 600;
+            color: white;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .lvl-1 { background: #1e3a8a; width: 50%; }
+        .lvl-2 { background: #2563eb; width: 75%; }
+        .lvl-3 { background: #60a5fa; width: 100%; color: #0f172a; }
+
+        /* 3. Arsitektur Rupiah Digital */
+        .cbdc-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .cbdc-node {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid var(--accent);
+        }
+        .cbdc-arrow {
+            font-size: 2rem;
+            color: #94a3b8;
+            margin: 0 15px;
+        }
+
+        /* Tabel Elegan */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 40px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
-            font-size: 15px;
+            background: white;
+            font-size: 1rem;
         }
-        th, td {
-            border: 1px solid #bdc3c7;
-            padding: 12px;
-            text-align: left;
-        }
+
         th {
-            background-color: #ecf0f1;
-            color: #2c3e50;
-            font-weight: bold;
-            text-align: center;
+            background: var(--primary);
+            color: white;
+            text-align: left;
+            padding: 18px 20px;
+            font-weight: 600;
         }
+
+        td {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+
+        /* Kotak Formula Code */
         .formula-box {
-            background-color: #f4f6f7;
-            border-left: 4px solid #1a4a75;
-            padding: 15px 20px;
-            margin: 20px 0;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 15px;
+            background: var(--primary);
+            color: #e2e8f0;
+            padding: 35px;
+            border-radius: 12px;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            margin: 40px 0;
+            box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.2);
         }
+        .formula-box strong { color: #fff; display: block; margin-bottom: 15px; font-family: 'Inter', sans-serif;}
+        .formula-line { color: #38bdf8; font-size: 1.15rem; margin-bottom: 10px; line-height: 1.5; }
+        .formula-line span { color: #a78bfa; }
+
+        /* Daftar Pustaka */
         .bibliography-section {
-            margin-top: 50px;
-            border-top: 2px solid #1a4a75;
-            padding-top: 20px;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
         }
         .bibliography {
-            font-size: 14px;
-            color: #555;
-            padding-left: 20px;
+            list-style: none;
+            font-size: 0.95rem;
+            color: #64748b;
+            padding-left: 0;
         }
         .bibliography li {
-            margin-bottom: 10px;
-            word-break: break-word;
+            margin-bottom: 15px;
+            padding-left: 25px;
+            text-indent: -25px;
+            line-height: 1.6;
         }
         .bibliography a {
-            color: #2980b9;
+            color: var(--accent);
             text-decoration: none;
+            word-break: break-all;
+            transition: color 0.2s;
         }
         .bibliography a:hover {
+            color: #1e3a8a;
             text-decoration: underline;
         }
-        .btn-container {
+
+        /* Tombol Dashboard */
+        .btn-wrapper {
             text-align: center;
-            margin-top: 60px;
-            margin-bottom: 20px;
+            margin-top: 70px;
+            margin-bottom: 30px;
         }
         .btn {
-            background-color: #1a4a75;
-            color: #ffffff;
-            padding: 12px 30px;
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary);
+            color: white;
+            padding: 18px 40px;
             text-decoration: none;
-            border-radius: 4px;
-            font-family: 'Arial', sans-serif;
-            font-weight: bold;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.3);
+        }
+        .btn svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            transition: transform 0.3s ease;
         }
         .btn:hover {
-            background-color: #113250;
+            background: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -5px rgba(15, 23, 42, 0.4);
+        }
+        .btn:hover svg {
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2::before { left: -10px; }
+            .container { padding: 30px 15px; }
+            .diagram-grid { grid-template-columns: 1fr; }
+            .cbdc-diagram { flex-direction: column; gap: 15px; }
+            .cbdc-arrow { transform: rotate(90deg); margin: 10px 0; }
         }
     </style>
 </head>
 <body>
 
-<div class="report-container">
-    <div class="header">
-        <div class="logo">nse<span>Report</span></div>
-        <div class="subtitle">Official Research & Analytical Document</div>
+    <div class="progress-container">
+        <div class="progress-bar" id="readingBar"></div>
     </div>
 
-    <h1>Denyut Nadi Likuiditas: Menelusuri Anatomi, Filosofi, dan Evolusi Sistem Moneter Global serta Indonesia</h1>
+    <div class="container">
+        <header>
+            <div class="logo">nse<span>Report</span></div>
+            <div class="report-tag">Laporan Hasil Kajian Resmi</div>
+        </header>
 
-    <h2>Kisah Aliran Air dan Bendungan Besar: Memahami Sistem, Moneter, dan Fiskal</h2>
-    <p>Untuk memahami bagaimana sebuah perekonomian modern bernapas, seseorang harus terlebih dahulu memahami konsep dasar tentang apa itu sistem. Berakar dari teori sistem umum yang digagas oleh Karl Ludwig von Bertalanffy, sebuah sistem didefinisikan sebagai kesatuan dari bagian-bagian yang saling berinteraksi secara dinamis dan tidak dapat dipisahkan guna mencapai tujuan tertentu. Di dalam sebuah ekosistem negara, sistem ini terbagi menjadi berbagai jaring laba-laba kebijakan, dengan dua pilar utamanya adalah sistem moneter dan sistem fiskal.</p>
-    
-    <p>Sistem moneter adalah keseluruhan struktur, aturan, institusi, dan mekanisme yang mengatur penciptaan, peredaran, serta pengelolaan nilai mata uang di dalam suatu perekonomian. Di sisi lain, sistem fiskal merujuk pada pengelolaan pendapatan negara melalui pajak serta pengeluaran negara melalui anggaran belanja pemerintah.</p>
-    
-    <p>Bagi seorang ahli ekonomi, perbedaan kedua sistem ini terletak pada saluran transmisi dan variabel sasarannya; namun bagi masyarakat awam, perbedaan ini dapat dipahami dengan menggunakan analogi pengelolaan air pada lahan pertanian yang luas. Bayangkan perekonomian sebagai hamparan sawah raksasa. Tanaman padi di sawah tersebut adalah dunia usaha, pekerjaan, perdagangan, dan konsumsi sehari-hari. Agar padi tumbuh subur, sawah membutuhkan aliran air yang pas. Jika kekurangan air, tanaman akan kekeringan dan mati, yang dalam istilah ekonomi disebut resesi atau deflasi. Namun, jika sawah dibanjiri air secara berlebihan, tanaman akan membusuk dan rusak, sebuah fenomena yang diidentifikasi sebagai inflasi tinggi.</p>
-    
-    <p>Dalam skenario ini, Bank Sentral bertindak sebagai penjaga bendungan utama. Melalui kebijakan moneter, Bank Sentral bertugas mengontrol total volume air yang dilepaskan ke sungai-sungai ekonomi (jumlah uang beredar) dan mengatur tekanan alirannya melalui katup suku bunga. Ketika sawah mulai kering, Bank Sentral akan menurunkan suku bunga agar perbankan mengalirkan lebih banyak kredit kepada masyarakat. Sebaliknya, jika sawah kebanjiran, suku bunga dinaikkan agar masyarakat lebih memilih menyimpannya kembali di bendungan perbankan.</p>
-    
-    <p>Pemerintah bertindak sebagai insinyur parit irigasi di lapangan. Melalui kebijakan fiskal, pemerintah menggunakan Anggaran Pendapatan dan Belanja Negara (APBN) sebagai cangkul untuk mengarahkan ke parit mana air harus mengalir. Pemerintah menarik pajak (menyedot air dari tanah) dan mengalirkannya kembali melalui belanja infrastruktur, subsidi, serta bantuan sosial (mengairi petak sawah tertentu yang membutuhkan).</p>
-    
-    <p>Kebijakan moneter cenderung bersifat teknokratis, mandiri dari intervensi politik, dan dapat diputuskan secara cepat melalui rapat dewan gubernur. Sementara kebijakan fiskal bersifat sangat politis, sarat dengan nilai keadilan sosial, dan membutuhkan proses persetujuan parlemen yang memakan waktu lama.</p>
+        <article>
+            <h1>Denyut Nadi Likuiditas: Menelusuri Anatomi, Filosofi, dan Evolusi Sistem Moneter Global serta Indonesia</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Dimensi Analisis</th>
-                <th>Sistem Moneter</th>
-                <th>Sistem Fiskal</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Institusi Pengendali</strong></td>
-                <td>Bank Sentral (Otoritas Moneter)</td>
-                <td>Pemerintah (Kementerian Keuangan)</td>
-            </tr>
-            <tr>
-                <td><strong>Variabel Utama</strong></td>
-                <td>Jumlah uang beredar, suku bunga, likuiditas perbankan, nilai tukar</td>
-                <td>Pajak, belanja negara, subsidi, utang publik</td>
-            </tr>
-            <tr>
-                <td><strong>Kecepatan Transmisi</strong></td>
-                <td>Fleksibel dan cepat diterapkan secara teknokratis</td>
-                <td>Lambat dalam perancangan karena siklus APBN dan politik legislatif</td>
-            </tr>
-            <tr>
-                <td><strong>Fungsi Utama</strong></td>
-                <td>Menjaga stabilitas harga (daya beli) dan ketertiban keuangan</td>
-                <td>Menjaga keadilan distributif, pemerataan sosial, dan alokasi sumber daya</td>
-            </tr>
-            <tr>
-                <td><strong>Instrumen Kerja</strong></td>
-                <td>Operasi pasar terbuka, giro wajib minimum, fasilitas diskonto</td>
-                <td>Kebijakan perpajakan, anggaran belanja nasional, subsidi</td>
-            </tr>
-        </tbody>
-    </table>
+            <h2>Kisah Aliran Air dan Bendungan Besar: Memahami Sistem, Moneter, dan Fiskal</h2>
+            <p>Untuk memahami bagaimana sebuah perekonomian modern bernapas, seseorang harus terlebih dahulu memahami konsep dasar tentang apa itu sistem. Berakar dari teori sistem umum yang digagas oleh Karl Ludwig von Bertalanffy, sebuah sistem didefinisikan sebagai kesatuan dari bagian-bagian yang saling berinteraksi secara dinamis dan tidak dapat dipisahkan guna mencapai tujuan tertentu. Di dalam sebuah ekosistem negara, sistem ini terbagi menjadi berbagai jaring laba-laba kebijakan, dengan dua pilar utamanya adalah sistem moneter dan sistem fiskal.</p>
+            
+            <p>Sistem moneter adalah keseluruhan struktur, aturan, institusi, dan mekanisme yang mengatur penciptaan, peredaran, serta pengelolaan nilai mata uang di dalam suatu perekonomian. Di sisi lain, sistem fiskal merujuk pada pengelolaan pendapatan negara melalui pajak serta pengeluaran negara melalui anggaran belanja pemerintah.</p>
+            
+            <p>Bagi seorang ahli ekonomi, perbedaan kedua sistem ini terletak pada saluran transmisi dan variabel sasarannya; namun bagi masyarakat awam, perbedaan ini dapat dipahami dengan menggunakan analogi pengelolaan air pada lahan pertanian yang luas.</p>
+            
+            <p>Bayangkan perekonomian sebagai hamparan sawah raksasa. Tanaman padi di sawah tersebut adalah dunia usaha, pekerjaan, perdagangan, dan konsumsi sehari-hari. Agar padi tumbuh subur, sawah membutuhkan aliran air yang pas. Jika kekurangan air, tanaman akan kekeringan dan mati, yang dalam istilah ekonomi disebut resesi atau deflasi. Namun, jika sawah dibanjiri air secara berlebihan, tanaman akan membusuk dan rusak, sebuah fenomena yang diidentifikasi sebagai inflasi tinggi.</p>
+            
+            <p>Dalam skenario ini, Bank Sentral bertindak sebagai penjaga bendungan utama. Melalui kebijakan moneter, Bank Sentral bertugas mengontrol total volume air yang dilepaskan ke sungai-sungai ekonomi (jumlah uang beredar) dan mengatur tekanan alirannya melalui katup suku bunga. Ketika sawah mulai kering, Bank Sentral akan menurunkan suku bunga agar perbankan mengalirkan lebih banyak kredit kepada masyarakat. Sebaliknya, jika sawah kebanjiran, suku bunga dinaikkan agar masyarakat lebih memilih menyimpannya kembali di bendungan perbankan.</p>
+            
+            <p>Pemerintah bertindak sebagai insinyur parit irigasi di lapangan. Melalui kebijakan fiskal, pemerintah menggunakan Anggaran Pendapatan dan Belanja Negara (APBN) sebagai cangkul untuk mengarahkan ke parit mana air harus mengalir. Pemerintah menarik pajak (menyedot air dari tanah) dan mengalirkannya kembali melalui belanja infrastruktur, subsidi, serta bantuan sosial (mengairi petak sawah tertentu yang membutuhkan).</p>
 
-    <h2>Filsafat Uang: Jiwa Simmel yang Bebas dan Keadilan Transaksional Syariah</h2>
-    <p>Untuk menggali lebih dalam, akademisi tidak bisa hanya melihat uang sebagai angka di atas kertas, melainkan harus menelusuri landasan filosofisnya. Sosiolog dan filsuf Jerman, Georg Simmel, dalam magnum opusnya <em>The Philosophy of Money</em> (1900), memandang uang sebagai instrumen dinamis yang merestrukturisasi seluruh eksistensi sosial manusia. Sebelum lahirnya mata uang universal, nilai dinilai melalui parameter subjektif yang tidak saling cocok satu sama lain, seperti ikatan kehormatan, waktu kerja keras, atau pengorbanan emosional. Barter membatasi kebebasan individu karena membutuhkan kebetulan kebutuhan yang sama pada saat yang sama.</p>
-    
-    <p>Simmel berargumen bahwa kehadiran uang bertindak sebagai pelarut universal. Uang menyederhanakan seluruh dimensi nilai yang kompleks ke dalam satu metrik kuantitatif tunggal, yaitu harga. Hal ini memberikan kebebasan luar biasa bagi manusia. Di era modern, seorang pekerja tidak lagi terikat secara pribadi pada tuannya; ia cukup dibayar dengan uang netral, yang membebaskannya untuk membeli apa pun dari siapa pun tanpa terikat hubungan emosional masa lalu.</p>
-    
-    <p>Namun, Simmel juga mengingatkan akan adanya harga mahal yang harus dibayar: hubungan sosial menjadi sangat dingin, rasional, berjarak, dan teralienasi. Uang berubah dari sekadar alat bantu transaksi menjadi lambang potensi murni, di mana manusia modern sering kali memuja kepemilikan uang melampaui kegunaan riilnya.</p>
-    
-    <p>Sudut pandang filosofis ini menemukan antitesis dan pelengkapnya dalam epistemologi ekonomi syariah. Di dalam filsafat ekonomi Islam, uang secara ontologis didefinisikan secara ketat hanya sebagai alat tukar dan satuan hitung, bukan sebagai komoditas yang boleh diperdagangkan untuk menghasilkan keuntungan secara pasif. Uang diyakini sebagai amanah spiritual yang harus terus bergerak dinamis di dalam perekonomian riil. Menimbun uang atau membiarkannya mengendap tanpa menghasilkan produk riil dinilai sebagai pelanggaran terhadap keadilan sosial. Oleh karena itu, sistem keuangan syariah menolak keras konsep bunga (riba) yang membiarkan uang menghasilkan uang secara sepihak, dan menggantinya dengan kemitraan bagi hasil yang mengedepankan pembagian risiko secara adil di antara para pelaku usaha.</p>
+            <div class="infographic-box">
+                <div class="info-title">Infografis 1: Analogi Sawah Ekonomi</div>
+                <div class="diagram-grid">
+                    <div class="diagram-card">
+                        <span class="icon">🏦</span>
+                        <strong>Bank Sentral</strong>
+                        <span>Penjaga Bendungan<br>(Mengontrol Suku Bunga & Volume Likuiditas)</span>
+                    </div>
+                    <div class="diagram-card">
+                        <span class="icon">🏛️</span>
+                        <strong>Pemerintah</strong>
+                        <span>Insinyur Irigasi<br>(Mengarahkan Aliran melalui Pajak & APBN)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <p>Kebijakan moneter cenderung bersifat teknokratis, mandiri dari intervensi politik, dan dapat diputuskan secara cepat melalui rapat dewan gubernur. Sementara kebijakan fiskal bersifat sangat politis, sarat dengan nilai keadilan sosial, dan membutuhkan proses persetujuan parlemen yang memakan waktu lama.</p>
 
-    <h2>Epistemologi dan Metodologi Agregat Moneter: Bagaimana Negara Mengukur Sesuatu yang Tak Terlihat</h2>
-    <p>Secara epistemologis, bagaimana otoritas moneter mengumpulkan pengetahuan yang valid mengenai jumlah uang yang beredar di masyarakat? Uang tidak selalu berwujud fisik; ia mengalir dalam bentuk angka digital di komputer perbankan, surat berharga, hingga saldo di ponsel pintar. Untuk menyusun pengetahuan ini, metodologi moneter bersandar pada akuntansi konsolidasi neraca sektor keuangan.</p>
-    
-    <p>Melalui metode ini, bank sentral melakukan konsolidasi atas neraca miliknya sendiri dengan neraca seluruh lembaga keuangan penampung simpanan, seperti bank umum dan bank perkreditan rakyat. Dari sisi pasiva neraca sistem moneter inilah jumlah uang beredar dihitung. Metode klasifikasinya disusun berdasarkan spektrum likuiditas, yang mengukur kemudahan suatu aset keuangan dikonversi menjadi alat pembayaran tunai tanpa mengalami penurunan nilai secara drastis. Epistemologi ini melahirkan agregat moneter yang kita kenal dengan simbol "M", yang diurutkan secara hierarkis dari yang paling likuid (M<sub>0</sub> dan M<sub>1</sub>) hingga yang membutuhkan waktu pencairan lebih lama (M<sub>2</sub>, M<sub>3</sub>, dan seterusnya).</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dimensi Analisis</th>
+                            <th>Sistem Moneter</th>
+                            <th>Sistem Fiskal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Institusi Pengendali</strong></td>
+                            <td>Bank Sentral (Otoritas Moneter)</td>
+                            <td>Pemerintah (Kementerian Keuangan)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Variabel Utama</strong></td>
+                            <td>Jumlah uang beredar, suku bunga, likuiditas perbankan, nilai tukar</td>
+                            <td>Pajak, belanja negara, subsidi, utang publik</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kecepatan Transmisi</strong></td>
+                            <td>Fleksibel dan cepat diterapkan secara teknokratis</td>
+                            <td>Lambat dalam perancangan karena siklus APBN dan politik legislatif</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fungsi Utama</strong></td>
+                            <td>Menjaga stabilitas harga (daya beli) dan ketertiban keuangan</td>
+                            <td>Menjaga keadilan distributif, pemerataan sosial, dan alokasi sumber daya</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Instrumen Kerja</strong></td>
+                            <td>Operasi pasar terbuka, giro wajib minimum, fasilitas diskonto</td>
+                            <td>Kebijakan perpajakan, anggaran belanja nasional, subsidi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-    <h2>Sejarah Evolusi Pengukuran Uang: Dari Monetarisme Hingga Arus Digital</h2>
-    <p>Sejarah klasifikasi moneter modern tidak dapat dipisahkan dari pasang surut pemikiran ekonomi global. Pada dekade 1970-an hingga 1980-an, pemikiran dunia dikuasai oleh mazhab Monetaris yang dipimpin oleh Milton Friedman. Mazhab ini berargumen bahwa inflasi adalah fenomena moneter murni yang hanya dapat diredam jika bank sentral secara konsisten membatasi laju pertumbuhan jumlah uang beredar (M<sub>1</sub> atau M<sub>2</sub>) sesuai dengan pertumbuhan ekonomi riil.</p>
-    
-    <p>Namun, eksperimen kebijakan ini menemui jalan buntu pada akhir era 1980-an. Inovasi teknologi perbankan, munculnya kartu kredit, kartu debit, serta deregulasi pasar keuangan membuat perilaku masyarakat dalam memegang uang menjadi sangat bergejolak dan sulit ditebak. Akibatnya, hubungan stabil antara pertumbuhan uang beredar dan inflasi menjadi rusak. Bank sentral di seluruh dunia akhirnya meninggalkan pengendalian jumlah uang secara langsung dan beralih ke kebijakan penetapan suku bunga jangka pendek serta penargetan inflasi langsung (inflation targeting framework).</p>
-    
-    <p>Meskipun kontrol langsung ditinggalkan, metode pengukuran agregat terus disesuaikan secara dinamis. Di Amerika Serikat, Federal Reserve menerbitkan data M<sub>1</sub>, M<sub>2</sub>, dan M<sub>3</sub> hingga Maret 2006, sebelum akhirnya menghentikan pelaporan M<sub>3</sub> dengan alasan biaya estimasi yang tinggi tidak sebanding dengan manfaat kebijakannya. Pada April 2020, Federal Reserve melakukan reformasi besar dengan memasukkan rekening tabungan (savings deposits) ke dalam komponen M<sub>1</sub>, setelah sebelumnya tabungan dikategorikan sebagai bagian dari M<sub>2</sub>. Langkah ini diambil karena tabungan di era digital kini dapat dipindahkan seketika untuk bertransaksi.</p>
-    
-    <p>Di Britania Raya, Bank of England melakukan reformasi pasar uang pada Mei 2006 dengan menghentikan publikasi agregat M<sub>0</sub> tradisional dan menggantinya dengan laporan saldo cadangan bank komersial yang disimpan langsung di bank sentral bersamaan dengan uang fisik di masyarakat. Transformasi ini membuktikan betapa dominannya uang ciptaan bank komersial dibandingkan uang fisik bank sentral. Sebagai ilustrasi historis, pada tahun 2010 di Inggris, total broad money (M<sub>4</sub>) mencapai £2,2 triliun, sementara nilai fisik uang kertas dan koin di masyarakat hanya sebesar £47 miliar—artinya uang fisik bank sentral hanya menyusun 2,1% dari total likuiditas perekonomian nasional.</p>
+            <h2>Filsafat Uang: Jiwa Simmel yang Bebas dan Keadilan Transaksional Syariah</h2>
+            <p>Untuk menggali lebih dalam, akademisi tidak bisa hanya melihat uang sebagai angka di atas kertas, melainkan harus menelusuri landasan filosofisnya. Sosiolog dan filsuf Jerman, Georg Simmel, dalam magnum opusnya <em>The Philosophy of Money</em> (1900), memandang uang sebagai instrumen dinamis yang merestrukturisasi seluruh eksistensi sosial manusia. Sebelum lahirnya mata uang universal, nilai dinilai melalui parameter subjektif yang tidak saling cocok satu sama lain, seperti ikatan kehormatan, waktu kerja keras, atau pengorbanan emosional. Barter membatasi kebebasan individu karena membutuhkan kebetulan kebutuhan yang sama pada saat yang sama.</p>
+            
+            <p>Simmel berargumen bahwa kehadiran uang bertindak sebagai pelarut universal. Uang menyederhanakan seluruh dimensi nilai yang kompleks ke dalam satu metrik kuantitatif tunggal, yaitu harga. Hal ini memberikan kebebasan luar biasa bagi manusia. Di era modern, seorang pekerja tidak lagi terikat secara pribadi pada tuannya; ia cukup dibayar dengan uang netral, yang membebaskannya untuk membeli apa pun dari siapa pun tanpa terikat hubungan emosional masa lalu.</p>
+            
+            <p>Namun, Simmel juga mengingatkan akan adanya harga mahal yang harus dibayar: hubungan sosial menjadi sangat dingin, rasional, berjarak, dan teralienasi. Uang berubah dari sekadar alat bantu transaksi menjadi lambang potensi murni, di mana manusia modern sering kali memuja kepemilikan uang melampaui kegunaan riilnya.</p>
+            
+            <p>Sudut pandang filosofis ini menemukan antitesis dan pelengkapnya dalam epistemologi ekonomi syariah. Di dalam filsafat ekonomi Islam, uang secara ontologis didefinisikan secara ketat hanya sebagai alat tukar dan satuan hitung, bukan sebagai komoditas yang boleh diperdagangkan untuk menghasilkan keuntungan secara pasif. Uang diyakini sebagai amanah spiritual yang harus terus bergerak dinamis di dalam perekonomian riil. Menimbun uang atau membiarkannya mengendap tanpa menghasilkan produk riil dinilai sebagai pelanggaran terhadap keadilan sosial. Oleh karena itu, sistem keuangan syariah menolak keras konsep bunga (riba) yang membiarkan uang menghasilkan uang secara sepihak, dan menggantinya dengan kemitraan bagi hasil yang mengedepankan pembagian risiko secara adil di antara para pelaku usaha.</p>
 
-    <h2>Katalog Agregat Moneter Global: Memetakan Ragam Likuiditas Dunia</h2>
-    <p>Secara akademis, setiap negara atau kawasan ekonomi memiliki variasi tersendiri dalam merumuskan batas-batas agregat moneternya, disesuaikan dengan karakteristik pasar keuangan setempat. Di bawah ini adalah pemetaan komparatif agregat moneter dari berbagai otoritas keuangan terkemuka dunia.</p>
+            <h2>Epistemologi dan Metodologi Agregat Moneter: Bagaimana Negara Mengukur Sesuatu yang Tak Terlihat</h2>
+            <p>Secara epistemologis, bagaimana otoritas moneter mengumpulkan pengetahuan yang valid mengenai jumlah uang yang beredar di masyarakat? Uang tidak selalu berwujud fisik; ia mengalir dalam bentuk angka digital di komputer perbankan, surat berharga, hingga saldo di ponsel pintar. Untuk menyusun pengetahuan ini, metodologi moneter bersandar pada akuntansi konsolidasi neraca sektor keuangan.</p>
 
-    <h3>Agregat Moneter Federal Reserve (Amerika Serikat)</h3>
-    <ul>
-        <li><strong>M<sub>0</sub> / Basis Moneter:</strong> Seluruh uang fisik (kertas dan logam) yang dicetak ditambah saldo cadangan bank komersial di bank sentral.</li>
-        <li><strong>M<sub>1</sub>:</strong> Komponen M<sub>0</sub> di luar sistem perbankan ditambah dengan simpanan giro (demand deposits), cek perjalanan, tabungan, dan rekening simpanan transaksi lainnya yang dapat ditarik sewaktu-waktu.</li>
-        <li><strong>M<sub>2</sub>:</strong> Seluruh komponen M<sub>1</sub> ditambah dengan deposito berjangka bernilai kecil (di bawah $100.000 USD), rekening pasar uang ritel, dan reksa dana pasar uang ritel.</li>
-        <li><strong>MZM (Money Zero Maturity):</strong> Mengukur seluruh aset keuangan yang memiliki maturitas nol (dapat ditarik seketika pada nilai nominalnya). Rumusnya adalah komponen M<sub>2</sub> dikurangi deposito berjangka ditambah dengan reksa dana pasar uang institusional.</li>
-        <li><strong>M<sub>3</sub>:</strong> Seluruh komponen M<sub>2</sub> ditambah deposito berjangka skala besar, dana pasar uang institusional, perjanjian pembelian kembali jangka pendek (repurchase agreements), dan simpanan Eurodollar. (Tidak lagi dipublikasikan secara resmi sejak 2006).</li>
-        <li><strong>M<sub>4</sub> dan L:</strong> Agregat likuiditas terdalam yang mencakup surat berharga komersial, surat utang negara jangka pendek (T-Bills), dan akseptasi bank.</li>
-    </ul>
+            <div class="infographic-box">
+                <div class="info-title">Infografis 2: Hierarki Piramida Agregat Moneter</div>
+                <div class="pyramid-wrapper">
+                    <div class="pyramid-level lvl-1">M0 (Basis Moneter) - Paling Likuid</div>
+                    <div class="pyramid-level lvl-2">M1 (Uang Beredar Sempit)</div>
+                    <div class="pyramid-level lvl-3">M2 / M3 (Uang Beredar Luas) - Kurang Likuid</div>
+                </div>
+                <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: #64748b;">
+                    Metode klasifikasi disusun berdasarkan spektrum likuiditas: Kemudahan aset dikonversi menjadi uang tunai.
+                </p>
+            </div>
+            
+            <p>Melalui metode ini, bank sentral melakukan konsolidasi atas neraca miliknya sendiri dengan neraca seluruh lembaga keuangan penampung simpanan, seperti bank umum dan bank perkreditan rakyat. Dari sisi pasiva neraca sistem moneter inilah jumlah uang beredar dihitung. Metode klasifikasinya disusun berdasarkan spektrum likuiditas, yang mengukur kemudahan suatu aset keuangan dikonversi menjadi alat pembayaran tunai tanpa mengalami penurunan nilai secara drastis. Epistemologi ini melahirkan agregat moneter yang kita kenal dengan simbol "M", yang diurutkan secara hierarkis dari yang paling likuid (M0 dan M1) hingga yang membutuhkan waktu pencairan lebih lama (M2, M3, dan seterusnya).</p>
 
-    <h3>Agregat Moneter Bank Sentral Eropa (Eurosystem)</h3>
-    <ul>
-        <li><strong>M<sub>1</sub> (Narrow Money):</strong> Uang kartal dalam peredaran ditambah simpanan semalam (overnight deposits) yang dapat dikonversi menjadi uang tunai secara instan.</li>
-        <li><strong>M<sub>2</sub> (Intermediate Money):</strong> Komponen M<sub>1</sub> ditambah simpanan dengan kesepakatan jangka waktu hingga 2 tahun dan simpanan yang dapat ditarik dengan pemberitahuan hingga 3 bulan.</li>
-        <li><strong>M<sub>3</sub> (Broad Money):</strong> Komponen M<sub>2</sub> ditambah perjanjian pembelian kembali (repo), saham/unit dana pasar uang, dan surat utang dengan jangka waktu hingga 2 tahun yang diterbitkan oleh institusi keuangan moneter.</li>
-    </ul>
+            <h2>Sejarah Evolusi Pengukuran Uang: Dari Monetarisme Hingga Arus Digital</h2>
+            <p>Sejarah klasifikasi moneter modern tidak dapat dipisahkan dari pasang surut pemikiran ekonomi global. Pada dekade 1970-an hingga 1980-an, pemikiran dunia dikuasai oleh mazhab Monetaris yang dipimpin oleh Milton Friedman. Mazhab ini berargumen bahwa inflasi adalah fenomena moneter murni yang hanya dapat diredam jika bank sentral secara konsisten membatasi laju pertumbuhan jumlah uang beredar (M1 atau M2) sesuai dengan pertumbuhan ekonomi riil.</p>
+            
+            <p>Namun, eksperimen kebijakan ini menemui jalan buntu pada akhir era 1980-an. Inovasi teknologi perbankan, munculnya kartu kredit, kartu debit, serta deregulasi pasar keuangan membuat perilaku masyarakat dalam memegang uang menjadi sangat bergejolak dan sulit ditebak. Akibatnya, hubungan stabil antara pertumbuhan uang beredar dan inflasi menjadi rusak. Bank sentral di seluruh dunia akhirnya meninggalkan pengendalian jumlah uang secara langsung dan beralih ke kebijakan penetapan suku bunga jangka pendek serta penargetan inflasi langsung (inflation targeting framework).</p>
+            
+            <p>Meskipun kontrol langsung ditinggalkan, metode pengukuran agregat terus disesuaikan secara dinamis. Di Amerika Serikat, Federal Reserve menerbitkan data M1, M2, dan M3 hingga Maret 2006, sebelum akhirnya menghentikan pelaporan M3 dengan alasan biaya estimasi yang tinggi tidak sebanding dengan manfaat kebijakannya. Pada April 2020, Federal Reserve melakukan reformasi besar dengan memasukkan rekening tabungan (savings deposits) ke dalam komponen M1, setelah sebelumnya tabungan dikategorikan sebagai bagian dari M2. Langkah ini diambil karena tabungan di era digital kini dapat dipindahkan seketika untuk bertransaksi.</p>
+            
+            <p>Di Britania Raya, Bank of England melakukan reformasi pasar uang pada Mei 2006 dengan menghentikan publikasi agregat M0 tradisional dan menggantinya dengan laporan saldo cadangan bank komersial yang disimpan langsung di bank sentral bersamaan dengan uang fisik di masyarakat. Transformasi ini membuktikan betapa dominannya uang ciptaan bank komersial dibandingkan uang fisik bank sentral. Sebagai ilustrasi historis, pada tahun 2010 di Inggris, total broad money (M4) mencapai £2,2 triliun, sementara nilai fisik uang kertas dan koin di masyarakat hanya sebesar £47 miliar—artinya uang fisik bank sentral hanya menyusun 2,1% dari total likuiditas perekonomian nasional.</p>
 
-    <h3>Agregat Moneter Bank Negara Malaysia</h3>
-    <ul>
-        <li><strong>M<sub>1</sub>:</strong> Uang kartal dalam peredaran ditambah simpanan giro (demand deposits).</li>
-        <li><strong>M<sub>2</sub>:</strong> Komponen M<sub>1</sub> ditambah dengan Narrow Quasi-Money yang mencakup tabungan biasa, deposito berjangka, instrumen simpanan yang dapat dinegosiasikan (NID), repo, dan simpanan mata uang asing.</li>
-        <li><strong>M<sub>3</sub>:</strong> Komponen M<sub>2</sub> ditambah seluruh simpanan sektor swasta non-bank yang ditempatkan pada lembaga perbankan lainnya, seperti bank investasi.</li>
-    </ul>
+            <h2>Katalog Agregat Moneter Global: Memetakan Ragam Likuiditas Dunia</h2>
+            <p>Secara akademis, setiap negara atau kawasan ekonomi memiliki variasi tersendiri dalam merumuskan batas-batas agregat moneternya, disesuaikan dengan karakteristik pasar keuangan setempat. Di bawah ini adalah pemetaan komparatif agregat moneter dari berbagai otoritas keuangan terkemuka dunia.</p>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Agregat</th>
-                <th>Federal Reserve (AS)</th>
-                <th>Bank Sentral Eropa (ECB)</th>
-                <th>Bank Negara Malaysia</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>M<sub>1</sub></strong></td>
-                <td>Uang fisik di publik + giro + tabungan + cek perjalanan</td>
-                <td>Uang fisik + simpanan semalam (overnight deposits)</td>
-                <td>Uang fisik di publik + simpanan giro</td>
-            </tr>
-            <tr>
-                <td><strong>M<sub>2</sub></strong></td>
-                <td>Komponen M<sub>1</sub> + deposito &lt;$100k + reksa dana pasar uang ritel</td>
-                <td>Komponen M<sub>1</sub> + deposito berjangka &lt;2 tahun + simpanan dengan pemberitahuan &lt;3 bulan</td>
-                <td>Komponen M<sub>1</sub> + tabungan + deposito berjangka + repo + simpanan valas</td>
-            </tr>
-            <tr>
-                <td><strong>M<sub>3</sub></strong></td>
-                <td>Komponen M<sub>2</sub> + deposito besar + reksa dana pasar uang institusi + repo + Eurodollar</td>
-                <td>Komponen M<sub>2</sub> + repo + reksa dana pasar uang + surat utang &lt;2 tahun</td>
-                <td>Komponen M<sub>2</sub> + simpanan swasta non-bank di bank investasi</td>
-            </tr>
-        </tbody>
-    </table>
+            <h3>Agregat Moneter Federal Reserve (Amerika Serikat)</h3>
+            <ul>
+                <li><strong>M0 / Basis Moneter:</strong> Seluruh uang fisik (kertas dan logam) yang dicetak ditambah saldo cadangan bank komersial di bank sentral.</li>
+                <li><strong>M1:</strong> Komponen M0 di luar sistem perbankan ditambah dengan simpanan giro (demand deposits), cek perjalanan, tabungan, dan rekening simpanan transaksi lainnya yang dapat ditarik sewaktu-waktu.</li>
+                <li><strong>M2:</strong> Seluruh komponen M1 ditambah dengan deposito berjangka bernilai kecil (di bawah $100.000 USD), rekening pasar uang ritel, dan reksa dana pasar uang ritel.</li>
+                <li><strong>MZM (Money Zero Maturity):</strong> Mengukur seluruh aset keuangan yang memiliki maturitas nol (dapat ditarik seketika pada nilai nominalnya). Rumusnya adalah komponen M2 dikurangi deposito berjangka ditambah dengan reksa dana pasar uang institusional.</li>
+                <li><strong>M3:</strong> Seluruh komponen M2 ditambah deposito berjangka skala besar, dana pasar uang institusional, perjanjian pembelian kembali jangka pendek (repurchase agreements), dan simpanan Eurodollar. (Tidak lagi dipublikasikan secara resmi sejak 2006).</li>
+                <li><strong>M4 dan L:</strong> Agregat likuiditas terdalam yang mencakup surat berharga komersial, surat utang negara jangka pendek (T-Bills), dan akseptasi bank.</li>
+            </ul>
 
-    <h2>Arsitektur Moneter Indonesia: Reklasifikasi Tabungan 2021 dan Peran Uang Elektronik</h2>
-    <p>Di Indonesia, mandat pengelolaan sistem moneter dipegang secara independen oleh Bank Indonesia dengan sasaran utama mencapai dan memelihara kestabilan nilai Rupiah. Dalam melaksanakan analisis likuiditasnya, Bank Indonesia secara historis membagi uang beredar ke dalam dua kelompok utama, yaitu uang beredar dalam arti sempit (M<sub>1</sub>) dan uang beredar dalam arti luas (M<sub>2</sub>). Namun, derasnya arus digitalisasi keuangan di tanah air memaksa Bank Indonesia melakukan kalibrasi ulang terhadap formula ini.</p>
-    
-    <p>Pada Agustus 2021, Bank Indonesia mengumumkan langkah reklasifikasi komponen uang beredar yang sangat penting. Tabungan Rupiah yang dapat ditarik sewaktu-waktu—yang semula dikelompokkan dalam komponen uang kuasi (M<sub>2</sub>)—secara resmi dipindahkan dan dikategorikan sebagai bagian dari uang beredar dalam arti sempit (M<sub>1</sub>).</p>
-    
-    <p>Keputusan ini didasarkan pada pergeseran perilaku transaksi masyarakat Indonesia. Berkat kehadiran ekosistem pembayaran non-tunai yang masif seperti QRIS, aplikasi mobile banking, dan dompet digital, tabungan Rupiah di bank tidak lagi berfungsi pasif sebagai penyimpan nilai jangka panjang. Tabungan tersebut kini berfungsi aktif sebagai alat transaksi ritel harian. Melalui reklasifikasi ini, statistik moneter Indonesia diselaraskan agar mencerminkan realitas daya beli masyarakat yang sebenarnya.</p>
+            <h3>Agregat Moneter Bank Sentral Eropa (Eurosystem)</h3>
+            <ul>
+                <li><strong>M1 (Narrow Money):</strong> Uang kartal dalam peredaran ditambah simpanan semalam (overnight deposits) yang dapat dikonversi menjadi uang tunai secara instan.</li>
+                <li><strong>M2 (Intermediate Money):</strong> Komponen M1 ditambah simpanan dengan kesepakatan jangka waktu hingga 2 tahun dan simpanan yang dapat ditarik dengan pemberitahuan hingga 3 bulan.</li>
+                <li><strong>M3 (Broad Money):</strong> Komponen M2 ditambah perjanjian pembelian kembali (repo), saham/unit dana pasar uang, dan surat utang dengan jangka waktu hingga 2 tahun yang diterbitkan oleh institusi keuangan moneter.</li>
+            </ul>
 
-    <div class="formula-box">
-        <strong>Formula Pasca-Agustus 2021:</strong><br><br>
-        M<sub>1</sub> = Uang Kartal di Luar Bank + Giro Rupiah + Tabungan Rupiah Sewaktu-waktu + Float Uang Elektronik<br><br>
-        M<sub>2</sub> = M<sub>1</sub> + Uang Kuasi (Deposito Berjangka & Giro Valas) + Surat Berharga Selain Saham
+            <h3>Agregat Moneter Bank Negara Malaysia</h3>
+            <ul>
+                <li><strong>M1:</strong> Uang kartal dalam peredaran ditambah simpanan giro (demand deposits).</li>
+                <li><strong>M2:</strong> Komponen M1 ditambah dengan Narrow Quasi-Money yang mencakup tabungan biasa, deposito berjangka, instrumen simpanan yang dapat dinegosiasikan (NID), repo, dan simpanan mata uang asing.</li>
+                <li><strong>M3:</strong> Komponen M2 ditambah seluruh simpanan sektor swasta non-bank yang ditempatkan pada lembaga perbankan lainnya, seperti bank investasi.</li>
+            </ul>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Agregat</th>
+                            <th>Federal Reserve (AS)</th>
+                            <th>Bank Sentral Eropa (ECB)</th>
+                            <th>Bank Negara Malaysia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>M1</strong></td>
+                            <td>Uang fisik di publik + giro + tabungan + cek perjalanan</td>
+                            <td>Uang fisik + simpanan semalam (overnight deposits)</td>
+                            <td>Uang fisik di publik + simpanan giro</td>
+                        </tr>
+                        <tr>
+                            <td><strong>M2</strong></td>
+                            <td>Komponen M1 + deposito &lt;$100k + reksa dana ritel</td>
+                            <td>Komponen M1 + deposito berjangka &lt;2 thn + simpanan dengan pemberitahuan</td>
+                            <td>Komponen M1 + tabungan + deposito + repo + valas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>M3</strong></td>
+                            <td>Komponen M2 + deposito besar + reksa dana institusi (tidak dipublikasi)</td>
+                            <td>Komponen M2 + repo + reksa dana + surat utang &lt;2 thn</td>
+                            <td>Komponen M2 + simpanan di bank investasi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Arsitektur Moneter Indonesia: Reklasifikasi Tabungan 2021 dan Peran Uang Elektronik</h2>
+            <p>Di Indonesia, mandat pengelolaan sistem moneter dipegang secara independen oleh Bank Indonesia dengan sasaran utama mencapai dan memelihara kestabilan nilai Rupiah. Dalam melaksanakan analisis likuiditasnya, Bank Indonesia secara historis membagi uang beredar ke dalam dua kelompok utama, yaitu uang beredar dalam arti sempit (M1) dan uang beredar dalam arti luas (M2). Namun, derasnya arus digitalisasi keuangan di tanah air memaksa Bank Indonesia melakukan kalibrasi ulang terhadap formula ini.</p>
+            
+            <p>Pada Agustus 2021, Bank Indonesia mengumumkan langkah reklasifikasi komponen uang beredar yang sangat penting. Tabungan Rupiah yang dapat ditarik sewaktu-waktu—yang semula dikelompokkan dalam komponen uang kuasi (M2)—secara resmi dipindahkan dan dikategorikan sebagai bagian dari uang beredar dalam arti sempit (M1).</p>
+            
+            <p>Keputusan ini didasarkan pada pergeseran perilaku transaksi masyarakat Indonesia. Berkat kehadiran ekosistem pembayaran non-tunai yang masif seperti QRIS, aplikasi mobile banking, dan dompet digital, tabungan Rupiah di bank tidak lagi berfungsi pasif sebagai penyimpan nilai jangka panjang. Tabungan tersebut kini berfungsi aktif sebagai alat transaksi ritel harian. Melalui reklasifikasi ini, statistik moneter Indonesia diselaraskan agar mencerminkan realitas daya beli masyarakat yang sebenarnya.</p>
+
+            <div class="formula-box">
+                <strong>[⚙️] Formula BI Pasca-Agustus 2021</strong>
+                <div class="formula-line"><span>M1 =</span> Uang Kartal + Giro Rupiah + Tabungan Rupiah Sewaktu-waktu + Float Uang Elektronik</div>
+                <div class="formula-line"><span>M2 =</span> M1 + Uang Kuasi (Deposito Berjangka & Giro Valas) + Surat Berharga Selain Saham</div>
+            </div>
+
+            <p>Seiring dengan reformasi tersebut, instrumen uang elektronik (e-money) juga mendapatkan tempat khusus dalam agregat moneter. Saldo mengambang (float) milik nasabah dan merchant yang mengendap pada aplikasi dompet digital dinilai sangat likuid karena dapat digunakan seketika tanpa jeda waktu konversi. Sesuai panduan IMF yang mengategorikan uang elektronik sebagai transferable deposits, Bank Indonesia memasukkan dana float uang elektronik ini sebagai bagian dari komponen M1. Meskipun nominalnya relatif kecil dibanding total likuiditas nasional—sebagai contoh, pada Desember 2021 saldo float uang elektronik tercatat sebesar Rp8,3 triliun atau menyusun sekitar 0,19% dari total M1—berbagai studi empiris menegaskan bahwa pertumbuhan transaksi digital ini berkontribusi signifikan terhadap perluasan aktivitas perekonomian riil dan mempermudah akses keuangan bagi kelompok masyarakat yang sebelumnya tidak terjangkau oleh perbankan konvensional (unbanked).</p>
+
+            <p>Untuk melihat potret likuiditas perekonomian Indonesia terkini, data historis per Maret 2026 menyajikan angka-angka makroekonomi yang sangat besar, menggambarkan betapa luasnya skala perekonomian nasional:</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Komponen Agregat Moneter Indonesia</th>
+                            <th>Nilai (Maret 2026)</th>
+                            <th>Karakteristik Utama</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Money Supply M0 (Basis Moneter)</strong></td>
+                            <td>Rp1.206.254 Miliar</td>
+                            <td>Uang fisik di masyarakat + cadangan bank di BI</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Money Supply M1 (Uang Beredar Sempit)</strong></td>
+                            <td>Rp3.423.670 Miliar</td>
+                            <td>Mencakup uang kartal, giro, tabungan instan, float e-money</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Money Supply M2 (Uang Beredar Luas)</strong></td>
+                            <td>Rp10.355.100 Miliar</td>
+                            <td>Mencakup seluruh M1, uang kuasi (deposito), surat berharga</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Proyek Garuda dan Rupiah Digital: Menatap Horison Kedaulatan Moneter Masa Depan</h2>
+            <p>Tantangan moneter global saat ini bergeser ke ranah digital seiring dengan populernya aset kripto swasta dan stablecoin. Menghadapi potensi disrupsi mata uang asing bayangan (shadow currency) ini, Bank Indonesia meluncurkan inisiatif strategis berjangka panjang bertajuk Proyek Garuda. Proyek ini didirikan untuk mengeksplorasi arsitektur terbaik bagi penerbitan Central Bank Digital Currency (CBDC) nasional, yang dinamakan Rupiah Digital.</p>
+            
+            <p>Rupiah Digital dirancang untuk berjalan berdampingan dan saling melengkapi dengan uang fisik serta instrumen non-tunai yang sudah ada, tanpa niat untuk menghapusnya. Berdasarkan arsitektur desainnya, Rupiah Digital akan dibagi menjadi dua jenis:</p>
+            <ul>
+                <li><strong>Wholesale Digital Rupiah (w-Rupiah Digital):</strong> Berperan sebagai infrastruktur settlement transaksi keuangan bernilai besar antarbank, seperti operasi moneter dan transaksi pasar valas. Pengujian teknologi ini menggunakan basis data terdistribusi perizinan (permissioned ledger) berbasis Hyperledger Besu.</li>
+                <li><strong>Retail Digital Rupiah (r-Rupiah Digital):</strong> Berfungsi sebagai alat pembayaran digital yang sah bagi masyarakat umum untuk transaksi belanja harian.</li>
+            </ul>
+
+            <div class="infographic-box">
+                <div class="info-title">Infografis 3: Arsitektur Keamanan Rupiah Digital vs E-Money Swasta</div>
+                <div class="cbdc-diagram">
+                    <div class="cbdc-node">
+                        <strong style="color: #dc2626; display: block; margin-bottom: 10px;">E-Money Swasta</strong>
+                        Klaim terhadap Perusahaan<br>
+                        <small style="color: #64748b;">(Terdapat Risiko Likuiditas/Gagal Bayar jika perusahaan bangkrut)</small>
+                    </div>
+                    <div class="cbdc-arrow">➔ VS ➔</div>
+                    <div class="cbdc-node">
+                        <strong style="color: #16a34a; display: block; margin-bottom: 10px;">Rupiah Digital (CBDC)</strong>
+                        Klaim Langsung ke Bank Indonesia<br>
+                        <small style="color: #64748b;">(Aman Absolut / <em>Risk-Free Asset</em> dijamin negara)</small>
+                    </div>
+                </div>
+            </div>
+
+            <p>Masyarakat awam sering kali keliru dalam membedakan antara Rupiah Digital dengan saldo uang elektronik di dompet digital komersial saat ini. Perbedaan mendasarnya terletak pada aspek risiko hukum penerbitnya (counterparty risk). Saldo dompet digital komersial merupakan bentuk klaim kewajiban terhadap perusahaan penerbit swasta atau bank umum terkait. Jika institusi swasta tersebut mengalami kebangkrutan, saldo pengguna menghadapi risiko likuiditas.</p>
+            
+            <p>Rupiah Digital diterbitkan secara langsung oleh Bank Indonesia sebagai otoritas tertinggi negara. Karena merupakan klaim langsung terhadap bank sentral, Rupiah Digital memiliki tingkat keamanan absolut dan bebas dari risiko gagal bayar (risk-free asset). Penerbitan CBDC ini tentu akan membawa konsekuensi besar pada dinamika agregat moneter di masa depan. Jika masyarakat secara masif memindahkan simpanan tabungan mereka dari bank umum komersial ke dalam bentuk dompet r-Rupiah Digital demi keamanan yang dijamin negara, perbankan akan kehilangan sumber pendanaan murah mereka.</p>
+            
+            <p>Fenomena perpindahan likuiditas (deposit substitution) ini dapat memaksa bank-bank umum komersial menaikkan suku bunga deposito mereka demi merayu nasabah agar kembali. Akibatnya, biaya bunga pinjaman bagi pelaku usaha di sektor riil akan terkerek naik. Menyadari risiko transmisi ini, Bank Indonesia bertindak sangat berhati-hati dengan menyelesaikan fase uji coba Proof of Concept (PoC) untuk wholesale pada Desember 2024 sebelum melangkah ke fase uji coba retail secara lebih luas di masyarakat.</p>
+
+            <h2>Sintesis Kebijakan dan Kesimpulan</h2>
+            <p>Perekonomian nasional adalah sebuah sistem dinamis yang membutuhkan harmoni tata kelola. Sebagaimana ditunjukkan dalam laporan ini, agregat moneter dari basis moneter hingga uang beredar luas bukanlah sekadar sekumpulan angka mati di atas kertas kerja teoretis. Mereka adalah representasi kuantitatif dari kepercayaan kolektif masyarakat, kebebasan bertransaksi yang dirumuskan Georg Simmel, serta upaya tak kenal lelah bank sentral dalam menjaga agar "arus air ekonomi" tetap mengalir stabil.</p>
+            
+            <p>Melalui pemahaman yang mendalam mengenai batas-batas agregat moneter, baik akademisi maupun masyarakat umum dapat melihat bagaimana kebijakan moneter bekerja melindungi daya beli Rupiah. Reformasi penting seperti reklasifikasi tabungan pada tahun 2021 serta eksplorasi teknologi melalui Proyek Garuda membuktikan bahwa instrumen moneter Indonesia terus bermutasi agar tetap relevan, aman, dan berdaulat di tengah badai digitalisasi ekonomi global. Sinergi yang kuat antara kebijakan moneter bank sentral yang kredibel dan kebijakan fiskal pemerintah yang adil adalah kunci utama untuk mewujudkan pertumbuhan ekonomi nasional yang bermartabat dan berkelanjutan.</p>
+        </article>
+
+        <section class="bibliography-section">
+            <h2 style="font-size: 1.5rem; margin-top: 0;">Daftar Pustaka Lengkap</h2>
+            <ul class="bibliography">
+                <li>Ludwig von Bertalanffy - Wikipedia, diakses Mei 18, 2026, <a href="https://en.wikipedia.org/wiki/Ludwig_von_Bertalanffy" target="_blank">https://en.wikipedia.org/wiki/Ludwig_von_Bertalanffy</a></li>
+                <li>Ludwig von Bertalanffy, General System Theory (1968) - Panarchy.org, diakses Mei 18, 2026, <a href="https://www.panarchy.org/vonbertalanffy/systems.1968.html" target="_blank">https://www.panarchy.org/vonbertalanffy/systems.1968.html</a></li>
+                <li>Kebijakan Fiskal dan Moneter: Pengertian, Perbedaan, dan Contoh - Sahabat Pegadaian, diakses Mei 18, 2026, <a href="https://sahabat.pegadaian.co.id/artikel/keuangan/kebijakan-fiskal-dan-moneter" target="_blank">https://sahabat.pegadaian.co.id/artikel/keuangan/kebijakan-fiskal-dan-moneter</a></li>
+                <li>Rudy C Tarumingkeng: Viskal vs. Moneter – Prioritas Politik dan, diakses Mei 18, 2026, <a href="https://rudyct.com/ab/FISCAL.vs.MONETER.pdf" target="_blank">https://rudyct.com/ab/FISCAL.vs.MONETER.pdf</a></li>
+                <li>ANALISIS KEBIJAKAN FISKAL DAN MONETER TERHADAP PEREKONOMIAN INDONESIA MENURUT EKONOMI ISLAM, diakses Mei 18, 2026, <a href="https://journal.um-surabaya.ac.id/Mas/article/download/22329/7775/57693" target="_blank">https://journal.um-surabaya.ac.id/Mas/article/download/22329/7775/57693</a></li>
+                <li>Analisis Dinamika dan Tantangan Perkembangan Sistem Moneter Internasional Pada Ekonomi Global - PUBLIKASI ARTIKEL ILMIAH, diakses Mei 18, 2026, <a href="https://www.ejurnal.kampusakademik.co.id/index.php/jaem/article/download/3325/3000" target="_blank">https://www.ejurnal.kampusakademik.co.id/index.php/jaem/article/download/3325/3000</a></li>
+                <li>Kebijakan Fiskal dan Moneter dalam Mendukung Stabilitas Ekonomi - rudyct.com, diakses Mei 18, 2026, <a href="https://rudyct.com/ab/Kebijakan.Fiskal.dan.Moneter.dalam.Mendukung.Stabilitas.%20Ekonomi.pdf" target="_blank">https://rudyct.com/ab/Kebijakan.Fiskal.dan.Moneter.dalam.Mendukung.Stabilitas.%20Ekonomi.pdf</a></li>
+                <li>Perbedaan Kebijakan Fiskal dan Moneter - IdScore, diakses Mei 18, 2026, <a href="https://idscore.id/articles/perbedaan-kebijakan-fiskal-dan-moneter" target="_blank">https://idscore.id/articles/perbedaan-kebijakan-fiskal-dan-moneter</a></li>
+                <li>7 Perbedaan Kebijakan Moneter dan Kebijakan Fiskal - Bizhare, diakses Mei 18, 2026, <a href="https://www.bizhare.id/media/keuangan/perbedaan-kebijakan-moneter-fiskal" target="_blank">https://www.bizhare.id/media/keuangan/perbedaan-kebijakan-moneter-fiskal</a></li>
+                <li>The Effect of Money Supply and Bank Indonesia Rate on Consumer Price Index in Indonesia 2018-2022 - ResearchGate, diakses Mei 18, 2026, <a href="https://www.researchgate.net/publication/387305916_The_Effect_of_Money_Supply_and_Bank_Indonesia_Rate_on_Consumer_Price_Index_in_Indonesia_2018-2022/fulltext/6767621ffb9aff6eaae64556/The-Effect-of-Money-Supply-and-Bank-Indonesia-Rate-on-Consumer-Price-Index-in-Indonesia-2018-2022.pdf" target="_blank">https://www.researchgate.net/publication/387305916_The_Effect_of_Money_Supply_and_Bank_Indonesia_Rate_on_Consumer_Price_Index_in_Indonesia_2018-2022/fulltext/6767621ffb9aff6eaae64556/The-Effect-of-Money-Supply-and-Bank-Indonesia-Rate-on-Consumer-Price-Index-in-Indonesia-2018-2022.pdf</a></li>
+                <li>KEBIJAKAN FISKAL DAN KEBIJAKAN MONETER – BBS EBC Malang - BINUS UNIVERSITY, diakses Mei 18, 2026, <a href="https://binus.ac.id/malang/ebc/kebijakan-fiskal-dan-kebijakan-moneter/" target="_blank">https://binus.ac.id/malang/ebc/kebijakan-fiskal-dan-kebijakan-moneter/</a></li>
+                <li>Kajian Filsafat Ilmu dalam pengembangan Ekonomi Moneter (Uang dan Bank) Desak Ayu Sriary Bhegawati7, desakbhegawati@unmas.ac.id - E-Journal UNIVERSITAS PANJI SAKTI, diakses Mei 18, 2026, <a href="https://ejournal.unipas.ac.id/index.php/WA/article/download/588/459" target="_blank">https://ejournal.unipas.ac.id/index.php/WA/article/download/588/459</a></li>
+                <li>The Philosophy of Money - Wikipedia, diakses Mei 18, 2026, <a href="https://en.wikipedia.org/wiki/The_Philosophy_of_Money" target="_blank">https://en.wikipedia.org/wiki/The_Philosophy_of_Money</a></li>
+                <li>Cash Rules Everything Around Me: Georg Simmel's The Philosophy of Money - Penn State, diakses Mei 18, 2026, <a href="https://pure.psu.edu/en/publications/cash-rules-everything-around-me-georg-simmels-the-philosophy-of-m/" target="_blank">https://pure.psu.edu/en/publications/cash-rules-everything-around-me-georg-simmels-the-philosophy-of-m/</a></li>
+                <li>What is meant by Georg Simmel's philosophy of money?, diakses Mei 18, 2026, <a href="https://philosophy.stackexchange.com/questions/92869/what-is-meant-by-georg-simmel-s-philosophy-of-money" target="_blank">https://philosophy.stackexchange.com/questions/92869/what-is-meant-by-georg-simmel-s-philosophy-of-money</a></li>
+                <li>The Philosophy of Money by Georg Simmel | Goodreads, diakses Mei 18, 2026, <a href="https://www.goodreads.com/book/show/243473.The_Philosophy_of_Money" target="_blank">https://www.goodreads.com/book/show/243473.The_Philosophy_of_Money</a></li>
+                <li>Georg Simmel's Philosophy of Money: 4. Individual Freedom - Waggish, diakses Mei 18, 2026, <a href="https://www.waggish.org/2015/georg-simmels-philosophy-of-money-4-individual-freedom/" target="_blank">https://www.waggish.org/2015/georg-simmels-philosophy-of-money-4-individual-freedom/</a></li>
+                <li>EPISTEMOLOGI HUKUM EKONOMI ISLAM (MUAMALAH), diakses Mei 18, 2026, <a href="http://repository.uingusdur.ac.id/116/1/EPISTEMOLOGI%20HUKUM%20EKONOMI%20ISLAM%20%28MUAMALAH%29.pdf" target="_blank">http://repository.uingusdur.ac.id/116/1/EPISTEMOLOGI%20HUKUM%20EKONOMI%20ISLAM%20%28MUAMALAH%29.pdf</a></li>
+                <li>FILSAFAT ILMU EKONOMI SYARIAH SEBAGAI LANDASAN SISTEM EKONOMI SYARIAH BAGI PENDIDIKAN UMAT ISLAM, diakses Mei 18, 2026, <a href="https://journal.um-surabaya.ac.id/Mas/article/download/17673/pdf/45153" target="_blank">https://journal.um-surabaya.ac.id/Mas/article/download/17673/pdf/45153</a></li>
+                <li>KEBIJAKAN MONETER BERBASIS PRINSIP-PRINSIP ISLAM Amien Wahyudi, diakses Mei 18, 2026, <a href="https://jurnal.iainponorogo.ac.id/index.php/justicia/article/download/142/104" target="_blank">https://jurnal.iainponorogo.ac.id/index.php/justicia/article/download/142/104</a></li>
+                <li>Dampak Perkembangan Uang Elektronik Terhadap Efektivitas Kebijakan Moneter Dalam Perspektif Sistem Ekonomi Islam, diakses Mei 18, 2026, <a href="https://ejurnal.kampusakademik.co.id/index.php/jiem/article/download/2181/1997" target="_blank">https://ejurnal.kampusakademik.co.id/index.php/jiem/article/download/2181/1997</a></li>
+                <li>Monetary aggregates - European Central Bank, diakses Mei 18, 2026, <a href="https://www.ecb.europa.eu/stats/money_credit_banking/monetary_aggregates/html/index.en.html" target="_blank">https://www.ecb.europa.eu/stats/money_credit_banking/monetary_aggregates/html/index.en.html</a></li>
+                <li>Penyusunan Statistik Uang Beredar - Bank Indonesia, diakses Mei 18, 2026, <a href="https://www.bi.go.id/id/edukasi/Documents/2.%20Penyusunan%20Statistik%20Uang%20Beredar.pdf" target="_blank">https://www.bi.go.id/id/edukasi/Documents/2.%20Penyusunan%20Statistik%20Uang%20Beredar.pdf</a></li>
+                <li>Uang Beredar (M2) dan Faktor yang Memengaruhi - Bank Indonesia, diakses Mei 18, 2026, <a href="https://www.bi.go.id/id/publikasi/laporan/Documents/Analisis_Uang_Beredar_Posisi_Desember_2021.pdf" target="_blank">https://www.bi.go.id/id/publikasi/laporan/Documents/Analisis_Uang_Beredar_Posisi_Desember_2021.pdf</a></li>
+                <li>Analisis Tingkat Uang Elektronik dan Jumlah Uang Beredar (M1) - STIE Al Washliyah Sibolga, diakses Mei 18, 2026, <a href="https://stiealwashliyahsibolga.ac.id/jurnal/index.php/jesya/article/download/1738/880/" target="_blank">https://stiealwashliyahsibolga.ac.id/jurnal/index.php/jesya/article/download/1738/880/</a></li>
+                <li>Money Supply | Richmond Fed, diakses Mei 18, 2026, <a href="https://www.richmondfed.org/publications/research/econ_focus/2019/q1/jargon_alert" target="_blank">https://www.richmondfed.org/publications/research/econ_focus/2019/q1/jargon_alert</a></li>
+                <li>Money supply - Wikipedia, diakses Mei 18, 2026, <a href="https://en.wikipedia.org/wiki/Money_supply" target="_blank">https://en.wikipedia.org/wiki/Money_supply</a></li>
+                <li>analisis pengaruh e-money, inflasi dan jumlah uang beredar terhadap pertumbuhan - eJournal Unsrat, diakses Mei 18, 2026, <a href="https://ejournal.unsrat.ac.id/v3/index.php/jbie/article/download/59060/48184/147638" target="_blank">https://ejournal.unsrat.ac.id/v3/index.php/jbie/article/download/59060/48184/147638</a></li>
+                <li>Monetary Aggregates: M1, M2, M3 | data.gov.my, diakses Mei 18, 2026, <a href="https://data.gov.my/data-catalogue/monetary_aggregates" target="_blank">https://data.gov.my/data-catalogue/monetary_aggregates</a></li>
+                <li>14 BAB II KAJIAN PUSTAKA, KERANGKA PEMIKIRAN, DAN HIPOTESIS 2.1 Kajian Pustaka 2.1.1 Jumlah Uang Beredar (M2) 2.1.1.1 Teori Juml - Elibrary UNIKOM, diakses Mei 18, 2026, <a href="https://elibrary.unikom.ac.id/id/eprint/522/8/11.%20UNIKOM_21214233_R.%20IRENA%20PUTRI%20BERNAWATI_BAB%20II.pdf" target="_blank">https://elibrary.unikom.ac.id/id/eprint/522/8/11.%20UNIKOM_21214233_R.%20IRENA%20PUTRI%20BERNAWATI_BAB%20II.pdf</a></li>
+                <li>Uang Beredar Tumbuh Positif pada Agustus 2021 - Bank Indonesia, diakses Mei 18, 2026, <a href="https://www.bi.go.id/id/publikasi/ruang-media/news-release/Pages/sp_2324221.aspx" target="_blank">https://www.bi.go.id/id/publikasi/ruang-media/news-release/Pages/sp_2324221.aspx</a></li>
+                <li>Analisis Pengaruh Uang Elektronik, Inflasi, dan Suku Bunga terhadap Jumlah Uang Beredar di Indonesia, diakses Mei 18, 2026, <a href="https://journal-laaroiba.com/ojs/index.php/elmal/article/download/8955/6897/55078" target="_blank">https://journal-laaroiba.com/ojs/index.php/elmal/article/download/8955/6897/55078</a></li>
+                <li>ANALYSIS OF THE EFFECT OF ELECTRONIC-BASED PAYMENT SYSTEMS AND ECONOMIC GROWTH IN INDONESIA - Journal UNAIR, diakses Mei 18, 2026, <a href="https://e-journal.unair.ac.id/JIET/article/download/26287/14649/167669" target="_blank">https://e-journal.unair.ac.id/JIET/article/download/26287/14649/167669</a></li>
+                <li>ANALISIS DINAMIKA UANG ELEKTRONIK DAN INFLASI REGIONAL: STUDI KASUS WILAYAH SUMATERA DENGAN MODEL DATA PANEL DINAMIS - SUMATRANOMICS, diakses Mei 18, 2026, <a href="https://sumatranomics.com/wp-content/uploads/2024/03/13215040222_Kategori-Mahasiswa-Juara-1.pdf" target="_blank">https://sumatranomics.com/wp-content/uploads/2024/03/13215040222_Kategori-Mahasiswa-Juara-1.pdf</a></li>
+                <li>ANALISIS PENGARUH INSTRUMEN PEMBAYARAN NON- TUNAI TERHADAP STABILITAS SISTEM KEUANGAN DI INDONESIA - UNDIP E-Journal System, diakses Mei 18, 2026, <a href="https://ejournal.undip.ac.id/index.php/dinamika_pembangunan/article/download/18772/13125" target="_blank">https://ejournal.undip.ac.id/index.php/dinamika_pembangunan/article/download/18772/13125</a></li>
+                <li>Indonesia Money Supply M2 - Trading Economics, diakses Mei 18, 2026, <a href="https://tradingeconomics.com/indonesia/money-supply-m2" target="_blank">https://tradingeconomics.com/indonesia/money-supply-m2</a></li>
+                <li>Pasar Uang Indonesia M1 - ID | TRADINGECONOMICS.COM, diakses Mei 18, 2026, <a href="https://id.tradingeconomics.com/indonesia/money-supply-m1" target="_blank">https://id.tradingeconomics.com/indonesia/money-supply-m1</a></li>
+                <li>Money Supply - Statistical Data - BPS-Statistics Indonesia, diakses Mei 18, 2026, <a href="https://www.bps.go.id/en/statistics-table/2/MTIzIzI=/money-supply--billion-rupiahs-.html" target="_blank">https://www.bps.go.id/en/statistics-table/2/MTIzIzI=/money-supply--billion-rupiahs-.html</a></li>
+                <li>Project Garuda: Navigating The Architecture Of Digital Rupiah - Bank Indonesia, diakses Mei 18, 2026, <a href="https://www.bi.go.id/en/rupiah/digital-rupiah/default.aspx" target="_blank">https://www.bi.go.id/en/rupiah/digital-rupiah/default.aspx</a></li>
+                <li>View of Digital rupiah: Are Indonesians ready? - Jurnal Ekonomi Indonesia, diakses Mei 18, 2026, <a href="https://jurnal.isei.or.id/index.php/isei/article/view/556/117" target="_blank">https://jurnal.isei.or.id/index.php/isei/article/view/556/117</a></li>
+                <li>Refocusing the Purpose of Indonesia's CBDC, diakses Mei 18, 2026, <a href="https://csis.or.id/publication/refocusing-the-purpose-of-indonesias-cbdc/" target="_blank">https://csis.or.id/publication/refocusing-the-purpose-of-indonesias-cbdc/</a></li>
+                <li>Supporting Bank Indonesia's CBDC Infrastructure - Kaleido, diakses Mei 18, 2026, <a href="https://www.kaleido.io/blockchain-blog/project-garuda-bank-indonesias-cbdc-infrastructure" target="_blank">https://www.kaleido.io/blockchain-blog/project-garuda-bank-indonesias-cbdc-infrastructure</a></li>
+                <li>Project Garuda: Will BI's Digital Currency Make Banks Fly or Flop? - Medium, diakses Mei 18, 2026, <a href="https://medium.com/@hibriziprima/project-garuda-will-bis-digital-currency-make-banks-fly-or-flop-40172a97690e" target="_blank">https://medium.com/@hibriziprima/project-garuda-will-bis-digital-currency-make-banks-fly-or-flop-40172a97690e</a></li>
+            </ul>
+        </section>
+
+        <div class="btn-wrapper">
+            <a href="https://naze.pages.dev" class="btn">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Kembali ke Dashboard
+            </a>
+        </div>
     </div>
 
-    <p>Seiring dengan reformasi tersebut, instrumen uang elektronik (e-money) juga mendapatkan tempat khusus dalam agregat moneter. Saldo mengambang (float) milik nasabah dan merchant yang mengendap pada aplikasi dompet digital dinilai sangat likuid karena dapat digunakan seketika tanpa jeda waktu konversi. Sesuai panduan IMF yang mengategorikan uang elektronik sebagai transferable deposits, Bank Indonesia memasukkan dana float uang elektronik ini sebagai bagian dari komponen M<sub>1</sub>. Meskipun nominalnya relatif kecil dibanding total likuiditas nasional—sebagai contoh, pada Desember 2021 saldo float uang elektronik tercatat sebesar Rp8,3 triliun atau menyusun sekitar 0,19% dari total M<sub>1</sub>—berbagai studi empiris menegaskan bahwa pertumbuhan transaksi digital ini berkontribusi signifikan terhadap perluasan aktivitas perekonomian riil dan mempermudah akses keuangan bagi kelompok masyarakat yang sebelumnya tidak terjangkau oleh perbankan konvensional (unbanked).</p>
-
-    <p>Untuk melihat potret likuiditas perekonomian Indonesia terkini, data historis per Maret 2026 menyajikan angka-angka makroekonomi yang sangat besar, menggambarkan betapa luasnya skala perekonomian nasional:</p>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Komponen Agregat Moneter Indonesia</th>
-                <th>Nilai (Maret 2026)</th>
-                <th>Persentase / Karakteristik</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Money Supply M<sub>0</sub> (Basis Moneter)</strong></td>
-                <td>Rp1.206.254 Miliar (Rp1.206,25 Triliun)</td>
-                <td>Uang fisik di masyarakat + cadangan bank di BI</td>
-            </tr>
-            <tr>
-                <td><strong>Money Supply M<sub>1</sub> (Uang Beredar Sempit)</strong></td>
-                <td>Rp3.423.670 Miliar (Rp3.423,67 Triliun)</td>
-                <td>Mencakup uang kartal di luar bank, giro rupiah, tabungan rupiah instan, dan float uang elektronik</td>
-            </tr>
-            <tr>
-                <td><strong>Money Supply M<sub>2</sub> (Uang Beredar Luas)</strong></td>
-                <td>Rp10.355.100 Miliar (Rp10.355,10 Triliun)</td>
-                <td>Mencakup seluruh komponen M<sub>1</sub>, uang kuasi (seperti deposito berjangka), dan surat berharga selain saham</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h2>Proyek Garuda dan Rupiah Digital: Menatap Horison Kedaulatan Moneter Masa Depan</h2>
-    <p>Tantangan moneter global saat ini bergeser ke ranah digital seiring dengan populernya aset kripto swasta dan stablecoin. Menghadapi potensi disrupsi mata uang asing bayangan (shadow currency) ini, Bank Indonesia meluncurkan inisiatif strategis berjangka panjang bertajuk Proyek Garuda. Proyek ini didirikan untuk mengeksplorasi arsitektur terbaik bagi penerbitan Central Bank Digital Currency (CBDC) nasional, yang dinamakan Rupiah Digital.</p>
-    
-    <p>Rupiah Digital dirancang untuk berjalan berdampingan dan saling melengkapi dengan uang fisik serta instrumen non-tunai yang sudah ada, tanpa niat untuk menghapusnya. Berdasarkan arsitektur desainnya, Rupiah Digital akan dibagi menjadi dua jenis:</p>
-    <ul>
-        <li><strong>Wholesale Digital Rupiah (w-Rupiah Digital):</strong> Berperan sebagai infrastruktur settlement transaksi keuangan bernilai besar antarbank, seperti operasi moneter dan transaksi pasar valas. Pengujian teknologi ini menggunakan basis data terdistribusi perizinan (permissioned ledger) berbasis Hyperledger Besu.</li>
-        <li><strong>Retail Digital Rupiah (r-Rupiah Digital):</strong> Berfungsi sebagai alat pembayaran digital yang sah bagi masyarakat umum untuk transaksi belanja harian.</li>
-    </ul>
-
-    <p>Masyarakat awam sering kali keliru dalam membedakan antara Rupiah Digital dengan saldo uang elektronik di dompet digital komersial saat ini. Perbedaan mendasarnya terletak pada aspek risiko hukum penerbitnya (counterparty risk). Saldo dompet digital komersial merupakan bentuk klaim kewajiban terhadap perusahaan penerbit swasta atau bank umum terkait. Jika institusi swasta tersebut mengalami kebangkrutan, saldo pengguna menghadapi risiko likuiditas.</p>
-    
-    <p>Rupiah Digital diterbitkan secara langsung oleh Bank Indonesia sebagai otoritas tertinggi negara. Karena merupakan klaim langsung terhadap bank sentral, Rupiah Digital memiliki tingkat keamanan absolut dan bebas dari risiko gagal bayar (risk-free asset). Penerbitan CBDC ini tentu akan membawa konsekuensi besar pada dinamika agregat moneter di masa depan. Jika masyarakat secara masif memindahkan simpanan tabungan mereka dari bank umum komersial ke dalam bentuk dompet r-Rupiah Digital demi keamanan yang dijamin negara, perbankan akan kehilangan sumber pendanaan murah mereka.</p>
-    
-    <p>Fenomena perpindahan likuiditas (deposit substitution) ini dapat memaksa bank-bank umum komersial menaikkan suku bunga deposito mereka demi merayu nasabah agar kembali. Akibatnya, biaya bunga pinjaman bagi pelaku usaha di sektor riil akan terkerek naik. Menyadari risiko transmisi ini, Bank Indonesia bertindak sangat berhati-hati dengan menyelesaikan fase uji coba Proof of Concept (PoC) untuk wholesale pada Desember 2024 sebelum melangkah ke fase uji coba retail secara lebih luas di masyarakat.</p>
-
-    <h2>Sintesis Kebijakan dan Kesimpulan</h2>
-    <p>Perekonomian nasional adalah sebuah sistem dinamis yang membutuhkan harmoni tata kelola. Sebagaimana ditunjukkan dalam laporan ini, agregat moneter dari basis moneter hingga uang beredar luas bukanlah sekadar sekumpulan angka mati di atas kertas kerja teoretis. Mereka adalah representasi kuantitatif dari kepercayaan kolektif masyarakat, kebebasan bertransaksi yang dirumuskan Georg Simmel, serta upaya tak kenal lelah bank sentral dalam menjaga agar "arus air ekonomi" tetap mengalir stabil.</p>
-    
-    <p>Melalui pemahaman yang mendalam mengenai batas-batas agregat moneter, baik akademisi maupun masyarakat umum dapat melihat bagaimana kebijakan moneter bekerja melindungi daya beli Rupiah. Reformasi penting seperti reklasifikasi tabungan pada tahun 2021 serta eksplorasi teknologi melalui Proyek Garuda membuktikan bahwa instrumen moneter Indonesia terus bermutasi agar tetap relevan, aman, dan berdaulat di tengah badai digitalisasi ekonomi global. Sinergi yang kuat antara kebijakan moneter bank sentral yang kredibel dan kebijakan fiskal pemerintah yang adil adalah kunci utama untuk mewujudkan pertumbuhan ekonomi nasional yang bermartabat dan berkelanjutan.</p>
-
-    <div class="bibliography-section">
-        <h2>Daftar Pustaka</h2>
-        <ul class="bibliography">
-            <li>Ludwig von Bertalanffy - Wikipedia, diakses Mei 18, 2026, <a href="https://en.wikipedia.org/wiki/Ludwig_von_Bertalanffy" target="_blank">https://en.wikipedia.org/wiki/Ludwig_von_Bertalanffy</a></li>
-            <li>Ludwig von Bertalanffy, General System Theory (1968) - Panarchy.org, diakses Mei 18, 2026, <a href="https://www.panarchy.org/vonbertalanffy/systems.1968.html" target="_blank">https://www.panarchy.org/vonbertalanffy/systems.1968.html</a></li>
-            <li>Kebijakan Fiskal dan Moneter: Pengertian, Perbedaan, dan Contoh - Sahabat Pegadaian, diakses Mei 18, 2026, <a href="https://sahabat.pegadaian.co.id/artikel/keuangan/kebijakan-fiskal-dan-moneter" target="_blank">https://sahabat.pegadaian.co.id/artikel/keuangan/kebijakan-fiskal-dan-moneter</a></li>
-            <li>Rudy C Tarumingkeng: Viskal vs. Moneter – Prioritas Politik dan, diakses Mei 18, 2026, <a href="https://rudyct.com/ab/FISCAL.vs.MONETER.pdf" target="_blank">https://rudyct.com/ab/FISCAL.vs.MONETER.pdf</a></li>
-            <li>ANALISIS KEBIJAKAN FISKAL DAN MONETER TERHADAP PEREKONOMIAN INDONESIA MENURUT EKONOMI ISLAM, diakses Mei 18, 2026, <a href="https://journal.um-surabaya.ac.id/Mas/article/download/22329/7775/57693" target="_blank">https://journal.um-surabaya.ac.id/Mas/article/download/22329/7775/57693</a></li>
-            <li>Analisis Dinamika dan Tantangan Perkembangan Sistem Moneter Internasional Pada Ekonomi Global - PUBLIKASI ARTIKEL ILMIAH, diakses Mei 18, 2026, <a href="https://www.ejurnal.kampusakademik.co.id/index.php/jaem/article/download/3325/3000" target="_blank">https://www.ejurnal.kampusakademik.co.id/index.php/jaem/article/download/3325/3000</a></li>
-            <li>Kebijakan Fiskal dan Moneter dalam Mendukung Stabilitas Ekonomi - rudyct.com, diakses Mei 18, 2026, <a href="https://rudyct.com/ab/Kebijakan.Fiskal.dan.Moneter.dalam.Mendukung.Stabilitas.%20Ekonomi.pdf" target="_blank">https://rudyct.com/ab/Kebijakan.Fiskal.dan.Moneter.dalam.Mendukung.Stabilitas.%20Ekonomi.pdf</a></li>
-            <li>Perbedaan Kebijakan Fiskal dan Moneter - IdScore, diakses Mei 18, 2026, <a href="https://idscore.id/articles/perbedaan-kebijakan-fiskal-dan-moneter" target="_blank">https://idscore.id/articles/perbedaan-kebijakan-fiskal-dan-moneter</a></li>
-            <li>7 Perbedaan Kebijakan Moneter dan Kebijakan Fiskal - Bizhare, diakses Mei 18, 2026, <a href="https://www.bizhare.id/media/keuangan/perbedaan-kebijakan-moneter-fiskal" target="_blank">https://www.bizhare.id/media/keuangan/perbedaan-kebijakan-moneter-fiskal</a></li>
-            <li>The Effect of Money Supply and Bank Indonesia Rate on Consumer Price Index in Indonesia 2018-2022 - ResearchGate, diakses Mei 18, 2026, <a href="https://www.researchgate.net/publication/387305916_The_Effect_of_Money_Supply_and_Bank_Indonesia_Rate_on_Consumer_Price_Index_in_Indonesia_2018-2022/fulltext/6767621ffb9aff6eaae64556/The-Effect-of-Money-Supply-and-Bank-Indonesia-Rate-on-Consumer-Price-Index-in-Indonesia-2018-2022.pdf" target="_blank">https://www.researchgate.net/publication/387305916_The_Effect_of_Money_Supply_and_Bank_Indonesia_Rate_on_Consumer_Price_Index_in_Indonesia_2018-2022/fulltext/6767621ffb9aff6eaae64556/The-Effect-of-Money-Supply-and-Bank-Indonesia-Rate-on-Consumer-Price-Index-in-Indonesia-2018-2022.pdf</a></li>
-            <li>KEBIJAKAN FISKAL DAN KEBIJAKAN MONETER – BBS EBC Malang - BINUS UNIVERSITY, diakses Mei 18, 2026, <a href="https://binus.ac.id/malang/ebc/kebijakan-fiskal-dan-kebijakan-moneter/" target="_blank">https://binus.ac.id/malang/ebc/kebijakan-fiskal-dan-kebijakan-moneter/</a></li>
-            <li>Kajian Filsafat Ilmu dalam pengembangan Ekonomi Moneter (Uang dan Bank) Desak Ayu Sriary Bhegawati7, desakbhegawati@unmas.ac.id - E-Journal UNIVERSITAS PANJI SAKTI, diakses Mei 18, 2026, <a href="https://ejournal.unipas.ac.id/index.php/WA/article/download/588/459" target="_blank">https://ejournal.unipas.ac.id/index.php/WA/article/download/588/459</a></li>
-            <li>The Philosophy of Money - Wikipedia, diakses Mei 18, 2026, <a href="https://en.wikipedia.org/wiki/The_Philosophy_of_Money" target="_blank">https://en.wikipedia.org/wiki/The_Philosophy_of_Money</a></li>
-            <li>Cash Rules Everything Around Me: Georg Simmel's The Philosophy of Money - Penn State, diakses Mei 18, 2026, <a href="https://pure.psu.edu/en/publications/cash-rules-everything-around-me-georg-simmels-the-philosophy-of-m/" target="_blank">https://pure.psu.edu/en/publications/cash-rules-everything-around-me-georg-simmels-the-philosophy-of-m/</a></li>
-            <li>What is meant by Georg Simmel's philosophy of money?, diakses Mei 18, 2026, <a href="https://philosophy.stackexchange.com/questions/92869/what-is-meant-by-georg-simmel-s-philosophy-of-money" target="_blank">https://philosophy.stackexchange.com/questions/92869/what-is-meant-by-georg-simmel-s-philosophy-of-money</a></li>
-            <li>The Philosophy of Money by Georg Simmel | Goodreads, diakses Mei 18, 2026, <a href="https://www.goodreads.com/book/show/243473.The_Philosophy_of_Money" target="_blank">https://www.goodreads.com/book/show/243473.The_Philosophy_of_Money</a></li>
-            <li>Georg Simmel's Philosophy of Money: 4. Individual Freedom - Waggish, diakses Mei 18, 2026, <a href="https://www.waggish.org/2015/georg-simmels-philosophy-of-money-4-individual-freedom/" target="_blank">https://www.waggish.org/2015/georg-simmels-philosophy-of-money-4-individual-freedom/</a></li>
-            <li>EPISTEMOLOGI HUKUM EKONOMI ISLAM (MUAMALAH), diakses Mei 18, 2026, <a href="http://repository.uingusdur.ac.id/116/1/EPISTEMOLOGI%20HUKUM%20EKONOMI%20ISLAM%20%28MUAMALAH%29.pdf" target="_blank">http://repository.uingusdur.ac.id/116/1/EPISTEMOLOGI%20HUKUM%20EKONOMI%20ISLAM%20%28MUAMALAH%29.pdf</a></li>
-            <li>FILSAFAT ILMU EKONOMI SYARIAH SEBAGAI LANDASAN SISTEM EKONOMI SYARIAH BAGI PENDIDIKAN UMAT ISLAM, diakses Mei 18, 2026, <a href="https://journal.um-surabaya.ac.id/Mas/article/download/17673/pdf/45153" target="_blank">https://journal.um-surabaya.ac.id/Mas/article/download/17673/pdf/45153</a></li>
-            <li>KEBIJAKAN MONETER BERBASIS PRINSIP-PRINSIP ISLAM Amien Wahyudi, diakses Mei 18, 2026, <a href="https://jurnal.iainponorogo.ac.id/index.php/justicia/article/download/142/104" target="_blank">https://jurnal.iainponorogo.ac.id/index.php/justicia/article/download/142/104</a></li>
-            <li>Dampak Perkembangan Uang Elektronik Terhadap Efektivitas Kebijakan Moneter Dalam Perspektif Sistem Ekonomi Islam, diakses Mei 18, 2026, <a href="https://ejurnal.kampusakademik.co.id/index.php/jiem/article/download/2181/1997" target="_blank">https://ejurnal.kampusakademik.co.id/index.php/jiem/article/download/2181/1997</a></li>
-            <li>Monetary aggregates - European Central Bank, diakses Mei 18, 2026, <a href="https://www.ecb.europa.eu/stats/money_credit_banking/monetary_aggregates/html/index.en.html" target="_blank">https://www.ecb.europa.eu/stats/money_credit_banking/monetary_aggregates/html/index.en.html</a></li>
-            <li>Penyusunan Statistik Uang Beredar - Bank Indonesia, diakses Mei 18, 2026, <a href="https://www.bi.go.id/id/edukasi/Documents/2.%20Penyusunan%20Statistik%20Uang%20Beredar.pdf" target="_blank">https://www.bi.go.id/id/edukasi/Documents/2.%20Penyusunan%20Statistik%20Uang%20Beredar.pdf</a></li>
-            <li>Uang Beredar (M2) dan Faktor yang Memengaruhi - Bank Indonesia, diakses Mei 18, 2026, <a href="https://www.bi.go.id/id/publikasi/laporan/Documents/Analisis_Uang_Beredar_Posisi_Desember_2021.pdf" target="_blank">https://www.bi.go.id/id/publikasi/laporan/Documents/Analisis_Uang_Beredar_Posisi_Desember_2021.pdf</a></li>
-            <li>Analisis Tingkat Uang Elektronik dan Jumlah Uang Beredar (M1) - STIE Al Washliyah Sibolga, diakses Mei 18, 2026, <a href="https://stiealwashliyahsibolga.ac.id/jurnal/index.php/jesya/article/download/1738/880/" target="_blank">https://stiealwashliyahsibolga.ac.id/jurnal/index.php/jesya/article/download/1738/880/</a></li>
-            <li>Money Supply | Richmond Fed, diakses Mei 18, 2026, <a href="https://www.richmondfed.org/publications/research/econ_focus/2019/q1/jargon_alert" target="_blank">https://www.richmondfed.org/publications/research/econ_focus/2019/q1/jargon_alert</a></li>
-            <li>Money supply - Wikipedia, diakses Mei 18, 2026, <a href="https://en.wikipedia.org/wiki/Money_supply" target="_blank">https://en.wikipedia.org/wiki/Money_supply</a></li>
-            <li>analisis pengaruh e-money, inflasi dan jumlah uang beredar terhadap pertumbuhan - eJournal Unsrat, diakses Mei 18, 2026, <a href="https://ejournal.unsrat.ac.id/v3/index.php/jbie/article/download/59060/48184/147638" target="_blank">https://ejournal.unsrat.ac.id/v3/index.php/jbie/article/download/59060/48184/147638</a></li>
-            <li>Monetary Aggregates: M1, M2, M3 | data.gov.my, diakses Mei 18, 2026, <a href="https://data.gov.my/data-catalogue/monetary_aggregates" target="_blank">https://data.gov.my/data-catalogue/monetary_aggregates</a></li>
-            <li>14 BAB II KAJIAN PUSTAKA, KERANGKA PEMIKIRAN, DAN HIPOTESIS 2.1 Kajian Pustaka 2.1.1 Jumlah Uang Beredar (M2) 2.1.1.1 Teori Juml - Elibrary UNIKOM, diakses Mei 18, 2026, <a href="https://elibrary.unikom.ac.id/id/eprint/522/8/11.%20UNIKOM_21214233_R.%20IRENA%20PUTRI%20BERNAWATI_BAB%20II.pdf" target="_blank">https://elibrary.unikom.ac.id/id/eprint/522/8/11.%20UNIKOM_21214233_R.%20IRENA%20PUTRI%20BERNAWATI_BAB%20II.pdf</a></li>
-            <li>Uang Beredar Tumbuh Positif pada Agustus 2021 - Bank Indonesia, diakses Mei 18, 2026, <a href="https://www.bi.go.id/id/publikasi/ruang-media/news-release/Pages/sp_2324221.aspx" target="_blank">https://www.bi.go.id/id/publikasi/ruang-media/news-release/Pages/sp_2324221.aspx</a></li>
-            <li>Analisis Pengaruh Uang Elektronik, Inflasi, dan Suku Bunga terhadap Jumlah Uang Beredar di Indonesia, diakses Mei 18, 2026, <a href="https://journal-laaroiba.com/ojs/index.php/elmal/article/download/8955/6897/55078" target="_blank">https://journal-laaroiba.com/ojs/index.php/elmal/article/download/8955/6897/55078</a></li>
-            <li>ANALYSIS OF THE EFFECT OF ELECTRONIC-BASED PAYMENT SYSTEMS AND ECONOMIC GROWTH IN INDONESIA - Journal UNAIR, diakses Mei 18, 2026, <a href="https://e-journal.unair.ac.id/JIET/article/download/26287/14649/167669" target="_blank">https://e-journal.unair.ac.id/JIET/article/download/26287/14649/167669</a></li>
-            <li>ANALISIS DINAMIKA UANG ELEKTRONIK DAN INFLASI REGIONAL: STUDI KASUS WILAYAH SUMATERA DENGAN MODEL DATA PANEL DINAMIS - SUMATRANOMICS, diakses Mei 18, 2026, <a href="https://sumatranomics.com/wp-content/uploads/2024/03/13215040222_Kategori-Mahasiswa-Juara-1.pdf" target="_blank">https://sumatranomics.com/wp-content/uploads/2024/03/13215040222_Kategori-Mahasiswa-Juara-1.pdf</a></li>
-            <li>ANALISIS PENGARUH INSTRUMEN PEMBAYARAN NON- TUNAI TERHADAP STABILITAS SISTEM KEUANGAN DI INDONESIA - UNDIP E-Journal System, diakses Mei 18, 2026, <a href="https://ejournal.undip.ac.id/index.php/dinamika_pembangunan/article/download/18772/13125" target="_blank">https://ejournal.undip.ac.id/index.php/dinamika_pembangunan/article/download/18772/13125</a></li>
-            <li>Indonesia Money Supply M2 - Trading Economics, diakses Mei 18, 2026, <a href="https://tradingeconomics.com/indonesia/money-supply-m2" target="_blank">https://tradingeconomics.com/indonesia/money-supply-m2</a></li>
-            <li>Pasar Uang Indonesia M1 - ID | TRADINGECONOMICS.COM, diakses Mei 18, 2026, <a href="https://id.tradingeconomics.com/indonesia/money-supply-m1" target="_blank">https://id.tradingeconomics.com/indonesia/money-supply-m1</a></li>
-            <li>Money Supply - Statistical Data - BPS-Statistics Indonesia, diakses Mei 18, 2026, <a href="https://www.bps.go.id/en/statistics-table/2/MTIzIzI=/money-supply--billion-rupiahs-.html" target="_blank">https://www.bps.go.id/en/statistics-table/2/MTIzIzI=/money-supply--billion-rupiahs-.html</a></li>
-            <li>Project Garuda: Navigating The Architecture Of Digital Rupiah - Bank Indonesia, diakses Mei 18, 2026, <a href="https://www.bi.go.id/en/rupiah/digital-rupiah/default.aspx" target="_blank">https://www.bi.go.id/en/rupiah/digital-rupiah/default.aspx</a></li>
-            <li>View of Digital rupiah: Are Indonesians ready? - Jurnal Ekonomi Indonesia, diakses Mei 18, 2026, <a href="https://jurnal.isei.or.id/index.php/isei/article/view/556/117" target="_blank">https://jurnal.isei.or.id/index.php/isei/article/view/556/117</a></li>
-            <li>Refocusing the Purpose of Indonesia's CBDC, diakses Mei 18, 2026, <a href="https://csis.or.id/publication/refocusing-the-purpose-of-indonesias-cbdc/" target="_blank">https://csis.or.id/publication/refocusing-the-purpose-of-indonesias-cbdc/</a></li>
-            <li>Supporting Bank Indonesia's CBDC Infrastructure - Kaleido, diakses Mei 18, 2026, <a href="https://www.kaleido.io/blockchain-blog/project-garuda-bank-indonesias-cbdc-infrastructure" target="_blank">https://www.kaleido.io/blockchain-blog/project-garuda-bank-indonesias-cbdc-infrastructure</a></li>
-            <li>Project Garuda: Will BI's Digital Currency Make Banks Fly or Flop? - Medium, diakses Mei 18, 2026, <a href="https://medium.com/@hibriziprima/project-garuda-will-bis-digital-currency-make-banks-fly-or-flop-40172a97690e" target="_blank">https://medium.com/@hibriziprima/project-garuda-will-bis-digital-currency-make-banks-fly-or-flop-40172a97690e</a></li>
-        </ul>
-    </div>
-
-    <div class="btn-container">
-        <a href="https://naze.pages.dev" class="btn">Kembali ke Dashboard</a>
-    </div>
-
-</div>
-
+    <script>
+        // Interaktivitas Scroll Progress Bar
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("readingBar").style.width = scrolled + "%";
+        };
+    </script>
 </body>
 </html>
