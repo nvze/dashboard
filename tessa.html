@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Persimpangan Jalan di Senja Bandung</title>
     <style>
+        /* Desain Halaman Cetak jika dikonversi ke PDF */
         @page {
             size: A4;
             margin: 20mm 15mm;
@@ -21,6 +22,7 @@
             box-sizing: border-box;
         }
 
+        /* Tema Gelap Premium & Tipografi Sastra */
         body {
             margin: 0;
             padding: 0;
@@ -32,12 +34,14 @@
             text-align: justify;
         }
 
+        /* Pembungkus Utama Agar Nyaman Dibaca di HP & Laptop */
         .main-wrapper {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 0 20px;
+            max-width: 720px; /* Lebar teks ideal untuk mata di layar laptop */
+            margin: 0 auto;   /* Memposisikan di tengah layar laptop */
+            padding: 0 20px;  /* Jarak aman di sisi kiri-kanan layar HP */
         }
 
+        /* Bagian Atas Halaman / Judul */
         .header-banner {
             margin: 0 0 40px 0;
             padding: 60px 0 40px 0;
@@ -92,11 +96,13 @@
             text-indent: 0;
         }
 
+        /* Gaya Penulisan Percakapan */
         .dialogue {
             color: #f0f6fc;
             font-style: italic;
         }
 
+        /* Aksen Kata Serapan Percakapan Urban */
         .slang-accent {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             font-size: 10pt;
@@ -105,6 +111,7 @@
             font-weight: 500;
         }
 
+        /* Kotak Sorot Kutipan Makna */
         .highlight-box {
             background-color: #161b22;
             border-left: 4px solid #58a6ff;
@@ -115,11 +122,40 @@
             page-break-inside: avoid;
         }
 
+        /* Bingkai Foto / Ilustrasi Estetik */
+        .story-image-container {
+            margin: 35px 0;
+            padding: 10px;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            page-break-inside: avoid;
+        }
+
+        .story-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            filter: grayscale(10%) contrast(105%);
+        }
+
+        .image-caption {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 9pt;
+            color: #8b949e;
+            text-align: center;
+            margin-top: 10px;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+
+        /* Optimasi Otomatis untuk Layar Ponsel (HP) */
         @media screen and (max-width: 600px) {
             body {
                 font-size: 11pt;
                 line-height: 1.8;
-                text-align: left;
+                text-align: left; /* Rata kiri lebih nyaman dibaca di layar HP yang sempit */
             }
             h1 {
                 font-size: 18pt;
@@ -135,12 +171,17 @@
                 padding: 15px 18px;
                 margin: 25px 0;
             }
+            .story-image-container {
+                margin: 25px 0;
+                padding: 6px;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="main-wrapper">
+        <!-- Banner Kepala Esai Sastra -->
         <div class="header-banner">
             <h1>Persimpangan Jalan di Senja Bandung</h1>
             <div class="subtitle">Sebuah Narasi tentang Rasa, Pragmatisme, dan Pelepasan Epik</div>
@@ -151,7 +192,13 @@
 
         <p>Gue melangkah masuk ke dalam ruangan bernuansa industrial-minimalis tersebut tanpa ekspektasi masif. Sebagai seorang pendatang baru yang skeptis terhadap dinamika sosial, kehadiran gue di sana murni untuk mencari stimulus visual baru bagi proyek arsitektur batin gue. Namun, ruang memiliki gravitasinya sendiri, dan malam itu, gravitasi tersebut berpusat pada satu koordinat yang presisi: <strong>Tessa</strong>.</p>
 
-        <p>Dia sudah eksis di sana, jauh sebelum gue memahami regulasi tidak tertulis dari lingkaran sosial tersebut. Tessa adalah definisi hidup dari konsep <i>effortless charisma</i>. Di tengah kerumunan yang sibuk mendebatkan teori estetika modern dan mengumbar istilah-istilah <span class="slang-accent">literally</span> atau <span class="slang-accent">which is</span> khas subkultur urban metropolitan yang bertransmigrasi ke Bandung, dia berdiri dengan ketenangan seorang kurator ulung. Ketika pandangan kami pertama kali bersinggungan di antara kepulan asap rokok artifisial dan denting cangkir porselen, ada sebuah anomali psikologis yang terjadi. Itu bukan sekadar kontak mata kasual. Itu adalah sebuah penatapan yang menembus filter defensif gue. Di tengah distorsi kebisingan ruangan, tatapan Tessa mengisolasi eksistensi gue. Ada rasa yang mendadak terdisosiasi dari nalar—sebuah ketertarikan mentah yang menuntut atensi penuh.</p>
+        <!-- Ilustrasi Pertama: Pertemuan Awal di Komunitas -->
+        <div class="story-image-container">
+            <img src="tessa1.png" alt="Pertemuan Awal Ray dan Tessa di Komunitas" class="story-image">
+            <div class="image-caption">Gambar 1: Ruang komunal jalan Dago, saat tatapan kami mengisolasi kebisingan sekitar.</div>
+        </div>
+
+        <p>Dia sudah eksis di sana, jauh sebelum gue memahami regulasi tidak tertulis dari lingkaran sosial tersebut. Tessa adalah definisi hidup dari konsep <i>effortless charisma</i>. Di tengah kerumunan yang sibuk mendebatkan teori estetika modern dan mengumbar istilah-istilah <span class="slang-accent">literally</span> atau <span class="slang-accent">which is</span> khas subkultur urban metropolitan yang bertransmigrasi ke Bandung, dia berdiri dengan ketenangan seorang kurator ulung. Ketika pandangan kami pertama kali bersinggungan di antara kepulan asap rokok artifisial dan denting cangkir porselen, ada sebuah anomali psikologis yang terjadi. Itu bukan sekadar kontak mata kasual. Itu adalah sebuah penatapan yang menembus filter defensif gue. Di tengah distorsi kebisingan ruangan, tatapan Tessa mengisolasi gue. Ada rasa yang mendadak terdisosiasi dari nalar—sebuah ketertarikan mentah yang menuntut atensi penuh.</p>
 
         <p>Perkenalan kami tidak terjadi di depan publik. Kami sama-sama memahami bahwa interaksi superfisial di tengah kerumunan hanya akan mereduksi kedalaman potensi yang ada. Malam itu juga, sebuah pesan singkat di platform privat mengantarkan kami ke sudut teras luar yang sepi, menghadap ke arah lampu-lampu kota Bandung yang berkelap-kelip di kejauhan bagai hamparan berlian yang tumpah.</p>
 
@@ -221,7 +268,7 @@
 
         <p class="no-indent dialogue">"Sederhana, Adrian," kata gue, mengambil kendali penuh atas narasi di meja tersebut. "Tessa baru saja menawarkan sebuah pilihan untuk melarikan diri dari konflik kalian berdua dan menggunakan gue sebagai pelabuhan barunya. Tapi gue di sini untuk menyatakan secara eksplisit bahwa gue menolak untuk menjadi bagian dari pelarian itu. Gue meminta kalian berdua untuk tetap bersama, untuk menyelesaikan apa yang sudah kalian mulai."</p>
 
-        <p>Tessa menoleh tajam ke arah gue, kemarahan dan kekecewaan bercampur aduk di matanya. Namun, ada juga kilatan kekaguman yang tersisa atas keberanian gue meruntuhkan permainan manipulasinya. Adrian tampak terkejut, ego maskulinnya mendadak ditenangkan oleh kejujuran absolut yang gue tunjukkan.</p>
+        <p>Tessa menoleh tajam ke arah gue, kemarahan dan kekecewaan bercampur aduk di matanya. Namun, ada juga kilatan kekaguman yang tersisa atas keberanian gue meruntuhkan permainan manipulasinya. Adrian tampak terchekat, ego maskulinnya mendadak ditenangkan oleh kejujuran absolut yang gue tunjukkan.</p>
 
         <p class="no-indent dialogue">"Kalian berdua memiliki kecocokan dalam hal-hal yang kalian anggap penting untuk masa depan kalian—status, ambisi, dan cara kalian melihat dunia secara eksternal," lanjut gue dengan nada bicara yang mirip seorang filsuf yang sedang membacakan putusan akhir. "Ketidakcocokan yang kalian hadapi sekarang hanyalah fase adaptasi dari dua ego yang sama-sama keras. Selesaikan itu. Jangan biarkan ketakutan akan kegagalan membuat kalian menghancurkan komitmen yang udah dibangun."</p>
 
@@ -232,6 +279,12 @@
         <p>Adrian mengangguk, sebuah penerimaan yang melegakan mengalir di wajahnya. Proses rekonsiliasi mereka terjadi secara instan di depan mata gue, difasilitasi oleh penolakan gue yang terhormat. Gue tersenyum, berdiri dari kursi, dan meletakkan beberapa lembar uang di atas meja untuk membayar minuman gue. <span class="dialogue">"Pertemuan ini selesai. Gue harap kalian menemukan apa yang kalian cari."</span></p>
 
         <p>Kami bertiga bergerak meninggalkan kafe tersebut. Senja Bandung telah sepenuhnya runtuh, digantikan oleh malam yang pekat dengan lampu-lampu jalan yang mulai memantulkan cahayanya di atas aspal yang basah. Udara dingin berembus kencang saat kami tiba di area parkir kendaraan yang sepi.</p>
+
+        <!-- Ilustrasi Kedua: Adegan Perpisahan di Parkiran Kafe -->
+        <div class="story-image-container">
+            <img src="tessa2.png" alt="Kecupan Perpisahan Tessa kepada Ray di Parkiran Kafe" class="story-image">
+            <div class="image-caption">Gambar 2: Area parkir kendaraan, kecupan perpisahan yang teatrikal sebelum pelepasan absolut yang emosional.</div>
+        </div>
 
         <p>Adrian berjalan lebih dulu menuju mobilnya, memberikan ruang bagi sebuah perpisahan terakhir. Namun, apa yang terjadi berikutnya adalah sebuah tindakan teatrikal yang akan mengunci memori ini selamanya dalam sejarah hidup gue. Tessa tidak langsung menuju mobil Adrian. Dia melangkah cepat ke arah gue yang sedang berdiri di dekat motor gue.</p>
 
