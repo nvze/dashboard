@@ -97,14 +97,6 @@
             color: #757575;
         }
 
-        .meta-box img {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            margin-right: 14px;
-            background-color: #eee;
-        }
-
         .meta-info div {
             margin-bottom: 2px;
         }
@@ -160,15 +152,6 @@
             text-align: center;
         }
 
-        .quote-box {
-            border-left: 3px solid #1a1a1a;
-            padding-left: 20px;
-            margin: 36px 0;
-            font-style: italic;
-            color: #404040;
-            font-size: 20px;
-        }
-
         .math-block {
             background-color: #f9f9f9;
             padding: 20px;
@@ -220,16 +203,16 @@
             color: #1a1a1a;
         }
     </style>
-    <!-- MathJax script configuration for neat rendering -->
+    <!-- Konfigurasi MathJax v3 yang lebih aman untuk mencegah tabrakan karakter tunggal $ -->
     <script>
         window.MathJax = {
             tex: {
-                inlineMath: [['$', '$'], ['\(', '\)']],
-                displayMath: [['$$', '$$'], ['\[', '\]']],
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
                 processEscapes: true
             },
             options: {
-                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
             }
         };
     </script>
@@ -256,13 +239,13 @@
                 </div>
             </div>
 
-            <p><span class="dropcap">H</span>ujan baru saja membasahi pelataran Dago bawah ketika Rehan menggeser laptopnya, memperlihatkan sebuah grafik interaktif yang penuh dengan fluktuasi garis berwarna neon. Di dalam ruang kerja komunal yang hangat di kawasan Bandung Utara itu, aroma kopi Arabika menyeruak lambat, berbaur dengan ketegangan sunyi yang membungkus empat orang manusia di dalamnya. Mereka adalah lulusan Teknik Industri institusi terkemuka di Bandung—empat kepala yang dididik untuk melihat dunia bukan sebagai kumpulan objek statis, melainkan sebagai sistem jaringan yang saling bertaut, berdenyut, dan kerap kali rapuh.</p>
+            <p><span class="dropcap">H</span>ujan baru saja membasahi pelataran Dago bawah ketika Rehan menggeser laptopnya, memperlihatkan sebuah grafik interaktif yang penuh dengan fluktuasi garis berwarna neon. Di dalam ruang kerja komunal yang hangat di kawasan Bandung Utara itu, aroma kopi Arabika menyeruak lambat, berbaur dengan ketegangan sunyi yang membungkus empat orang manusia di dalamnya. Mereka adalah lulusan Teknik Industri institusi terkemuka di Bandung—empat kepala yang dididik untuk melihat dunia bukan sebagai kumpulan objek statis, melainkan sebagai sistem jaringan yang saling bertaut, berdua, dan kerap kali rapuh.</p>
 
             <p>Alyssa, yang duduk bersandar sembari memutar-mutar pena, menatap tajam ke arah layar. Sebagai seorang spesialis optimasi sistem yang kini mendalami pemodelan risiko kuantitatif, matanya langsung menangkap sesuatu yang tidak biasa pada data tersebut. Di sebelahnya, Gibran sibuk dengan kalkulator matriks di tabletnya, sementara Dian, sang arsitek rantai pasok global kelompok mereka, mencatat poin-poin penting pada buku bersampul kulit hitam.</p>
 
             <p>Lihat ini, kata Rehan memecah keheningan, suaranya berat namun penuh penekanan. Kita selalu berpikir bahwa bank sentral atau institusi perbankan konvensional adalah pemegang kendali utama likuiditas global. Namun, perhatikan lompatan ini. Sektor Lembaga Keuangan Non-Bank atau Non-Bank Financial Institutions (NBFI) telah melesat jauh melampaui imajinasi kita. Aset mereka di tahun 2024 saja sudah menyentuh angka luar biasa: US$ 256,8 triliun. Itu setara dengan lima puluh satu persen dari total aset keuangan di seluruh bumi.</p>
 
-            <p>Gibran mengangguk pelan tanpa mengalihkan pandangan dari hitungannya. Angka itu bukan sekadar statistik kosmetik, Rehan. Jika kita hitung laju pertumbuhannya, NBFI tumbuh sebesar sembilan koma empat persen pada tahun 2024, bandingkan dengan sektor perbankan tradisional yang hanya tumbuh empat koma tujuh persen. Secara matematis, akselerasi ini menunjukkan adanya perpindahan struktural dalam cara modal dunia dikelola dan dialokasikan.</p>
+            <p>Gibran mengangguk pelan tanpa mengalihkan pandangan dari hitungannya. Angka itu bukan sekadar statistik kosmetik, Rehan. Jika kita hitung laju pertumbuhannya, NBFI tumbuh sebesar sembilan koma empat persen pada tahun 2024, bandingkan dengan sektor perbankan tradisional yang hanya tumbuh empat koma urutan persen. Secara matematis, akselerasi ini menunjukkan adanya perpindahan struktural dalam cara modal dunia dikelola dan dialokasikan.</p>
 
             <h2>Bab 1: Anatomi Para Pemain Bayangan</h2>
 
@@ -275,19 +258,19 @@
             <div class="math-block">
                 $$S_p = rac{\mathbb{E}[R_p] - R_f}{\sigma_p}$$
                 <div style="margin-top: 10px; font-size: 14px; text-align: center; font-style: italic;">
-                    Di mana $\mathbb{E}[R_p]$ adalah ekspektasi imbal hasil portofolio, $R_f$ adalah tingkat pengembalian bebas risiko, dan $\sigma_p$ adalah volatilitas portofolio.
+                    Di mana \(\mathbb{E}[R_p]\) adalah ekspektasi imbal hasil portofolio, \(R_f\) adalah tingkat pengembalian bebas risiko, dan \(\sigma_p\) adalah volatilitas portofolio.
                 </div>
             </div>
 
-            <p>Ketika hedge fund mengoptimalkan rasio ini, lanjut Alyssa sembari mengetuk papan tulis dengan spidolnya, mereka tidak hanya melihat keuntungan absolut. Mereka memaksimumkan pembilang sekaligus meminimalkan penyebut melalui instrumen derivatif yang kompleks. Ketika volatilitas pasar global bergeser sedikit saja, algoritma mereka mendeteksi perubahan seketika pada nilai $\sigma_p$. Efeknya? Mereka melakukan rebalancing portofolio lintas negara dalam hitungan milidetik. Likuiditas bernilai miliaran dolar bisa menguap dari pasar domestik kita hanya karena perubahan angka di balik layar komputer di New York atau London.</p>
+            <p>Ketika hedge fund mengoptimalkan rasio ini, lanjut Alyssa sembari mengetuk papan tulis dengan spidolnya, mereka tidak hanya melihat keuntungan absolut. Mereka memaksimumkan pembilang sekaligus meminimalkan penyebut melalui instrumen derivatif yang kompleks. Ketika volatilitas pasar global bergeser sedikit saja, algoritma mereka mendeteksi perubahan seketika pada nilai \(\sigma_p\). Efeknya? Mereka melakukan rebalancing portofolio lintas negara dalam hitungan milidetik. Likuiditas bernilai miliaran dolar bisa menguap dari pasar domestik kita hanya karena perubahan angka di balik layar komputer di New York atau London.</p>
 
-            <p>Gibran menambahkan analisisnya mengenai leverage. Masalah terbesar muncul ketika kita memasukkan faktor pengali modal atau leverage ratio ($L$). Jika modal awal mereka adalah $K$ dan mereka meminjam dana hingga total aset menjadi $A$, maka tingkat leverage didefinisikan sebagai:</p>
+            <p>Gibran menambahkan analisisnya mengenai leverage. Masalah terbesar muncul ketika kita memasukkan faktor pengali modal atau leverage ratio (\(L\)). Jika modal awal mereka adalah \(K\) dan mereka meminjam dana hingga total aset menjadi \(A\), maka tingkat leverage didefinisikan sebagai:</p>
 
             <div class="math-block">
                 $$L = rac{A}{K}$$
             </div>
 
-            <p>Dengan instrumen derivatif modern, nilai $L$ ini bisa mencapai angka yang sangat ekstrem. Ketika keuntungan bergerak searah dengan prediksi mereka, imbal hasil mereka akan berlipat ganda secara eksponensial. Namun, ketika pasar berbalik arah sedikit saja, potensi kerugian yang terjadi juga mengikuti fungsi linier yang diperkuat oleh faktor $L$ tersebut. Hal inilah yang memaksa mereka melakukan forced selling atau penjualan paksa saat margin call terpenuhi. Kejadian seperti ini langsung memicu guncangan hebat di pasar saham lokal, terutama pada saham-saham berkapitalisasi besar atau big cap.</p>
+            <p>Dengan instrumen derivatif modern, nilai \(L\) ini bisa mencapai angka yang sangat ekstrem. Ketika keuntungan bergerak searah dengan prediksi mereka, imbal hasil mereka akan berlipat ganda secara eksponensial. Namun, ketika pasar berbalik arah sedikit saja, potensi kerugian yang terjadi juga mengikuti fungsi linier yang diperkuat oleh faktor \(L\) tersebut. Hal inilah yang memaksa mereka melakukan forced selling atau penjualan paksa saat margin call terpenuhi. Kejadian seperti ini langsung memicu guncangan hebat di pasar saham lokal, terutama pada saham-saham berkapitalisasi besar atau big cap.</p>
 
             <div class="image-container">
                 <img src="kekuatan_dana_global.jpg" alt="Kekuatan Dana Global di Luar Sistem Perbankan">
@@ -307,11 +290,11 @@
             <div class="math-block">
                 $$PV = \sum_{t=1}^{n} rac{CF_t}{(1 + r + \Delta r)^t}$$
                 <div style="margin-top: 10px; font-size: 14px; text-align: center; font-style: italic;">
-                    Di mana $CF_t$ adalah arus kas pada periode $t$, $r$ adalah suku bunga acuan domestik, dan $\Delta r$ adalah premi risiko tambahan yang dibebankan oleh investor asing akibat volatilitas global.
+                    Di mana \(CF_t\) adalah arus kas pada periode \(t\), \(r\) adalah suku bunga acuan domestik, dan \(\Delta r\) adalah premi risiko tambahan yang dibebankan oleh investor asing akibat volatilitas global.
                 </div>
             </div>
 
-            <p>Saat premi risiko $\Delta r$ melonjak akibat sentimen global, nilai sekarang ($PV$) dari korporasi domestik jatuh merosot, jelas Gibran. Alhasil, manajer investasi asing segera melakukan repricing of risk secara massal. Penjualan besar-besaran ini memicu kepanikan, menurunkan harga saham, dan memicu aksi jual paksa (forced selling) pada akun-akun margin lokal. Efek dominonya sangat merusak sistem keuangan internal.</p>
+            <p>Saat premi risiko \(\Delta r\) melonjak akibat sentimen global, nilai sekarang (\(PV\)) dari korporasi domestik jatuh merosot, jelas Gibran. Alhasil, manajer investasi asing segera melakukan repricing of risk secara massal. Penjualan besar-besaran ini memicu kepanikan, menurunkan harga saham, dan memicu aksi jual paksa (forced selling) pada akun-akun margin lokal. Efek dominonya sangat merusak sistem keuangan internal.</p>
 
             <p>Alyssa kemudian mengambil alih pembicaraan untuk membahas Volatilitas Kurs. Ini yang paling berbahaya bagi stabilitas makro kita, kawan-kawan. Ketika arus portofolio non-bank ke pasar negara berkembang (emerging markets) mendekati proyeksi ekstrem—seperti angka US$ 4 triliun pada tahun 2025—balikannya bisa sama dahsyatnya. Begitu dolar Amerika Serikat menguat karena kebijakan pengetatan moneter di sana, modal asing langsung keluar (outflow) secara masif.</p>
 
@@ -329,16 +312,16 @@
 
             <p>Lalu yang kelima, Gibran menimpali, defisit fiskal yang terus melebar melampaui batas aman tiga persen dari PDB. Keenam, inflasi yang merangkak naik tak terkendali. Ketujuh, adanya tekanan politik yang mengintervensi independensi bank sentral. Dan terakhir, kedelapan, outlook rating utang negara yang memburuk dari lembaga pemeringkat internasional seperti Moody's atau S&P.</p>
 
-            <p>Secara matematis, kita bisa menggambarkan fungsi kerentanan ekonomi ($V$) suatu negara sebagai kombinasi linier terbobot dari variabel-variabel makro tersebut, jelas Gibran sembari merumuskan sebuah model sederhana pada papan tulis:</p>
+            <p>Secara matematis, kita bisa menggambarkan fungsi kerentanan ekonomi (\(V\)) suatu negara sebagai kombinasi linier terbobot dari variabel-variabel makro tersebut, jelas Gibran sembari merumuskan sebuah model sederhana pada papan tulis:</p>
 
             <div class="math-block">
                 $$V = \sum_{i=1}^{n} w_i \cdot X_i$$
                 <div style="margin-top: 10px; font-size: 14px; text-align: center; font-style: italic;">
-                    Di mana $X_i$ merepresentasikan nilai ternormalisasi dari setiap indikator kerentanan (misalnya rasio utang terhadap PDB atau rasio defisit), dan $w_i$ adalah bobot sensitivitas yang diberikan oleh algoritma dana global.
+                    Di mana \(X_i\) merepresentasikan nilai ternormalisasi dari setiap indikator kerentanan (misalnya rasio utang terhadap PDB atau rasio defisit), dan \(w_i\) adalah bobot sensitivitas yang diberikan oleh algoritma dana global.
                 </div>
             </div>
 
-            <p>Ketika nilai $V$ ini melampaui ambang batas kritis tertentu, algoritma automated trading milik asset manager global akan mendeteksi sinyal jual otomatis (sell-signal), potong Alyssa cepat. Mereka tidak akan menunggu menteri keuangan kita berpidato atau membuat kebijakan baru. Mereka langsung mengeksekusi perintah pelepasan aset. Inilah mengapa modal global bergerak sangat kejam dan tanpa kompromi.</p>
+            <p>Ketika nilai \(V\) ini melampaui ambang batas kritis tertentu, algoritma automated trading milik asset manager global akan mendeteksi sinyal jual otomatis (sell-signal), potong Alyssa cepat. Mereka tidak akan menunggu menteri keuangan kita berpidato atau membuat kebijakan baru. Mereka langsung mengeksekusi perintah pelepasan aset. Inilah mengapa modal global bergerak sangat kejam dan tanpa kompromi.</p>
 
             <h2>Bab 4: Pandangan Lembaga Multilateral</h2>
 
