@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melepaskan dengan Ikhlas - Kisah Bandung</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-dark: #2d3748;
+            --text-light: #718096;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+            border-left: 5px solid #fff;
+            padding: 30px 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: #fff;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 5rem;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            opacity: 0.3;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .quote-author {
+            text-align: right;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .intro {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .chapter {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            border-radius: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out both;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .chapter:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .chapter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .chapter p {
+            margin-bottom: 20px;
+            text-align: justify;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+
+        .character-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .char-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .char-box:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.6);
+        }
+
+        .char-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .char-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .char-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .principle-box {
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.15), rgba(0, 242, 254, 0.15));
+            border-left: 5px solid #4facfe;
+            padding: 25px 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.2);
+        }
+
+        .principle-box h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .principle-box p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(254, 243, 199, 0.8) 0%, rgba(253, 224, 71, 0.8) 100%);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .dialogue {
+            background: linear-gradient(135deg, rgba(236, 252, 203, 0.5), rgba(187, 247, 208, 0.5));
+            padding: 25px 35px;
+            border-radius: 20px;
+            margin: 25px 0;
+            border-left: 5px solid #84cc16;
+            font-style: italic;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .dialogue::before {
+            content: '💬';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: white;
+            padding: 0 10px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+        }
+
+        .scene-divider {
+            text-align: center;
+            margin: 50px 0;
+            font-size: 2rem;
+            color: rgba(255,255,255,0.8);
+            letter-spacing: 20px;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            border-radius: 25px;
+            text-align: center;
+            margin-top: 60px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .dashboard-link {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .dashboard-link:hover::before {
+            left: 100%;
+        }
+
+        .dashboard-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        .reflection-section {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1));
+            border: 2px solid rgba(245, 158, 11, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .reflection-section h3 {
+            color: #d97706;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: var(--secondary-gradient);
+            z-index: 1000;
+            transition: width 0.1s;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .hero-card { padding: 40px 25px; }
+            .chapter { padding: 35px 25px; }
+            .quote-box { font-size: 1rem; padding: 20px 25px; }
+            .character-card { grid-template-columns: 1fr; }
+        }
+
+        .moral-lesson {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .moral-lesson h3 {
+            color: #059669;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            width: 120px;
+            height: 120px;
+            background: white;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation-delay: 5s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 15%;
+            width: 100px;
+            height: 100px;
+            background: white;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            animation-delay: 10s;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <header>
+            <div class="hero-card">
+                <h1>Melepaskan dengan Ikhlas</h1>
+                <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-top: 20px;">Sebuah Kisah tentang Keikhlasan dan Detachment Emosional di Kota Bandung</p>
+                
+                <div class="quote-box">
+                    Terkadang melepaskan sesuatu adalah tindakan yang jauh lebih kuat daripada mempertahankan atau berkeras untuk tetap bertahan.
+                    <div class="quote-author">— Eckhart Tolle</div>
+                </div>
+            </div>
+        </header>
+
+        <section class="intro">
+            <p><strong>Bandung, kota yang terkenal dengan sejuknya udara dan hangatnya persahabatan.</strong> Di sudut-sudut kota yang dipenuhi kafe-kafe cozy dan pemandangan pegunungan yang memesona, empat anak muda cerdas sedang menjalani perjalanan hidup mereka yang penuh tantangan. Mereka adalah Arya, Bima, Citra, dan Dewi—empat individu dengan kepribadian berbeda yang dipersatukan oleh persahabatan dan keinginan untuk tumbuh lebih bijaksana.</p>
+            
+            <p>Kisah ini adalah tentang bagaimana mereka belajar mempraktikkan <span class="highlight">detachment emosional</span>—bukan untuk menjadi dingin atau terlepas dari perasaan, melainkan untuk melindungi kedamaian batin mereka sambil tetap peduli dengan tulus. Ini adalah perjalanan empat sahabat dalam memahami seni melepaskan tanpa kehilangan cinta, tetap hadir tanpa terhanyut dalam drama, dan menemukan keseimbangan di tengah kompleksitas kehidupan modern di Bandung.</p>
+        </section>
+
+        <div class="character-card">
+            <div class="char-box">
+                <div class="char-avatar">A</div>
+                <div class="char-name">Arya Wijaya</div>
+                <div class="char-desc">24 tahun, Software Engineer di startup teknologi. Pemikir analitis yang cenderung overthinking.</div>
+            </div>
+            <div class="char-box">
+                <div class="char-avatar">B</div>
+                <div class="char-name">Bima Sakti</div>
+                <div class="char-desc">25 tahun, Arsitek muda. Pribadi yang tenang dan filosofis, suka mendaki gunung.</div>
+            </div>
+            <div class="char-box">
+                <div class="char-avatar">C</div>
+                <div class="char-name">Citra Lestari</div>
+                <div class="char-desc">23 tahun, Psikolog klinis. Empatik namun belajar menetapkan batasan yang sehat.</div>
+            </div>
+            <div class="char-box">
+                <div class="char-avatar">D</div>
+                <div class="char-name">Dewi Kusuma</div>
+                <div class="char-desc">24 tahun, Content Creator. Energik dan kreatif, sedang belajar mengelola ekspektasi.</div>
+            </div>
+        </div>
+
+        <section class="chapter">
+            <div class="chapter-number">1</div>
+            <h2 class="chapter-title">Pertemuan di Dago</h2>
+            
+            <p>Malam itu, udara Bandung terasa格外 sejuk. Di sebuah rooftop café di kawasan Dago, empat sahabat duduk mengelilingi meja kayu dengan pemandangan lampu kota yang berkelap-kelip di kejauhan. Arya menatap layar laptopnya dengan alis berkerut, sementara Bima menyeruput kopi dengan tenang. Citra dan Dewi baru saja tiba, masih membawa tas kerja mereka.</p>
+
+            <p>"Gila, deadline project ini benar-benar bikin stres," keluh Arya sambil menutup laptopnya dengan kasar. "Client terus-terusan minta revisi. Aku sudah kerja 14 jam sehari selama seminggu ini, tapi mereka masih belum puas."</p>
+
+            <div class="dialogue">
+                "Masalahnya, Ary, kamu terlalu terikat dengan hasil akhir yang sempurna. Kamu lupa bahwa ada hal-hal yang memang di luar kendali kamu," ujar Bima dengan suara tenangnya.
+            </div>
+
+            <p>Citra mengangguk setuju. "Sebagai psikolog, aku sering melihat klien yang seperti kamu. Mereka mengambil tanggung jawab atas perasaan dan pilihan orang lain. Padahal, itu bukan beban mereka."</p>
+
+            <p>Dewi menambahkan, "Aku juga pernah mengalaminya waktu bikin konten. Kadang views-nya jelek, banyak yang hate comment, dan aku langsung baper. Tapi semakin aku peduli, semakin aku stres."</p>
+
+            <p>Arya menghela napas panjang. "Terus gimana caranya supaya nggak peduli tapi tetap profesional? Aku kan memang harus deliver yang terbaik."</p>
+
+            <div class="principle-box">
+                <h4>Prinsip #1: Kenali Apa yang Bukan Tanggung Jawabmu</h4>
+                <p>Melepaskan tanggung jawab atas perasaan dan pilihan orang lain adalah langkah pertama menuju kebebasan emosional. Kamu bisa peduli tanpa harus membawa beban itu.</p>
+            </div>
+
+            <p>Bima tersenyum bijak. "Nih, gue kasih tau prinsip pertama: <strong>kenali apa yang bukan milikmu untuk dipegang</strong>. Client kamu minta revisi? Itu hak mereka. Tapi reaksi kamu terhadap permintaan itu—itu yang bisa kamu kontrol. Kamu bisa memilih untuk tidak mengambil hati, tidak merasa diserang, dan tetap fokus pada solusi."</p>
+
+            <p>"Gimana caranya?" tanya Arya penasaran.</p>
+
+            <p>"Dengan menyadari bahwa perasaan client itu bukan tanggung jawab kamu. Yang jadi tanggung jawab kamu adalah memberikan effort terbaik. Sisanya? Serahkan pada mereka," jelas Citra.</p>
+
+            <p>Malam itu, untuk pertama kalinya, Arya mulai memahami bahwa ada perbedaan besar antara <em>peduli</em> dan <em>terlalu terikat</em>. Dia bisa tetap profesional tanpa harus mengorbankan kesehatan mentalnya.</p>
+        </section>
+
+        <div class="scene-divider">❖ ❖ ❖</div>
+
+        <section class="chapter">
+            <div class="chapter-number">2</div>
+            <h2 class="chapter-title">Jeda Sebelum Bereaksi</h2>
+
+            <p>Minggu berikutnya, giliran Citra yang menghadapi masalah. Di ruang praktik kecilnya di kawasan Setiabudi, dia baru saja menyelesaikan sesi terapi dengan seorang pasien yang sangat menuntut. Pasien itu marah-marah karena merasa tidak ada kemajuan, padahal sudah tiga bulan menjalani terapi.</p>
+
+            <p>"Dia bilang aku psikolog yang nggak becus," cerita Citra kepada ketiga sahabatnya di sebuah warung kopi di Braga. Matanya berkaca-kaca. "Aku merasa gagal. Aku sudah berusaha sebaik mungkin, tapi dia tetap tidak puas."</p>
+
+            <p>Dewi memeluk sahabatnya itu. "Ya ampun, Cit. Aku ngerti banget perasaan kamu. Tapi kamu tahu kan, pasien itu punya ekspektasi yang nggak realistis?"</p>
+
+            <p>"Iya, tapi tetap saja... aku merasa tersinggung. Aku jadi overthinking semalaman. Apakah aku memang nggak kompeten? Apakah aku harus ganti profesi?" Citra mengusap air matanya.</p>
+
+            <div class="dialogue">
+                "Citra, dengerin gue," kata Bima dengan serius. "Masalah kamu adalah kamu langsung bereaksi tanpa jeda. Kamu langsung internalisasi kritik itu sebagai serangan pribadi."</div>
+
+            <p>Arya menambahkan, "Kemarin gue belajar sesuatu. Sekarang setiap kali ada email dari client yang nadanya nyebelin, gue nggak langsung balas. Gue tunggu minimal 30 menit. Kadang gue tidur dulu. Dan begitu gue baca ulang, biasanya emosi gue sudah reda dan gue bisa respond dengan lebih rasional."</p>
+
+            <div class="principle-box">
+                <h4>Prinsip #2: Berhenti Sejenak Sebelum Bereaksi</h4>
+                <p>Beri diri kamu waktu untuk memisahkan emosi dari impuls. Reaksi spontan biasanya didasari emosi, sementara respons yang dipikirkan biasanya lebih bijaksana.</p>
+            </div>
+
+            <p>Citra terdiam, mencerna kata-kata mereka. "Jadi maksud kalian, aku harus pause dulu sebelum bereaksi?"</p>
+
+            <p>"Exactly!" seru Dewi. "Kayak aku sekarang. Dulu kalau ada yang komen negatif di konten aku, aku langsung balas dengan defensif. Sekarang? Aku screenshot, aku simpan draft balasannya, tapi aku nggak kirim. Aku tunggu sehari. Dan 90% kasus, aku malah hapus draft itu karena sudah nggak relevan."</p>
+
+            <p>"Ini namanya <strong>memisahkan emosi dari impuls</strong>," jelas Bima. "Emosi itu wajar. Marah, sedih, kecewa—semua valid. Tapi impuls untuk langsung membalas, menyerang balik, atau menyalahkan diri sendiri—itu yang perlu kita manage."</p>
+
+            <p>Citra mengangguk perlahan. "Aku mengerti. Jadi aku boleh merasa tersinggung, tapi aku tidak harus bertindak berdasarkan perasaan itu."</p>
+
+            <p>"Bener banget!" seru Arya sambil mengacungkan jempol.</p>
+
+            <p>Malam itu, Citra belajar bahwa <strong>jeda adalah kekuatan</strong>. Dengan memberi diri waktu untuk bernapas dan berpikir, dia bisa memilih respons yang lebih konstruktif daripada sekadar bereaksi secara impulsif.</p>
+        </section>
+
+        <div class="scene-divider">❖ ❖ </div>
+
+        <section class="chapter">
+            <div class="chapter-number">3</div>
+            <h2 class="chapter-title">Mengamati Pikiran Tanpa Terseret</h2>
+
+            <p>Bima menghadapi tantangannya sendiri di proyek arsitektur terbarunya. Klien menginginkan desain rumah modern minimalis, tapi di tengah jalan, mereka terus-menerus mengubah spesifikasi. Setiap minggu ada perubahan baru, dan itu membuat frustrasi.</p>
+
+            <p>"Gue jadi nggak bisa tidur," curhat Bima saat mereka berkumpul di Taman Hutan Raya. "Pikiran gue terus muter: Gimana kalau mereka nggak puas? Gimana kalau project ini gagal? Gimana kalau reputasi gue hancur?"</p>
+
+            <p>Dewi tertawa kecil. "Bro, lo overthinking parah. Gue tau banget rasanya. Dulu gue juga begitu. Tapi lo tahu apa yang gue lakukan sekarang?"</p>
+
+            <p>"Meditasi?" tebak Arya.</p>
+
+            <p>"Bukan. Gue <strong>observasi pikiran gue sendiri</strong>," jawab Dewi. "Gue bayangin pikiran-pikiran itu kayak awan yang lewat di langit. Gue lihat, gue kenali, tapi gue nggak ikut terbang bersama awan itu."</p>
+
+            <div class="principle-box">
+                <h4>Prinsip #3: Amati Pikiranmu Tanpa Terseret</h4>
+                <p>Kamu bukan pikiranmu. Dengan mengamati pikiran tanpa teridentifikasi, kamu bisa melihat mereka datang dan pergi tanpa terhanyut dalam drama mental.</p>
+            </div>
+
+            <p>Citra menambahkan, "Ini teknik mindfulness yang sering aku ajarkan ke klien. Saat pikiran negatif muncul, jangan dilawan atau dipercaya begitu saja. Cukup sadari: 'Oh, ada pikiran yang bilang aku gagal.' Lalu biarkan dia pergi."</p>
+
+            <p>"Tapi gimana caranya biar nggak terseret?" tanya Bima skeptis.</p>
+
+            <p>"Coba teknik ini," kata Arya. "Setiap kali pikiran overthinking muncul, kasih label: 'Ini cuma pikiran, bukan fakta.' Terus tanya: 'Apakah pikiran ini produktif? Apakah ini membantu aku solve masalah?' Kalau nggak, ya udah, lepasin."</p>
+
+            <p>Bima mencoba teknik itu. Dia duduk di bangku taman, memejamkan mata, dan mulai mengamati pikirannya. Benar saja, pikirannya seperti monyet yang terus melompat-lompat. Tapi alih-alih mengikuti setiap lompatan, dia hanya mengamati.</p>
+
+            <p>"Gila, susah juga ya," gumam Bima setelah beberapa menit.</p>
+
+            <p>"Iya, karena kita terlatih untuk percaya sama semua pikiran kita," kata Citra. "Padahal banyak pikiran yang cuma noise, bukan signal."</p>
+
+            <p>Perlahan, Bima mulai memahami perbedaan antara <strong>memiliki pikiran</strong> dan <strong>menjadi pikiran</strong>. Dia bisa memikirkan tentang project-nya tanpa harus tenggelam dalam kecemasan. Dia bisa merencanakan tanpa overthinking.</p>
+
+            <p>"Ini kayak jadi observer di hidup sendiri ya," renung Bima.</p>
+
+            <p>"Exactly!" seru Dewi. "Dan begitu lo jadi observer, lo punya power untuk memilih: mau percaya pikiran ini atau nggak."</p>
+        </section>
+
+        <div class="scene-divider">❖ ❖ ❖</div>
+
+        <section class="chapter">
+            <div class="chapter-number">4</div>
+            <h2 class="chapter-title">Batasan yang Sehat</h2>
+
+            <p>Dewi sedang menghadapi masalah dengan salah satu temannya yang toxic. Teman ini selalu minta tolong bikin konten gratis, selalu komen negatif, dan menguras energi Dewi. Tapi Dewi sulit untuk mengatakan tidak karena takut dianggap sombong.</p>
+
+            <p>"Gue capek banget sama dia," keluh Dewi di sebuah café di kawasan Asia Afrika. "Tapi gue takut kalau gue batasi akses dia, dia bakal nyebarkan hal-hal negatif tentang gue."</p>
+
+            <p>Arya mengangguk paham. "Gue dulu juga gitu. Takut nge-set boundary karena takut dianggap nggak baik. Tapi akhirnya gue sadar: orang yang benar-benar peduli sama kita akan respect sama batasan kita."</p>
+
+            <div class="dialogue">
+                "Dan orang yang marah karena kamu set boundary? Mereka justru membuktikan bahwa boundary itu perlu," tambah Citra dengan tegas.
+            </div>
+
+            <div class="principle-box">
+                <h4>Prinsip #4: Tetapkan Batasan Emosional yang Tegas</h4>
+                <p>Batasan bukan untuk menjauhkan orang, tapi untuk melindungi energimu. Orang yang tepat akan menghormati batasanmu; yang tidak, akan tersingkir dengan sendirinya.</p>
+            </div>
+
+            <p>Bima berbagi pengalamannya. "Gue punya prinsip: <strong>limit access to people who drain your energy</strong>. Dulu gue temenan sama orang yang selalu negatif, selalu komplain, nggak pernah appreciate. Gue terus-terusan dengerin karena gue merasa wajib sebagai teman. Tapi akhirnya gue sadar, itu nggak sehat."</p>
+
+            <p>"Terus lo putus temenan?" tanya Dewi.</p>
+
+            <p>"Nggak ekstrem gitu. Gue cuma batasi interaksi. Gue nggak lagi available 24/7 buat dengerin curhatnya yang itu-itu aja. Gue alokasikan waktu tertentu. Dan lo tahu apa? Hubungan kami justru jadi lebih sehat. Dia belajar untuk nggak terlalu dependent, dan gue nggak burnout."</p>
+
+            <p>Citra menambahkan dari perspektif psikologi. "Batasan yang sehat itu bukan egois. Itu self-care. Kamu nggak bisa menuang dari cangkir yang kosong. Kalau kamu terus-terusan ngasih ke orang lain tanpa jaga energi kamu sendiri, akhirnya kamu burnout dan malah nggak bisa ngasih apa-apa."</p>
+
+            <p>Dewi terdiam lama. "Jadi dengan nge-set boundary, aku justru bisa jadi teman yang lebih baik?"</p>
+
+            <p>"Bener!" seru Arya. "Karena kamu punya energi yang cukup untuk peduli dengan tulus, bukan karena terpaksa."</p>
+
+            <p>Akhirnya, Dewi memberanikan diri untuk bicara dengan temannya itu. Dengan lembut tapi tegas, dia menjelaskan bahwa dia tidak bisa lagi membuatkan konten gratis dan perlu membatasi interaksi mereka. Reaksi temannya memang tidak menyenangkan, tapi Dewi merasa lega. Untuk pertama kalinya dalam waktu lama, dia merasa punya kendali atas energinya sendiri.</p>
+        </section>
+
+        <div class="scene-divider">❖ ❖ ❖</div>
+
+        <section class="chapter">
+            <div class="chapter-number">5</div>
+            <h2 class="chapter-title">Menghentikan Overthinking</h2>
+
+            <p>Arya kembali menghadapi masalahnya yang klasik: overthinking. Kali ini lebih parah. Dia baru saja mendapat tawaran kerja dari perusahaan besar di Jakarta, tapi dia terjebak dalam loop "what if" yang tidak berujung.</p>
+
+            <p>"Gimana kalau gue gagal di Jakarta? Gimana kalau gue nggak cocok sama budaya kerja sana? Gimana kalau ternyata keputusan ini salah? Gimana kalau gue nyesel?" Demikian pikiran yang terus menghantuinya.</p>
+
+            <p>Saat curhat ke teman-temannya di sebuah co-working space di Bandung Digital Valley, Citra langsung mengenali pola itu.</p>
+
+            <p>"Arya, kamu terjebak dalam <strong>what if loops</strong>," kata Citra. "Dan satu-satunya cara keluar adalah dengan mengganti pertanyaan itu dengan: 'Apakah ini dalam kendaliku?'"</p>
+
+            <div class="principle-box">
+                <h4>Prinsip #5: Batasi Overthinking</h4>
+                <p>Ganti loop "What if?" dengan "Apakah ini dalam kendaliku?" Fokus pada apa yang bisa kamu kontrol, dan lepaskan apa yang tidak bisa.</p>
+            </div>
+
+            <p>Bima menambahkan, "Gue belajar ini dari mendaki gunung. Lo bisa planning seperfect apapun, tapi cuaca? Itu di luar kendali lo. Yang bisa lo kontrol: persiapan lo, mental lo, effort lo. Sisanya? Serahkan."</p>
+
+            <p>"Tapi gimana caranya berhenti overthinking?" tanya Arya frustrasi. "Gue udah tau itu nggak produktif, tapi pikiran gue tetap muter-muter."</p>
+
+            <p>Dewi berbagi tekniknya. "Gue pakai teknik <strong>thought-stopping</strong>. Setiap kali gue sadar gue overthinking, gue bilang dalam hati: 'STOP!' Terus gue ganti dengan pertanyaan: 'Apa yang bisa gue lakukan SEKARANG untuk solve ini?' Kalau jawabannya 'nggak ada,' ya gue terima dan move on."</p>
+
+            <p>Citra menjelaskan lebih lanjut. "Overthinking itu sebenarnya bentuk resistance terhadap ketidakpastian. Kita ingin kontrol penuh, padahal hidup ini inherently uncertain. Detachment emosional bukan berarti kita nggak peduli dengan masa depan, tapi kita nggak membiarkan ketakutan akan masa depan menghancurkan kedamaian kita hari ini."</p>
+
+            <p>Arya mencoba teknik-teknik itu. Setiap kali pikiran "what if" muncul, dia tanya: "Apakah ini dalam kendaliku?" Kalau jawabannya tidak, dia tarik napas dalam dan lepaskan. Pelan-pelan, dia mulai merasa lebih ringan.</p>
+
+            <p>"Gila, ini liberating banget," kata Arya. "Ternyata gue nggak perlu mikirin semua skenario. Gue cukup prepare yang terbaik, dan sisanya... trust the process."</p>
+
+            <p>"Exactly!" seru Bima sambil tos dengan Arya.</p>
+        </section>
+
+        <div class="scene-divider">❖ ❖ ❖</div>
+
+        <section class="chapter">
+            <div class="chapter-number">6</div>
+            <h2 class="chapter-title">Fakta vs Asumsi</h2>
+
+            <p>Citra menghadapi dilema di tempat kerjanya. Rekan kerjanya tiba-tiba bersikap dingin, dan Citra langsung berasumsi yang buruk-buruk: "Dia pasti marah sama aku. Mungkin aku salah ngomong sesuatu. Mungkin dia nggak suka sama kerja aku."</p>
+
+            <p>Sampai akhirnya dia curhat ke teman-temannya, dan Bima memberikan perspektif yang berbeda.</p>
+
+            <div class="dialogue">
+                "Cit, lo yakin itu fakta atau asumsi lo?" tanya Bima.
+            </div>
+
+            <p>Citra terdiam. "Ya... dia memang bersikap dingin. Itu fakta kan?"</p>
+
+            <p>"Itu observasi. Tapi alasan di balik itu? Itu asumsi lo," jelas Bima. "Lo langsung assume dia marah sama lo. Padahal bisa aja dia lagi ada masalah pribadi, lagi sakit, atau sekadar bad day."</p>
+
+            <div class="principle-box">
+                <h4>Prinsip #6: Fokus pada Fakta, Bukan Asumsi</h4>
+                <p>Grounding diri dalam kejelasan fakta, bukan cerita emosional yang kita ciptakan. Asumsi adalah sumber penderitaan yang tidak perlu.</p>
+            </div>
+
+            <p>Dewi menambahkan, "Ini sering banget kejadian di media sosial. Orang komen 'Nice' aja, aku bisa assume dia sindir. Padahal mungkin dia memang tulus bilang nice. Asumsi bikin kita suffer sendiri."</p>
+
+            <p>Arya berbagi, "Di dunia programming, kita diajarin untuk selalu cek fakta. Error message bilang apa? Log file nunjukkin apa? Nggak boleh assume. Dan itu prinsip yang bisa diterapkan di kehidupan juga."</p>
+
+            <p>Citra akhirnya menyadari bahwa dia telah terjebak dalam <strong>emotional story</strong> yang dia ciptakan sendiri. Alih-alih berasumsi, dia memutuskan untuk bertanya langsung kepada rekannya itu.</p>
+
+            <p>Ternyata benar—rekannya itu sedang ada masalah keluarga dan sedang tidak mood bicara dengan siapa pun. Tidak ada hubungannya dengan Citra.</p>
+
+            <p>"Gila, gue nyiksa diri sendiri gara-gara asumsi," akui Citra.</p>
+
+            <p>"Kita semua begitu," kata Dewi menghibur. "Makanya penting untuk selalu cek: ini fakta atau cerita yang gue bikin?"</p>
+
+            <p>Pelajaran itu membuat Citra lebih berhati-hati dalam membedakan antara <strong>apa yang benar-benar terjadi</strong> dan <strong>cerita yang dia ciptakan</strong> tentang apa yang terjadi.</p>
+        </section>
+
+        <div class="scene-divider">❖ ❖ </div>
+
+        <section class="chapter">
+            <div class="chapter-number">7</div>
+            <h2 class="chapter-title">Teknik Self-Soothing</h2>
+
+            <p>Dewi sedang dalam tekanan besar. Konten terbarunya gagal total—views-nya rendah, banyak yang hate comment, dan sponsor mengancam putus kontrak. Dia panik dan stres berat.</p>
+
+            <p>"Gue nggak tahu harus gimana," kata Dewi hampir menangis. "Gue merasa gagal. Semua kerja keras gue sia-sia."</p>
+
+            <p>Citra, sebagai psikolog, langsung mengambil tindakan. "Dew, tarik napas dulu. Kita latihan pernapasan bareng-bareng."</p>
+
+            <p>Mereka berempat duduk melingkar di lantai, memejamkan mata, dan mengikuti instruksi Citra untuk melakukan <strong>deep breathing</strong>.</p>
+
+            <div class="principle-box">
+                <h4>Prinsip #7: Praktik Self-Soothing</h4>
+                <p>Deep breathing, grounding exercises, dan teknik menenangkan diri lainnya adalah alat penting untuk kembali ke pusat saat emosi memuncak.</p>
+            </div>
+
+            <p>"Tarik napas dalam 4 hitungan... tahan 4 hitungan... buang napas 6 hitungan," instruksi Citra. "Rasakan udara masuk dan keluar. Fokus pada sensasi napas."</p>
+
+            <p>Setelah beberapa menit, bahu Dewi yang tegang mulai rileks. Napasnya yang tadinya cepat dan dangkal, menjadi lebih lambat dan dalam.</p>
+
+            <p>"Gimana perasaan kamu?" tanya Citra.</p>
+
+            <p>"Lebih tenang," jawab Dewi pelan. "Tadi gue kayak nggak bisa mikir jernih. Sekarang udah mendingan."</p>
+
+            <p>Arya berbagi teknik yang dia gunakan. "Gue punya <strong>grounding exercise</strong> favorit: 5-4-3-2-1 technique. Gue identifikasi 5 hal yang bisa gue lihat, 4 yang bisa gue sentuh, 3 yang bisa gue dengar, 2 yang bisa gue cium, dan 1 yang bisa gue rasa. Itu bikin gue kembali ke saat ini, nggak terjebak dalam kecemasan."</p>
+
+            <p>Bima menambahkan, "Kalau gue, gue pergi ke alam. Mendaki gunung atau sekadar duduk di taman. Alam punya cara sendiri untuk nenangin pikiran. Tapi kalau nggak bisa ke alam, gue lakuin progressive muscle relaxation—tegangin dan rileksin setiap otot dari ujung kaki sampai kepala."</p>
+
+            <p>Dewi belajar bahwa <strong>self-soothing bukan kelemahan</strong>. Itu adalah keterampilan penting yang harus dimiliki setiap orang. Saat badai emosi datang, dia sekarang tahu cara menenangkan diri sendiri sebelum mengambil keputusan atau bereaksi.</p>
+
+            <p>"Thanks guys," kata Dewi tulus. "Gue jadi punya toolkit untuk handle stres. Nggak cuma mental, tapi juga teknik praktis."</p>
+        </section>
+
+        <div class="scene-divider">❖ ❖ </div>
+
+        <section class="chapter">
+            <div class="chapter-number">8</div>
+            <h2 class="chapter-title">Melepaskan Keterikatan pada Hasil</h2>
+
+            <p>Bima sedang menunggu pengumuman tender untuk sebuah proyek besar. Ini adalah kesempatan emas untuk kariernya, dan dia sudah mencurahkan segala usaha untuk membuat proposal terbaik. Tapi semakin dekat pengumuman, semakin dia cemas.</p>
+
+            <p>"Gue nggak bisa mikir hal lain," akui Bima. "Gue terus-terusan cek email, berharap ada kabar. Kalau gue menang, alhamdulillah. Tapi kalau kalah... gue takut kecewa banget."</p>
+
+            <p>Dewi, yang sudah belajar banyak dari teman-temannya, memberikan perspektif baru.</p>
+
+            <div class="dialogue">
+                "Bim, lo udah usaha maksimal kan?" tanya Dewi.
+            </div>
+
+            <p>"Udah. Gue yakin proposal gue yang terbaik."</p>
+
+            <p>"Nah, kalau gitu, apa yang bisa lo kontrol sekarang?"</p>
+
+            <p>Bima terdiam.</p>
+
+            <div class="principle-box">
+                <h4>Prinsip #8: Melepaskan Diri dari Hasil</h4>
+                <p>Terimalah bahwa kamu bisa mempengaruhi tapi tidak mengontrol segalanya. Usaha adalah kewajibanmu; hasil adalah hak prerogatif semesta.</p>
+            </div>
+
+            <p>Citra menjelaskan, "Ini esensi dari <strong>detachment from outcomes</strong>. Kamu bisa influence, tapi kamu nggak bisa control. Ada banyak faktor yang nggak tergantung sama kamu: keputusan klien, kompetisi, timing, bahkan keberuntungan."</p>
+
+            <p>Arya menambahkan, "Di startup, kita sering bilang: <strong>fall in love with the problem, not the solution</strong>. Maksudnya, fokus sama effort dan proses, bukan fixated pada satu outcome tertentu. Karena kalau outcome-nya nggak sesuai harapan, kita kecewa dan berhenti. Padahal mungkin ada jalan lain yang lebih baik."</p>
+
+            <p>Bima merenung. "Jadi maksud kalian, gue harus lepas attachment sama hasil tender ini?"</p>
+
+            <p>"Bukan berarti gue nggak peduli," koreksi Bima. "Tapi gue terima bahwa hasilnya di luar kendali gue. Yang dalam kendali gue: kualitas kerja gue, effort gue, dan bagaimana gue menyikapi hasilnya nanti."</p>
+
+            <p>"Exactly!" seru Citra. "Dan ironisnya, begitu lo lepas attachment, lo justru lebih tenang dan bisa perform lebih baik di project-project berikutnya. Karena lo nggak terbebani ekspektasi."</p>
+
+            <p>Pengumuman tender akhirnya keluar. Bima tidak menang. Tapi alih-alih hancur, dia menerima dengan lapang dada.</p>
+
+            <p>"Ya udah, berarti emang bukan rezeki gue," katanya tenang. "Gue evaluasi proposal gue, perbaiki, dan coba lagi di tender berikutnya."</p>
+
+            <p>Teman-temannya bangga. Bima telah belajar <strong>melepaskan tanpa kehilangan motivasi</strong>.</p>
+        </section>
+
+        <div class="scene-divider">❖ ❖ </div>
+
+        <section class="chapter">
+            <div class="chapter-number">9</div>
+            <h2 class="chapter-title">Berkata Tidak Tanpa Rasa Bersalah</h2>
+
+            <p>Arya menghadapi situasi sulit. Manajernya meminta dia mengerjakan project tambahan di luar jam kerja, tanpa kompensasi tambahan. Arya sebenarnya keberatan—dia sudah kelelahan dan butuh waktu istirahat. Tapi dia sulit mengatakan tidak karena takut dianggap tidak kooperatif.</p>
+
+            <p>"Gue takut ini mempengaruhi penilaian kinerja gue," keluh Arya.</p>
+
+            <p>Dewi, yang sekarang sudah lebih percaya diri menetapkan batasan, memberikan saran.</p>
+
+            <div class="dialogue">
+                "Ary, lo tahu nggak? Dulu gue juga susah bilang nggak. Tapi sekarang gue sadar: setiap kali gue bilang 'ya' padahal mau bilang 'nggak', gue sedang mengkhianati diri sendiri."</p>
+            </div>
+
+            <div class="principle-box">
+                <h4>Prinsip #9: Katakan Tidak Tanpa Rasa Bersalah</h4>
+                <p>Menghormati bandwidth emosionalmu adalah bentuk self-respect. Berkata tidak pada hal yang salah adalah berkata ya pada kesejahteraanmu.</p>
+            </div>
+
+            <p>Citra menambahkan dari sudut pandang psikologi. "Rasa bersalah yang kamu rasakan itu wajar, karena kita dikondisikan untuk selalu menyenangkan orang lain. Tapi <strong>saying no without guilt</strong> adalah keterampilan yang harus dipelajari. Itu tentang menghormati emotional bandwidth kamu."</p>
+
+            <p>"Tapi gimana caranya bilang nggak tanpa terdengar jahat?" tanya Arya.</p>
+
+            <p>Bima berbagi pengalamannya. "Gue pakai formula ini: <strong>appreciate + decline + alternative</strong>. Contoh: 'Terima kasih sudah percaya sama saya. Sayangnya saya tidak bisa mengambil project tambahan saat ini karena sedang fokus menyelesaikan project yang ada. Mungkin bisa dicarikan timeline yang lebih longgar?'"</p>
+
+            <p>"Jadi lo tetap profesional tapi set boundary," simpul Arya.</p>
+
+            <p>"Exactly. Dan lo tahu apa? Orang justru lebih respect sama kita kalau kita jelas soal batasan kita. Yang nggak respect ya emang bukan orang yang tepat buat kita pleasing," kata Dewi.</p>
+
+            <p>Arya akhirnya memberanikan diri bicara dengan manajernya. Dengan sopan tapi tegas, dia menjelaskan bahwa dia tidak bisa mengambil project tambahan saat ini karena sudah overload. Reaksi manajernya di luar dugaan—dia justru appreciate karena Arya jujur dan tidak memaksakan diri yang bisa berujung pada kualitas kerja yang buruk.</p>
+
+            <p>"Gila, gue nyangka bakal ribet. Ternyata malah dihargai," kata Arya lega.</p>
+
+            <p>"Karena lo menghormati diri sendiri, orang lain jadi ikut menghormati lo," pungkas Citra bijak.</p>
+        </section>
+
+        <div class="scene-divider">❖ ❖ </div>
+
+        <section class="chapter">
+            <div class="chapter-number">10</div>
+            <h2 class="chapter-title">Memilih Kedamaian</h2>
+
+            <p>Pertemuan mereka yang ke-10 adalah yang paling spesial. Mereka berkumpul di sebuah villa kecil di Lembang, merayakan satu tahun perjalanan mereka belajar tentang emotional detachment.</p>
+
+            <p>"Coba kita sharing, apa perubahan terbesar yang kita rasakan dalam setahun ini?" usul Citra.</p>
+
+            <p>Arya mulai. "Gue dulu overthinking parah, sekarang gue bisa manage. Gue masih mikir, tapi gue nggak tenggelam. Gue belajar <strong>choose peace over reaction</strong>. Dulu kalau ada masalah, gue langsung panik dan reaktif. Sekarang gue pause, tarik napas, dan pilih respons yang lebih tenang."</p>
+
+            <p>Bima melanjutkan. "Gue belajar bahwa <strong>kedamaian itu pilihan</strong>. Dulu gue pikir kedamaian datang dari luar—dari project yang sukses, dari pengakuan orang. Sekarang gue sadar, kedamaian datang dari dalam, dari cara gue menyikapi segala sesuatu."</p>
+
+            <div class="principle-box">
+                <h4>Prinsip #10: Pilih Kedamaian di Atas Reaksi</h4>
+                <p>Prioritaskan respons yang tenang daripada keterikatan emosional. Kedamaian bukan berarti pasif, tapi memilih untuk merespons dengan clarity, bukan dari emosi.</p>
+            </div>
+
+            <p>Dewi berbagi, "Gue dulu gampang banget baper. Sekarang gue punya filter: 'Apakah ini penting? Apakah ini dalam kendali gue? Apakah ini worth my energy?' Kalau jawabannya nggak, gue lepas. Gue prioritize <strong>calm responses instead of emotional entanglement</strong>."</p>
+
+            <p>Citra menutup. "Dan gue belajar bahwa <strong>detachment bukan berarti nggak peduli</strong>. Justru dengan detachment, gue bisa peduli dengan lebih sehat. Gue bisa empati tanpa burnout, bisa membantu tanpa kehilangan diri sendiri. Itu yang bikin hubungan gue sama klien, sama teman, sama keluarga—jauh lebih sehat."</p>
+
+            <p>Mereka duduk diam sejenak, menikmati sunset di Lembang sambil merenungi perjalanan mereka.</p>
+
+            <p>"Tahu nggak?" kata Bima. "Setahun lalu, kita empat orang yang stres, overthinking, dan gampang terbawa emosi. Sekarang kita masih punya masalah—karena hidup emang begitu—tapi kita punya tools untuk handle-nya."</p>
+
+            <p>"Dan yang paling penting," tambah Arya, "kita belajar bahwa <strong>emotional detachment itu bukan jadi dingin atau nggak peduli</strong>. Tapi tentang <strong>melindungi inner world kita</strong> supaya bisa respond dengan clarity, balance, dan peace."</p>
+
+            <p>Mereka berempat tersenyum, menyadari bahwa perjalanan ini bukan tentang menjadi sempurna, tapi tentang menjadi lebih sadar. Tentang memilih untuk tidak lagi menjadi budak emosi sendiri, tapi menjadi master atas respons sendiri.</p>
+        </section>
+
+        <div class="reflection-section">
+            <h3>🌟 Refleksi Akhir</h3>
+            <p style="font-size: 1.1rem; line-height: 2;">
+                Kisah Arya, Bima, Citra, dan Dewi mengajarkan kita bahwa <strong>praktik emotional detachment</strong> adalah perjalanan seumur hidup. Ini bukan tentang menjadi dingin atau tidak peduli, melainkan tentang belajar <strong>peduli tanpa kehilangan diri sendiri</strong>, <strong>mencintai tanpa keterikatan yang menyakitkan</strong>, dan <strong>hadir sepenuhnya tanpa terhanyut dalam drama</strong>.</p>
+            
+            <p style="font-size: 1.1rem; line-height: 2; margin-top: 20px;">
+                Sepuluh prinsip yang mereka praktikkan—dari mengenali apa yang bukan tanggung jawab kita, pause sebelum bereaksi, mengamati pikiran tanpa terseret, menetapkan batasan sehat, membatasi overthinking, fokus pada fakta, praktik self-soothing, melepaskan keterikatan pada hasil, berkata tidak tanpa rasa bersalah, hingga memilih kedamaian di atas reaksi—adalah <strong>alat-alat praktis</strong> yang bisa kita terapkan dalam kehidupan sehari-hari.</p>
+        </div>
+
+        <div class="moral-lesson">
+            <h3>💫 Pesan Moral</h3>
+            <p style="font-size: 1.1rem; line-height: 2;">
+                Ketika kamu mempraktikkan emotional detachment dengan mindfulness dan compassion, kamu melindungi energimu, memperkuat ketahanan emosionalmu, dan menciptakan ruang untuk hubungan yang lebih sehat dan seimbang. <strong>Melepaskan bukan berarti kalah—itu adalah tindakan kekuatan tertinggi.</strong></p>
+        </div>
+
+        <footer>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px; color: var(--text-dark);">Terima Kasih Telah Membaca</h2>
+            <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 30px;">
+                Semoga kisah ini menginspirasi Anda untuk mempraktikkan emotional detachment dalam kehidupan sehari-hari dan menemukan kedamaian yang sejati.</p>
+            
+            <p style="font-size: 0.95rem; color: var(--text-light); margin: 30px 0;">
+                Dibuat dengan ❤️ di Bandung<br>
+                © 2024 - Kisah Emosional Detachment
+            </p>
+
+            <a href="https://imnxx.vercel.app" class="dashboard-link">
+                ← Kembali ke Dashboard
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        // Scroll indicator
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("scrollIndicator").style.width = scrolled + "%";
+        };
+
+        // Create particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                particle.style.width = particle.style.height = (Math.random() * 10 + 5) + 'px';
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Smooth scroll animation for chapters
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.chapter').forEach((chapter, index) => {
+            chapter.style.opacity = '0';
+            chapter.style.transform = 'translateY(30px)';
+            chapter.style.transition = `all 0.8s ease ${index * 0.1}s`;
+            observer.observe(chapter);
+        });
+
+        // Character card click effect
+        document.querySelectorAll('.char-box').forEach(box => {
+            box.addEventListener('click', function() {
+                this.style.animation = 'pulse 0.5s ease';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 500);
+            });
+        });
+
+        // Add parallax effect to floating shapes
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 20;
+                const xOffset = (0.5 - x) * speed;
+                const yOffset = (0.5 - y) * speed;
+                shape.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
