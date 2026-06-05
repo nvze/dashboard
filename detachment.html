@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jarak yang Menjaga — nseReview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  <style>
+    :root {
+      --ink: #1a1814;
+      --ink-soft: #3d3a34;
+      --ink-muted: #7a7368;
+      --paper: #faf8f4;
+      --paper-warm: #f3efe8;
+      --rule: #ddd8ce;
+      --accent: #b84c2e;
+      --accent-soft: #e8d5ce;
+      --blue-dot: #5ba3d9;
+      --serif: 'Playfair Display', Georgia, serif;
+      --body: 'Source Serif 4', Georgia, serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 19px;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* ─── HEADER / MASTHEAD ─── */
+    .masthead {
+      border-bottom: 2px solid var(--ink);
+      padding: 18px 0 14px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      background: var(--paper);
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-size: 15px;
+      letter-spacing: 0.12em;
+      font-weight: 500;
+      color: var(--ink);
+      text-transform: lowercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .logo-dot {
+      color: var(--blue-dot);
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .nav-rule {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    .nav-rule span { cursor: pointer; }
+    .nav-rule span:hover { color: var(--ink); }
+
+    /* ─── HERO / TITLE SECTION ─── */
+    .hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 32px 48px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .category-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .standfirst {
+      font-family: var(--body);
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      font-weight: 300;
+      font-style: italic;
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
+      margin-bottom: 32px;
+    }
+
+    .byline {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+
+    .byline-dot { color: var(--rule); }
+
+    /* ─── MAIN CONTENT ─── */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+
+    /* Hero image */
+    .hero-image {
+      width: 100%;
+      max-width: 100%;
+      margin: 48px 0 12px;
+      display: block;
+      border: 1px solid var(--rule);
+    }
+
+    .caption {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    /* Prose */
+    .prose p {
+      margin-bottom: 1.6em;
+    }
+
+    .prose em { font-style: italic; }
+    .prose strong { font-weight: 700; }
+
+    /* Drop cap */
+    .prose p.dropcap::first-letter {
+      font-family: var(--serif);
+      font-size: 4.8em;
+      font-weight: 700;
+      float: left;
+      line-height: 0.82;
+      margin-right: 10px;
+      margin-top: 6px;
+      color: var(--accent);
+    }
+
+    /* Pull quote */
+    .pull-quote {
+      margin: 48px 0;
+      padding: 32px 36px;
+      background: var(--paper-warm);
+      border-top: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .pull-quote p {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      line-height: 1.45;
+      font-style: italic;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .pull-quote cite {
+      display: block;
+      margin-top: 14px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      font-style: normal;
+    }
+
+    /* Scene heading */
+    .scene {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin: 52px 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .scene::before, .scene::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* Section heading */
+    .prose h2 {
+      font-family: var(--serif);
+      font-size: 1.65rem;
+      font-weight: 700;
+      margin: 48px 0 20px;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    /* Math block */
+    .math-block {
+      background: var(--paper-warm);
+      border-left: 3px solid var(--ink-muted);
+      padding: 20px 28px;
+      margin: 36px 0;
+      border-radius: 2px;
+      font-size: 0.95rem;
+    }
+
+    .math-label {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 10px;
+    }
+
+    /* Ornament */
+    .ornament {
+      text-align: center;
+      margin: 40px 0;
+      color: var(--rule);
+      font-size: 1.4rem;
+      letter-spacing: 0.5em;
+    }
+
+    /* Dialogue */
+    .dialogue {
+      margin: 0 0 1.6em 28px;
+      border-left: 2px solid var(--accent-soft);
+      padding-left: 20px;
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+
+    /* Footer / back link */
+    .article-footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 32px 60px;
+      border-top: 2px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .back-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    .footer-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--ink-muted);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-logo span { color: var(--blue-dot); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body { font-size: 17px; }
+      .hero, .article-wrap, .article-footer { padding-left: 20px; padding-right: 20px; }
+      .pull-quote { padding: 24px 22px; }
+      .pull-quote p { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="logo">nse<span class="logo-dot">.</span>Review</div>
+  <nav class="nav-rule">
+    <span>Fiksi</span>
+    <span>Esai</span>
+    <span>Ilmu</span>
+    <span>Resensi</span>
+  </nav>
+</header>
+
+<!-- HERO TITLE -->
+<section class="hero">
+  <span class="category-tag">Cerpen · Psikologi &amp; Sastra</span>
+  <h1>Jarak yang<br /><em>Menjaga</em></h1>
+  <p class="standfirst">
+    Empat sahabat dari Bandung — dua perempuan, dua lelaki — menghadapi satu pertanyaan yang sama di meja yang berbeda: bagaimana seseorang bisa mencintai tanpa kehilangan dirinya sendiri?
+  </p>
+  <div class="byline">
+    <span>nseReview Editorial</span>
+    <span class="byline-dot">·</span>
+    <span>Fiksi</span>
+    <span class="byline-dot">·</span>
+    <span>4.000 kata</span>
+  </div>
+</section>
+
+<!-- ARTICLE BODY -->
+<main class="article-wrap">
+
+  <img src="detachment.jpg" alt="How to Practice Emotional Detachment" class="hero-image" />
+  <p class="caption">Ilustrasi: Seni merawat diri — melepas bukan berarti tidak peduli.</p>
+
+  <article class="prose">
+
+    <!-- SCENE 1 -->
+    <div class="scene">Satu — Kafe Pagi, Dago</div>
+
+    <p class="dropcap">
+      Hujan turun dini hari itu tanpa permisi, membasahi trotoar Jalan Dago sebelum warung-warung sempat membuka tirai. Aroma petrichor bercampur dengan bau kopi yang mengepul dari dalam <em>Titik Koma</em>, sebuah kafe kecil bertingkat dua yang sudah menjadi kantor tidak resmi mereka sejak zaman skripsi.
+    </p>
+
+    <p>
+      Hana Paramita tiba paling awal, seperti biasanya. Ia meletakkan laptopnya di meja sudut dekat jendela, memesan Americano tanpa gula, lalu membuka dokumen yang sudah ia tulisi sejak subuh: sebuah makalah tentang <em>emotional regulation</em> untuk jurnal psikologi yang tenggat waktunya empat hari lagi. Hana adalah peneliti muda di Fakultas Psikologi Universitas Padjadjaran — usianya dua puluh delapan, rambut hitam selalu dikucir rendah, dan ia punya kebiasaan mengetuk-ngetuk meja saat berpikir keras.
+    </p>
+
+    <p>
+      Yang datang berikutnya adalah Raka Wirawan, insinyur perangkat lunak yang bekerja dari rumah untuk sebuah perusahaan rintisan di Singapura. Raka masuk sambil mengibas-ibaskan jaket denim yang basah, melihat Hana, dan langsung duduk tanpa ditanya.
+    </p>
+
+    <p class="dialogue">
+      "Lo kelihatan kayak orang yang habis baca Sartre sejak jam empat pagi."
+    </p>
+
+    <p>
+      Hana tidak mengangkat kepala. "Stoikisme, bukan Sartre. Beda."
+    </p>
+
+    <p>
+      Mereka berteman sejak kelas matrikulasi — dua orang dengan cara berpikir yang berseberangan namun entah mengapa saling melengkapi. Raka terlalu sering larut dalam urusan orang lain; Hana sebaliknya, terlalu rapi menjaga batas. Bertahun-tahun persahabatan membuat keduanya diam-diam saling mengamati dan saling mencoba memahami cara yang lain melihat dunia.
+    </p>
+
+    <p>
+      Sepuluh menit kemudian, pintu kafe terbuka lagi. Gilang Saputra dan Mira Kusumawati masuk bersama — bukan karena mereka berpacaran, tetapi karena kos mereka bersebelahan di Ciumbuleuit dan mereka memang selalu berangkat berbarengan sejak dulu. Gilang adalah dosen muda di ITB, mengajar matematika diskret, berpenampilan rapi dengan kacamata tipis yang selalu sedikit miring. Mira adalah editor di sebuah penerbitan independen di Bandung Timur; ia yang paling banyak bicara di antara mereka berempat, namun juga yang paling cepat membaca suasana hati orang lain.
+    </p>
+
+    <p>
+      Mereka empat orang ini adalah lingkar kecil yang sudah bertahan lebih dari enam tahun — melewati wisuda, putus cinta, pindah kerja, kehilangan orang tua, dan semua jenis kekacauan yang datang diam-diam di usia dua puluhan akhir.
+    </p>
+
+    <!-- PULL QUOTE 1 -->
+    <div class="pull-quote">
+      <p>"Terkadang melepaskan sesuatu adalah tindakan kekuatan yang jauh lebih besar daripada mempertahankannya."</p>
+      <cite>— Eckhart Tolle</cite>
+    </div>
+
+    <!-- SCENE 2 -->
+    <div class="scene">Dua — Raka dan Pertanyaan yang Menggantung</div>
+
+    <p>
+      Kopi Raka belum habis separuh ketika ia akhirnya berkata: "Gue baru putus kemarin."
+    </p>
+
+    <p>
+      Meja hening sebentar. Mira menutup bukunya. Gilang menghentikan coretannya di kertas. Hana akhirnya mengangkat wajah dari layar.
+    </p>
+
+    <p class="dialogue">
+      "Dengan Sari?" tanya Mira pelan.
+    </p>
+
+    <p>
+      "Iya." Raka menyesap kopinya. "Atau lebih tepatnya, Sari yang mutusin gue. Katanya gue terlalu <em>available</em>. Terlalu banyak ada."
+    </p>
+
+    <p>
+      Gilang mengerutkan dahi. "Itu salah? Emangnya cowok yang perhatian itu jadi masalah sekarang?"
+    </p>
+
+    <p>
+      "Bukan soal perhatian, Lang." Hana memotong, suaranya tenang dan terukur. "Terlalu available itu bisa jadi bentuk ketidakamanan. Ketika lo nggak bisa duduk diam dengan diri sendiri, lo ngisi kekosongan itu dengan ada di mana-mana buat orang lain. Dan itu... melelahkan. Buat lo sendiri, dan buat orang yang lo tuju."
+    </p>
+
+    <p>
+      Raka menatapnya. "Lo baru aja bilang gue codependent."
+    </p>
+
+    <p>
+      "Gue bilang lo mungkin perlu belajar detachment. Bukan berarti lo nggak peduli. Justru sebaliknya."
+    </p>
+
+    <p>
+      Mira mengangguk perlahan. "Gue pernah baca soal itu. Ada bedanya antara mencintai dengan tangan terbuka versus mencintai dengan mencengkeram. Yang pertama memberi ruang. Yang kedua... menyedot oksigen."
+    </p>
+
+    <p>
+      Raka diam cukup lama. Di luar, hujan mulai mereda, menyisakan rintik-rintik kecil yang menempel di kaca jendela seperti titik-titik kode Morse yang tidak ia mengerti.
+    </p>
+
+    <!-- MATH BLOCK -->
+    <div class="math-block">
+      <div class="math-label">Catatan Gilang — di sudut kertasnya</div>
+      <p>Gilang menggambar di margin catatannya sore itu sebuah fungsi sederhana untuk menggambarkan konsep yang Hana jelaskan. Ia memodelkan <em>keterlibatan emosional</em> \( E \) sebagai fungsi dari jarak psikologis \( d \):</p>
+      \[
+        E(d) = \frac{C}{1 + e^{\,k(d - d_0)}}
+      \]
+      <p style="margin-top:10px; font-size:0.9rem; color: var(--ink-soft);">
+        Di mana \( C \) adalah kapasitas emosional maksimum seseorang, \( k \) adalah laju perubahan, dan \( d_0 \) adalah titik keseimbangan — jarak optimal di mana seseorang bisa <em>hadir sepenuhnya</em> tanpa kehilangan diri. Detachment yang sehat bukan berarti \( E \to 0 \), melainkan menemukan \( d_0 \) yang tepat.
+      </p>
+    </div>
+
+    <p>
+      "Itu kurva sigmoid," kata Gilang sambil mendorong kertasnya ke tengah meja. "Terlalu dekat, lo kehilangan perspektif. Terlalu jauh, lo nggak bisa menyentuh apapun. Ada titik optimal — titik di mana lo cukup dekat untuk peduli, cukup jauh untuk tetap jernih."
+    </p>
+
+    <p>
+      Mira memandangi rumus itu. "Lo baru aja mathematize perasaan."
+    </p>
+
+    <p>
+      "Matematika cuma bahasa," Gilang mengangkat bahu. "Kalau lo bisa jelaskan sesuatu dengan tepat, artinya lo paham."
+    </p>
+
+    <!-- SCENE 3 -->
+    <div class="scene">Tiga — Mira dan Beban yang Tak Pernah Diakui</div>
+
+    <p>
+      Mereka memesan makan siang di tempat yang sama — nasi goreng kampung dan teh tarik hangat — karena hujan belum benar-benar berhenti dan tidak ada yang berniat kemana-mana. Percakapan bergeser, seperti biasanya, dari satu topik ke topik lain tanpa koordinasi.
+    </p>
+
+    <p>
+      Tapi ada sesuatu yang Hana perhatikan pada Mira sejak pagi. Ada lingkaran tipis di bawah mata perempuan itu. Ada cara ia tersenyum yang sedikit terlambat dari biasanya — seperti otaknya harus memberikan instruksi lebih dulu sebelum wajahnya bereaksi.
+    </p>
+
+    <p class="dialogue">
+      "Mira. Lo baik-baik aja?"
+    </p>
+
+    <p>
+      Semua orang melihat ke arah Mira. Ia memutar cangkir tehnya.
+    </p>
+
+    <p>
+      "Gue lagi ngurusin manuskrip penulis yang deadlinenya tiga hari lagi dan dia ngirim revisi jam dua pagi sambil minta gue balas sekarang. Sudah dua minggu kayak gitu terus."
+    </p>
+
+    <p>
+      "Lo balesin?" tanya Raka.
+    </p>
+
+    <p>
+      "Selalu."
+    </p>
+
+    <p>
+      Gilang meletakkan garpunya. "Kenapa?"
+    </p>
+
+    <p>
+      Mira terdiam. Itu pertanyaan yang sepertinya sederhana tapi ternyata tidak. Kenapa? Karena ia takut dianggap tidak profesional? Karena ia tidak mau mengecewakan? Karena selama ini ia percaya bahwa nilai dirinya sebanding dengan seberapa cepat ia merespons, seberapa banyak ia bersedia memberikan?
+    </p>
+
+    <p>
+      "Gue nggak bisa bilang nggak," akhirnya ia berkata. "Bukan karena takut dipecat. Tapi karena... gue selalu ngerasa kalau gue nggak ada, semuanya akan berantakan. Dan itu jadi semacam... kebutuhan. Buat ngerasa penting."
+    </p>
+
+    <p>
+      Hana mengangguk pelan, tidak menghakimi. "Itu salah satu bentuk yang paling halus dari kecanduan validasi. Lo bukan menolong karena lo mampu — lo menolong karena lo butuh dibutuhkan."
+    </p>
+
+    <div class="pull-quote">
+      <p>Mencintai tanpa kehilangan diri sendiri bukan tentang menarik diri dari dunia — ini tentang tahu di mana diri sendiri berakhir dan orang lain dimulai.</p>
+      <cite>— Mira Kusumawati, catatan harian</cite>
+    </div>
+
+    <p>
+      Mira tidak langsung menjawab. Tapi ada sesuatu yang melonggar di wajahnya — seperti seorang yang sudah lama menahan napas akhirnya diizinkan menghela udara.
+    </p>
+
+    <p>
+      "Jadi... gimana caranya berhenti?"
+    </p>
+
+    <p>
+      "Bukan berhenti peduli," kata Hana. "Tapi mulai mengenali batas antara empati dan self-erasure. Lo boleh merespons. Tapi lo juga boleh bilang: <em>besok pagi gue akan cek ini, malam ini gue butuh istirahat</em>. Itu bukan penolakan. Itu pengakuan bahwa lo juga manusia."
+    </p>
+
+    <!-- SCENE 4 -->
+    <div class="scene">Empat — Gilang dan Pikiran yang Teratur</div>
+
+    <p>
+      Gilang adalah yang paling sulit dibaca di antara mereka berempat. Ia tidak banyak mengeluh, tidak mudah memperlihatkan gejolak, dan punya kemampuan aneh untuk tetap tampak stabil bahkan di tengah situasi yang kacau. Orang-orang di kampus sering menyebutnya "Profesor Dingin" — bukan karena ia tidak ramah, tapi karena ia jarang terlihat terbawa arus.
+    </p>
+
+    <p>
+      Raka yang pertama menyadari: itu bukan kekuatan. Itu pertahanan.
+    </p>
+
+    <p>
+      "Lang," kata Raka di sela-sela percakapan, "lo sendiri gimana? Lo kerja sampai jam berapa semalam?"
+    </p>
+
+    <p>
+      "Jam satu."
+    </p>
+
+    <p>
+      "Kenapa?"
+    </p>
+
+    <p>
+      Gilang mengangkat bahu. "Ada mahasiswa yang datang ke ruangan gue jam sebelas malam. Nangis. Katanya dia nggak ngerti materi ujian besoknya dan orangtuanya bakal marah kalau dia dapat nilai jelek. Gue nggak bisa tolak."
+    </p>
+
+    <p>
+      Mira menoleh. "Lo ngajarin dia sampai jam satu pagi?"
+    </p>
+
+    <p>
+      "Iya."
+    </p>
+
+    <p>
+      "Dan besoknya lo ngajar jam tujuh?"
+    </p>
+
+    <p>
+      "Iya."
+    </p>
+
+    <p>
+      Hana menggambar sesuatu di sudut kertasnya — sebuah lingkaran, lalu lingkaran yang lebih kecil di dalamnya. "Ini namanya boundaryless empathy. Lo merasakan apa yang orang lain rasakan dengan begitu kuat sampai lo nggak lagi bisa membedakan mana tanggung jawab lo, mana yang bukan."
+    </p>
+
+    <p>
+      "Tapi bukankah itu justru bagus?" tanya Gilang. "Kalau lo bisa merasakan apa yang orang lain rasakan—"
+    </p>
+
+    <p>
+      "Empati tanpa batas," Hana memotong dengan lembut, "bukan kebaikan. Itu pengorbanan yang tidak diminta, yang akhirnya akan lo sesali karena lo nggak pernah memilihnya dengan sadar."
+    </p>
+
+    <p>
+      Gilang menatap lingkaran yang Hana gambar. Ada sesuatu yang bergerak di wajahnya — bukan kesedihan, tapi semacam pengakuan. Bahwa selama ini ia telah memakai topeng ketenangan untuk menyembunyikan kenyataan bahwa ia tidak tahu cara berkata tidak tanpa merasa bersalah.
+    </p>
+
+    <div class="math-block">
+      <div class="math-label">Kerangka psikologis — Hana menjelaskan</div>
+      <p>Hana menggunakan analogi yang Gilang bisa mengerti. Jika total kapasitas energi emosional seseorang dalam sehari adalah \( W \), dan setiap tindakan bantuan memerlukan energi \( w_i \), maka kondisi sehat terjadi ketika:</p>
+      \[
+        \sum_{i=1}^{n} w_i \;\leq\; \alpha \cdot W, \quad 0 < \alpha < 1
+      \]
+      <p style="margin-top:10px; font-size:0.9rem; color: var(--ink-soft);">
+        Di mana \( \alpha \) adalah koefisien preservasi — ruang yang secara sadar disisihkan untuk diri sendiri. Ketika \( \alpha \to 0 \), seseorang mengorbankan seluruh kapasitasnya. Detachment yang sehat memastikan \( \alpha \) selalu bernilai positif dan bermakna.
+      </p>
+    </div>
+
+    <!-- SCENE 5 -->
+    <div class="scene">Lima — Hana dan Sisi Lain dari Jarak</div>
+
+    <p>
+      Hujan akhirnya benar-benar berhenti. Cahaya sore menerobos dari celah awan, memantul di genangan air di trotoar, menciptakan pantulan-pantulan kecil yang bergerak mengikuti angin.
+    </p>
+
+    <p>
+      Mereka masih di sana. Kafe sudah berganti shift — pelayan baru, musik yang lebih tenang, wangi kopi yang tidak sepanas tadi.
+    </p>
+
+    <p>
+      "Gue mau tanya sesuatu ke lo, Han," kata Raka tiba-tiba. "Dan lo harus jawab jujur."
+    </p>
+
+    <p>
+      Hana memandangnya. "Oke."
+    </p>
+
+    <p>
+      "Semua yang lo bilang hari ini — soal jarak, soal batas, soal detachment — itu teori, atau itu cara lo sendiri buat nggak ngerasa sakit?"
+    </p>
+
+    <p>
+      Hening yang panjang. Mira dan Gilang diam, tidak bergerak.
+    </p>
+
+    <p>
+      Hana akhirnya meletakkan pensilnya. "Dua-duanya," katanya. "Itu teori yang gue pelajari karena gue butuh cara untuk menjelaskan kenapa dulu gue selalu kelelahan. Kenapa dulu gue selalu ngerasa terkuras sehabis bertemu orang, bahkan orang-orang yang gue sayangi."
+    </p>
+
+    <p>
+      "Dan sekarang?" tanya Mira pelan.
+    </p>
+
+    <p>
+      "Sekarang gue masih belajar. Detachment yang sehat itu bukan tembok. Bukan ketidakpedulian. Tapi memang butuh waktu untuk membedakan mana yang satu, mana yang lain. Kadang gue kebablasan ke sisi yang salah — terlalu dingin, terlalu berjarak — dan gue nggak selalu sadar."
+    </p>
+
+    <p>
+      Raka mengangguk pelan. Ada sesuatu yang berbeda dari cara ia memandang Hana sekarang — bukan kasihan, tapi semacam rasa hormat yang lebih dalam. Selama ini ia mengira Hana adalah orang yang sudah selesai — yang sudah punya semua jawaban dan tinggal menjalani. Ternyata ia juga tengah dalam perjalanan, hanya saja ia sudah lebih jauh dari yang lain.
+    </p>
+
+    <div class="pull-quote">
+      <p>Menjaga jarak yang tepat bukan tanda tidak peduli. Itu tanda bahwa seseorang tahu betapa berharganya kehadirannya — dan ingin hadir dengan utuh, bukan dalam keadaan terkuras.</p>
+      <cite>— Hana Paramita</cite>
+    </div>
+
+    <!-- SCENE 6 -->
+    <div class="scene">Enam — Sepuluh Cara yang Mereka Bicarakan</div>
+
+    <p>
+      Gilang membuka lagi kertas catatannya — kali ini bukan untuk menulis rumus, tapi karena ia ingin mengingat setiap hal yang mereka bicarakan hari ini. Ada sesuatu yang terasa seperti pelajaran, meski tidak ada yang mengajar secara formal.
+    </p>
+
+    <p>
+      "Kalau gue rangkum," katanya, "ada sepuluh hal konkret yang kita bahas hari ini soal emotional detachment yang sehat. Gue tulis, ya?"
+    </p>
+
+    <p>
+      Tidak ada yang protes. Gilang mulai menulis dengan rapi.
+    </p>
+
+    <p>
+      Pertama, <strong>kenali apa yang bukan tanggung jawabmu</strong>. Raka tidak bertanggung jawab atas kebahagiaan Sari. Mira tidak bertanggung jawab atas ketenangan batin penulisnya di tengah malam. Gilang tidak bertanggung jawab untuk menjadi guru dua puluh empat jam. Melepaskan rasa tanggung jawab yang salah tempat bukan bentuk egois — itu keadilan untuk diri sendiri.
+    </p>
+
+    <p>
+      Kedua, <strong>jeda sebelum bereaksi</strong>. Saat seseorang mengirim pesan menuntut di jam dua pagi, respon otomatis adalah panik dan langsung menjawab. Tapi jeda — satu tarikan napas, satu menit keheningan — memberi ruang untuk memilih respons yang sadar, bukan yang impulsif.
+    </p>
+
+    <p>
+      Ketiga, <strong>amati pikiran, jangan terseret</strong>. Pikiran adalah pengunjung, bukan penjaga. Ketika pikiran berteriak <em>lo nggak cukup baik</em> atau <em>kalau lo nggak bantu sekarang lo egois</em>, seseorang bisa memilih untuk menyaksikan pikiran itu tanpa mempercayainya sepenuhnya.
+    </p>
+
+    <p>
+      Keempat, <strong>tetapkan batas emosional yang tegas</strong>. Bukan tembok yang memisahkan, tapi pagar yang masih memiliki pintu — yang bisa dibuka dengan sadar, bukan dijebol oleh orang lain.
+    </p>
+
+    <p>
+      Kelima, <strong>ganti pertanyaan "bagaimana kalau" dengan "apakah ini dalam kendalimu"</strong>. Overthinking tumbuh subur di ruang antara kekhawatiran dan kenyataan. Pertanyaan sederhana itu memotong spiral sebelum terlalu dalam.
+    </p>
+
+    <p>
+      Keenam, <strong>berpegang pada fakta, bukan asumsi</strong>. Mira tidak tahu pasti apa yang dipikirkan penulisnya tentang dirinya. Raka tidak tahu pasti mengapa Sari meninggalkannya — hanya asumsi yang kemudian ia percaya sebagai kebenaran. Fakta lebih stabil dari cerita yang kita bangun di kepala sendiri.
+    </p>
+
+    <p>
+      Ketujuh, <strong>latih teknik menenangkan diri</strong>. Hana menyebutkan pernapasan dalam dan grounding — cara sederhana untuk membawa perhatian kembali ke tubuh ketika emosi mulai mengambil alih. Bukan pelarian, tapi penjangkaran.
+    </p>
+
+    <p>
+      Kedelapan, <strong>lepaskan keterikatan pada hasil</strong>. Gilang tidak bisa menjamin mahasiswanya lulus dengan nilai bagus meski ia mengajar sampai pagi. Raka tidak bisa menjamin hubungannya berhasil meski ia hadir setiap saat. Ada yang bisa dipengaruhi, ada yang tidak bisa dikontrol — dan belajar menerima perbedaan itu adalah bentuk kebijaksanaan.
+    </p>
+
+    <p>
+      Kesembilan, <strong>berkata tidak tanpa rasa bersalah</strong>. Ini yang paling sulit bagi Mira. Tapi "tidak" yang diucapkan dengan hormat adalah kalimat lengkap. Tidak membutuhkan penjelasan panjang, tidak membutuhkan permintaan maaf yang berlapis.
+    </p>
+
+    <p>
+      Kesepuluh, <strong>pilih kedamaian daripada reaksi</strong>. Ketika seseorang memprovokasi, ketika situasi memanas, ada pilihan untuk tidak ikut terbakar. Bukan karena tidak peduli — tapi karena api yang dijaga dari jarak aman bisa menghangatkan tanpa membakar.
+    </p>
+
+    <div class="ornament">· · ·</div>
+
+    <!-- SCENE 7 -->
+    <div class="scene">Tujuh — Yang Tersisa Setelah Kafe Tutup</div>
+
+    <p>
+      Pukul enam sore, Titik Koma mulai meredupkan lampunya — isyarat halus bahwa hari sudah semakin malam dan meja-meja perlu dikembalikan untuk pelanggan makan malam.
+    </p>
+
+    <p>
+      Mereka membereskan barang-barang mereka dengan gerakan yang sudah sangat familiar. Raka menutup laptopnya. Mira melipat jaketnya. Gilang merapikan tumpukan kertasnya dengan rapi — lembar demi lembar, termasuk kertas berisi rumus sigmoid dan catatan yang ia tulis siang tadi.
+    </p>
+
+    <p>
+      Di depan pintu kafe, Raka berhenti sebentar memandang ke arah jalan. Genangan air di trotoar sudah mulai menyusut. Lampu-lampu toko menyala satu per satu.
+    </p>
+
+    <p class="dialogue">
+      "Gue mau coba sesuatu," katanya.
+    </p>
+
+    <p>
+      Mereka memandangnya.
+    </p>
+
+    <p>
+      "Gue mau pulang, duduk sendiri, dan nggak langsung buka HP. Mungkin setengah jam. Mungkin sejam. Gue mau lihat apa yang gue rasakan kalau gue nggak langsung ngisi kekosongan dengan sesuatu."
+    </p>
+
+    <p>
+      Mira tersenyum — senyum yang kali ini tidak terlambat datang. "Itu langkah yang bagus, Ka."
+    </p>
+
+    <p>
+      "Dan gue," kata Mira kemudian, "mau matiin notifikasi email jam sembilan malam. Mulai malam ini."
+    </p>
+
+    <p>
+      Gilang menyesuaikan kacamatanya yang miring. "Gue mau bilang ke mahasiswa gue bahwa konsultasi di luar jam kantor harus lewat email, bukan ketuk pintu langsung."
+    </p>
+
+    <p>
+      Hana memandangi ketiga temannya bergantian. Ada sesuatu yang hangat yang ia rasakan — bukan menyengat seperti biasanya, tapi stabil. Seperti cahaya matahari yang masuk dari jendela pada sudut yang tepat.
+    </p>
+
+    <p>
+      Ia tidak mengatakan apapun. Tapi dalam hati ia mencatat: ini yang selama ini ia coba jelaskan dalam ratusan halaman jurnal dan presentasi akademik — bahwa detachment yang sehat bukan tentang menjadi dingin. Ini tentang memiliki cukup ruang di dalam diri untuk tetap hangat tanpa terbakar habis.
+    </p>
+
+    <p>
+      Mereka berpencar di pertigaan Dago. Mira dan Gilang ke kiri menuju Ciumbuleuit. Raka ke kanan menuju kontrakannya di Dipatiukur. Hana lurus terus — ia masih harus ke kampus untuk mengambil beberapa buku referensi.
+    </p>
+
+    <p>
+      Tapi sebelum benar-benar berpisah, Raka berbalik sebentar.
+    </p>
+
+    <p class="dialogue">
+      "Han."
+    </p>
+
+    <p>
+      Hana menoleh.
+    </p>
+
+    <p>
+      "Makasih udah selalu di sini. Bahkan waktu cara lo ada di sini itu diam dan nggak bilang apa-apa."
+    </p>
+
+    <p>
+      Hana tersenyum tipis. "Kadang kehadiran itu cukup."
+    </p>
+
+    <p>
+      Ia berjalan. Angin sore Bandung menerpa punggungnya — dingin, segar, dan terasa seperti izin untuk bernafas.
+    </p>
+
+    <div class="ornament">· · ·</div>
+
+    <!-- EPILOG -->
+    <div class="scene">Epilog — Tiga Minggu Kemudian</div>
+
+    <p>
+      Raka mengirim pesan grup pukul delapan malam — bukan jam dua belas, bukan jam dua pagi — sebuah foto sederhana: secangkir kopi, sebuah buku, dan jendela yang menghadap lampu-lampu kota Bandung di bawah sana.
+    </p>
+
+    <p>
+      Captionnya hanya satu baris: <em>Ternyata kesendirian bisa terasa seperti rumah kalau lo nggak buru-buru kabur darinya.</em>
+    </p>
+
+    <p>
+      Mira membalas dengan emoji kecil dan satu kalimat: <em>Gue tidur jam sepuluh tadi malam. Pertama kalinya dalam dua bulan.</em>
+    </p>
+
+    <p>
+      Gilang mengirim foto catatan barunya — lembar bersih, tulisan rapi, dan di pojok kanan atas: sebuah persamaan kecil yang berbeda dari biasanya. Bukan tentang topologi atau teori graf, tapi tentang keseimbangan:
+    </p>
+
+    <div class="math-block">
+      <div class="math-label">Catatan Gilang — Tiga Minggu Kemudian</div>
+      \[
+        \text{Kesehatan Emosional} = \lim_{t \to \infty} \frac{\text{Kehadiran untuk diri sendiri}}{\text{Total energi yang diberikan}} > 0
+      \]
+      <p style="margin-top:10px; font-size:0.9rem; color: var(--ink-soft);">
+        Selama batas bawah ini terjaga — selama ada sesuatu yang tersisa untuk diri sendiri — maka semua yang diberikan untuk orang lain menjadi pilihan, bukan kewajiban yang menguras.
+      </p>
+    </div>
+
+    <p>
+      Hana membaca semua pesan itu di ruang kerjanya yang kecil, di bawah cahaya lampu meja berwarna kuning. Ia tidak langsung membalas. Ia meletakkan ponselnya menghadap ke bawah, menyandarkan punggungnya ke kursi, dan membiarkan dirinya hanya duduk — hadir, penuh, tanpa agenda.
+    </p>
+
+    <p>
+      Sepuluh menit kemudian, ia mengetik satu kalimat dan mengirimkannya ke grup:
+    </p>
+
+    <p>
+      <em>Mencintai dengan tangan terbuka itu bukan berarti tidak memegang apa-apa. Itu berarti memegang dengan cara yang tidak menyakiti — diri sendiri maupun orang yang kita cintai.</em>
+    </p>
+
+    <p>
+      Di luar jendela, Bandung malam itu terasa lebih tenang dari biasanya. Atau mungkin memang selalu seperti itu — dan mereka baru saja belajar bagaimana cara benar-benar mendengarnya.
+    </p>
+
+    <div class="ornament">✦</div>
+
+  </article>
+</main>
+
+<!-- FOOTER -->
+<footer class="article-footer">
+  <a href="https://imnxx.vercel.app" class="back-link">
+    ← Kembali ke Dashboard
+  </a>
+  <div class="footer-logo">nse<span>.</span>Review</div>
+</footer>
+
+</body>
+</html>
