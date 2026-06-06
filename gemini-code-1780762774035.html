@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>nseReview · Cerpen Hukum Fisika | Kisah Teknik Industri Bandung</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-body: #f7f9fc;
+            --bg-card: #ffffff;
+            --text-main: #242424;
+            --text-muted: #5f7f94;
+            --accent-dark: #0a2540;
+            --accent-blue: #2c7da0;
+            --accent-light: #7bc5e8;
+            --border-color: #eaeef2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-body);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Wrapper Jurnal Premium */
+        .journal-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: var(--bg-card);
+            border-radius: 24px;
+            box-shadow: 0 10px 40px -10px rgba(10, 37, 64, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03);
+            overflow: hidden;
+        }
+
+        /* Header Responsif */
+        .hero-science {
+            background: var(--accent-dark);
+            padding: 3rem 2.5rem;
+            color: white;
+            border-bottom: 4px solid var(--accent-light);
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .nse-logo {
+            font-family: 'Merriweather', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nse-logo span {
+            color: var(--accent-light);
+        }
+
+        .badge-journal {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .hero-title h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.3;
+            max-width: 800px;
+        }
+
+        .hero-title p {
+            font-size: 1.05rem;
+            margin-top: 1rem;
+            opacity: 0.85;
+            max-width: 700px;
+            font-weight: 300;
+        }
+
+        /* Konten Utama Flex Responsif */
+        .main-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .article-content {
+            flex: 1 1 65%;
+            padding: 3rem 4rem;
+            background: var(--bg-card);
+        }
+
+        .sidebar-figure {
+            flex: 1 1 35%;
+            background: #fafbfc;
+            padding: 3rem 2.5rem;
+            border-left: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+        }
+
+        /* Area Teks Bercerita - Tipografi Editorial Premium */
+        .story-text {
+            font-family: 'Merriweather', serif;
+            font-size: 1.125rem;
+            line-height: 1.85;
+            color: #333333;
+        }
+
+        .story-text p {
+            margin-bottom: 1.8rem;
+        }
+
+        .story-text strong {
+            font-weight: 700;
+            color: var(--accent-dark);
+        }
+
+        .story-text em {
+            font-style: italic;
+            background: linear-gradient(120deg, rgba(123, 197, 232, 0.2) 0%, rgba(123, 197, 232, 0.2) 100%);
+            padding: 0 0.2rem;
+        }
+
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1.2rem 0;
+            color: var(--accent-dark);
+            border-left: 4px solid var(--accent-light);
+            padding-left: 1rem;
+            line-height: 1.3;
+        }
+
+        /* Elemen Visual & Callout */
+        .equation-callout {
+            background: #f4f7f9;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            overflow-x: auto;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .equation-callout mjx-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0.5rem 0;
+        }
+
+        .quote-dialog {
+            background: #ffffff;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            font-size: 1.05rem;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-dialog::before {
+            content: "“";
+            font-family: 'Merriweather', serif;
+            font-size: 4rem;
+            color: rgba(123, 197, 232, 0.3);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+        }
+
+        /* Sidebar Elements */
+        .fig-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .fig-caption {
+            padding: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: #fdfdfd;
+            border-top: 1px solid var(--border-color);
+            line-height: 1.5;
+        }
+
+        .sidebar-box {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .sidebar-box h3 {
+            margin-top: 0;
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+            color: var(--accent-dark);
+        }
+
+        /* Navigasi Bawah */
+        .dashboard-link {
+            margin-top: 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-dashboard {
+            display: inline-block;
+            background: var(--accent-dark);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-dashboard:hover {
+            background: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 125, 160, 0.3);
+        }
+
+        footer {
+            background: #ffffff;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* --- Media Queries untuk Tablet & HP --- */
+        @media (max-width: 992px) {
+            .article-content {
+                padding: 2.5rem;
+            }
+            .sidebar-figure {
+                padding: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .journal-container {
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .main-grid {
+                flex-direction: column;
+            }
+
+            .article-content, .sidebar-figure {
+                flex: 1 1 100%;
+                width: 100%;
+            }
+
+            .sidebar-figure {
+                order: 2; /* Pindah ke bawah di HP */
+                border-left: none;
+                border-top: 1px solid var(--border-color);
+                padding: 2rem 1.5rem;
+            }
+
+            .article-content {
+                order: 1;
+                padding: 1.5rem;
+            }
+
+            .hero-science {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-title h1 {
+                font-size: 1.6rem;
+            }
+
+            .story-text {
+                font-size: 1.05rem; 
+                line-height: 1.7;
+            }
+
+            .quote-dialog {
+                padding: 1.2rem 1.5rem;
+                margin: 2rem 0;
+            }
+            
+            .equation-callout {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="journal-container">
+    <header class="hero-science">
+        <div class="logo-area">
+            <div class="nse-logo">nseReview<span>.</span></div>
+            <div class="badge-journal">Jurnal Sains Terapan | Edisi Fenomena Fisika</div>
+        </div>
+        <div class="hero-title">
+            <h1>Hukum Alam, Lini Produksi, dan Bandung yang Tak Pernah Berhenti Bernyanyi</h1>
+            <p>Sebuah cerpen tentang empat insinyur teknik industri yang menemukan makna aksi, reaksi, dan inersia di tengah hiruk-pikuk kota kembang.</p>
+        </div>
+    </header>
+
+    <div class="main-grid">
+        <article class="article-content">
+            <div class="story-text">
+                <p>“Bandung bukan hanya soal gedung sate dan kafe instagramable. Bandung adalah pusaran data, lini perakitan yang berdenyut, dan keringat dingin menjelang deadline produksi.” Itulah kalimat pembuka yang biasa dilontarkan <strong>Citra Maharani</strong> saat memandu timnya. Perempuan 27 tahun lulusan Teknik Industri ITB ini memegang posisi sebagai analis rantai pasok di sebuah perusahaan otomotif terkemuka. Bersama tiga rekannya: <strong>Andra Permana</strong> (ahli simulasi sistem), <strong>Budi Wibisono</strong> (spesialis lean manufacturing), dan <strong>Dinda Lestari</strong> (manajer pengendalian kualitas), mereka menghadapi proyek terbesar dalam karir: menstabilkan efisiensi pabrik setelah lonjakan permintaan yang tak terduga.</p>
+
+                <p>Suatu sore di bulan November, gerimis membasahi Dago. Di ruang rafik lantai 7, keempat sahabat itu duduk melingkar di antara tumpukan laptop dan diagram aliran. <strong>Dinda</strong> menggeser layar proyektor, memperlihatkan grafik menukik. “Tingkat cacat produk meningkat 22% dalam dua minggu. Padahal secara kapasitas mesin masih mencukupi. Ada yang tidak beres dengan aliran material.” Andra menyipit, lalu menuliskan sesuatu di papan tulis virtual. “Jika kita analogikan dengan Hukum Newton pertama — <em>Hukum Kelembaman</em>,” ucapnya, “Lini perakitan kita cenderung mempertahankan state-nya. Tapi ada <strong>gaya eksternal</strong> berupa perubahan shift kerja dan suku cadang baru yang mengganggu keseimbangan.”</p>
+
+                <div class="equation-callout">
+                    \[ \sum \vec{F} = \frac{d\vec{p}}{dt} = m\vec{a} \]
+                </div>
+
+                <p>Citra mengangguk. “Maka percepatan perubahan kualitas itu tidak muncul begitu saja. Ada force yang kita abaikan.” Ia mengambil spidol merah, menulis <strong>Hukum II Newton</strong> di pinggir whiteboard. “Gaya sama dengan massa dikali percepatan. Massa di sini analog dengan kompleksitas produksi, percepatan adalah laju peningkatan defect. Gaya eksternalnya?” Budi yang pendiam tiba-tiba berseru, “Itu <strong>ketidakkonsistenan kalibrasi alat ukur</strong>! Seperti gaya yang diberikan sistem pengukuran. Dalam Hukum Ketiga Newton, setiap aksi punya reaksi sama besar. Kalibrasi yang buruk akan menghasilkan reaksi produk reject.” Ruangan menjadi hidup. Diskusi pun melebar, mereka memutuskan untuk meninjau data dari perspektif fisika klasik.</p>
+
+                <h2>1. Hukum Gravitasi di Gudang Logistik</h2>
+                <p>Keesokan harinya, mereka turun ke gudang pusat di kawasan Gedebage. Debu dan wangi kardus bercampur dengan suara forklift. Dinda memperhatikan tata letak rak penyimpanan. “Lihatlah, hubungan antara dua massa barang: palet berat dan palet ringan. Newton merumuskan gaya tarik gravitasi sebagai \( F = G \frac{m_1 m_2}{r^2} \). Di sini, jarak antar zona penyimpanan memperlambat aliran—seakan tiap massa saling ‘menarik’ waktu siklus.” Andra segera mencatat data lalu menjalankan simulasi. “Kita bisa mengurangi efek kuadrat jarak dengan meminimalkan radius perpindahan.” Budi menambahkan, “Jangan lupa <strong>Hukum Hooke</strong> tentang elastisitas. Sistem rantai pasok kita seperti pegas, di mana \( F = k x \). Beban berlebih membuat deformasi permanen.” Mereka tertawa mengingat perkuliahan dulu; Citra lalu memotret diagram susunan gudang yang mirip dengan struktur kristal.</p>
+
+                <div class="equation-callout">
+                    \[ F = k \, x \quad \text{(Hukum Hooke: gaya sebanding dengan pertambahan panjang)} \]
+                </div>
+
+                <p>Sore itu juga Citra menyusun model matematis untuk menekan pemborosan. Namun masalah baru muncul: aliran fluida pendingin di lini pengecatan tidak stabil. Ini mengingatkan mereka pada prinsip <strong>Pascal</strong> dan <strong>Archimedes</strong>. “Tekanan yang diberikan pada fluida tertutup akan diteruskan ke segala arah,” ujar Dinda sambil menunjuk pipa hidrolik. “Jika tekanan di titik awal tidak seragam, maka celupan cat menjadi tidak merata.” Mereka menerapkan sistem distribusi tekanan merata dengan valve otomatis. Hasilnya spektakuler: penurunan defect hingga 10% dalam sepekan.</p>
+
+                <div class="quote-dialog">
+                    “Hukum Archimedes mengingatkan kita bahwa setiap benda yang tercelup dalam fluida mendapat gaya apung sebesar berat fluida yang dipindahkan. Begitu pula proyek kita: ketika tim ini benar-benar ‘tercelup’ dalam akar masalah, kita akan mendapat energi apung berupa solusi inovatif.”
+                </div>
+
+                <h2>2. Bernoulli dan Kecepatan Informasi</h2>
+                <p>Minggu ketiga, Andra mendapati bahwa bottleneck terjadi di stasiun inspeksi karena lambatnya aliran data kualitas. “Prinsip Bernoulli untuk fluida ideal: \( P + \frac{1}{2}\rho v^2 + \rho g h = \text{konstan} \). Dalam pabrik kita, tekanan (P) adalah kepadatan antrian, kecepatan (v) kecepatan inspeksi, dan h adalah level wewenang. Jika kita meningkatkan kecepatan inspeksi digital, tekanan di titik itu akan turun.” Usulnya membuat Budi merancang aplikasi berbasis AI untuk verifikasi cepat. Dengan bantuan Dinda yang piawai dalam machine learning, sistem itu terintegrasi dalam 6 hari.</p>
+
+                <div class="equation-callout">
+                    \[ P + \frac{1}{2} \rho v^2 + \rho g h = \text{konstan} \]
+                </div>
+
+                <p>Namun keajaiban terbesar adalah malam ketika listrik padam di sebagian pabrik. Mereka terpaksa menyelesaikan analisis dengan senter dan kertas grafik. Dinda, yang paling tenang, bergumam tentang <strong>Hukum Ohm</strong> yang tidak hanya untuk listrik, tapi juga aliran informasi. “\( V = IR \), tegangan adalah dorongan untuk berubah, arus adalah laju eksekusi, hambatan adalah resistensi tim terhadap paradigma baru.” Mereka kemudian memetakan resistensi organisasi dan secara bertahap menekan “hambatan internal”. Momen paling intens terjadi saat Citra meledak: “Kita terlalu lama berfoya-foya dengan asumsi! Hukum <strong>Faraday</strong> tentang induksi elektromagnetik menyatakan bahwa perubahan fluks magnetik menghasilkan GGL induksi. Perubahan budaya kita harus menghasilkan energi baru!” Mereka pun berkomitmen melakukan perubahan drastis pada prosedur.</p>
+
+                <div class="equation-callout">
+                    \[ \mathcal{E} = -\frac{d\Phi_B}{dt} \quad \text{(Hukum Induksi Faraday)} \]
+                </div>
+
+                <p>Setelah sebulan penuh, tingkat efisiensi pabrik meningkat drastis, mencapai 94.7% — rekor tertinggi dalam sejarah perusahaan. Di malam perayaan di sebuah kafe di Braga, <strong>Citra</strong> menatap teman-temannya dengan mata berbinar. “Kita tidak hanya menyelesaikan proyek. Kita membuktikan bahwa hukum-hukum fisika adalah puisi alam yang bisa diterjemahkan ke dalam tata kelola industri.” Andra menambahkan, “Newton, Pascal, Bernoulli… mereka bicara kepada kita lewat diagram pareto dan simulasi monte carlo.” Budi tersenyum kecil, “Dan yang terpenting, kita mengerti bahwa setiap aksi akan menuai reaksi — baik dalam sistem produksi maupun dalam persahabatan.”</p>
+
+                <h2>3. Di Antara Rumus dan Rasa</h2>
+                <p>Namun cerita tidak melulu tentang grafik dan tabel. Ada malam ketika Dinda hampir patah semangat karena tekanan dari atasan. Dia duduk di emperan pabrik sambil memandangi langit Bandung yang redup. Andra mendekat. “Ingat Hukum Kelembaman? Sebuah benda akan tetap diam atau bergerak lurus beraturan kecuali ada gaya luar. Kamu perempuan yang tangguh. Jangan biarkan tekanan eksternal mengubah momentum positifmu.” Dinda tersenyum, “Kadang kita butuh gaya dorong yang tepat.” Mereka berbagi tawa dan cokelat hangat. Persahabatan mereka menjadi analogi sempurna dari <strong>Hukum III Newton</strong>: setiap tindakan kepedulian menghasilkan reaksi semangat yang sama besar.</p>
+
+                <p>Puncaknya, ketika manajemen memutuskan untuk memberikan penghargaan inovasi terbaik. Keempat sahabat itu berdiri di atas panggung bersama. Citra berpidato: “Fisika mengajarkan bahwa tidak ada yang tercipta dari ketiadaan, tetapi dengan nalar dan kolaborasi, kita bisa mengubah energi potensial menjadi energi kinetik perubahan. Terima kasih untuk Andra, Budi, Dinda — tim yang membuat rumus-rumus itu hidup.” Penonton bertepuk tangan meriah. Di sudut ruangan, sebuah bingkai foto lama berisi diagram <strong>Hukum Coulomb</strong> dan <strong>Hukum Gravitasi Universal</strong> menjadi saksi bisu perjalanan mereka.</p>
+
+                <div class="equation-callout">
+                    \[ F = k \frac{q_1 q_2}{r^2} \quad \text{(Coulomb: gaya tarik muatan listrik)} \]
+                    <br>
+                    \[ F = G \frac{m_1 m_2}{r^2} \quad \text{(Gravitasi: tarik-menarik massa)} \]
+                </div>
+
+                <p>Sebagai penutup, Budi membacakan pesan yang ditulis Dinda di buku catatan lama: “Hidup seperti fluida ideal dalam pipa Bernoulli — ketika kecepatan meningkat, tekanannya menurun. Jangan takut melaju kencang demi mimpi. Nanti tekanan akan pulih saat kita berhasil.” Bandung yang hujan, deru mesin pabrik, dan semangat anak teknik industri mengajarkan satu hal: hukum alam adalah sahabat terbaik para pemecah masalah. Dan keempat insinyur itu pulang dengan kepala tegak, membawa pulang lebih dari sekadar sertifikat: mereka membawa pemahaman bahwa </p>
+
+                <p><strong>“Hukum tidak pernah bohong. Ia hanya perlu penerjemah yang jujur.”</strong> — kutipan yang kini tergantung di ruang kendali pabrik mereka.</p>
+
+                <p>Bulan berikutnya, mereka merancang modul pelatihan berbasis fisika untuk operator pabrik. <strong>Hukum Ohm</strong> digunakan untuk menjelaskan aliran energi di jalur perakitan; <strong>Hukum Archimedes</strong> untuk memahami daya apung dalam manajemen inventori. Para pekerja menyukainya karena sederhana dan membumi. Bahkan, seorang operator veteran bernama Pak Eman berkomentar, “Saya jadi paham kenapa angkatan kerja seperti fluida — kalau diberi tekanan dari segala arah, dia akan memancar ke semua sisi.” Semua tertawa. Transformasi kultural pun dimulai.</p>
+
+                <p>Pada suatu pagi di Taman Film, Andra menggenggam tangan Citra. “Ada satu hal yang belum kita analogikan,” katanya pelan. “Apa itu?” tanya Citra. “Faraday: perubahan fluks magnetik menghasilkan emf. Perubahan hatiku saat bersamamu menghasilkan energi yang tak terhingga.” Citra tersipu namun tersenyum lebar. Mereka pun memutuskan untuk menjalani riset bersama tentang kecerdasan buatan di industri 4.0. Dinda dan Budi hanya menggeleng geli, “Mereka berdua akhirnya mengerti gaya tarik Coulomb, saling mempengaruhi dalam jarak dekat.” Cerita mereka bukan sekadar novel teknik, tetapi sebuah mozaik tentang cinta, kerja sama, dan keindahan sains.</p>
+
+                <p>Dua tahun setelah proyek besar itu, keempat sahabat tersebut mendirikan sebuah konsultan kecil bernama “nseReview Dynamics” — terinspirasi dari logo yang selalu mereka pakai di buku catatan. Tepat di website mereka, sebuah kutipan dari Richard Feynman terpampang: “What I cannot create, I do not understand.” Dan mereka menciptakan ekosistem industri yang lebih manusiawi, selaras dengan hukum-hukum alam. Bandung menjadi saksi: langit biru, pabrik yang berdebar, dan cerita para insinyur yang tak pernah lelah membuktikan bahwa fisika adalah denyut peradaban.</p>
+            </div>
+
+            <div class="dashboard-link">
+                <a href="https://imnxx.vercel.app" class="btn-dashboard" target="_blank" rel="noopener noreferrer">⟳ Kembali ke Dashboard</a>
+                <p style="font-size: 0.8rem; margin-top: 1.2rem; color: #8fa6b8;">nseReview — merangkai sains dan narasi</p>
+            </div>
+        </article>
+
+        <aside class="sidebar-figure">
+            <div class="fig-card">
+                <img src="fisika_law.jpg" alt="Physics Laws Quick Reference Sheet - Hukum Newton, Gravitasi, Ohm, Faraday, dll" style="width:100%; height:auto; display:block;">
+                <div class="fig-caption">
+                    📜 <strong>Referensi hukum fisika</strong> — himpunan rumus yang menginspirasi solusi teknik industri (gambar: fisika_law.jpg)
+                </div>
+            </div>
+
+            <div class="sidebar-box">
+                <h3>⚡ Hukum dalam cerita</h3>
+                <ol style="margin-left: 1.2rem; line-height: 1.7; font-size: 0.9rem; color: #4a5d6e; padding-left: 0.5rem;">
+                    <li><strong>Newton's First Law</strong> (Inersia)</li>
+                    <li><strong>Newton's Second Law</strong> (\(F=ma\))</li>
+                    <li><strong>Newton's Third Law</strong> (Aksi-Reaksi)</li>
+                    <li><strong>Universal Gravitation</strong> (Gravitasi)</li>
+                    <li><strong>Hooke's Law</strong> (\(F=kx\))</li>
+                    <li><strong>Pascal's Law</strong> (Transmisi Tekanan)</li>
+                    <li><strong>Archimedes' Principle</strong> (Daya Apung)</li>
+                    <li><strong>Bernoulli's Principle</strong> (Aliran Fluida)</li>
+                    <li><strong>Ohm's Law</strong> (\(V=IR\))</li>
+                    <li><strong>Coulomb's Law</strong> (Elektrostatis)</li>
+                    <li><strong>Faraday's Law</strong> (Induksi Elektromagnetik)</li>
+                    <li><strong>Boyle's Law</strong> (\(PV=\text{constant}\))</li>
+                </ol>
+            </div>
+
+            <div style="background: rgba(123, 197, 232, 0.1); border-radius: 12px; padding: 1.2rem; text-align: center; border: 1px solid rgba(123, 197, 232, 0.3);">
+                <p style="font-size: 0.85rem; color: var(--accent-dark); margin: 0;"><strong>#BandungBercerita</strong><br>Teknik Industri cerdas, kota kreatif</p>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        © 2026 nseReview<span style="color:#2c7da0;">.</span> — Jurnal sains & humaniora. Cerpen fiksi berdasarkan ide hukum fisika.
+    </footer>
+</div>
+
+</body>
+</html>
