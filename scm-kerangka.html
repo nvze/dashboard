@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerangka Belajar Supply Chain Management Secara Utuh</title>
+    <style>
+        :root {
+            --bg: #f5f0eb;
+            --card-bg: #fffdf9;
+            --text: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --border: #e0d9cf;
+            --shadow: 0 6px 24px rgba(0, 0, 0, 0.07);
+            --shadow-hover: 0 14px 36px rgba(0, 0, 0, 0.13);
+            --radius: 16px;
+            --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Palet warna per fase — makin kaya */
+        --c1-header: #1b3a5c;
+        --c1-badge: #2c5f8a;
+        --c1-accent: #3b7db5;
+        --c1-light: #e3f0fa;
+
+        --c2-header: #2d6a4f;
+        --c2-badge: #40916c;
+        --c2-accent: #52b788;
+        --c2-light: #e6f7ee;
+
+        --c3-header: #b46118;
+        --c3-badge: #d97d2b;
+        --c3-accent: #f0983e;
+        --c3-light: #fef3e6;
+
+        --c4-header: #9b2226;
+        --c4-badge: #bc3a3f;
+        --c4-accent: #da555a;
+        --c4-light: #fde8e9;
+
+        --c5-header: #5a189a;
+        --c5-badge: #7b2cbf;
+        --c5-accent: #9d4edd;
+        --c5-light: #f3e8fd;
+
+        --c6-header: #005f73;
+        --c6-badge: #0a9396;
+        --c6-accent: #1db5b8;
+        --c6-light: #e0f7f8;
+
+        --c7-header: #4a1942;
+        --c7-badge: #7b2d6b;
+        --c7-accent: #c77dba;
+        --c7-light: #f9eef6;
+
+        --c8-header: #1e3a5f;
+        --c8-badge: #264e7a;
+        --c8-accent: #3f73a8;
+        --c8-light: #e5eef7;
+
+        --c9-header: #3b4d3e;
+        --c9-badge: #5a735c;
+        --c9-accent: #7d9b7f;
+        --c9-light: #edf3ee;
+
+        --c10-header: #6d2e46;
+        --c10-badge: #9a4762;
+        --c10-accent: #c76d87;
+        --c10-light: #f9eef2;
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            background: linear-gradient(170deg, #fdf6ee 0%, #f2ece0 25%, #e8e2d5 50%, #f7f3eb 75%, #fffdf7 100%);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ============ HEADER ============ */
+        .header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b3a5c 35%, #1f4d6e 65%, #162b42 100%);
+            color: #fff;
+            text-align: center;
+            padding: 70px 24px 55px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 5px solid #f0a500;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.12) 0%, transparent 65%);
+            border-radius: 50%;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -70px;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(100, 180, 255, 0.1) 0%, transparent 65%);
+            border-radius: 50%;
+        }
+
+        .header-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            animation: floatUp 8s infinite ease-in;
+        }
+
+        .particle:nth-child(1) {
+            width: 6px;
+            height: 6px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        .particle:nth-child(2) {
+            width: 4px;
+            height: 4px;
+            left: 25%;
+            animation-delay: 1.5s;
+        }
+        .particle:nth-child(3) {
+            width: 7px;
+            height: 7px;
+            left: 40%;
+            animation-delay: 3s;
+        }
+        .particle:nth-child(4) {
+            width: 5px;
+            height: 5px;
+            left: 55%;
+            animation-delay: 4.5s;
+        }
+        .particle:nth-child(5) {
+            width: 8px;
+            height: 8px;
+            left: 70%;
+            animation-delay: 2s;
+        }
+        .particle:nth-child(6) {
+            width: 4px;
+            height: 4px;
+            left: 85%;
+            animation-delay: 5.5s;
+        }
+        .particle:nth-child(7) {
+            width: 6px;
+            height: 6px;
+            left: 15%;
+            animation-delay: 6s;
+        }
+        .particle:nth-child(8) {
+            width: 5px;
+            height: 5px;
+            left: 92%;
+            animation-delay: 3.8s;
+        }
+
+        @keyframes floatUp {
+            0% {
+                bottom: -20px;
+                opacity: 0;
+                transform: translateX(0) scale(0.5);
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 0.6;
+            }
+            100% {
+                bottom: 110%;
+                opacity: 0;
+                transform: translateX(40px) scale(1.2);
+            }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .header .icon-row {
+            font-size: 56px;
+            margin-bottom: 14px;
+            display: block;
+            animation: bounceIcon 2s ease-in-out infinite;
+        }
+
+        @keyframes bounceIcon {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .header h1 {
+            font-size: 2.7rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            background: linear-gradient(180deg, #ffffff 0%, #d4e0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            max-width: 650px;
+            margin: 0 auto;
+            color: #c4d7ee;
+        }
+
+        /* ============ CONTAINER ============ */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+
+        /* ============ ROADMAP ============ */
+        .roadmap {
+            background: linear-gradient(135deg, #fffef9, #fdf8f0);
+            border-radius: var(--radius);
+            padding: 30px 32px;
+            margin-bottom: 38px;
+            box-shadow: var(--shadow);
+            border: 1.5px solid #d4c9b0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roadmap::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(240, 165, 0, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .roadmap h2 {
+            font-size: 1.35rem;
+            margin-bottom: 18px;
+            color: #3d2b1f;
+            position: relative;
+            z-index: 1;
+        }
+
+        .roadmap-flow {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .roadmap-item {
+            padding: 9px 18px;
+            border-radius: 22px;
+            white-space: nowrap;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+
+        .roadmap-item:nth-child(1) {
+            background: #e3f0fa;
+            color: #1b3a5c;
+        }
+        .roadmap-item:nth-child(3) {
+            background: #e6f7ee;
+            color: #2d6a4f;
+        }
+        .roadmap-item:nth-child(5) {
+            background: #fef3e6;
+            color: #b46118;
+        }
+        .roadmap-item:nth-child(7) {
+            background: #fde8e9;
+            color: #9b2226;
+        }
+        .roadmap-item:nth-child(9) {
+            background: #f3e8fd;
+            color: #5a189a;
+        }
+        .roadmap-item:nth-child(11) {
+            background: #e0f7f8;
+            color: #005f73;
+        }
+        .roadmap-item:nth-child(13) {
+            background: #f9eef6;
+            color: #4a1942;
+        }
+        .roadmap-item:nth-child(15) {
+            background: #e5eef7;
+            color: #1e3a5f;
+        }
+        .roadmap-item:nth-child(17) {
+            background: #edf3ee;
+            color: #3b4d3e;
+        }
+        .roadmap-item:nth-child(19) {
+            background: #f9eef2;
+            color: #6d2e46;
+        }
+
+        .roadmap-arrow {
+            color: #b0a090;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        /* ============ FASE CARD ============ */
+        .phase {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            margin-bottom: 26px;
+            box-shadow: var(--shadow);
+            border: 1.5px solid transparent;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .phase:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+        }
+
+        /* Warna border kiri berdasarkan fase */
+        .phase:nth-child(2) {
+            border-left: 6px solid var(--c1-accent);
+        }
+        .phase:nth-child(3) {
+            border-left: 6px solid var(--c2-accent);
+        }
+        .phase:nth-child(4) {
+            border-left: 6px solid var(--c3-accent);
+        }
+        .phase:nth-child(5) {
+            border-left: 6px solid var(--c4-accent);
+        }
+        .phase:nth-child(6) {
+            border-left: 6px solid var(--c5-accent);
+        }
+        .phase:nth-child(7) {
+            border-left: 6px solid var(--c6-accent);
+        }
+        .phase:nth-child(8) {
+            border-left: 6px solid var(--c7-accent);
+        }
+        .phase:nth-child(9) {
+            border-left: 6px solid var(--c8-accent);
+        }
+        .phase:nth-child(10) {
+            border-left: 6px solid var(--c9-accent);
+        }
+        .phase:nth-child(11) {
+            border-left: 6px solid var(--c10-accent);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 22px 28px;
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 1px solid transparent;
+            transition: var(--transition);
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.005) 0%, transparent 100%);
+        }
+
+        .phase-header:hover {
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.02) 0%, transparent 100%);
+        }
+
+        .phase-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .phase:nth-child(2) .phase-number {
+            background: linear-gradient(135deg, #1b3a5c, #3b7db5);
+        }
+        .phase:nth-child(3) .phase-number {
+            background: linear-gradient(135deg, #2d6a4f, #52b788);
+        }
+        .phase:nth-child(4) .phase-number {
+            background: linear-gradient(135deg, #b46118, #f0983e);
+        }
+        .phase:nth-child(5) .phase-number {
+            background: linear-gradient(135deg, #9b2226, #da555a);
+        }
+        .phase:nth-child(6) .phase-number {
+            background: linear-gradient(135deg, #5a189a, #9d4edd);
+        }
+        .phase:nth-child(7) .phase-number {
+            background: linear-gradient(135deg, #005f73, #1db5b8);
+        }
+        .phase:nth-child(8) .phase-number {
+            background: linear-gradient(135deg, #4a1942, #c77dba);
+        }
+        .phase:nth-child(9) .phase-number {
+            background: linear-gradient(135deg, #1e3a5f, #3f73a8);
+        }
+        .phase:nth-child(10) .phase-number {
+            background: linear-gradient(135deg, #3b4d3e, #7d9b7f);
+        }
+        .phase:nth-child(11) .phase-number {
+            background: linear-gradient(135deg, #6d2e46, #c76d87);
+        }
+
+        .phase-title-group {
+            flex: 1;
+        }
+
+        .phase-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .phase-badge {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-top: 3px;
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .phase-toggle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            transition: transform 0.35s ease;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .phase.open .phase-toggle {
+            transform: rotate(180deg);
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .phase-body {
+            padding: 0 28px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.55s ease, padding 0.35s ease;
+        }
+
+        .phase.open .phase-body {
+            max-height: 5000px;
+            padding: 20px 28px 26px;
+        }
+
+        .phase.open .phase-header {
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* ============ SUB-SECTION ============ */
+        .section {
+            margin-bottom: 16px;
+            background: rgba(0, 0, 0, 0.012);
+            border-radius: 10px;
+            padding: 12px 16px;
+            transition: var(--transition);
+        }
+
+        .section:hover {
+            background: rgba(0, 0, 0, 0.025);
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 0.98rem;
+            margin-bottom: 8px;
+            padding-left: 12px;
+            border-left: 4px solid;
+            display: inline-block;
+        }
+
+        .phase:nth-child(2) .section-title {
+            color: var(--c1-accent);
+            border-left-color: var(--c1-accent);
+        }
+        .phase:nth-child(3) .section-title {
+            color: var(--c2-accent);
+            border-left-color: var(--c2-accent);
+        }
+        .phase:nth-child(4) .section-title {
+            color: var(--c3-accent);
+            border-left-color: var(--c3-accent);
+        }
+        .phase:nth-child(5) .section-title {
+            color: var(--c4-accent);
+            border-left-color: var(--c4-accent);
+        }
+        .phase:nth-child(6) .section-title {
+            color: var(--c5-accent);
+            border-left-color: var(--c5-accent);
+        }
+        .phase:nth-child(7) .section-title {
+            color: var(--c6-accent);
+            border-left-color: var(--c6-accent);
+        }
+        .phase:nth-child(8) .section-title {
+            color: var(--c7-accent);
+            border-left-color: var(--c7-accent);
+        }
+        .phase:nth-child(9) .section-title {
+            color: var(--c8-accent);
+            border-left-color: var(--c8-accent);
+        }
+        .phase:nth-child(10) .section-title {
+            color: var(--c9-accent);
+            border-left-color: var(--c9-accent);
+        }
+        .phase:nth-child(11) .section-title {
+            color: var(--c10-accent);
+            border-left-color: var(--c10-accent);
+        }
+
+        .section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section ul li {
+            position: relative;
+            padding: 5px 0 5px 24px;
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+        }
+
+        .section ul li::before {
+            content: '◆';
+            position: absolute;
+            left: 2px;
+            font-size: 0.55rem;
+            top: 9px;
+            opacity: 0.6;
+        }
+
+        .phase:nth-child(2) .section ul li::before {
+            color: var(--c1-accent);
+        }
+        .phase:nth-child(3) .section ul li::before {
+            color: var(--c2-accent);
+        }
+        .phase:nth-child(4) .section ul li::before {
+            color: var(--c3-accent);
+        }
+        .phase:nth-child(5) .section ul li::before {
+            color: var(--c4-accent);
+        }
+        .phase:nth-child(6) .section ul li::before {
+            color: var(--c5-accent);
+        }
+        .phase:nth-child(7) .section ul li::before {
+            color: var(--c6-accent);
+        }
+        .phase:nth-child(8) .section ul li::before {
+            color: var(--c7-accent);
+        }
+        .phase:nth-child(9) .section ul li::before {
+            color: var(--c8-accent);
+        }
+        .phase:nth-child(10) .section ul li::before {
+            color: var(--c9-accent);
+        }
+        .phase:nth-child(11) .section ul li::before {
+            color: var(--c10-accent);
+        }
+
+        /* ============ HIGHLIGHT BOX ============ */
+        .highlight-box {
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-top: 14px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .phase:nth-child(11) .highlight-box {
+            background: linear-gradient(135deg, #f9eef2, #fdf5f7);
+            border: 1.5px solid #e8c4d0;
+            color: #5a2d3e;
+        }
+
+        .highlight-box strong {
+            font-weight: 700;
+        }
+
+        /* ============ REKOMENDASI BOX ============ */
+        .rekomendasi {
+            background: linear-gradient(135deg, #fffef7, #fefaf0);
+            border-radius: var(--radius);
+            padding: 28px 30px;
+            margin-top: 36px;
+            box-shadow: var(--shadow);
+            border: 1.5px solid #d4c9b0;
+        }
+
+        .rekomendasi h2 {
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            color: #3d2b1f;
+        }
+
+        .rekomendasi table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        .rekomendasi th {
+            background: #f0e6d2;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 700;
+            color: #3d2b1f;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .rekomendasi td {
+            padding: 10px 16px;
+            border-bottom: 1px solid #e8ddd0;
+            color: #4a3f35;
+        }
+
+        .rekomendasi tr:hover td {
+            background: #fdf9f2;
+        }
+
+        .rekomendasi .emoji-col {
+            font-size: 1.3rem;
+            text-align: center;
+            width: 50px;
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            text-align: center;
+            padding: 30px 20px 44px;
+            color: #8a7e6e;
+            font-size: 0.88rem;
+            border-top: 1px solid #e0d9cf;
+            margin-top: 20px;
+        }
+
+        .footer p {
+            margin: 4px 0;
+        }
+
+        /* ============ RESPONSIF ============ */
+        @media (max-width: 640px) {
+            .header h1 {
+                font-size: 1.7rem;
+            }
+            .header {
+                padding: 44px 16px 38px;
+            }
+            .header .icon-row {
+                font-size: 40px;
+            }
+            .container {
+                padding: 20px 10px 40px;
+            }
+            .phase-header {
+                padding: 16px 16px;
+            }
+            .phase-body {
+                padding: 0 16px;
+            }
+            .phase.open .phase-body {
+                padding: 14px 16px 18px;
+            }
+            .roadmap {
+                padding: 18px 14px;
+            }
+            .roadmap-flow {
+                font-size: 0.76rem;
+                gap: 3px;
+            }
+            .roadmap-item {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            .roadmap-arrow {
+                font-size: 0.9rem;
+            }
+            .rekomendasi {
+                padding: 18px 14px;
+            }
+            .rekomendasi table {
+                font-size: 0.78rem;
+            }
+            .rekomendasi th,
+            .rekomendasi td {
+                padding: 8px 10px;
+            }
+        }
+
+        /* ============ PRINT ============ */
+        @media print {
+            body {
+                background: #fff !important;
+            }
+            .phase-body {
+                max-height: none !important;
+                padding: 14px 18px !important;
+            }
+            .phase {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            .header {
+                background: #0d1b2a !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .roadmap,
+            .rekomendasi {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header">
+        <div class="header-particles">
+            <span class="particle"></span><span class="particle"></span><span class="particle"></span>
+            <span class="particle"></span><span class="particle"></span><span class="particle"></span>
+            <span class="particle"></span><span class="particle"></span>
+        </div>
+        <div class="header-content">
+            <span class="icon-row">🚚📦🏭</span>
+            <h1>Kerangka Belajar Supply Chain Management</h1>
+            <p class="subtitle">Peta perjalanan lengkap dari fondasi hingga strategi transformasi rantai pasok modern. Klik setiap fase untuk melihat detailnya.</p>
+        </div>
+    </header>
+
+    <!-- ==================== CONTAINER ==================== -->
+    <div class="container">
+
+        <!-- ROADMAP -->
+        <div class="roadmap">
+            <h2>🗺️ Alur Utama Pembelajaran</h2>
+            <div class="roadmap-flow">
+                <span class="roadmap-item">Fondasi & Strategi</span><span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Procurement</span><span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Manufaktur</span><span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Persediaan</span><span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Distribusi</span><span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Demand</span><span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Teknologi</span><span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Risiko</span><span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Global</span><span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Transformasi</span>
+            </div>
+        </div>
+
+        <!-- ==================== FASE 1 ==================== -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">1</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Fondasi Manajemen Rantai Pasok</h2>
+                    <span class="phase-badge">Definisi, metrik, dan strategi dasar</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">1.1 Definisi dan Konsep Dasar</div>
+                    <ul>
+                        <li>Definisi supply chain dan manajemen rantai pasok</li>
+                        <li>Perbedaan supply chain vs logistik</li>
+                        <li>Ruang lingkup: hulu ke hilir (upstream to downstream)</li>
+                        <li>Pihak-pihak: pemasok, manufaktur, distributor, pengecer, pelanggan</li>
+                        <li>Tiga aliran utama: material, informasi, dan keuangan</li>
+                        <li>Value chain vs supply chain</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">1.2 Tujuan dan Metrik Kinerja</div>
+                    <ul>
+                        <li>Tujuan utama: efisiensi dan responsivitas</li>
+                        <li>Trade-off antara biaya dan layanan</li>
+                        <li>KPI: On-Time Delivery, Perfect Order Rate, Inventory Turnover, Cash-to-Cash Cycle Time, Total Landed Cost</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">1.3 Strategi Rantai Pasok</div>
+                    <ul>
+                        <li>Strategi efisien vs responsif</li>
+                        <li>Push vs Pull system</li>
+                        <li>MTS, MTO, ATO, ETO</li>
+                        <li>Postponement strategy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FASE 2 ==================== -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">2</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Procurement & Supplier Management</h2>
+                    <span class="phase-badge">Pengadaan strategis dan manajemen pemasok</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">2.1 Pengadaan Strategis</div>
+                    <ul>
+                        <li>Peran procurement dalam rantai pasok modern</li>
+                        <li>Strategic sourcing vs tactical purchasing</li>
+                        <li>Total Cost of Ownership (TCO)</li>
+                        <li>Proses pengadaan: identifikasi → pemilihan → negosiasi → kontrak → evaluasi</li>
+                        <li>e-Procurement dan platform digital</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">2.2 Manajemen Hubungan Pemasok</div>
+                    <ul>
+                        <li>Supplier segmentation (Kraljic Matrix): Strategic, Leverage, Bottleneck, Non-critical</li>
+                        <li>Supplier evaluation dan scorecard</li>
+                        <li>SRM (Supplier Relationship Management)</li>
+                        <li>Kemitraan strategis vs transaksional</li>
+                        <li>Outsourcing dan offshoring decisions</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">2.3 Negosiasi dan Kontrak</div>
+                    <ul>
+                        <li>Prinsip negosiasi dalam supply chain</li>
+                        <li>Tipe kontrak: fixed price, cost-plus, incentive-based</li>
+                        <li>Manajemen risiko kontrak</li>
+                        <li>Incoterms (dasar)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FASE 3 ==================== -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">3</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Manufaktur & Operasi</h2>
+                    <span class="phase-badge">Perencanaan produksi dan lean manufacturing</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">3.1 Perencanaan Produksi</div>
+                    <ul>
+                        <li>Perencanaan agregat (aggregate planning)</li>
+                        <li>Master Production Schedule (MPS)</li>
+                        <li>Material Requirements Planning (MRP & MRP II)</li>
+                        <li>Capacity planning dan manajemen kapasitas</li>
+                        <li>Bottleneck management (Theory of Constraints)</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">3.2 Lean Manufacturing & Just-in-Time</div>
+                    <ul>
+                        <li>Filosofi lean dan eliminasi pemborosan (7 wastes)</li>
+                        <li>Just-in-Time (JIT) production</li>
+                        <li>Kanban system</li>
+                        <li>Value Stream Mapping (VSM)</li>
+                        <li>Continuous improvement (Kaizen)</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">3.3 Quality Management</div>
+                    <ul>
+                        <li>Total Quality Management (TQM)</li>
+                        <li>Six Sigma (konsep DMAIC)</li>
+                        <li>Statistical Process Control (SPC)</li>
+                        <li>Cost of Quality</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FASE 4 ==================== -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">4</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Manajemen Persediaan</h2>
+                    <span class="phase-badge">Model pengendalian dan klasifikasi persediaan</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">4.1 Konsep Dasar Persediaan</div>
+                    <ul>
+                        <li>Fungsi dan jenis: raw material, WIP, finished goods, MRO</li>
+                        <li>Biaya persediaan: holding, ordering, shortage cost</li>
+                        <li>Inventory turnover dan days of inventory</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">4.2 Model Pengendalian Persediaan</div>
+                    <ul>
+                        <li>Economic Order Quantity (EOQ) dan variasinya</li>
+                        <li>Reorder Point (ROP)</li>
+                        <li>Safety stock dan service level</li>
+                        <li>Periodic review (P-system) & Continuous review (Q-system)</li>
+                        <li>Newsvendor model (single period)</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">4.3 Klasifikasi dan Segmentasi</div>
+                    <ul>
+                        <li>ABC analysis (Pareto principle)</li>
+                        <li>XYZ analysis (variabilitas permintaan)</li>
+                        <li>FSN analysis (Fast, Slow, Non-moving)</li>
+                        <li>VED analysis (Vital, Essential, Desirable)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FASE 5 ==================== -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">5</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Distribusi & Transportasi</h2>
+                    <span class="phase-badge">Jaringan distribusi, transportasi, dan gudang</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">5.1 Jaringan Distribusi</div>
+                    <ul>
+                        <li>Saluran distribusi dan tingkatan</li>
+                        <li>Direct vs indirect distribution</li>
+                        <li>Cross-docking</li>
+                        <li>Drop shipping</li>
+                        <li>Omni-channel distribution</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">5.2 Manajemen Transportasi</div>
+                    <ul>
+                        <li>Moda transportasi: darat, laut, udara, kereta, pipa</li>
+                        <li>Intermodal dan multimodal transport</li>
+                        <li>Routing dan scheduling</li>
+                        <li>Freight forwarding dan 3PL/4PL</li>
+                        <li>Incoterms (lanjutan)</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">5.3 Manajemen Gudang</div>
+                    <ul>
+                        <li>Fungsi dan tipe gudang</li>
+                        <li>Tata letak gudang (layout) dan slotting</li>
+                        <li>Warehouse Management System (WMS)</li>
+                        <li>Teknologi gudang: barcode, RFID, voice-picking</li>
+                        <li>Material handling equipment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FASE 6 ==================== -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">6</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Perencanaan & Peramalan Permintaan</h2>
+                    <span class="phase-badge">Demand management dan S&OP</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">6.1 Konsep Demand Management</div>
+                    <ul>
+                        <li>Demand planning vs demand forecasting</li>
+                        <li>Demand sensing</li>
+                        <li>Bullwhip effect: penyebab dan solusi</li>
+                        <li>Collaborative Planning, Forecasting, and Replenishment (CPFR)</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">6.2 Metode Peramalan</div>
+                    <ul>
+                        <li>Kualitatif: Delphi, market research, expert judgment</li>
+                        <li>Kuantitatif: Moving average, exponential smoothing, ARIMA, regresi linear</li>
+                        <li>Ukuran akurasi: MAD, MSE, MAPE</li>
+                        <li>Pemilihan metode peramalan</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">6.3 Sales & Operations Planning (S&OP)</div>
+                    <ul>
+                        <li>Proses S&OP bulanan</li>
+                        <li>Integrasi demand, supply, dan finansial</li>
+                        <li>Peran eksekutif dalam S&OP</li>
+                        <li>S&OP vs IBP (Integrated Business Planning)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FASE 7 ==================== -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">7</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Teknologi dalam Rantai Pasok</h2>
+                    <span class="phase-badge">Sistem informasi dan teknologi digital terkini</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">7.1 Sistem Informasi Rantai Pasok</div>
+                    <ul>
+                        <li>ERP (Enterprise Resource Planning)</li>
+                        <li>APS (Advanced Planning & Scheduling)</li>
+                        <li>TMS (Transportation Management System)</li>
+                        <li>WMS (Warehouse Management System)</li>
+                        <li>Control tower dan visibility platform</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">7.2 Teknologi Digital Terkini</div>
+                    <ul>
+                        <li>IoT (Internet of Things) dan sensor</li>
+                        <li>Big Data analytics dalam supply chain</li>
+                        <li>Blockchain untuk traceability</li>
+                        <li>Kecerdasan buatan (AI) dan machine learning</li>
+                        <li>Digital twin rantai pasok</li>
+                        <li>Cloud-based supply chain</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FASE 8 ==================== -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">8</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Manajemen Risiko & Keberlanjutan</h2>
+                    <span class="phase-badge">Resiliensi dan green supply chain</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">8.1 Risiko Rantai Pasok</div>
+                    <ul>
+                        <li>Jenis risiko: operasional, finansial, geopolitik, alam</li>
+                        <li>Supply chain mapping dan identifikasi titik rawan</li>
+                        <li>Mitigasi: dual sourcing, buffer inventory, flexible capacity</li>
+                        <li>Business Continuity Planning (BCP)</li>
+                        <li>Supply chain resilience</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">8.2 Supply Chain Berkelanjutan</div>
+                    <ul>
+                        <li>Triple bottom line: people, planet, profit</li>
+                        <li>Green supply chain management</li>
+                        <li>Circular economy dalam rantai pasok</li>
+                        <li>Carbon footprint dan sustainability metrics</li>
+                        <li>ESG (Environmental, Social, Governance) dalam supply chain</li>
+                        <li>Etika dan kepatuhan (compliance)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FASE 9 ==================== -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">9</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Supply Chain Global</h2>
+                    <span class="phase-badge">Dinamika global, incoterms, dan dokumentasi</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">9.1 Dinamika Rantai Pasok Global</div>
+                    <ul>
+                        <li>Global sourcing strategies</li>
+                        <li>Nearshoring vs reshoring vs offshoring</li>
+                        <li>Tarif, bea cukai, dan regulasi internasional</li>
+                        <li>Foreign Trade Zones (FTZ)</li>
+                        <li>Manajemen rantai pasok lintas budaya</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">9.2 Incoterms dan Dokumentasi</div>
+                    <ul>
+                        <li>Incoterms 2020 lengkap</li>
+                        <li>Dokumentasi perdagangan internasional</li>
+                        <li>Letter of Credit, Bill of Lading, Certificate of Origin</li>
+                        <li>Customs clearance process</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FASE 10 ==================== -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">10</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Strategi & Transformasi Rantai Pasok</h2>
+                    <span class="phase-badge">Keunggulan kompetitif dan masa depan supply chain</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">10.1 Strategi Kompetitif</div>
+                    <ul>
+                        <li>Supply chain sebagai keunggulan kompetitif</li>
+                        <li>Strategic fit: menyelaraskan supply chain dengan strategi bisnis</li>
+                        <li>Agility, adaptability, alignment (Triple-A Supply Chain)</li>
+                        <li>Supply chain segmentation</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">10.2 Transformasi dan Masa Depan</div>
+                    <ul>
+                        <li>Supply chain maturity model</li>
+                        <li>Transformasi digital end-to-end</li>
+                        <li>Autonomous supply chain</li>
+                        <li>Industry 4.0 dan dampaknya</li>
+                        <li>Tren masa depan: resilience, visibility, sustainability</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <strong>💡 Tips:</strong> Fase ini mengintegrasikan semua konsep sebelumnya ke dalam strategi bisnis yang koheren. Cocok dipelajari setelah menguasai fondasi operasional.
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== REKOMENDASI ==================== -->
+        <div class="rekomendasi">
+            <h2>📚 Rekomendasi Sumber Belajar</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="emoji-col">🎯</th>
+                        <th>Tipe</th>
+                        <th>Rekomendasi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="emoji-col">📖</td>
+                        <td><strong>Buku</strong></td>
+                        <td>Supply Chain Management (Chopra & Meindl), The Goal (Goldratt), Supply Chain Logistics Management (Bowersox)</td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-col">🎓</td>
+                        <td><strong>Sertifikasi</strong></td>
+                        <td>CSCP (APICS), CPIM, SCOR-P, ISM CPSM</td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-col">💻</td>
+                        <td><strong>Online</strong></td>
+                        <td>MITx SCx MicroMasters, Coursera (Supply Chain Rutgers), edX</td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-col">🎧</td>
+                        <td><strong>Podcast</strong></td>
+                        <td>Supply Chain Now, The Logistics of Logistics, Digital Supply Chain</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <div class="footer">
+        <p>📘 Kerangka Belajar Supply Chain Management — Dari Fondasi hingga Transformasi</p>
+        <p>Simpan halaman ini sebagai referensi belajar, atau cetak untuk dipelajari secara offline.</p>
+    </div>
+
+    <!-- ==================== SCRIPT ==================== -->
+    <script>
+        function togglePhase(header) {
+            const phase = header.parentElement;
+            phase.classList.toggle('open');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('✅ Kerangka Supply Chain siap! Klik header fase untuk menutup/membuka.');
+        });
+    </script>
+
+</body>
+</html>
