@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerangka Belajar Kalkulus Secara Utuh</title>
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-secondary: #636e72;
+            --accent: #0984e3;
+            --accent-light: #d6eaf8;
+            --phase-1: #6c5ce7;
+            --phase-2: #0984e3;
+            --phase-3: #00b894;
+            --phase-4: #e17055;
+            --phase-5: #fdcb6e;
+            --phase-6: #a29bfe;
+            --border: #dfe6e9;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --radius: 14px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(160deg, #f0f3f7 0%, #e8ecf1 40%, #f8f9fa 100%);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 60px 24px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -80px;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: -60px;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header .icon {
+            font-size: 52px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .header h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Container utama */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+
+        /* Peta alur */
+        .roadmap {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            margin-bottom: 36px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .roadmap h2 {
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .roadmap-flow {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+
+        .roadmap-item {
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 8px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .roadmap-arrow {
+            color: var(--text-secondary);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Fase (card) */
+        .phase {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            margin-bottom: 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .phase:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 28px;
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 1px solid transparent;
+            transition: var(--transition);
+        }
+
+        .phase-header:hover {
+            background: #fafbfc;
+        }
+
+        .phase-number {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .phase:nth-child(1) .phase-number { background: var(--phase-1); }
+        .phase:nth-child(2) .phase-number { background: var(--phase-2); }
+        .phase:nth-child(3) .phase-number { background: var(--phase-3); }
+        .phase:nth-child(4) .phase-number { background: var(--phase-4); }
+        .phase:nth-child(5) .phase-number { background: var(--phase-5); color: #333; }
+        .phase:nth-child(6) .phase-number { background: var(--phase-6); }
+
+        .phase-title-group {
+            flex: 1;
+        }
+
+        .phase-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .phase-badge {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .phase-toggle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: transform 0.3s;
+        }
+
+        .phase.open .phase-toggle {
+            transform: rotate(180deg);
+        }
+
+        .phase-body {
+            padding: 0 28px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+        }
+
+        .phase.open .phase-body {
+            max-height: 4000px;
+            padding: 20px 28px 24px;
+        }
+
+        .phase.open .phase-header {
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Sub-bab */
+        .section {
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 1.02rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+            padding-left: 4px;
+            border-left: 3px solid var(--accent);
+            padding-left: 12px;
+        }
+
+        .section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section ul li {
+            position: relative;
+            padding: 5px 0 5px 22px;
+            color: var(--text-secondary);
+            font-size: 0.94rem;
+        }
+
+        .section ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.7rem;
+            top: 8px;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: linear-gradient(135deg, #e8f4fd, #f0f7ff);
+            border: 1px solid #b8d8f0;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #1a5276;
+        }
+
+        .highlight-box strong {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px 40px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Responsif */
+        @media (max-width: 640px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .header {
+                padding: 40px 16px 35px;
+            }
+            .container {
+                padding: 24px 12px 40px;
+            }
+            .phase-header {
+                padding: 16px 18px;
+            }
+            .phase-body {
+                padding: 0 18px;
+            }
+            .phase.open .phase-body {
+                padding: 16px 18px 20px;
+            }
+            .roadmap {
+                padding: 20px 16px;
+            }
+            .roadmap-flow {
+                font-size: 0.8rem;
+                gap: 4px;
+            }
+            .roadmap-item {
+                padding: 6px 10px;
+            }
+        }
+
+        /* Print */
+        @media print {
+            .phase-body {
+                max-height: none !important;
+                padding: 16px 20px !important;
+            }
+            .phase {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            .header {
+                background: #1a1a2e !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <span class="icon">📐</span>
+            <h1>Kerangka Belajar Kalkulus Secara Utuh</h1>
+            <p class="subtitle">Peta perjalanan lengkap dari prasyarat dasar hingga kalkulus lanjutan. Klik setiap fase untuk melihat detailnya.</p>
+        </div>
+    </header>
+
+    <!-- CONTAINER -->
+    <div class="container">
+
+        <!-- ROADMAP ALUR UTAMA -->
+        <div class="roadmap">
+            <h2>🗺️ Alur Utama Pembelajaran</h2>
+            <div class="roadmap-flow">
+                <span class="roadmap-item">Aljabar &amp; Fungsi</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Limit</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Turunan</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Aplikasi Turunan</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Integral</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Teknik &amp; Aplikasi Integral</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">PD Biasa</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Multivariabel</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Vektor</span>
+                <span class="roadmap-arrow">→</span>
+                <span class="roadmap-item">Deret</span>
+            </div>
+        </div>
+
+        <!-- FASE 1 -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">1</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Prasyarat / Pondasi</h2>
+                    <span class="phase-badge">Sebelum masuk kalkulus, pastikan ini kuat</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">1. Aljabar Dasar</div>
+                    <ul>
+                        <li>Operasi polinomial, pemfaktoran, eksponen, akar</li>
+                        <li>Pertidaksamaan linear & kuadrat</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">2. Fungsi dan Grafik</div>
+                    <ul>
+                        <li>Fungsi linear, kuadrat, polinomial, akar</li>
+                        <li>Fungsi rasional, nilai mutlak, piecewise</li>
+                        <li>Transformasi grafik (translasi, refleksi, dilatasi)</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">3. Trigonometri Dasar</div>
+                    <ul>
+                        <li>Definisi sin, cos, tan pada segitiga dan lingkaran satuan</li>
+                        <li>Identitas trigonometri penting</li>
+                        <li>Grafik fungsi trigonometri</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">4. Eksponensial dan Logaritma</div>
+                    <ul>
+                        <li>Sifat eksponen & logaritma</li>
+                        <li>Grafik fungsi eksponensial & logaritma</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 2 -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">2</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Kalkulus Diferensial (Turunan)</h2>
+                    <span class="phase-badge">Inti dari kalkulus diferensial</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">2.1 Limit dan Kekontinuan</div>
+                    <ul>
+                        <li>Definisi limit secara intuitif dan formal (epsilon-delta opsional)</li>
+                        <li>Limit satu sisi</li>
+                        <li>Limit tak hingga dan limit di tak hingga</li>
+                        <li>Kekontinuan fungsi dan teorema nilai antara</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">2.2 Konsep Turunan</div>
+                    <ul>
+                        <li>Definisi turunan sebagai limit (laju perubahan sesaat)</li>
+                        <li>Interpretasi geometris (garis singgung) dan fisis (kecepatan)</li>
+                        <li>Aturan dasar turunan</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">2.3 Teknik Diferensiasi</div>
+                    <ul>
+                        <li>Aturan pangkat, jumlah, selisih</li>
+                        <li>Aturan perkalian dan pembagian</li>
+                        <li>Aturan rantai (komposisi fungsi)</li>
+                        <li>Turunan fungsi implisit</li>
+                        <li>Turunan fungsi invers</li>
+                        <li>Turunan fungsi trigonometri, eksponensial, logaritma</li>
+                        <li>Turunan tingkat tinggi</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">2.4 Aplikasi Turunan</div>
+                    <ul>
+                        <li>Garis singgung dan normal</li>
+                        <li>Laju terkait (<em>related rates</em>)</li>
+                        <li>Nilai maksimum/minimum lokal & global</li>
+                        <li>Teorema Rolle & Teorema Nilai Rata-rata</li>
+                        <li>Kemonotonan dan uji turunan pertama/kedua</li>
+                        <li>Kecekungan dan titik belok</li>
+                        <li>Menggambar grafik fungsi secara komprehensif</li>
+                        <li>Optimasi masalah nyata</li>
+                        <li>Metode Newton (pendekatan akar)</li>
+                        <li>Diferensial dan aproksimasi linear</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 3 -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">3</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Kalkulus Integral</h2>
+                    <span class="phase-badge">Integral tak tentu, tentu, teknik & aplikasi</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">3.1 Integral Tak Tentu</div>
+                    <ul>
+                        <li>Anti-turunan dan konsep integral tak tentu</li>
+                        <li>Rumus-rumus dasar integral</li>
+                        <li>Integrasi dengan substitusi (sederhana)</li>
+                        <li>Integral fungsi trigonometri, eksponensial, logaritma</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">3.2 Integral Tentu</div>
+                    <ul>
+                        <li>Jumlah Riemann dan definisi integral tentu</li>
+                        <li>Teorema Dasar Kalkulus (bagian 1 dan 2)</li>
+                        <li>Sifat-sifat integral tentu</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">3.3 Teknik Integrasi</div>
+                    <ul>
+                        <li>Substitusi (lanjutan)</li>
+                        <li>Integral parsial</li>
+                        <li>Integral fungsi trigonometri (pangkat, sudut rangkap)</li>
+                        <li>Substitusi trigonometri</li>
+                        <li>Dekomposisi pecahan parsial</li>
+                        <li>Integral fungsi rasional</li>
+                        <li>Integral tak wajar (batas tak hingga, diskontinuitas)</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">3.4 Aplikasi Integral</div>
+                    <ul>
+                        <li>Luas daerah antar kurva</li>
+                        <li>Volume benda putar (metode cakram/cincin, kulit tabung)</li>
+                        <li>Panjang busur kurva</li>
+                        <li>Luas permukaan benda putar</li>
+                        <li>Momen, pusat massa (dasar)</li>
+                        <li>Kerja/usaha dan tekanan fluida (fisika dasar)</li>
+                        <li>Nilai rata-rata fungsi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 4 -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">4</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Persamaan Diferensial Biasa (Dasar)</h2>
+                    <span class="phase-badge">Pengantar PD biasa</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <ul>
+                        <li>Definisi, orde, dan solusi umum/khusus</li>
+                        <li>Persamaan diferensial terpisah (<em>separable</em>)</li>
+                        <li>Persamaan linear orde satu (faktor integrasi)</li>
+                        <li>Aplikasi: pertumbuhan populasi, pendinginan Newton, rangkaian listrik sederhana</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 5 -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">5</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Kalkulus Multivariabel (Lanjutan)</h2>
+                    <span class="phase-badge">Fungsi dua variabel atau lebih</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <div class="section-title">5.1 Ruang Dimensi-n</div>
+                    <ul>
+                        <li>Vektor dan geometri ruang</li>
+                        <li>Fungsi dua variabel atau lebih, domain, grafik permukaan</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">5.2 Turunan Parsial</div>
+                    <ul>
+                        <li>Definisi dan interpretasi</li>
+                        <li>Aturan rantai multivariabel</li>
+                        <li>Gradien dan turunan berarah</li>
+                        <li>Bidang singgung dan aproksimasi linear</li>
+                        <li>Masalah optimasi tanpa kendala (maks/min lokal)</li>
+                        <li>Optimasi dengan kendala: Pengali Lagrange</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">5.3 Integral Lipat</div>
+                    <ul>
+                        <li>Integral ganda (<em>double integral</em>)</li>
+                        <li>Integral berulang, perubahan urutan integrasi</li>
+                        <li>Integral lipat tiga</li>
+                        <li>Koordinat polar, silinder, bola</li>
+                        <li>Aplikasi: luas permukaan, volume, massa, pusat massa</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <div class="section-title">5.4 Kalkulus Vektor</div>
+                    <ul>
+                        <li>Medan vektor</li>
+                        <li>Integral garis (<em>line integral</em>)</li>
+                        <li>Teorema Green (bidang)</li>
+                        <li>Divergensi dan Curl</li>
+                        <li>Integral permukaan</li>
+                        <li>Teorema Divergensi (Gauss) dan Teorema Stokes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 6 -->
+        <div class="phase open">
+            <div class="phase-header" onclick="togglePhase(this)">
+                <div class="phase-number">6</div>
+                <div class="phase-title-group">
+                    <h2 class="phase-title">Topik Lanjutan (Opsional)</h2>
+                    <span class="phase-badge">Sesuai kebutuhan dan minat</span>
+                </div>
+                <span class="phase-toggle">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="section">
+                    <ul>
+                        <li><strong>Deret dan Barisan:</strong> Konvergensi, uji deret, deret pangkat, deret Taylor dan Maclaurin</li>
+                        <li><strong>Analisis Fourier</strong> (dasar)</li>
+                        <li><strong>Variabel Kompleks</strong> (kalkulus bilangan kompleks)</li>
+                        <li><strong>Kalkulus Diferensial Geometri Diferensial</strong> (dasar)</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <strong>💡 Tips:</strong> Topik <strong>Deret dan Barisan</strong> sering diajarkan sebelum atau setelah kalkulus multivariabel, tergantung kurikulum. Topik lainnya bisa dipelajari setelah menguasai fondasi kalkulus.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>📘 Kerangka Belajar Kalkulus — Dibuat sebagai panduan belajar mandiri maupun kuliah.</p>
+        <p>Simpan halaman ini sebagai referensi, atau cetak untuk dipelajari secara offline.</p>
+    </div>
+
+    <script>
+        function togglePhase(header) {
+            const phase = header.parentElement;
+            phase.classList.toggle('open');
+        }
+
+        // Buka semua fase saat halaman pertama kali dimuat (sudah default 'open')
+        document.addEventListener('DOMContentLoaded', () => {
+            // Semua fase sudah memiliki class 'open' di HTML
+            console.log('✅ Kerangka belajar kalkulus siap! Klik header fase untuk menutup/membuka.');
+        });
+    </script>
+
+</body>
+</html>
