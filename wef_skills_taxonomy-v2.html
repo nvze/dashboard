@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Skills Taxonomy - World Economic Forum</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        @page {
+            size: A4;
+            margin: 20mm 15mm;
+            background-color: #0b111e;
+            @bottom-right {
+                content: counter(page);
+                color: #4b5563;
+                font-family: 'Helvetica Neue', Arial, sans-serif;
+                font-size: 9pt;
+            }
+            @bottom-left {
+                content: "World Economic Forum • Future of Jobs Report";
+                color: #4b5563;
+                font-family: 'Helvetica Neue', Arial, sans-serif;
+                font-size: 9pt;
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0b111e;
+            color: #e2e8f0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px 40px 20px;
+        }
+
+        /* Cover/Header Block - Adjusts naturally for screen vs print */
+        .header-banner {
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+            border-bottom: 3px solid #3b82f6;
+            padding: 40px 30px;
+            border-radius: 0 0 12px 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        @media print {
+            .header-banner {
+                margin: -20mm -15mm 25px -15mm;
+                padding: 40px 15mm 35px 15mm;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+        }
+
+        .wef-badge {
+            display: inline-block;
+            font-size: 8.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #3b82f6;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 24pt;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.2;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 13pt;
+            color: #94a3b8;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        .intro-text {
+            font-size: 11.5pt;
+            color: #cbd5e1;
+            margin-bottom: 35px;
+            text-align: justify;
+        }
+
+        /* Responsive Layout without Flex/Grid for WeasyPrint structural compatibility */
+        .category-block {
+            margin-bottom: 30px;
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 8px;
+            padding: 20px;
+            page-break-inside: avoid;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-header {
+            border-left: 4px solid #3b82f6;
+            padding-left: 12px;
+            margin-bottom: 15px;
+        }
+
+        .header-cognitive { border-left-color: #3b82f6; }
+        .header-tech { border-left-color: #10b981; }
+        .header-self { border-left-color: #f59e0b; }
+        .header-social { border-left-color: #ec4899; }
+
+        h2 {
+            font-size: 14pt;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.3px;
+        }
+        
+        .title-cognitive { color: #60a5fa; }
+        .title-tech { color: #34d399; }
+        .title-self { color: #fbbf24; }
+        .title-social { color: #f472b6; }
+
+        /* Skill items listing */
+        .skill-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .skill-item {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 12px;
+            page-break-inside: avoid;
+        }
+
+        .skill-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: #f8fafc;
+            font-size: 11pt;
+            margin-bottom: 6px;
+        }
+
+        .skill-desc {
+            color: #94a3b8;
+            font-size: 10pt;
+            margin: 0;
+            text-align: justify;
+            line-height: 1.5;
+        }
+
+        /* Callout Box for Highlights */
+        .highlight-box {
+            background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+            border-left: 4px solid #8b5cf6;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 35px 0;
+            page-break-inside: avoid;
+        }
+
+        .highlight-box h3 {
+            margin: 0 0 8px 0;
+            color: #a78bfa;
+            font-size: 11pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: 10pt;
+            color: #cbd5e1;
+        }
+
+        /* Footer Button Container */
+        .cta-container {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #1f2937;
+            page-break-inside: avoid;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 11pt;
+            text-decoration: none;
+            padding: 14px 36px;
+            border-radius: 30px;
+            border: 1px solid #60a5fa;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.2s ease;
+        }
+        
+        /* Mobile styling adjustment for screen */
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 10.5pt;
+            }
+            .container {
+                padding: 0 10px 30px 10px;
+            }
+            .header-banner {
+                padding: 30px 20px;
+                margin-bottom: 20px;
+            }
+            h1 {
+                font-size: 18pt;
+            }
+            .subtitle {
+                font-size: 11pt;
+            }
+            .category-block {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .skill-item {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-banner">
+            <div class="wef-badge">Global Skills Taxonomy</div>
+            <h1>Future of Jobs Report</h1>
+            <div class="subtitle">Edisi Komprehensif Taksonomi Keterampilan Masa Depan</div>
+        </div>
+
+        <p class="intro-text">
+            World Economic Forum (WEF) merumuskan sebuah arsitektur kompetensi universal yang dikenal sebagai <strong>Global Skills Taxonomy</strong>. Lanskap ini dirancang secara sistematis untuk memetakan evolusi kebutuhan dunia kerja global di tengah gelombang disrupsi kecerdasan buatan (AI), otomatisasi, serta transisi ekonomi hijau. Taksonomi ini membagi kluster kompetensi menjadi empat pilar utama yang menyeimbangkan kecerdasan komputasional dan resiliensi murni manusia.
+        </p>
+
+        <!-- 1. COGNITIVE SKILLS -->
+        <div class="category-block">
+            <div class="category-header header-cognitive">
+                <h2 class="title-cognitive">1. Cognitive Skills (Keterampilan Kognitif)</h2>
+            </div>
+            <ul class="skill-list">
+                <li class="skill-item">
+                    <div class="skill-name">Analytical Thinking (Berpikir Analitis)</div>
+                    <div class="skill-desc">Kemampuan untuk memecahkan masalah kompleks, mengidentifikasi pola tersembunyi dalam set data besar, serta mengevaluasi argumen secara logis berbasis bukti objektif. Ini tetap menjadi kompetensi peringkat pertama yang paling dicari korporasi global.</div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name">Creative Thinking (Berpikir Kreatif)</div>
+                    <div class="skill-desc">Kapasitas menghasilkan ide-ide orisinal yang disruptif, menghubungkan konsep-konsep dari domain yang berbeda, serta merancang solusi inovatif yang belum pernah diterapkan sebelumnya guna menjawab tantangan baru.</div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name">Systems Thinking (Berpikir Sistemis)</div>
+                    <div class="skill-desc">Kemampuan memahami bagaimana berbagai subsistem kecil saling berinteraksi dalam satu ekosistem besar, serta memprediksi dampak berantai dari suatu keputusan struktural.</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 2. TECHNOLOGY SKILLS -->
+        <div class="category-block">
+            <div class="category-header header-tech">
+                <h2 class="title-tech">2. Technology Skills (Keterampilan Teknologi)</h2>
+            </div>
+            <ul class="skill-list">
+                <li class="skill-item">
+                    <div class="skill-name">AI and Big Data (Kecerdasan Buatan & Data Besar)</div>
+                    <div class="skill-desc">Kompetensi mengoperasikan, melatih, serta memanipulasi model AI generatif dan algoritma machine learning, sekaligus mengekstrak insight berharga dari lautan data mentah.</div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name">Technological Literacy (Literasi Digital Dasar & Lanjut)</div>
+                    <div class="skill-desc">Kefasihan dalam mengadopsi platform digital baru, cloud computing, otomatisasi perkantoran, dan integrasi software terdistribusi dalam alur kerja harian.</div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name">Networks and Cybersecurity (Keamanan Siber)</div>
+                    <div class="skill-desc">Kesadaran dan keahlian teknis untuk melindungi aset digital, memitigasi risiko kebocoran data, serta menjaga integritas arsitektur jaringan perusahaan dari ancaman eksternal.</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 3. SELF-EFFICACY SKILLS -->
+        <div class="category-block">
+            <div class="category-header header-self">
+                <h2 class="title-self">3. Self-Efficacy & Engagement (Kemandirian & Ketahanan)</h2>
+            </div>
+            <ul class="skill-list">
+                <li class="skill-item">
+                    <div class="skill-name">Resilience, Flexibility, and Agility</div>
+                    <div class="skill-desc">Kapasitas mental untuk mempertahankan performa di bawah tekanan tinggi, fleksibel menghadapi pivot strategi bisnis, serta lincah dalam mengubah arah eksekusi kerja secara instan.</div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name">Curiosity and Lifelong Learning</div>
+                    <div class="skill-desc">Dorongan intrinsik untuk terus melakukan upskilling dan reskilling mandiri, mengeksplorasi ilmu baru di luar bidang keahlian utama demi menjaga relevansi profesional.</div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name">Motivation and Self-Awareness</div>
+                    <div class="skill-desc">Kesadaran mendalam akan limitasi dan kelebihan diri sendiri, serta memiliki motivasi otonom untuk mencapai target tanpa memerlukan supervisi mikro.</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 4. WORKING WITH OTHERS -->
+        <div class="category-block">
+            <div class="category-header header-social">
+                <h2 class="title-social">4. Working with Others & Management</h2>
+            </div>
+            <ul class="skill-list">
+                <li class="skill-item">
+                    <div class="skill-name">Leadership and Social Influence</div>
+                    <div class="skill-desc">Kemampuan menggerakkan tim heterogen, menyatukan visi, dan memberikan pengaruh positif lintas sektoral bahkan tanpa otoritas struktural formal.</div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name">Empathy and Active Listening</div>
+                    <div class="skill-desc">Kecerdasan emosional tingkat tinggi untuk memahami perspektif multi-stakeholder, mendengar secara aktif guna mereduksi friksi komunikasi di lingkungan kerja hibrida.</div>
+                </li>
+                <li class="skill-item">
+                    <div class="skill-name">Talent Management & Mentoring</div>
+                    <div class="skill-desc">Keahlian dalam mendeteksi potensi anggota tim, melakukan kaderisasi kepemimpinan, serta mentransfer pengetahuan secara taktis dan inklusif.</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3>Fokus Transversal: Environmental Stewardship</h3>
+            <p>Di luar kerangka utama, WEF menegaskan bahwa Keterampilan Hijau (Green Skills) kini melekat silang pada seluruh aspek pekerjaan guna mendorong keberlanjutan bumi dan efisiensi sirkular ekologis.</p>
+        </div>
+
+        <div class="cta-container">
+            <a href="https://imnxx.vercel.app" class="cta-button">Eksplorasi Portofolio Masa Depan</a>
+        </div>
+    </div>
+
+</body>
+</html>
