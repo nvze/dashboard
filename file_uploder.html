@@ -3,420 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Repository File Downloader (Fixed)</title>
+    <title>nseUpload - Industrial File Engine</title>
     <style>
-        :root {
-            --bg-color: #f6f8fa;
-            --container-bg: #ffffff;
-            --text-color: #24292f;
-            --border-color: #d0d7de;
-            --primary-color: #0969da;
-            --primary-hover: #0c57d0;
-            --accent-color: #57606a;
-            --folder-color: #54aeff;
-            --file-color: #57606a;
-        }
-
+        /* ==========================================================================
+           INDUSTRIAL REGIME STYLE - RAW, BRUTALIST & HIGH-CONTRAST
+           ========================================================================== */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding: 2rem 1rem;
-            line-height: 1.5;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: var(--container-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 2rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border-color);
+            background-color: #1a1a1a;
+            /* Pola latar belakang garis-garis mesh baja industrial */
+            background-image: linear-gradient(335deg, #141414 23px, transparent 23px),
+                              linear-gradient(155deg, #141414 23px, transparent 23px),
+                              linear-gradient(335deg, #141414 23px, transparent 23px),
+                              linear-gradient(155deg, #141414 23px, transparent 23px);
+            background-size: 58px 58px;
+            background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+            color: #e0e0e0;
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 0.5rem;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        .config-panel {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            background-color: #f8f9fa;
-            padding: 1rem;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
+        .industrial-panel {
+            background-color: #2b2b2b;
+            border: 4px solid #3d3d3d;
+            border-top: 6px solid #e67e22; /* Aksen warna karat / oranye industrial */
+            border-radius: 0px; /* Industrial bersifat kaku & angular */
+            width: 100%;
+            max-width: 560px;
+            padding: 35px;
+            box-shadow: 10px 10px 0px #111111;
+            position: relative;
         }
 
-        @media (min-width: 768px) {
-            .config-panel {
-                grid-template-columns: 1fr 1fr;
-            }
-            .full-width {
-                grid-column: span 2;
-            }
+        /* Rivet/Baut Dekorasi Sudut Panel */
+        .industrial-panel::before, .industrial-panel::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #555;
+            border-radius: 50%;
+            box-shadow: inset -1px -1px 2px #000, 1px 1px 1px #fff;
+        }
+        .industrial-panel::before { top: 10px; left: 10px; }
+        .industrial-panel::after { top: 10px; right: 10px; }
+
+        /* LOGO nseUpload CUSTOM */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #444;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
+        .logo-text {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #111;
+            display: inline-block;
+        }
+
+        .logo-dot {
+            color: #00d2ff; /* Warna biru muda menyala */
+            font-size: 36px;
+            line-height: 0;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.8);
+        }
+
+        .subtitle {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        /* FORM CONTROLS */
+        .control-group {
+            margin-bottom: 20px;
         }
 
         label {
-            font-size: 0.875rem;
-            font-weight: 600;
+            display: block;
+            font-weight: bold;
+            font-size: 12px;
+            color: #aaaaaa;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
         }
 
-        input {
-            padding: 0.45rem 0.75rem;
-            font-size: 0.9rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 14px;
+            background-color: #1e1e1e;
+            border: 2px solid #444;
+            color: #00ff66; /* Warna font monitor terminal jadul */
+            border-radius: 0px;
+            transition: all 0.2s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #e67e22;
+            background-color: #151515;
             outline: none;
+            box-shadow: 0 0 8px rgba(230, 126, 34, 0.5);
         }
 
-        input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.3);
+        /* INDUSTRIAL UPLOAD ZONE (Tombol Upload Terintegrasi) */
+        .upload-zone {
+            position: relative;
+            margin-bottom: 25px;
         }
 
-        button {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #ffffff;
-            background-color: var(--primary-color);
-            border: 1px solid rgba(27, 31, 36, 0.15);
-            border-radius: 6px;
+        .upload-box {
+            border: 3px dashed #e67e22;
+            padding: 30px 20px;
+            text-align: center;
+            background-color: #222222;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s ease;
         }
 
-        button:hover {
-            background-color: var(--primary-hover);
+        .upload-box:hover {
+            background-color: #1e1e1e;
+            border-color: #f39c12;
         }
 
-        .status-message {
-            margin-top: 1rem;
-            padding: 0.75rem 1rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
+        .upload-box p {
+            font-size: 13px;
+            color: #e67e22;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #fileInput {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-meta {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #00d2ff; /* Output info berwarna biru muda */
+            word-break: break-all;
+            background-color: #1a1a1a;
+            padding: 8px;
+            border-left: 3px solid #00d2ff;
             display: none;
         }
 
-        .status-message.error {
+        /* SUBMIT BUTTON - HEAVY DUTY MACHINERY STYLE */
+        .btn-submit {
             display: block;
-            background-color: #ffebe9;
-            color: #cf222e;
-            border: 1px solid #ffc1c0;
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #111111;
+            background-color: #e67e22;
+            border: none;
+            border-bottom: 4px solid #d35400;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.1s ease;
         }
 
-        .status-message.loading {
+        .btn-submit:hover {
+            background-color: #f39c12;
+            border-bottom-width: 4px;
+        }
+
+        .btn-submit:active {
+            transform: translateY(2px);
+            border-bottom-width: 2px;
+        }
+
+        .btn-submit:disabled {
+            background-color: #444444;
+            border-bottom: 4px solid #333333;
+            color: #777777;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* SECONDARY NAVIGATION BUTTON (GITHUB EXPLORER) */
+        .btn-explorer {
             display: block;
-            background-color: #ddf4ff;
-            color: #0969da;
-            border: 1px solid #b6e3ff;
-        }
-
-        .repo-browser {
-            margin-top: 1.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .repo-header {
-            background-color: #f6f8fa;
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        .breadcrumb a {
-            color: var(--primary-color);
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #111111;
+            background-color: #00d2ff;
+            border: none;
+            border-bottom: 4px solid #008eb3;
+            text-align: center;
             text-decoration: none;
             cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.1s ease;
         }
 
-        .breadcrumb a:hover {
-            text-decoration: underline;
+        .btn-explorer:hover {
+            background-color: #33dbff;
+            border-bottom-width: 4px;
         }
 
-        .file-list {
-            list-style: none;
-            background: #fff;
+        .btn-explorer:active {
+            transform: translateY(2px);
+            border-bottom-width: 2px;
         }
 
-        .file-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem 1rem;
-            border-bottom: 1px solid #e1e4e8;
-            font-size: 0.875rem;
+        /* MONITOR STATUS CONSOLE */
+        #statusConsole {
+            margin-top: 25px;
+            padding: 12px;
+            font-size: 12px;
+            display: none;
+            border-left: 4px solid transparent;
+            text-transform: uppercase;
         }
 
-        .file-item:hover {
-            background-color: #f6f8fa;
+        .console-success {
+            background-color: rgba(0, 255, 102, 0.1);
+            border-color: #00ff66;
+            color: #00ff66;
         }
 
-        .file-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            flex: 1;
-            min-width: 0;
+        .console-error {
+            background-color: rgba(255, 51, 51, 0.1);
+            border-color: #ff3333;
+            color: #ff3333;
         }
 
-        .file-name {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        .console-loading {
+            background-color: rgba(230, 126, 34, 0.1);
+            border-color: #e67e22;
+            color: #e67e22;
+            animation: blinker 1.5s linear infinite;
         }
 
-        .file-name.dir-link {
-            color: var(--primary-color);
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .file-name.dir-link:hover {
-            text-decoration: underline;
-        }
-
-        .file-size {
-            font-size: 0.75rem;
-            color: var(--accent-color);
-        }
-
-        .btn-download {
-            background-color: #24292f;
-            font-size: 0.75rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            color: white;
-            border: none;
-        }
-
-        .btn-download:hover {
-            background-color: #57606a;
-        }
-
-        .icon {
-            width: 16px;
-            height: 16px;
-            flex-shrink: 0;
+        @keyframes blinker {
+            50% { opacity: 0.5; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>GitHub Repo Explorer & Downloader</h1>
-
-    <div class="config-panel">
-        <div class="form-group full-width">
-            <label for="token">GitHub Token (Wajib jika Repo Private / menghindari Rate Limit)</label>
-            <input type="password" id="token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
-        </div>
-        <div class="form-group">
-            <label for="username">Username / Owner Repo</label>
-            <input type="text" id="username" placeholder="Contoh: octocat">
-        </div>
-        <div class="form-group">
-            <label for="repo">Nama Repository</label>
-            <input type="text" id="repo" placeholder="Contoh: Hello-World">
-        </div>
-        <div class="form-group full-width">
-            <button id="btn-load" onclick="loadRepository()">Muat Daftar File</button>
-        </div>
+<div class="industrial-panel">
+    
+    <div class="logo-container">
+        <div class="logo-text">nseUpload<span class="logo-dot">.</span></div>
+        <div class="subtitle">[ TERMINAL TRANSMISI REPOSITORI ]</div>
     </div>
 
-    <div id="status" class="status-message"></div>
-
-    <div id="browser-container" style="display: none;" class="repo-browser">
-        <div class="repo-header">
-            <div class="breadcrumb" id="breadcrumb"></div>
-        </div>
-        <ul class="file-list" id="file-list-container"></ul>
+    <div class="control-group">
+        <label for="githubToken">> GITHUB ACCESS TOKEN</label>
+        <input type="password" id="githubToken" placeholder="MASUKKAN TOKEN API...">
     </div>
+
+    <div class="control-group">
+        <label for="username">> USERNAME REPO</label>
+        <input type="text" id="username" placeholder="USERNAME GITHUB...">
+    </div>
+
+    <div class="control-group">
+        <label for="repoName">> NAMA TARGET REPOSITORI</label>
+        <input type="text" id="repoName" placeholder="NAMA REPO...">
+    </div>
+
+    <div class="control-group">
+        <label for="commitMessage">> LOG PESAN COMMIT</label>
+        <input type="text" id="commitMessage" value="SYSTEM_UPLOAD: TRANSMISI DATA DILAKUKAN">
+    </div>
+
+    <label>> MUAT ELEMEN DATA (UPLOAD)</label>
+    <div class="upload-zone">
+        <div class="upload-box" id="dropBox">
+            <p id="uploadPrompt">// KLIK / SERET FILE UNTUK DIUNGGAH //</p>
+            <div id="fileMeta" class="file-meta"></div>
+        </div>
+        <input type="file" id="fileInput">
+    </div>
+
+    <button type="button" id="submitBtn" class="btn-submit" disabled>EKSEKUSI DATA (SUBMIT)</button>
+
+    <div id="statusConsole"></div>
+
+    <a href="https://nvze.github.io/files/github_explorer.html" target="_blank" class="btn-explorer">Buka GitHub Explorer //</a>
 </div>
 
 <script>
-    let currentPath = '';
-    let cachedToken = '';
-    let cachedOwner = '';
-    let cachedRepo = '';
+    const fileInput = document.getElementById('fileInput');
+    const uploadPrompt = document.getElementById('uploadPrompt');
+    const fileMeta = document.getElementById('fileMeta');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusConsole = document.getElementById('statusConsole');
 
-    async function loadRepository(path = '') {
-        const token = document.getElementById('token').value.trim();
-        const owner = document.getElementById('username').value.trim();
-        const repo = document.getElementById('repo').value.trim();
-        const statusDiv = document.getElementById('status');
-        const browserContainer = document.getElementById('browser-container');
+    let selectedFile = null;
 
-        if (!owner || !repo) {
-            showStatus('Mohon isi Username dan Nama Repo.', 'error');
+    // Aksi ketika modul upload dipicu
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files.length > 0) {
+            selectedFile = e.target.files[0];
+            fileMeta.style.display = 'block';
+            fileMeta.textContent = `BERKAS SIAP: ${selectedFile.name.toUpperCase()} [${(selectedFile.size / 1024).toFixed(2)} KB]`;
+            submitBtn.disabled = false;
+            clearConsole();
+        } else {
+            resetEngine();
+        }
+    });
+
+    function resetEngine() {
+        selectedFile = null;
+        fileMeta.style.display = 'none';
+        fileMeta.textContent = '';
+        submitBtn.disabled = true;
+    }
+
+    function clearConsole() {
+        statusConsole.style.display = 'none';
+        statusConsole.className = '';
+    }
+
+    function writeConsole(text, mode) {
+        if (!text) {
+            clearConsole();
+            return;
+        }
+        statusConsole.className = '';
+        statusConsole.style.display = 'block';
+        statusConsole.textContent = `>>> STATUS: ${text}`;
+        
+        if (mode === 'success') statusConsole.classList.add('console-success');
+        if (mode === 'error') statusConsole.classList.add('console-error');
+        if (mode === 'loading') statusConsole.classList.add('console-loading');
+    }
+
+    // Eksekusi pengiriman data ke GitHub
+    submitBtn.addEventListener('click', async function() {
+        const token = document.getElementById('githubToken').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const repo = document.getElementById('repoName').value.trim();
+        const commitMsg = document.getElementById('commitMessage').value.trim() || 'SYSTEM_UPLOAD: TRANSMISI DATA DILAKUKAN';
+
+        if (!token || !username || !repo) {
+            writeConsole('ERROR! KREDENSIAL ENGINE HARUS DIISI LENGKAP!', 'error');
             return;
         }
 
-        cachedToken = token;
-        cachedOwner = owner;
-        cachedRepo = repo;
-        currentPath = path;
+        if (!selectedFile) {
+            writeConsole('ERROR! ELEMEN DATA KOSONG!', 'error');
+            return;
+        }
 
-        showStatus('Sedang mengambil data dari GitHub...', 'loading');
+        writeConsole('MENGONVERSI DATA & TRANSMISI SEDANG BERJALAN...', 'loading');
+        submitBtn.disabled = true;
+
+        const reader = new FileReader();
+        reader.readAsDataURL(selectedFile);
         
-        let url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-        const headers = { 'Accept': 'application/vnd.github.v3+json' };
-        if (token) { headers['Authorization'] = `token ${token}`; }
+        reader.onload = async function () {
+            const base64Content = reader.result.split(',')[1];
+            const path = selectedFile.name; 
+            const url = `https://api.github.com/repos/${username}/${repo}/contents/${encodeURIComponent(path)}`;
 
-        try {
-            const response = await fetch(url, { headers });
-            if (!response.ok) throw new Error(`Gagal memuat data (${response.status}). Periksa nama repo/token.`);
-            
-            const data = await response.json();
-            statusDiv.style.display = 'none';
-            browserContainer.style.display = 'block';
-            
-            renderBreadcrumb();
-            renderFileList(data);
-        } catch (error) {
-            showStatus(error.message, 'error');
-            browserContainer.style.display = 'none';
-        }
-    }
+            try {
+                let sha = null;
+                const checkResponse = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
 
-    function showStatus(message, type) {
-        const statusDiv = document.getElementById('status');
-        statusDiv.className = `status-message ${type}`;
-        statusDiv.innerText = message;
-    }
-
-    function renderBreadcrumb() {
-        const breadcrumb = document.getElementById('breadcrumb');
-        breadcrumb.innerHTML = '';
-        const rootLink = document.createElement('a');
-        rootLink.innerText = cachedRepo;
-        rootLink.onclick = () => loadRepository('');
-        breadcrumb.appendChild(rootLink);
-
-        if (currentPath) {
-            const parts = currentPath.split('/');
-            let accumulatedPath = '';
-            parts.forEach((part, index) => {
-                breadcrumb.appendChild(document.createTextNode(' / '));
-                accumulatedPath += (index === 0 ? part : '/' + part);
-                if (index === parts.length - 1) {
-                    const span = document.createElement('span');
-                    span.innerText = part;
-                    breadcrumb.appendChild(span);
-                } else {
-                    const dirLink = document.createElement('a');
-                    dirLink.innerText = part;
-                    const targetPath = accumulatedPath;
-                    dirLink.onclick = () => loadRepository(targetPath);
-                    breadcrumb.appendChild(dirLink);
+                if (checkResponse.ok) {
+                    const fileData = await checkResponse.json();
+                    sha = fileData.sha; 
                 }
-            });
-        }
-    }
 
-    function renderFileList(items) {
-        const container = document.getElementById('file-list-container');
-        container.innerHTML = '';
+                const bodyData = {
+                    message: commitMsg,
+                    content: base64Content
+                };
+                if (sha) {
+                    bodyData.sha = sha;
+                }
 
-        if (currentPath) {
-            const upRow = document.createElement('li');
-            upRow.className = 'file-item';
-            const parentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
-            upRow.innerHTML = `<div class="file-info"><span class="file-name dir-link">📁 .. (Kembali)</span></div>`;
-            upRow.querySelector('.dir-link').onclick = () => loadRepository(parentPath);
-            container.appendChild(upRow);
-        }
+                const uploadResponse = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify(bodyData)
+                });
 
-        items.sort((a, b) => (a.type === b.type ? a.name.localeCompare(b.name) : a.type === 'dir' ? -1 : 1));
+                if (uploadResponse.ok) {
+                    writeConsole(`TRANSMISI BERHASIL! BERKAS "${selectedFile.name.toUpperCase()}" SUKSES TERKIRIM KE REPO [${repo.toUpperCase()}].`, 'success');
+                    resetEngine();
+                } else {
+                    const errorData = await uploadResponse.json();
+                    writeConsole(`TRANSMISI GAGAL: ${errorData.message.toUpperCase() || 'UNKNOWN ERROR'}`, 'error');
+                    submitBtn.disabled = false;
+                }
 
-        items.forEach(item => {
-            const li = document.createElement('li');
-            li.className = 'file-item';
-            const isDir = item.type === 'dir';
-            
-            li.innerHTML = `
-                <div class="file-info">
-                    <span>${isDir ? '📁' : '📄'}</span>
-                    <span class="file-name ${isDir ? 'dir-link' : ''}">${item.name}</span>
-                </div>
-                ${isDir ? '' : `<button class="btn-download" onclick="downloadFile('${item.url}', '${item.name}')">Download</button>`}
-            `;
-
-            if (isDir) {
-                li.querySelector('.dir-link').onclick = () => loadRepository(item.path);
+            } catch (error) {
+                writeConsole(`KESALAHAN JARINGAN/API: ${error.message.toUpperCase()}`, 'error');
+                submitBtn.disabled = false;
             }
-            container.appendChild(li);
-        });
-    }
+        };
 
-    // Perbaikan utama: Mengambil data konten file via API endpoint langsung menggunakan Token untuk membongkar Base64 Blob
-    async function downloadFile(apiUrl, filename) {
-        try {
-            const headers = { 'Accept': 'application/vnd.github.v3+json' };
-            if (cachedToken) { headers['Authorization'] = `token ${cachedToken}`; }
-
-            // 1. Ambil metadata file (termasuk konten dalam format base64 jika file < 12MB)
-            const response = await fetch(apiUrl, { headers });
-            if (!response.ok) throw new Error('Gagal menghubungi API GitHub.');
-            
-            const fileData = await response.json();
-            
-            // Periksa jika file terlalu besar untuk API Contents biasa (>12MB biasanya diarahkan ke Git LFS/Blob API)
-            if (!fileData.content && fileData.download_url) {
-                // Fallback menggunakan unduhan langsung jika tidak terikat enkripsi base64 API biasa
-                window.open(fileData.download_url, '_blank');
-                return;
-            }
-
-            // 2. Decode string base64 menjadi byte array
-            const byteCharacters = atob(fileData.content.replace(/\s/g, ''));
-            const byteNumbers = new Array(byteCharacters.length);
-            for (let i = 0; i < byteCharacters.length; i++) {
-                byteNumbers[i] = byteCharacters.charCodeAt(i);
-            }
-            const byteArray = new Uint8Array(byteNumbers);
-            
-            // 3. Buat objek Blob lokal untuk memicu unduhan di browser bypass CORS
-            const blob = new Blob([byteArray], { type: 'application/octet-stream' });
-            const blobUrl = window.URL.createObjectURL(blob);
-            
-            const a = document.createElement('a');
-            a.href = blobUrl;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(blobUrl);
-        } catch (error) {
-            alert('Gagal mendownload file: ' + error.message + '\nJika file Anda berukuran besar (>10MB), buka langsung via browser.');
-        }
-    }
+        reader.onerror = function () {
+            writeConsole('GAGAL MEMBACA ELEMEN DATA LOKAL.', 'error');
+            submitBtn.disabled = false;
+        };
+    });
 </script>
 
 </body>
