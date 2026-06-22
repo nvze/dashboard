@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ringkasan UU Nomor 4 Tahun 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background: #f4f7fb;
+            color: #1e2a3a;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px -12px rgba(0, 20, 30, 0.25);
+            padding: 40px 45px;
+            transition: all 0.2s ease;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #0b2b4a;
+            border-left: 6px solid #c0392b;
+            padding-left: 20px;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subhead {
+            font-size: 1rem;
+            color: #3d5a73;
+            background: #eef3f9;
+            padding: 10px 18px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .badge {
+            background: #1a3a5e;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-right: 12px;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1a3a5e;
+            margin-top: 2.2rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 6px;
+            border-bottom: 3px solid #dce5ef;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f4a6e;
+            margin-top: 1.8rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #2a4d6e;
+            margin-top: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-card {
+            background: #fafcff;
+            border-radius: 16px;
+            padding: 18px 24px;
+            margin-bottom: 1.8rem;
+            border: 1px solid #e6edf5;
+            box-shadow: 0 2px 6px rgba(0,20,30,0.04);
+        }
+
+        ul, ol {
+            padding-left: 1.8rem;
+            margin-top: 0.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        .highlight {
+            background: #f0f6fe;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: #004080;
+        }
+
+        .pill {
+            background: #dceaf5;
+            color: #004d7a;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, #b3c9e0, transparent);
+            margin: 24px 0 20px 0;
+        }
+
+        .download-section {
+            margin-top: 42px;
+            padding-top: 28px;
+            border-top: 2px dashed #bacddc;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-download {
+            background: #0b2b4a;
+            color: white;
+            border: none;
+            padding: 15px 38px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 16px -6px rgba(11, 43, 74, 0.3);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-download:hover {
+            background: #1a456b;
+            box-shadow: 0 12px 24px -8px rgba(11, 43, 74, 0.4);
+            transform: scale(1.02);
+        }
+
+        .btn-download:active {
+            transform: scale(0.96);
+        }
+
+        .btn-download i {
+            font-size: 1.6rem;
+            line-height: 1;
+        }
+
+        .meta-info {
+            font-size: 0.9rem;
+            color: #3a5f7a;
+            background: #e9f0f7;
+            padding: 8px 20px;
+            border-radius: 40px;
+        }
+
+        .footer-note {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #4c6f8c;
+            text-align: center;
+            border-top: 1px solid #dde6f0;
+            padding-top: 18px;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 20px 18px;
+            }
+            h1 {
+                font-size: 1.7rem;
+                padding-left: 14px;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+            .btn-download {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px;
+                font-size: 1.1rem;
+            }
+            .download-section {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 8px;">
+            <span class="badge">Undang-Undang</span>
+            <span style="font-weight: 500; color: #1f4a6e;">Nomor 4 Tahun 2026</span>
+        </div>
+        <h1>Perubahan atas UU P2SK</h1>
+        <div class="subhead">Ringkasan lengkap · Penguatan Sektor Keuangan</div>
+
+        <!-- ISI RINGKASAN (dari file yang diberikan) -->
+        <div class="section-card">
+            <p style="font-weight: 500; margin-bottom: 12px;">📌 Undang-Undang ini merupakan perubahan atas UU Nomor 4 Tahun 2023 tentang Pengembangan dan Penguatan Sektor Keuangan (P2SK), sebagai tindak lanjut putusan Mahkamah Konstitusi dan kebutuhan hukum. Mencakup berbagai sektor: LPS, OJK, BI, Perbankan, Pasar Modal, Asuransi, Aset Kripto, dan lainnya.</p>
+        </div>
+
+        <!-- I. LPS -->
+        <h2>I. Lembaga Penjamin Simpanan (LPS)</h2>
+        <div class="section-card">
+            <h3>A. Definisi, Fungsi & Tugas</h3>
+            <ul>
+                <li><strong>Status:</strong> LPS adalah badan hukum dan lembaga negara yang independen, transparan, dan akuntabel (Pasal 2).</li>
+                <li><strong>Fungsi baru:</strong> Menjamin polis asuransi dan melakukan resolusi Perusahaan Asuransi &amp; Asuransi Syariah (Pasal 4).</li>
+                <li><strong>Tugas:</strong> Merumuskan kebijakan penjaminan polis, serta resolusi perusahaan asuransi (Pasal 5).</li>
+                <li><strong>Wewenang diperluas:</strong> Memungut iuran penjaminan polis, memperoleh data pemegang polis, melakukan pemeriksaan, memberikan dukungan finansial, dan mengambil alih hak pemegang saham pada saat resolusi (Pasal 6).</li>
+            </ul>
+
+            <h3>B. Penanganan Resolusi (Bank & Perusahaan Asuransi)</h3>
+            <ul>
+                <li><strong>Pasal 7A &amp; 20A (baru):</strong> Perlindungan hukum bagi pejabat LPS; tindakan sebelum resolusi (pengalihan ke investor, pembayaran klaim sementara).</li>
+                <li><strong>Pasal 22A &amp; 24A:</strong> LPS dapat memilih menyelamatkan atau tidak menyelamatkan perusahaan asuransi dalam resolusi, dengan pertimbangan biaya dan faktor lainnya.</li>
+                <li><strong>Pasal 28–30:</strong> Hak pemegang saham lama tergantung ekuitas; LPS wajib menjual saham dalam waktu 3 tahun (dapat diperpanjang).</li>
+                <li><strong>Pasal 31:</strong> Jika tidak diselamatkan, LPS meminta pencabutan izin dan membayar klaim penjaminan.</li>
+            </ul>
+
+            <h3>C. Kelembagaan & Anggaran</h3>
+            <ul>
+                <li><strong>Dewan Komisioner (Pasal 63, 65):</strong> Berjumlah 7 orang (1 Kemenkeu, 1 OJK, 1 BI, 4 dari dalam/luar LPS). Anggota dari 4 orang dipilih DPR dari calon Presiden.</li>
+                <li><strong>Anggaran (Pasal 86, 86A, 87):</strong> Anggaran kegiatan operasional harus mendapat persetujuan DPR (tindak lanjut putusan MK). Standar mengikuti praktik wajar sektor keuangan.</li>
+            </ul>
+
+            <h3>D. Tugas Lain & Sanksi</h3>
+            <ul>
+                <li><strong>Pasal 90A (baru):</strong> LPS menjalankan program edukasi dan pemberdayaan masyarakat secara inklusif.</li>
+                <li><strong>Pasal 95A:</strong> Sanksi pidana bagi yang melanggar kewajiban pemberian data dan informasi (penjara maks. 3 tahun/denda).</li>
+            </ul>
+        </div>
+
+        <!-- II. OJK -->
+        <h2>II. Otoritas Jasa Keuangan (OJK)</h2>
+        <div class="section-card">
+            <h3>A. Tugas & Wewenang</h3>
+            <ul>
+                <li><strong>Pasal 6:</strong> Tugas OJK diperluas: mengawasi <span class="highlight">bursa mineral dan komoditas strategis</span>, serta pengelolaan dana publik lainnya (diatur dalam PP setelah persetujuan DPR).</li>
+                <li><strong>Pasal 8B:</strong> OJK adalah satu-satunya pihak yang berwenang mengajukan pailit bagi entitas yang diawasi, termasuk yang terkait aset kripto dan aset keuangan digital.</li>
+                <li><strong>Pasal 8C (baru):</strong> OJK berwenang menetapkan kebijakan yang berimplikasi pada risiko nasabah/industri/stabilitas sistem, setelah berkonsultasi dengan DPR.</li>
+            </ul>
+
+            <h3>B. Kelembagaan</h3>
+            <ul>
+                <li><strong>Pasal 10:</strong> Dewan Komisioner berjumlah 11 orang, dengan tambahan <span class="highlight">Kepala Eksekutif Pengawas Bursa Mineral dan Komoditas Strategis</span>.</li>
+                <li><strong>Pasal 11, 12, 17, 18:</strong> Seleksi anggota (kecuali ex-officio) oleh DPR dari calon Presiden; alasan pemberhentian diperjelas.</li>
+                <li><strong>Pasal 21A (baru):</strong> Perlindungan hukum bagi pejabat OJK yang bertugas dengan itikad baik.</li>
+                <li><strong>Pasal 35–37:</strong> Anggaran dan pungutan OJK mengikuti standar wajar, dengan persetujuan DPR; pungutan bukan objek pajak penghasilan.</li>
+            </ul>
+
+            <h3>C. Koordinasi & Tugas Lain</h3>
+            <ul>
+                <li><strong>Pasal 41, 42:</strong> OJK wajib menginformasikan bank/perusahaan asuransi bermasalah kepada LPS.</li>
+                <li><strong>Pasal 47A (baru):</strong> OJK menjalankan program edukasi dan pemberdayaan masyarakat secara inklusif.</li>
+            </ul>
+        </div>
+
+        <!-- III. BI -->
+        <h2>III. Bank Indonesia (BI)</h2>
+        <div class="section-card">
+            <h3>A. Tujuan & Kebijakan</h3>
+            <ul>
+                <li><strong>Pasal 7:</strong> Tujuan BI diperluas: mencapai stabilitas nilai rupiah, <span class="highlight">memelihara stabilitas Sistem Pembayaran</span>, dan turut menjaga stabilitas sistem keuangan.</li>
+                <li>BI melaksanakan bauran kebijakan untuk mendukung pertumbuhan ekonomi dan penciptaan lapangan kerja.</li>
+            </ul>
+
+            <h3>B. Kelembagaan & Anggaran</h3>
+            <ul>
+                <li><strong>Pasal 39, 43:</strong> Gubernur mewakili BI; rapat Dewan Gubernur diatur lebih rinci, termasuk keputusan darurat.</li>
+                <li><strong>Pasal 48, 50:</strong> Alasan pemberhentian dan mekanisme penggantian Gubernur/Deputi Gubernur diperjelas.</li>
+                <li><strong>Pasal 60, 60A:</strong> Anggaran operasional BI harus mendapat persetujuan DPR; standar mengikuti praktik wajar sektor keuangan.</li>
+                <li><strong>Pasal 35E (baru):</strong> Perlindungan hukum bagi Gubernur, Deputi, pejabat, dan pegawai BI.</li>
+                <li><strong>Pasal 57A (baru):</strong> BI menjalankan program edukasi dan pemberdayaan masyarakat secara inklusif.</li>
+            </ul>
+        </div>
+
+        <!-- IV. Evaluasi DPR -->
+        <h2>IV. Evaluasi Kinerja oleh DPR</h2>
+        <div class="section-card">
+            <p><strong>Pasal 9A (baru):</strong> DPR dapat melakukan evaluasi kinerja terhadap LPS, OJK, dan BI. Hasil evaluasi dan rekomendasi bersifat <span class="highlight">mengikat</span> dan harus ditindaklanjuti.</p>
+        </div>
+
+        <!-- V. Perbankan -->
+        <h2>V. Perbankan</h2>
+        <div class="section-card">
+            <ul>
+                <li><strong>Pasal 1 &amp; 7:</strong> Definisi Bank diperluas; Bank Umum dapat melakukan kerja sama dengan LJK dan selain LJK, serta kegiatan usaha layanan jasa keuangan lainnya secara bertahap (penahapan diatur dalam POJK setelah persetujuan DPR).</li>
+                <li><strong>Pasal 28B (baru):</strong> OJK menyusun peta jalan konsolidasi Bank Umum untuk memperkuat struktur dan ketahanan.</li>
+                <li><strong>Pasal 250 &amp; 251:</strong> Penghapusbukuan dan penghapustagihan piutang macet UMKM oleh BUMN/BUMD dapat dilakukan; kerugian bukan kerugian negara jika iktikad baik.</li>
+                <li><strong>Pasal 16C &amp; 20B:</strong> Diperjelas kewenangan OJK dan LPS dalam penanganan bank dalam penyehatan, termasuk penempatan dana untuk Bank Sistemik.</li>
+            </ul>
+        </div>
+
+        <!-- VI. Perbankan Syariah -->
+        <h2>VI. Perbankan Syariah</h2>
+        <div class="section-card">
+            <ul>
+                <li><strong>Pasal 1 &amp; 20:</strong> Definisi dan kegiatan usaha Bank Umum Syariah diperluas, termasuk kerja sama dan penahapan kegiatan usaha.</li>
+                <li><strong>Pasal 17B (baru):</strong> OJK menyusun peta jalan konsolidasi Bank Umum Syariah.</li>
+                <li><strong>Pasal 22A (baru):</strong> Hasil penyelesaian aset produk investasi perbankan syariah hanya untuk nasabah investor.</li>
+            </ul>
+        </div>
+
+        <!-- VII. Pasar Modal -->
+        <h2>VII. Pasar Modal</h2>
+        <div class="section-card">
+            <ul>
+                <li><strong>Pasal 8 &amp; 8B (baru):</strong> Demutualisasi Bursa Efek (didirikan oleh badan usaha tidak terafiliasi); Kemenkeu, BI, dan Danantara dapat menjadi pemegang saham.</li>
+                <li><strong>Pasal 100A &amp; 100E:</strong> OJK dapat menghentikan penyidikan (prinsip <em>una via</em>) dan mengenakan sanksi administratif dengan syarat mengembalikan kerugian.</li>
+            </ul>
+        </div>
+
+        <!-- VIII. Mekanisme Perdagangan & Instrumen -->
+        <h2>VIII. Mekanisme Perdagangan &amp; Instrumen Keuangan</h2>
+        <div class="section-card">
+            <ul>
+                <li><strong>Pasal 39A (baru):</strong> Mengatur transfer margin (<em>initial margin</em> dan <em>variation margin</em>) melalui pengalihan hak milik (<em>transfer of title</em>); margin tidak termasuk harta pailit.</li>
+                <li><strong>Pasal 50A (baru):</strong> Danantara dapat menerbitkan surat utang khusus (Patriot Bond &amp; Merah Putih Bond) dengan jaminan negara dan perlindungan dari tuntutan pidana/perdata.</li>
+            </ul>
+        </div>
+
+        <!-- IX. Perasuransian -->
+        <h2>IX. Perasuransian</h2>
+        <div class="section-card">
+            <ul>
+                <li><strong>Pasal 20 (perubahan):</strong> LPS dapat mencairkan Dana Jaminan tanpa persetujuan OJK jika perusahaan dalam resolusi dan tidak diselamatkan.</li>
+                <li><strong>Pasal 53, 79, 81, 83, 84:</strong> Perusahaan asuransi wajib ikut program penjaminan polis; LPS dapat melakukan pengalihan aset/kewajiban, pembayaran klaim, atau pengelolaan kontrak.</li>
+                <li><strong>Pasal 90, 90A–90F:</strong> Diatur status pengawasan (normal, penyehatan, resolusi) dan koordinasi OJK-LPS; LPS dapat mendirikan Perusahaan Asuransi Perantara.</li>
+                <li><strong>Pasal 98, 101A–101C:</strong> Urutan pembayaran kewajiban dalam likuidasi; sengketa diselesaikan melalui Pengadilan Niaga dengan prosedur dan batas waktu jelas.</li>
+                <li><strong>Pasal 52A:</strong> Perubahan UU No. 34/1964 tentang Dana Kecelakaan Lalu Lintas, memperluas cakupan korban yang berhak mendapat ganti rugi.</li>
+            </ul>
+        </div>
+
+        <!-- X. Aset Kripto & AKD -->
+        <h2>X. Aset Kripto &amp; Aset Keuangan Digital (AKD)</h2>
+        <div class="section-card">
+            <ul>
+                <li><strong>Pasal 213 &amp; 215:</strong> Aktivitas aset kripto termasuk dalam ITSK; LJK Aset Kripto terdiri dari pedagang, bursa, lembaga kliring, dan pengelola tempat penyimpanan.</li>
+                <li><strong>Pasal 221A:</strong> Seluruh aktivitas aset kripto wajib ditransaksikan melalui/dilaporkan ke bursa aset kripto.</li>
+                <li><strong>Pasal 221D &amp; 304A:</strong> Larangan manipulasi pasar, insider trading, dan pernyataan menyesatkan; sanksi pidana berat (penjara 10 tahun) bagi yang beroperasi tanpa izin.</li>
+            </ul>
+        </div>
+
+        <!-- XI. Penyelidikan, Penyidikan & Keadilan Restoratif -->
+        <h2>XI. Penyelidikan, Penyidikan &amp; Keadilan Restoratif</h2>
+        <div class="section-card">
+            <ul>
+                <li><strong>Pasal 278A–278C:</strong> Wewenang penyelidik dan penyidik di sektor jasa keuangan, termasuk penyidik dari OJK (Polri, PPNS, pegawai OJK).</li>
+                <li><strong>Pasal 278F–278O:</strong> Penyelesaian perkara melalui keadilan restoratif pada seluruh tahap (penyelidikan, penyidikan, penuntutan, sidang). Dapat diterapkan untuk tindak pidana pertama kali atau bukan pengulangan. Melibatkan kesepakatan pelaku-korban; jika dipenuhi, proses hukum dihentikan. Pelaku juga dapat dikenai sanksi administratif oleh OJK.</li>
+            </ul>
+        </div>
+
+        <!-- XII. Lainnya -->
+        <h2>XII. Ketentuan Lainnya</h2>
+        <div class="section-card">
+            <ul>
+                <li><strong>Bursa Mineral &amp; Komoditas Strategis (Pasal 132A):</strong> Dibentuk bursa yang diawasi OJK, beroperasi mulai 1 Januari 2027.</li>
+                <li><strong>Satuan Tugas (Pasal 247):</strong> Pemerintah membentuk satgas untuk mencegah dan menangani kegiatan usaha tanpa izin di sektor keuangan, pelanggaran konsumen, dan judi online.</li>
+                <li><strong>Pusat Finansial Internasional Indonesia (Pasal 248A):</strong> Akan dibentuk dengan kekhususan hukum dan fasilitas perpajakan khusus; UU khusus ditargetkan selesai dalam 3 bulan sejak UU ini diundangkan.</li>
+            </ul>
+        </div>
+
+        <!-- XIII. Ketentuan Peralihan -->
+        <h2>XIII. Ketentuan Peralihan (Pasal II)</h2>
+        <div class="section-card">
+            <ul>
+                <li>Persetujuan DPR untuk anggaran operasional LPS mulai berlaku tahun anggaran 2027.</li>
+                <li>Pengecualian pungutan dari pajak penghasilan mulai berlaku terhadap pungutan Tahun 2027.</li>
+                <li>Program penjaminan polis berlaku paling lambat Januari 2028.</li>
+                <li>Ketentuan penyelamatan perusahaan asuransi oleh LPS mulai berlaku 1 Januari 2030.</li>
+                <li>Bursa mineral dan komoditas strategis beroperasi mulai 1 Januari 2027.</li>
+                <li>Bursa aset kripto wajib menyelenggarakan perdagangan dalam waktu 1 tahun setelah UU ditetapkan.</li>
+                <li>Peraturan pelaksanaan UU P2SK lama tetap berlaku sepanjang tidak bertentangan.</li>
+            </ul>
+            <p style="margin-top: 10px; background: #e9f0f7; padding: 6px 16px; border-radius: 30px; display: inline-block;">📅 Diundangkan di Jakarta pada 17 Juni 2026</p>
+        </div>
+
+        <!-- TOMBOL DOWNLOAD -->
+        <div class="download-section">
+            <div>
+                <span style="font-weight: 500; font-size: 1.05rem;">📄 Unduh dokumen asli</span>
+                <div style="font-size: 0.85rem; color: #406e8c; margin-top: 4px;">Salinan UU Nomor 4 Tahun 2026 (PDF)</div>
+            </div>
+            <a href="https://nvze.github.io/files/Salinan_UU.pdf" target="_blank" rel="noopener noreferrer" class="btn-download">
+                <span style="font-size: 1.4rem;">⬇️</span> Download PDF
+            </a>
+        </div>
+        <div class="footer-note">
+            ⚖️ Ringkasan ini disusun berdasarkan naskah UU Nomor 4 Tahun 2026. Untuk keperluan hukum, selalu rujuk pada dokumen resmi.
+        </div>
+    </div>
+</body>
+</html>
