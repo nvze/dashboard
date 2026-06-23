@@ -4,7 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>14 Rasio Profitabilitas: Sebuah Catatan dari Bandung</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- Konfigurasi MathJax untuk memastikan formula dirender dengan benar -->
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      startup: {
+        typeset: true
+      }
+    };
+    </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         body {
@@ -84,11 +95,13 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 18px;
             overflow-x: auto;
+            text-align: center;
         }
         .dashboard-link-container {
             margin-top: 60px;
             padding-top: 40px;
-            border-top: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 60px;
         }
         .dashboard-link {
             display: inline-block;
@@ -145,7 +158,7 @@
     <p><span class="dialogue-name">Tessa</span> menunjuk ke baris pertama berwarna hijau. "Gross Margin. Secara sederhana, ini adalah persentase dari pendapatan yang menjadi laba kotor. Ini mengukur seberapa efisien perusahaan memproduksi barang atau jasanya sebelum biaya-biaya operasional dihitung."</p>
 
     <div class="formula-box">
-        $$	ext{Gross Margin} = rac{	ext{Gross Profit}}{	ext{Sales}}$$
+        $$\text{Gross Margin} = \frac{\text{Gross Profit}}{\text{Sales}}$$
     </div>
 
     <p>"Dalam konteks teknik industri," ujarku, "ini adalah area di mana ilmu kita paling terasa dampaknya. Laba kotor didapat dari Penjualan dikurangi Harga Pokok Penjualan (HPP). Jika kita bisa melakukan optimasi pada material, mengurangi <i>waste</i> atau cacat produk dengan Six Sigma, HPP akan turun. Ketika HPP turun, Gross Profit naik."</p>
@@ -157,7 +170,7 @@
     <p><span class="dialogue-name">Nase</span> mengetik beberapa baris kode dan berujar, "Selanjutnya kita masuk ke EBITDA Margin. Persentase dari penjualan yang menjadi Earnings Before Interest, Taxes, Depreciation, and Amortization."</p>
 
     <div class="formula-box">
-        $$	ext{EBITDA Margin} = rac{	ext{EBITDA}}{	ext{Sales}}$$
+        $$\text{EBITDA Margin} = \frac{\text{EBITDA}}{\text{Sales}}$$
     </div>
 
     <p>"Kenapa kita butuh mengecualikan depresiasi dan amortisasi?" tanya Tessa retoris, memancing diskusi. "Sebagai orang teknik, kita tahu bahwa pabrik butuh investasi alat berat, mesin CNC, robotika, yang nilainya menyusut setiap tahun. Biaya penyusutan ini adalah biaya non-kas."</p>
@@ -169,7 +182,7 @@
     <p>Kertas itu kini sedikit bergeser ke arah Esan. "Lalu ada Operating Margin. Persentase dari penjualan yang menjadi Pendapatan Operasional (Operating Income)."</p>
 
     <div class="formula-box">
-        $$	ext{Operating Margin} = rac{	ext{Operating Income}}{	ext{Sales}}$$
+        $$\text{Operating Margin} = \frac{\text{Operating Income}}{\text{Sales}}$$
     </div>
 
     <p><span class="dialogue-name">Tessa</span> menjelaskan dengan antusias, "Operating Income itu didapat setelah laba kotor dikurangi seluruh beban operasional seperti gaji karyawan kantor, biaya pemasaran, dan riset pengembangan (R&D). Ini menunjukkan seberapa lihai manajemen mengelola biaya di luar lantai pabrik."</p>
@@ -181,7 +194,7 @@
     <p>Aku melihat rasio berikutnya. "EBIT Margin. Persentase penjualan yang menjadi Earnings Before Interest and Taxes."</p>
 
     <div class="formula-box">
-        $$	ext{EBIT Margin} = rac{	ext{EBIT}}{	ext{Sales}}$$
+        $$\text{EBIT Margin} = \frac{\text{EBIT}}{\text{Sales}}$$
     </div>
 
     <p>"Apa bedanya secara signifikan dengan Operating Income?" tanya Esan sambil mengerutkan kening. "Di banyak perusahaan, angkanya sering kali sama, kan?"</p>
@@ -193,7 +206,7 @@
     <p><span class="dialogue-name">Tessa</span> melanjutkan jarinya ke bawah. "Sekarang kita masukkan elemen bunga pinjaman. Pre-Tax Margin atau EBT Margin. Persentase penjualan yang menjadi Earnings Before Taxes."</p>
 
     <div class="formula-box">
-        $$	ext{EBT Margin} = rac{	ext{EBT}}{	ext{Sales}}$$
+        $$\text{EBT Margin} = \frac{\text{EBT}}{\text{Sales}}$$
     </div>
 
     <p>"Ini mulai menarik untuk analisis struktur permodalan kita," ujarku. "Sebagai <i>engineer</i> yang mendesain sistem manufaktur baru, kita sering harus memutuskan apakah akan mendanai mesin baru dengan modal sendiri (ekuitas) atau meminjam ke bank (utang). Jika kita meminjam, beban bunga akan menggerus EBIT menjadi EBT. Rasio ini memberitahu kita seberapa besar beban hutang mencekik margin profitabilitas perusahaan sebelum dipotong pajak negara."</p>
@@ -203,7 +216,7 @@
     <p>Hujan di luar semakin deras, namun kehangatan diskusi kami semakin terasa. "Dan inilah rajanya margin," kata Esan sambil tersenyum. "Net Profit Margin. Persentase penjualan yang benar-benar tersisa sebagai laba bersih setelah semua komponen biaya, termasuk bunga dan pajak, dikurangkan."</p>
 
     <div class="formula-box">
-        $$	ext{Net Profit Margin} = rac{	ext{Net Income}}{	ext{Sales}}$$
+        $$\text{Net Profit Margin} = \frac{\text{Net Income}}{\text{Sales}}$$
     </div>
 
     <p><span class="dialogue-name">Nase</span> mengetik kencang. "Ini adalah angka yang paling sering dilihat publik. Berapa sen yang berhasil dipertahankan perusahaan dari setiap rupiah penjualan. Margin bersih yang konsisten di atas 10% di industri yang ketat menunjukkan adanya keunggulan kompetitif (<i>economic moat</i>) yang luar biasa kuat."</p>
@@ -215,7 +228,7 @@
     <p>"Tepat sekali, Tessa! Itulah mengapa baris berikutnya sangat krusial," kataku dengan penuh semangat. "Free Cash Flow Margin. Persentase penjualan yang menjadi Free Cash Flow (FCF)."</p>
 
     <div class="formula-box">
-        $$	ext{Free Cash Flow Margin} = rac{	ext{Free Cash Flow}}{	ext{Sales}}$$
+        $$\text{Free Cash Flow Margin} = \frac{\text{Free Cash Flow}}{\text{Sales}}$$
     </div>
 
     <p><span class="dialogue-name">Nase</span> langsung mengambil alih panggung. "Kas adalah raja. Free Cash Flow adalah Arus Kas dari Operasi dikurangi Pengeluaran Modal (Capital Expenditures / Capex). Kalau sebuah perusahaan melaporkan Net Profit Margin yang besar tapi FCF Margin-nya negatif, kita harus curiga. Ke mana uangnya pergi?"</p>
@@ -227,7 +240,7 @@
     <p>Kami beralih ke blok berikutnya dalam gambar tersebut. "Earnings Per Share," gumam Tessa membaca bagian berwarna hijau terang.</p>
 
     <div class="formula-box">
-        $$	ext{EPS} = rac{	ext{Net Income}}{	ext{Shares Outstanding}}$$
+        $$\text{EPS} = \frac{\text{Net Income}}{\text{Shares Outstanding}}$$
     </div>
 
     <p>"Berapa banyak laba yang dihasilkan perusahaan untuk setiap lembar saham yang beredar," aku menjelaskan. "Ini adalah rasio jembatan antara total perusahaan dan porsi kepemilikan individu. EPS sangat penting karena menjadi dasar perhitungan rasio valuasi seperti Price-to-Earnings (P/E)."</p>
@@ -239,7 +252,7 @@
     <p>"Sekarang kita masuk ke ranah pengembalian atau <i>Returns</i>," kata Tessa. Ia menunjuk ke ROA. "Berapa banyak laba yang dihasilkan perusahaan dari total asetnya."</p>
 
     <div class="formula-box">
-        $$	ext{ROA} = rac{	ext{Net Income}}{	ext{Total Assets}}$$
+        $$\text{ROA} = \frac{\text{Net Income}}{\text{Total Assets}}$$
     </div>
 
     <p><span class="dialogue-name">Esan</span>, yang selalu berpikir dari sudut pandang manajer produksi, mengangguk antusias. "Ini rasio favoritku. Bayangkan kita punya pabrik bernilai miliaran rupiah (aset). ROA mengukur seberapa keras bangunan dan mesin-mesin tersebut bekerja menghasilkan uang. Jika ROA rendah, berarti kita punya banyak aset yang <i>idle</i> (menganggur) atau tidak dioptimalkan dengan baik. Dalam filosofi teknik industri, ini adalah bentuk inefisiensi yang harus diberantas!"</p>
@@ -249,7 +262,7 @@
     <p>"Lalu di bawahnya ada ROE," kataku. "Mengukur berapa laba yang dihasilkan perusahaan terkait dengan ekuitas atau uang yang telah diinvestasikan oleh para pemegang saham."</p>
 
     <div class="formula-box">
-        $$	ext{ROE} = rac{	ext{Net Income}}{	ext{Equity}}$$
+        $$\text{ROE} = \frac{\text{Net Income}}{\text{Equity}}$$
     </div>
 
     <p>"ROE adalah kompas bagi pemegang saham," jelas Nase. "Jika saya menaruh uang 100 juta di perusahaan ini, berapa laba bersih yang dihasilkan dari uang tersebut setiap tahun? Namun, ROE punya satu kelemahan besar. Perusahaan bisa mendongkrak ROE dengan mengambil banyak hutang. Karena Ekuitas = Aset - Hutang, maka semakin tinggi hutang, ekuitas semakin kecil. Denominator mengecil, ROE meroket. Perusahaan seolah-olah berkinerja luar biasa, padahal risiko kebangkrutannya meningkat tajam."</p>
@@ -259,7 +272,7 @@
     <p><span class="dialogue-name">Tessa</span> tersenyum penuh arti. "Di sinilah ROIC masuk untuk menyelamatkan kita dari manipulasi utang pada ROE. Return on Invested Capital. Ini metrik yang mengukur seberapa efisien perusahaan mengalokasikan modal di bawah kendalinya untuk menghasilkan operasi yang menguntungkan."</p>
 
     <div class="formula-box">
-        $$	ext{ROIC} = rac{	ext{NOPAT}}{	ext{Total Invested Capital}}$$
+        $$\text{ROIC} = \frac{\text{NOPAT}}{\text{Total Invested Capital}}$$
     </div>
 
     <p>"NOPAT adalah Net Operating Profit After Tax," selaku. "Ini adalah laba operasi riil dari perusahaan seandainya perusahaan tersebut tidak memiliki utang sama sekali. Dibandingkan dengan Total Invested Capital (modal dari pemegang saham ditambah utang berbunga). ROIC adalah standar emas dari profitabilitas. Jika ROIC perusahaan konsisten di atas Biaya Modal (WACC), itu artinya perusahaan tersebut benar-benar menciptakan nilai fundamental. Sebagai lulusan IE yang merancang sistem investasi di lantai produksi, jika proyeksi ROIC kita lebih rendah dari biaya bunga bank, proyek itu lebih baik dibatalkan."</p>
@@ -269,7 +282,7 @@
     <p>Esan menyipitkan mata. "Tunggu, di bawahnya ada ROCE. Apa bedanya dengan ROIC?"</p>
 
     <div class="formula-box">
-        $$	ext{ROCE} = rac{	ext{EBIT}}{	ext{Long-Term Debt} + 	ext{Equity}}$$
+        $$\text{ROCE} = \frac{\text{EBIT}}{\text{Long Term Debt} + \text{Equity}}$$
     </div>
 
     <p>"Mereka sangat mirip," jawab Nase. "ROCE menggunakan EBIT sebagai pembilangnya, bukan NOPAT (yang sudah dipotong pajak). Penyebutnya juga lebih spesifik ke Hutang Jangka Panjang dan Ekuitas. ROCE sangat berguna terutama dalam sektor padat modal seperti industri telekomunikasi atau utilitas untuk mengevaluasi profitabilitas dari proyek jangka panjang yang mereka jalankan."</p>
@@ -281,7 +294,7 @@
     <p>"Free Cash Flow Conversion. Mengukur seberapa banyak Net Income yang benar-benar berubah menjadi Free Cash Flow."</p>
 
     <div class="formula-box">
-        $$	ext{FCF Conversion} = rac{	ext{Free Cash Flow}}{	ext{Net Income}}$$
+        $$\text{FCF Conversion} = \frac{\text{Free Cash Flow}}{\text{Net Income}}$$
     </div>
 
     <p>"Ini adalah pendeteksi kebohongan paling mutakhir di dunia finansial," kataku dengan nada dramatis. "Banyak eksekutif korporat membual tentang Net Income yang tumbuh dua digit. Tetapi, jika FCF Conversion-nya jauh di bawah 1 (atau di bawah 100%), kita wajib bertanya-tanya. Berarti laba bersih itu hanya angka di atas kertas—mungkin pelanggan membeli dengan kredit panjang sehingga piutang menumpuk, atau persediaan barang tidak laku terjual menumpuk di gudang. Kasnya tidak pernah masuk ke brankas."</p>
@@ -295,7 +308,7 @@
     <p><span class="dialogue-name">Esan</span> membacanya perlahan. "Owner's Earnings. Mengukur berapa banyak uang kas yang bisa ditarik keluar dari bisnis dan diberikan kepada pemiliknya tanpa merusak kemampuan kompetitif bisnis tersebut."</p>
 
     <div class="formula-box">
-        $$	ext{Owner's Earnings} = 	ext{Net Income} + (	ext{Depreciation \& Amortization}) \pm 	ext{Non Cash Charges} - 	ext{Maintenance Capex} \pm 	ext{Changes in Working Capital}$$
+        $$\text{Owners Earnings} = \text{Net Income} + (\text{Depreciation and Amortization}) \pm \text{Non Cash Charges} - \text{Maintenance Capex} \pm \text{Changes in Working Capital}$$
     </div>
 
     <p>"Ini adalah formula yang dipopulerkan oleh Warren Buffett dalam suratnya kepada pemegang saham Berkshire Hathaway tahun 1986," terang Tessa. Matanya berbinar, memancarkan kecintaannya pada riset mendalam. "Buffett menganggap laba bersih itu cacat. Ia menciptakan Owner's Earnings untuk mencari 'nilai intrinsik' sebuah bisnis."</p>
