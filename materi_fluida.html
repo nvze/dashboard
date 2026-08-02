@@ -3,105 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panduan Komprehensif Mekanika Fluida</title>
+    <title>Panduan Mekanika Fluida - Academic Edition</title>
     <style>
+        /* Gaya visual terinspirasi dari Oxford University */
+        :root {
+            --oxford-blue: #002147;
+            --oxford-gold: #cfa874;
+            --text-dark: #222222;
+            --bg-light: #f3f1ee;
+            --box-bg: #f8f9fa;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 30px;
-            background-color: #f4f7f6;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
         }
-        .container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        h1 {
+
+        /* Header bergaya Universitas */
+        .university-header {
+            background-color: var(--oxford-blue);
+            color: #ffffff;
+            padding: 20px 0;
             text-align: center;
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
+            border-bottom: 5px solid var(--oxford-gold);
         }
+
+        .university-header h1 {
+            font-family: 'PT Serif', Georgia, 'Times New Roman', serif;
+            font-weight: normal;
+            letter-spacing: 2px;
+            margin: 0;
+            font-size: 1.8em;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 50px 60px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        h1, h2, h3 {
+            font-family: 'PT Serif', Georgia, 'Times New Roman', serif;
+            color: var(--oxford-blue);
+        }
+
+        h1.document-title {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+        }
+
         h2 {
-            color: #2980b9;
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 10px;
+            font-size: 1.6em;
             margin-top: 40px;
+            border-bottom: 2px solid var(--oxford-blue);
+            padding-bottom: 8px;
+            display: inline-block;
         }
+
         h3 {
-            color: #16a085;
-            margin-top: 25px;
+            font-size: 1.3em;
+            margin-top: 30px;
         }
+
         p {
             text-align: justify;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
+
+        /* Kotak Rumus Akademik Klasik */
         .formula-box {
-            background-color: #e8f4f8;
-            border-left: 5px solid #3498db;
-            padding: 20px;
-            margin: 25px 0;
-            border-radius: 4px;
+            background-color: #ffffff;
+            border: 1px solid var(--oxford-blue);
+            padding: 25px;
+            margin: 30px 0;
             text-align: center;
-            font-size: 1.3em;
-            letter-spacing: 1px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.4em;
+            font-style: italic;
+            box-shadow: 4px 4px 0px rgba(0, 33, 71, 0.05);
         }
+
         .formula-desc {
-            font-size: 0.85em;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 0.7em;
             text-align: left;
-            margin-top: 15px;
+            margin-top: 20px;
+            font-style: normal;
+            border-top: 1px dashed #ccc;
+            padding-top: 15px;
             display: inline-block;
-            letter-spacing: normal;
+            width: 100%;
         }
-        .note-box {
-            background-color: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 15px 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+
+        /* Kotak Catatan & Penerapan yang Formal */
+        .note-box, .application-box {
+            background-color: var(--box-bg);
+            border-left: 4px solid var(--oxford-blue);
+            padding: 20px 25px;
+            margin: 25px 0;
+            font-size: 0.95em;
         }
-        .application-box {
-            background-color: #e2f0d9;
-            border-left: 5px solid #7ebd5b;
-            padding: 15px 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+
+        .box-title {
+            font-family: 'PT Serif', Georgia, serif;
+            color: var(--oxford-blue);
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: block;
         }
+
         ul, ol {
             margin-bottom: 20px;
-            padding-left: 20px;
+            padding-left: 25px;
         }
+
         li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            text-align: justify;
         }
-        strong {
-            color: #2c3e50;
-        }
+
         .footer {
             text-align: center;
-            margin-top: 50px;
-            font-size: 0.9em;
-            color: #7f8c8d;
-            border-top: 1px solid #ecf0f1;
-            padding-top: 20px;
+            margin-top: 60px;
+            font-size: 0.85em;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 25px;
+            font-family: 'PT Serif', Georgia, serif;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+                margin: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
+<header class="university-header">
+    <h1>Department of Physics</h1>
+</header>
+
 <div class="container">
-    <h1>Prinsip dan Hukum Fundamental Mekanika Fluida</h1>
+    <h1 class="document-title">Prinsip dan Hukum Fundamental Mekanika Fluida</h1>
     
-    <p>Mekanika fluida adalah cabang ilmu fisika yang mempelajari perilaku zat yang dapat mengalir (cairan dan gas) serta gaya-gaya yang bekerja padanya. Untuk memahaminya secara komprehensif, ilmu ini dibagi menjadi dua domain utama: <strong>Fluida Statis</strong> (kondisi diam) dan <strong>Fluida Dinamis</strong> (kondisi bergerak).</p>
+    <p>Mekanika fluida adalah cabang ilmu fisika yang mempelajari perilaku zat yang dapat mengalir (cairan dan gas) serta gaya-gaya yang bekerja padanya. Untuk memahaminya secara komprehensif, ilmu ini dibagi menjadi dua domain utama: Fluida Statis (kondisi diam) dan Fluida Dinamis (kondisi bergerak).</p>
 
     <!-- BAGIAN 1: FLUIDA STATIS -->
-    <h2>1. Fluida Statis (Fluida dalam Keadaan Diam)</h2>
+    <h2>1. Fluida Statis (Kondisi Diam)</h2>
     <p>Pada kondisi statis, fluida tidak mengalami gaya geser. Konsep utama di sini berpusat pada bagaimana tekanan didistribusikan dalam cairan yang diam.</p>
 
     <h3>A. Tekanan Hidrostatis dan Tekanan Mutlak</h3>
@@ -111,37 +174,36 @@
         P<sub>h</sub> = &rho; &middot; g &middot; h
         <div class="formula-desc">
             <ul>
-                <li><strong>P<sub>h</sub></strong> : Tekanan hidrostatis (Pascal atau N/m<sup>2</sup>)</li>
-                <li><strong>&rho; (rho)</strong> : Massa jenis cairan (kg/m<sup>3</sup>)</li>
-                <li><strong>g</strong> : Percepatan gravitasi bumi (~9.8 m/s<sup>2</sup>)</li>
-                <li><strong>h</strong> : Kedalaman yang diukur dari permukaan cairan (m)</li>
+                <li>P<sub>h</sub> : Tekanan hidrostatis (Pascal atau N/m<sup>2</sup>)</li>
+                <li>&rho; (rho) : Massa jenis cairan (kg/m<sup>3</sup>)</li>
+                <li>g : Percepatan gravitasi bumi (~9.8 m/s<sup>2</sup>)</li>
+                <li>h : Kedalaman yang diukur dari permukaan cairan (m)</li>
             </ul>
         </div>
     </div>
 
     <div class="note-box">
-        <strong>Konsep Tambahan: Tekanan Mutlak (Total)</strong><br>
-        Di dunia nyata, permukaan cairan biasanya terbuka ke udara. Oleh karena itu, tekanan total yang dialami sebuah kapal selam bukan hanya dari air, melainkan juga dari atmosfer di atas air tersebut. Rumusnya menjadi: 
-        <br><br>
-        <strong>P<sub>total</sub> = P<sub>atmosfer</sub> + P<sub>hidrostatis</sub></strong>
+        <span class="box-title">Catatan Konsep: Tekanan Mutlak (Total)</span>
+        Di dunia nyata, permukaan cairan biasanya terbuka ke udara. Oleh karena itu, tekanan total yang dialami sebuah kapal selam bukan hanya dari air, melainkan juga dari atmosfer di atas air tersebut. Rumusnya menjadi:<br><br>
+        P<sub>total</sub> = P<sub>atmosfer</sub> + P<sub>hidrostatis</sub>
     </div>
 
     <h3>B. Hukum Pascal</h3>
     <p>Blaise Pascal menemukan bahwa cairan di dalam wadah tertutup sangat sulit untuk dimampatkan (inkompresibel). Dari sifat ini lahir Hukum Pascal: <em>"Tekanan yang diberikan pada zat cair dalam ruang tertutup akan diteruskan ke segala arah dengan nilai yang sama besar."</em></p>
 
     <div class="formula-box">
-        P<sub>1</sub> = P<sub>2</sub><br>
         F<sub>1</sub> / A<sub>1</sub> = F<sub>2</sub> / A<sub>2</sub>
         <div class="formula-desc">
             <ul>
-                <li><strong>F</strong> : Gaya yang diberikan/dihasilkan (Newton)</li>
-                <li><strong>A</strong> : Luas penampang wadah (m<sup>2</sup>)</li>
+                <li>F : Gaya yang diberikan atau dihasilkan (Newton)</li>
+                <li>A : Luas penampang wadah (m<sup>2</sup>)</li>
             </ul>
         </div>
     </div>
 
     <div class="application-box">
-        <strong>Penerapan:</strong> Prinsip ini adalah rahasia di balik sistem hidrolik (dongkrak, rem mobil, alat berat). Dengan memberikan gaya dorong (F<sub>1</sub>) yang kecil pada pipa penampang sempit (A<sub>1</sub>), kita bisa menghasilkan gaya angkat (F<sub>2</sub>) yang sangat raksasa pada pipa penampang lebar (A<sub>2</sub>) untuk mengangkat sebuah mobil.
+        <span class="box-title">Penerapan Hukum Pascal</span>
+        Prinsip ini adalah dasar operasional dari sistem hidrolik (dongkrak, rem mobil, alat berat). Dengan memberikan gaya dorong (F<sub>1</sub>) yang kecil pada pipa penampang sempit (A<sub>1</sub>), kita dapat menghasilkan gaya angkat (F<sub>2</sub>) yang sangat besar pada pipa penampang lebar (A<sub>2</sub>).
     </div>
 
     <h3>C. Hukum Archimedes (Prinsip Gaya Apung)</h3>
@@ -151,9 +213,9 @@
         F<sub>a</sub> = &rho;<sub>f</sub> &middot; g &middot; V<sub>bf</sub>
         <div class="formula-desc">
             <ul>
-                <li><strong>F<sub>a</sub></strong> : Gaya apung atau Gaya Archimedes (Newton)</li>
-                <li><strong>&rho;<sub>f</sub></strong> : Massa jenis fluida (kg/m<sup>3</sup>)</li>
-                <li><strong>V<sub>bf</sub></strong> : Volume benda yang tercelup ke dalam fluida (m<sup>3</sup>)</li>
+                <li>F<sub>a</sub> : Gaya apung atau Gaya Archimedes (Newton)</li>
+                <li>&rho;<sub>f</sub> : Massa jenis fluida (kg/m<sup>3</sup>)</li>
+                <li>V<sub>bf</sub> : Volume benda yang tercelup ke dalam fluida (m<sup>3</sup>)</li>
             </ul>
         </div>
     </div>
@@ -161,13 +223,13 @@
     <p>Hukum ini menentukan status posisi benda dalam cairan yang terbagi menjadi tiga kondisi:</p>
     <ul>
         <li><strong>Terapung:</strong> Massa jenis benda lebih kecil dari cairan (&rho;<sub>b</sub> &lt; &rho;<sub>f</sub>). Gaya apung mampu menahan seluruh berat benda meski hanya sebagian benda yang tercelup.</li>
-        <li><strong>Melayang:</strong> Massa jenis benda sama persis dengan cairan (&rho;<sub>b</sub> = &rho;<sub>f</sub>). Benda berada di tengah-tengah cairan. Contoh: Kapal selam saat berpatroli di kedalaman.</li>
+        <li><strong>Melayang:</strong> Massa jenis benda sama persis dengan cairan (&rho;<sub>b</sub> = &rho;<sub>f</sub>). Benda berada di tengah-tengah cairan.</li>
         <li><strong>Tenggelam:</strong> Massa jenis benda lebih besar dari cairan (&rho;<sub>b</sub> &gt; &rho;<sub>f</sub>). Gaya apung tidak sanggup menahan berat benda, sehingga benda jatuh ke dasar wadah.</li>
     </ul>
 
     <!-- BAGIAN 2: FLUIDA DINAMIS -->
-    <h2>2. Fluida Dinamis (Fluida dalam Keadaan Bergerak)</h2>
-    <p>Untuk menyederhanakan analisis perhitungan yang kompleks, ilmuwan fisika menciptakan asumsi <strong>Fluida Ideal</strong> yang memiliki syarat:</p>
+    <h2>2. Fluida Dinamis (Kondisi Bergerak)</h2>
+    <p>Untuk menyederhanakan analisis perhitungan yang kompleks, ilmuwan memodelkan asumsi Fluida Ideal yang memiliki syarat:</p>
     <ol>
         <li>Tidak kompresibel (Massa jenisnya tidak berubah walau ditekan).</li>
         <li>Tidak kental / Non-viscous (Tidak ada gesekan internal antar molekul cairan).</li>
@@ -175,51 +237,49 @@
         <li>Aliran garis arus / Streamline (Bukan aliran yang bergolak atau turbulen).</li>
     </ol>
 
-    <h3>A. Konsep Debit dan Persamaan Kontinuitas (Hukum Kekekalan Massa)</h3>
-    <p><strong>Debit (Q)</strong> adalah laju volume cairan yang mengalir melewati suatu penampang tiap satuan waktu (Q = V/t atau Q = A &middot; v).</p>
-    <p>Berdasarkan kekekalan massa, massa cairan yang masuk ke dalam sebuah pipa harus sama persis dengan massa cairan yang keluar dari pipa tersebut, terlepas dari perubahan bentuk pipanya. Hal ini melahirkan Persamaan Kontinuitas:</p>
+    <h3>A. Persamaan Kontinuitas (Kekekalan Massa)</h3>
+    <p>Debit (Q) adalah laju volume cairan yang mengalir melewati suatu penampang tiap satuan waktu. Berdasarkan asas kekekalan massa, massa cairan yang masuk ke dalam sebuah pipa harus sama persis dengan massa cairan yang keluar dari pipa tersebut.</p>
 
     <div class="formula-box">
-        Q<sub>1</sub> = Q<sub>2</sub><br>
         A<sub>1</sub> &middot; v<sub>1</sub> = A<sub>2</sub> &middot; v<sub>2</sub>
         <div class="formula-desc">
             <ul>
-                <li><strong>A</strong> : Luas penampang pipa (m<sup>2</sup>)</li>
-                <li><strong>v</strong> : Kecepatan aliran cairan (m/s)</li>
+                <li>A : Luas penampang pipa (m<sup>2</sup>)</li>
+                <li>v : Kecepatan aliran cairan (m/s)</li>
             </ul>
         </div>
     </div>
 
     <div class="note-box">
-        <strong>Inti Logika Kontinuitas:</strong> Luas penampang (A) berbanding terbalik dengan kecepatan aliran (v). Jika Anda memencet ujung selang air (memperkecil luas penampang A), maka kecepatan pancaran air (v) akan meningkat secara drastis untuk menjaga nilai debit tetap stabil.
+        <span class="box-title">Logika Kontinuitas</span>
+        Luas penampang (A) berbanding terbalik dengan kecepatan aliran (v). Jika luas penampang diperkecil (misalnya saat memencet ujung selang air), maka kecepatan pancaran air akan meningkat secara drastis untuk menjaga nilai debit tetap stabil.
     </div>
 
-    <h3>B. Hukum Bernoulli (Hukum Kekekalan Energi Fluida)</h3>
-    <p>Daniel Bernoulli merumuskan prinsip paling vital dalam fluida dinamis. Ia menyatakan bahwa tekanan dalam fluida yang bergerak menurun seiring dengan peningkatan kecepatan fluida tersebut. Secara spesifik: <em>"Jumlah dari energi tekanan, energi kinetik per volume, dan energi potensial per volume adalah konstan di setiap titik sepanjang garis aliran."</em></p>
+    <h3>B. Hukum Bernoulli (Kekekalan Energi Fluida)</h3>
+    <p>Daniel Bernoulli merumuskan prinsip bahwa tekanan dalam fluida yang bergerak menurun seiring dengan peningkatan kecepatan fluida tersebut. Secara spesifik: <em>"Jumlah dari energi tekanan, energi kinetik per volume, dan energi potensial per volume adalah konstan di setiap titik sepanjang garis aliran."</em></p>
 
     <div class="formula-box">
-        P + &frac12;&rho;v<sup>2</sup> + &rho;gh = Konstan<br><br>
         P<sub>1</sub> + &frac12;&rho;v<sub>1</sub><sup>2</sup> + &rho;gh<sub>1</sub> = P<sub>2</sub> + &frac12;&rho;v<sub>2</sub><sup>2</sup> + &rho;gh<sub>2</sub>
         <div class="formula-desc">
             <ul>
-                <li><strong>P</strong> : Tekanan fluida (N/m<sup>2</sup>)</li>
-                <li><strong>&frac12;&rho;v<sup>2</sup></strong> : Faktor energi kinetik (bergantung pada kecepatan, v)</li>
-                <li><strong>&rho;gh</strong> : Faktor energi potensial (bergantung pada ketinggian, h)</li>
+                <li>P : Tekanan fluida (N/m<sup>2</sup>)</li>
+                <li>&frac12;&rho;v<sup>2</sup> : Faktor energi kinetik</li>
+                <li>&rho;gh : Faktor energi potensial</li>
             </ul>
         </div>
     </div>
 
     <div class="application-box">
-        <strong>Penerapan Luar Biasa Hukum Bernoulli di Kehidupan Nyata:</strong>
-        <ol>
-            <li><strong>Gaya Angkat Pesawat Terbang (Aerodinamika):</strong> Sayap pesawat didesain agar udara di bagian atas mengalir jauh lebih cepat daripada di bagian bawah. Menurut Bernoulli, udara yang mengalir cepat memiliki tekanan rendah. Perbedaan tekanan (tekanan bawah &gt; tekanan atas) inilah yang mendorong pesawat seberat ratusan ton naik ke angkasa.</li>
-            <li><strong>Teorema Torricelli (Tangki Bocor):</strong> Menghitung kecepatan air yang menyembur dari lubang kebocoran tangki. Kecepatannya sama dengan kecepatan benda yang jatuh bebas dari ketinggian permukaan air ke lubang tersebut (v = &radic;2gh).</li>
-            <li><strong>Efek Venturi dan Alat Penyemprot:</strong> Pada botol parfum atau obat nyamuk semprot, pompa menghasilkan aliran udara cepat bertekanan rendah di bagian atas tabung cairan. Tekanan atmosfer di dalam botol yang lebih tinggi kemudian menekan cairan naik ke atas untuk kemudian ikut terhembus keluar.</li>
-        </ol>
+        <span class="box-title">Aplikasi Hukum Bernoulli</span>
+        <ul>
+            <li><strong>Gaya Angkat Pesawat (Aerodinamika):</strong> Sayap pesawat didesain agar udara di bagian atas mengalir lebih cepat daripada di bagian bawah, menciptakan area bertekanan rendah di atas sayap yang mengangkat pesawat.</li>
+            <li><strong>Teorema Torricelli:</strong> Menghitung kecepatan air yang menyembur dari lubang kebocoran tangki, yang kecepatannya setara dengan gerak jatuh bebas.</li>
+            <li><strong>Efek Venturi:</strong> Diterapkan pada alat semprot (seperti parfum), di mana udara berkecepatan tinggi menciptakan tekanan rendah yang menghisap cairan naik ke atas.</li>
+        </ul>
     </div>
 
     <div class="footer">
-        Catatan ini mencakup prinsip paling dasar hingga aplikasi praktis untuk mempermudah pemahaman intuitif terhadap mekanika fluida.
+        Modul Akademik Terstruktur &mdash; Pengantar Mekanika Fluida
     </div>
 </div>
 
