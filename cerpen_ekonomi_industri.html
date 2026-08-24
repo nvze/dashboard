@@ -4,9 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ekuilibrium di Bawah Langit Dago: Narasi Likuiditas dan Sistem</title>
-    <!-- MathJax for rendering math equations -->
+    
+    <!-- MathJax Configuration for rendering math equations -->
+    <!-- Perbaikan krusial pada konfigurasi delimiter agar tanda kurung biasa tidak terbaca sebagai rumus -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+        chtml: {
+          scale: 1.1,
+          displayAlign: 'center'
+        }
+      };
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <!-- Google Fonts for Modern Editorial Design -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +41,7 @@
             font-size: 1.15rem;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
         .container {
             max-width: 900px;
@@ -86,16 +102,18 @@
         .equation-box {
             background-color: #f4f6f8;
             border-left: 4px solid var(--accent-color);
-            padding: 1.5rem;
+            padding: 1.5rem 2rem;
             margin: 2rem 0;
-            overflow-x: auto;
+            text-align: center;
+            border-radius: 0 8px 8px 0;
         }
         .equation-desc {
             font-size: 0.95rem;
             font-style: italic;
             text-align: center;
-            margin-top: 0.5rem;
-            color: #666;
+            margin-top: 1rem;
+            color: #555;
+            font-family: 'Lora', serif;
         }
         .image-container {
             margin: 3rem 0;
@@ -123,13 +141,12 @@
         h2 { font-size: 1.8rem; border-bottom: 2px solid #eaeaea; padding-bottom: 0.5rem; }
         h3 { font-size: 1.4rem; }
         .quote {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-style: italic;
             color: var(--accent-color);
             text-align: center;
             margin: 3rem 2rem;
             padding: 0 2rem;
-            border-left: none;
             position: relative;
         }
         .quote::before {
@@ -164,6 +181,10 @@
         .btn:hover {
             background-color: #2a3a4d;
         }
+        /* CSS untuk memastikan MathJax ter-render sempurna */
+        mjx-container {
+            margin: 0.5rem 0 !important;
+        }
     </style>
 </head>
 <body>
@@ -181,19 +202,19 @@
 
         <p>Citra, satu-satunya wanita di meja itu, duduk dengan postur tegak. Kacamata berbingkai tipis bertengger di hidungnya. Sebagai seorang konsultan <i>supply chain finance</i> di sebuah perusahaan multinasional, otaknya selalu berputar menghitung efisiensi aliran dana dari hulu ke hilir. Di hadapannya, Arya sedang menatap layar laptopnya dengan dahi berkerut, merapikan barisan kode simulasi stokastik. Bima, yang mengenakan jaket tebal, sibuk mengaduk teh kamomilnya, selalu waspada dan penuh perhitungan. Sementara Dimas, sosok yang paling eksentrik dengan kemeja linen kasual, sedang menggambar grafik tren pasar dengan penuh semangat di udara menggunakan pena mahalnya.</p>
 
-        <p>Malam itu, agenda mereka bukanlah reuni biasa. Mereka sedang membedah masalah likuiditas perusahaan rintisan <i>(startup)</i> yang sedang mereka bangun bersama: sebuah platform integrasi rantai pasok cerdas untuk UMKM manufaktur di Jawa Barat. Perdebatan berkisar pada satu pertanyaan klasik yang telah menghantui para ekonom dan insinyur selama berabad-abad: Berapa banyak uang tunai yang harus mereka tahan, dan berapa banyak yang harus diinvestasikan atau dibelanjakan untuk ekspansi?</p>
+        <p>Malam itu, agenda mereka bukanlah reuni biasa. Mereka sedang membedah masalah likuiditas perusahaan rintisan (startup) yang sedang mereka bangun bersama: sebuah platform integrasi rantai pasok cerdas untuk UMKM manufaktur di Jawa Barat. Perdebatan berkisar pada satu pertanyaan klasik yang telah menghantui para ekonom dan insinyur selama berabad-abad: Berapa banyak uang tunai yang harus mereka tahan, dan berapa banyak yang harus diinvestasikan atau dibelanjakan untuk ekspansi?</p>
 
         <h2>Dialektika Likuiditas dan Preferensi</h2>
 
-        <p><i>"Kita terlalu konservatif,"</i> cetus Dimas, memecah keheningan yang sempat tercipta. Ia menunjuk ke arah proyeksi arus kas di layar laptop Arya. <i>"Lihat suku bunga saat ini. Sangat rendah. Menyimpan uang tunai di bank atau instrumen jangka pendek saat ini tidak masuk akal secara strategis. Uang itu tidak bekerja. Uang itu diam, dan dalam teori sistem, segala sesuatu yang diam dan tidak menambah nilai adalah sebuah <i>waste</i> atau pemborosan."</i></p>
+        <p><i>"Kita terlalu konservatif,"</i> cetus Dimas, memecah keheningan yang sempat tercipta. Ia menunjuk ke arah proyeksi arus kas di layar laptop Arya. <i>"Lihat suku bunga saat ini. Sangat rendah. Menyimpan uang tunai di bank atau instrumen jangka pendek saat ini tidak masuk akal secara strategis. Uang itu tidak bekerja. Uang itu diam, dan dalam teori sistem, segala sesuatu yang diam dan tidak menambah nilai adalah sebuah waste atau pemborosan."</i></p>
 
-        <p>Bima menggeleng pelan, ekspresinya skeptis. Sebagai manajer operasional yang berurusan dengan ketidakpastian harian, ia memiliki pandangan berbeda. <i>"Dimas, kau lupa bahwa kita tidak hidup di dunia deterministik. Rantai pasok itu sangat stokastik. Bulan lalu saja kita menghadapi gangguan pengiriman bahan baku dari supplier lapis kedua di Cikarang. Kalau kita tidak punya cadangan likuiditas, operasional bisa lumpuh. <i>Cash is king</i> saat krisis terjadi."</i></p>
+        <p>Bima menggeleng pelan, ekspresinya skeptis. Sebagai manajer operasional yang berurusan dengan ketidakpastian harian, ia memiliki pandangan berbeda. <i>"Dimas, kau lupa bahwa kita tidak hidup di dunia deterministik. Rantai pasok itu sangat stokastik. Bulan lalu saja kita menghadapi gangguan pengiriman bahan baku dari supplier lapis kedua di Cikarang. Kalau kita tidak punya cadangan likuiditas, operasional bisa lumpuh. Cash is king saat krisis terjadi."</i></p>
 
         <p>Arya berhenti mengetik dan menoleh. <i>"Kedua poin kalian valid secara isolasi. Namun, sistem kita tidak bekerja dalam isolasi. Kita membutuhkan model optimasi."</i></p>
 
         <p>Citra, yang sejak tadi menyimak dalam diam, akhirnya menghela napas. Ia mengambil secarik kertas catatan kosong dan sebuah pena. Baginya, setiap perdebatan kompleks dapat disederhanakan melalui lensa makroekonomi klasik yang dikawinkan dengan rekayasa sistem.</p>
 
-        <p><i>"Kalian berdua,"</i> ucap Citra dengan nada tenang namun berwibawa, membuat ketiga pria itu memusatkan perhatian padanya, <i>"sebenarnya sedang memperdebatkan sesuatu yang sudah diselesaikan oleh John Maynard Keynes hampir seabad yang lalu dalam <i>Teori Preferensi Likuiditas</i> (Liquidity Preference Theory). Apa yang Bima khawatirkan dan apa yang Dimas kejar, semuanya memiliki persamaan matematisnya."</i></p>
+        <p><i>"Kalian berdua,"</i> ucap Citra dengan nada tenang namun berwibawa, membuat ketiga pria itu memusatkan perhatian padanya, <i>"sebenarnya sedang memperdebatkan sesuatu yang sudah diselesaikan oleh John Maynard Keynes hampir seabad yang lalu dalam Teori Preferensi Likuiditas (Liquidity Preference Theory). Apa yang Bima khawatirkan dan apa yang Dimas kejar, semuanya memiliki persamaan matematisnya."</i></p>
 
         <p>Citra mulai menggambar di atas kertas tersebut. Goresan penanya tegas, memetakan aliran pikiran yang terstruktur sempurna, ciri khas seorang sarjana teknik industri.</p>
 
@@ -210,25 +231,25 @@
 
         <div class="equation-box">
             $$ M_d = M_t + M_p + M_s $$
-            <div class="equation-desc">Total Permintaan Uang (Total Demand for Money)</div>
+            <div class="equation-desc">Total Permintaan Uang (Total Demand for Money). <br> Terdiri dari $M_t$ (Transaksi), $M_p$ (Berjaga-jaga), dan $M_s$ (Spekulasi).</div>
         </div>
 
         <p><i>"Biar kujelaskan,"</i> kata Citra. <i>"Persamaan ini merangkum total permintaan uang ($M_d$). Ia terbentuk dari tiga motif utama. Pertama, $M_t$ adalah <b>Motif Transaksi</b> (Transaction Motive). Kedua, $M_p$ adalah <b>Motif Berjaga-jaga</b> (Precautionary Motive). Dan ketiga, $M_s$ adalah <b>Motif Spekulasi</b> (Speculative Motive)."</i></p>
 
-        <p>Arya mengangguk perlahan. <i>"Mari kita bedah ini dalam konteks <i>startup</i> kita. Motif Transaksi, $M_t$. Ini adalah uang yang mutlak kita butuhkan untuk operasi sehari-hari. Bayar sewa server AWS, gaji pegawai, biaya logistik. Ini linier atau sangat bergantung pada tingkat transaksi harian kita. Semakin tinggi volume bisnis kita, semakin tinggi $M_t$ yang kita butuhkan."</i></p>
+        <p>Arya mengangguk perlahan. <i>"Mari kita bedah ini dalam konteks startup kita. Motif Transaksi, $M_t$. Ini adalah uang yang mutlak kita butuhkan untuk operasi sehari-hari. Bayar sewa server AWS, gaji pegawai, biaya logistik. Ini linier atau sangat bergantung pada tingkat transaksi harian kita. Semakin tinggi volume bisnis kita, semakin tinggi $M_t$ yang kita butuhkan."</i></p>
 
         <div class="equation-box">
             $$ M_t = f(Y) $$
-            <div class="equation-desc">Di mana Y adalah tingkat pendapatan atau volume transaksi. $M_t$ berbanding lurus dengan Y.</div>
+            <div class="equation-desc">Di mana $Y$ adalah tingkat pendapatan atau volume transaksi. $M_t$ berbanding lurus dengan $Y$.</div>
         </div>
 
         <p><i>"Tepat,"</i> sahut Citra. <i>"Secara agregat, Keynes mengasumsikan motif transaksi sangat bergantung pada pendapatan ($Y$). Jika pendapatan naik, transaksi naik, maka permintaan uang untuk transaksi juga akan naik. Ini tidak terlalu dipengaruhi oleh suku bunga."</i></p>
 
-        <p>Bima mencondongkan tubuhnya ke depan. <i>"Lalu bagaimana dengan kekhawatiranku? Uang yang kita simpan untuk mengantisipasi ketidakpastian <i>lead time</i> bahan baku atau denda keterlambatan pengiriman?"</i></p>
+        <p>Bima mencondongkan tubuhnya ke depan. <i>"Lalu bagaimana dengan kekhawatiranku? Uang yang kita simpan untuk mengantisipasi ketidakpastian lead time bahan baku atau denda keterlambatan pengiriman?"</i></p>
 
-        <p><i>"Itulah Motif Berjaga-jaga, $M_p$,"</i> jelas Citra. <i>"Uang dipegang untuk menghadapi kejadian yang tidak terduga atau darurat. Dalam teknik industri, kita sering menyebutnya sebagai <i>Safety Stock</i>, tapi ini dalam bentuk likuiditas finansial. Semakin tinggi tingkat ketidakpastian dalam sistem rantai pasok kita, semakin besar saldo berjaga-jaga yang ingin kita tahan. Sama seperti $M_t$, motif ini juga dipengaruhi kuat oleh ukuran pendapatan atau skala operasi kita."</i></p>
+        <p><i>"Itulah Motif Berjaga-jaga, $M_p$,"</i> jelas Citra. <i>"Uang dipegang untuk menghadapi kejadian yang tidak terduga atau darurat. Dalam teknik industri, kita sering menyebutnya sebagai Safety Stock, tapi ini dalam bentuk likuiditas finansial. Semakin tinggi tingkat ketidakpastian dalam sistem rantai pasok kita, semakin besar saldo berjaga-jaga yang ingin kita tahan. Sama seperti $M_t$, motif ini juga dipengaruhi kuat oleh ukuran pendapatan atau skala operasi kita."</i></p>
 
-        <p>Bima tampak puas mendengarnya. <i>"Jadi, keputusanku untuk menahan <i>buffer cash</i> itu valid secara teori. Ketidakpastian logistik global saat ini sangat tinggi. Variabilitas adalah musuh efisiensi, dan likuiditas adalah alat untuk meredam variabilitas itu."</i></p>
+        <p>Bima tampak puas mendengarnya. <i>"Jadi, keputusanku untuk menahan buffer cash itu valid secara teori. Ketidakpastian logistik global saat ini sangat tinggi. Variabilitas adalah musuh efisiensi, dan likuiditas adalah alat untuk meredam variabilitas itu."</i></p>
 
         <p>Dimas memutar penanya dengan tidak sabar. <i>"Oke, transaksi dan berjaga-jaga, aku paham. Itu biaya untuk bernapas dan biaya untuk memakai asuransi. Tapi perusahaan tidak akan bertumbuh eksponensial kalau kita hanya bernapas dan berhati-hati. Di mana ruang untuk agresivitas kapital?"</i></p>
 
@@ -240,7 +261,7 @@
 
         <div class="equation-box">
             $$ M_s = f(i) $$
-            <div class="equation-desc">Di mana i adalah suku bunga (interest rate). Terdapat hubungan terbalik (inverse) antara suku bunga dan permintaan uang untuk spekulasi.</div>
+            <div class="equation-desc">Di mana $i$ adalah suku bunga (interest rate). Terdapat hubungan terbalik (inverse) antara suku bunga dan permintaan uang untuk spekulasi.</div>
         </div>
 
         <p><i>"Keynes merevolusi cara pandang ekonomi dengan menyatakan bahwa orang memegang uang tidak hanya untuk dibelanjakan, tetapi juga untuk mengambil keuntungan dari ekspektasi perubahan suku bunga di masa depan,"</i> terang Citra. <i>"Ini adalah inti dari apa yang kita perdebatkan dari tadi, Dimas."</i></p>
@@ -249,7 +270,7 @@
 
         <p><i>"Sederhananya begini,"</i> Citra menunjuk grafik kurva permintaannya. <i>"Ada hubungan terbalik yang fundamental antara suku bunga dan harga instrumen investasi berbasis pendapatan tetap, sebut saja obligasi. Ketika suku bunga ($i$) naik, harga obligasi turun. Sebaliknya, ketika suku bunga turun, harga obligasi naik."</i></p>
 
-        <p>Citra melanjutkan dengan intonasi yang lebih tajam. <i>"Jika saat ini suku bunga sangat rendah, seperti yang kau katakan tadi Dimas, orang-orang atau entitas rasional akan berekspektasi bahwa di masa depan suku bunga pasti akan naik kembali ke tingkat normalnya. Nah, jika suku bunga diekspektasikan naik, artinya harga obligasi diekspektasikan akan turun. Jika kau memegang obligasi sekarang, kau akan mengalami <i>capital loss</i> di masa depan."</i></p>
+        <p>Citra melanjutkan dengan intonasi yang lebih tajam. <i>"Jika saat ini suku bunga sangat rendah, seperti yang kau katakan tadi Dimas, orang-orang atau entitas rasional akan berekspektasi bahwa di masa depan suku bunga pasti akan naik kembali ke tingkat normalnya. Nah, jika suku bunga diekspektasikan naik, artinya harga obligasi diekspektasikan akan turun. Jika kau memegang obligasi sekarang, kau akan mengalami capital loss di masa depan."</i></p>
 
         <p>Dimas terdiam, mencoba memproses logika tersebut ke dalam rencananya.</p>
 
@@ -271,26 +292,26 @@
 
         <p>Ia kembali mencoret di atas kertas, kali ini menggabungkan semua variabel ke dalam satu kesatuan sistem mekanis.</p>
 
-        <p><i>"Pertama, alokasi untuk Motif Transaksi ($M_t$). Ini <i>non-negotiable</i>. Kita harus memetakan arus kas keluar harian kita, dikurangi siklus konversi kas dari klien. Gunakan algoritma <i>forecasting</i> <i>moving average</i> yang Arya buat untuk memastikan saldo ini selalu presisi, tidak kurang, dan tidak berlebih. Efisiensi persis pada batas kendali (control limit)."</i></p>
+        <p><i>"Pertama, alokasi untuk Motif Transaksi ($M_t$). Ini non-negotiable. Kita harus memetakan arus kas keluar harian kita, dikurangi siklus konversi kas dari klien. Gunakan algoritma forecasting moving average yang Arya buat untuk memastikan saldo ini selalu presisi, tidak kurang, dan tidak berlebih. Efisiensi persis pada batas kendali (control limit)."</i></p>
 
         <p>Arya mengangguk cepat. <i>"Aku bisa menambahkan parameter variansi pada modelku untuk mengakomodasi ini."</i></p>
 
-        <p><i>"Kedua,"</i> lanjut Citra, menatap Bima. <i>"Untuk Motif Berjaga-jaga ($M_p$), kita tidak boleh sekadar menebak. Kita harus mengukur tingkat ketidakpastian. Kita gunakan standar deviasi dari <i>lead time</i> rantai pasok kita. Jika volatilitas logistik meningkat, model secara otomatis merekomendasikan injeksi likuiditas tambahan ke cadangan <i>buffer</i> kita. Ini adalah sistem pengaman dinamis."</i></p>
+        <p><i>"Kedua,"</i> lanjut Citra, menatap Bima. <i>"Untuk Motif Berjaga-jaga ($M_p$), kita tidak boleh sekadar menebak. Kita harus mengukur tingkat ketidakpastian. Kita gunakan standar deviasi dari lead time rantai pasok kita. Jika volatilitas logistik meningkat, model secara otomatis merekomendasikan injeksi likuiditas tambahan ke cadangan buffer kita. Ini adalah sistem pengaman dinamis."</i></p>
 
         <p>Bima tersenyum puas. Pendekatan analitik berbasis probabilitas selalu bisa menenangkan saraf-saraf kecemasannya.</p>
 
         <p><i>"Dan terakhir,"</i> Citra beralih pada Dimas, <i>"Motif Spekulasi ($M_s$). Dimas, kau benar bahwa kita harus mengkapitalisasi pergerakan pasar. Tapi kita tidak boleh berjudi buta. Keputusan kita untuk mengubah kas menjadi aset investasi jangka panjang atau ekspansi aset tetap, harus bergantung pada sensitivitas suku bunga dan ekuilibrium pasar uang. Kapan titik ekuilibrium itu tercapai?"</i></p>
 
         <div class="equation-box">
-            $$ M_s = M_d \implies M_s = M_t + M_p + M_s $$
-            <div class="equation-desc">Ekuilibrium Pasar Uang tercapai ketika Suplai Uang (Money Supply, $M_s$) yang ditentukan oleh bank sentral, sama dengan Total Permintaan Uang ($M_d$). Pada titik ini, suku bunga ekuilibrium ($i^*$) terbentuk.</div>
+            $$ M_{\text{supply}} = M_d $$
+            <div class="equation-desc">Ekuilibrium Pasar Uang tercapai ketika Suplai Uang ($M_{\text{supply}}$) yang ditentukan oleh bank sentral, sama dengan Total Permintaan Uang ($M_d$). Pada titik ini, suku bunga ekuilibrium ($i^*$) terbentuk.</div>
         </div>
 
-        <p><i>"Kita berada pada ekuilibrium ketika uang yang kita miliki, sama dengan fungsi total permintaan uang kita terhadap suku bunga dan pendapatan saat ini. Jika <i>Internal Rate of Return</i> (IRR) dari proyek ekspansi yang kau usulkan secara signifikan melampaui suku bunga ekuilibrium saat ini ditambah premi risiko operasi kita, maka kita lepaskan likuiditas itu. Kita ekspansi. Tapi jika suku bunga diprediksi akan naik drastis bulan depan, kita tahan likuiditas sekarang, karena modal kita akan bernilai jauh lebih besar kelak, atau <i>cost of capital</i> untuk meminjam akan terlalu mahal."</i></p>
+        <p><i>"Kita berada pada ekuilibrium ketika uang yang kita miliki, sama dengan fungsi total permintaan uang kita terhadap suku bunga dan pendapatan saat ini. Jika Internal Rate of Return (IRR) dari proyek ekspansi yang kau usulkan secara signifikan melampaui suku bunga ekuilibrium saat ini ditambah premi risiko operasi kita, maka kita lepaskan likuiditas itu. Kita ekspansi. Tapi jika suku bunga diprediksi akan naik drastis bulan depan, kita tahan likuiditas sekarang, karena modal kita akan bernilai jauh lebih besar kelak, atau cost of capital untuk meminjam akan terlalu mahal."</i></p>
 
         <p>Dimas terdiam cukup lama. Ia menatap deretan persamaan yang kini tergambar indah dengan <i>MathJax</i> di layar laptop Arya. Pola pikir insinyurnya perlahan menerima batasan (constraints) dan fungsi objektif yang dipaparkan Citra.</p>
 
-        <p><i>"Kau benar, Citra,"</i> aku Dimas perlahan. <i>"Sebagai anak Teknik Industri, aku seharusnya tahu bahwa ekspansi tanpa mitigasi risiko dan tanpa perhitungan <i>cost of opportunity</i> yang tepat dari sebuah modal yang diam, adalah desain sistem yang cacat. Kita tidak sedang bermain di kasino, kita sedang mendesain sistem rantai nilai."</i></p>
+        <p><i>"Kau benar, Citra,"</i> aku Dimas perlahan. <i>"Sebagai anak Teknik Industri, aku seharusnya tahu bahwa ekspansi tanpa mitigasi risiko dan tanpa perhitungan cost of opportunity yang tepat dari sebuah modal yang diam, adalah desain sistem yang cacat. Kita tidak sedang bermain di kasino, kita sedang mendesain sistem rantai nilai."</i></p>
 
         <p>Bima mengangkat cangkir teh kamomilnya yang sudah kosong. <i>"Jadi, kita sepakat? Model alokasi tiga pilar. Transaksi dijaga presisi, Berjaga-jaga dikalkulasi berdasarkan variansi rantai pasok, dan Spekulasi dipicu oleh indeks suku bunga dan IRR proyek."</i></p>
 
@@ -304,11 +325,11 @@
 
         <p><i>"Terkadang,"</i> gumam Citra pelan, <i>"aku kagum dengan bagaimana ilmu ekonomi klasik seperti yang diajarkan Keynes, bisa sangat relevan dengan rekayasa sistem modern kita. Keynes hidup pada masa Depresi Hebat (Great Depression), di mana pasar hancur dan orang kehilangan arah. Namun, ia mampu melihat pola, mengkuantifikasi motif manusia yang irasional menjadi persamaan matematis yang logis."</i></p>
 
-        <p>Dimas menimpali, <i>"Itu karena ketakutan dan keserakahan—dua emosi dasar yang menggerakkan pasar—tidak pernah berubah dari zaman ke zaman. Perbedaannya, sekarang kita memiliki komputasi awan dan algoritma <i>machine learning</i> untuk memodelkan emosi tersebut menjadi angka."</i></p>
+        <p>Dimas menimpali, <i>"Itu karena ketakutan dan keserakahan—dua emosi dasar yang menggerakkan pasar—tidak pernah berubah dari zaman ke zaman. Perbedaannya, sekarang kita memiliki komputasi awan dan algoritma machine learning untuk memodelkan emosi tersebut menjadi angka."</i></p>
 
         <p><i>"Tapi pada akhirnya,"</i> sahut Bima, <i>"angka-angka itu tetap tidak memiliki makna jika kita tidak memahaminya. Teori Keynes membuktikan bahwa ekonomi makro bukan sekadar tentang uang yang berputar, tapi tentang preferensi psikologis manusia. Mengapa kita merasa aman menyimpan selembar kertas berharga, dan mengapa kita berani menukarkannya dengan sebuah risiko."</i></p>
 
-        <p>Arya menutup laptopnya dengan bunyi klik yang renyah. <i>"Hasilnya sudah keluar. Persentase alokasi yang disarankan sistem memberikan kita <i>runway</i> operasional selama 18 bulan, cadangan risiko untuk menahan gangguan <i>supply</i> hingga tingkat <i>severity</i> tinggi, dan masih menyisakan <i>capital</i> yang cukup untuk mendanai 60% dari inisiatif ekspansi yang Dimas inginkan. Sisanya, kita terbitkan obligasi perusahaan ketika suku bunga turun bulan depan seperti proyeksi makroekonomi."</i></p>
+        <p>Arya menutup laptopnya dengan bunyi klik yang renyah. <i>"Hasilnya sudah keluar. Persentase alokasi yang disarankan sistem memberikan kita runway operasional selama 18 bulan, cadangan risiko untuk menahan gangguan supply hingga tingkat severity tinggi, dan masih menyisakan capital yang cukup untuk mendanai 60% dari inisiatif ekspansi yang Dimas inginkan. Sisanya, kita terbitkan obligasi perusahaan ketika suku bunga turun bulan depan seperti proyeksi makroekonomi."</i></p>
 
         <p>Dimas tersenyum lebar, menepuk meja dengan semangat. <i>"Sempurna! Inilah keindahan dari ekuilibrium. Titik potong optimal antara ambisi dan realita. Kita akan menaklukkan industri ini."</i></p>
 
@@ -322,7 +343,7 @@
         
         <p>Cerita tentang mereka berempat—Citra dengan keanggunan pemikiran rasionalnya, Arya dengan ketelitian komputasinya, Bima dengan kehati-hatian operasionalnya, dan Dimas dengan keberanian strategisnya—adalah representasi dari dinamika ekonomi itu sendiri. Sebuah perpaduan harmonis antara motif transaksi, berjaga-jaga, dan spekulasi.</p>
 
-        <p>Di ujung Jalan Dago yang mendaki, lampu-lampu kota Bandung berkelap-kelip menyerupai titik-titik data pada sebuah <i>scatter plot</i> yang raksasa. Dan di antara ribuan titik data itu, perusahaan <i>startup</i> mereka siap untuk melesat ke atas, mengikuti garis tren pertumbuhan eksponensial yang telah mereka rancang malam ini secara presisi.</p>
+        <p>Di ujung Jalan Dago yang mendaki, lampu-lampu kota Bandung berkelap-kelip menyerupai titik-titik data pada sebuah scatter plot yang raksasa. Dan di antara ribuan titik data itu, perusahaan startup mereka siap untuk melesat ke atas, mengikuti garis tren pertumbuhan eksponensial yang telah mereka rancang malam ini secara presisi.</p>
         
         <div class="footer">
             <a href="https://imnxx.vercel.app" class="btn">kembali ke dashboard</a>
