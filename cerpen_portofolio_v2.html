@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resiko Portofolio: Sebuah Narasi Teknik Industri</title>
+    
+    <!-- Konfigurasi MathJax yang benar agar render rumus lebih rapi -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['\\(', '\\)']],
+          displayMath: [['\\[', '\\]']],
+          processEscapes: true
+        },
+        chtml: {
+          scale: 1.1,
+          displayAlign: 'center'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #0A2540;
+            --accent-blue: #007BFF;
+            --light-blue: #00BFFF;
+            --text-main: #334155;
+            --bg-color: #F8FAFC;
+            --container-bg: #FFFFFF;
+        }
+        body {
+            font-family: 'Merriweather', serif;
+            line-height: 1.8;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 60px 70px;
+            background-color: var(--container-bg);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            border-radius: 12px;
+        }
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            letter-spacing: -0.5px;
+        }
+        .logo-dot {
+            color: var(--light-blue);
+        }
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 40px;
+            line-height: 1.3;
+            color: var(--primary-blue);
+            text-align: left;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        .subtitle {
+            text-align: left;
+            color: #64748B;
+            font-style: italic;
+            margin-bottom: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.15em;
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 18px;
+        }
+        .editorial-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 50px 0;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        p {
+            margin-bottom: 24px;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        .drop-cap:first-letter {
+            float: left;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 8px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Perbaikan styling untuk MathJax Container */
+        .math-container {
+            background-color: #F8FAFC;
+            padding: 25px 40px;
+            border-radius: 8px;
+            border: 1px solid #E2E8F0;
+            margin: 40px auto;
+            overflow-x: auto;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+            text-align: center;
+        }
+
+        /* Perbaikan styling untuk Kotak Kutipan agar lebih editorial dan rapi */
+        .quote-box {
+            position: relative;
+            margin: 60px auto;
+            padding: 40px 50px;
+            background-color: #F1F5F9;
+            border-left: 8px solid var(--primary-blue);
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+            font-size: 22px;
+            line-height: 1.6;
+            color: var(--primary-blue);
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .quote-box::before {
+            content: "\201C";
+            font-family: 'Inter', sans-serif;
+            font-size: 100px;
+            color: rgba(10, 37, 64, 0.1);
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            line-height: 1;
+        }
+        .quote-box span {
+            display: block;
+            margin-top: 10px;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+        
+        .character-dialogue {
+            margin-left: 20px;
+            padding-left: 15px;
+            border-left: 3px solid #CBD5E1;
+        }
+        .footer {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #E2E8F0;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+        }
+        .dashboard-link {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--primary-blue);
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .dashboard-link:hover {
+            background-color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.25);
+        }
+        @media (max-width: 768px) {
+            .container { padding: 30px 20px; margin: 20px; }
+            h1 { font-size: 32px; }
+            .drop-cap:first-letter { font-size: 3.5rem; }
+            .quote-box { padding: 30px; font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="logo">nseReview<span class="logo-dot">.</span></div>
+    </div>
+
+    <h1>Korelasi di Bawah Hujan Dago</h1>
+    <div class="subtitle">Sebuah diskursus tentang varians, volatilitas, dan ilusi diversifikasi di kalangan insinyur industri.</div>
+
+    <p class="drop-cap">Hujan menderas di kawasan Dago Atas, menyisakan kabut tipis yang menempel di kaca-kaca jendela sebuah kafe berdesain industrial minimalis. Aroma petrikor berpadu dengan wangi kopi arabika yang diseduh melalui metode <em>V60</em>, menciptakan atmosfer yang ironisnya sangat kontras dengan diskusi berat yang sedang berlangsung di meja sudut. Di meja bundar berbahan kayu jati itu, empat orang profesional muda yang semuanya merupakan alumni Teknik Industri dari sebuah kampus teknik ternama di Bandung tengah berkumpul. Mereka bukan sekadar teman nongkrong biasa; mereka adalah produk dari sistem pendidikan yang mendewakan optimasi, efisiensi, dan manajemen risiko.</p>
+
+    <p>Alya, satu-satunya wanita di meja itu, duduk bersandar sambil menyesap perlahan <em>chamomile tea</em> miliknya. Sorot matanya tajam, khas seorang analis risiko kuantitatif di sebuah firma investasi terkemuka di Jakarta yang sedang pulang kampung ke Bandung untuk akhir pekan. Di hadapannya, Dimas, seorang pengusaha muda yang ambisius dengan kemeja flanel yang digulung hingga siku, sedang membeberkan rencana ekspansi bisnisnya dengan penuh semangat. Di sebelah Dimas, Bima, seorang manajer <em>supply chain</em> yang pragmatis, mendengarkan sambil mengangguk-angguk kecil, sementara Caka, seorang <em>data scientist</em> yang terobsesi dengan algoritma, asyik mengetuk-ngetukkan jarinya di atas meja mengikuti irama lagu <em>lo-fi</em> yang diputar kafe.</p>
+
+    <p><em>"Jadi begini,"</em> Dimas membuka percakapan, suaranya sedikit bersaing dengan derai hujan di luar. <em>"Gue berencana membagi modal investasi perusahaan gue ke dalam dua sektor utama. Delapan puluh persen akan gue suntikkan ke startup logistik pengiriman barang, dan dua puluh persen sisanya ke platform e-commerce yang sedang naik daun. Gue pikir ini adalah langkah diversifikasi yang solid. Kalau logistik lagi lesu, e-commerce bisa menopang, begitu juga sebaliknya."</em></p>
+
+    <p>Alya meletakkan cangkirnya. Senyum tipis, nyaris sinis, terbentuk di bibirnya. Sebagai seorang analis, ia tahu betul jebakan pemikiran seperti itu. Ia menatap Dimas dengan pandangan mengasihani yang terukur.</p>
+
+    <p class="character-dialogue"><em>"Diversifikasi yang solid, kata lu, Dim?"</em> tanya Alya dengan nada menantang yang lembut. <em>"Lu sadar nggak kalau lu baru aja mendeskripsikan apa yang kita sebut di industri keuangan sebagai portofolio yang sangat terkonsentrasi? Lu bukan sedang mendiversifikasi risiko, lu cuma sedang membaginya ke dalam dua keranjang yang dibawa oleh orang yang sama di atas jembatan yang rapuh."</em></p>
+
+    <p>Dimas mengerutkan dahi, merasa strateginya diremehkan. <em>"Maksud lu apa, Al? Bukannya teori dasar investasi bilang 'jangan taruh semua telurmu dalam satu keranjang'? Gue udah bikin dua keranjang nih. Satu logistik, satu e-commerce."</em></p>
+
+    <p>Bima menyela sambil tertawa kecil, <em>"Keranjangnya emang dua, Dim. Tapi pertanyaannya, apakah kedua keranjang itu ditaruh di gerobak yang sama? Kalau gerobaknya terguling, ya telur di kedua keranjang lu pecah semua."</em> Bima, dengan latar belakang rantai pasoknya, memahami betul bahwa logistik dan e-commerce adalah dua entitas yang saling bergantung satu sama lain secara absolut.</p>
+
+    <p>Alya mengangguk setuju dengan analogi Bima. Ia kemudian merogoh tasnya, mengeluarkan sebuah tablet pintar, dan membuka sebuah berkas gambar yang sering ia gunakan untuk presentasi di hadapan klien-klien kakap. Ia meletakkan tablet tersebut di tengah meja agar semua orang bisa melihatnya.</p>
+
+    <!-- Memanggil gambar dengan format dan nama yang benar sesuai permintaan -->
+    <img src="resiko_portofolio.png" alt="Infografis Membaca Risiko Portofolio" class="editorial-img">
+
+    <p><em>"Coba kalian perhatikan gambar ini,"</em> ujar Alya, jarinya menunjuk ke bagian atas layar yang bertuliskan <strong>MEMBACA RISIKO PORTOFOLIO</strong>. <em>"Risiko total dari sebuah portofolio itu tidak hanya dibentuk oleh bobot aset dan volatilitas masing-masing aset, tapi ada satu faktor krusial yang sering dilupakan oleh investor pemula: hubungan pergerakan antar-aset, atau korelasi."</em></p>
+
+    <p>Caka, yang sedari tadi diam, tiba-tiba matanya berbinar melihat persamaan matematika yang terpampang gagah di gambar tersebut. Sebagai <em>data scientist</em>, melihat rumus bagaikan melihat oase di padang pasir. Ia langsung mengambil selembar serbet kafe dan sebuah pena dari saku kemejanya.</p>
+
+    <p class="character-dialogue"><em>"Ah, Teori Portofolio Modern dari Harry Markowitz,"</em> gumam Caka sambil menulis ulang persamaan tersebut di atas serbet. <em>"Mari kita bedah secara matematis, Dim. Supaya otak teknik industri lu yang udah karatan karena terlalu banyak <em>pitching</em> bisnis itu kembali bekerja."</em></p>
+
+    <p>Alya tersenyum puas melihat Caka mengambil alih penjelasan teknis. Caka menuliskan rumus varians total portofolio dengan sangat rapi, persis seperti yang tertulis di layar tablet Alya.</p>
+
+    <!-- Menggunakan format \\[ \\] untuk display equation MathJax agar lebih rapi -->
+    <div class="math-container">
+        \[ \sigma_p^2 = \sum_{i} w_i^2 \sigma_i^2 + 2 \sum_{i<j} w_i w_j \sigma_i \sigma_j \rho_{ij} \]
+    </div>
+
+    <p><em>"Lihat ini, Dim,"</em> Caka menunjuk simbol \(\sigma_p^2\). <em>"Ini adalah varians total portofolio lu. Ukuran keseluruhan dari penyebaran kemungkinan return. Semakin besar nilai ini, semakin tinggi ketidakpastian yang lu hadapi. Risiko lu makin gila."</em></p>
+
+    <p>Dimas menatap rumus itu dengan saksama. Masa-masa kuliah Kalkulus dan Statistika Industri tiba-tiba terbayang kembali di benaknya. <em>"Oke, gue masih ingat sedikit. Simbol \(w\) itu bobot kan? Persentase dana yang gue masukkan?"</em></p>
+
+    <p><em>"Tepat,"</em> jawab Alya. <em>"Di kasus lu, \(w_A\) untuk logistik adalah delapan puluh persen atau 0.8, dan \(w_B\) untuk e-commerce adalah dua puluh persen atau 0.2. Seperti yang dibilang di infografis ini, bobot yang terlalu besar pada satu aset menciptakan konsentrasi risiko. Lu menaruh 80% di logistik, itu udah bendera merah pertama."</em></p>
+
+    <p>Bima menunjuk simbol \(\sigma_i\) pada serbet Caka. <em>"Dan ini volatilitas masing-masing aset, kan? Seberapa liar harga atau valuasi mereka naik-turun. Startup teknologi biasanya punya volatilitas yang tinggi."</em></p>
+
+    <p><em>"Benar, Bim,"</em> sahut Caka. <em>"Tapi bagian yang paling mematikan dari rencana Dimas bukan di bobot atau volatilitas individualnya. Kiamatnya ada di suku kedua dari persamaan ini."</em> Caka melingkari bagian \( 2 \sum_{i<j} w_i w_j \sigma_i \sigma_j \rho_{ij} \) dengan penanya dengan penekanan yang kuat.</p>
+
+    <p><em>"Interaksi antar-aset. Kovarians,"</em> ucap Alya dengan nada serius. <em>"Dim, variabel \(\rho_{ij}\) (rho) ini merepresentasikan korelasi antara aset \(i\) dan aset \(j\). Nilainya bergerak dari minus satu hingga plus satu. Coba lu pikir pakai logika sistem yang lu pelajari di kampus. Apa yang terjadi pada sektor logistik kalau sektor e-commerce sedang hancur lebur karena krisis daya beli?"</em></p>
+
+    <p>Dimas terdiam sejenak. Matanya menerawang, membayangkan simulasi bisnis di kepalanya. <em>"Ya... pesanan online turun drastis. Kalau pesanan turun, otomatis pengiriman barang juga anjlok. Pemasukan logistik gue bakal nyungsep."</em></p>
+
+    <p><em>"Nah!"</em> Caka menjentikkan jarinya. <em>"Itu artinya, logistik dan e-commerce bergerak searah. Ketika satu naik, yang lain naik. Ketika satu hancur, yang lain ikut hancur. Dalam bahasa statistik, korelasi \(\rho\) antara keduanya mendekati +1."</em></p>
+
+    <p>Alya mengambil alih tabletnya, memperbesar bagian kotak merah di infografis yang menjelaskan tentang korelasi. <em>"Kalau korelasi lu +1, maka suku kedua dari persamaan varians portofolio akan sangat besar. Hasilnya? Risiko total (\(\sigma_p^2\)) portofolio lu tidak berkurang sama sekali. Alih-alih mendiversifikasi risiko, lu justru mengamplifikasinya. Portofolio lu ini masuk kategori <strong>Portofolio Terkonsentrasi</strong>: satu bobot dominan ditambah korelasi tinggi sama dengan risiko masif."</em></p>
+
+    <p>Udara di kafe itu terasa sedikit lebih dingin, atau mungkin itu hanya perasaan Dimas yang mulai menyadari kelemahan fatal dalam rencana bisnisnya. Ia menyandarkan punggungnya ke kursi, mengusap wajahnya dengan kedua tangan. Kepercayaan dirinya yang menggebu-gebu beberapa menit lalu kini luntur oleh argumen matematis yang tak terbantahkan dari teman-temannya.</p>
+
+    <p><em>"Jadi, apa yang seharusnya gue lakuin?"</em> tanya Dimas, nada suaranya kini lebih merendah, memposisikan dirinya sebagai murid yang siap mendengarkan dosen.</p>
+
+    <p>Bima tersenyum, memesan secangkir kopi hitam lagi kepada pelayan yang lewat, lalu berkata, <em>"Konsep dasar teknik industri: optimasi sistem. Lu harus mencari komponen yang tidak memiliki ketergantungan linier yang sama terhadap gangguan eksternal. Kalau lu mau portofolio yang tangguh, lu harus membangun <strong>Portofolio Terverdiversifikasi</strong>."</em></p>
+
+    <p>Alya menggeser layar tabletnya ke bagian kanan bawah infografis. <em>"Lihat perbandingannya, Dim. Daripada membagi 80-20 ke aset yang berkorelasi tinggi, coba bagi bobotnya menjadi lebih seimbang dan cari aset yang korelasinya rendah atau bahkan negatif (\(\rho = -1\) atau mendekati \(0\)). Misalnya, Aset A 40%, Aset B 30%, dan Aset C 30%."</em></p>
+
+    <p><em>"Contoh realnya gimana, Al?"</em> desak Dimas.</p>
+
+    <p><em>"Misalnya, selain e-commerce, lu investasi di sektor yang kebal terhadap resesi konsumtif. Contoh, infrastruktur utilitas dasar, pengelolaan limbah, atau komoditas pertahanan. Ketika daya beli masyarakat turun (e-commerce hancur), orang tetap butuh air bersih, listrik, dan membuang sampah. Korelasi antara e-commerce dan utilitas sangat rendah. Dengan begitu, interaksi kovarians di rumus Caka tadi akan bernilai kecil atau bahkan mengurangkan varians total. Risiko total lu jadi lebih terkendali."</em></p>
+
+    <p>Caka menambahkan, <em>"Diversifikasi itu bekerja melalui bobot dan korelasi, Dim, bukan sekadar menambah jumlah startup yang lu suntik dana. Lu punya seratus perusahaan di portofolio lu pun percuma kalau semuanya bergerak di sektor digital ekonomi yang rentan terhadap suku bunga The Fed. Itu namanya kebodohan yang diagregasi."</em></p>
+
+    <p>Kata-kata tajam Caka membuat Dimas tertawa getir. <em>"Sialan lu, Cak. Tapi lu bener."</em></p>
+
+    <p>Alya menutup tabletnya, membiarkan layar itu menampilkan sebuah kutipan yang menjadi penutup sempurna untuk diskusi malam itu. Kutipan tersebut dicetak dengan gaya editorial yang elegan di layar tabletnya.</p>
+
+    <!-- Kotak kutipan yang sudah dirapikan dengan desain editorial modern -->
+    <div class="quote-box">
+        Banyak aset belum tentu terdiversifikasi 
+        <span>jika semuanya bergerak ke arah yang sama.</span>
+    </div>
+
+    <p><em>"Ingat, Dim,"</em> Alya mengunci pandangannya dengan Dimas, nadanya melembut namun tetap berwibawa. <em>"Diversifikasi tidak menghilangkan risiko secara absolut. Ia hanya mengurangi ketergantungan pada satu sumber risiko. Sebagai <em>engineer</em>, tugas kita bukan mencari sistem tanpa risiko, karena itu mustahil. Tugas kita adalah mendesain sistem yang bisa bertahan hidup saat risiko terburuk itu terjadi."</em></p>
+
+    <p>Hujan di luar mulai mereda, menyisakan rintik-rintik kecil yang berirama harmonis di atas atap kafe. Cahaya lampu kota Bandung mulai menyala satu per satu, menembus kaca jendela yang berembun, menciptakan siluet jingga yang hangat. Dimas menatap ketiga temannya. Ada rasa syukur yang mendalam di dadanya. Gelar Sarjana Teknik yang melekat di nama mereka bukan sekadar pajangan, melainkan sebuah pola pikir rasional yang menyelamatkannya dari jurang kebangkrutan finansial.</p>
+
+    <p><em>"Gue berutang banyak sama kalian malam ini,"</em> ucap Dimas tulus, mengangkat gelas air mineralnya. <em>"Untuk varians, korelasi, dan persahabatan yang nggak pernah terdepresiasi."</em></p>
+
+    <p>Alya, Bima, dan Caka ikut mengangkat cangkir dan gelas mereka, mendentingkannya di tengah meja kayu tersebut. <em>"Untuk Teknik Industri ITB,"</em> sahut Bima, yang disambut tawa lepas dari mereka berempat.</p>
+
+    <p>Malam itu, di bawah langit Bandung yang basah, sebuah keputusan investasi yang bernilai miliaran rupiah berhasil diselamatkan oleh selembar serbet kertas, secangkir <em>chamomile</em>, dan pemahaman yang mendalam tentang rumus matematika yang mengatur kekacauan dunia maya dan nyata.</p>
+
+    <div class="footer">
+        <a href="https://imnxx.vercel.app" class="dashboard-link">kembali ke dashboard</a>
+    </div>
+</div>
+
+</body>
+</html>
