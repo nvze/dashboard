@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8 Dimensi Kualitas - nseReview</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* Desain Luxeher: Elegan, Gelap, Emas, dan Sentuhan Modern */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #c5a059;
+            --gold-light: #e8d5b5;
+            --dark-bg: #0a0a0a;
+            --card-bg: #141414;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --accent-blue: #4a90e2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 60px 50px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            position: relative;
+            border-radius: 4px;
+        }
+
+        /* Logo nseReview */
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+        }
+
+        .logo span {
+            color: var(--accent-blue);
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+
+        .logo-sub {
+            text-align: center;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--gold-light);
+            text-align: center;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 15px;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-weight: 300;
+            text-align: justify;
+        }
+
+        .image-container {
+            margin: 40px 0;
+            text-align: center;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        .image-caption {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* MathJax styling */
+        .math-block {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow-x: auto;
+            border-left: 3px solid var(--gold);
+        }
+
+        /* Link Dashboard */
+        .dashboard-link {
+            display: inline-block;
+            margin-top: 50px;
+            padding: 15px 40px;
+            background: transparent;
+            color: var(--gold);
+            text-decoration: none;
+            border: 1px solid var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .dashboard-link:hover {
+            background: var(--gold);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .logo {
+                font-size: 1.8rem;
+            }
+            .logo span {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo nseReview -->
+        <div class="logo">nseReview<span>.</span></div>
+        <div class="logo-sub">Industrial Engineering Insights</div>
+
+        <!-- Judul -->
+        <h1>Delapan Dimensi Kualitas</h1>
+        <p style="text-align: center; color: var(--text-muted); font-style: italic; margin-bottom: 40px;">
+            Sebuah Narasi tentang Standar, Persepsi, dan Dedikasi di Jantung Kota Bandung
+        </p>
+
+        <!-- Gambar -->
+        <div class="image-container">
+            <img src="quality.jpg" alt="8 Dimensi Kualitas">
+            <div class="image-caption">Gambar 1. Delapan Dimensi Kualitas (Sumber: Dokumentasi Pribadi)</div>
+        </div>
+
+        <!-- Cerita -->
+        <h2>Bab 1: Langit Bandung dan Ambisi</h2>
+        <p>
+            Langit Bandung sore itu berwarna kelabu, tetapi bagi empat mahasiswa Teknik Industri Universitas Terkemuka di kota kembang ini, langit kelabu justru merupakan kanvas yang sempurna untuk menggambar mimpi. Mereka duduk melingkar di sebuah kafe kayu di daerah Dago. Aroma kopi robusta bercampur dengan hawa dingin yang khas. Meja kayu jati itu dipenuhi oleh laptop, buku catatan, dan satu cetakan gambar besar yang menjadi topik perdebatan panas mereka.
+        </p>
+        <p>
+            Di antara mereka, <strong>Raka</strong> adalah sosok yang paling perfeksionis. Sebagai koordinator tim, ia selalu menuntut standar tinggi. Di sebelahnya, <strong>Sinta</strong>, seorang wanita cerdas dengan pandangan tajam mengenai perilaku konsumen, sering kali menjadi penyeimbang. Ada pula <strong>Bima</strong>, praktisi yang lebih suka terjun langsung ke lantai produksi, dan <strong>Dewi</strong>, ahli statistik yang tenang namun kritis.
+        </p>
+        <p>
+            "Jadi, kita semua setuju bahwa produk ini tidak bisa hanya sekadar 'berfungsi'," ujar Raka membuka diskusi, menunjuk pada gambar yang baru saja mereka cetak. Gambar itu menampilkan diagram delapan lingkaran yang saling terhubung, berpusat pada satu kata: Kualitas.
+        </p>
+        <p>
+            Sinta mengangguk, matanya menyapu delapan dimensi tersebut. "Kualitas itu bukan entitas tunggal, Rak. Ia adalah spektrum. Kita tidak bisa hanya fokus pada satu aspek dan mengabaikan yang lain. Lihat dimensi <em>Performance</em> dan <em>Features</em>. Konsumen kita di Bandung ini sangat kritis. Mereka tidak hanya butuh produk yang berjalan, tetapi juga nilai tambah."
+        </p>
+
+        <h2>Bab 2: Performance dan Features</h2>
+        <p>
+            Diskusi pun mengerucut pada dua dimensi pertama. Raka membuka laptopnya, menampilkan data performa mesin yang mereka rancang.
+        </p>
+        <p>
+            "Dimensi pertama, <strong>Performance</strong>," jelas Raka. "Ini adalah kemampuan dasar produk untuk melakukan fungsi utamanya secara efektif. Kita harus memastikan efisiensi termal mesin ini mencapai titik optimal. Jika kita melihat kurva efisiensi, kita harus bisa memodelkannya secara matematis."
+        </p>
+        <p>
+            Raka kemudian menuliskan sebuah persamaan di papan tulis kecil yang ada di dekat meja mereka. "Jika kita asumsikan efisiensi sebagai fungsi dari suhu dan tekanan, maka kita bisa menggunakan pendekatan berikut:"
+        </p>
+        <div class="math-block">
+            \[
+            \eta = 1 - \frac{T_c}{T_h}
+            \]
+        </div>
+        <p>
+            "Di mana \(\eta\) adalah efisiensi, \(T_c\) adalah suhu dingin, dan \(T_h\) adalah suhu panas. Ini adalah fondasi performa kita," lanjut Raka.
+        </p>
+        <p>
+            Bima menyela, "Tapi jangan lupa <strong>Features</strong>. Konsumen zaman sekarang ingin produk yang bisa terkoneksi dengan smartphone. Itu adalah nilai tambah yang membuat produk kita menonjol. Fitur bukan hanya pelengkap, tapi daya tarik utama."
+        </p>
+        <p>
+            Dewi, yang sejak tadi diam, mengangkat pena. "Betul. Kita bisa mengukur kepuasan pelanggan terhadap fitur ini menggunakan regresi linear berganda. Misalnya, \(Y\) adalah kepuasan, \(X_1\) adalah kegunaan, dan \(X_2\) adalah kemudahan penggunaan. Maka:"
+        </p>
+        <div class="math-block">
+            \[
+            Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \epsilon
+            \]
+        </div>
+        <p>
+            "Kita perlu memastikan \(\beta_1\) dan \(\beta_2\) signifikan secara statistik," tambah Dewi dengan senyum tipis.
+        </p>
+
+        <h2>Bab 3: Reliability dan Durability</h2>
+        <p>
+            Sore berganti malam. Mereka memutuskan untuk melanjutkan diskusi di laboratorium kampus. Lampu neon yang terang benderang menggantikan cahaya temaram kafe. Di sana, mereka berhadapan dengan prototipe produk mereka.
+        </p>
+        <p>
+            "Sekarang kita masuk ke dimensi <strong>Reliability</strong> dan <strong>Durability</strong>," kata Sinta sambil memegang komponen logam. "Reliabilitas adalah tentang konsistensi. Produk ini harus bekerja tanpa gagal dalam jangka waktu tertentu. Kita bisa menghitung laju kegagalan menggunakan distribusi eksponensial."
+        </p>
+        <p>
+            Sinta menuliskan rumus reliabilitas:
+        </p>
+        <div class="math-block">
+            \[
+            R(t) = e^{-\lambda t}
+            \]
+        </div>
+        <p>
+            "Di mana \(R(t)\) adalah reliabilitas pada waktu \(t\), dan \(\lambda\) adalah laju kegagalan. Kita harus menekan \(\lambda\) serendah mungkin," jelasnya.
+        </p>
+        <p>
+            Bima menambahkan, "Dan <strong>Durability</strong>! Ini tentang ketahanan fisik. Produk ini harus bisa bertahan dari guncangan, tekanan, dan kelembapan. Kita sudah melakukan uji jatuh dan uji tekan. Hasilnya cukup memuaskan, tapi kita perlu meningkatkan ketahanan aus pada bagian engsel."
+        </p>
+        <p>
+            Dewi mengangguk. "Secara statistik, kita bisa mengukur <em>Mean Time Between Failures</em> (MTBF). Jika \(T\) adalah waktu antar kegagalan, maka:"
+        </p>
+        <div class="math-block">
+            \[
+            MTBF = \frac{1}{\lambda}
+            \]
+        </div>
+        <p>
+            "Semakin tinggi MTBF, semakin baik durabilitas dan reliabilitas produk kita," pungkas Dewi.
+        </p>
+
+        <h2>Bab 4: Serviceability dan Aesthetics</h2>
+        <p>
+            Malam semakin larut, namun semangat mereka membara. Mereka beralih ke dimensi yang lebih bersifat humanis.
+        </p>
+        <p>
+            "Kualitas bukan hanya soal mesin, tapi juga soal manusia," ujar Sinta. "Dimensi <strong>Serviceability</strong> sangat penting. Kemudahan perbaikan dan ketersediaan suku cadang. Jika produk kita rusak, berapa lama waktu yang dibutuhkan untuk memperbaikinya? Kita harus mendesain produk ini agar mudah dibongkar pasang."
+        </p>
+        <p>
+            Raka menambahkan, "Setuju. Kita bisa menggunakan metrik <em>Mean Time To Repair</em> (MTTR). Jika \(t_i\) adalah waktu perbaikan ke-\(i\), maka:"
+        </p>
+        <div class="math-block">
+            \[
+            MTTR = \frac{1}{n} \sum_{i=1}^{n} t_i
+            \]
+        </div>
+        <p>
+            "Target kita adalah MTTR di bawah 30 menit," tegas Raka.
+        </p>
+        <p>
+            Bima yang sedang mengamati desain casing produk kemudian bersuara, "Lalu ada <strong>Aesthetics</strong>. Ini soal nilai visual dan persepsi. Produk ini harus terlihat premium. Warna, tekstur, dan bentuk harus selaras dengan identitas kita. Orang Bandung sangat menghargai estetika. Desain yang buruk akan menurunkan persepsi kualitas secara keseluruhan."
+        </p>
+
+        <h2>Bab 5: Perceived Quality dan Conformance to Standards</h2>
+        <p>
+            Keesokan harinya, mereka berkumpul kembali di ruang rapat. Kali ini, mereka membahas dua dimensi terakhir yang menjadi mahkota dari seluruh usaha mereka.
+        </p>
+        <p>
+            "Dimensi <strong>Perceived Quality</strong>," buka Sinta. "Ini adalah impresi keseluruhan pelanggan. Ini subjektif, tapi bisa diukur. Kita bisa menggunakan skala Likert atau analisis sentimen dari ulasan online. Jika pelanggan merasa puas, maka perceived quality kita tinggi."
+        </p>
+        <p>
+            Dewi menambahkan, "Kita bisa memodelkan perceived quality (\(PQ\)) sebagai fungsi dari ekspektasi (\(E\)) dan persepsi (\(P\)):"
+        </p>
+        <div class="math-block">
+            \[
+            PQ = f(P, E)
+            \]
+        </div>
+        <p>
+            "Jika \(P > E\), maka pelanggan akan sangat puas. Jika \(P < E\), maka akan terjadi kekecewaan," jelas Dewi.
+        </p>
+        <p>
+            Raka kemudian menutup diskusi dengan dimensi terakhir, <strong>Conformance to Standards</strong>. "Ini adalah tentang kepatuhan. Apakah produk kita sesuai dengan spesifikasi yang telah ditetapkan? Apakah ia memenuhi standar ISO atau SNI? Kita tidak boleh lengah. Setiap deviasi harus dicatat dan diperbaiki."
+        </p>
+        <p>
+            "Kita bisa menggunakan <em>Process Capability Index</em> (\(C_p\) dan \(C_{pk}\)) untuk mengukurnya," ujar Dewi. "Rumusnya adalah:"
+        </p>
+        <div class="math-block">
+            \[
+            C_p = \frac{USL - LSL}{6\sigma}
+            \]
+        </div>
+        <p>
+            "Di mana \(USL\) adalah <em>Upper Specification Limit</em>, \(LSL\) adalah <em>Lower Specification Limit</em>, dan \(\sigma\) adalah standar deviasi proses. Kita harus memastikan \(C_p > 1.33\) agar proses kita dianggap mampu."
+        </p>
+
+        <h2>Bab 6: Sintesis dan Dedikasi</h2>
+        <p>
+            Keempat mahasiswa itu terdiam sejenak, merenungkan kedalaman dari delapan dimensi yang telah mereka bedah. Mereka menyadari bahwa menjadi seorang sarjana Teknik Industri bukan hanya tentang menghitung, tetapi tentang memahami kompleksitas kualitas manusia dan produk.
+        </p>
+        <p>
+            "Jadi," kata Raka memecah keheningan, "Kualitas adalah sebuah sistem. Ia adalah keterkaitan antara performa, fitur, keandalan, daya tahan, kemudahan servis, estetika, persepsi, dan kepatuhan standar. Tidak ada satu pun yang bisa diabaikan."
+        </p>
+        <p>
+            Sinta tersenyum. "Dan kita, sebagai calon insinyur, adalah penjaga standar itu. Kita adalah arsitek dari pengalaman pengguna."
+        </p>
+        <p>
+            Bima menambahkan, "Kita adalah jembatan antara desain dan realitas."
+        </p>
+        <p>
+            Dewi menutup dengan kalimat bijak, "Dan pada akhirnya, kualitas adalah bentuk rasa hormat kita kepada pengguna."
+        </p>
+        <p>
+            Mereka kemudian berjabat tangan, mengikat komitmen untuk terus mengembangkan produk mereka. Langit Bandung kembali cerah, seolah merestui langkah mereka. Delapan dimensi kualitas itu tidak lagi hanya gambar di atas kertas, melainkan sebuah peta jalan menuju keunggulan.
+        </p>
+
+        <!-- Link Kembali ke Dashboard -->
+        <div style="text-align: center;">
+            <a href="https://imnxx.vercel.app" class="dashboard-link" target="_blank">Kembali ke Dashboard</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            &copy; 2024 nseReview. All rights reserved.
+        </div>
+    </div>
+
+</body>
+</html>
