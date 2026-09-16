@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makalah Komprehensif: Akuntansi Biaya</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f4f6f8',
+                            100: '#e3e8ee',
+                            200: '#c7d2de',
+                            300: '#a1b5c7',
+                            400: '#7592ab',
+                            500: '#567692',
+                            600: '#435c75',
+                            700: '#374a5e',
+                            800: '#2f4051',
+                            900: '#2a3644',
+                        },
+                        accent: {
+                            500: '#3b82f6', // blue-500
+                            600: '#2563eb', // blue-600
+                        }
+                    },
+                    typography: (theme) => ({
+                        DEFAULT: {
+                            css: {
+                                color: theme('colors.gray.700'),
+                                h1: { color: theme('colors.brand.900'), fontWeight: '800' },
+                                h2: { color: theme('colors.brand.800'), fontWeight: '700', borderBottom: '2px solid #e3e8ee', paddingBottom: '0.5rem' },
+                                h3: { color: theme('colors.brand.700'), fontWeight: '600' },
+                                a: { color: theme('colors.accent.600'), '&:hover': { color: theme('colors.accent.500') } },
+                                blockquote: { borderLeftColor: theme('colors.accent.500'), backgroundColor: theme('colors.brand.50'), padding: '1rem', fontStyle: 'italic', borderRadius: '0.5rem' },
+                                table: { width: '100%', borderCollapse: 'collapse', marginTop: '2em', marginBottom: '2em' },
+                                th: { backgroundColor: theme('colors.brand.100'), color: theme('colors.brand.900'), padding: '0.75rem', border: '1px solid #c7d2de' },
+                                td: { padding: '0.75rem', border: '1px solid #e3e8ee' },
+                            },
+                        },
+                    }),
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles for Advanced UI */
+        body {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glow-effect {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(124,58,237,0.2) 100%);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        /* Hide scrollbar for cleaner UI */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="antialiased text-gray-800 pb-32">
+
+    <!-- Decorative Glow Backgrounds -->
+    <div class="glow-effect top-0 left-0"></div>
+    <div class="glow-effect top-1/4 right-0" style="background: rgba(16,185,129,0.15);"></div>
+
+    <!-- Header / Hero Section -->
+    <header class="pt-24 pb-16 px-6 max-w-5xl mx-auto text-center relative z-10">
+        <span class="inline-block py-1 px-3 rounded-full bg-accent-500/10 text-accent-600 text-sm font-semibold tracking-wider mb-6 border border-accent-500/20">
+            KARYA TULIS ILMIAH
+        </span>
+        <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-8 leading-tight">
+            Eksplorasi Mendalam <br/>
+            <span class="text-gradient">Akuntansi Biaya Modern</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Sebuah makalah komprehensif yang membahas arsitektur biaya, metode kalkulasi, analisis strategis, dan inovasi kontemporer dalam manajemen biaya perusahaan.
+        </p>
+    </header>
+
+    <!-- Main Content Paper -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <article class="glass-panel rounded-3xl p-8 md:p-14 prose prose-lg prose-brand max-w-none">
+            
+            <h2>BAB I: PENDAHULUAN</h2>
+            <h3>1.1 Latar Belakang</h3>
+            <p>Dalam lanskap bisnis global yang hiper-kompetitif dan bergerak cepat saat ini, perusahaan dihadapkan pada tekanan yang belum pernah terjadi sebelumnya untuk mempertahankan margin keuntungan sambil secara simultan meningkatkan kualitas produk dan layanan. Pada era industri 4.0, di mana teknologi otomasi dan digitalisasi mengubah paradigma manufaktur dan jasa, pengambilan keputusan yang didasarkan pada intuisi semata telah menjadi usang dan berisiko tinggi. Di sinilah peran krusial dari <strong>Akuntansi Biaya (Cost Accounting)</strong> muncul bukan sekadar sebagai alat pencatatan historis, melainkan sebagai instrumen strategis utama.</p>
+            <p>Akuntansi biaya tidak lagi sebatas membebankan pengeluaran pabrik ke dalam persediaan (inventory valuation) untuk tujuan pelaporan keuangan eksternal. Fungsinya telah bermutasi menjadi pusat inteligensi bisnis yang menyuplai manajemen dengan aliran informasi kuantitatif (keuangan) dan kualitatif (non-keuangan). Informasi ini mutlak diperlukan untuk perencanaan strategis, pengendalian operasional, evaluasi kinerja komprehensif, dan pengambilan keputusan proaktif yang menyangkut hidup matinya entitas bisnis.</p>
+            
+            <h3>1.2 Definisi dan Ruang Lingkup Akuntansi Biaya</h3>
+            <p>Menurut <em>Institute of Management Accountants (IMA)</em>, akuntansi biaya adalah sebuah teknik atau metode untuk menentukan, mengumpulkan, menganalisis, dan melaporkan biaya dari suatu produk, aktivitas, atau layanan. Akuntansi biaya bertindak sebagai "jembatan" hibrida yang menghubungkan dua disiplin besar:</p>
+            <ul>
+                <li><strong>Akuntansi Keuangan (Financial Accounting):</strong> Akuntansi biaya menyediakan basis data fundamental terkait Harga Pokok Penjualan (Cost of Goods Sold/COGS) dan nilai persediaan akhir (Ending Inventory) yang diwajibkan dalam penyusunan Neraca dan Laporan Laba Rugi sesuai dengan Prinsip Akuntansi Berterima Umum (GAAP/IFRS).</li>
+                <li><strong>Akuntansi Manajemen (Management Accounting):</strong> Menyediakan instrumen kalkulasi prediktif dan analitis (seperti anggaran, analisis varians, dan analisis biaya-volume-laba) yang membantu manajer internal dalam mengarahkan strategi operasional.</li>
+            </ul>
+
+            <hr/>
+
+            <h2>BAB II: KONSTRUKSI, KLASIFIKASI, DAN PERILAKU BIAYA</h2>
+            <p>Pemahaman fundamental terhadap bagaimana sebuah biaya diklasifikasikan adalah prasyarat utama sebelum melakukan analisis finansial apa pun. Kegagalan manajemen dalam mengidentifikasi sifat biaya sering kali berujung pada <em>pricing error</em> yang fatal (under-pricing maupun over-pricing).</p>
+
+            <h3>2.1 Klasifikasi Berdasarkan Ketertelusuran (Traceability)</h3>
+            <p>Konsep ketertelusuran berfokus pada sejauh mana suatu biaya dapat dihubungkan secara fisik, logis, dan ekonomis ke sebuah objek biaya (cost object) tertentu—seperti produk, departemen, atau pelanggan.</p>
+            <ul>
+                <li><strong>Biaya Langsung (Direct Costs):</strong> Biaya yang dapat ditelusuri secara mudah, akurat, dan ekonomis ke objek biaya. Komponen utamanya meliputi:
+                    <ul>
+                        <li><em>Bahan Baku Langsung (Direct Materials):</em> Material yang membentuk bagian integral dari produk jadi (misal: baja dalam produksi mobil, kayu murni pada furnitur).</li>
+                        <li><em>Tenaga Kerja Langsung (Direct Labor):</em> Kompensasi bagi pekerja yang secara fisik mengubah bahan baku menjadi produk jadi (misal: operator mesin cetak).</li>
+                    </ul>
+                </li>
+                <li><strong>Biaya Tidak Langsung (Indirect Costs / Overhead):</strong> Biaya yang tidak dapat ditelusuri dengan mudah secara langsung ke sebuah produk. Biaya ini harus "dialokasikan" menggunakan dasar alokasi tertentu (cost driver). Contohnya meliputi depresiasi mesin pabrik, gaji supervisor pabrik, biaya asuransi, dan utilitas pabrik.</li>
+            </ul>
+
+            <h3>2.2 Klasifikasi Berdasarkan Perilaku Biaya (Cost Behavior)</h3>
+            <p>Perilaku biaya merujuk pada respons matematis suatu biaya ketika terjadi perubahan dalam tingkat aktivitas bisnis (volume produksi atau penjualan).</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipe Perilaku Biaya</th>
+                        <th>Karakteristik Total Biaya</th>
+                        <th>Karakteristik Biaya Per Unit</th>
+                        <th>Contoh Implementasi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Biaya Variabel (Variable Cost)</strong></td>
+                        <td>Berubah secara proporsional sejalan dengan perubahan volume.</td>
+                        <td>Konstan (Tetap) berapapun volume produksinya.</td>
+                        <td>Bahan baku langsung, komisi penjualan.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biaya Tetap (Fixed Cost)</strong></td>
+                        <td>Konstan (Tidak berubah) dalam rentang kapasitas relevan.</td>
+                        <td>Menurun seiring dengan peningkatan volume produksi.</td>
+                        <td>Sewa gedung, gaji direktur, depresiasi garis lurus.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biaya Campuran (Mixed Cost)</strong></td>
+                        <td>Memiliki dua elemen sekaligus (tetap dan variabel).</td>
+                        <td>Bervariasi secara non-proporsional.</td>
+                        <td>Tagihan listrik (biaya langganan tetap + biaya per kWh).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr/>
+
+            <h2>BAB III: SISTEM KALKULASI BIAYA (COSTING SYSTEMS)</h2>
+            <p>Untuk mengakumulasi dan membebankan biaya secara presisi ke unit produk, perusahaan menggunakan sistem perhitungan yang disesuaikan dengan tipologi proses produksinya. Ada tiga paradigma utama dalam kalkulasi biaya modern.</p>
+
+            <h3>3.1 Job-Order Costing (Sistem Kalkulasi Biaya Pesanan)</h3>
+            <p>Sistem ini dirancang untuk perusahaan yang memproduksi produk-produk yang heterogen, khusus (custom-made), dan memiliki spesifikasi unik dari tiap pelanggan. Pengumpulan biaya dilakukan per "pekerjaan" (Job) atau "batch".</p>
+            <blockquote>"Dalam Job-Order Costing, dokumen sentralnya adalah <em>Job Cost Sheet</em> (Kartu Harga Pokok Pesanan). Seluruh bahan langsung, tenaga kerja langsung, dan overhead yang dibebankan dicatat secara spesifik untuk satu pesanan tersebut."</blockquote>
+            <p>Contoh industri: Percetakan, firma hukum, perusahaan arsitektur, dan pembuatan kapal laut. Kunci dari sistem ini adalah penentuan tarif overhead di muka (Predetermined Overhead Rate) berdasarkan taksiran biaya setahun penuh dibagi taksiran basis alokasi (misalnya jam kerja langsung).</p>
+
+            <h3>3.2 Process Costing (Sistem Kalkulasi Biaya Proses)</h3>
+            <p>Berbanding terbalik dengan Job-Order, sistem Process Costing diaplikasikan pada manufaktur yang memproduksi produk homogen secara massal dan kontinu melalui serangkaian departemen proses.</p>
+            <p>Karena produknya identik, biaya tidak ditelusuri per unit secara individu. Melainkan, biaya diakumulasikan per departemen untuk suatu periode (misal: bulan berjalan), kemudian dibagi dengan <strong>Unit Ekuivalen Produksi (Equivalent Units of Production / EUP)</strong>. Unit ekuivalen adalah sebuah konsep krusial yang mengonversi unit barang dalam proses (WIP) sebagian selesai, menjadi ekspresi matematis unit yang sepenuhnya selesai berdasarkan persentase penyelesaiannya.</p>
+            <p>Contoh industri: Pengilangan minyak bumi, pabrik semen, produsen minuman ringan, dan pabrik tepung.</p>
+
+            <h3>3.3 Activity-Based Costing (ABC System)</h3>
+            <p>Di era otomasi, proporsi biaya overhead seringkali lebih besar daripada tenaga kerja langsung. Alokasi overhead tradisional yang hanya menggunakan satu basis (seperti jam kerja) menyebabkan fenomena <em>Cost Distortion</em> (Subsidi silang biaya). Produk bervolume tinggi mensubsidi produk bervolume rendah yang kompleks.</p>
+            <p><strong>Sistem ABC (Activity-Based Costing)</strong> memecahkan masalah ini dengan paradigma bahwa: <em>"Produk tidak mengonsumsi biaya, produk mengonsumsi aktivitas, dan aktivitaslah yang mengonsumsi biaya."</em></p>
+            <p>Hierarki Aktivitas dalam ABC:</p>
+            <ol>
+                <li><strong>Unit-Level Activities:</strong> Dilakukan untuk setiap unit (contoh: daya listrik mesin, material langsung).</li>
+                <li><strong>Batch-Level Activities:</strong> Dilakukan untuk sekelompok produk terlepas dari jumlah unit di dalamnya (contoh: setup mesin, inspeksi kualitas batch).</li>
+                <li><strong>Product-Sustaining Activities:</strong> Dilakukan untuk mendukung produk tertentu (contoh: desain rekayasa produk, iklan spesifik produk).</li>
+                <li><strong>Facility-Sustaining Activities:</strong> Aktivitas untuk menopang perusahaan secara keseluruhan (contoh: keamanan pabrik, pajak bumi dan bangunan).</li>
+            </ol>
+            <p>Dengan membebankan biaya berdasarkan berbagai "Cost Driver" yang akurat, manajer mendapatkan perhitungan biaya produk yang sangat presisi, memungkinkan keputusan penetapan harga (pricing) yang lebih rasional dan mengeliminasi aktivitas tak bernilai tambah (Non-Value Added Activities).</p>
+
+            <hr/>
+
+            <h2>BAB IV: ANALISIS BIAYA-VOLUME-LABA (CVP ANALYSIS) DAN PENGAMBILAN KEPUTUSAN</h2>
+            <p>Analisis Cost-Volume-Profit (CVP) merupakan salah satu instrumen paling tangguh yang dihasilkan dari rahim akuntansi biaya. Alat ukur ini memfasilitasi manajemen untuk melihat dampak finansial jika terjadi dinamika interaksi antara: harga jual, volume penjualan, biaya variabel per unit, total biaya tetap, dan bauran produk (sales mix).</p>
+
+            <h3>4.1 Anatomi Margin Kontribusi (Contribution Margin)</h3>
+            <p>Berbeda dengan Laba Kotor (Gross Margin) dalam laporan keuangan eksternal, akuntansi biaya fokus pada <strong>Margin Kontribusi</strong>, yang didefinisikan sebagai: Harga Jual - Biaya Variabel. Ini adalah jumlah absolut (atau rasio) yang tersedia untuk "berkontribusi" dalam menutupi seluruh Biaya Tetap. Setelah biaya tetap tertutupi sepenuhnya, sisa margin kontribusi tersebut mengalir murni menjadi Laba Operasional (Operating Income).</p>
+
+            <h3>4.2 Titik Impas (Break-Even Point) dan Margin of Safety</h3>
+            <p>Titik Impas (BEP) adalah volume operasi spesifik di mana total pendapatan perusahaan sama persis dengan total biaya (Laba = Nol). Formula esensialnya adalah:</p>
+            <ul>
+                <li><strong>BEP (Unit) = Total Biaya Tetap / Margin Kontribusi per Unit</strong></li>
+                <li><strong>BEP (Rupiah) = Total Biaya Tetap / Rasio Margin Kontribusi</strong></li>
+            </ul>
+            <p>Manajemen modern tidak hanya melihat BEP, melainkan juga menghitung <em>Margin of Safety</em> (Batas Keamanan)—yakni selisih antara estimasi penjualan yang dianggarkan dengan penjualan pada titik impas. Semakin besar batas keamanannya, semakin kuat perusahaan menahan guncangan penurunan permintaan pasar tanpa harus mengalami kerugian operasional.</p>
+
+            <h3>4.3 Relevant Costing untuk Pengambilan Keputusan Taktis</h3>
+            <p>Dalam mengambil keputusan strategis jangka pendek (Tactical Decision Making), manajer hanya boleh menggunakan <strong>Biaya Relevan (Relevant Costs)</strong>. Sebuah biaya dikategorikan relevan jika memenuhi dua syarat mutlak: (1) Biaya tersebut akan terjadi di masa depan, dan (2) Biaya tersebut berbeda di antara alternatif-alternatif yang sedang dipertimbangkan.</p>
+            <p>Beberapa aplikasi keputusannya meliputi:</p>
+            <ul>
+                <li><strong>Make-or-Buy Decision:</strong> Memutuskan apakah lebih menguntungkan memproduksi komponen secara internal atau mengalihdayakan (outsourcing) dari pihak ketiga. Sunk cost (seperti depresiasi mesin lama) tidak boleh dimasukkan dalam hitungan.</li>
+                <li><strong>Special Order Decision:</strong> Menerima pesanan pelanggan di bawah harga pasar normal dengan memanfaatkan kapasitas pabrik yang menganggur. Selama harga pesanan menutupi <em>incremental variable costs</em>, maka pesanan tersebut akan meningkatkan laba.</li>
+                <li><strong>Keep or Drop a Segment:</strong> Menganalisis apakah divisi yang merugi secara akuntansi benar-benar harus ditutup. Analisis ini meninjau <em>avoidable fixed costs</em> (biaya tetap yang dapat dihindari). Jika margin kontribusi divisi yang hilang lebih besar dari biaya tetap yang bisa dihemat, maka menutup divisi justru akan memperburuk laba agregat perusahaan.</li>
+            </ul>
+
+            <hr/>
+
+            <h2>BAB V: PERKEMBANGAN MUTAKHIR (CONTEMPORARY TRENDS)</h2>
+            <p>Seiring globalisasi, literatur dan praktik akuntansi biaya melahirkan berbagai mahzab baru (strategic cost management) yang mentransformasi pendekatan tradisional menjadi sangat adaptif.</p>
+
+            <h3>5.1 Target Costing</h3>
+            <p>Pendekatan tradisional menggunakan "Cost-Plus Pricing": Perusahaan mendesain produk, menghitung biayanya, lalu menambahkan margin laba untuk menentukan harga jual. Di era persaingan ketat, harga ditentukan oleh pasar, bukan oleh perusahaan.</p>
+            <p><strong>Target Costing</strong> membalik paradigma tersebut (Market-Driven). Prosesnya: Manajemen pertama-tama meneliti harga jual maksimal yang sudi dibayar konsumen. Kemudian manajemen menetapkan target laba. Sisanya adalah <em>Target Cost</em> (Biaya Maksimal yang diizinkan). Para insinyur dan akuntan kemudian bekerja keras secara lintas divisi dalam fase desain (Value Engineering) untuk memangkas biaya tanpa mengorbankan utilitas pelanggan demi mencapai target cost tersebut sebelum produk diproduksi.</p>
+
+            <h3>5.2 Lean Accounting dan Just-In-Time (JIT)</h3>
+            <p>Mengadopsi filosofi manufaktur Jepang (seperti Toyota Production System), JIT bertujuan meminimalkan tingkat persediaan hingga mendeteksi angka nol (Zero Inventory). Karena persediaan nyaris tidak ada, alur material sangat cepat. Akuntansi biaya merespons hal ini dengan <strong>Backflush Costing</strong>, yaitu sistem radikal yang menghapus pencatatan jurnal perpindahan unit barang dalam proses (WIP) harian yang rumit, dan baru membebankan biaya ketika produk telah selesai atau terjual, guna mengurangi kompleksitas administrasi (cost of accounting).</p>
+
+            <h3>5.3 Environmental Management Accounting (EMA)</h3>
+            <p>Dalam era keberlanjutan (sustainability) dan ESG (Environmental, Social, Governance), akuntansi biaya dituntut mampu membedah biaya lingkungan. Biaya lingkungan tersembunyi—seperti biaya pengolahan limbah, denda regulasi emisi karbon, dan biaya pemulihan ekosistem—kini dikapitalisasi atau dibebankan secara eksplisit menggunakan ABC. Hal ini memacu perusahaan untuk mengadopsi <em>Eco-efficiency</em>, yakni memaksimalkan penciptaan nilai bisnis dengan secara simultan meminimalkan konsumsi sumber daya alam dan emisi limbah beracun.</p>
+
+            <hr/>
+
+            <h2>BAB VI: KESIMPULAN</h2>
+            <p>Akuntansi biaya telah mengalami evolusi revolusioner dari sekadar tata buku klerikal yang kaku menjadi tulang punggung intelijen strategis perusahaan. Melalui integrasi data ke dalam sistem Job-Order, Process Costing, hingga Activity-Based Costing yang super presisi, manajemen dibekali teropong jernih untuk membedah anatomi keuangan organisasi.</p>
+            <p>Di era di mana disrupsi adalah norma, kemampuan sebuah entitas bisnis untuk memisahkan biaya tak bernilai tambah, mengalokasikan sumber daya secara taktis melalui analisis CVP, menetapkan Target Costing yang digerakkan oleh pasar, serta menginternalisasi biaya lingkungan (EMA), bukan lagi sebuah keunggulan kompetitif (competitive advantage), melainkan prasyarat mutlak untuk dapat bertahan hidup (survival). Pada akhirnya, keakuratan sistem akuntansi biaya akan menentukan apakah seorang eksekutif mengemudikan kapalnya menuju samudra probabilitas laba, atau karam di tengah ilusi margin yang salah kalkulasi.</p>
+
+        </article>
+    </main>
+
+    <!-- Sticky Bottom Nav / Dashboard Button -->
+    <div class="fixed bottom-0 left-0 w-full z-50 p-5 bg-white/70 backdrop-blur-xl border-t border-gray-200/50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] flex justify-center transition-all">
+        <a href="https://imnxx.vercel.app" 
+           class="group relative inline-flex items-center justify-center px-8 py-4 text-base md:text-lg font-bold text-white transition-all duration-300 bg-brand-900 rounded-full hover:bg-accent-600 focus:outline-none focus:ring-4 focus:ring-accent-500/50 shadow-xl hover:shadow-accent-500/30 hover:-translate-y-1 overflow-hidden">
+            <!-- Ripple effect overlay -->
+            <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
+            
+            <!-- Icon -->
+            <svg class="w-5 h-5 mr-3 transition-transform duration-300 group-hover:-translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            <span class="relative">Kembali ke Dashboard</span>
+        </a>
+    </div>
+
+</body>
+</html>
