@@ -49,7 +49,7 @@
 
     .logo-container {
       display: flex;
-      justify-content: flex-end; /*sebelumnya center -nse note*/
+      justify-content: center; /*sebelumnya center -nse note*/
       width: 100%; /* nse note*/
       padding-left: 0.5rem; /*nse note*/
       
@@ -186,10 +186,23 @@
     /* --- LAYOUT HORIZONTAL KHUSUS DESKTOP / LAPTOP (≥768px) --- */
     /* ========================================================= */
     @media (min-width: 768px) {
-      .main-wrapper {
-        max-width: 900px;
-        flex-direction: column;
-      }
+        /* 1. Atur pembungkus utama agar meratakan isinya ke kiri */
+  .main-wrapper {
+    max-width: 900px;
+    flex-direction: column;
+    align-items: flex-start; /* Mengubah dari center menjadi rata kiri */
+  }
+
+  /* 2. Ubah posisi logo menjadi rata kiri khusus desktop */
+  .logo-container {
+    justify-content: flex-start; /* Mengubah posisi logo ke kiri */
+    width: 100%;
+  }
+
+  /* Ukuran logo 2x lipat (220px) khusus desktop */
+  .profile-logo {
+    width: 220px; 
+  }
 
       .dashboard-card {
         flex-direction: row;
