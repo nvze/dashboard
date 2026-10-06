@@ -44,6 +44,7 @@
       max-width: 400px;
       gap: 1rem; 
       padding: 1rem;
+      transition: all 0.3s ease;
     }
 
     .logo-container {
@@ -177,7 +178,67 @@
       .clock-widget { margin-bottom: 1rem; }
       .dashboard-card { padding: 1rem; }
     }
-    
+
+    /* ========================================================= */
+    /* --- LAYOUT HORIZONTAL KHUSUS DESKTOP / LAPTOP (≥768px) --- */
+    /* ========================================================= */
+    @media (min-width: 768px) {
+      .main-wrapper {
+        max-width: 900px;
+        flex-direction: column;
+      }
+
+      .dashboard-card {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        text-align: left;
+        padding: 2.5rem;
+        gap: 2rem;
+      }
+
+      /* Bagian Kiri: Header + Jam */
+      .card-left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      .card-left h1 {
+        font-size: 2rem;
+      }
+
+      .card-left p.subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .clock-widget {
+        margin-bottom: 0;
+      }
+
+      .time-display {
+        font-size: 4rem;
+      }
+
+      .date-display {
+        font-size: 1.1rem;
+      }
+
+      /* Bagian Kanan: Grid Menu */
+      .menu-list {
+        flex: 1.2;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+      }
+
+      a.menu-item {
+        padding: 1rem 1.2rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -190,14 +251,18 @@
 
     <div class="dashboard-card">
       
-      <h1>Dashboard</h1>
-      <p class="subtitle">Visualisasi Knowledge & Knowhow</p>
+      <!-- Bagian Kiri (Header + Jam) saat di Desktop -->
+      <div class="card-left">
+        <h1>Dashboard</h1>
+        <p class="subtitle">Visualisasi Knowledge & Knowhow</p>
 
-      <div class="clock-widget">
-        <div class="time-display" id="clock-time">00:00</div>
-        <div class="date-display" id="clock-date">Memuat...</div>
+        <div class="clock-widget">
+          <div class="time-display" id="clock-time">00:00</div>
+          <div class="date-display" id="clock-date">Memuat...</div>
+        </div>
       </div>
       
+      <!-- Bagian Kanan (Menu) saat di Desktop -->
       <div class="menu-list">
         <a href="blog.html" class="menu-item">
           <div class="item-content">
@@ -241,6 +306,7 @@
           </div>
         </a>
       </div>
+
     </div>
 
   </div>
