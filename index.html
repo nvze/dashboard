@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <!-- PERBAIKAN 1: Menghapus pembatasan zoom yang kaku -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>imnxx Dashboard</title>
 
@@ -21,20 +22,22 @@
       padding: 0; 
     }
     
+    html, body {
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden; /* Mengunci layar agar tidak bisa di-scroll */
+    }
+
     body {
       font-family: "Segoe UI Variable Display", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
       background-color: #2855c9; 
       background-image: linear-gradient(135deg, #ff9aeb 0%, #2855c9 40%, #2855c9 60%, #ff9aeb 100%);
       color: #ffffff;
       
-      min-height: 100vh;
-      min-height: 100dvh; 
-      padding: 2rem 1rem;
-      
+      padding: 0.8rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow-y: auto;
     }
 
     .main-wrapper {
@@ -42,10 +45,9 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      max-width: 420px;
-      gap: 1rem; 
+      max-width: 400px;
+      gap: 0.5rem; 
       margin: auto;
-      transition: all 0.3s ease;
     }
 
     .logo-container {
@@ -55,17 +57,18 @@
     }
 
     .profile-logo {
-      width: 100px;
+      width: 65px; /* Diperkecil agar hemat ruang */
       height: auto;
       display: block;
       filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.2));
     }
 
+    /* Dashboard Card */
     .dashboard-card {
       width: 100%;
       text-align: center;
-      padding: 1.5rem 1.25rem;
-      border-radius: 24px;
+      padding: 1rem 0.8rem;
+      border-radius: 20px;
       
       background: rgba(255, 255, 255, 0.1); 
       backdrop-filter: blur(20px);            
@@ -80,46 +83,46 @@
     }
 
     h1 {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #ffffff;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.1rem;
       letter-spacing: 0.5px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     p.subtitle {
       color: #dbeafe; 
-      margin-bottom: 1.2rem;
-      font-size: 0.85rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.75rem;
       font-weight: 400;
       opacity: 0.9;
     }
 
+    /* Widget Jam */
     .clock-widget {
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.8rem;
     }
     
     .time-display {
-      font-size: 2.8rem;
+      font-size: 2.2rem;
       font-weight: 600; 
       color: #ffffff; 
       line-height: 1;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.1rem;
       letter-spacing: -1px;
-      text-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
 
     .date-display {
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       color: #e2e8f0;
       font-weight: 500;
     }
     
+    /* List Menu */
     .menu-list {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.4rem;
       width: 100%;
     }
 
@@ -129,8 +132,8 @@
       justify-content: center;
       text-decoration: none;
       background: rgba(255, 255, 255, 0.12); 
-      padding: 0.8rem 1rem;
-      border-radius: 14px;
+      padding: 0.55rem 0.8rem; /* Padding tombol dibuat lebih tipis */
+      border-radius: 10px;
       border: 1px solid rgba(255, 255, 255, 0.15);
       transition: all 0.2s ease;
     }
@@ -138,13 +141,12 @@
     a.menu-item:hover {
       background: rgba(255, 255, 255, 0.25);
       border-color: rgba(255, 255, 255, 0.4);
-      transform: translateY(-2px);
     }
 
     .item-title {
       font-weight: 600;
       color: #ffffff; 
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
 
     @keyframes fadeInDown {
@@ -152,43 +154,48 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Penyesuaian Responsif Desktop */
+    /* --- TAMPILAN DESKTOP / TABLET (TETAP PROPORSIONAL) --- */
     @media (min-width: 768px) {
       .main-wrapper {
-        max-width: 520px;
+        max-width: 480px;
+        gap: 0.8rem;
       }
 
       .profile-logo {
-        width: 120px;
+        width: 100px;
       }
 
       .dashboard-card {
-        padding: 2rem 1.8rem;
+        padding: 1.8rem 1.5rem;
       }
 
       h1 {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
       }
 
       p.subtitle {
-        font-size: 0.95rem;
-        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+        margin-bottom: 1.2rem;
       }
 
       .time-display {
-        font-size: 3.5rem;
+        font-size: 3.2rem;
       }
 
       .date-display {
-        font-size: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .menu-list {
+        gap: 0.55rem;
       }
 
       a.menu-item {
-        padding: 0.95rem 1.2rem;
+        padding: 0.85rem 1rem;
       }
 
       .item-title {
-        font-size: 1rem;
+        font-size: 0.95rem;
       }
     }
   </style>
