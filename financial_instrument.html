@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instrumen Keuangan · Landasan Teori Komprehensif</title>
-  <!-- Tailwind via CDN + plugin forms & typography -->
+  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -41,7 +41,6 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
-    /* kustomisasi scroll & glassmorphism */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
@@ -68,6 +67,26 @@
     .hover-glow:hover {
       box-shadow: 0 0 25px rgba(59,130,246,0.35);
       transition: all 0.3s ease;
+    }
+    /* kotak penjelasan sederhana */
+    .simple-box {
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(88, 28, 135, 0.35));
+      border-left: 4px solid #a78bfa;
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .simple-box strong {
+      color: #fbbf24;
+    }
+    .simple-box em {
+      color: #93c5fd;
+      font-style: normal;
+      font-weight: 600;
     }
   </style>
 </head>
@@ -97,7 +116,7 @@
         struktur pasar, hingga derivatif dan manajemen risiko — disertai formulasi matematis yang rigorous.
       </p>
       <div class="mt-6 flex justify-center gap-4 text-sm text-slate-500">
-        <span>📅 2026</span>
+        <span>📅 2025</span>
         <span>•</span>
         <span>⏱️ 5000+ kata</span>
         <span>•</span>
@@ -182,7 +201,7 @@
         </p>
       </section>
 
-      <!-- 3. Teori Portofolio -->
+      <!-- 3. Teori Portofolio Modern (DENGAN PENJELASAN SEDERHANA) -->
       <section>
         <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
           <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 3. Teori Portofolio Modern
@@ -215,9 +234,19 @@
           Di sini \(\Sigma\) adalah matriks kovarians, \(\mu\) vektor return ekspektasi. 
           Garis batas efisien (efficient frontier) melahirkan model CAPM.
         </p>
+        <!-- PENJELASAN SEDERHANA -->
+        <div class="simple-box">
+          <strong>💡 Penjelasan sederhana:</strong> 
+          Bayangkan kamu punya uang jajan Rp50.000. Kalau kamu taruh semua di satu kotak (misal beli permen saja), 
+          risikonya besar — kalau permen tidak laku, uangmu habis. Tapi kalau kamu bagi ke beberapa kotak: 
+          sebagian beli permen, sebagian beli stiker, sebagian ditabung, maka kalau permen gagal, stiker mungkin untung. 
+          Itulah <em>diversifikasi</em> — "jangan taruh semua telur dalam satu keranjang". 
+          Teori Portofolio Modern mengajarkan cara membagi uang secara pintar supaya keuntungan tetap bagus 
+          tapi risiko kalahnya lebih kecil.
+        </div>
       </section>
 
-      <!-- 4. CAPM & APT -->
+      <!-- 4. CAPM & APT (DENGAN PENJELASAN SEDERHANA) -->
       <section>
         <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
           <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 4. Model Keseimbangan: CAPM dan APT
@@ -242,9 +271,18 @@
         <p class="leading-relaxed text-slate-300">
           \(\lambda_k\) adalah premi risiko faktor ke-\(k\), dan \(\beta_{ik}\) sensitivitas aset terhadap faktor tersebut.
         </p>
+        <!-- PENJELASAN SEDERHANA -->
+        <div class="simple-box">
+          <strong>💡 Penjelasan sederhana:</strong> 
+          CAPM itu seperti rumus untuk menebak hasil investasi. Semakin "liar" suatu saham (sering naik-turun), 
+          semakin besar hasil yang bisa didapat, tapi juga semakin besar risikonya. 
+          <em>Beta</em> (β) mengukur seberapa liar saham dibanding pasar. Beta 1 artinya sama dengan pasar, 
+          beta 2 artinya dua kali lebih liar. APT mirip, tapi mempertimbangkan banyak faktor sekaligus — 
+          seperti nilai tukar, inflasi, harga minyak — bukan hanya pasar secara keseluruhan.
+        </div>
       </section>
 
-      <!-- 5. Struktur Suku Bunga -->
+      <!-- 5. Struktur Istilah Suku Bunga (DENGAN PENJELASAN SEDERHANA) -->
       <section>
         <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
           <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 5. Struktur Istilah Suku Bunga (Term Structure)
@@ -267,9 +305,18 @@
           Model Nelson-Siegel (1987) memodelkan kurva yield dengan faktor level, slope, dan curvature:
           \( y(\tau) = \beta_0 + \beta_1 \frac{1 - e^{-\lambda \tau}}{\lambda \tau} + \beta_2 \left( \frac{1 - e^{-\lambda \tau}}{\lambda \tau} - e^{-\lambda \tau} \right) \).
         </p>
+        <!-- PENJELASAN SEDERHANA -->
+        <div class="simple-box">
+          <strong>💡 Penjelasan sederhana:</strong> 
+          Coba bayangkan kamu menabung di bank. Kalau menabung 1 tahun, bunganya misalnya 3%. 
+          Kalau menabung 5 tahun, bunganya mungkin 5%. Kenapa beda? Karena bank "meminjam" uangmu lebih lama, 
+          jadi mereka kasih hadiah lebih besar. Kurva yang menggambarkan perbedaan bunga berdasarkan lama menabung 
+          itulah yang disebut <em>struktur istilah suku bunga</em>. Kadang kurvanya naik (makin lama makin tinggi), 
+          kadang terbalik (makin lama makin rendah) kalau orang khawatir ekonomi akan memburuk.
+        </div>
       </section>
 
-      <!-- 6. Penilaian Obligasi & Saham -->
+      <!-- 6. Penilaian Obligasi & Saham (DENGAN PENJELASAN SEDERHANA) -->
       <section>
         <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
           <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 6. Penilaian Instrumen Utang dan Ekuitas
@@ -287,6 +334,15 @@
           Modifikasi durasi \( D^* = \frac{D}{1 + y} \) menghubungkan perubahan harga:
           \( \frac{\Delta P}{P} \approx -D^* \Delta y + \frac{1}{2} \Gamma (\Delta y)^2 \).
         </p>
+        <!-- PENJELASAN SEDERHANA OBLIGASI -->
+        <div class="simple-box">
+          <strong>💡 Penjelasan sederhana (Obligasi):</strong> 
+          Obligasi itu seperti kamu meminjamkan uang ke pemerintah atau perusahaan. Mereka janji akan 
+          membayar bunga setiap tahun (disebut <em>kupon</em>) dan mengembalikan uang pokokmu di akhir periode. 
+          Harga obligasi hari ini dihitung dengan "menghitung mundur" semua pembayaran masa depan itu 
+          ke nilai sekarang. Kalau bunga bank naik, harga obligasi yang sudah kamu pegang akan turun — 
+          karena orang lebih suka menabung di bank daripada beli obligasi lamamu yang bunganya lebih kecil.
+        </div>
         <h3 class="text-2xl font-semibold mt-8 mb-3 text-blue-300">6.2 Saham</h3>
         <p class="mb-4 leading-relaxed text-slate-300">
           Model diskonto dividen (DDM) menyatakan nilai intrinsik saham sebagai nilai sekarang dividen 
@@ -304,9 +360,18 @@
         <p class="leading-relaxed text-slate-300">
           Untuk pertumbuhan tidak konstan, model dua tahap atau tiga tahap digunakan.
         </p>
+        <!-- PENJELASAN SEDERHANA SAHAM -->
+        <div class="simple-box">
+          <strong>💡 Penjelasan sederhana (Saham):</strong> 
+          Saham itu seperti kamu membeli sepotong kecil dari sebuah perusahaan. Kalau perusahaan untung, 
+          kamu dapat bagian keuntungan yang disebut <em>dividen</em>. Harga saham yang wajar dihitung 
+          dengan menebak berapa banyak dividen yang akan kamu terima di masa depan, lalu menghitung 
+          nilai sekarangnya. Kalau dividen diperkirakan tumbuh terus (misal naik 5% per tahun), 
+          rumusnya jadi sederhana: harga = dividen tahun depan dibagi (tingkat bunga - pertumbuhan).
+        </div>
       </section>
 
-      <!-- 7. Derivatif -->
+      <!-- 7. Derivatif (DENGAN PENJELASAN SEDERHANA) -->
       <section>
         <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
           <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 7. Instrumen Derivatif
@@ -332,6 +397,16 @@
           \(N(\cdot)\) adalah fungsi distribusi kumulatif normal standar. Paritas put-call:
           \( C - P = S_0 - K e^{-rT} \).
         </p>
+        <!-- PENJELASAN SEDERHANA OPSI -->
+        <div class="simple-box">
+          <strong>💡 Penjelasan sederhana (Opsi):</strong> 
+          Opsi itu seperti "tiket pre-order" yang memberi kamu <em>hak</em> (bukan kewajiban) untuk membeli 
+          atau menjual sesuatu dengan harga yang sudah ditentukan di masa depan. Misalnya, kamu beli tiket 
+          untuk membeli 1 kg apel seharga Rp20.000 bulan depan. Kalau bulan depan harga apel naik jadi Rp30.000, 
+          kamu untung karena bisa beli Rp20.000. Kalau harga apel turun jadi Rp10.000, kamu tidak pakai tiketmu 
+          (hak, bukan kewajiban) dan beli di pasar saja. Tiket itulah "opsi". Model Black-Scholes adalah rumus 
+          untuk menghitung harga wajar tiket tersebut.
+        </div>
         <h3 class="text-2xl font-semibold mt-8 mb-3 text-blue-300">7.2 Futures dan Swap</h3>
         <p class="mb-4 leading-relaxed text-slate-300">
           Harga futures \(F\) terkait dengan harga spot \(S\) melalui cost-of-carry:
@@ -343,9 +418,18 @@
           \(q\) biaya penyimpanan, \(y\) convenience yield. Swap suku bunga (IRS) dapat dinilai 
           sebagai portofolio obligasi atau serangkaian FRA.
         </p>
+        <!-- PENJELASAN SEDERHANA FUTURES & SWAP -->
+        <div class="simple-box">
+          <strong>💡 Penjelasan sederhana (Futures & Swap):</strong> 
+          <em>Futures</em> itu seperti janji beli barang di masa depan dengan harga yang dikunci sekarang. 
+          Misalnya petani dan pembeli cokelat sepakat: "6 bulan lagi, saya jual 1 ton kakao dengan harga Rp10.000/kg." 
+          Keduanya jadi tahu pasti harga di masa depan. <em>Swap</em> itu seperti tukar-menukar pembayaran bunga: 
+          kamu bayar bunga tetap, temanmu bayar bunga mengambang, lalu kalian tukar. Tujuannya supaya 
+          tidak kaget kalau bunga pasar naik-turun.
+        </div>
       </section>
 
-      <!-- 8. Teori Pasar Efisien -->
+      <!-- 8. Teori Pasar Efisien (DENGAN PENJELASAN SEDERHANA) -->
       <section>
         <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
           <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 8. Teori Pasar Efisien (EMH)
@@ -361,9 +445,19 @@
           dengan \(\mathcal{F}_t\) adalah informasi yang tersedia. Jika pasar efisien, tidak ada strategi 
           yang dapat menghasilkan abnormal return secara konsisten setelah menyesuaikan risiko.
         </p>
+        <!-- PENJELASAN SEDERHANA EMH -->
+        <div class="simple-box">
+          <strong>💡 Penjelasan sederhana (EMH):</strong> 
+          Bayangkan pasar saham seperti pasar ikan yang sangat ramai dan semua orang tahu harga ikan 
+          saat itu juga. Kalau ada berita "ikan akan langka besok", semua pedagang langsung menaikkan harga 
+          hari ini. Jadi tidak ada yang bisa beli murah dulu sebelum orang lain tahu — semua informasi 
+          sudah tercermin di harga. Itulah <em>pasar efisien</em>. Artinya, sangat sulit (mungkin mustahil) 
+          untuk "mengalahkan pasar" secara terus-menerus hanya dengan membaca berita atau melihat grafik 
+          masa lalu.
+        </div>
       </section>
 
-      <!-- 9. Manajemen Risiko -->
+      <!-- 9. Manajemen Risiko (DENGAN PENJELASAN SEDERHANA) -->
       <section>
         <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
           <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 9. Manajemen Risiko Kuantitatif
@@ -384,6 +478,16 @@
         <p class="leading-relaxed text-slate-300">
           Model GARCH untuk volatilitas kondisional: \( \sigma_t^2 = \omega + \alpha \epsilon_{t-1}^2 + \beta \sigma_{t-1}^2 \).
         </p>
+        <!-- PENJELASAN SEDERHANA MANAJEMEN RISIKO -->
+        <div class="simple-box">
+          <strong>💡 Penjelasan sederhana (Manajemen Risiko):</strong> 
+          VaR itu seperti ramalan cuaca untuk uang: "Dengan keyakinan 95%, kerugianmu besok tidak akan 
+          lebih dari Rp1 juta." Jadi kamu tahu batas maksimal yang mungkin hilang. 
+          <em>Expected Shortfall</em> lebih dalam: "Kalau benar-benar terjadi bencana (5% terburuk), 
+          rata-rata kerugiannya berapa?" Ini penting supaya kamu siap sedia payung sebelum hujan. 
+          GARCH itu rumus untuk memprediksi seberapa "liar" pasar besok berdasarkan seberapa liar hari ini 
+          dan kemarin.
+        </div>
       </section>
 
       <!-- 10. Kesimpulan -->
@@ -431,9 +535,9 @@
     </div>
   </main>
 
-  <!-- Footer kecil -->
+  <!-- Footer -->
   <footer class="text-center text-slate-600 text-sm py-10 border-t border-slate-800/50 mt-6">
-    <p>© 2026 · Artikel Ilmiah Instrumen Keuangan · Dibuat dengan Tailwind CSS & MathJax</p>
+    <p>© 2025 · Artikel Ilmiah Instrumen Keuangan · Dibuat dengan Tailwind CSS & MathJax</p>
   </footer>
 </body>
 </html>
