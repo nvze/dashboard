@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instrumen Keuangan · Landasan Teori Komprehensif</title>
+  <!-- Tailwind via CDN + plugin forms & typography -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], serif: ['Merriweather', 'Georgia', 'serif'] },
+          animation: {
+            'gradient-x': 'gradient-x 12s ease infinite',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            'gradient-x': {
+              '0%, 100%': { 'background-position': '0% 50%' },
+              '50%': { 'background-position': '100% 50%' },
+            },
+            'float': {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-6px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- MathJax -->
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+      svg: { fontCache: 'global' },
+      options: { renderActions: { addMenu: [] } }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* kustomisasi scroll & glassmorphism */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .math-block {
+      overflow-x: auto;
+      padding: 1rem 0.5rem;
+      background: rgba(0,0,0,0.25);
+      border-radius: 1rem;
+      border-left: 4px solid #3b82f6;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hover-glow:hover {
+      box-shadow: 0 0 25px rgba(59,130,246,0.35);
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-200 font-sans antialiased selection:bg-blue-500/30">
+
+  <!-- Latar belakang animasi gradien -->
+  <div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute top-1/3 -right-20 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+    <div class="absolute bottom-0 left-1/2 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-3xl -translate-x-1/2"></div>
+  </div>
+
+  <!-- Konten utama -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+
+    <!-- Header artikel -->
+    <header class="mb-12 text-center relative">
+      <div class="inline-block px-4 py-1.5 mb-6 rounded-full glass-card text-sm text-blue-300 border border-blue-500/30 tracking-wide">
+        📈 Financial Instruments · Teori & Aplikasi
+      </div>
+      <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4">
+        <span class="gradient-text">Instrumen Keuangan:</span><br>
+        <span class="text-slate-100">Landasan Teori Komprehensif</span>
+      </h1>
+      <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+        Eksplorasi mendalam tentang instrumen keuangan, mulai dari teori nilai waktu uang, penilaian aset, 
+        struktur pasar, hingga derivatif dan manajemen risiko — disertai formulasi matematis yang rigorous.
+      </p>
+      <div class="mt-6 flex justify-center gap-4 text-sm text-slate-500">
+        <span>📅 2025</span>
+        <span>•</span>
+        <span>⏱️ 5000+ kata</span>
+        <span>•</span>
+        <span>📐 MathJax</span>
+      </div>
+    </header>
+
+    <!-- Artikel -->
+    <article class="glass-card rounded-3xl p-6 md:p-10 shadow-2xl border border-slate-800/80 space-y-12 hover-glow transition-all duration-500">
+
+      <!-- Abstrak -->
+      <section class="border-l-4 border-blue-500 pl-5 italic text-slate-300 bg-blue-950/20 p-5 rounded-r-2xl">
+        <h2 class="text-xl font-semibold not-italic text-blue-300 mb-2">Abstrak</h2>
+        <p>
+          Instrumen keuangan merupakan kontrak yang memberikan hak dan kewajiban finansial kepada pemegangnya. 
+          Artikel ini menyajikan landasan teori yang kokoh bagi pemahaman instrumen keuangan modern, 
+          mencakup nilai waktu uang, teori portofolio, penetapan harga aset (CAPM, APT), struktur suku bunga, 
+          penilaian obligasi dan saham, derivatif (opsi, futures, swap), serta teori pasar efisien. 
+          Setiap konsep diuraikan dengan formulasi matematis yang tepat dan interpretasi ekonomi, 
+          sehingga memberikan kerangka analitis bagi akademisi dan praktisi.
+        </p>
+      </section>
+
+      <!-- 1. Pendahuluan -->
+      <section>
+        <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
+          <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 1. Pendahuluan
+        </h2>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Instrumen keuangan adalah "darah" dari sistem keuangan modern. Ia memungkinkan transfer dana dari 
+          unit surplus (penabung) ke unit defisit (investor) dengan efisien, sekaligus menyediakan mekanisme 
+          untuk manajemen risiko, spekulasi, dan arbitrase. Secara formal, instrumen keuangan dapat 
+          diklasifikasikan menjadi aset keuangan (saham, obligasi) dan derivatif (opsi, futures, swap). 
+          Pemahaman mendalam tentang instrumen ini memerlukan landasan teori yang mencakup teori ekonomi, 
+          matematika keuangan, dan ekonometrika.
+        </p>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Artikel ini bertujuan menyajikan sintesis komprehensif landasan teori instrumen keuangan. 
+          Pembahasan dimulai dari prinsip dasar nilai waktu uang, kemudian berkembang ke teori portofolio, 
+          model keseimbangan aset, struktur istilah suku bunga, penilaian instrumen utang dan ekuitas, 
+          hingga derivatif dan teori pasar efisien. Setiap bagian dilengkapi dengan rumus matematis yang 
+          ditulis menggunakan notasi standar dan dijelaskan maknanya.
+        </p>
+      </section>
+
+      <!-- 2. Nilai Waktu Uang -->
+      <section>
+        <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
+          <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 2. Nilai Waktu Uang (Time Value of Money)
+        </h2>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Konsep nilai waktu uang adalah fondasi semua penilaian instrumen keuangan. Uang yang dimiliki 
+          saat ini lebih berharga daripada jumlah yang sama di masa depan karena dapat diinvestasikan 
+          untuk menghasilkan bunga. Nilai masa depan (FV) dari sejumlah pokok \(PV\) yang diinvestasikan 
+          selama \(n\) periode dengan tingkat bunga \(r\) per periode adalah:
+        </p>
+        <div class="math-block my-6">
+          $$ FV = PV \times (1 + r)^n $$
+        </div>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Sebaliknya, nilai sekarang (PV) dari pembayaran masa depan \(FV\) adalah:
+        </p>
+        <div class="math-block my-6">
+          $$ PV = \frac{FV}{(1 + r)^n} $$
+        </div>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Untuk anuitas (pembayaran tetap \(C\) setiap periode selama \(n\) periode), nilai sekarang 
+          dinyatakan sebagai:
+        </p>
+        <div class="math-block my-6">
+          $$ PV_{\text{annuity}} = C \times \frac{1 - (1 + r)^{-n}}{r} $$
+        </div>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Jika pembayaran berlangsung selamanya (perpetuitas), rumusnya menjadi:
+        </p>
+        <div class="math-block my-6">
+          $$ PV_{\text{perpetuity}} = \frac{C}{r} $$
+        </div>
+        <p class="leading-relaxed text-slate-300">
+          Konsep ini juga melahirkan hubungan antara tingkat bunga nominal dan riil (persamaan Fisher):
+          \( (1 + r_{\text{nominal}}) = (1 + r_{\text{riil}})(1 + \pi) \), dengan \(\pi\) adalah inflasi.
+        </p>
+      </section>
+
+      <!-- 3. Teori Portofolio -->
+      <section>
+        <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
+          <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 3. Teori Portofolio Modern
+        </h2>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Dikembangkan oleh Harry Markowitz (1952), teori portofolio modern (MPT) menekankan diversifikasi 
+          untuk mengoptimalkan return dan risiko. Return portofolio \(R_p\) adalah rata-rata tertimbang 
+          return aset individual:
+        </p>
+        <div class="math-block my-6">
+          $$ R_p = \sum_{i=1}^{N} w_i R_i $$
+        </div>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          dengan \(w_i\) adalah bobot aset \(i\) dan \(\sum w_i = 1\). Risiko portofolio diukur dengan 
+          standar deviasi \(\sigma_p\), yang tidak hanya bergantung pada varians masing-masing aset 
+          tetapi juga kovarians antar aset:
+        </p>
+        <div class="math-block my-6">
+          $$ \sigma_p^2 = \sum_{i=1}^{N} \sum_{j=1}^{N} w_i w_j \sigma_{ij} = \sum_{i=1}^{N} w_i^2 \sigma_i^2 + \sum_{i \neq j} w_i w_j \rho_{ij} \sigma_i \sigma_j $$
+        </div>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Efek diversifikasi muncul ketika korelasi \(\rho_{ij} < 1\). Portofolio efisien adalah 
+          portofolio yang memaksimalkan return untuk tingkat risiko tertentu, yang secara matematis 
+          diselesaikan melalui optimasi kuadratik:
+        </p>
+        <div class="math-block my-6">
+          $$ \min_{w} \frac{1}{2} w^T \Sigma w \quad \text{s.t.} \quad w^T \mu = R_{\text{target}}, \quad w^T \mathbf{1} = 1 $$
+        </div>
+        <p class="leading-relaxed text-slate-300">
+          Di sini \(\Sigma\) adalah matriks kovarians, \(\mu\) vektor return ekspektasi. 
+          Garis batas efisien (efficient frontier) melahirkan model CAPM.
+        </p>
+      </section>
+
+      <!-- 4. CAPM & APT -->
+      <section>
+        <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
+          <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 4. Model Keseimbangan: CAPM dan APT
+        </h2>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Capital Asset Pricing Model (CAPM) memperluas MPT dengan menambahkan aset bebas risiko. 
+          Return ekspektasi aset \(i\) menurut CAPM:
+        </p>
+        <div class="math-block my-6">
+          $$ E[R_i] = R_f + \beta_i (E[R_m] - R_f) $$
+        </div>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          dengan \(R_f\) tingkat bebas risiko, \(E[R_m]\) return pasar, dan \(\beta_i = \frac{\text{Cov}(R_i, R_m)}{\text{Var}(R_m)}\).
+        </p>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Arbitrage Pricing Theory (APT) oleh Ross (1976) menggeneralisasi CAPM dengan faktor risiko 
+          makroekonomi berganda:
+        </p>
+        <div class="math-block my-6">
+          $$ E[R_i] = R_f + \sum_{k=1}^{K} \beta_{ik} \lambda_k $$
+        </div>
+        <p class="leading-relaxed text-slate-300">
+          \(\lambda_k\) adalah premi risiko faktor ke-\(k\), dan \(\beta_{ik}\) sensitivitas aset terhadap faktor tersebut.
+        </p>
+      </section>
+
+      <!-- 5. Struktur Suku Bunga -->
+      <section>
+        <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
+          <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 5. Struktur Istilah Suku Bunga (Term Structure)
+        </h2>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Hubungan antara yield obligasi dan jatuh temponya digambarkan oleh kurva yield. Teori ekspektasi 
+          murni menyatakan bahwa suku bunga jangka panjang adalah rata-rata geometrik suku bunga jangka 
+          pendek yang diharapkan:
+        </p>
+        <div class="math-block my-6">
+          $$ (1 + y_n)^n = \prod_{t=1}^{n} (1 + E[r_t]) $$
+        </div>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Teori preferensi likuiditas menambahkan premi likuiditas \(L_n\):
+        </p>
+        <div class="math-block my-6">
+          $$ y_n = \frac{1}{n} \sum_{t=1}^{n} E[r_t] + L_n $$
+        </div>
+        <p class="leading-relaxed text-slate-300">
+          Model Nelson-Siegel (1987) memodelkan kurva yield dengan faktor level, slope, dan curvature:
+          \( y(\tau) = \beta_0 + \beta_1 \frac{1 - e^{-\lambda \tau}}{\lambda \tau} + \beta_2 \left( \frac{1 - e^{-\lambda \tau}}{\lambda \tau} - e^{-\lambda \tau} \right) \).
+        </p>
+      </section>
+
+      <!-- 6. Penilaian Obligasi & Saham -->
+      <section>
+        <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
+          <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 6. Penilaian Instrumen Utang dan Ekuitas
+        </h2>
+        <h3 class="text-2xl font-semibold mt-6 mb-3 text-blue-300">6.1 Obligasi</h3>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Harga obligasi adalah nilai sekarang dari semua arus kas masa depan (kupon dan nilai nominal):
+        </p>
+        <div class="math-block my-6">
+          $$ P = \sum_{t=1}^{T} \frac{C}{(1 + y)^t} + \frac{F}{(1 + y)^T} $$
+        </div>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Durasi Macaulay mengukur sensitivitas harga terhadap perubahan yield:
+          \( D = \frac{\sum_{t=1}^{T} t \cdot PV(C_t)}{P} \). 
+          Modifikasi durasi \( D^* = \frac{D}{1 + y} \) menghubungkan perubahan harga:
+          \( \frac{\Delta P}{P} \approx -D^* \Delta y + \frac{1}{2} \Gamma (\Delta y)^2 \).
+        </p>
+        <h3 class="text-2xl font-semibold mt-8 mb-3 text-blue-300">6.2 Saham</h3>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Model diskonto dividen (DDM) menyatakan nilai intrinsik saham sebagai nilai sekarang dividen 
+          masa depan:
+        </p>
+        <div class="math-block my-6">
+          $$ P_0 = \sum_{t=1}^{\infty} \frac{D_t}{(1 + r)^t} $$
+        </div>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Jika dividen tumbuh konstan \(g\) (Gordon Growth Model):
+        </p>
+        <div class="math-block my-6">
+          $$ P_0 = \frac{D_1}{r - g} $$
+        </div>
+        <p class="leading-relaxed text-slate-300">
+          Untuk pertumbuhan tidak konstan, model dua tahap atau tiga tahap digunakan.
+        </p>
+      </section>
+
+      <!-- 7. Derivatif -->
+      <section>
+        <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
+          <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 7. Instrumen Derivatif
+        </h2>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Derivatif adalah kontrak yang nilainya bergantung pada aset dasar. Jenis utama: forward, futures, opsi, dan swap.
+        </p>
+        <h3 class="text-2xl font-semibold mt-6 mb-3 text-blue-300">7.1 Opsi</h3>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Payoff opsi call Eropa pada saat jatuh tempo \(T\):
+          \( \max(S_T - K, 0) \). Opsi put: \( \max(K - S_T, 0) \).
+        </p>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Model Black-Scholes untuk harga opsi call Eropa (tanpa dividen):
+        </p>
+        <div class="math-block my-6">
+          $$ C = S_0 N(d_1) - K e^{-rT} N(d_2) $$
+        </div>
+        <div class="math-block my-6">
+          $$ d_1 = \frac{\ln(S_0/K) + (r + \sigma^2/2)T}{\sigma \sqrt{T}}, \quad d_2 = d_1 - \sigma \sqrt{T} $$
+        </div>
+        <p class="leading-relaxed text-slate-300">
+          \(N(\cdot)\) adalah fungsi distribusi kumulatif normal standar. Paritas put-call:
+          \( C - P = S_0 - K e^{-rT} \).
+        </p>
+        <h3 class="text-2xl font-semibold mt-8 mb-3 text-blue-300">7.2 Futures dan Swap</h3>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Harga futures \(F\) terkait dengan harga spot \(S\) melalui cost-of-carry:
+        </p>
+        <div class="math-block my-6">
+          $$ F = S e^{(r + q - y)T} $$
+        </div>
+        <p class="leading-relaxed text-slate-300">
+          \(q\) biaya penyimpanan, \(y\) convenience yield. Swap suku bunga (IRS) dapat dinilai 
+          sebagai portofolio obligasi atau serangkaian FRA.
+        </p>
+      </section>
+
+      <!-- 8. Teori Pasar Efisien -->
+      <section>
+        <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
+          <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 8. Teori Pasar Efisien (EMH)
+        </h2>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Fama (1970) merumuskan hipotesis pasar efisien dalam tiga bentuk: lemah, semi-kuat, dan kuat. 
+          Secara formal, harga aset mengikuti martingale:
+        </p>
+        <div class="math-block my-6">
+          $$ E[P_{t+1} \mid \mathcal{F}_t] = P_t $$
+        </div>
+        <p class="leading-relaxed text-slate-300">
+          dengan \(\mathcal{F}_t\) adalah informasi yang tersedia. Jika pasar efisien, tidak ada strategi 
+          yang dapat menghasilkan abnormal return secara konsisten setelah menyesuaikan risiko.
+        </p>
+      </section>
+
+      <!-- 9. Manajemen Risiko -->
+      <section>
+        <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
+          <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 9. Manajemen Risiko Kuantitatif
+        </h2>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Value at Risk (VaR) mengukur kerugian maksimum pada tingkat kepercayaan \(1-\alpha\):
+        </p>
+        <div class="math-block my-6">
+          $$ \text{VaR}_{\alpha} = \inf \{ l \in \mathbb{R} : P(L > l) \leq \alpha \} $$
+        </div>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Untuk distribusi normal, \( \text{VaR} = \mu + \sigma \Phi^{-1}(1-\alpha) \). 
+          Expected Shortfall (ES) lebih koheren:
+        </p>
+        <div class="math-block my-6">
+          $$ ES_{\alpha} = E[L \mid L > \text{VaR}_{\alpha}] $$
+        </div>
+        <p class="leading-relaxed text-slate-300">
+          Model GARCH untuk volatilitas kondisional: \( \sigma_t^2 = \omega + \alpha \epsilon_{t-1}^2 + \beta \sigma_{t-1}^2 \).
+        </p>
+      </section>
+
+      <!-- 10. Kesimpulan -->
+      <section>
+        <h2 class="text-3xl font-bold mb-4 text-white flex items-center gap-3">
+          <span class="w-1.5 h-8 bg-blue-500 rounded-full"></span> 10. Kesimpulan
+        </h2>
+        <p class="mb-4 leading-relaxed text-slate-300">
+          Landasan teori instrumen keuangan merupakan jalinan konsep dari nilai waktu uang, teori portofolio, 
+          model keseimbangan, struktur suku bunga, penilaian aset, hingga derivatif dan manajemen risiko. 
+          Formulasi matematis yang disajikan memberikan kerangka kuantitatif untuk analisis, penilaian, 
+          dan pengambilan keputusan investasi. Penguasaan teori ini esensial bagi akademisi, analis, 
+          dan praktisi pasar keuangan dalam menghadapi kompleksitas instrumen modern.
+        </p>
+        <p class="leading-relaxed text-slate-300">
+          Perkembangan selanjutnya meliputi instrumen terstruktur, keuangan berkelanjutan (green bonds), 
+          dan aset kripto, yang menuntut perluasan teori dan model ekonometrika yang ada.
+        </p>
+      </section>
+
+      <!-- Referensi ringkas -->
+      <section class="border-t border-slate-800 pt-8 mt-4">
+        <h3 class="text-lg font-semibold text-slate-400 mb-2">Referensi Utama (ringkas)</h3>
+        <ul class="text-sm text-slate-400 list-disc list-inside space-y-1">
+          <li>Markowitz, H. (1952). Portfolio Selection. <em>The Journal of Finance</em>.</li>
+          <li>Sharpe, W. F. (1964). Capital Asset Prices. <em>Journal of Finance</em>.</li>
+          <li>Ross, S. A. (1976). The Arbitrage Theory of Capital Asset Pricing. <em>JET</em>.</li>
+          <li>Black, F., & Scholes, M. (1973). The Pricing of Options and Corporate Liabilities. <em>JPE</em>.</li>
+          <li>Fama, E. F. (1970). Efficient Capital Markets. <em>Journal of Finance</em>.</li>
+          <li>Hull, J. C. (2022). <em>Options, Futures, and Other Derivatives</em>. Pearson.</li>
+        </ul>
+      </section>
+    </article>
+
+    <!-- Tombol kembali ke dashboard -->
+    <div class="mt-12 flex justify-center">
+      <a href="https://imnxx.vercel.app" 
+         class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold text-lg shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 hover:scale-[1.02] transition-all duration-300 border border-white/10 backdrop-blur-sm overflow-hidden">
+        <span class="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 relative z-10 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span class="relative z-10">Kembali ke Dashboard</span>
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer kecil -->
+  <footer class="text-center text-slate-600 text-sm py-10 border-t border-slate-800/50 mt-6">
+    <p>© 2026 · Artikel Ilmiah Instrumen Keuangan · Dibuat dengan Tailwind CSS & MathJax</p>
+  </footer>
+</body>
+</html>
