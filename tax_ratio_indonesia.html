@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tax Ratio Indonesia: Analisis Komprehensif | Artikel Ilmiah</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- MathJax untuk rendering rumus -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      svg: { fontCache: 'global' },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  <style>
+    /* Kustomisasi scroll dan transisi halus */
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: radial-gradient(circle at 10% 20%, rgba(15, 23, 42, 0.98) 0%, rgba(2, 6, 23, 1) 100%);
+      font-feature-settings: "ss01", "cv01", "cv11";
+    }
+    /* Efek kaca dan gradien teks */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #a5f3fc 0%, #c084fc 50%, #f9a8d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .prose-custom p, .prose-custom li {
+      color: #cbd5e1;
+      line-height: 1.8;
+      font-size: 1.0625rem;
+    }
+    .prose-custom h2, .prose-custom h3, .prose-custom h4 {
+      color: #f1f5f9;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      scroll-margin-top: 2rem;
+    }
+    .prose-custom h2 {
+      border-left: 6px solid #38bdf8;
+      padding-left: 1.25rem;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+    .prose-custom h3 {
+      margin-top: 2.25rem;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: #bae6fd;
+    }
+    .prose-custom h4 {
+      margin-top: 1.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+      color: #7dd3fc;
+    }
+    .prose-custom blockquote {
+      border-left: 4px solid #c084fc;
+      background: rgba(192, 132, 252, 0.08);
+      padding: 1.5rem 2rem;
+      border-radius: 0 1rem 1rem 0;
+      font-style: italic;
+      color: #e2e8f0;
+      margin: 2rem 0;
+    }
+    .prose-custom code {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.375rem;
+      font-size: 0.9em;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    .prose-custom .math-display {
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+    .stat-badge {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 1px solid #334155;
+      border-radius: 9999px;
+      padding: 0.25rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #a5f3fc;
+      display: inline-block;
+      letter-spacing: 0.02em;
+    }
+    /* Animasi masuk */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up {
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    /* Tombol dashboard */
+    .btn-dashboard {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
+      box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.5);
+    }
+    .btn-dashboard:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 20px 40px -10px rgba(139, 92, 246, 0.6);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-200 antialiased selection:bg-cyan-500/30">
+
+  <!-- Dekorasi latar belakang -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px]"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-[150px]"></div>
+  </div>
+
+  <!-- Konten utama -->
+  <main class="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 py-12 md:py-20">
+    
+    <!-- Header -->
+    <header class="mb-16 animate-fade-up">
+      <div class="flex flex-wrap items-center gap-3 mb-6">
+        <span class="stat-badge">📊 Analisis Fiskal</span>
+        <span class="stat-badge">🇮🇩 Indonesia</span>
+        <span class="stat-badge">📅 2025</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6">
+        <span class="gradient-text">Tax Ratio Indonesia:</span><br>
+        <span class="text-slate-100">Dinamika, Determinan, dan Strategi Optimalisasi</span>
+      </h1>
+      <p class="text-xl text-slate-400 max-w-2xl leading-relaxed">
+        Sebuah kajian komprehensif mengenai rasio pajak terhadap PDB, tantangan struktural, 
+        dan reformasi perpajakan menuju Indonesia Emas 2045.
+      </p>
+      <div class="flex items-center gap-4 mt-8 text-sm text-slate-500 border-t border-slate-800 pt-6">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-xs font-bold text-white">AP</div>
+          <span>Analis Kebijakan Fiskal</span>
+        </div>
+        <span class="w-1 h-1 rounded-full bg-slate-600"></span>
+        <span>Dipublikasikan 15 Januari 2025</span>
+        <span class="w-1 h-1 rounded-full bg-slate-600"></span>
+        <span>22 menit baca</span>
+      </div>
+    </header>
+
+    <!-- Artikel -->
+    <article class="prose-custom max-w-none animate-fade-up delay-100">
+      
+      <!-- Abstrak -->
+      <div class="glass-card rounded-2xl p-6 md:p-8 mb-12 border-l-4 border-l-cyan-400">
+        <h2 class="text-lg font-bold text-cyan-300 mt-0 mb-3 uppercase tracking-wider">Abstrak</h2>
+        <p class="text-slate-300 text-base leading-relaxed mb-0">
+          Tax ratio Indonesia telah menjadi perhatian utama dalam diskursus kebijakan fiskal selama dua dekade terakhir. 
+          Dengan rasio pajak terhadap PDB yang berkisar 10–11% dalam satu dekade terakhir, Indonesia tertinggal jauh 
+          dibandingkan negara-negara ASEAN-5 maupun rata-rata negara berpenghasilan menengah. Artikel ini menganalisis 
+          secara mendalam faktor-faktor determinan tax ratio, meliputi struktur ekonomi, kebijakan perpajakan, 
+          tingkat kepatuhan, dan faktor institusional. Melalui pendekatan kuantitatif dan kualitatif, kajian ini 
+          menemukan bahwa rendahnya tax ratio disebabkan oleh kombinasi sempitnya basis pajak, besarnya sektor informal, 
+          lemahnya administrasi perpajakan, serta insentif pajak yang kurang tepat sasaran. Reformasi melalui 
+          Undang-Undang Harmonisasi Peraturan Perpajakan (UU HPP) dan implementasi Core Tax System diharapkan 
+          mampu mendorong tax ratio menuju 12–14% dalam lima tahun ke depan. Artikel ini merekomendasikan 
+          strategi komprehensif yang mencakup perluasan basis pajak, digitalisasi administrasi, dan penguatan 
+          kelembagaan untuk mencapai target fiskal yang berkelanjutan.
+        </p>
+      </div>
+
+      <!-- 1. Pendahuluan -->
+      <h2 id="pendahuluan">1. Pendahuluan</h2>
+      <p>
+        Rasio pajak terhadap Produk Domestik Bruto (tax ratio) merupakan indikator fundamental yang 
+        mencerminkan kapasitas fiskal suatu negara. Tax ratio mengukur seberapa besar pemerintah mampu 
+        memobilisasi sumber daya domestik melalui instrumen perpajakan untuk membiayai pembangunan. 
+        Bagi Indonesia, tax ratio bukan sekadar angka statistik, melainkan cerminan dari efektivitas 
+        sistem perpajakan, tingkat kepatuhan wajib pajak, dan struktur ekonomi secara keseluruhan.
+      </p>
+      <p>
+        Dalam konteks global, Indonesia konsisten berada di kelompok negara dengan tax ratio terendah 
+        di antara negara-negara berpenghasilan menengah. Data Organisasi untuk Kerja Sama Ekonomi dan 
+        Pembangunan (OECD) menunjukkan bahwa rata-rata tax ratio negara OECD mencapai 34,1% pada tahun 2022, 
+        sementara negara-negara Amerika Latin rata-rata 21,7%. Indonesia, dengan tax ratio sekitar 10,4% 
+        pada tahun 2022, berada jauh di bawah rata-rata tersebut. Bahkan dibandingkan dengan negara 
+        tetangga seperti Malaysia (11,8%), Thailand (16,4%), dan Vietnam (14,7%), Indonesia masih tertinggal.
+      </p>
+      <p>
+        Rendahnya tax ratio memiliki implikasi serius terhadap keberlanjutan fiskal. Dengan belanja 
+        negara yang terus meningkat untuk mendukung pembangunan infrastruktur, pendidikan, kesehatan, 
+        dan perlindungan sosial, pemerintah menghadapi tekanan untuk meningkatkan penerimaan negara. 
+        Defisit anggaran yang dibiayai utang telah menjadi konsekuensi dari keterbatasan ruang fiskal. 
+        Oleh karena itu, memahami determinan tax ratio dan merumuskan strategi optimalisasinya menjadi 
+        keniscayaan.
+      </p>
+      <p>
+        Artikel ini bertujuan memberikan analisis komprehensif tentang tax ratio Indonesia, mencakup 
+        definisi dan pengukuran, tren historis, faktor-faktor determinan, dampak kebijakan, serta 
+        rekomendasi strategis. Kajian ini diharapkan menjadi kontribusi pemikiran bagi pembuat kebijakan, 
+        akademisi, dan praktisi di bidang perpajakan.
+      </p>
+
+      <!-- 2. Definisi dan Metodologi -->
+      <h2 id="definisi">2. Definisi, Pengukuran, dan Metodologi</h2>
+      
+      <h3>2.1 Definisi Tax Ratio</h3>
+      <p>
+        Tax ratio secara umum didefinisikan sebagai perbandingan antara total penerimaan pajak 
+        dengan Produk Domestik Bruto (PDB) dalam suatu periode tertentu. Secara matematis:
+      </p>
+      <div class="math-display">
+        $$\text{Tax Ratio} = \frac{\text{Total Penerimaan Pajak}}{\text{Produk Domestik Bruto}} \times 100\%$$
+      </div>
+      <p>
+        Namun, definisi ini memiliki variasi tergantung pada cakupan yang digunakan. Terdapat 
+        setidaknya tiga konsep tax ratio yang umum digunakan:
+      </p>
+      <ul>
+        <li><strong>Tax Ratio Sempit</strong>: Hanya mencakup penerimaan pajak pusat (PPh, PPN, PPnBM, Bea Meterai, PBB, dan BPHTB).</li>
+        <li><strong>Tax Ratio Luas</strong>: Mencakup pajak pusat dan pajak daerah, serta penerimaan negara bukan pajak (PNBP) dari sumber daya alam.</li>
+        <li><strong>Tax Ratio Efektif</strong>: Memperhitungkan penerimaan pajak setelah dikurangi insentif dan pengecualian.</li>
+      </ul>
+      <p>
+        Di Indonesia, Kementerian Keuangan umumnya menggunakan definisi tax ratio sebagai 
+        perbandingan antara penerimaan perpajakan (pajak dan bea cukai) terhadap PDB nominal. 
+        Penerimaan perpajakan mencakup PPh, PPN, PPnBM, PBB, BPHTB, Bea Meterai, Bea Masuk, 
+        dan Cukai.
+      </p>
+
+      <h3>2.2 Metodologi Kajian</h3>
+      <p>
+        Kajian ini menggunakan pendekatan mixed-methods dengan mengombinasikan analisis 
+        kuantitatif dan kualitatif. Data kuantitatif diperoleh dari:
+      </p>
+      <ul>
+        <li>Laporan Anggaran Pendapatan dan Belanja Negara (APBN) Kementerian Keuangan RI</li>
+        <li>Statistik Keuangan Pemerintah (SKP) Bank Indonesia</li>
+        <li>Badan Pusat Statistik (BPS) untuk data PDB</li>
+        <li>OECD Revenue Statistics dan IMF Government Finance Statistics</li>
+        <li>World Bank World Development Indicators</li>
+      </ul>
+      <p>
+        Analisis kuantitatif meliputi perhitungan tren tax ratio, dekomposisi pertumbuhan 
+        penerimaan pajak, dan estimasi tax gap. Sementara analisis kualitatif dilakukan 
+        melalui studi literatur, telaah kebijakan, dan sintesis temuan dari berbagai penelitian 
+        terdahulu.
+      </p>
+      <p>
+        Untuk mengestimasi potensi penerimaan pajak, digunakan pendekatan <em>representative tax system</em> 
+        yang dikembangkan oleh Tanzi (1987) dan dimodifikasi oleh ahli fiskal Indonesia. Model 
+        ekonometrika sederhana juga digunakan untuk mengidentifikasi determinan tax ratio:
+      </p>
+      <div class="math-display">
+        $$\text{TaxRatio}_t = \beta_0 + \beta_1 \text{GDPperCapita}_t + \beta_2 \text{TradeOpenness}_t + \beta_3 \text{AgricultureShare}_t + \beta_4 \text{InformalShare}_t + \beta_5 \text{CorruptionIndex}_t + \varepsilon_t$$
+      </div>
+      <p>
+        Di mana $\text{GDPperCapita}$ adalah PDB per kapita, $\text{TradeOpenness}$ adalah 
+        keterbukaan perdagangan, $\text{AgricultureShare}$ adalah kontribusi sektor pertanian 
+        terhadap PDB, $\text{InformalShare}$ adalah proporsi sektor informal, dan 
+        $\text{CorruptionIndex}$ adalah indeks persepsi korupsi.
+      </p>
+
+      <!-- 3. Tren Historis -->
+      <h2 id="tren">3. Tren Historis Tax Ratio Indonesia</h2>
+      
+      <h3>3.1 Periode 2000–2010: Era Boom Komoditas</h3>
+      <p>
+        Pada awal dekade 2000-an, tax ratio Indonesia berada pada kisaran 12–13%. Krisis 
+        finansial Asia 1997–1998 yang menghancurkan perekonomian Indonesia meninggalkan 
+        warisan berupa melemahnya basis pajak dan tingginya sektor informal. Namun, 
+        pemulihan ekonomi yang didorong oleh boom komoditas global pada periode 2004–2008 
+        memberikan ruang fiskal yang lebih baik. Penerimaan dari sektor sumber daya alam, 
+        khususnya minyak dan gas, serta pertambangan, memberikan kontribusi signifikan 
+        terhadap penerimaan negara.
+      </p>
+      <p>
+        Pada tahun 2008, tax ratio Indonesia mencapai puncaknya di angka 13,3%. Namun, 
+        perlu dicatat bahwa sebagian besar penerimaan tersebut berasal dari kenaikan 
+        harga komoditas global, bukan dari perluasan basis pajak yang struktural. 
+        Ketika harga komoditas mulai turun pada tahun 2009, tax ratio kembali menurun 
+        menjadi 11,3%.
+      </p>
+
+      <h3>3.2 Periode 2011–2019: Stagnasi dan Tantangan Struktural</h3>
+      <p>
+        Dekade berikutnya menunjukkan stagnasi tax ratio pada kisaran 10–12%. Meskipun 
+        pertumbuhan ekonomi Indonesia stabil di atas 5%, penerimaan pajak tidak tumbuh 
+        secara proporsional. Fenomena ini dikenal sebagai <em>tax elasticity</em> yang rendah, 
+        di mana pertumbuhan penerimaan pajak lebih lambat daripada pertumbuhan PDB.
+      </p>
+      <p>
+        Beberapa faktor menjelaskan stagnasi ini. Pertama, struktur ekonomi Indonesia 
+        didominasi oleh sektor-sektor yang memiliki intensitas pajak rendah, seperti 
+        perdagangan, pertanian, dan jasa informal. Kedua, tingginya ketergantungan pada 
+        penerimaan sumber daya alam yang sangat fluktuatif. Ketiga, lemahnya penegakan 
+        hukum perpajakan dan tingginya tingkat penghindaran pajak.
+      </p>
+      <p>
+        Pada tahun 2015, pemerintah meluncurkan program pengampunan pajak (tax amnesty) 
+        yang berhasil mengumpulkan tebusan sebesar Rp 135 triliun. Namun, dampak jangka 
+        panjangnya terhadap tax ratio tidak signifikan. Tax ratio pada tahun 2016 justru 
+        turun menjadi 10,3% akibat perlambatan ekonomi global dan penurunan harga komoditas.
+      </p>
+
+      <h3>3.3 Periode 2020–2024: Pandemi dan Pemulihan</h3>
+      <p>
+        Pandemi COVID-19 memberikan guncangan besar terhadap perekonomian Indonesia. 
+        Kontraksi ekonomi pada tahun 2020 sebesar -2,07% menyebabkan penurunan tajam 
+        penerimaan pajak. Tax ratio merosot ke level terendah dalam dua dekade, yaitu 
+        8,3% pada tahun 2020. Pemerintah merespons dengan berbagai insentif perpajakan 
+        untuk mendukung dunia usaha dan masyarakat, yang semakin menekan penerimaan.
+      </p>
+      <p>
+        Seiring pemulihan ekonomi pada tahun 2021–2022, tax ratio kembali meningkat 
+        menjadi 9,1% (2021) dan 10,4% (2022). Kenaikan ini didorong oleh kenaikan 
+        harga komoditas, khususnya batu bara dan minyak sawit, serta pemulihan 
+        konsumsi domestik. Pada tahun 2023, tax ratio diperkirakan mencapai 10,2%, 
+        sementara target APBN 2024 menetapkan tax ratio sebesar 10,6%.
+      </p>
+      <div class="overflow-x-auto my-8 rounded-xl border border-slate-700">
+        <table class="w-full text-sm text-left text-slate-300">
+          <thead class="bg-slate-800/80 text-cyan-300">
+            <tr>
+              <th class="px-5 py-4">Tahun</th>
+              <th class="px-5 py-4">PDB (Rp Triliun)</th>
+              <th class="px-5 py-4">Penerimaan Pajak (Rp Triliun)</th>
+              <th class="px-5 py-4">Tax Ratio (%)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-700">
+            <tr class="hover:bg-slate-800/40 transition"><td class="px-5 py-3">2019</td><td class="px-5 py-3">15.833</td><td class="px-5 py-3">1.643</td><td class="px-5 py-3 font-semibold text-cyan-300">10,4</td></tr>
+            <tr class="hover:bg-slate-800/40 transition"><td class="px-5 py-3">2020</td><td class="px-5 py-3">15.434</td><td class="px-5 py-3">1.285</td><td class="px-5 py-3 font-semibold text-rose-300">8,3</td></tr>
+            <tr class="hover:bg-slate-800/40 transition"><td class="px-5 py-3">2021</td><td class="px-5 py-3">16.971</td><td class="px-5 py-3">1.547</td><td class="px-5 py-3 font-semibold text-amber-300">9,1</td></tr>
+            <tr class="hover:bg-slate-800/40 transition"><td class="px-5 py-3">2022</td><td class="px-5 py-3">19.588</td><td class="px-5 py-3">2.034</td><td class="px-5 py-3 font-semibold text-emerald-300">10,4</td></tr>
+            <tr class="hover:bg-slate-800/40 transition"><td class="px-5 py-3">2023</td><td class="px-5 py-3">20.892</td><td class="px-5 py-3">2.132</td><td class="px-5 py-3 font-semibold text-cyan-300">10,2</td></tr>
+            <tr class="hover:bg-slate-800/40 transition"><td class="px-5 py-3">2024*</td><td class="px-5 py-3">22.145</td><td class="px-5 py-3">2.348</td><td class="px-5 py-3 font-semibold text-emerald-300">10,6</td></tr>
+          </tbody>
+        </table>
+        <p class="text-xs text-slate-500 px-5 py-3 border-t border-slate-700">*Target APBN 2024. Sumber: Kementerian Keuangan RI, BPS (diolah)</p>
+      </div>
+
+      <!-- 4. Determinan -->
+      <h2 id="determinan">4. Determinan Tax Ratio: Analisis Mendalam</h2>
+      
+      <h3>4.1 Faktor Struktural Ekonomi</h3>
+      <h4>4.1.1 Sektor Informal yang Besar</h4>
+      <p>
+        Salah satu penyebab utama rendahnya tax ratio Indonesia adalah besarnya proporsi 
+        sektor informal dalam perekonomian. Menurut data BPS, sekitar 57% dari total 
+        tenaga kerja Indonesia bekerja di sektor informal. Sektor ini mencakup pedagang 
+        kaki lima, petani kecil, pekerja lepas, dan usaha mikro yang tidak terdaftar 
+        secara resmi. Kesulitan dalam mengidentifikasi, mendata, dan memungut pajak 
+        dari sektor informal menjadi tantangan besar.
+      </p>
+      <p>
+        Secara empiris, terdapat hubungan negatif antara ukuran sektor informal dan 
+        tax ratio. Menggunakan data panel lintas negara, penelitian menunjukkan bahwa 
+        setiap kenaikan 1% proporsi sektor informal terhadap PDB berpotensi menurunkan 
+        tax ratio sebesar 0,3–0,5 poin persentase. Bagi Indonesia, dengan sektor informal 
+        yang diperkirakan mencapai 25–30% dari PDB, dampaknya terhadap tax ratio sangat 
+        signifikan.
+      </p>
+
+      <h4>4.1.2 Struktur Sektor Ekonomi</h4>
+      <p>
+        Komposisi sektor ekonomi juga mempengaruhi tax ratio. Sektor-sektor dengan 
+        intensitas pajak tinggi seperti manufaktur, keuangan, dan pertambangan 
+        memberikan kontribusi pajak yang lebih besar dibandingkan sektor pertanian 
+        dan perdagangan. Sayangnya, kontribusi sektor manufaktur terhadap PDB Indonesia 
+        mengalami penurunan dari 27% pada tahun 2000 menjadi sekitar 19% pada tahun 2023 
+        — fenomena yang dikenal sebagai <em>deindustrialisasi dini</em>.
+      </p>
+      <p>
+        Sebaliknya, sektor pertanian yang menyumbang sekitar 13% PDB memiliki 
+        kontribusi pajak yang sangat kecil, sebagian besar karena sifat informal 
+        dan berbagai pengecualian pajak. Sektor perdagangan, meskipun besar, 
+        sering kali sulit dipajaki karena fragmentasi dan dominasi usaha mikro.
+      </p>
+
+      <h4>4.1.3 Ketergantungan pada Komoditas</h4>
+      <p>
+        Indonesia masih sangat bergantung pada penerimaan dari sektor komoditas, 
+        khususnya batu bara, minyak sawit, dan mineral. Pada tahun 2022, penerimaan 
+        dari sektor sumber daya alam mencapai sekitar 25% dari total penerimaan pajak. 
+        Ketergantungan ini menciptakan kerentanan terhadap fluktuasi harga komoditas 
+        global. Ketika harga komoditas turun, penerimaan negara ikut menurun, 
+        sebagaimana terjadi pada tahun 2015–2016.
+      </p>
+      <div class="math-display">
+        $$\text{Tax Ratio Volatility} = f(\text{Commodity Price Volatility}, \text{Export Concentration})$$
+      </div>
+
+      <h3>4.2 Faktor Kebijakan dan Administrasi</h3>
+      <h4>4.2.1 Insentif Pajak yang Berlebihan</h4>
+      <p>
+        Pemerintah Indonesia telah memberikan berbagai insentif pajak untuk mendorong 
+        investasi dan pertumbuhan ekonomi. Namun, banyak dari insentif tersebut yang 
+        kurang tepat sasaran dan menimbulkan <em>revenue loss</em> yang signifikan. 
+        <em>Tax expenditure</em> Indonesia diperkirakan mencapai 2–3% dari PDB, 
+        mencakup pembebasan PPN untuk barang kebutuhan pokok, insentif tax holiday 
+        untuk industri tertentu, dan berbagai fasilitas lainnya.
+      </p>
+      <p>
+        Studi oleh Kementerian Keuangan menunjukkan bahwa setiap 1% PDB yang 
+        dialokasikan untuk insentif pajak hanya menghasilkan tambahan investasi 
+        sekitar 0,3–0,5% PDB. Dengan kata lain, efektivitas insentif pajak 
+        dalam mendorong investasi masih dipertanyakan.
+      </p>
+
+      <h4>4.2.2 Administrasi Perpajakan</h4>
+      <p>
+        Lemahnya administrasi perpajakan menjadi salah satu penghambat utama 
+        peningkatan tax ratio. Indikatornya meliputi:
+      </p>
+      <ul>
+        <li><strong>Rasio SPT</strong>: Hanya sekitar 60–65% wajib pajak terdaftar yang menyampaikan SPT tahunan.</li>
+        <li><strong>Tax Gap</strong>: Estimasi kebocoran pajak mencapai 4–5% PDB atau sekitar Rp 800–1.000 triliun per tahun.</li>
+        <li><strong>Rasio Kepatuhan</strong>: Tingkat kepatuhan pajak (tax compliance ratio) Indonesia berada di kisaran 60–70%, jauh di bawah negara-negara maju yang mencapai 85–90%.</li>
+      </ul>
+      <p>
+        Faktor penyebabnya meliputi keterbatasan sumber daya manusia di Direktorat 
+        Jenderal Pajak (DJP), teknologi informasi yang belum terintegrasi, serta 
+        lemahnya koordinasi antarinstansi.
+      </p>
+
+      <h4>4.2.3 Penghindaran dan Penggelapan Pajak</h4>
+      <p>
+        Praktik penghindaran pajak (tax avoidance) dan penggelapan pajak (tax evasion) 
+        masih marak di Indonesia. Beberapa modus yang umum meliputi:
+      </p>
+      <ul>
+        <li><em>Transfer pricing</em> agresif oleh perusahaan multinasional</li>
+        <li>Manipulasi harga ekspor-impor</li>
+        <li>Penggunaan negara <em>tax haven</em> untuk menyembunyikan aset</li>
+        <li>Under-reporting pendapatan oleh wajib pajak orang pribadi</li>
+      </ul>
+      <p>
+        Global Financial Integrity (GFI) memperkirakan aliran dana ilegal dari 
+        Indonesia mencapai US$ 6–8 miliar per tahun, yang sebagian besar terkait 
+        dengan penghindaran pajak.
+      </p>
+
+      <h3>4.3 Faktor Institusional dan Tata Kelola</h3>
+      <h4>4.3.1 Korupsi dan Kualitas Pemerintahan</h4>
+      <p>
+        Terdapat korelasi positif antara kualitas tata kelola pemerintahan dan 
+        tax ratio. Negara-negara dengan tingkat korupsi rendah cenderung memiliki 
+        tax ratio yang lebih tinggi. Indeks Persepsi Korupsi (IPK) Indonesia pada 
+        tahun 2023 berada di angka 34 (skala 0–100), menempatkannya di peringkat 
+        115 dari 180 negara. Korupsi melemahkan kepercayaan publik terhadap 
+        institusi pajak dan mengurangi kepatuhan sukarela.
+      </p>
+      <div class="math-display">
+        $$\text{Tax Compliance} = \alpha - \beta \cdot \text{Corruption} + \gamma \cdot \text{Trust in Government} + \delta \cdot \text{Public Goods Provision}$$
+      </div>
+
+      <h4>4.3.2 Desentralisasi Fiskal</h4>
+      <p>
+        Desentralisasi fiskal yang diterapkan sejak tahun 2001 telah mengubah 
+        lanskap perpajakan Indonesia. Pemerintah daerah memiliki kewenangan untuk 
+        memungut pajak daerah dan retribusi, namun kontribusinya terhadap total 
+        penerimaan negara masih relatif kecil, sekitar 8–10%. Ketidakseimbangan 
+        antara kewenangan belanja dan kapasitas pendapatan daerah menciptakan 
+        ketergantungan pada transfer pusat, yang pada gilirannya mempengaruhi 
+        insentif untuk meningkatkan mobilisasi pajak lokal.
+      </p>
+      <p>
+        Pajak daerah yang utama meliputi Pajak Bumi dan Bangunan Perdesaan dan 
+        Perkotaan (PBB-P2), Bea Perolehan Hak atas Tanah dan Bangunan (BPHTB), 
+        Pajak Kendaraan Bermotor (PKB), dan Pajak Air Permukaan. Namun, 
+        pemungutan pajak daerah sering terkendala oleh lemahnya kapasitas 
+        administrasi dan rendahnya kepatuhan.
+      </p>
+
+      <!-- 5. Dampak Ekonomi -->
+      <h2 id="dampak">5. Dampak Rendahnya Tax Ratio terhadap Ekonomi</h2>
+      
+      <h3>5.1 Keterbatasan Ruang Fiskal</h3>
+      <p>
+        Rendahnya tax ratio secara langsung membatasi ruang fiskal pemerintah. 
+        Dengan penerimaan pajak yang terbatas, pemerintah harus mengalokasikan 
+        anggaran secara hati-hati, sering kali mengorbankan belanja pembangunan 
+        yang bersifat jangka panjang. Rasio belanja modal terhadap total belanja 
+        negara hanya sekitar 15–18%, sementara belanja pegawai dan belanja barang 
+        menghabiskan porsi yang signifikan.
+      </p>
+      <p>
+        Keterbatasan ini juga mempengaruhi kemampuan pemerintah dalam merespons 
+        krisis. Ketika pandemi COVID-19 melanda, pemerintah harus meningkatkan 
+        defisit anggaran menjadi 6,1% PDB pada tahun 2020, yang dibiayai sebagian 
+        besar melalui utang. Rasio utang terhadap PDB meningkat dari 30% pada 
+        tahun 2019 menjadi 39% pada tahun 2021.
+      </p>
+
+      <h3>5.2 Ketergantungan pada Utang</h3>
+      <p>
+        Untuk menutupi defisit anggaran, pemerintah semakin bergantung pada 
+        penerbitan surat utang negara (SUN). Outstanding utang pemerintah 
+        per akhir 2023 mencapai Rp 8.041 triliun, atau sekitar 39% dari PDB. 
+        Meskipun rasio ini masih relatif aman dibandingkan negara-negara lain, 
+        tren peningkatannya perlu diwaspadai. Beban bunga utang mencapai 
+        sekitar Rp 400 triliun per tahun, atau sekitar 20% dari total 
+        penerimaan pajak.
+      </p>
+      <div class="math-display">
+        $$\text{Debt to GDP} = \frac{\text{Total Utang Pemerintah}}{\text{PDB}} \times 100\%$$
+      </div>
+      <p>
+        Jika tax ratio tidak meningkat, maka ketergantungan pada utang akan 
+        terus berlanjut, menciptakan risiko fiskal jangka panjang.
+      </p>
+
+      <h3>5.3 Keterbatasan Belanja Publik</h3>
+      <p>
+        Dampak paling langsung dari rendahnya tax ratio adalah terbatasnya 
+        alokasi belanja untuk sektor-sektor produktif. Belanja pendidikan 
+        diamanatkan minimal 20% dari APBN, namun realisasinya sering kali 
+        terkendala oleh keterbatasan penerimaan. Begitu pula dengan belanja 
+        kesehatan yang idealnya 5% dari APBN, masih jauh dari terpenuhi.
+      </p>
+      <p>
+        Infrastruktur, yang menjadi prioritas pembangunan, juga terdampak. 
+        Meskipun pemerintah telah meningkatkan belanja infrastruktur secara 
+        signifikan dalam satu dekade terakhir, masih terdapat kesenjangan 
+        besar antara kebutuhan dan ketersediaan anggaran. Kebutuhan investasi 
+        infrastruktur Indonesia diperkirakan mencapai US$ 500 miliar hingga 
+        tahun 2030, sementara kemampuan fiskal pemerintah hanya mampu menutupi 
+        sekitar 30% dari kebutuhan tersebut.
+      </p>
+
+      <h3>5.4 Ketimpangan dan Keadilan Sosial</h3>
+      <p>
+        Rendahnya tax ratio juga berdampak pada ketimpangan. Sistem perpajakan 
+        yang tidak progresif cenderung membebani kelompok berpenghasilan rendah 
+        secara tidak proporsional, terutama melalui pajak konsumsi seperti PPN. 
+        Di sisi lain, kelompok berpenghasilan tinggi sering kali memiliki 
+        akses lebih besar terhadap celah pajak dan perencanaan pajak yang agresif.
+      </p>
+      <p>
+        Rasio Gini Indonesia pada tahun 2023 berada di angka 0,388, menunjukkan 
+        ketimpangan yang masih signifikan. Tanpa sistem perpajakan yang kuat 
+        dan progresif, upaya pengurangan ketimpangan melalui belanja sosial 
+        akan terkendala oleh keterbatasan anggaran.
+      </p>
+
+      <!-- 6. Reformasi dan Strategi -->
+      <h2 id="reformasi">6. Reformasi Perpajakan: Upaya dan Tantangan</h2>
+      
+      <h3>6.1 Undang-Undang Harmonisasi Peraturan Perpajakan (UU HPP)</h3>
+      <p>
+        Pada tahun 2021, pemerintah bersama DPR mengesahkan UU No. 7 Tahun 2021 
+        tentang Harmonisasi Peraturan Perpajakan (HPP). UU ini membawa perubahan 
+        signifikan dalam sistem perpajakan Indonesia, meliputi:
+      </p>
+      <ul>
+        <li><strong>Pajak Pertambahan Nilai (PPN)</strong>: Kenaikan tarif PPN secara bertahap dari 10% menjadi 11% (2022) dan 12% (2025), serta perluasan basis PPN dengan menghapus beberapa pengecualian.</li>
+        <li><strong>Pajak Penghasilan (PPh)</strong>: Penyesuaian lapisan tarif PPh orang pribadi, dengan lapisan tertinggi 35% untuk penghasilan di atas Rp 5 miliar.</li>
+        <li><strong>Program Pengungkapan Sukarela (PPS)</strong>: Memberikan kesempatan bagi wajib pajak untuk mengungkapkan harta yang belum dilaporkan dengan tarif tebusan yang lebih rendah.</li>
+        <li><strong>Pajak Karbon</strong>: Pengenalan pajak karbon sebagai instrumen untuk mengurangi emisi dan meningkatkan penerimaan.</li>
+        <li><strong>Core Tax System</strong>: Modernisasi administrasi perpajakan melalui sistem terintegrasi.</li>
+      </ul>
+      <p>
+        Implementasi UU HPP diharapkan meningkatkan tax ratio secara bertahap, 
+        meskipun dampak jangka pendeknya mungkin terbatas karena perlunya 
+        penyesuaian administratif dan sosialisasi.
+      </p>
+
+      <h3>6.2 Core Tax System dan Digitalisasi</h3>
+      <p>
+        Salah satu pilar utama reformasi adalah implementasi Core Tax System (CTS), 
+        sebuah sistem administrasi perpajakan terintegrasi yang mencakup seluruh 
+        proses bisnis DJP, mulai dari pendaftaran, pelaporan, pembayaran, hingga 
+        pemeriksaan dan penagihan. CTS diharapkan meningkatkan efisiensi, 
+        transparansi, dan akurasi data perpajakan.
+      </p>
+      <p>
+        Digitalisasi juga mencakup:
+      </p>
+      <ul>
+        <li>E-Filing dan E-Billing untuk pelaporan dan pembayaran pajak</li>
+        <li>Pre-populated SPT untuk mengurangi beban administrasi wajib pajak</li>
+        <li>Integrasi data dengan instansi lain (bank, notaris, dukcapil) untuk memperluas basis pajak</li>
+        <li>Penggunaan analitik data dan kecerdasan buatan untuk deteksi ketidakpatuhan</li>
+      </ul>
+      <p>
+        Tantangan utama digitalisasi adalah kesenjangan digital antara daerah 
+        perkotaan dan pedesaan, serta keterbatasan literasi digital sebagian 
+        wajib pajak. Diperlukan pendekatan bertahap dan pendampingan intensif.
+      </p>
+
+      <h3>6.3 Perluasan Basis Pajak</h3>
+      <p>
+        Perluasan basis pajak menjadi kunci peningkatan tax ratio. Beberapa strategi 
+        yang dapat dilakukan:
+      </p>
+      <ul>
+        <li><strong>Formalisasi Sektor Informal</strong>: Insentif bagi usaha mikro untuk beralih ke sektor formal, dengan skema pajak yang sederhana dan tarif rendah.</li>
+        <li><strong>Pajak Properti yang Lebih Efektif</strong>: Optimalisasi PBB dan BPHTB melalui penilaian properti yang akurat dan pemutakhiran data.</li>
+        <li><strong>Pengenaan Pajak atas Ekonomi Digital</strong>: Pengaturan pajak untuk transaksi e-commerce, platform digital, dan ekonomi berbagi.</li>
+        <li><strong>Ekstensifikasi Pajak Karbon</strong>: Perluasan cakupan pajak karbon untuk sektor-sektor lain setelah implementasi awal di PLTU batu bara.</li>
+      </ul>
+      <div class="math-display">
+        $$\text{Tax Base Expansion} = \Delta \text{Formalization} + \Delta \text{Property Tax Coverage} + \Delta \text{Digital Economy} + \Delta \text{Carbon Tax}$$
+      </div>
+
+      <h3>6.4 Penguatan Kepatuhan dan Penegakan Hukum</h3>
+      <p>
+        Peningkatan kepatuhan pajak memerlukan pendekatan yang komprehensif, 
+        mencakup:
+      </p>
+      <ul>
+        <li><strong>Pendidikan dan Sosialisasi</strong>: Meningkatkan kesadaran pajak sejak dini melalui kurikulum pendidikan dan kampanye publik.</li>
+        <li><strong>Insentif Kepatuhan</strong>: Memberikan kemudahan dan penghargaan bagi wajib pajak patuh, misalnya prioritas layanan atau pengurangan sanksi.</li>
+        <li><strong>Penegakan Hukum yang Konsisten</strong>: Menindak tegas pelanggar pajak tanpa pandang bulu, termasuk perusahaan besar dan orang kaya.</li>
+        <li><strong>Transparansi dan Akuntabilitas</strong>: Publikasi penggunaan uang pajak secara transparan untuk membangun kepercayaan publik.</li>
+      </ul>
+
+      <!-- 7. Proyeksi dan Skenario -->
+      <h2 id="proyeksi">7. Proyeksi Tax Ratio dan Skenario Kebijakan</h2>
+      
+      <h3>7.1 Skenario Baseline</h3>
+      <p>
+        Dengan asumsi pertumbuhan ekonomi 5,0–5,5% per tahun, inflasi 2,5–3,5%, 
+        dan implementasi kebijakan yang ada saat ini, tax ratio Indonesia 
+        diproyeksikan meningkat secara perlahan menjadi 11,5–12,0% pada tahun 2030. 
+        Skenario ini mengasumsikan tidak ada perubahan signifikan dalam 
+        struktur ekonomi dan administrasi perpajakan.
+      </p>
+      <div class="math-display">
+        $$\text{TaxRatio}_{2030}^{\text{baseline}} = \text{TaxRatio}_{2024} + \sum_{t=2025}^{2030} \Delta \text{TaxRatio}_t$$
+      </div>
+      <p>
+        Di mana $\Delta \text{TaxRatio}_t$ adalah perubahan tahunan yang 
+        dipengaruhi oleh pertumbuhan ekonomi, inflasi, dan kebijakan yang 
+        ada.
+      </p>
+
+      <h3>7.2 Skenario Reformasi Optimal</h3>
+      <p>
+        Jika reformasi UU HPP diimplementasikan secara penuh, Core Tax System 
+        berjalan efektif, dan strategi perluasan basis pajak dijalankan dengan 
+        konsisten, tax ratio dapat mencapai 13–14% pada tahun 2030. Skenario 
+        ini membutuhkan:
+      </p>
+      <ul>
+        <li>Pertumbuhan penerimaan pajak rata-rata 8–10% per tahun</li>
+        <li>Penurunan tax gap dari 4–5% PDB menjadi 2–3% PDB</li>
+        <li>Peningkatan rasio kepatuhan dari 65% menjadi 80%</li>
+        <li>Perluasan basis pajak melalui formalisasi sektor informal dan pajak digital</li>
+      </ul>
+      <p>
+        Dengan tax ratio 13–14%, ruang fiskal pemerintah akan jauh lebih 
+        luas, memungkinkan peningkatan belanja infrastruktur, pendidikan, 
+        dan kesehatan tanpa harus meningkatkan utang secara signifikan.
+      </p>
+
+      <h3>7.3 Skenario Ambisius</h3>
+      <p>
+        Skenario paling ambisius menargetkan tax ratio 15–16% pada tahun 2035, 
+        setara dengan rata-rata negara berpenghasilan menengah atas. Untuk 
+        mencapai ini, diperlukan transformasi fundamental dalam sistem 
+        perpajakan, termasuk:
+      </p>
+      <ul>
+        <li>Reformasi besar-besaran pada pajak properti dan kekayaan</li>
+        <li>Integrasi penuh ekonomi informal ke dalam sistem pajak</li>
+        <li>Penerapan pajak digital yang komprehensif</li>
+        <li>Peningkatan kualitas belanja negara untuk membangun kepercayaan publik</li>
+      </ul>
+      <p>
+        Skenario ini membutuhkan komitmen politik yang kuat, stabilitas 
+        ekonomi makro, dan dukungan luas dari masyarakat.
+      </p>
+
+      <!-- 8. Kesimpulan -->
+      <h2 id="kesimpulan">8. Kesimpulan dan Rekomendasi</h2>
+      
+      <h3>8.1 Kesimpulan</h3>
+      <p>
+        Tax ratio Indonesia yang rendah merupakan hasil interaksi kompleks 
+        antara faktor struktural, kebijakan, administrasi, dan institusional. 
+        Besarnya sektor informal, struktur ekonomi yang kurang padat pajak, 
+        ketergantungan pada komoditas, lemahnya administrasi perpajakan, 
+        serta korupsi dan tata kelola yang belum optimal menjadi penyebab 
+        utama. Rendahnya tax ratio berdampak pada keterbatasan ruang fiskal, 
+        ketergantungan pada utang, dan keterbatasan belanja publik yang 
+        pada gilirannya menghambat pembangunan ekonomi dan pengurangan 
+        ketimpangan.
+      </p>
+      <p>
+        Reformasi perpajakan melalui UU HPP, Core Tax System, dan berbagai 
+        upaya perluasan basis pajak merupakan langkah yang tepat, namun 
+        implementasinya memerlukan konsistensi, komitmen politik, dan 
+        dukungan sumber daya yang memadai. Tanpa reformasi yang 
+        menyeluruh dan berkelanjutan, target tax ratio 12–14% dalam 
+        lima hingga sepuluh tahun ke depan akan sulit tercapai.
+      </p>
+
+      <h3>8.2 Rekomendasi</h3>
+      <p>
+        Berdasarkan analisis di atas, beberapa rekomendasi strategis dapat 
+        diajukan:
+      </p>
+      <ol>
+        <li><strong>Percepatan Implementasi Core Tax System</strong>: Memastikan CTS beroperasi penuh dengan integrasi data lintas instansi, serta investasi dalam infrastruktur teknologi dan pelatihan SDM.</li>
+        <li><strong>Optimalisasi Pajak Properti</strong>: Melakukan revaluasi properti secara berkala, memperluas cakupan PBB, dan meningkatkan tarif secara progresif untuk properti mewah.</li>
+        <li><strong>Formalisasi Sektor Informal</strong>: Menyediakan skema pajak sederhana (misalnya 0,5% omzet) dengan ambang batas yang jelas, serta insentif untuk beralih ke formal.</li>
+        <li><strong>Pengenaan Pajak Ekonomi Digital</strong>: Memperkuat regulasi pajak untuk platform digital, e-commerce, dan ekonomi berbagi, dengan kerja sama internasional untuk mencegah penghindaran pajak.</li>
+        <li><strong>Peningkatan Transparansi dan Akuntabilitas</strong>: Mempublikasikan laporan penerimaan dan belanja pajak secara rinci, serta memperkuat pengawasan eksternal.</li>
+        <li><strong>Penguatan Penegakan Hukum</strong>: Menindak tegas penghindaran dan penggelapan pajak, termasuk melalui pertukaran informasi otomatis dengan negara lain.</li>
+        <li><strong>Reformasi Insentif Pajak</strong>: Mengevaluasi efektivitas insentif yang ada, menghapus yang tidak tepat sasaran, dan mengarahkan pada sektor-sektor strategis.</li>
+        <li><strong>Pendidikan Pajak Sejak Dini</strong>: Memasukkan literasi pajak dalam kurikulum pendidikan dasar dan menengah untuk membangun kesadaran pajak jangka panjang.</li>
+      </ol>
+      <p>
+        Dengan melaksanakan rekomendasi ini secara konsisten, Indonesia memiliki 
+        peluang untuk meningkatkan tax ratio menuju level yang lebih berkelanjutan, 
+        memperkuat kemandirian fiskal, dan mewujudkan pembangunan yang inklusif 
+        dan berkeadilan.
+      </p>
+
+      <!-- Referensi -->
+      <h3>Referensi</h3>
+      <div class="text-sm text-slate-400 space-y-2">
+        <p>Bank Indonesia. (2023). <em>Statistik Keuangan Pemerintah</em>. Jakarta: BI.</p>
+        <p>Badan Pusat Statistik. (2024). <em>Produk Domestik Bruto Indonesia Menurut Pengeluaran</em>. Jakarta: BPS.</p>
+        <p>IMF. (2023). <em>Government Finance Statistics Yearbook</em>. Washington, DC: IMF.</p>
+        <p>Kementerian Keuangan RI. (2023). <em>Laporan Keuangan Pemerintah Pusat</em>. Jakarta: Kemenkeu.</p>
+        <p>OECD. (2023). <em>Revenue Statistics in Asia and the Pacific</em>. Paris: OECD Publishing.</p>
+        <p>Tanzi, V. (1987). "Quantitative Characteristics of the Tax Systems of Developing Countries." In <em>The Theory of Taxation for Developing Countries</em>. Oxford: Oxford University Press.</p>
+        <p>World Bank. (2023). <em>World Development Indicators</em>. Washington, DC: World Bank.</p>
+      </div>
+    </article>
+
+    <!-- Tombol Kembali ke Dashboard -->
+    <div class="mt-20 flex justify-center animate-fade-up delay-300">
+      <a href="https://imnxx.vercel.app" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="btn-dashboard inline-flex items-center gap-3 px-8 py-4 rounded-2xl text-white font-bold text-lg tracking-wide shadow-2xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Kembali ke Dashboard
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-16 text-center text-xs text-slate-600 border-t border-slate-800 pt-8 pb-4">
+      <p>© 2025 Analisis Fiskal Indonesia. Artikel ilmiah untuk tujuan edukasi.</p>
+      <p class="mt-1">Dibuat dengan Tailwind CSS & MathJax</p>
+    </footer>
+  </main>
+
+  <!-- Script tambahan untuk smooth scroll (opsional) -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
