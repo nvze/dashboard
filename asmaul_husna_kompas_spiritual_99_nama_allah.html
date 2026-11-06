@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asmaul Husna - Kompas Spiritual 99 Nama Allah</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Amiri, Scheherazade New, Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Canvas Confidential Custom Styling -->
+    <style>
+        :root {
+            --gold-primary: #D4AF37;
+            --gold-light: #F3E5AB;
+            --gold-dark: #AA771C;
+            --emerald-dark: #062319;
+            --emerald-base: #0b3c2c;
+            --emerald-light: #145942;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #030d09;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        .font-arabic {
+            font-family: 'Amiri', 'Scheherazade New', serif;
+        }
+
+        /* Golden Gradient Text */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 50%, #AA771C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Radial Glow & Metallic Effects */
+        .bg-spiritual-radial {
+            background: radial-gradient(circle at center, rgba(11, 60, 44, 0.85) 0%, rgba(6, 35, 25, 0.95) 50%, rgba(3, 13, 9, 1) 100%);
+        }
+
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15), inset 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        .gold-border-glow {
+            border: 2px solid rgba(212, 175, 55, 0.7);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), inset 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Compass Rotation Styling */
+        .compass-ring {
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-origin: center center;
+        }
+
+        .needle-pulse {
+            animation: pulseGlow 2.5s infinite ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.7; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6)); }
+            50% { opacity: 1; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.9)); }
+        }
+
+        /* Custom Scrollbar for Modal */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(6, 35, 25, 0.5);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.4);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.8);
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(6, 35, 25, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-spiritual-radial min-h-screen flex flex-col justify-between relative selection:bg-amber-500 selection:text-black">
+
+    <!-- Canvas Background Particles -->
+    <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="relative z-10 px-4 py-4 md:px-8 border-b border-amber-500/20 glass-panel">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3 text-center md:text-left">
+                <div class="w-10 h-10 rounded-full border border-amber-400/50 flex items-center justify-center bg-emerald-950/80 shadow-lg shadow-amber-500/10">
+                    <i class="fa-solid font-bold text-amber-400 text-lg">ﷲ</i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-wide text-gold-gradient font-serif">ASMAUL HUSNA</h1>
+                    <p class="text-xs text-amber-200/70 tracking-wider uppercase">Kompas Astronomi Spiritual 99 Nama Allah SWT</p>
+                </div>
+            </div>
+
+            <!-- Quick Action Header Controls -->
+            <div class="flex items-center space-x-3">
+                <button id="btnOpenList" class="px-4 py-2 rounded-xl glass-panel hover:bg-amber-500/20 text-amber-300 text-xs md:text-sm font-medium transition flex items-center gap-2 border border-amber-500/30">
+                    <i class="fa-solid fa-list-ul text-amber-400"></i>
+                    <span>Daftar 99 Nama</span>
+                </button>
+                
+                <button id="btnAudioToggle" class="w-10 h-10 rounded-xl glass-panel hover:bg-amber-500/20 text-amber-300 transition flex items-center justify-center border border-amber-500/30" title="Audio Suara">
+                    <i id="audioIcon" class="fa-solid fa-volume-high text-amber-400"></i>
+                </button>
+
+                <button id="btnInfo" class="w-10 h-10 rounded-xl glass-panel hover:bg-amber-500/20 text-amber-300 transition flex items-center justify-center border border-amber-500/30" title="Informasi">
+                    <i class="fa-solid fa-circle-info text-amber-400"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="relative z-10 max-w-6xl mx-auto px-4 py-6 md:py-10 flex-grow flex flex-col items-center justify-center w-full">
+        
+        <!-- COMPASS & CARD CONTAINER WRAPPER -->
+        <div class="relative w-full max-w-4xl flex flex-col items-center justify-center">
+
+            <!-- 3D ISLAMI ASTRONOMICAL COMPASS DIAL -->
+            <div class="relative w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] md:w-[480px] md:h-[480px] flex items-center justify-center my-4">
+                
+                <!-- OUTER ORNATE RING (Static Frame) -->
+                <div class="absolute inset-0 rounded-full border-2 border-amber-500/40 p-2 shadow-2xl shadow-emerald-950/80">
+                    <div class="w-full h-full rounded-full border border-dashed border-amber-400/30 flex items-center justify-center"></div>
+                </div>
+
+                <!-- ROTATING COMPASS DIAL (Animates on Index Change) -->
+                <div id="compassDial" class="compass-ring absolute inset-3 rounded-full flex items-center justify-center bg-emerald-950/30 border border-amber-500/30 shadow-inner">
+                    <!-- SVG Sacred Geometry Ornament & Dial Marks -->
+                    <svg class="w-full h-full text-amber-400/30" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Outer Decorative Ring -->
+                        <circle cx="250" cy="250" r="235" stroke="currentColor" stroke-width="2" stroke-dasharray="6 6" />
+                        <circle cx="250" cy="250" r="220" stroke="currentColor" stroke-width="1.5" />
+                        <circle cx="250" cy="250" r="200" stroke="currentColor" stroke-width="1" opacity="0.6"/>
+
+                        <!-- Islamic Rub El Hizb Star Background Geometry -->
+                        <g transform="rotate(0 250 250)" stroke="currentColor" stroke-width="1.5" opacity="0.4">
+                            <rect x="100" y="100" width="300" height="300" rx="10" />
+                            <rect x="100" y="100" width="300" height="300" rx="10" transform="rotate(45 250 250)" />
+                        </g>
+                        <g transform="rotate(22.5 250 250)" stroke="currentColor" stroke-width="1" opacity="0.25">
+                            <rect x="110" y="110" width="280" height="280" />
+                            <rect x="110" y="110" width="280" height="280" transform="rotate(45 250 250)" />
+                        </g>
+
+                        <!-- Radial Rays & Degree Ticks -->
+                        <g stroke="currentColor" stroke-width="1.5" opacity="0.7">
+                            <line x1="250" y1="15" x2="250" y2="40" />
+                            <line x1="250" y1="460" x2="250" y2="485" />
+                            <line x1="15" y1="250" x2="40" y2="250" />
+                            <line x1="460" y1="250" x2="485" y2="250" />
+                            <line x1="84" y1="84" x2="102" y2="102" />
+                            <line x1="398" y1="398" x2="416" y2="416" />
+                            <line x1="84" y1="398" x2="102" y2="398" />
+                            <line x1="398" y1="84" x2="416" y2="102" />
+                        </g>
+
+                        <!-- Inner Astro Arc Rings -->
+                        <circle cx="250" cy="250" r="140" stroke="currentColor" stroke-width="1" stroke-dasharray="12 6" />
+                    </svg>
+
+                    <!-- Dynamically Generated Radial Numbers (1 - 99 Mini Indicators around edge) -->
+                    <div id="dialMarkers" class="absolute inset-0 pointer-events-none"></div>
+                </div>
+
+                <!-- TOP POINTER NEEDLE (Fixed Pointer at Top) -->
+                <div class="absolute -top-3 z-30 flex flex-col items-center pointer-events-none needle-pulse">
+                    <div class="w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[20px] border-t-amber-400 drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]"></div>
+                    <div class="w-2 h-2 rounded-full bg-amber-200 -mt-1 shadow-md"></div>
+                </div>
+
+                <!-- CENTER FOCUS DISPLAY CARD (The active Asmaul Husna Name) -->
+                <div class="absolute inset-8 sm:inset-12 md:inset-14 rounded-full glass-panel gold-border-glow flex flex-col items-center justify-center p-6 text-center z-20 shadow-2xl transition-all duration-500 overflow-hidden">
+                    
+                    <!-- Background Subtle Radial Glow inside card -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-amber-500/10 via-emerald-950/40 to-emerald-900/60 pointer-events-none"></div>
+                    
+                    <!-- Number Badge -->
+                    <div class="relative z-10 mb-2">
+                        <span id="nameNumber" class="inline-block px-3 py-0.5 text-xs font-semibold tracking-wider text-amber-300 bg-amber-500/20 border border-amber-400/40 rounded-full shadow-inner">
+                            01 / 99
+                        </span>
+                    </div>
+
+                    <!-- Arabic Calligraphy Text -->
+                    <div class="relative z-10 my-1 max-w-full">
+                        <h2 id="nameArabic" class="text-4xl sm:text-5xl md:text-6xl font-bold font-arabic text-gold-gradient drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] transition-all duration-300 leading-tight">
+                            الرَّحْمَٰنُ
+                        </h2>
+                    </div>
+
+                    <!-- Transliteration Latin -->
+                    <div class="relative z-10 mt-1">
+                        <h3 id="nameLatin" class="text-lg sm:text-xl font-bold tracking-wide text-amber-100">
+                            Ar-Rahman
+                        </h3>
+                    </div>
+
+                    <!-- Indonesian Translation -->
+                    <div class="relative z-10 mt-2 max-w-[85%]">
+                        <p id="nameMeaning" class="text-xs sm:text-sm text-emerald-100/90 font-medium italic line-clamp-2">
+                            "Yang Maha Pengasih"
+                        </p>
+                    </div>
+
+                    <!-- Audio Play Animation Wave Indicator -->
+                    <div id="audioWave" class="hidden absolute bottom-3 z-10 flex items-center space-x-1">
+                        <span class="w-1 h-3 bg-amber-400 rounded-full animate-pulse"></span>
+                        <span class="w-1 h-5 bg-amber-300 rounded-full animate-pulse delay-75"></span>
+                        <span class="w-1 h-2 bg-amber-400 rounded-full animate-pulse delay-150"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CONTROLS PANEL -->
+            <div class="w-full max-w-lg glass-panel rounded-2xl p-4 md:p-6 mt-4 border border-amber-500/30 shadow-xl z-20">
+                
+                <!-- Main Navigation Controls Buttons -->
+                <div class="flex items-center justify-between gap-3 mb-5">
+                    
+                    <!-- Previous Button -->
+                    <button id="btnPrev" class="flex-1 py-3 px-4 rounded-xl bg-emerald-950/80 hover:bg-amber-500/20 text-amber-300 border border-amber-500/40 transition-all flex items-center justify-center gap-2 font-medium shadow-md active:scale-95">
+                        <i class="fa-solid fa-chevron-left text-sm"></i>
+                        <span class="hidden sm:inline">Sebelumnya</span>
+                    </button>
+
+                    <!-- Auto Play / Pause Main Button -->
+                    <button id="btnPlayPause" class="py-3 px-6 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-emerald-950 font-bold transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 min-w-[130px]">
+                        <i id="playIcon" class="fa-solid fa-play text-base"></i>
+                        <span id="playText">Putar Otomatis</span>
+                    </button>
+
+                    <!-- Next Button -->
+                    <button id="btnNext" class="flex-1 py-3 px-4 rounded-xl bg-emerald-950/80 hover:bg-amber-500/20 text-amber-300 border border-amber-500/40 transition-all flex items-center justify-center gap-2 font-medium shadow-md active:scale-95">
+                        <span class="hidden sm:inline">Berikutnya</span>
+                        <i class="fa-solid fa-chevron-right text-sm"></i>
+                    </button>
+
+                </div>
+
+                <!-- Secondary Slider & Settings -->
+                <div class="space-y-4 pt-2 border-t border-amber-500/20">
+                    
+                    <!-- Rotation Speed Slider -->
+                    <div class="flex items-center justify-between gap-4">
+                        <label class="text-xs font-semibold text-amber-200/80 flex items-center gap-2 whitespace-nowrap">
+                            <i class="fa-solid fa-gauge-high text-amber-400"></i>
+                            <span>Kecepatan Putar:</span>
+                        </label>
+                        <input type="range" id="speedSlider" min="1.5" max="8" step="0.5" value="4" 
+                               class="w-full accent-amber-400 bg-emerald-900/50 h-2 rounded-lg cursor-pointer">
+                        <span id="speedVal" class="text-xs text-amber-300 font-mono w-8 text-right">4.0s</span>
+                    </div>
+
+                    <!-- Direct Jump Select Dropdown -->
+                    <div class="flex items-center justify-between gap-3">
+                        <label class="text-xs font-semibold text-amber-200/80 flex items-center gap-2 whitespace-nowrap">
+                            <i class="fa-solid fa-compass text-amber-400"></i>
+                            <span>Lompat Ke:</span>
+                        </label>
+                        <select id="jumpSelect" class="w-full bg-emerald-950/90 text-amber-200 text-xs rounded-xl p-2.5 border border-amber-500/30 focus:outline-none focus:border-amber-400 cursor-pointer">
+                            <!-- Options populated dynamically -->
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 py-4 px-6 border-t border-amber-500/20 text-center text-xs text-amber-200/60 glass-panel">
+        <p>Asmaul Husna Kompas Spiritual &copy; 2026 - Melafalkan 99 Nama Indah Allah SWT</p>
+    </footer>
+
+    <!-- MODAL LIST ALL 99 NAMES -->
+    <div id="modalList" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-emerald-950 border border-amber-500/40 rounded-3xl w-full max-w-3xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+            <!-- Modal Header -->
+            <div class="p-5 border-b border-amber-500/30 flex items-center justify-between bg-emerald-900/40">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-book-open text-amber-400 text-xl"></i>
+                    <h3 class="text-lg font-bold text-gold-gradient font-serif">Daftar Lengkap 99 Asmaul Husna</h3>
+                </div>
+                <button id="btnCloseModal" class="w-8 h-8 rounded-full bg-amber-500/10 text-amber-400 hover:bg-amber-500/30 flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Search Input -->
+            <div class="p-4 bg-emerald-950/60 border-b border-amber-500/20">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-amber-400/60 text-sm"></i>
+                    <input type="text" id="modalSearch" placeholder="Cari nomor, nama latin, atau arti..." 
+                           class="w-full bg-emerald-900/40 text-amber-100 placeholder-amber-200/40 pl-10 pr-4 py-2 rounded-xl border border-amber-500/30 focus:outline-none focus:border-amber-400 text-sm">
+                </div>
+            </div>
+
+            <!-- Modal Content Grid -->
+            <div id="modalGrid" class="p-4 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-3 flex-grow">
+                <!-- Cards injected dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- INFO MODAL -->
+    <div id="modalInfo" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-emerald-950 border border-amber-500/40 rounded-2xl w-full max-w-md p-6 shadow-2xl relative text-center">
+            <button id="btnCloseInfo" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-amber-500/10 text-amber-400 hover:bg-amber-500/30 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center mx-auto mb-4 text-amber-300 text-xl">
+                <i class="fa-solid fa-star-and-crescent"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gold-gradient font-serif mb-2">Tentang Kompas Asmaul Husna</h3>
+            <p class="text-xs text-amber-100/80 leading-relaxed mb-4">
+                Aplikasi ini dirancang sebagai sarana zikir dan kontemplasi visual 99 Nama Allah SWT. Desain kompas astronomi Islami melambangkan petunjuk spiritual kehidupan.
+            </p>
+            <div class="text-xs text-emerald-200/60 border-t border-amber-500/20 pt-3">
+                <p>Pengucapan Audio menggunakan Web Speech Synthesizer bawaan peranti Anda untuk pengalaman interaktif.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUDIO SYNTHESIS & SCRIPT LOGIC -->
+    <script>
+        // COMPLETE DATA: 99 ASMAUL HUSNA (Arabic, Latin Transliteration, Indonesian Meaning)
+        const asmaulHusnaData = [
+            { id: 1, latin: "Ar-Rahman", arabic: "الرَّحْمَٰنُ", meaning: "Yang Maha Pengasih" },
+            { id: 2, latin: "Ar-Rahim", arabic: "الرَّحِيمُ", meaning: "Yang Maha Penyayang" },
+            { id: 3, latin: "Al-Malik", arabic: "الْمَلِكُ", meaning: "Yang Maha Merajai / Memerintah" },
+            { id: 4, latin: "Al-Quddus", arabic: "الْقُدُّوسُ", meaning: "Yang Maha Suci" },
+            { id: 5, latin: "As-Salam", arabic: "السَّلاَمُ", meaning: "Yang Maha Memberi Kesejahteraan" },
+            { id: 6, latin: "Al-Mu'min", arabic: "الْمُؤْمِنُ", meaning: "Yang Maha Memberi Keamanan" },
+            { id: 7, latin: "Al-Muhaimin", arabic: "الْمُهَيْمِنُ", meaning: "Yang Maha Pemelihara" },
+            { id: 8, latin: "Al-Aziz", arabic: "الْعَزِيزُ", meaning: "Yang Maha Perkasa" },
+            { id: 9, latin: "Al-Jabbar", arabic: "الْجَبَّارُ", meaning: "Yang Memiliki Mutlak Kegagahan" },
+            { id: 10, latin: "Al-Mutakabbir", arabic: "الْمُتَكَبِّرُ", meaning: "Yang Maha Megah" },
+            { id: 11, latin: "Al-Khaliq", arabic: "الْخَالِقُ", meaning: "Yang Maha Pencipta" },
+            { id: 12, latin: "Al-Bari'", arabic: "الْبَارِئُ", meaning: "Yang Maha Melepaskan / Membuat" },
+            { id: 13, latin: "Al-Musawwir", arabic: "الْمُصَوِّرُ", meaning: "Yang Maha Membentuk Rupa" },
+            { id: 14, latin: "Al-Ghaffar", arabic: "الْغَفَّارُ", meaning: "Yang Maha Pengampun" },
+            { id: 15, latin: "Al-Qahhar", arabic: "الْقَهَّارُ", meaning: "Yang Maha Menundukkan" },
+            { id: 16, latin: "Al-Wahhab", arabic: "الْوَهَّابُ", meaning: "Yang Maha Pemberi Karunia" },
+            { id: 17, latin: "Ar-Razzaq", arabic: "الرَّزَّاقُ", meaning: "Yang Maha Memberi Rezeki" },
+            { id: 18, latin: "Al-Fattah", arabic: "الْفَتَّاحُ", meaning: "Yang Maha Pembuka Rahmat" },
+            { id: 19, latin: "Al-'Alim", arabic: "الْعَلِيمُ", meaning: "Yang Maha Mengetahui" },
+            { id: 20, latin: "Al-Qabidh", arabic: "الْقَابِضُ", meaning: "Yang Maha Menyempitkan" },
+            { id: 21, latin: "Al-Basit", arabic: "الْبَاسِطُ", meaning: "Yang Maha Lapang Rezeki" },
+            { id: 22, latin: "Al-Khafidh", arabic: "الْخَافِضُ", meaning: "Yang Maha Merendahkan" },
+            { id: 23, latin: "Ar-Rafi'", arabic: "الرَّافِعُ", meaning: "Yang Maha Meninggikan" },
+            { id: 24, latin: "Al-Mu'izz", arabic: "الْمُعِزُّ", meaning: "Yang Maha Memuliakan" },
+            { id: 25, latin: "Al-Mudhill", arabic: "الْمُذِلُّ", meaning: "Yang Maha Hina / Menghencurkan" },
+            { id: 26, latin: "As-Sami'", arabic: "السَّمِيعُ", meaning: "Yang Maha Mendengar" },
+            { id: 27, latin: "Al-Bashir", arabic: "الْبَصِيرُ", meaning: "Yang Maha Melihat" },
+            { id: 28, latin: "Al-Hakam", arabic: "الْحَكَمُ", meaning: "Yang Maha Menetapkan Hukum" },
+            { id: 29, latin: "Al-'Adl", arabic: "الْعَدْلُ", meaning: "Yang Maha Adil" },
+            { id: 30, latin: "Al-Latif", arabic: "الَّطِيفُ", meaning: "Yang Maha Lembut" },
+            { id: 31, latin: "Al-Khabir", arabic: "الْخَبِيرُ", meaning: "Yang Maha Mengenal / Waspada" },
+            { id: 32, latin: "Al-Halim", arabic: "الْحَلِيمُ", meaning: "Yang Maha Penyantun" },
+            { id: 33, latin: "Al-'Adhim", arabic: "الْعَظِيمُ", meaning: "Yang Maha Agung" },
+            { id: 34, latin: "Al-Ghafur", arabic: "الْغَفُورُ", meaning: "Yang Maha Memberi Pengampunan" },
+            { id: 35, latin: "Ash-Syakur", arabic: "الشَّكُورُ", meaning: "Yang Maha Pembalas Budi" },
+            { id: 36, latin: "Al-'Aliyy", arabic: "الْعَلِيُّ", meaning: "Yang Maha Tinggi" },
+            { id: 37, latin: "Al-Kabir", arabic: "الْكَبِيرُ", meaning: "Yang Maha Besar" },
+            { id: 38, latin: "Al-Hafidh", arabic: "الْحَفِيظُ", meaning: "Yang Maha Memelihara" },
+            { id: 39, latin: "Al-Muqit", arabic: "الْمُقِيتُ", meaning: "Yang Maha Pemberi Kecukupan" },
+            { id: 40, latin: "Al-Hasib", arabic: "الْحَسِيبُ", meaning: "Yang Maha Membuat Perhitungan" },
+            { id: 41, latin: "Al-Jalil", arabic: "الْجَلِيلُ", meaning: "Yang Maha Luhur" },
+            { id: 42, latin: "Al-Karim", arabic: "الْكَرِيمُ", meaning: "Yang Maha Pemurah" },
+            { id: 43, latin: "Ar-Raqib", arabic: "الرَّقِيبُ", meaning: "Yang Maha Mengawasi" },
+            { id: 44, latin: "Al-Mujib", arabic: "الْمُجِيبُ", meaning: "Yang Maha Mengabulkan" },
+            { id: 45, latin: "Al-Wasi'", arabic: "الْوَاسِعُ", meaning: "Yang Maha Luas" },
+            { id: 46, latin: "Al-Hakim", arabic: "الْحَكِيمُ", meaning: "Yang Maha Bijaksana" },
+            { id: 47, latin: "Al-Wadud", arabic: "الْوَدُودُ", meaning: "Yang Maha Mengasihi" },
+            { id: 48, latin: "Al-Majid", arabic: "الْمَجِيدُ", meaning: "Yang Maha Mulia" },
+            { id: 49, latin: "Al-Ba'ith", arabic: "الْبَاعِثُ", meaning: "Yang Maha Membangkitkan" },
+            { id: 50, latin: "Ash-Syahid", arabic: "الشَّهِيدُ", meaning: "Yang Maha Menyaksikan" },
+            { id: 51, latin: "Al-Haqq", arabic: "الْحَقُّ", meaning: "Yang Maha Benar" },
+            { id: 52, latin: "Al-Wakil", arabic: "الْوَكِيلُ", meaning: "Yang Maha Memelihara / Penyerah" },
+            { id: 53, latin: "Al-Qawiyy", arabic: "الْقَوِيُّ", meaning: "Yang Maha Kuat" },
+            { id: 54, latin: "Al-Matin", arabic: "الْمَتِينُ", meaning: "Yang Maha Kokoh" },
+            { id: 55, latin: "Al-Waliyy", arabic: "الْوَلِيُّ", meaning: "Yang Maha Melindungi" },
+            { id: 56, latin: "Al-Hamid", arabic: "الْحَمِيدُ", meaning: "Yang Maha Terpuji" },
+            { id: 57, latin: "Al-Muhsi", arabic: "الْمُحْصِي", meaning: "Yang Maha Mengalkulasi" },
+            { id: 58, latin: "Al-Mubdi'", arabic: "الْمُبْدِئُ", meaning: "Yang Maha Memulai" },
+            { id: 59, latin: "Al-Mu'id", arabic: "الْمُعِيدُ", meaning: "Yang Maha Mengembalikan Kehidupan" },
+            { id: 60, latin: "Al-Muhyi", arabic: "الْمُحْيِي", meaning: "Yang Maha Menghidupkan" },
+            { id: 61, latin: "Al-Mumit", arabic: "الْمُمِيتُ", meaning: "Yang Maha Mematikan" },
+            { id: 62, latin: "Al-Hayyu", arabic: "الْحَيُّ", meaning: "Yang Maha Hidup" },
+            { id: 63, latin: "Al-Qayyum", arabic: "الْقَيُّومُ", meaning: "Yang Maha Mandiri" },
+            { id: 64, latin: "Al-Wajid", arabic: "الْوَاجِدُ", meaning: "Yang Maha Penemu" },
+            { id: 65, latin: "Al-Majid", arabic: "الْمَاجِدُ", meaning: "Yang Maha Mulia" },
+            { id: 66, latin: "Al-Wahid", arabic: "الْوَاحِدُ", meaning: "Yang Maha Tunggal" },
+            { id: 67, latin: "Al-Ahad", arabic: "الأَحَدُ", meaning: "Yang Maha Esa" },
+            { id: 68, latin: "As-Shamad", arabic: "الصَّمَدُ", meaning: "Yang Maha Dibutuhkan" },
+            { id: 69, latin: "Al-Qadir", arabic: "الْقَادِرُ", meaning: "Yang Maha Menentukan / Kuasa" },
+            { id: 70, latin: "Al-Muqtadir", arabic: "الْمُقْتَدِرُ", meaning: "Yang Maha Berkuasa" },
+            { id: 71, latin: "Al-Muqaddim", arabic: "الْمُقَدِّمُ", meaning: "Yang Maha Mendahulukan" },
+            { id: 72, latin: "Al-Mu'akhkhir", arabic: "الْمُؤَخِّرُ", meaning: "Yang Maha Mengakhirkan" },
+            { id: 73, latin: "Al-Awwal", arabic: "الأَوَّلُ", meaning: "Yang Maha Awal" },
+            { id: 74, latin: "Al-Akhir", arabic: "الأَخِرُ", meaning: "Yang Maha Akhir" },
+            { id: 75, latin: "Az-Zahir", arabic: "الظَّاهِرُ", meaning: "Yang Maha Nyata" },
+            { id: 76, latin: "Al-Batin", arabic: "الْبَاطِنُ", meaning: "Yang Maha Ghaib" },
+            { id: 77, latin: "Al-Wali", arabic: "الْوَالِي", meaning: "Yang Maha Memerintah" },
+            { id: 78, latin: "Al-Muta'ali", arabic: "الْمُتَعَالِي", meaning: "Yang Maha Tinggi" },
+            { id: 79, latin: "Al-Barr", arabic: "الْبَرُّ", meaning: "Yang Maha Penderma" },
+            { id: 80, latin: "At-Tawwab", arabic: "التَّوَّابُ", meaning: "Yang Maha Penerima Taubat" },
+            { id: 81, latin: "Al-Muntaqim", arabic: "الْمُنْتَقِمُ", meaning: "Yang Maha Pemberi Balasan" },
+            { id: 82, latin: "Al-'Afuww", arabic: "الْعَفُوُّ", meaning: "Yang Maha Pemaaf" },
+            { id: 83, latin: "Ar-Ra'uf", arabic: "الرَّؤُوفُ", meaning: "Yang Maha Pengasuh" },
+            { id: 84, latin: "Malikul-Mulk", arabic: "مَالِكُ الْمُلْكِ", meaning: "Yang Maha Penguasa Kerajaan" },
+            { id: 85, latin: "Dzul-Jalali wal-Ikram", arabic: "ذُو الْجَلاَلِ وَالإِكْرَامِ", meaning: "Yang Maha Pemilik Keagungan dan Kemuliaan" },
+            { id: 86, latin: "Al-Muqsit", arabic: "الْمُقْسِطُ", meaning: "Yang Maha Pemberi Keadilan" },
+            { id: 87, latin: "Al-Jami'", arabic: "الْجَامِعُ", meaning: "Yang Maha Mengumpulkan" },
+            { id: 88, latin: "Al-Ghaniyy", arabic: "الْغَنِيُّ", meaning: "Yang Maha Kaya" },
+            { id: 89, latin: "Al-Mughni", arabic: "الْمُغْنِي", meaning: "Yang Maha Memberi Kekayaan" },
+            { id: 90, latin: "Al-Mani'", arabic: "الْمَانِعُ", meaning: "Yang Maha Mencegah" },
+            { id: 91, latin: "Ad-Dharr", arabic: "الضَّارُّ", meaning: "Yang Maha Penimpa Kemudharatan" },
+            { id: 92, latin: "An-Nafi'", arabic: "النَّافِعُ", meaning: "Yang Maha Memberi Manfaat" },
+            { id: 93, latin: "An-Nur", arabic: "النُّورُ", meaning: "Yang Maha Bercahaya (Menerangi)" },
+            { id: 94, latin: "Al-Hadi", arabic: "الْهَادِي", meaning: "Yang Maha Memberi Petunjuk" },
+            { id: 95, latin: "Al-Badi'", arabic: "الْبَدِيعُ", meaning: "Yang Maha Pencipta Tiada Banding" },
+            { id: 96, latin: "Al-Baqi", arabic: "الْبَاقِي", meaning: "Yang Maha Kekal" },
+            { id: 97, latin: "Al-Warith", arabic: "الْوَارِثُ", meaning: "Yang Maha Pewaris" },
+            { id: 98, latin: "Ar-Rasyid", arabic: "الرَّشِيدُ", meaning: "Yang Maha Pandai / Cendekia" },
+            { id: 99, latin: "As-Sabur", arabic: "الصَّبُورُ", meaning: "Yang Maha Sabar" }
+        ];
+
+        // STATE VARIABLES
+        let currentIndex = 0;
+        let isPlaying = false;
+        let autoPlayTimer = null;
+        let rotationIntervalSpeed = 4000; // default 4 seconds
+        let audioEnabled = true;
+
+        // DOM ELEMENTS
+        const compassDial = document.getElementById('compassDial');
+        const nameNumber = document.getElementById('nameNumber');
+        const nameArabic = document.getElementById('nameArabic');
+        const nameLatin = document.getElementById('nameLatin');
+        const nameMeaning = document.getElementById('nameMeaning');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const btnPlayPause = document.getElementById('btnPlayPause');
+        const playIcon = document.getElementById('playIcon');
+        const playText = document.getElementById('playText');
+        const speedSlider = document.getElementById('speedSlider');
+        const speedVal = document.getElementById('speedVal');
+        const jumpSelect = document.getElementById('jumpSelect');
+        const btnAudioToggle = document.getElementById('btnAudioToggle');
+        const audioIcon = document.getElementById('audioIcon');
+        const audioWave = document.getElementById('audioWave');
+
+        // Modal Elements
+        const modalList = document.getElementById('modalList');
+        const btnOpenList = document.getElementById('btnOpenList');
+        const btnCloseModal = document.getElementById('btnCloseModal');
+        const modalGrid = document.getElementById('modalGrid');
+        const modalSearch = document.getElementById('modalSearch');
+
+        const modalInfo = document.getElementById('modalInfo');
+        const btnInfo = document.getElementById('btnInfo');
+        const btnCloseInfo = document.getElementById('btnCloseInfo');
+
+        // INITIALIZATION
+        window.addEventListener('DOMContentLoaded', () => {
+            initCanvasParticles();
+            populateSelectOptions();
+            populateModalList(asmaulHusnaData);
+            updateDisplay(currentIndex, false);
+            setupEventListeners();
+        });
+
+        // POPULATE JUMP SELECT DROPDOWN
+        function populateSelectOptions() {
+            jumpSelect.innerHTML = asmaulHusnaData.map((item, idx) => 
+                `<option value="${idx}">${item.id}. ${item.latin} (${item.arabic})</option>`
+            ).join('');
+        }
+
+        // UPDATE DISPLAY & COMPASS ROTATION
+        function updateDisplay(index, playAudioSound = true) {
+            const data = asmaulHusnaData[index];
+            
+            // 1. Calculate Rotation Degree for 99 items (360 degrees / 99 step)
+            const anglePerItem = 360 / 99;
+            const targetRotation = -(index * anglePerItem);
+
+            // Apply Compass Dial CSS Rotation
+            compassDial.style.transform = `rotate(${targetRotation}deg)`;
+
+            // 2. Animate Text Fade-In/Glow Effect
+            nameArabic.style.opacity = '0';
+            nameArabic.style.transform = 'scale(0.85)';
+            nameLatin.style.opacity = '0';
+            nameMeaning.style.opacity = '0';
+
+            setTimeout(() => {
+                nameNumber.textContent = `${String(data.id).padStart(2, '0')} / 99`;
+                nameArabic.textContent = data.arabic;
+                nameLatin.textContent = data.latin;
+                nameMeaning.textContent = `"${data.meaning}"`;
+
+                nameArabic.style.opacity = '1';
+                nameArabic.style.transform = 'scale(1)';
+                nameLatin.style.opacity = '1';
+                nameMeaning.style.opacity = '1';
+            }, 250);
+
+            // Update Select dropdown value silently
+            jumpSelect.value = index;
+
+            // Audio Pronunciation Trigger
+            if (audioEnabled && playAudioSound) {
+                speakArabicName(data.arabic);
+            }
+        }
+
+        // SPEECH SYNTHESIS (Pronounce Arabic Name)
+        function speakArabicName(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop ongoing speech
+
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ar-SA'; // Arabic Saudi Arabia
+                utterance.rate = 0.85; // Slightly slower for clarity
+                utterance.pitch = 1.0;
+
+                utterance.onstart = () => {
+                    audioWave.classList.remove('hidden');
+                };
+                utterance.onend = () => {
+                    audioWave.classList.add('hidden');
+                };
+                utterance.onerror = () => {
+                    audioWave.classList.add('hidden');
+                };
+
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // AUTO-PLAY LOGIC
+        function toggleAutoPlay() {
+            if (isPlaying) {
+                pauseAutoPlay();
+            } else {
+                startAutoPlay();
+            }
+        }
+
+        function startAutoPlay() {
+            isPlaying = true;
+            playIcon.className = "fa-solid fa-pause text-base";
+            playText.textContent = "Jeda";
+            btnPlayPause.classList.remove('from-amber-500', 'to-amber-600');
+            btnPlayPause.classList.add('from-emerald-600', 'to-emerald-700', 'text-white');
+
+            autoPlayTimer = setInterval(() => {
+                nextName();
+            }, rotationIntervalSpeed);
+        }
+
+        function pauseAutoPlay() {
+            isPlaying = false;
+            playIcon.className = "fa-solid fa-play text-base";
+            playText.textContent = "Putar Otomatis";
+            btnPlayPause.classList.remove('from-emerald-600', 'to-emerald-700', 'text-white');
+            btnPlayPause.classList.add('from-amber-500', 'to-amber-600', 'text-emerald-950');
+
+            if (autoPlayTimer) clearInterval(autoPlayTimer);
+        }
+
+        function nextName() {
+            currentIndex = (currentIndex + 1) % 99;
+            updateDisplay(currentIndex, true);
+        }
+
+        function prevName() {
+            currentIndex = (currentIndex - 1 + 99) % 99;
+            updateDisplay(currentIndex, true);
+        }
+
+        // POPULATE MODAL LIST & SEARCH FILTER
+        function populateModalList(items) {
+            modalGrid.innerHTML = items.map((item) => `
+                <div onclick="selectFromModal(${item.id - 1})" 
+                     class="p-3.5 rounded-2xl glass-panel hover:bg-amber-500/20 hover:border-amber-400/60 transition cursor-pointer flex items-center justify-between border border-amber-500/20 group">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-8 h-8 rounded-full bg-amber-500/10 text-amber-300 font-bold text-xs flex items-center justify-center border border-amber-500/30 group-hover:bg-amber-400 group-hover:text-emerald-950 transition">
+                            ${item.id}
+                        </span>
+                        <div>
+                            <h4 class="text-sm font-bold text-amber-100 group-hover:text-amber-300 transition">${item.latin}</h4>
+                            <p class="text-xs text-emerald-200/70 italic">${item.meaning}</p>
+                        </div>
+                    </div>
+                    <span class="text-2xl font-arabic font-bold text-gold-gradient">${item.arabic}</span>
+                </div>
+            `).join('');
+        }
+
+        function selectFromModal(index) {
+            currentIndex = index;
+            updateDisplay(currentIndex, true);
+            closeModal();
+        }
+
+        function closeModal() {
+            modalList.classList.add('opacity-0');
+            setTimeout(() => modalList.classList.add('hidden'), 300);
+        }
+
+        function openModal() {
+            modalList.classList.remove('hidden');
+            setTimeout(() => modalList.classList.remove('opacity-0'), 10);
+        }
+
+        // EVENT LISTENERS
+        function setupEventListeners() {
+            // Control buttons
+            btnNext.addEventListener('click', () => {
+                if (isPlaying) pauseAutoPlay();
+                nextName();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (isPlaying) pauseAutoPlay();
+                prevName();
+            });
+
+            btnPlayPause.addEventListener('click', toggleAutoPlay);
+
+            // Speed Slider
+            speedSlider.addEventListener('input', (e) => {
+                const val = parseFloat(e.target.value);
+                speedVal.textContent = `${val.toFixed(1)}s`;
+                rotationIntervalSpeed = val * 1000;
+
+                if (isPlaying) {
+                    clearInterval(autoPlayTimer);
+                    autoPlayTimer = setInterval(nextName, rotationIntervalSpeed);
+                }
+            });
+
+            // Jump Select Dropdown
+            jumpSelect.addEventListener('change', (e) => {
+                if (isPlaying) pauseAutoPlay();
+                currentIndex = parseInt(e.target.value);
+                updateDisplay(currentIndex, true);
+            });
+
+            // Audio Toggle
+            btnAudioToggle.addEventListener('click', () => {
+                audioEnabled = !audioEnabled;
+                if (audioEnabled) {
+                    audioIcon.className = "fa-solid fa-volume-high text-amber-400";
+                    speakArabicName(asmaulHusnaData[currentIndex].arabic);
+                } else {
+                    audioIcon.className = "fa-solid fa-volume-xmark text-amber-400/50";
+                    window.speechSynthesis.cancel();
+                }
+            });
+
+            // Modal List handlers
+            btnOpenList.addEventListener('click', openModal);
+            btnCloseModal.addEventListener('click', closeModal);
+            modalList.addEventListener('click', (e) => {
+                if (e.target === modalList) closeModal();
+            });
+
+            // Search filter in modal
+            modalSearch.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const filtered = asmaulHusnaData.filter(item => 
+                    item.id.toString().includes(query) ||
+                    item.latin.toLowerCase().includes(query) ||
+                    item.meaning.toLowerCase().includes(query)
+                );
+                populateModalList(filtered);
+            });
+
+            // Info Modal
+            btnInfo.addEventListener('click', () => {
+                modalInfo.classList.remove('hidden');
+                setTimeout(() => modalInfo.classList.remove('opacity-0'), 10);
+            });
+            btnCloseInfo.addEventListener('click', () => {
+                modalInfo.classList.add('opacity-0');
+                setTimeout(() => modalInfo.classList.add('hidden'), 300);
+            });
+
+            // Keyboard Navigation (Arrow Keys & Spacebar)
+            document.addEventListener('keydown', (e) => {
+                if (e.key === "ArrowRight") {
+                    if (isPlaying) pauseAutoPlay();
+                    nextName();
+                } else if (e.key === "ArrowLeft") {
+                    if (isPlaying) pauseAutoPlay();
+                    prevName();
+                } else if (e.key === " ") {
+                    e.preventDefault();
+                    toggleAutoPlay();
+                }
+            });
+        }
+
+        // BACKGROUND PARTICLES CANVAS (Spiritual Glowing Golden Orbs)
+        function initCanvasParticles() {
+            const canvas = document.getElementById('particleCanvas');
+            const ctx = canvas.getContext('2d');
+
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const particles = [];
+            const particleCount = 45;
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2 + 0.5,
+                    alpha: Math.random() * 0.7 + 0.2,
+                    speedY: - (Math.random() * 0.4 + 0.1),
+                    speedX: (Math.random() - 0.5) * 0.3,
+                    pulseSpeed: Math.random() * 0.02 + 0.005
+                });
+            }
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, width, height);
+
+                particles.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.alpha += Math.sin(Date.now() * p.pulseSpeed) * 0.005;
+
+                    if (p.y < -10) p.y = height + 10;
+                    if (p.x < -10) p.x = width + 10;
+                    if (p.x > width + 10) p.x = -10;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(212, 175, 55, ${Math.max(0.1, Math.min(0.8, p.alpha))})`;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = "rgba(212, 175, 55, 0.8)";
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animateParticles);
+            }
+
+            animateParticles();
+        }
+    </script>
+</body>
+</html>
