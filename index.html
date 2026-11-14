@@ -6,7 +6,7 @@
   <title>imnxx Dashboard</title>
 
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#2855c9">
+  <meta name="theme-color" content="#0d0b0a">
   
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -19,12 +19,11 @@
     body {
       font-family: "Segoe UI Variable Display", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
       
-      /* --- BACKGROUND UTAMA --- */
-      background-color: #2855c9; 
-      /* Gradasi Pink Kiri Atas -> Biru -> Pink Kanan Bawah */
-      background-image: linear-gradient(135deg, #ff9aeb 0%, #2855c9 40%, #2855c9 60%, #ff9aeb 100%);
+      /* --- BACKGROUND UTAMA (OBSIDIAN & ESPRESSO BRONZE) --- */
+      background-color: #0d0b0a; 
+      background-image: radial-gradient(circle at 15% 15%, #3d2817 0%, #1a120d 45%, #090807 100%);
       
-      color: #ffffff;
+      color: #f5efe6;
       
       /* --- PERBAIKAN TINGGI LAYAR --- */
       height: 100vh;
@@ -39,7 +38,7 @@
     .main-wrapper {
       display: flex;
       flex-direction: column;
-      align-items: center; /* sebelumnya center - nse note*/
+      align-items: center;
       width: 100%;
       max-width: 480px;
       gap: 0.3rem; 
@@ -49,33 +48,33 @@
 
     .logo-container {
       display: flex;
-      justify-content: center; /*sebelumnya center -nse note*/
-      width: 100%; /* nse note*/
-      padding-left: 0.5rem; /*nse note*/
-      
+      justify-content: center;
+      width: 100%;
+      padding-left: 0.5rem;
       animation: fadeInDown 0.8s ease-out;
     }
 
     .profile-logo {
-      width: 160px !important; /*sebelumnya 210px */
+      width: 160px !important;
       height: auto;
       display: block;
-      filter: brightness(0) invert(1) drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+      /* Sentuhan warna warm champagne/ivory agar menyatu dengan tema mewah */
+      filter: brightness(0) invert(0.93) sepia(0.18) saturate(0.8) drop-shadow(0 4px 10px rgba(0,0,0,0.6));
     }
 
-    /* --- DASHBOARD CARD (EFEK KACA) --- */
+    /* --- DASHBOARD CARD (SMOKED GLASS & BRONZE RIM) --- */
     .dashboard-card {
       width: 100%;
       text-align: center;
       padding: 1.2rem 1.2rem;
       border-radius: 24px;
       
-      background: rgba(255, 255, 255, 0.1); 
-      backdrop-filter: blur(20px);            
-      -webkit-backdrop-filter: blur(20px);
+      background: linear-gradient(145deg, rgba(36, 26, 20, 0.65) 0%, rgba(14, 11, 9, 0.85) 100%); 
+      backdrop-filter: blur(24px);            
+      -webkit-backdrop-filter: blur(24px);
       
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(196, 154, 108, 0.28);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(230, 194, 145, 0.15);
       
       display: flex;
       flex-direction: column;
@@ -85,18 +84,19 @@
     h1 {
       font-size: 1.3rem;
       font-weight: 700;
-      color: #ffffff;
+      color: #f7f1e8;
       margin-bottom: 0.1rem;
-      letter-spacing: 0.5px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      letter-spacing: 0.8px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
     p.subtitle {
-      color: #dbeafe; 
+      color: #c49a6c; /* Warm Bronze / Cognac */
       margin-bottom: 1.2rem;
       font-size: 0.8rem;
-      font-weight: 400;
-      opacity: 0.9;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      opacity: 0.95;
     }
 
     /* --- WIDGET JAM --- */
@@ -107,16 +107,19 @@
     .time-display {
       font-size: 3rem;
       font-weight: 600; 
-      color: #ffffff; 
+      /* Gradasi halus dari Champagne Gold ke Warm Ivory */
+      background: linear-gradient(180deg, #ffffff 20%, #d8b892 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       line-height: 1;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.25rem;
       letter-spacing: -1px;
-      text-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
     }
 
     .date-display {
       font-size: 0.9rem;
-      color: #e2e8f0;
+      color: #b5a698;
       font-weight: 500;
     }
     
@@ -133,17 +136,18 @@
       align-items: center;
       justify-content: space-between;
       text-decoration: none;
-      background: rgba(255, 255, 255, 0.12); 
+      background: rgba(255, 245, 235, 0.035); 
       padding: 0.85rem 1.1rem;
       border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      transition: all 0.2s ease;
+      border: 1px solid rgba(196, 154, 108, 0.18);
+      transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
     a.menu-item:hover {
-      background: rgba(255, 255, 255, 0.25);
-      border-color: rgba(255, 255, 255, 0.4);
-      transform: scale(1.02);
+      background: linear-gradient(135deg, rgba(166, 124, 82, 0.22) 0%, rgba(92, 64, 40, 0.28) 100%);
+      border-color: rgba(212, 170, 120, 0.55);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+      transform: translateY(-2px);
     }
     
     .item-content {
@@ -154,20 +158,26 @@
 
     .item-title {
       font-weight: 600;
-      color: #ffffff; 
+      color: #f3ece4; 
       font-size: 0.9rem;
+      letter-spacing: 0.3px;
+      transition: color 0.2s ease;
+    }
+
+    a.menu-item:hover .item-title {
+      color: #e6c291;
     }
     
     .item-desc {
       font-size: 0.7rem;
-      color: #f1f5f9;
+      color: #a8998c;
       margin-top: 1px;
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
     .item-icon {
       font-size: 1.2rem;
-      color: #ffffff;
+      color: #c49a6c;
     }
 
     @keyframes fadeInDown {
@@ -186,23 +196,20 @@
     /* --- LAYOUT HORIZONTAL KHUSUS DESKTOP / LAPTOP (≥768px) --- */
     /* ========================================================= */
     @media (min-width: 768px) {
-        /* 1. Atur pembungkus utama agar meratakan isinya ke kiri */
-  .main-wrapper {
-    max-width: 900px;
-    flex-direction: column;
-    align-items: flex-start; /* Mengubah dari center menjadi rata kiri */
-  }
+      .main-wrapper {
+        max-width: 900px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-  /* 2. Ubah posisi logo menjadi rata kiri khusus desktop */
-  .logo-container {
-    justify-content: flex-start; /* Mengubah posisi logo ke kiri */
-    width: 100%;
-  }
+      .logo-container {
+        justify-content: flex-start;
+        width: 100%;
+      }
 
-  /* Ukuran logo 2x lipat (220px) khusus desktop */
-  .profile-logo {
-    width: 220px; 
-  }
+      .profile-logo {
+        width: 220px; 
+      }
 
       .dashboard-card {
         flex-direction: row;
